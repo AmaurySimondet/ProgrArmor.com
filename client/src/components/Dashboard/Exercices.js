@@ -1,0 +1,173 @@
+const exercices = [
+  {
+    id: 1,
+    class: "select-title",
+    name: "Musculation - Haut du corps",
+    value: "title",
+  },
+  {
+    id: 2,
+    class: "select-item",
+    name: "Developpé couché",
+    value: "benchpress",
+  },
+
+  {
+    id: 4,
+    class: "select-item",
+    name: "Rowing",
+    value: "rowing",
+  },
+  {
+    id: 5,
+    class: "select-item",
+    name: "Tirage Horizontal",
+    value: "tirage-horizontal",
+  },
+  {
+    id: 6,
+    class: "select-item",
+    name: "Tirage Vertical",
+    value: "tirage-vertical",
+  },
+  {
+    id: 9,
+    class: "select-item",
+    name: "Curl",
+    value: "curl",
+  },
+  {
+    id: 10,
+    class: "select-item",
+    name: "Barre au front",
+    value: "barre-au-front",
+  },
+  {
+    id: 11,
+    class: "select-title",
+    name: "Musculation - Bas du corps",
+    value: "title",
+  },
+  {
+    id: 3,
+    class: "select-item",
+    name: "Squat",
+    value: "squat",
+  },
+  {
+    id: 7,
+    class: "select-item",
+    name: "Soulevé de terre",
+    value: "deadlift",
+  },
+  {
+    id: 12,
+    class: "select-title",
+    name: "Streetlifting - Haut du corps",
+    value: "title",
+  },
+  {
+    id: 8,
+    class: "select-item",
+    name: "Traction",
+    value: "traction",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "Dips",
+    value: "dips",
+  },
+  {
+    id: 14,
+    class: "select-item",
+    name: "Muscle Up",
+    value: "muscle-up",
+  },
+  {
+    id: 19,
+    class: "select-title",
+    name: "Streetlifting - Bas du corps",
+    value: "title",
+  },
+  {
+    id: 20,
+    class: "select-item",
+    name: "Pistol Squat",
+    value: "pistol-squat",
+  },
+  {
+    id: 21,
+    class: "select-item",
+    name: "Matrix Squat",
+    value: "matrix-squat",
+  },
+  {
+    id: 22,
+    class: "select-item",
+    name: "Nordic Curl",
+    value: "nordic-curl",
+  },
+  {
+    id: 23,
+    class: "select-item",
+    name: "Natural Leg Extension",
+    value: "natural-leg-extension",
+  },
+  {
+    id: 15,
+    class: "select-title",
+    name: "Statique / Figures",
+    value: "title",
+  },
+  {
+    id: 16,
+    class: "select-item",
+    name: "Front Lever",
+    value: "front-lever",
+  },
+  {
+    id: 17,
+    class: "select-item",
+    name: "Back Lever",
+    value: "back-lever",
+  },
+  {
+    id: 18,
+    class: "select-item",
+    name: "Planche",
+    value: "planche",
+  },
+  {
+    id: 24,
+    class: "select-item",
+    name: "Handstand / Poirier",
+    value: "handstand",
+  },
+  {
+    id: 25,
+    class: "select-item",
+    name: "Maltses",
+    value: "maltese",
+  },
+  {
+    id: 26,
+    class: "select-item",
+    name: "Drapeau / Human Flag",
+    value: "flag",
+  },
+  {
+    id: 27,
+    class: "select-item",
+    name: "Iron Cross / Croix de fer",
+    value: "iron-cross",
+  },
+  {
+    id: 999,
+    class: "select-item-own",
+    name: "Entre ton propre exercice ici...",
+    value: "own-exercice",
+  },
+];
+
+export default exercices;

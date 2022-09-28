@@ -1,0 +1,343 @@
+.hide {
+  display: none;
+}
+
+.nothide {
+  margin-top:5%;
+  display: block;
+  background-color: #8e8e8e;
+  color: white;
+  text-align: justify;
+  width: 500%;
+}
+
+.select-title{
+    font-weight:800;
+
+}
+
+.select-item-own{
+    font-weight:800;
+
+}
+
+.form-button{
+    margin-top:2%;
+
+}
+
+
+.myDIV{
+    margin-left:5px;
+    width:20px;
+
+}
+
+.debutant-form{
+    width: 90%;
+    margin:auto;
+}
+
+.session-div h1{
+    text-align:center;
+    margin-top: 2%;
+}
+
+.session-div p{
+    text-align:center;
+    margin-bottom: 2%;
+}
+
+
+
+
+/* TAGS */
+
+h1{
+    font-weight:800;
+
+}
+
+h2{
+    font-weight:200;
+
+}
+
+/* HOME HEADER*/
+
+.navbar-elements{
+    position: absolute;
+    right: 1%;
+}
+
+.bg-light{
+    background-color: #9b0000!important;
+
+}
+
+.logo-navbar{
+    width:80px;
+
+}
+
+.navbar-light .navbar-nav .active>.nav-link {
+    color: white;
+
+}
+
+.inscription-navbar{
+    padding-top:0;
+
+}
+
+.ProgrArmor{
+    margin: auto;
+    color: white;
+}
+
+.ProgrArmor-a:hover{
+    text-decoration: none;
+
+}
+
+.nav-link{
+    font-size:20px;
+
+}
+
+.text-navbar{
+    margin-right:80px;
+
+}
+
+/* INSCRIPTION */
+
+body{
+    overflow-x:hidden;
+    font-family: 'Montserrat', sans-serif;
+    /* weight 200 500 800*/
+}
+
+.p-cgu{
+    font-weight:200;
+    font-size:15px;
+}
+
+.inscription-div{
+    text-align: center;
+    margin: 5%;
+}
+
+.btn-social{
+    margin:5px;
+    margin-top:20px;
+}
+
+.inscription-form{
+    margin: 5% 2%;
+
+}
+
+.btn-dark{
+    background-color: #9b0000;
+    border-color: #9b0000;
+}
+
+.hometable{
+    margin: auto;
+
+}
+
+table.hometable {
+  table-layout: fixed ;
+  width: 100%;
+}
+
+table.hometable td.inscription-img-td {
+  position: absolute;
+  width: 60%;
+
+}
+
+/* CONNEXION */
+.connexion-img{
+    display:block;
+    width:100%;
+    height:auto;
+}
+
+.connexion-div{
+    text-align: center;
+
+}
+
+table.connexion-table {
+  table-layout: fixed ;
+  width: 100% ;
+}
+
+table.connexion-table td.connexion-img-td {
+  width: 55% ;
+
+}
+
+/* NavigBar */
+.icon-navbar{
+    width:40px;
+    margin-right:80px;
+}
+
+.gear-is-clicked{
+    background-color: #9b0000;
+    width: 200px;
+    height: 350px;
+    border-radius: 25px;
+    top: 0;
+    z-index: 0;
+    position: absolute;
+    right: 15px;
+}
+
+.navigbar{
+    padding-top:0;
+    z-index:1;
+}
+
+.param-choice-div{
+    z-index:2;
+    margin:auto;
+    text-align:center;
+    right:80px;
+    position: absolute;
+    border-collapse:separate;
+    border-spacing: 0 2em;
+}
+
+.param-choice:hover{
+    color: #6c757d;
+    text-decoration: none;
+
+}
+
+.param-choice{
+    color:white;
+
+}
+
+/* CGU */
+.titre-CGU{
+    margin: 3%;
+
+}
+
+.text-CGU{
+    margin: 2%;
+    margin-right:5%;
+}
+
+/* TRAVAUX */
+.Travaux-div{
+    text-align: center;
+    margin-top: 15%;
+    margin-left: 5%;
+    margin-right:5%;
+}
+
+.travaux-icon{
+    margin: 2%;
+}
+
+.Travaux-div h1{
+    margin-bottom: 2%;
+
+}
+
+/* RESPONSIVE LAYOUT */
+
+/* Smallest layout */
+@media (max-width: 280px){
+    h1{
+        font-size:20px;
+    }
+
+    h2{
+        font-size:15px;
+    }
+
+    body{
+        font-size:10px;
+        overflow-x:visible;
+    }
+
+    a.nav-link{
+        font-size:10px;
+    }
+
+    .logo-navbar{
+        width:50px;
+    }
+}
+
+/* Smartphone layout */
+@media (max-width: 580px){
+    .nothide {
+        width: 100%;
+
+    }
+
+    .text-navbar{
+        margin-right:auto;
+
+    }
+
+    h1{
+        font-size:30px;
+    }
+
+    h2{
+        font-size:20px;
+    }
+
+    body{
+        font-size:15px;
+    }
+
+    a.nav-link{
+        font-size:15px;
+    }
+
+    .logo-navbar{
+        width:60px;
+    }
+}
+
+/* small-med layout*/
+@media (max-width: 800px){
+    .ProgrArmor{
+        display:none;
+    }
+
+}
+
+/* Medium layout*/
+@media (max-width: 1100px){
+    .inscription-img-td{
+        display:none;
+    }
+
+    .connexion-img-td{
+        display: none;
+    }
+
+    h1{
+        margin-top:5%;
+    }
+}
+
+/* Large layout*/
+@media (min-width: 1100px){
+
+}
+
+
+
