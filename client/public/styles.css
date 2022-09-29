@@ -1,3 +1,5 @@
+/* SESSION */
+
 .hide {
   display: none;
 }
@@ -58,7 +60,10 @@
     margin-bottom: 2%;
 }
 
+.poubelle{
+    margin-top:5px;
 
+}
 
 
 /* TAGS */
@@ -208,9 +213,37 @@ table.connexion-table td.connexion-img-td {
     right: 15px;
 }
 
+.toggle-is-clicked{
+    background-color: #9b0000;
+    width: 120px;
+    height: 520px;
+    border-radius: 25px;
+    top: 0;
+    z-index: 0;
+    position: absolute;
+    right: 0;
+}
+
+.toggler-icon{
+    width:45px;
+    z-index:2;
+    position: absolute;
+    right: 35px;
+
+}
+
 .navigbar{
     padding-top:0;
     z-index:1;
+}
+
+.param-choice-toggle{
+    z-index:2;
+    right:8px;
+    position: absolute;
+    border-collapse:separate;
+    margin-top:25px;
+    border-spacing: 0 1em;
 }
 
 .param-choice-div{

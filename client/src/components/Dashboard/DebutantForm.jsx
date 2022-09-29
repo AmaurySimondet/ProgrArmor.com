@@ -125,13 +125,15 @@ function DebutantForm() {
 
           <PoidsInput changePoids={changePoids}/>
 
-          <ExerciceInput changeExercice={changeExercice} />
-          <SerieInput changeSerie={changeSerie} num={"1"} poids={seance.poids}/>
+          <div>
+              <ExerciceInput changeExercice={changeExercice} />
+              <SerieInput changeSerie={changeSerie} num={"1"} poids={seance.poids}/>
 
-          <button className="btn btn-lg btn-dark form-button" onClick={handleClickSerie} type="submit">Ajouter une série !</button>
-          <br/>
+              <button className="btn btn-dark form-button" onClick={handleClickSerie} type="submit">Ajouter une série !</button>
+              <br/>
+          </div>
 
-          <button className="btn btn-lg btn-dark form-button" onClick={handleClickExercice} type="submit">Ajouter un exercice à cette séance !</button>
+          <button className="btn btn-dark form-button" onClick={handleClickExercice} type="submit">Ajouter un exercice à cette séance !</button>
           <br/>
 
           <div className="form-button-div">

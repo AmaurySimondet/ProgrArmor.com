@@ -2,7 +2,6 @@ import React, {useState} from "react";
 
 function NavigBar(){
     const [gearIsClicked, setGearIsClicked] = useState(false);
-    const [onMobile, setOnMobile] = useState(false);
     const [toggled, setToggled] = useState(false);
 
     function handleClick(){
@@ -17,19 +16,30 @@ function NavigBar(){
         })
     }
 
+      const [dimensions, setDimensions] = React.useState({
+            height: window.innerHeight,
+            width: window.innerWidth
+      })
+
       React.useEffect(() => {
         function handleResize() {
-          if (window.innerWidth<500){setOnMobile(true)}
-          else{setOnMobile(false)}
+          setDimensions({
+            height: window.innerHeight,
+            width: window.innerWidth
+          })
         }
 
-        window.addEventListener('resize', handleResize)
+        var timeout = false;
+        window.addEventListener('resize', function() {
+            clearTimeout(timeout);;
+            timeout = setTimeout(handleResize, 200);
+        });
       })
 
     return(
         <div>
         {
-        onMobile ?
+        dimensions.width<500 ?
                 <nav className="navbar navbar-expand navbar-light bg-light navigbar">
                   <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -37,13 +47,13 @@ function NavigBar(){
                     <a className="navbar-brand" href="/dashboard"><img className="logo-navbar" src={require('../images/icons/logo-navbar.png')} alt="logo" /></a>
                     <a className="navbar-brand" href="/dashboard"><h1 className="ProgrArmor">ProgrArmor</h1></a>
                   <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <img className="logo-navbar" onClick={toggling} src={require('../images/icons/logo-navbar.png')} alt="logo" />
+                    <img className="toggler-icon" onClick={toggling} src={require('../images/icons/output-onlinepngtools.png')} alt="logo" />
                     {toggled ?
                         (
                             <div>
-                                <div className="gear-is-clicked"></div>
+                                <div className="toggle-is-clicked"></div>
 
-                                <table className="param-choice-div">
+                                <table className="param-choice-toggle">
                                     <tbody>
                                         <tr>
                                             <td>
@@ -72,7 +82,22 @@ function NavigBar(){
                                         </tr>
                                         <tr>
                                             <td>
-                                                <a onClick={handleClick} className="nav-link"><img className="icon-navbar" src={require('../images/icons/gear.png')} alt='parametres' /></a>
+                                                <a className="param-choice" href="/compte"> Compte </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="param-choice" href="/aide"> Aide </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="param-choice" href="/a_propos"> A propos </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="param-choice" href="/CGU"> CGU </a>
                                             </td>
                                         </tr>
                                     </tbody>
