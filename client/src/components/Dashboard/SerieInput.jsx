@@ -16,7 +16,7 @@ function SerieInput(props) {
   }
 
   function handleChange(){
-    event.preventDefault();
+    console.log(event.target.id)
 
     if (event.target.id !== "charge") {
         setSerie(oldSerie => {

@@ -1,23 +1,9 @@
 import {React, useState} from "react";
 import API from "../../utils/API";
 import axios from 'axios';
-import exercices from "./Exercices";
-import Select from "./Select";
 import DateInput from "./DateInput";
 import PoidsInput from "./PoidsInput";
-import ExerciceInput from "./ExerciceInput";
-import SerieInput from "./SerieInput";
-
-function createEntry(exercicesTerm) {
-  return (
-    <Select
-      key={exercicesTerm.id}
-      class={exercicesTerm.class}
-      name={exercicesTerm.name}
-      value={exercicesTerm.value}
-    />
-  );
-}
+import FullExerciceInput from "./FullExerciceInput"
 
 const ReactComment = ({ text }) => {
   return <div dangerouslySetInnerHTML={{ __html: `<!-- ${text} -->` }}/>
@@ -89,7 +75,7 @@ function DebutantForm() {
         });
     })}
 
-    function changeExercice(exercice){
+    function changeFullExercice(fullExercice){
         event.preventDefault();
 
         setSeance(oldSeance => {
@@ -98,20 +84,6 @@ function DebutantForm() {
             exercice: exercice,
         });
     })}
-
-    function changeSerie(serie){
-        event.preventDefault();
-
-        setSeance(oldSeance => {
-            return ({
-            ...oldSeance,
-            serie: serie,
-        });
-    })};
-
-    function handleClickSerie(){
-        return null;
-    }
 
     function handleClickExercice(){
         return null;
@@ -125,13 +97,7 @@ function DebutantForm() {
 
           <PoidsInput changePoids={changePoids}/>
 
-          <div>
-              <ExerciceInput changeExercice={changeExercice} />
-              <SerieInput changeSerie={changeSerie} num={"1"} poids={seance.poids}/>
-
-              <button className="btn btn-dark form-button" onClick={handleClickSerie} type="submit">Ajouter une série !</button>
-              <br/>
-          </div>
+          <FullExerciceInput changeFullExercice={changeFullExercice} poids={seance.poids}/>
 
           <button className="btn btn-dark form-button" onClick={handleClickExercice} type="submit">Ajouter un exercice à cette séance !</button>
           <br/>
