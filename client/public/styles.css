@@ -3,7 +3,7 @@
 }
 
 .nothide {
-  margin-top:5%;
+  margin-top:15%;
   display: block;
   background-color: #8e8e8e;
   color: white;
@@ -16,6 +16,11 @@
 
 }
 
+.hidden-text{
+    padding: 2%;
+
+}
+
 .select-item-own{
     font-weight:800;
 
@@ -23,6 +28,11 @@
 
 .form-button{
     margin-top:2%;
+
+}
+
+.form-button-div{
+    text-align:center;
 
 }
 

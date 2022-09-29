@@ -1,6 +1,11 @@
 import { React, useState } from "react";
 import API from "../utils/API";
 
+function containsSC(str) {
+  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  return specialChars.test(str);
+}
+
 
 function InscriptionForm(){
   const stateNull = {
@@ -18,11 +23,13 @@ function InscriptionForm(){
 
     const { fName, lName, email, password, cpassword } = state;
 
-    if (!email || email.length === 0) return alert("No email given !");
-    if (!password || password.length === 0) return alert("No password given !");
-    if (!fName || fName.length === 0) return alert("No first name given !");
-    if (!lName || lName.length === 0) return alert("No last name given !");
-    if (password !== cpassword) return alert("Passwords missmatch !");
+    if (!email || email.length === 0) return alert("Aucun email fourni !");
+    if (!password || password.length === 0) return alert("Aucun mot de passe fourni !");
+    if (!fName || fName.length === 0) return alert("Aucun prénom fourni !");
+    if (!lName || lName.length === 0) return alert("Aucun mom fourni !");
+    if (password !== cpassword) return alert("Les mots de passes ne sont pas les mêmes !");
+    if (password.length<8 || containsSC(password)===false) return alert("Le mot de passe doit contenir 8 caractères dont un spécial")
+
     try {
       const { data } = await API.signup({ fName, lName, email, password });
       if (data.success === true){
