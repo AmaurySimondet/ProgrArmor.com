@@ -2,6 +2,7 @@ import {React, useState} from "react";
 
 function SerieInput(props) {
   const [serie, setSerie] = useState({
+    num: props.num,
     typeSerie: "",
     repsTime: "",
     charge: "",
@@ -16,8 +17,6 @@ function SerieInput(props) {
   }
 
   function handleChange(){
-    console.log(event.target.id)
-
     if (event.target.id !== "charge") {
         setSerie(oldSerie => {
                 return ({
@@ -36,11 +35,13 @@ function SerieInput(props) {
         });
     }
 
-    props.changeSerie(serie);
+    props.changeSerie(serie, props.num);
   }
 
   function handleClickPoubelle(){
-         return null
+         props.onDeleteSerie(props.num);
+
+         event.preventDefault();
   }
 
   return (

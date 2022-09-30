@@ -24,9 +24,11 @@ function PrivateRoute() {
     facebookToken();
     googleToken();
 
+    var timeout = false;
     if (!localStorage.getItem('reload')) {
         localStorage['reload'] = true;
-        window.location.reload();
+        clearTimeout(timeout);;
+        timeout = setTimeout(window.location.reload, 200);
     } else {
         localStorage.removeItem('reload');
     }

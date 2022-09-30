@@ -16,7 +16,8 @@ function createEntry(exercicesTerm) {
 }
 
 function FullExerciceInput(props){
-    const [fullExercice, setFullExercice] = useState({})
+    const [fullExercice, setFullExercice] = useState({name: "", series: {}});
+    const [numberOfSeries ,setNumberOfSeries] = useState(0);
 
     function changeExercice(exercice){
         event.preventDefault();
@@ -28,11 +29,22 @@ function FullExerciceInput(props){
         });
     })}
 
-    function changeSerie(serie){
+    function changeSerie(serie, num){
+        const otherThanFiltered = {}
+
+        if (FullExerciceInput.series) {otherThanFiltered = FullExerciceInput.series.filter(function (serie) {
+              if(serie.num !== num) {
+                return true
+              } else {
+                return false;
+              }
+        });
+        }
+
         setFullExercice(oldFullExercice => {
             return ({
             ...oldFullExercice,
-            serie: serie,
+            series: {...otherThanFiltered, serie},
         });
     })};
 
@@ -47,16 +59,68 @@ function FullExerciceInput(props){
         props.changeFullExercice(fullExercice);
       };
 
-    function handleClickSerie(){
-        return null;
+    function onDeleteSerie(num){
+        const seriesDeleted = {}
+
+        if (FullExerciceInput.series) {seriesDeleted = FullExerciceInput.series.filter(function (serie) {
+          if(serie.num !== num) {
+            return true
+          } else {
+            return false;
+          }
+        });
+        };
+
+        setFullExercice(oldFullExercice => {
+            return({
+                ...oldFullExercice,
+                series: seriesDeleted,
+            })
+        });
+    }
+
+    function onAddSerie(){
+        event.preventDefault();
+        let lastKey = 0;
+
+        if (fullExercice.series) {
+            for(var key in fullExercice.series){
+                    lastKey = key;
+                }
+        }
+
+        const data = {num: lastKey+1};
+
+        setFullExercice(oldFullExercice => {
+            return({
+                ...oldFullExercice,
+                series: {...series, data},
+            })
+        })
     }
 
     return(
           <div>
               <ExerciceInput id="name" value={fullExercice.name} changeExercice={changeExercice} />
-              <SerieInput id="serie" value={fullExercice.serie} changeSerie={changeSerie} num={"1"} poids={props.poids}/>
 
-              <button className="btn btn-dark form-button" onClick={handleClickSerie} type="submit">Ajouter une série !</button>
+              <div id="series">
+                  {fullExercice.series ? Object.keys(fullExercice.series).map((serie,index) => {
+                    return(
+                        <SerieInput
+                            key={index+1}
+                            num={index+1}
+                            poids={props.poids}
+                            changeSerie={changeSerie}
+                            onAddSerie={onAddSerie}
+                            onDeleteSerie={onDeleteSerie}
+                    />);
+                  })
+                  : null
+                  }
+              </div>
+
+
+              <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
               <br/>
           </div>
     )
