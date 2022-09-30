@@ -34,8 +34,6 @@ function SerieInput(props) {
             });
         });
     }
-
-    props.changeSerie(serie, props.num);
   }
 
   function handleClickPoubelle(){

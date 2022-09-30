@@ -16,108 +16,82 @@ function createEntry(exercicesTerm) {
 }
 
 function FullExerciceInput(props){
-    const [fullExercice, setFullExercice] = useState({name: "", series: {}});
-    const [numberOfSeries ,setNumberOfSeries] = useState(0);
+    const [series, setSeries] = useState([])
+    const [fullExercice, setFullExercice] = useState({});
 
     function changeExercice(exercice){
         event.preventDefault();
 
         setFullExercice(oldFullExercice => {
             return ({
-            ...oldFullExercice,
-            name: exercice,
-        });
-    })}
-
-    function changeSerie(serie, num){
-        const otherThanFiltered = {}
-
-        if (FullExerciceInput.series) {otherThanFiltered = FullExerciceInput.series.filter(function (serie) {
-              if(serie.num !== num) {
-                return true
-              } else {
-                return false;
-              }
-        });
-        }
-
-        setFullExercice(oldFullExercice => {
-            return ({
-            ...oldFullExercice,
-            series: {...otherThanFiltered, serie},
-        });
-    })};
-
-    function handleChange(event){
-        setFullExercice(oldFullExercice => {
-            return ({
                 ...oldFullExercice,
-                [event.target.id]: event.target.value,
+                exercice: exercice,
             });
         });
 
         props.changeFullExercice(fullExercice);
-      };
-
-    function onDeleteSerie(num){
-        const seriesDeleted = {}
-
-        if (FullExerciceInput.series) {seriesDeleted = FullExerciceInput.series.filter(function (serie) {
-          if(serie.num !== num) {
-            return true
-          } else {
-            return false;
-          }
-        });
-        };
-
-        setFullExercice(oldFullExercice => {
-            return({
-                ...oldFullExercice,
-                series: seriesDeleted,
-            })
-        });
     }
 
-    function onAddSerie(){
+//  function handleChange(event){
+//    event.preventDefault();
+//
+//    setFullExercice(oldFullExercice => {
+//            return ({
+//            ...oldFullExercice,
+//            [event.target.id]: event.target.value,
+//        });
+//    });
+//  }
+
+//    React.useEffect(() => {
+//        if (series) {
+//            setFullExercice(oldFullExercice => {
+//                return ({
+//                ...oldFullExercice,
+//                series: series,
+//                });
+//            })
+//        }
+//    }, [series])
+
+    function onAddSerie(serie, num){
         event.preventDefault();
-        let lastKey = 0;
 
-        if (fullExercice.series) {
-            for(var key in fullExercice.series){
-                    lastKey = key;
-                }
-        }
+        const otherThanSelected =  series.filter((serie, index) => {
+            return index!==num
+        })
 
-        const data = {num: lastKey+1};
+        setSeries([...otherThanSelected, serie])
+    }
 
-        setFullExercice(oldFullExercice => {
-            return({
-                ...oldFullExercice,
-                series: {...series, data},
-            })
+    function onDeleteSerie(num){
+        event.preventDefault();
+
+        setSeries(oldSeries => {
+            return(
+                oldSeries.filter((serie, index) => {
+                    return index!==(num-1)
+                })
+            )
         })
     }
 
     return(
           <div>
-              <ExerciceInput id="name" value={fullExercice.name} changeExercice={changeExercice} />
+              <ExerciceInput id="exercice" value={fullExercice.exercice} changeExercice={changeExercice} />
 
-              <div id="series">
-                  {fullExercice.series ? Object.keys(fullExercice.series).map((serie,index) => {
-                    return(
-                        <SerieInput
-                            key={index+1}
-                            num={index+1}
-                            poids={props.poids}
-                            changeSerie={changeSerie}
-                            onAddSerie={onAddSerie}
-                            onDeleteSerie={onDeleteSerie}
-                    />);
-                  })
-                  : null
-                  }
-              </div>
+              {series ? series.map((serie,index) => {
+                return(
+                    <SerieInput
+                        key={index+1}
+                        num={index+1}
+                        poids={props.poids}
+                        onAddSerie={onAddSerie}
+                        onDeleteSerie={onDeleteSerie}
+                />);
+              })
+              : null
+              }
 
 
               <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>

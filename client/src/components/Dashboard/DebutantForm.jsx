@@ -81,9 +81,10 @@ function DebutantForm() {
         setSeance(oldSeance => {
             return ({
             ...oldSeance,
-            exercice: exercice,
-        });
-    })}
+            exercice: fullExercice,
+            });
+        })
+    }
 
     function handleClickExercice(){
         return null;

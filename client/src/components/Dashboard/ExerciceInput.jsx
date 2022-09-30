@@ -16,7 +16,7 @@ function createEntry(exercicesTerm) {
 function ExerciceInput(props) {
   const [exercice, setExercice] = useState({name: "", ownExercice: ""});
 
-  function handleChange(){
+  function handleChange(event){
     event.preventDefault();
 
     setExercice(oldExercice => {
@@ -45,7 +45,7 @@ function ExerciceInput(props) {
           {exercice.name === "own-exercice" ?
               <div className="form-group row">
                 <div className="col-sm-5">
-                <p>
+                <p className="info-own-exercice">
                     <u>Attention:</u> Pour une experience optimale de ProgrArmor, choisis un exercice parmis la liste précédente <br/>
                     {"Tu accèderas à plus de choix en selectionnant le mode Expert avec l'interrupteur"}
                 </p>
