@@ -32,6 +32,18 @@ function FullExerciceInput(props){
         props.changeFullExercice(fullExercice);
     }
 
+    function changeSerie(serie, num, exerciceOf){
+        event.preventDefault();
+
+        const otherThanSelected =  series.filter((serie, index) => {
+            return index!==(num)
+        })
+
+        setSeries([...otherThanSelected, serie])
+
+        props.changeFullExercice(fullExercice, series);
+    }
+
 //  function handleChange(event){
 //    event.preventDefault();
 //
@@ -58,7 +70,7 @@ function FullExerciceInput(props){
         event.preventDefault();
 
         const otherThanSelected =  series.filter((serie, index) => {
-            return index!==num
+            return index!==(num)
         })
 
         setSeries([...otherThanSelected, serie])
@@ -70,7 +82,7 @@ function FullExerciceInput(props){
         setSeries(oldSeries => {
             return(
                 oldSeries.filter((serie, index) => {
-                    return index!==(num-1)
+                    return index!==(num)
                 })
             )
         })
@@ -83,16 +95,17 @@ function FullExerciceInput(props){
               {series ? series.map((serie,index) => {
                 return(
                     <SerieInput
-                        key={index+1}
-                        num={index+1}
+                        key={index}
+                        num={index}
+                        exercice={fullExercice.exercice}
                         poids={props.poids}
                         onAddSerie={onAddSerie}
+                        changeSerie={changeSerie}
                         onDeleteSerie={onDeleteSerie}
                 />);
               })
               : null
               }
-
 
               <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
               <br/>

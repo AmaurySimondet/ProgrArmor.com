@@ -75,16 +75,41 @@ function DebutantForm() {
         });
     })}
 
-    function changeFullExercice(fullExercice){
+    function changeFullExercice(fullExercice, fullSeries){
         event.preventDefault();
+
+        const series = {...fullSeries}
+        const exercice = {...fullExercice, series}
 
         setSeance(oldSeance => {
             return ({
             ...oldSeance,
-            exercice: fullExercice,
+            exercices: {exercice},
             });
         })
     }
+
+//    function changeSeries(series, exerciceOf){
+//        event.preventDefault();
+//        const indexOf = null;
+//
+//        const exericesArray = Object.values(seance.exercices)
+//        exericesArray.forEach((exercice, index) => {
+//            if(exercice.name === exerciceOf.name && exercice.name !== "own-exercice"){
+//                indexOf = index;
+//            }
+//            if(exercice.name === exerciceOf.name && exercice.ownExercice === exerciceOf.ownExercice){
+//                indexOf = index;
+//            }
+//        })
+//
+//        setSeance(oldSeance => {
+//            return ({
+//            ...oldSeance,
+//            [seance.exercices.indexOf.series]: series,
+//            });
+//        })
+//    }
 
     function handleClickExercice(){
         return null;
