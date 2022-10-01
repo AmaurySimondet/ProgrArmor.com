@@ -21,6 +21,7 @@ function DebutantForm() {
   });
 
   const [seance, setSeance] = useState({date: "", poids: ""});
+  const [exercices, setExercices] = useState([]);
 
   async function handleClick() {
 //    event.preventDefault();
@@ -89,32 +90,37 @@ function DebutantForm() {
         })
     }
 
-//    function changeSeries(series, exerciceOf){
-//        event.preventDefault();
-//        const indexOf = null;
-//
-//        const exericesArray = Object.values(seance.exercices)
-//        exericesArray.forEach((exercice, index) => {
-//            if(exercice.name === exerciceOf.name && exercice.name !== "own-exercice"){
-//                indexOf = index;
-//            }
-//            if(exercice.name === exerciceOf.name && exercice.ownExercice === exerciceOf.ownExercice){
-//                indexOf = index;
-//            }
-//        })
-//
-//        setSeance(oldSeance => {
-//            return ({
-//            ...oldSeance,
-//            [seance.exercices.indexOf.series]: series,
-//            });
-//        })
-//    }
+    function changeExercices(exercice, num){
+        event.preventDefault();
 
-    function handleClickExercice(){
-        return null;
+        const otherThanSelected =  exercices.filter((exercice, index) => {
+            return index!==(num)
+        })
+
+        setExercices([...otherThanSelected, exercice])
     }
 
+    function onAddExercices(exercice, num){
+        event.preventDefault();
+
+        const otherThanSelected =  exercices.filter((exercice, index) => {
+            return index!==(num)
+        })
+
+        setExercices([...otherThanSelected, exercice])
+    }
+
+    function onDeleteExercices(num){
+        event.preventDefault();
+
+        setExercices(oldExercices => {
+            return(
+                oldExercices.filter((exercice, index) => {
+                    return index!==(num)
+                })
+            )
+        })
+    }
 
     return(
         <form className="debutant-form">
@@ -123,9 +129,22 @@ function DebutantForm() {
 
           <PoidsInput changePoids={changePoids}/>
 
-          <FullExerciceInput changeFullExercice={changeFullExercice} poids={seance.poids}/>
+          {exercices ? exercices.map((exercice,index) => {
+            return(
+                <FullExerciceInput
+                    key={index}
+                    num={index}
+                    poids={seance.poids}
+                    changeFullExercice={changeFullExercice}
+                    onAddExercices={onAddExercices}
+                    changeExercices={changeExercices}
+                    onDeleteExercices={onDeleteExercices}
+            />);
+          })
+          : null
+          }
 
-          <button className="btn btn-dark form-button" onClick={handleClickExercice} type="submit">Ajouter un exercice à cette séance !</button>
+          <button className="btn btn-dark form-button" onClick={onAddExercices} type="submit">Ajouter un exercice à cette séance !</button>
           <br/>
 
           <div className="form-button-div">

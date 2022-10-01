@@ -47,7 +47,7 @@ function SerieInput(props) {
   return (
       <div className="form-group row">
             <label className="col-sm-2 col-form-label">
-                Série {props.num}
+                Série {props.num+1}
                 <img className="myDIV" onClick={handleClickQuestion} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                 <div className={clicked}>
                     <div className="hidden-text">
@@ -66,7 +66,7 @@ function SerieInput(props) {
                     </div>
                 </div>
             </label>
-            <div className="col-sm-3">
+            <div className="col-sm-2">
                 <select onChange={handleChange} className="custom-select" id="typeSerie">
                     <option value="reps"> Répétitions (défaut) </option>
                     <option value="time"> Temps (secondes) </option>

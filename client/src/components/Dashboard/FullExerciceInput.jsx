@@ -44,28 +44,6 @@ function FullExerciceInput(props){
         props.changeFullExercice(fullExercice, series);
     }
 
-//  function handleChange(event){
-//    event.preventDefault();
-//
-//    setFullExercice(oldFullExercice => {
-//            return ({
-//            ...oldFullExercice,
-//            [event.target.id]: event.target.value,
-//        });
-//    });
-//  }
-
-//    React.useEffect(() => {
-//        if (series) {
-//            setFullExercice(oldFullExercice => {
-//                return ({
-//                ...oldFullExercice,
-//                series: series,
-//                });
-//            })
-//        }
-//    }, [series])
-
     function onAddSerie(serie, num){
         event.preventDefault();
 
@@ -90,7 +68,7 @@ function FullExerciceInput(props){
 
     return(
           <div>
-              <ExerciceInput id="exercice" value={fullExercice.exercice} changeExercice={changeExercice} />
+              <ExerciceInput id="exercice" value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} />
 
               {series ? series.map((serie,index) => {
                 return(

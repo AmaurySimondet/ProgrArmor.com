@@ -29,16 +29,25 @@ function ExerciceInput(props) {
     props.changeExercice(exercice);
   }
 
+    function handleClickPoubelle(){
+         props.onDeleteExercices(props.num);
+
+         event.preventDefault();
+  }
+
   return (
     <div>
           <div className="form-group row">
             <label className="col-sm-2 col-form-label">
-              Exercice
+              Exercice {props.num+1}
             </label>
-            <div className="col-sm-10">
+            <div className="col-sm-9">
                 <select onChange={handleChange} className="custom-select col-sm-10" id="name">
                     {lesExercices.map(createEntry)}
                 </select>
+            </div>
+            <div className="col-sm-1">
+              <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
             </div>
           </div>
 
