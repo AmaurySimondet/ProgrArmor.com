@@ -29,7 +29,9 @@ function FullExerciceInput(props){
             });
         });
 
-        props.changeFullExercice(fullExercice);
+        const Series = {...series}
+        const Exercice = {...fullExercice, Series}
+        props.changeExercices(Exercice, props.num);
     }
 
     function changeSerie(serie, num, exerciceOf){
@@ -41,7 +43,9 @@ function FullExerciceInput(props){
 
         setSeries([...otherThanSelected, serie])
 
-        props.changeFullExercice(fullExercice, series);
+        const Series = {...series}
+        const Exercice = {...fullExercice, Series}
+        props.changeExercices(Exercice, props.num);
     }
 
     function onAddSerie(serie, num){

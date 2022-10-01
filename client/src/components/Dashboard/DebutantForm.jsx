@@ -5,21 +5,7 @@ import DateInput from "./DateInput";
 import PoidsInput from "./PoidsInput";
 import FullExerciceInput from "./FullExerciceInput"
 
-const ReactComment = ({ text }) => {
-  return <div dangerouslySetInnerHTML={{ __html: `<!-- ${text} -->` }}/>
-}
-
 function DebutantForm() {
-  const [state, setState] = useState({
-//    date: "",
-    poids: "",
-    exercice: "",
-    charge: "",
-    percent: "",
-    typeSerie: "reps",
-    repsTime: "",
-  });
-
   const [seance, setSeance] = useState({date: "", poids: ""});
   const [exercices, setExercices] = useState([]);
 
@@ -43,19 +29,6 @@ function DebutantForm() {
 //    }
   };
 
-
-
-  function handleChange(event){
-    event.preventDefault();
-
-    setState(oldState => {
-        return ({
-            ...oldState,
-            [event.target.id]: event.target.value,
-        });
-    });
-  };
-
     function changeDate(date){
         event.preventDefault();
 
@@ -76,20 +49,6 @@ function DebutantForm() {
         });
     })}
 
-    function changeFullExercice(fullExercice, fullSeries){
-        event.preventDefault();
-
-        const series = {...fullSeries}
-        const exercice = {...fullExercice, series}
-
-        setSeance(oldSeance => {
-            return ({
-            ...oldSeance,
-            exercices: {exercice},
-            });
-        })
-    }
-
     function changeExercices(exercice, num){
         event.preventDefault();
 
@@ -98,6 +57,13 @@ function DebutantForm() {
         })
 
         setExercices([...otherThanSelected, exercice])
+
+        setSeance(oldSeance => {
+            return ({
+            ...oldSeance,
+            exerices: exercices,
+            });
+        });
     }
 
     function onAddExercices(exercice, num){
@@ -135,7 +101,6 @@ function DebutantForm() {
                     key={index}
                     num={index}
                     poids={seance.poids}
-                    changeFullExercice={changeFullExercice}
                     onAddExercices={onAddExercices}
                     changeExercices={changeExercices}
                     onDeleteExercices={onDeleteExercices}
