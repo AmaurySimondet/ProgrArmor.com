@@ -60,7 +60,7 @@
 
 }
 
-.session-div p{
+.session-div-switch{
     text-align:center;
     margin-bottom: 2%;
 }
@@ -82,8 +82,18 @@
 
 .hr-serie{
     border-width: 2px;
+
 }
 
+.enregistrer-button{
+    margin-bottom:2%;
+    margin-top:5%;
+}
+
+.nom-exercice-serie p {
+    text-align:justify;
+
+}
 
 /* TAGS */
 

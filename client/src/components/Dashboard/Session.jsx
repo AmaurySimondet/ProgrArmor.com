@@ -23,7 +23,7 @@ function Session() {
           <div className="session-div">
               <h1> Enregistre ta séance ! </h1>
 
-              <p> Débutant <Switch onChange={handleChange} /> Expert </p>
+              <p className="session-div-switch"> Débutant <Switch onChange={handleChange} /> Expert </p>
 
               {switched ? <ExpertForm/> : <DebutantForm/>}
           </div>

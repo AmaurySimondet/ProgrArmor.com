@@ -128,7 +128,7 @@ function SerieInput(props) {
   <div style={divStyle(props.num)}>
       <div className="form-group row">
             <label className="col-sm-2 col-form-label">
-                Série {props.num+1}
+                Série {props.num+1} <p className="nom-exercice-serie"> ({props.exercice.name}) </p>
                 <img className="myDIV" onClick={handleClickQuestion} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                 <div className={clicked}>
                     <div className="hidden-text">

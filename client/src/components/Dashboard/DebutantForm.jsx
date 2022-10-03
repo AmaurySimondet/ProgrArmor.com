@@ -6,17 +6,52 @@ import PoidsInput from "./PoidsInput";
 import FullExerciceInput from "./FullExerciceInput"
 
 function DebutantForm() {
-  const [seance, setSeance] = useState({date: "", poids: ""});
+  const [seance, setSeance] = useState({date: "", poids: "", exercices: {}});
   const [exercices, setExercices] = useState([]);
 
   async function handleClick() {
         event.preventDefault();
+        let emptySerie = false
+        let err = false;
 
-        console.log(seance)
+        console.log(seance);
 
-        Object.values(seance)[2].forEach(exercice => {
-            if(exercice.exercice.name==="title"){
+        if (seance.date === '' && err === false){
+            err = true;
+            alert ("Et c'était quand ça ? tu m'as pas dis la date !")
+        }
+
+        if (seance.poids === '' && err === false){
+            err = true;
+            alert ("Tu pèses combien ? Pas de tricherie avec moi tu m'as pas donné ton poids !")
+        }
+
+        if (exercices.length === 0 && err === false){
+            err = true;
+            alert ("Ah bah super ta séance, y a aucun exo !")
+        }
+
+        exercices.forEach(exercice => {
+            if (Object.keys(exercice.Series).length === 0 && err === false){
+                err = true;
+                alert("Faut avouer qu'un exercice sans série c'est pas commode !")
+            }
+
+            Object.values(exercice.Series).forEach(serie => {
+                if (serie.repsTime==='' || serie.charge==='' && err === false){
+                    err = true;
+                    alert("Une serie n'est pas remplie !")
+                }
+            })
+
+            if(exercice.exercice.name==="title" && err === false){
+                err = true;
                 alert("Une catégorie n'est pas un exercice voyons !")
+            }
+
+            if(exercice.exercice.name==="" && err === false){
+                err = true;
+                alert("Tu m'as pas donné le nom de ton exo petit cachottier !")
             }
         });
     }
@@ -68,7 +103,7 @@ function DebutantForm() {
     useEffect(() => {setSeance(oldSeance => {
             return ({
             ...oldSeance,
-            exerices: exercices,
+            exercices: exercices,
             });
         });}, [exercices])
 
@@ -121,7 +156,7 @@ function DebutantForm() {
           <br/>
 
           <div className="form-button-div">
-            <button className="btn btn-lg btn-dark form-button" onClick={handleClick} type="submit">Enregistrer la séance !</button>
+            <button className="btn btn-lg btn-dark enregistrer-button" onClick={handleClick} type="submit">Enregistrer la séance !</button>
           </div>
         </form>
     )
