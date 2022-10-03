@@ -31,8 +31,6 @@ function FullExerciceInput(props){
     }
 
     function changeSerie(serie, num, exerciceOf){
-        event.preventDefault();
-
         const otherThanSelected =  series.filter((serie, index) => {
             return index!==(num)
         });
@@ -68,21 +66,49 @@ function FullExerciceInput(props){
         })
     }
 
+    function perc2color(perc,min,max) {
+                var base = (max - min);
+
+                if (base == 0) { perc = 100; }
+                else {
+                    perc = (perc - min) / base * 100;
+                }
+                var r, g, b = 0;
+                if (perc < 50) {
+                    r = 255;
+                    g = Math.round(5.1 * perc);
+                }
+                else {
+                    g = 255;
+                    r = Math.round(510 - 5.10 * perc);
+                }
+                var h = r * 0x10000 + g * 0x100 + b * 0x1;
+                return '#' + ('000000' + h.toString(16)).slice(-6);
+    }
+
     return(
-          <div>
+          <div className="exercice-div">
+              <hr className="hr-exercice"/>
+
               <ExerciceInput id="exercice" value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} />
 
               {series ? series.map((serie,index) => {
                 return(
+                <div>
+                    <hr className="hr-serie"/>
+
                     <SerieInput
                         key={index}
                         num={index}
+                        length={series.length}
                         exercice={fullExercice.exercice}
                         poids={props.poids}
                         onAddSerie={onAddSerie}
                         changeSerie={changeSerie}
                         onDeleteSerie={onDeleteSerie}
-                />);
+                    />
+                </div>
+                );
               })
               : null
               }

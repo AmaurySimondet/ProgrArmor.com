@@ -2,6 +2,7 @@
 
 .hide {
   display: none;
+
 }
 
 .nothide {
@@ -38,7 +39,6 @@
 
 }
 
-
 .myDIV{
     margin-left:5px;
     width:20px;
@@ -68,6 +68,20 @@
 .poubelle{
     margin-top:5px;
 
+}
+
+.exercice-div{
+    margin-bottom: 20px;
+
+}
+
+.hr-exercice{
+    border-width: 2px;
+    border-color: black;
+}
+
+.hr-serie{
+    border-width: 2px;
 }
 
 
