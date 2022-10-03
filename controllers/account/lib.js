@@ -70,7 +70,6 @@ passport.use(new FacebookStrategy({
 }
 ))
 
-
 async function facebook(req, res) {
     passport.authenticate("facebook", {failureRedirect: '/', scope:['email'], successRedirect: 'http://localhost:3000/dashboard'})(req,res,function(){
                     const token = jwt.sign({ username: 'facebook' }, process.env.secret, { expiresIn: "24h" });
@@ -146,7 +145,6 @@ passport.use(new GoogleStrategy({
 }
 ))
 
-
 async function google(req, res) {
     passport.authenticate("google", {failureRedirect: '/', scope:['email', 'profile'], successRedirect: 'http://localhost:3000/dashboard'})(req,res,function(){
                     const token = jwt.sign({ username: 'google' }, process.env.secret, { expiresIn: "24h" });
@@ -177,6 +175,8 @@ async function googleToken(req, res) {
 
 
 //SIGNUP
+let userProfile = null;
+
 async function signup(req, res) {
     User.register(
         {fName: req.body.fName, email: req.body.email, lName: req.body.lName},
@@ -187,6 +187,8 @@ async function signup(req, res) {
                 res.json({ success: false, message: "Your account could not be saved. Error: " + err });
             }else{
                 passport.authenticate("local")(req,res,function(){
+                    userProfile = user;
+                    console.log(userProfile);
                     const token = jwt.sign({ email: user.email }, process.env.secret, { expiresIn: "24h" });
                     res.json({ success: true, message: "Register successful", token: token });
                 });
@@ -222,6 +224,8 @@ async function login(req, res) {
                         res.json({ success: false, message: "email or password incorrect" });
                     }
                     else {
+                        userProfile = user;
+                        console.log(userProfile);
                         const token = jwt.sign({ email: user.email }, process.env.secret, { expiresIn: "24h" });
                         res.json({ success: true, message: "Login successful", token: token });
                     }
@@ -239,8 +243,50 @@ async function logout(req, res) {
     });
     facebookProfile = null;
     googleProfile = null;
+    userProfile = null;
     res.json({ success: true, message: "Logout successful"})
 }
+
+//SESSION
+//DEBUTANT FORM
+async function debutantform(req, res) {
+    const seance = req.body.seance;
+    let profile = null;
+
+    if (facebookProfile === null){
+        if (googleProfile === null){
+            if (userProfile === null){
+                res.json({ success: false, message: "Merci de vous connecter" });
+            } else {
+                profile = userProfile;
+            }
+        }
+        else{
+            profile = googleProfile;
+        }
+    }else {
+        profile = facebookProfile;
+
+    }
+
+    console.log(seance);
+    console.log(profile);
+
+    try {
+       User.findOneAndUpdate(
+          {"email": profile.email},
+          { $addToSet:  {"seances": seance}},
+          (err) => {
+              if (err) {return res.json({ success: false, message: err})}
+              else {res.json({ success: true, message: "Serie enregistrée !"})}
+          }
+       )
+
+    }
+    catch(e){
+       console.log(e);
+    }
+};
 
 //On exporte nos fonctions
 exports.login = login;
@@ -252,3 +298,4 @@ exports.google = google;
 exports.googleAuthenticate = googleAuthenticate;
 exports.googleToken = googleToken;
 exports.logout = logout;
+exports.debutantform = debutantform;

@@ -2,6 +2,20 @@ const mongoose = require("mongoose");
 const findOrCreate = require('mongoose-findorcreate');
 const passportLocalMongoose = require("passport-local-mongoose");
 
+//const seanceSchema = mongoose.Schema(
+//  {
+//    date: {type : String},
+//    poids: {type : String},
+//    exercices: {type : Array},
+//  }
+//);
+
+//const seancesSchema = mongoose.Schema(
+//  {
+//    seance: seanceSchema,
+//  }
+//);
+
 const userSchema = mongoose.Schema(
   {
     facebookId: { type: String },
@@ -27,7 +41,8 @@ const userSchema = mongoose.Schema(
     },
     profilePic: {
       type: String
-    }
+    },
+    seances: Array,
   },
   { timestamps: { createdAt: "created_at" } }
 );

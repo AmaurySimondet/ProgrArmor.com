@@ -16,6 +16,7 @@ function DebutantForm() {
 
         console.log(seance);
 
+        //CONDITIONS
         if (seance.date === '' && err === false){
             err = true;
             alert ("Et c'était quand ça ? tu m'as pas dis la date !")
@@ -54,6 +55,18 @@ function DebutantForm() {
                 alert("Tu m'as pas donné le nom de ton exo petit cachottier !")
             }
         });
+
+        //API
+        try {
+          const { data } = await API.debutantform(seance);
+          if (data.success === true){
+            window.location = "/dashboard";
+          }else{
+            alert(data.message);
+          }
+        } catch (error) {
+          alert(error);
+        }
     }
 //    if (!date || date.length === 0) {
 //      return alert("No date given !");
