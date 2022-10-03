@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import API from "../../utils/API";
 import axios from 'axios';
 import DateInput from "./DateInput";
@@ -9,6 +9,17 @@ function DebutantForm() {
   const [seance, setSeance] = useState({date: "", poids: ""});
   const [exercices, setExercices] = useState([]);
 
+  async function handleClick() {
+        event.preventDefault();
+
+        console.log(seance)
+
+        Object.values(seance)[2].forEach(exercice => {
+            if(exercice.exercice.name==="title"){
+                alert("Une catégorie n'est pas un exercice voyons !")
+            }
+        });
+    }
 //    if (!date || date.length === 0) {
 //      return alert("No date given !");
 //    }
@@ -52,14 +63,14 @@ function DebutantForm() {
         })
 
         setExercices([...otherThanSelected, exercice])
+    }
 
-        setSeance(oldSeance => {
+    useEffect(() => {setSeance(oldSeance => {
             return ({
             ...oldSeance,
             exerices: exercices,
             });
-        });
-    }
+        });}, [exercices])
 
     function onAddExercices(exercice, num){
         event.preventDefault();
@@ -83,17 +94,7 @@ function DebutantForm() {
         })
     }
 
-    async function handleClick() {
-        event.preventDefault();
 
-        console.log(seance)
-
-        Object.values(seance)[2].forEach(exercice => {
-            if(exercice.exercice.name==="title"){
-                alert("Une catégorie n'est pas un exercice voyons !")
-            }
-        });
-    }
 
     return(
         <form className="debutant-form">
