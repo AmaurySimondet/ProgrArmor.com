@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import lesExercices from "./Exercices";
 import Select from "./Select";
 
@@ -23,11 +23,12 @@ function ExerciceInput(props) {
             return ({
             ...oldExercice,
             [event.target.id]: event.target.value,
-        });
-    });
-
-    props.changeExercice(exercice);
+        })});
   }
+
+  useEffect(() => {
+    props.changeExercice(exercice);
+  }, [exercice]);
 
     function handleClickPoubelle(){
          props.onDeleteExercices(props.num);

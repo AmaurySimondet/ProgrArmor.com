@@ -1,9 +1,9 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 
 function SerieInput(props) {
   const [serie, setSerie] = useState({
     num: props.num,
-    typeSerie: "",
+    typeSerie: "reps",
     repsTime: "",
     charge: "",
     percent: ""});
@@ -34,9 +34,11 @@ function SerieInput(props) {
             });
         });
     }
-
-    props.changeSerie(serie, props.num, props.exercice)
   }
+
+  useEffect(() => {
+    props.changeSerie(serie, props.num, props.exercice)
+  }, [serie])
 
   function handleClickPoubelle(){
          props.onDeleteSerie(props.num);

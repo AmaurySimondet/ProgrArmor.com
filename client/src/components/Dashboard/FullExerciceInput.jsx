@@ -2,7 +2,7 @@ import ExerciceInput from "./ExerciceInput";
 import SerieInput from "./SerieInput";
 import exercices from "./Exercices";
 import Select from "./Select";
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 
 function createEntry(exercicesTerm) {
   return (
@@ -16,7 +16,7 @@ function createEntry(exercicesTerm) {
 }
 
 function FullExerciceInput(props){
-    const [series, setSeries] = useState([])
+    const [series, setSeries] = useState([]);
     const [fullExercice, setFullExercice] = useState({});
 
     function changeExercice(exercice){
@@ -28,10 +28,6 @@ function FullExerciceInput(props){
                 exercice: exercice,
             });
         });
-
-        const Series = {...series}
-        const Exercice = {...fullExercice, Series}
-        props.changeExercices(Exercice, props.num);
     }
 
     function changeSerie(serie, num, exerciceOf){
@@ -39,14 +35,16 @@ function FullExerciceInput(props){
 
         const otherThanSelected =  series.filter((serie, index) => {
             return index!==(num)
-        })
+        });
 
-        setSeries([...otherThanSelected, serie])
-
-        const Series = {...series}
-        const Exercice = {...fullExercice, Series}
-        props.changeExercices(Exercice, props.num);
+        setSeries([...otherThanSelected, serie]);
     }
+
+    useEffect(() => {
+        const Series = {...series};
+        const Exercice = {...fullExercice, Series};
+        props.changeExercices(Exercice, props.num);
+    }, [fullExercice, series])
 
     function onAddSerie(serie, num){
         event.preventDefault();

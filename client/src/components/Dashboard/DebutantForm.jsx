@@ -9,10 +9,6 @@ function DebutantForm() {
   const [seance, setSeance] = useState({date: "", poids: ""});
   const [exercices, setExercices] = useState([]);
 
-  async function handleClick() {
-//    event.preventDefault();
-//
-//    const {poids, exercice, typeSerie, repsTime, charge, percent } = state;
 //    if (!date || date.length === 0) {
 //      return alert("No date given !");
 //    }
@@ -27,7 +23,6 @@ function DebutantForm() {
 //    } catch (error) {
 //      alert(error);
 //    }
-  };
 
     function changeDate(date){
         event.preventDefault();
@@ -86,6 +81,18 @@ function DebutantForm() {
                 })
             )
         })
+    }
+
+    async function handleClick() {
+        event.preventDefault();
+
+        console.log(seance)
+
+        Object.values(seance)[2].forEach(exercice => {
+            if(exercice.exercice.name==="title"){
+                alert("Une catégorie n'est pas un exercice voyons !")
+            }
+        });
     }
 
     return(
