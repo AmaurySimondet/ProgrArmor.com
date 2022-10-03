@@ -62,4 +62,9 @@ export default {
     return axios.post(`${burl}/user/debutantform`,{seance},{headers: headers});
 
   },
+
+  workouts: function(){
+      return axios.get(`${burl}/user/workouts`, { headers: headers });
+
+  }
 };

@@ -17,4 +17,7 @@ module.exports = function (app) {
     //SESSION
     app.post('/debutantform',account.debutantform);
 
+    //DASHBOARD
+    app.get('/workouts',account.workouts);
+
 }

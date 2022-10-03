@@ -1,3 +1,15 @@
+/* TAGS */
+
+h1{
+    font-weight:800;
+
+}
+
+h2{
+    font-weight:200;
+
+}
+
 /* SESSION */
 
 .hide {
@@ -95,17 +107,18 @@
 
 }
 
-/* TAGS */
+/* DASHBOARD */
 
-h1{
-    font-weight:800;
+.dashboard-table{
+  border: 1px solid black;
+
+}
+
+.dashboard-td{
+  border: 1px solid black;
 
 }
 
-h2{
-    font-weight:200;
-
-}
 
 /* HOME HEADER*/
 
