@@ -63,8 +63,18 @@ export default {
 
   },
 
-  workouts: function(){
-      return axios.get(`${burl}/user/workouts`, { headers: headers });
+  workouts: function(params){
+        let string = "";
+        let keyArray = [];
+        Object.keys(params).forEach(key => {keyArray.push(key)});
+        Object.values(params).forEach((param,index) => {
+            string = string + keyArray[index] + "=" + param
+            if (index !== (Object.values(params).length-1)){
+                string = string + "&"
+            };
+        })
+
+      return axios.get(`${burl}/user/workouts?`+string, { headers: headers });
 
   }
 };

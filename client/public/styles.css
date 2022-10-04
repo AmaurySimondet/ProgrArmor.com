@@ -110,12 +110,24 @@ h2{
 /* DASHBOARD */
 
 .dashboard-table{
-  border: 1px solid black;
+    margin-top: 5%;
 
 }
 
-.dashboard-td{
-  border: 1px solid black;
+.Dashboard{
+    width:98%;
+    margin:auto;
+    text-align: center;
+
+}
+
+.Dashboard-h1{
+    margin: 2% 0;
+
+}
+
+.none{
+    display: none;
 
 }
 

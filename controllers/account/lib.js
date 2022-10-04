@@ -293,6 +293,9 @@ async function debutantform(req, res) {
 async function workouts(req, res) {
     let profile = null;
 
+//    req.query.tri === 'red'  // true
+//    req.query.periode === 'blue' // true
+
     if (facebookProfile === null){
         if (googleProfile === null){
             if (userProfile === null){
@@ -313,7 +316,7 @@ async function workouts(req, res) {
 
     try {
        User.find(
-          {"email": profile.email}, function (err, data) {
+          {"email": profile.email}, null, {sort: {date: -1}}, function (err, data) {
                 if (err){
                     res.json({ success: false, message: err})
                 }

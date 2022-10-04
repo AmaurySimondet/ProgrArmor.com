@@ -68,20 +68,6 @@ function DebutantForm() {
           alert(error);
         }
     }
-//    if (!date || date.length === 0) {
-//      return alert("No date given !");
-//    }
-//    try {
-//      const { data } = await API.login(email, password);
-//      if (data.success === true){
-//        localStorage.setItem("token", data.token);
-//        window.location = "/dashboard";
-//      }else{
-//        alert(data.message);
-//      }
-//    } catch (error) {
-//      alert(error);
-//    }
 
     function changeDate(date){
         event.preventDefault();
