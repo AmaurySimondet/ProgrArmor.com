@@ -293,8 +293,13 @@ async function debutantform(req, res) {
 async function workouts(req, res) {
     let profile = null;
 
-//    req.query.tri === 'red'  // true
-//    req.query.periode === 'blue' // true
+    function sortDateCroissant(a, b) {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+    }
+
+    function sortDateDecroissant(a, b) {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+    }
 
     if (facebookProfile === null){
         if (googleProfile === null){
@@ -316,12 +321,25 @@ async function workouts(req, res) {
 
     try {
        User.find(
-          {"email": profile.email}, null, {sort: {date: -1}}, function (err, data) {
+          {"email": profile.email}, function (err, data) {
                 if (err){
                     res.json({ success: false, message: err})
                 }
                 else{
-                    res.json({ success: true, message: "Utilisateur trouvé !", seances: data[0].seances})
+                    let seances = data[0].seances;
+
+                    if (req.query.repsFrom !== ""){
+
+                    }
+
+                    if (req.query.tri === 'Ordre chronologique décroissant'){
+                        seances = seances.sort(sortDateDecroissant);
+                    }
+                    if (req.query.tri === 'Ordre chronologique croissant'){
+                        seances = seances.sort(sortDateCroissant);
+                    }
+
+                    res.json({ success: true, message: "Utilisateur trouvé !", seances: seances})
                 }
           });
 

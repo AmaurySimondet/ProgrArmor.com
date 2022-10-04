@@ -6,7 +6,7 @@ import API from "../../utils/API";
 
 function Dashboard() {
     const [seances, setSeances] = useState([]);
-    const [params, setParams] = useState({tri: "Ordre chronologique décroissant", periode: "30j", reps: "tous"});
+    const [params, setParams] = useState({tri: "Ordre chronologique décroissant", periode: "30j", repsFrom: "", repsTo: ""});
 
   async function disconnect() {
     await API.logout();
@@ -28,7 +28,7 @@ function Dashboard() {
     }
   }
 
-  function handleChangeSelect(event){
+  function handleChange(event){
     event.preventDefault();
 
     setParams(oldParams => {
@@ -98,11 +98,34 @@ function Dashboard() {
                     <label className="col-sm-2 col-form-label">
                       Tri
                     </label>
-                    <div className="col-sm-3">
-                        <select onChange={handleChangeSelect} className="custom-select col-sm-10" id="tri">
+                    <div className="col-sm-4">
+                        <select onChange={handleChange} className="custom-select col-sm-10" id="tri">
                             <option value="Ordre chronologique décroissant"> Ordre chronologique décroissant (défaut) </option>
                             <option value="Ordre chronologique croissant"> Ordre chronologique croissant </option>
                         </select>
+                    </div>
+
+                    <label className="col-sm-1 col-form-label">
+                      Reps / Temps
+                    </label>
+                    <div className="col-sm-1">
+                        <input type="text"
+                          className="form-control"
+                          value={params.repsFrom}
+                          onChange={handleChange}
+                          id="repsFrom"
+                        />
+                    </div>
+                    <label className="col-sm-1 col-form-label">
+                      à
+                    </label>
+                    <div className="col-sm-1">
+                        <input type="text"
+                          className="form-control"
+                          value={params.repsTo}
+                          onChange={handleChange}
+                          id="repsTo"
+                        />
                     </div>
 
                     <div className="form-button-div">
