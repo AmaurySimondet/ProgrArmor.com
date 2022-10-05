@@ -329,7 +329,27 @@ async function workouts(req, res) {
                     let seances = data[0].seances;
 
                     if (req.query.repsFrom !== ""){
+                        seances.map((seance,indexSeance) => {
+                        return (seance.exercices.map((exercice, indexExercice) => {
+                                return (Object.values(exercice.Series).map((serie, index) => {
+                                    if (parseFloat(serie.repsTime)<req.query.repsFrom){
+                                        delete seances[indexSeance].exercices[indexExercice].Series[index]
+                                    }
+                                }))
+                            }))
+                        })
+                    }
 
+                    if (req.query.repsTo !== ""){
+                        seances.map((seance,indexSeance) => {
+                        return (seance.exercices.map((exercice, indexExercice) => {
+                                return (Object.values(exercice.Series).map((serie, index) => {
+                                    if (parseFloat(serie.repsTime)>req.query.repsTo){
+                                        delete seances[indexSeance].exercices[indexExercice].Series[index]
+                                    }
+                                }))
+                            }))
+                        })
                     }
 
                     if (req.query.tri === 'Ordre chronologique décroissant'){

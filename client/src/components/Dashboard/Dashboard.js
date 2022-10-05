@@ -71,7 +71,7 @@ function Dashboard() {
             let font;
 
             if (index%2===0){
-                font = "#ff0000"
+                font = "#ffbaba"
             } else {
                 font = "white"
             }
