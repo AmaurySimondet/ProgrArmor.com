@@ -1,5 +1,11 @@
 const exercices = [
   {
+    id: 0,
+    class: "select-title",
+    name: "Tous (défaut)",
+    value: "title",
+  },
+  {
     id: 1,
     class: "select-title",
     name: "Musculation - Haut du corps",

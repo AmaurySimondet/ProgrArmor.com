@@ -126,6 +126,11 @@ h2{
 
 }
 
+.Dashboard .poubelle-div{
+    display: none;
+
+}
+
 .none{
     display: none;
 

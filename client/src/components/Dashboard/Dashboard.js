@@ -1,12 +1,13 @@
 import {React, useState, useEffect} from "react";
 import { Button } from "react-bootstrap";
 import NavigBar from "../NavigBar.jsx"
-
 import API from "../../utils/API";
+import ExerciceInput from "./ExerciceInput"
 
 function Dashboard() {
     const [seances, setSeances] = useState([]);
-    const [params, setParams] = useState({tri: "Ordre chronologique décroissant", periode: "30j", repsFrom: "", repsTo: ""});
+    const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
+    const [params, setParams] = useState({tri: "Ordre chronologique décroissant", periode: "30j", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
 
   async function disconnect() {
     await API.logout();
@@ -53,6 +54,25 @@ function Dashboard() {
 //    console.log(string);
 //  },[params]);
 
+    function changeExercice(exercice){
+        setExercice(oldExercice => {
+            return ({
+                ...oldExercice,
+                exercice: exercice,
+            });
+        });
+    }
+
+    useEffect(() => {
+        setParams(oldParams => {
+            return ({
+                ...oldParams,
+                exerciceName: exercice.exercice.name,
+                exerciceOwnExercice: exercice.exercice.ownExercice,
+            })
+        })
+    },[exercice]);
+
     function trStyle(index){
             let font;
 
@@ -95,15 +115,17 @@ function Dashboard() {
 
             <form className="debutant-form">
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">
+                    <label className="col-sm-1 col-form-label">
                       Tri
                     </label>
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                         <select onChange={handleChange} className="custom-select col-sm-10" id="tri">
                             <option value="Ordre chronologique décroissant"> Ordre chronologique décroissant (défaut) </option>
                             <option value="Ordre chronologique croissant"> Ordre chronologique croissant </option>
                         </select>
                     </div>
+
+                    <ExerciceInput num={0} id="exercice" changeExercice={changeExercice} />
 
                     <label className="col-sm-1 col-form-label">
                       Reps / Temps
@@ -116,7 +138,7 @@ function Dashboard() {
                           id="repsFrom"
                         />
                     </div>
-                    <label className="col-sm-1 col-form-label">
+                    <label className="col-sm-0 col-form-label">
                       à
                     </label>
                     <div className="col-sm-1">
@@ -154,36 +176,39 @@ function Dashboard() {
               <tbody>
                   {seances.map((seance,indexSeance) => {
                         return (seance.exercices.map((exercice, indexExercice) => {
-                                return (Object.values(exercice.Series).map((serie, index) => {
-                                    return (
-                                        <tr style={trStyle(indexSeance)}>
-                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                {seance.date}
-                                            </td>
-                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                {seance.poids}
-                                            </td>
-                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                {exercice.exercice.name==="own-exercice" ? exercice.exercice.ownExercice : exercice.exercice.name}
-                                            </td>
-                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                {serie.num+1}
-                                            </td>
-                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                {serie.typeSerie==="reps" ? "Répétitions" : null}
-                                                {serie.typeSerie==="time" ? "Temps (secondes)" : null}
-                                            </td>
-                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                {serie.repsTime}
-                                            </td>
-                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                {serie.charge}
-                                            </td>
-                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                {serie.percent}
-                                            </td>
-                                        </tr>
-                                )}))
+                                if (exercice !== null){
+                                    return (Object.values(exercice.Series).map((serie, index) => {
+
+                                        return (
+                                            <tr style={trStyle(indexSeance)}>
+                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                    {seance.date}
+                                                </td>
+                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                    {seance.poids}
+                                                </td>
+                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                    {exercice.exercice.name==="own-exercice" ? exercice.exercice.ownExercice : exercice.exercice.name}
+                                                </td>
+                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                    {serie.num+1}
+                                                </td>
+                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                    {serie.typeSerie==="reps" ? "Répétitions" : null}
+                                                    {serie.typeSerie==="time" ? "Temps (secondes)" : null}
+                                                </td>
+                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                    {serie.repsTime}
+                                                </td>
+                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                    {serie.charge}
+                                                </td>
+                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                    {serie.percent}
+                                                </td>
+                                            </tr>
+                                    )}))
+                                }
                         }))})
                   }
               </tbody>

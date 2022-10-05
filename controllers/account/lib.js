@@ -328,6 +328,26 @@ async function workouts(req, res) {
                 else{
                     let seances = data[0].seances;
 
+                    if (req.query.exerciceName !== "title" && req.query.exerciceName !== ""){
+                        if (req.query.exerciceName !== "own-exercice"){
+                            seances.map((seance,indexSeance) => {
+                                return (seance.exercices.map((exercice, indexExercice) => {
+                                        if (req.query.exerciceName !== exercice.exercice.name){
+                                            delete seances[indexSeance].exercices[indexExercice]
+                                        }
+                                }))
+                            })
+                        } else {
+                            seances.map((seance,indexSeance) => {
+                                return (seance.exercices.map((exercice, indexExercice) => {
+                                        if (req.query.exerciceOwnExercice !== exercice.exercice.ownExercice){
+                                            delete seances[indexSeance].exercices[indexExercice]
+                                        }
+                                }))
+                            })
+                        }
+                    }
+
                     if (req.query.repsFrom !== ""){
                         seances.map((seance,indexSeance) => {
                         return (seance.exercices.map((exercice, indexExercice) => {
@@ -354,9 +374,12 @@ async function workouts(req, res) {
 
                     if (req.query.tri === 'Ordre chronologique décroissant'){
                         seances = seances.sort(sortDateDecroissant);
+
                     }
+
                     if (req.query.tri === 'Ordre chronologique croissant'){
                         seances = seances.sort(sortDateCroissant);
+
                     }
 
                     res.json({ success: true, message: "Utilisateur trouvé !", seances: seances})
