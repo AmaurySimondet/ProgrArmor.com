@@ -39,7 +39,7 @@ function ExerciceInput(props) {
   return (
     <div>
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
+            <label className="col-sm-2 col-form-label exercice-label">
               Exercice {props.num+1}
             </label>
             <div className="col-sm-9">

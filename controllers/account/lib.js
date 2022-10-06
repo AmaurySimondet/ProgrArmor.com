@@ -295,10 +295,71 @@ async function workouts(req, res) {
 
     function sortDateCroissant(a, b) {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
+
     }
 
     function sortDateDecroissant(a, b) {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
+
+    }
+
+    function seanceChargeSort(b,a) {
+        const A = parseFloat(a.exercices.map((exercice, indexExercice) => {
+            return (Object.values(exercice.Series).map((serie, index) => {
+                return serie.charge;
+            }))
+        }));
+        const B = parseFloat(b.exercices.map((exercice, indexExercice) => {
+            return (Object.values(exercice.Series).map((serie, index) => {
+                return serie.charge;
+            }))
+        }))
+        return A-B;
+
+    }
+
+    function seancePercentSort(b,a) {
+        const A = parseFloat(a.exercices.map((exercice, indexExercice) => {
+            return (Object.values(exercice.Series).map((serie, index) => {
+                return serie.percent.slice(0,serie.percent.length-1);
+            }))
+        }));
+        const B = parseFloat(b.exercices.map((exercice, indexExercice) => {
+            return (Object.values(exercice.Series).map((serie, index) => {
+                return serie.percent.slice(0,serie.percent.length-1);
+            }))
+        }))
+        return A-B;
+
+    }
+
+
+    function seancesToPerformances(seances){
+        seances.map((seance,indexSeance) => {
+            return (seance.exercices.map((exercice, indexExercice) => {
+                    return (Object.values(exercice.Series).map((serie, index) => {
+                        const obj = {
+                            date: seance.date,
+                            poids: seance.poids,
+                            exercices: [{exercice: {name: exercice.exercice.name,
+                                                       ownExercice: exercice.exercice.ownExercice },
+                                           Series: {0: seances[indexSeance].exercices[indexExercice].Series[index]}
+                                       }]
+                            }
+//                            console.log(obj);
+                        seances.push(obj);
+                        delete seances[indexSeance].exercices[indexExercice].Series[index];
+                    }))
+            }))
+        })
+        seances.map((seance,indexSeance) => {
+            return (seance.exercices.map((exercice, indexExercice) => {
+                if (indexExercice>0){
+                    delete seances[indexSeance].exercices[indexExercice]
+                }
+            }))
+        })
+        return seances;
     }
 
     if (facebookProfile === null){
@@ -328,6 +389,7 @@ async function workouts(req, res) {
                 else{
                     let seances = data[0].seances;
 
+                    //TRI EXERCICE
                     if (req.query.exerciceName !== "title" && req.query.exerciceName !== ""){
                         if (req.query.exerciceName !== "own-exercice"){
                             seances.map((seance,indexSeance) => {
@@ -348,6 +410,7 @@ async function workouts(req, res) {
                         }
                     }
 
+                    //TRI REP RANGE
                     if (req.query.repsFrom !== ""){
                         seances.map((seance,indexSeance) => {
                         return (seance.exercices.map((exercice, indexExercice) => {
@@ -359,7 +422,6 @@ async function workouts(req, res) {
                             }))
                         })
                     }
-
                     if (req.query.repsTo !== ""){
                         seances.map((seance,indexSeance) => {
                         return (seance.exercices.map((exercice, indexExercice) => {
@@ -372,13 +434,66 @@ async function workouts(req, res) {
                         })
                     }
 
+                    //TRI PERIODE
+                    let currDate = new Date();
+                    if (req.query.periode === '7d'){
+                        seances.map((seance,indexSeance) => {
+                            let d2 = new Date(seance.date);
+                            if (Math.floor((currDate - d2)/1000/60/60/24) > 7){
+                                delete seances[indexSeance]
+                            }
+                        })
+                    }
+                    if (req.query.periode === '30d'){
+                        seances.map((seance,indexSeance) => {
+                            let d2 = new Date(seance.date);
+                            if (Math.floor((currDate - d2)/1000/60/60/24) > 30){
+                                delete seances[indexSeance]
+                            }
+                        })
+                    }
+                    if (req.query.periode === '90d'){
+                        seances.map((seance,indexSeance) => {
+                            let d2 = new Date(seance.date);
+                            if (Math.floor((currDate - d2)/1000/60/60/24) > 90){
+                                delete seances[indexSeance]
+                            }
+                        })
+                    }
+                    if (req.query.periode === '180d'){
+                        seances.map((seance,indexSeance) => {
+                            let d2 = new Date(seance.date);
+                            if (Math.floor((currDate - d2)/1000/60/60/24) > 180){
+                                delete seances[indexSeance]
+                            }
+                        })
+                    }
+                    if (req.query.periode === '1y'){
+                        seances.map((seance,indexSeance) => {
+                            let d2 = new Date(seance.date);
+                            if (Math.floor((currDate - d2)/1000/60/60/24) > 365){
+                                delete seances[indexSeance]
+                            }
+                        })
+                    }
+
+                    //TRI TYPE TRI
                     if (req.query.tri === 'Ordre chronologique décroissant'){
                         seances = seances.sort(sortDateDecroissant);
 
                     }
-
                     if (req.query.tri === 'Ordre chronologique croissant'){
                         seances = seances.sort(sortDateCroissant);
+
+                    }
+                    if (req.query.tri === 'Charge (ordre décroissant)'){
+                        seances = seancesToPerformances(seances);
+                        seances = seances.sort(seanceChargeSort);
+
+                    }
+                    if (req.query.tri === 'PDC (ordre décroissant)'){
+                        seances = seancesToPerformances(seances);
+                        seances = seances.sort(seancePercentSort);
 
                     }
 

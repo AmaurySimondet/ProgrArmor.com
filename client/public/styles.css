@@ -126,6 +126,11 @@ h2{
 
 }
 
+.exercice-label{
+    display:none;
+
+}
+
 .Dashboard .poubelle-div{
     display: none;
 

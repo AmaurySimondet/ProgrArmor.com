@@ -7,7 +7,7 @@ import ExerciceInput from "./ExerciceInput"
 function Dashboard() {
     const [seances, setSeances] = useState([]);
     const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
-    const [params, setParams] = useState({tri: "Ordre chronologique décroissant", periode: "30j", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
+    const [params, setParams] = useState({periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
 
   async function disconnect() {
     await API.logout();
@@ -25,7 +25,18 @@ function Dashboard() {
 //        Obect.values(data.seances[0].exercices[0].Series)j.map(serie => console.log(serie));
 //        console.log(data.seances);
 //        console.log(Object.values(data.seances[0].exercices[0].Series));
+        console.log(data.seances);
         setSeances(data.seances);
+
+//      data.seances.map((seance,indexSeance) => {
+//        if (seance !== null) {
+//            return (seance.exercices.map((exercice, indexExercice) => {
+//                if (exercice !== null){
+//                    return (Object.values(exercice.Series).map((serie, index) => {
+//                       if(serie !== null){
+//                        console.log(serie);
+//                       }
+//      }))}}))}})
     }
   }
 
@@ -122,9 +133,30 @@ function Dashboard() {
                         <select onChange={handleChange} className="custom-select col-sm-10" id="tri">
                             <option value="Ordre chronologique décroissant"> Ordre chronologique décroissant (défaut) </option>
                             <option value="Ordre chronologique croissant"> Ordre chronologique croissant </option>
+                            <option value="Charge (ordre décroissant)"> Charge (ordre décroissant) </option>
+                            <option value="PDC (ordre décroissant)"> % PDC (ordre décroissant) </option>
                         </select>
                     </div>
 
+                    <label className="col-sm-1 col-form-label">
+                      Periode
+                    </label>
+                    <div className="col-sm-3">
+                        <select onChange={handleChange} className="custom-select col-sm-10" id="periode">
+                            <option value="max"> Max (défaut) </option>
+                            <option value="7d"> 7 derniers jours </option>
+                            <option value="30d"> 30 derniers jours </option>
+                            <option value="90d"> 90 derniers jours (3 mois) </option>
+                            <option value="180d"> 180 derniers jours (6 mois) </option>
+                            <option value="1y"> Depuis 1 an </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div className="form-group row">
+                    <label className="col-sm-1 col-form-label">
+                      Exercice
+                    </label>
                     <ExerciceInput num={0} id="exercice" changeExercice={changeExercice} />
 
                     <label className="col-sm-1 col-form-label">
@@ -135,10 +167,11 @@ function Dashboard() {
                           className="form-control"
                           value={params.repsFrom}
                           onChange={handleChange}
+                          placeholder="Aucun filtre"
                           id="repsFrom"
                         />
                     </div>
-                    <label className="col-sm-0 col-form-label">
+                    <label className="col-sm-1 col-form-label">
                       à
                     </label>
                     <div className="col-sm-1">
@@ -146,6 +179,7 @@ function Dashboard() {
                           className="form-control"
                           value={params.repsTo}
                           onChange={handleChange}
+                          placeholder="Aucun filtre"
                           id="repsTo"
                         />
                     </div>
@@ -175,47 +209,51 @@ function Dashboard() {
               </thead>
               <tbody>
                   {seances.map((seance,indexSeance) => {
-                        return (seance.exercices.map((exercice, indexExercice) => {
+                        if (seance !== null) {
+                            return (seance.exercices.map((exercice, indexExercice) => {
                                 if (exercice !== null){
-                                    return (Object.values(exercice.Series).map((serie, index) => {
-
-                                        return (
-                                            <tr style={trStyle(indexSeance)}>
-                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                    {seance.date}
-                                                </td>
-                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                    {seance.poids}
-                                                </td>
-                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                    {exercice.exercice.name==="own-exercice" ? exercice.exercice.ownExercice : exercice.exercice.name}
-                                                </td>
-                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                    {serie.num+1}
-                                                </td>
-                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                    {serie.typeSerie==="reps" ? "Répétitions" : null}
-                                                    {serie.typeSerie==="time" ? "Temps (secondes)" : null}
-                                                </td>
-                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                    {serie.repsTime}
-                                                </td>
-                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                    {serie.charge}
-                                                </td>
-                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                    {serie.percent}
-                                                </td>
-                                            </tr>
-                                    )}))
+                                    return (exercice.Series && Object.values(exercice.Series).map((serie, index) => {
+                                       if(serie !== null){
+                                            return (
+                                                <tr style={trStyle(indexSeance)}>
+                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                        {seance.date}
+                                                    </td>
+                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                        {seance.poids}
+                                                    </td>
+                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                        {exercice.exercice.name==="own-exercice" ? exercice.exercice.ownExercice : exercice.exercice.name}
+                                                    </td>
+                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                        {serie.num+1}
+                                                    </td>
+                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                        {serie.typeSerie==="reps" ? "Répétitions" : null}
+                                                        {serie.typeSerie==="time" ? "Temps (secondes)" : null}
+                                                    </td>
+                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                        {serie.repsTime}
+                                                    </td>
+                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                        {serie.charge}
+                                                    </td>
+                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                        {serie.percent}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        }
+                                    }))
                                 }
-                        }))})
+                            }))
+                        }})
                   }
               </tbody>
             </table>
           </div>
       </div>
-    );
-};
+    )
+}
 
 export default Dashboard;
