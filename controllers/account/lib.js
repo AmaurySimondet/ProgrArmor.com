@@ -288,10 +288,27 @@ async function debutantform(req, res) {
     }
 };
 
-
 //DASHBOARD
 async function workouts(req, res) {
     let profile = null;
+
+    if (facebookProfile === null){
+        if (googleProfile === null){
+            if (userProfile === null){
+                res.json({ success: false, message: "Merci de vous connecter" });
+            } else {
+                profile = userProfile;
+            }
+        }
+        else{
+            profile = googleProfile;
+        }
+    }else {
+        profile = facebookProfile;
+
+    }
+
+    console.log(profile);
 
     function sortDateCroissant(a, b) {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
@@ -333,7 +350,6 @@ async function workouts(req, res) {
 
     }
 
-
     function seancesToPerformances(seances){
         seances.map((seance,indexSeance) => {
             return (seance.exercices.map((exercice, indexExercice) => {
@@ -361,24 +377,6 @@ async function workouts(req, res) {
         })
         return seances;
     }
-
-    if (facebookProfile === null){
-        if (googleProfile === null){
-            if (userProfile === null){
-                res.json({ success: false, message: "Merci de vous connecter" });
-            } else {
-                profile = userProfile;
-            }
-        }
-        else{
-            profile = googleProfile;
-        }
-    }else {
-        profile = facebookProfile;
-
-    }
-
-    console.log(profile);
 
     try {
        User.find(
@@ -507,6 +505,50 @@ async function workouts(req, res) {
     }
 };
 
+//COMPTE
+async function getUser(req, res) {
+    let profile = null;
+
+    if (facebookProfile === null){
+        if (googleProfile === null){
+            if (userProfile === null){
+                res.json({ success: false, message: "Merci de vous connecter" });
+            } else {
+                profile = userProfile;
+            }
+        }
+        else{
+            profile = googleProfile;
+        }
+    }else {
+        profile = facebookProfile;
+
+    }
+
+    try{
+        User.find(
+          {"email": profile.email}, function (err, data) {
+                if (err){
+                    res.json({ success: false, message: err})
+                }
+                else{
+                    const obj = {
+                        email: data[0].email,
+                        fName: data[0].fName,
+                        lName: data[0].lName,
+                        profilePic: data[0].profilePic,
+                    }
+
+                    res.json({ success: true, message: "Utilisateur trouvé !", profile: obj})
+                }
+          });
+
+    }
+    catch(e){
+       console.log(e);
+    }
+}
+
 //On exporte nos fonctions
 exports.login = login;
 exports.signup = signup;
@@ -519,3 +561,4 @@ exports.googleToken = googleToken;
 exports.logout = logout;
 exports.debutantform = debutantform;
 exports.workouts = workouts;
+exports.getUser = getUser;

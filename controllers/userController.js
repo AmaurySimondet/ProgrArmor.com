@@ -20,4 +20,7 @@ module.exports = function (app) {
     //DASHBOARD
     app.get('/workouts',account.workouts);
 
+    //COMPTE
+    app.get('/getUser', account.getUser);
+
 }

@@ -7,6 +7,7 @@ import CGU from "./components/CGU";
 import PrivateRoute from "./components/PrivateRoute.js";
 import Travaux from "./components/Dashboard/Travaux";
 import Session from "./components/Dashboard/Session";
+import Compte from "./components/Dashboard/Compte";
 
 function App() {
 
@@ -31,6 +32,10 @@ function App() {
 
             <Route path="/social/*" element={<PrivateRoute/>}>
                 <Route exact path='/social/*' element={<Travaux/>}/>
+            </Route>
+
+            <Route path="/compte/*" element={<PrivateRoute/>}>
+                <Route exact path='/compte/*' element={<Compte/>}/>
             </Route>
 
             <Route path="/aide/*" element={<PrivateRoute/>}>

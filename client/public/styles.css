@@ -10,6 +10,90 @@ h2{
 
 }
 
+/* COMPTE */
+.profile-pic{
+    border-radius: 50%
+
+}
+
+.profile-td{
+    padding: 10px
+
+}
+
+table.profile-table{
+    text-align: justify;
+    width:90%;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.profile-btn{
+    margin: 10px 0;
+
+}
+
+.Compte{
+    text-align: center;
+    width: 90%;
+    margin: auto;
+
+}
+
+.profile-disconnect-btn{
+    margin-top: 30px;
+
+}
+
+.profile-btn-small{
+    margin-top: 5%;
+
+}
+
+.profile-pic-small{
+    margin-top: 5%;
+    width: 125px;
+}
+
+/* Large layout*/
+@media (max-width: 1030px){
+    .profile-table{
+        display: none
+
+    }
+
+    h1.profile-email {
+        font-weight:200;
+        font-size: 1rem;
+
+    }
+
+}
+
+/* Smallest */
+@media (max-width: 300px){
+    h1.profile-email {
+        font-weight:200;
+        font-size: 0.5rem;
+
+    }
+}
+
+/* Small layout */
+@media (min-width: 1030px){
+    .small-profile{
+        display: none
+
+    }
+
+    h1.profile-email {
+        font-weight:200;
+        font-size: 2rem;
+
+    }
+
+}
+
 /* SESSION */
 
 .hide {
@@ -266,6 +350,16 @@ table.connexion-table td.connexion-img-td {
     margin-right: 20px;
 }
 
+.icon-navbar:hover{
+    filter: invert(0.6);
+
+}
+
+.toggler-icon:hover{
+    filter: invert(0.6);
+
+}
+
 .gear-is-clicked{
     background-color: #9b0000;
     width: 200px;
@@ -345,7 +439,7 @@ table.connexion-table td.connexion-img-td {
 /* TRAVAUX */
 .Travaux-div{
     text-align: center;
-    margin-top: 15%;
+    margin-top: 10%;
     margin-left: 5%;
     margin-right:5%;
 }
@@ -441,10 +535,6 @@ table.connexion-table td.connexion-img-td {
     }
 }
 
-/* Large layout*/
-@media (min-width: 1100px){
-
-}
 
 
 

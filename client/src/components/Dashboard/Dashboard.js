@@ -9,36 +9,20 @@ function Dashboard() {
     const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
     const [params, setParams] = useState({periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
 
-  async function disconnect() {
-    await API.logout();
-    localStorage.removeItem('token');
-    window.location = "/";
-  };
-
   async function getWorkouts(){
-    event.preventDefault();
-
     const {data} = await API.workouts(params);
     if (data.success === false){
         alert(data.message);
     } else {
-//        Obect.values(data.seances[0].exercices[0].Series)j.map(serie => console.log(serie));
-//        console.log(data.seances);
-//        console.log(Object.values(data.seances[0].exercices[0].Series));
         console.log(data.seances);
         setSeances(data.seances);
-
-//      data.seances.map((seance,indexSeance) => {
-//        if (seance !== null) {
-//            return (seance.exercices.map((exercice, indexExercice) => {
-//                if (exercice !== null){
-//                    return (Object.values(exercice.Series).map((serie, index) => {
-//                       if(serie !== null){
-//                        console.log(serie);
-//                       }
-//      }))}}))}})
     }
   }
+
+  useEffect(() => {
+        setTimeout(getWorkouts, 50);
+  }, [params]);
+
 
   function handleChange(event){
     event.preventDefault();
@@ -117,10 +101,6 @@ function Dashboard() {
           <NavigBar location="dashboard"/>
 
           <div className="Dashboard">
-            <h1 className="Dashboard-h1">Connecté !</h1>
-            <Button className="btn btn-dark btn-lg" onClick={disconnect} block="true" type="submit">
-              Se déconnecter
-            </Button>
 
             <h1 className="Dashboard-h1">Historique des séances</h1>
 
@@ -184,11 +164,6 @@ function Dashboard() {
                         />
                     </div>
 
-                    <div className="form-button-div">
-                        <Button className="btn btn-dark btn-lg" onClick={getWorkouts} block="true" type="submit">
-                            Actualiser
-                        </Button>
-                    </div>
                 </div>
             </form>
 

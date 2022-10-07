@@ -10,7 +10,9 @@ function Travaux() {
             <h1>Oups !</h1>
             <p>
                 <img className="travaux-icon" src={require('../../images/icons/icons8-man-construction-worker-48.png')} alt="miguel" />
+                <br/>
                 Miguel fait encore chauffer la betonnière pour cette page ! Reviens plus tard...
+                <br/>
                 <img className="travaux-icon" src={require('../../images/icons/icons8-brick-48.png')} alt="brique" />
             </p>
           </div>

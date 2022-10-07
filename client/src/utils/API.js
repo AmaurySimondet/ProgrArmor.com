@@ -76,5 +76,10 @@ export default {
 
       return axios.get(`${burl}/user/workouts?`+string, { headers: headers });
 
+  },
+
+  getUser: function(){
+      return axios.get(`${burl}/user/getUser`, { headers: headers });
+
   }
 };
