@@ -43,7 +43,7 @@ function Compte() {
   }
 
   function handleClickFormInfo(formInfo){
-    return null
+    return alert("Pas encore disponible !")
   }
 
     return (
@@ -134,7 +134,7 @@ function Compte() {
                                 </Button>
                                 <br/>
 
-                                <Button className="btn btn-dark" onClick={()=>{return null}} block="true" type="submit">
+                                <Button className="btn btn-dark" onClick={handleClickFormInfo} block="true" type="submit">
                                   Modifier le mot de passe
                                 </Button>
                             </td>
@@ -161,7 +161,7 @@ function Compte() {
                     </Button>
                     <br/>
 
-                    <Button className="btn btn-dark" onClick={()=>{return null}} block="true" type="submit">
+                    <Button className="btn btn-dark" onClick={handleClickFormInfo} block="true" type="submit">
                       Modifier le mot de passe
                     </Button>
                 </div>

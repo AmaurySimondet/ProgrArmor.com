@@ -38,6 +38,10 @@ function App() {
                 <Route exact path='/compte/*' element={<Compte/>}/>
             </Route>
 
+            <Route path="/a_propos/*" element={<PrivateRoute/>}>
+                <Route exact path='/a_propos/*' element={<Travaux/>}/>
+            </Route>
+
             <Route path="/aide/*" element={<PrivateRoute/>}>
                 <Route exact path='/aide/*' element={<Travaux/>}/>
             </Route>
