@@ -12,8 +12,9 @@ h2{
 
 /* COMPTE */
 .profile-pic{
-    border-radius: 50%
-
+    border-radius: 50%;
+    width:200px;
+    height:200px;
 }
 
 .profile-td{
@@ -35,8 +36,25 @@ table.profile-table{
 
 .Compte{
     text-align: center;
-    width: 90%;
+    width: 98%;
     margin: auto;
+
+}
+
+.modify-info-form{
+    margin: 10px;
+    margin-top: 50px;
+    text-align: center;
+
+}
+
+.modify-info-form .btn{
+    margin-bottom: 10px;
+
+}
+
+.btn-arriere{
+    text-align: justify;
 
 }
 
@@ -53,6 +71,7 @@ table.profile-table{
 .profile-pic-small{
     margin-top: 5%;
     width: 125px;
+    height:125px;
 }
 
 /* Large layout*/
