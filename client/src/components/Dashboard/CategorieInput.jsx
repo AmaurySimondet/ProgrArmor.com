@@ -9,28 +9,29 @@ import Slider from '@mui/material/Slider';
 const marks = [
   {
     value: 0,
-    label: '0%',
+    label: '0',
   },
   {
-    value: 50,
-    label: '50%',
+    value: 0.5,
+    label: '0.5',
   },
   {
-    value: 100,
-    label: '100%',
+    value: 1.5,
+    label: '1.5',
   },
   {
-    value: 200,
-    label: '200%',
+    value: 3,
+    label: '3',
   },
   {
-    value: 300,
-    label: '300%',
+    value: 6,
+    label: '6',
   },
   {
-    value: 400,
-    label: '400%',
+    value: 9,
+    label: '9',
   },
+
 ];
 
 function valuetext(value) {
@@ -84,6 +85,7 @@ function CategorieInput(props) {
             return ({
             ...oldCategorie,
             tension: event.target.value,
+            estimation: (event.target.value/3*parseInt(categorie.input)).toFixed(2),
         })});
   }
 
@@ -209,25 +211,59 @@ function CategorieInput(props) {
                 </select>
             </div>
 
+            {categorie.input === "mesure" ?
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
-                  Tension elastique
+                  Tension elastique (kg)
                 </label>
-                <Slider
-                    style={{
-                        width: "70%",
-                        marginLeft: "5%"
-                    }}
-                    defaultValue={100}
-                    onChange={handleChangeSlider}
-                    getAriaValueText={valuetext}
-                    aria-labelledby="discrete-slider-custom"
-                    step={10}
-                    max={400}
-                    valueLabelDisplay="auto"
-                    marks={marks}
-                />
+                <div className="col-sm-9">
+                    <input type="text"
+                          className="form-control"
+                          id="estimation"
+                          value={categorie.estimation}
+                          onChange={handleChange}
+                    />
+                </div>
             </div>
+            :
+            <div>
+                <div className="form-group row">
+                    <label className="col-sm-2 col-form-label">
+                      Etirement (mètres)
+                    </label>
+                    <Slider
+                        style={
+                        {
+                            width: "74%",
+                            marginLeft: "1%"
+                        }
+                        }
+                        defaultValue={100}
+                        onChange={handleChangeSlider}
+                        getAriaValueText={valuetext}
+                        aria-labelledby="discrete-slider-custom"
+                        step={0.5}
+                        max={9}
+                        valueLabelDisplay="auto"
+                        marks={marks}
+                    />
+                </div>
+
+                <div className="form-group row">
+                    <label className="col-sm-2 col-form-label">
+                      Estimation
+                    </label>
+                    <div className="col-sm-9">
+                      <input type="text"
+                          className="form-control"
+                          id="estimation"
+                          value={categorie.estimation+" kg"}
+                          readOnly
+                      />
+                    </div>
+                </div>
+            </div>
+            }
         </div>
       : null }
 

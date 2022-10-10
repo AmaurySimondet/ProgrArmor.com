@@ -68,7 +68,7 @@ const variantes = [
   {
     id: 11,
     class: "select-title",
-    name: "Musculation",
+    name: "General",
     value: "title",
   },
   {
@@ -79,6 +79,43 @@ const variantes = [
   },
   {
     id: 13,
+    class: "select-item",
+    name: "Incliné",
+    value: "Incliné",
+  },
+  {
+    id: 14,
+    class: "select-item",
+    name: "Décliné",
+    value: "Décliné",
+  },
+  {
+    id: 15,
+    class: "select-item",
+    name: "Unilatéral",
+    value: "Unilatéral",
+  },
+  {
+    id: 16,
+    class: "select-item",
+    name: "Archer (unilatéral assisté)",
+    value: "Archer",
+  },
+  {
+    id: 17,
+    class: "select-item",
+    name: "Sur les doigts",
+    value: "Sur les doigts",
+  },
+    {
+    id: 16,
+    class: "select-item",
+    name: "Sur la pointe des pieds",
+    value: "Sur la pointe des pieds",
+  },
+
+  {
+    id: 999,
     class: "select-title",
     name: "Elastiques ? => utiliser la catégorie dédiée",
     value: "title",

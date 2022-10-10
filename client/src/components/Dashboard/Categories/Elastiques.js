@@ -47,6 +47,12 @@ const elastiques = [
     name: "Enorme (>80kg) (rare)",
     value: "110",
   },
+  {
+    id: 8,
+    class: "select-item",
+    name: "J'ai mesuré la resistance moi-même comme un grand...",
+    value: "mesure",
+  },
 
 ];
 

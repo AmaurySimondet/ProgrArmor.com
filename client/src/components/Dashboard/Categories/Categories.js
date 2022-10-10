@@ -38,8 +38,8 @@ const categories = [
   {
     id: 6,
     class: "select-item",
-    name: "Largeur de prise",
-    value: "Largeur de prise",
+    name: "Ecartement mains / jambes",
+    value: "Ecartement mains / jambes",
   },
   {
     id: 7,
