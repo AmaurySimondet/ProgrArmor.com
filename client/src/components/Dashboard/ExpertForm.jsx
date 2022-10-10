@@ -4,7 +4,7 @@ import axios from 'axios';
 import DateInput from "./DateInput";
 import NameInput from "./NameInput";
 import PoidsInput from "./PoidsInput";
-import FullExerciceInput from "./FullExerciceInput"
+import FullExerciceExpertInput from "./FullExerciceExpertInput"
 
 function ExpertForm() {
   const [seance, setSeance] = useState({date: "", poids: "", exercices: {}});
@@ -99,8 +99,6 @@ function ExpertForm() {
     })}
 
     function changeExercices(exercice, num){
-        event.preventDefault();
-
         const otherThanSelected =  exercices.filter((exercice, index) => {
             return index!==(num)
         })
@@ -150,7 +148,7 @@ function ExpertForm() {
 
           {exercices ? exercices.map((exercice,index) => {
             return(
-                <FullExerciceInput
+                <FullExerciceExpertInput
                     key={index}
                     num={index}
                     poids={seance.poids}

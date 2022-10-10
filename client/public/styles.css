@@ -229,7 +229,7 @@ table.profile-table{
 
 }
 
-.exercice-label{
+.Dashboard .exercice-label{
     display:none;
 
 }
@@ -245,6 +245,11 @@ table.profile-table{
 }
 
 /* SESSION EXPERT */
+
+.Aucune{
+    font-weight:800;
+
+}
 
 
 /* HOME HEADER*/

@@ -2,8 +2,8 @@ import {React, useState, useEffect} from "react";
 import Select from "./Select";
 
 function NameInput(props) {
-  const [nom, setNom] = useState({ancienNom: "nouveau-nom", nouveauNom: ""});
-  const anciensNoms = [{ancienNom: "nouveau-nom", nouveauNom: "Force bas du corps"}, {ancienNom: "nouveau-nom", nouveauNom: "Freestyle haut du corps"}];
+  const [nom, setNom] = useState({ancienNom: "ancien-nom", nouveauNom: ""});
+  const anciensNoms = [{ancienNom: "ancien-nom", nouveauNom: "Force bas du corps"}, {ancienNom: "ancien-nom", nouveauNom: "Freestyle haut du corps"}];
 
   function handleChange(event){
     event.preventDefault();
