@@ -145,6 +145,9 @@ function FullExerciceInput(props){
 
               {categories ? categories.map((categorie,index) => {
                 return(
+                <div>
+                  <hr className="hr-serie"/>
+
                   <CategorieInput
                     key={index}
                     num={index}
@@ -153,6 +156,8 @@ function FullExerciceInput(props){
                     changeCategorie={changeCategorie}
                     onDeleteCategorie={onDeleteCategorie}
                   />
+
+                </div>
                 );
               })
               : null
