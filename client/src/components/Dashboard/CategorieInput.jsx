@@ -5,6 +5,29 @@ import lesTypesBarres from "./Categories/TypesBarres.js";
 import lesElastiques from "./Categories/Elastiques.js";
 import VarianteHiddenText from "./Categories/VarianteHiddenText.js";
 import Slider from '@mui/material/Slider';
+import { alpha, styled } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
+
+const StyleSlider = styled(Slider)(({ theme }) => ({
+  '& .MuiSlider-thumb': {
+    color: red['A700'],
+  },
+  '& .MuiSlider-thumb:hover': {
+    color: red['A400'],
+  },
+  '& .MuiSlider-dragging': {
+    backgroundColor: red['A700'],
+  },
+  '& .MuiSlider-rail': {
+    backgroundColor: red['A700'],
+  },
+  '& .MuiSlider-track': {
+    backgroundColor: red['A700'],
+  },
+  '& .MuiSlider-mark': {
+    backgroundColor: red['A700'],
+  },
+}));
 
 const marks = [
   {
@@ -231,7 +254,7 @@ function CategorieInput(props) {
                     <label className="col-sm-2 col-form-label">
                       Etirement (mètres)
                     </label>
-                    <Slider
+                    <StyleSlider
                         style={
                         {
                             width: "74%",
