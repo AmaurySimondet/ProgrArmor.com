@@ -6,6 +6,11 @@ const variantes = [
     name: "/ (défaut)",
     value: "title",
   },
+
+
+
+
+//BARRES
   {
     id: 1,
     class: "select-title",
@@ -66,11 +71,20 @@ const variantes = [
     name: "Safety squat bar",
     value: "Safety squat bar",
   },
+
+
+//POIDS
   {
     id: 11,
     class: "select-title",
     name: "Poids",
     value: "title",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Disque(s)",
+    value: "Disque(s)",
   },
   {
     id: 12,
@@ -90,11 +104,38 @@ const variantes = [
     name: "Medecine Ball",
     value: "Medecine Ball",
   },
+
+
+//POULIES
   {
     id: 15,
     class: "select-title",
-    name: "Pour poulie(s)",
+    name: "Poulie(s)",
     value: "title",
+  },
+ {
+    id: 11,
+    class: "select-item",
+    name: "Poulie haute",
+    value: "Poulie haute",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Poulie basse",
+    value: "Poulie basse",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Poulies hautes",
+    value: "Poulies hautes",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Poulies basses",
+    value: "Poulies basses",
   },
   {
     id: 16,
@@ -144,6 +185,39 @@ const variantes = [
     name: "Poignet(s)",
     value: "Poignet(s)",
   },
+
+
+
+
+//MACHINE
+  {
+    id: 24,
+    class: "select-title",
+    name: "Machine",
+    value: "title",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "A la Smith Machine",
+    value: "A la Smith Machine",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "A la machine",
+    value: "A la machine",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "A la chaise romaine",
+    value: "A la chaise romaine",
+  },
+
+
+
+//STREETWORKOUT
   {
     id: 24,
     class: "select-title",
@@ -175,6 +249,28 @@ const variantes = [
     value: "Loading pin",
   },
   {
+    id: 11,
+    class: "select-item",
+    name: "Aux anneaux",
+    value: "Aux anneaux",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Sur parallettes",
+    value: "Sur parallettes",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Aux barres parallèles",
+    value: "Aux barres parallèles",
+  },
+
+
+
+//STRONGMAN
+  {
     id: 29,
     class: "select-title",
     name: "Strongman",
@@ -193,9 +289,33 @@ const variantes = [
     value: "Barre Log",
   },
   {
+    id: 31,
+    class: "select-item",
+    name: "Cambered bar",
+    value: "Cambered bar",
+  },
+  {
+    id: 31,
+    class: "select-item",
+    name: "Cambered squat bar",
+    value: "Cambered squat bar",
+  },
+  {
+    id: 31,
+    class: "select-item",
+    name: "Cambered safety squat bar",
+    value: "Cambered safety squat bar",
+  },
+  {
+    id: 31,
+    class: "select-item",
+    name: "Cambered Multigrip bar",
+    value: "Cambered Multigrip bar",
+  },
+  {
     id: 32,
     class: "select-item",
-    name: "Sand Bag (sac de sable)",
+    name: "Sand Bag (sac de sable) / Keg",
     value: "Sand Bag (sac de sable)",
   },
   {
@@ -221,6 +341,24 @@ const variantes = [
     class: "select-item",
     name: "Sled (traîneau)",
     value: "Sled (traîneau)",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Grenade / Canon ball",
+    value: "Grenade / Canon ball",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Pneu",
+    value: "Pneu",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Corde",
+    value: "Corde",
   },
 
 ];

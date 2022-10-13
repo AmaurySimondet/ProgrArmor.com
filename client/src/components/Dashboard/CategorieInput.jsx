@@ -3,10 +3,47 @@ import lesCategories from "./Categories/Categories";
 import lesVariantes from "./Categories/Variantes.js";
 import lesTypesBarres from "./Categories/TypesBarres.js";
 import lesElastiques from "./Categories/Elastiques.js";
+import Streetworkout from "./Categories/StreetWorkout.js";
 import VarianteHiddenText from "./Categories/VarianteHiddenText.js";
 import Slider from '@mui/material/Slider';
 import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
+
+//      {categorie.name === "Variante" ?
+//            <div className="form-group row">
+//                <label className="col-sm-2 col-form-label">
+//                  Variante
+//                  <img className="myDIV" onClick={handleClickVariante} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+//                  <div className={varianteClicked}>
+//                      <VarianteHiddenText />
+//                  </div>
+//                </label>
+//                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+//                    {lesVariantes.map(createEntry)}
+//                </select>
+//            </div>
+//      : null }
+//      {categorie.name === "Variante" && categorie.input==="Avec chaines" ?
+//            <div className="form-group row">
+//                <label className="col-sm-2 col-form-label">
+//                    Poids chaines (kg)
+//                    <img className="myDIV" onClick={handleClickChaine} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+//                    <div className={chaineClicked}>
+//                      <div className="hidden-text">
+//                        <strong> Attention: ce poids sera ajouté à la charge totale, il ne faut donc pas le compter dans la charge </strong>
+//                      </div>
+//                    </div>
+//                </label>
+//                <div className="col-sm-5">
+//                  <input type="text"
+//                      className="form-control"
+//                      onChange={handleChange}
+//                      id="poidsChaines"
+//                      value={categorie.poidsChaines}
+//                  />
+//                </div>
+//            </div>
+//        :null}
 
 const StyleSlider = styled(Slider)(({ theme }) => ({
   '& .MuiSlider-thumb': {
@@ -155,52 +192,19 @@ function CategorieInput(props) {
             </div>
       </div>
 
-      {categorie.name === "Variante" ?
+      {categorie.name === "Variante Street Workout" ?
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
-                  Variante
+                  Variante Street Workout
                   <img className="myDIV" onClick={handleClickVariante} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                   <div className={varianteClicked}>
                       <VarianteHiddenText />
                   </div>
                 </label>
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
-                    {lesVariantes.map(createEntry)}
+                    {Streetworkout.map(createEntry)}
                 </select>
             </div>
-      : null }
-      {categorie.name === "Variante" && categorie.input==="Avec chaines" ?
-            <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                    Poids chaines (kg)
-                    <img className="myDIV" onClick={handleClickChaine} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
-                    <div className={chaineClicked}>
-                      <div className="hidden-text">
-                        <strong> Attention: ce poids sera ajouté à la charge totale, il ne faut donc pas le compter dans la charge </strong>
-                      </div>
-                    </div>
-                </label>
-                <div className="col-sm-5">
-                  <input type="text"
-                      className="form-control"
-                      onChange={handleChange}
-                      id="poidsChaines"
-                      value={categorie.poidsChaines}
-                  />
-                </div>
-            </div>
-        :null}
-      {categorie.name === "Côté (si unilatéral)" ?
-      <div className="form-group row">
-        <label className="col-sm-2 col-form-label">
-          Côté
-        </label>
-        <select onChange={handleChange} className="custom-select col-sm-9" id="input">
-            <option className="select-title" value="title"> / (défaut) </option>
-            <option value="Gauche"> Gauche </option>
-            <option value="Droit"> Droit </option>
-        </select>
-      </div>
       : null }
       {categorie.name === "Type de barre / poids" ?
             <div className="form-group row">

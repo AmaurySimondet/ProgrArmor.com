@@ -8,14 +8,8 @@ const categories = [
   {
     id: 1,
     class: "select-item",
-    name: "Variante",
-    value: "Variante",
-  },
-  {
-    id: 2,
-    class: "select-item",
-    name: "Côté (si unilatéral)",
-    value: "Côté (si unilatéral)",
+    name: "Variante Street Workout",
+    value: "Variante Street Workout",
   },
   {
     id: 3,
@@ -28,42 +22,6 @@ const categories = [
     class: "select-item",
     name: "Elastique",
     value: "Elastique",
-  },
-  {
-    id: 5,
-    class: "select-item",
-    name: "Type de prise",
-    value: "Type de prise",
-  },
-  {
-    id: 6,
-    class: "select-item",
-    name: "Ecartement mains / jambes",
-    value: "Ecartement mains / jambes",
-  },
-  {
-    id: 7,
-    class: "select-item",
-    name: "Amplitude",
-    value: "Amplitude",
-  },
-  {
-    id: 8,
-    class: "select-item",
-    name: "Execution",
-    value: "Execution",
-  },
-  {
-    id: 9,
-    class: "select-item",
-    name: "Vitesse d'éxecution",
-    value: "Vitesse d'éxecution",
-  },
-  {
-    id: 10,
-    class: "select-item",
-    name: "Accessoire supplémentaire",
-    value: "Accessoire supplémentaire",
   },
   {
     id: 11,

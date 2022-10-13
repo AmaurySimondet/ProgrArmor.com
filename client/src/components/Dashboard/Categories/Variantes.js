@@ -11,137 +11,6 @@ const variantes = [
     name: "Street Workout",
     value: "title",
   },
-  {
-    id: 2,
-    class: "select-item",
-    name: "Tuck",
-    value: "Tuck",
-  },
-  {
-    id: 3,
-    class: "select-item",
-    name: "Advanced tuck",
-    value: "Advanced tuck",
-  },
-  {
-    id: 4,
-    class: "select-item",
-    name: "Closed hip straddle",
-    value: "Closed hip straddle",
-  },
-  {
-    id: 5,
-    class: "select-item",
-    name: "One leg",
-    value: "One leg",
-  },
-  {
-    id: 6,
-    class: "select-item",
-    name: "Open hip straddle",
-    value: "Open hip straddle",
-  },
-  {
-    id: 7,
-    class: "select-item",
-    name: "Advanced on leg",
-    value: "Advanced on leg",
-  },
-  {
-    id: 8,
-    class: "select-item",
-    name: "Half lay",
-    value: "Half lay",
-  },
-  {
-    id: 9,
-    class: "select-item",
-    name: "One leg half",
-    value: "One leg half",
-  },
-  {
-    id: 10,
-    class: "select-item",
-    name: "Full",
-    value: "Full",
-  },
-  {
-    id: 10,
-    class: "select-item",
-    name: "Touch",
-    value: "Touch",
-  },
-
-
-
-//SUPPORT
-  {
-    id: 11,
-    class: "select-item",
-    name: "A la Smith Machine",
-    value: "A la Smith Machine",
-  },
-  {
-    id: 11,
-    class: "select-item",
-    name: "A la machine",
-    value: "A la machine",
-  },
-  {
-    id: 11,
-    class: "select-item",
-    name: "A la chaise romaine",
-    value: "A la chaise romaine",
-  },
-  {
-    id: 11,
-    class: "select-item",
-    name: "A la poulie haute",
-    value: "A la poulie haute",
-  },
-  {
-    id: 11,
-    class: "select-item",
-    name: "A la poulie basse",
-    value: "A la poulie basse",
-  },
-  {
-    id: 11,
-    class: "select-item",
-    name: "Aux poulies hautes",
-    value: "Aux poulies hautes",
-  },
-  {
-    id: 11,
-    class: "select-item",
-    name: "Aux poulies basses",
-    value: "Aux poulies basses",
-  },
-  {
-    id: 11,
-    class: "select-item",
-    name: "Aux anneaux",
-    value: "Aux anneaux",
-  },
-  {
-    id: 11,
-    class: "select-item",
-    name: "Sur barre",
-    value: "Sur barre",
-  },
-  {
-    id: 11,
-    class: "select-item",
-    name: "Sur parallettes",
-    value: "Sur parallettes",
-  },
-  {
-    id: 11,
-    class: "select-item",
-    name: "Aux barres parallèles",
-    value: "Aux barres parallèles",
-  },
-
 
 
 
@@ -158,10 +27,46 @@ const variantes = [
     name: "Avec ballon de yoga",
     value: "Avec ballon de yoga",
   },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Avec plateforme d'equilibre",
+    value: "Avec plateforme d'equilibre",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Ab Roll Out",
+    value: "Ab Roll Out",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Hip Band",
+    value: "Hip Band",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Fat Grip",
+    value: "Fat Grip",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Grenade / Canon ball",
+    value: "Grenade / Canon ball",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Corde",
+    value: "Corde",
+  },
 
 
 
-// AXE ORIENTATION DU CORPS DU BANC OU DE LA BARRE
+// AXE / ORIENTATION DU CORPS / BANC / BARRE
   {
     id: 13,
     class: "select-item",
@@ -180,7 +85,25 @@ const variantes = [
     name: "Lean / penché ",
     value: "Lean",
   },
-    {
+  {
+    id: 13,
+    class: "select-item",
+    name: "Penché à 45°",
+    value: "Penché à 45°",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "Penché à 60°",
+    value: "Penché à 60°",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "Penché à 90°",
+    value: "Penché à 90°",
+  },
+  {
     id: 11,
     class: "select-item",
     name: "Avant / Front",
@@ -195,13 +118,169 @@ const variantes = [
   {
     id: 11,
     class: "select-item",
-    name: "Sur le côté",
+    name: "Latéral",
+    value: "Latéral",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Derrière la nuque",
+    value: "Derrière la nuque",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Sur le côté ",
     value: "Sur le côté",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Sur le dos",
+    value: "Sur le dos",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Sur le ventre",
+    value: "Sur le ventre",
   },
 
 
 
+//MUSCLE / Partie du corps
+  {
+    id: 13,
+    class: "select-item",
+    name: "Avant bras",
+    value: "Avant bras",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "Cou / Neck",
+    value: "Cou / Neck ",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "Triceps",
+    value: "Triceps",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "Biceps",
+    value: "Biceps",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "Back",
+    value: "Back",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "Leg",
+    value: "Leg",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "Hip",
+    value: "Hip",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "Epaules",
+    value: "Epaules",
+  },
+
+
+
+
+
 //EXECUTION SPECIFIQUE
+  {
+    id: 13,
+    class: "select-title",
+    name: "'Musculation'",
+    value: "title",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "'Concentration'",
+    value: "'Concentration'",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "En croisant",
+    value: "En croisant",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "Dos rond",
+    value: "Dos rond",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "'Sumo'",
+    value: "'Sumo'",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "'Zerker'",
+    value: "'Zerker'",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "'Larsen'",
+    value: "'Larsen'",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "'Bulgare'",
+    value: "'Bulgare'",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Ponté",
+    value: "Ponté",
+  },
+  {
+    id: 13,
+    class: "select-title",
+    name: "'Street Workout'",
+    value: "title",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "'Volant'",
+    value: "'Volant'",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Wushu",
+    value: "Wushu",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Sans les mains",
+    value: "Sans les mains",
+  },
   {
     id: 13,
     class: "select-item",
@@ -217,8 +296,26 @@ const variantes = [
   {
     id: 13,
     class: "select-item",
+    name: "'Pelican'",
+    value: "'Pelican'",
+  },
+  {
+    id: 13,
+    class: "select-item",
     name: "'Korean'",
     value: "'Korean'",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "'Natural Leg'",
+    value: "'Natural Leg'",
+  },
+  {
+    id: 13,
+    class: "select-item",
+    name: "'Nordic'",
+    value: "'Nordic'",
   },
   {
     id: 13,
@@ -231,18 +328,6 @@ const variantes = [
     class: "select-item",
     name: "En Marchant / marché",
     value: "En Marchant",
-  },
-  {
-    id: 13,
-    class: "select-item",
-    name: "Dos rond",
-    value: "Dos rond",
-  },
-  {
-    id: 13,
-    class: "select-item",
-    name: "'Sumo'",
-    value: "'Sumo'",
   },
   {
     id: 13,
@@ -289,12 +374,6 @@ const variantes = [
   {
     id: 13,
     class: "select-item",
-    name: "'Larsen'",
-    value: "'Larsen'",
-  },
-  {
-    id: 13,
-    class: "select-item",
     name: "'Zanetti'",
     value: "'Zanetti'",
   },
@@ -328,12 +407,7 @@ const variantes = [
     name: "'Pistol'",
     value: "'Pistol'",
   },
-  {
-    id: 13,
-    class: "select-item",
-    name: "'Concentration'",
-    value: "'Concentration'",
-  },
+
 
 
 
@@ -345,10 +419,34 @@ const variantes = [
     value: "Unilatéral",
   },
   {
+    id: 15,
+    class: "select-item",
+    name: "Unilatéral gauche",
+    value: "Unilatéral gauche",
+  },
+  {
+    id: 15,
+    class: "select-item",
+    name: "Unilatéral droite",
+    value: "Unilatéral droite",
+  },
+  {
     id: 16,
     class: "select-item",
     name: "Archer / Lateral (unilatéral assisté)",
     value: "Archer / Lateral",
+  },
+  {
+    id: 16,
+    class: "select-item",
+    name: "Archer / Lateral (unilatéral assisté) travail à gauche",
+    value: "Archer / Lateral gauche",
+  },
+  {
+    id: 16,
+    class: "select-item",
+    name: "Archer / Lateral (unilatéral assisté) travail à droite",
+    value: "Archer / Lateral droite",
   },
 
 
@@ -382,6 +480,12 @@ const variantes = [
     class: "select-item",
     name: "Bras / jambes au sol",
     value: "Bras / jambes au sol",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Sur pupitre",
+    value: "Sur pupitre",
   },
   {
     id: 11,
@@ -452,6 +556,14 @@ const variantes = [
     name: "Pieds / mains vers l'interieur",
     value: "Pieds / mains vers l'interieur",
   },
+  {
+    id: 14,
+    class: "select-item",
+    name: "Pieds / mains sur le banc",
+    value: "Pieds / mains sur le banc",
+  },
+
+
 
 // POSITION CORPS
   {
@@ -481,9 +593,24 @@ const variantes = [
   {
     id: 11,
     class: "select-item",
+    name: "Sur banc",
+    value: "Sur banc",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Sur box",
+    value: "Sur box",
+  },
+  {
+    id: 11,
+    class: "select-item",
     name: "Un genou et une main sur le banc",
     value: "Un genou et une main sur le banc",
   },
+
+
+
 
 // EXECUTION
   {
@@ -491,6 +618,12 @@ const variantes = [
     class: "select-item",
     name: "Inversé",
     value: "Inversé",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Statique",
+    value: "Statique",
   },
   {
     id: 11,
@@ -538,8 +671,23 @@ const variantes = [
     id: 11,
     class: "select-item",
     name: "Vers l'interieur",
+    value: "Vers l'interieur",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Vers l'exterieur",
     value: "Vers l'exterieur",
   },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Latéral",
+    value: "Latéral",
+  },
+
+
+
 
 //DEPART
   {
@@ -547,6 +695,12 @@ const variantes = [
     class: "select-item",
     name: "Au sol",
     value: "Au sol",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Sur les genoux",
+    value: "Sur les genoux",
   },
   {
     id: 11,
@@ -559,6 +713,12 @@ const variantes = [
     class: "select-item",
     name: "Au niveau du genou",
     value: "Au niveau du genou",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "En squat",
+    value: "En squat",
   },
   {
     id: 11,
@@ -578,6 +738,8 @@ const variantes = [
     name: "Depart des blocks / du rack",
     value: "Depart des blocks / du rack",
   },
+
+
 
 
 //EXPLOSIF
@@ -632,9 +794,180 @@ const variantes = [
   {
     id: 11,
     class: "select-item",
+    name: "Clappé dans le dos",
+    value: "Clappé dans le dos",
+  },
+  {
+    id: 11,
+    class: "select-item",
     name: "Sauté",
     value: "Sauté",
   },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Sur box",
+    value: "Sur box",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Avec élan",
+    value: "Avec élan",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Avec élan bloqué",
+    value: "Avec élan bloqué",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Talon Fesse",
+    value: "Talon Fesse",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Groupé / Tuck",
+    value: "Groupé / Tuck",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Groupé complet",
+    value: "Groupé complet",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Groupé enlacé",
+    value: "Groupé enlacé",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Filé",
+    value: "Filé",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Suicide",
+    value: "Suicide",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "En ciseau",
+    value: "En ciseau",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "En / avec coup de pied",
+    value: "En / avec coup de pied",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "En touchant le torse",
+    value: "En touchant le torse",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "En / Avec saut",
+    value: "En / Avec saut",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "En / Avec Appui tendu renversé",
+    value: "En / Avec Appui tendu renversé",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "En se relevant",
+    value: "En se relevant",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Superman",
+    value: "Superman",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "'Du singe'",
+    value: "'Du singe'",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "'A quatre points'",
+    value: "'A quatre points'",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Roulade",
+    value: "Roulade",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Ponté",
+    value: "Ponté",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Kip",
+    value: "Kip",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "(Sur les) fesses / Butt",
+    value: "(Sur les) fesses / Butt",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "(Sur la) tête / Head",
+    value: "(Sur la) tête / Head",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "(Sur le) dos / Back",
+    value: "(Sur le) dos / Back",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "'Volant'",
+    value: "'Volant'",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Wushu",
+    value: "Wushu",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Sans les mains",
+    value: "Sans les mains",
+  },
+
+
+
 
 
 
@@ -693,6 +1026,13 @@ const variantes = [
     name: "Supination",
     value: "Supination",
   },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Fat Grip",
+    value: "Fat Grip",
+  },
+
 
 
 
@@ -812,7 +1152,16 @@ const variantes = [
     value: "Derrière la nuque",
   },
 
+
+
+
 //PARTIEL
+  {
+    id: 28,
+    class: "select-item",
+    name: "Demi / Half",
+    value: "Demi / Half",
+  },
   {
     id: 28,
     class: "select-item",
@@ -888,6 +1237,12 @@ const variantes = [
   {
     id: 11,
     class: "select-item",
+    name: "Pause au dessous du genou",
+    value: "Pause au dessous du genou",
+  },
+  {
+    id: 11,
+    class: "select-item",
     name: "Pause sous le genou",
     value: "Pause sous le genou",
   },
@@ -896,6 +1251,24 @@ const variantes = [
     class: "select-item",
     name: "Pause au genou",
     value: "Pause au genou",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Pause au dessous du coude",
+    value: "Pause au dessous du coude",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Pause sous le coude",
+    value: "Pause sous le coude",
+  },
+  {
+    id: 11,
+    class: "select-item",
+    name: "Pause au coude",
+    value: "Pause au coude",
   },
 
 ];

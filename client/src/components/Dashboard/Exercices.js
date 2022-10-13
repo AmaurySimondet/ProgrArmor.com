@@ -5,6 +5,15 @@ const exercices = [
     name: "Tous (défaut)",
     value: "title",
   },
+
+
+//MUSCU HAUT DU CORPS
+  {
+    id: 1,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
   {
     id: 1,
     class: "select-title",
@@ -32,12 +41,6 @@ const exercices = [
   {
     id: 2,
     class: "select-item",
-    name: "Elevations latérales",
-    value: "Elevations latérales",
-  },
-  {
-    id: 2,
-    class: "select-item",
     name: "L fly",
     value: "L fly",
   },
@@ -60,10 +63,10 @@ const exercices = [
     value: "Rowing menton",
   },
   {
-    id: 5,
+    id: 2,
     class: "select-item",
-    name: "Tirage Horizontal",
-    value: "Tirage Horizontal",
+    name: "Face Pull",
+    value: "Face Pull",
   },
   {
     id: 6,
@@ -72,22 +75,10 @@ const exercices = [
     value: "Tirage Vertical",
   },
   {
-    id: 9,
-    class: "select-item",
-    name: "Curl",
-    value: "Curl",
-  },
-  {
     id: 10,
     class: "select-item",
     name: "Barre au front / Skullcrusher",
     value: "Barre au front",
-  },
-  {
-    id: 10,
-    class: "select-item",
-    name: "Extension triceps / Triceps press",
-    value: "Extension triceps",
   },
   {
     id: 10,
@@ -101,11 +92,74 @@ const exercices = [
     name: "Oiseau / Reverse fly",
     value: "Oiseau / Reverse fly",
   },
+  {
+    id: 8,
+    class: "select-item",
+    name: "Le volant",
+    value: "Le volant",
+  },
+
+
+//MUSCU TERME GENERIQUE
+  {
+    id: 1,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
+  {
+    id: 1,
+    class: "select-title",
+    name: "Musculation - Terme générique",
+    value: "title",
+  },
+  {
+    id: 2,
+    class: "select-item",
+    name: "Elevation",
+    value: "Elevation",
+  },
+  {
+    id: 9,
+    class: "select-item",
+    name: "Curl",
+    value: "Curl",
+  },
+  {
+    id: 10,
+    class: "select-item",
+    name: "Extension",
+    value: "Extension",
+  },
+
+  {
+    id: 7,
+    class: "select-item",
+    name: "Abduction",
+    value: "Abduction",
+  },
+  {
+    id: 7,
+    class: "select-item",
+    name: "Adduction",
+    value: "Adduction",
+  },
+  {
+    id: 7,
+    class: "select-item",
+    name: "Press",
+    value: "Press",
+  },
 
 
 
-
-
+//MUSCU BAS DU CORPS
+  {
+    id: 1,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
   {
     id: 11,
     class: "select-title",
@@ -142,48 +196,18 @@ const exercices = [
     name: "Pont / Bridge",
     value: "Pont / Bridge",
   },
-  {
-    id: 7,
-    class: "select-item",
-    name: "Extensions de mollets / Calf raises",
-    value: "Extensions de mollets",
-  },
-  {
-    id: 7,
-    class: "select-item",
-    name: "Leg extension",
-    value: "Leg extension",
-  },
-  {
-    id: 7,
-    class: "select-item",
-    name: "Leg curl",
-    value: "Leg curl",
-  },
-  {
-    id: 7,
-    class: "select-item",
-    name: "Leg abduction",
-    value: "Leg abduction",
-  },
-  {
-    id: 7,
-    class: "select-item",
-    name: "Leg adduction",
-    value: "Leg adduction",
-  },
-  {
-    id: 7,
-    class: "select-item",
-    name: "Leg press",
-    value: "Leg press",
-  },
 
 
 
 
 
-
+//STREET HAUT DU CORPS
+  {
+    id: 1,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
   {
     id: 12,
     class: "select-title",
@@ -235,46 +259,30 @@ const exercices = [
   {
     id: 14,
     class: "select-item",
-    name: "Pelican Curl",
-    value: "Pelican Curl",
-  },
-  {
-    id: 14,
-    class: "select-item",
     name: "Suspension / hang",
     value: "Suspension / hang",
   },
-
-
-
-
-
   {
-    id: 19,
+    id: 28,
+    class: "select-item",
+    name: "Pont du lutteur / Neck Bridge",
+    value: "Pont du lutteur",
+  },
+  {
+    id: 28,
+    class: "select-item",
+    name: "Pont avant / Front Bridge",
+    value: "Pont avant",
+  },
+
+
+//STREET FIGURES
+  {
+    id: 1,
     class: "select-title",
-    name: "Street Workout - Bas du corps",
+    name: "",
     value: "title",
   },
-  {
-    id: 22,
-    class: "select-item",
-    name: "Nordic Curl / Glute Ham Raise",
-    value: "Nordic Curl",
-  },
-  {
-    id: 23,
-    class: "select-item",
-    name: "Natural Leg Extension",
-    value: "Natural Leg Extension",
-  },
-  {
-    id: 23,
-    class: "select-item",
-    name: "Natural Leg Press",
-    value: "Natural Leg Press",
-  },
-
-
   {
     id: 15,
     class: "select-title",
@@ -365,6 +373,16 @@ const exercices = [
     name: "Victorian",
     value: "Victorian",
   },
+
+
+
+//STREET FREESTYLE
+  {
+    id: 1,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
   {
     id: 15,
     class: "select-title",
@@ -403,7 +421,17 @@ const exercices = [
   },
 
 
- {
+
+
+
+//MUSCU ABDO LOMBAIRES
+  {
+    id: 1,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
+  {
     id: 1,
     class: "select-title",
     name: "Musculation - Abdominaux / Lombaires",
@@ -412,8 +440,20 @@ const exercices = [
   {
     id: 2,
     class: "select-item",
+    name: "Good morning",
+    value: "Good morning",
+  },
+  {
+    id: 2,
+    class: "select-item",
     name: "Abdominal bicycles / Bicyclette",
     value: "Abdominal bicycles / Bicyclette",
+  },
+  {
+    id: 2,
+    class: "select-item",
+    name: "Ab Rollout",
+    value: "Ab Rollout",
   },
   {
     id: 2,
@@ -472,19 +512,13 @@ const exercices = [
   {
     id: 2,
     class: "select-item",
-    name: "Spiderman plank",
-    value: "Spiderman plank",
-  },
-  {
-    id: 2,
-    class: "select-item",
     name: "Reverse hypers",
     value: "Reverse hypers",
   },
   {
     id: 2,
     class: "select-item",
-    name: "Russian Twist",
+    name: "Russian Twist / Ab rotation",
     value: "Russian Twist",
   },
   {
@@ -511,233 +545,39 @@ const exercices = [
     name: "Swimmer / Nageur",
     value: "Swimmer / Nageur",
   },
-
-
-
   {
-    id: 28,
+    id: 2,
+    class: "select-item",
+    name: "Obliques / Side bend",
+    value: "Obliques / Side bend",
+  },
+
+
+
+//EXPLOSIF
+  {
+    id: 1,
     class: "select-title",
-    name: "Exercices Spécifiques - Cou",
-    value: "title",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Pont du lutteur / Neck Bridge",
-    value: "Pont du lutteur",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Pont avant / Front Bridge",
-    value: "Pont avant",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Neck extension",
-    value: "Neck extension",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Neck curl",
-    value: "Neck curl",
-  },
-
-
-
-  {
-    id: 28,
-    class: "select-title",
-    name: "Exercices Spécifiques - Explosif",
+    name: "",
     value: "title",
   },
   {
     id: 28,
     class: "select-title",
-    name: "Sauts",
-    value: "title",
-  },
-
-
-
-  {
-    id: 28,
-    class: "select-item",
-    name: "Kneeling jump",
-    value: "Kneeling jump",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Kneeling box jump",
-    value: "Kneeling box jump",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Box jump",
-    value: "Box jump",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Box jump avec élan",
-    value: "Box jump avec élan",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Straight Up / Bond",
-    value: "Straight Up",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Squat sauté",
-    value: "Squat sauté",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Squat sauté main vers le ciel",
-    value: "Squat sauté main vers le ciel",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Saut avec élan bloqué",
-    value: "Saut avec élan bloqué",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Saut talon fesse",
-    value: "Saut talon fesse",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Saut groupé en claquant les cuisses",
-    value: "Saut groupé en claquant les cuisses",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Saut groupé complet",
-    value: "Saut groupé complet",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Saut groupé enlacé",
-    value: "Saut groupé enlacé",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Saut filé",
-    value: "Saut filé",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Saut suicide",
-    value: "Saut suicide",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Saut en ciseaux",
-    value: "Saut en ciseaux",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Coup de pied sauté",
-    value: "Coup de pied sauté",
-  },
-
-
-
-  {
-    id: 28,
-    class: "select-title",
-    name: "Pompes Explosives",
+    name: "Explosif / Plyometric",
     value: "title",
   },
   {
     id: 28,
     class: "select-item",
-    name: "Répulsion inclinée debout",
-    value: "Répulsion inclinée debout",
+    name: "Saut",
+    value: "Saut",
   },
   {
     id: 28,
     class: "select-item",
-    name: "Répulsion à genoux",
-    value: "Répulsion à genoux",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Pompe répulsion",
-    value: "Pompe répulsion",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Pompe clapée",
-    value: "Pompe clapée",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Pompe en touchant la poitrine",
-    value: "Pompe en touchant la poitrine",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Pompe claquée dans le dos",
-    value: "Pompe claquée dans le dos",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Half superman",
-    value: "Half superman",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Répulsion de tout le coprs",
-    value: "Répulsion de tout le coprs",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Pompe superman",
-    value: "Pompe superman",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Get Up Push Up",
-    value: "Get Up Push Up",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Aztec Push up",
-    value: "Aztec Push up",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Crossed Aztec Push up",
-    value: "Crossed Aztec Push up",
+    name: "Répulsion",
+    value: "Répulsion",
   },
   {
     id: 28,
@@ -751,56 +591,11 @@ const exercices = [
     name: "Burpees",
     value: "Burpees",
   },
-
-
-
-  {
-    id: 28,
-    class: "select-title",
-    name: "Kip Up",
-    value: "title",
-  },
   {
     id: 28,
     class: "select-item",
     name: "Relevé de buste en roulade",
     value: "Relevé de buste en roulade",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Squat roulade",
-    value: "Squat roulade",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Répulsion d'épaules",
-    value: "Répulsion d'épaules",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Répulsion pontées",
-    value: "Répulsion pontées",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Bridge Kip",
-    value: "Bridge Kip",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Butt Kip",
-    value: "Butt Kip",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Half Kip",
-    value: "Half Kip",
   },
   {
     id: 28,
@@ -811,48 +606,14 @@ const exercices = [
   {
     id: 28,
     class: "select-item",
-    name: "Roll Kip Up",
-    value: "Roll Kip Up",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Head Kip Up",
-    value: "Head Kip Up",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Straight leg Kip Up",
-    value: "Straight leg Kip Up",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Wushu Kip Up",
-    value: "Wushu Kip Up",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "No hands Kip Up",
-    value: "No hands Kip Up",
+    name: "Roulade",
+    value: "Roulade",
   },
   {
     id: 28,
     class: "select-item",
     name: "Ditang Breakfall",
     value: "Ditang Breakfall",
-  },
-
-
-
-
-  {
-    id: 28,
-    class: "select-title",
-    name: "Flip",
-    value: "title",
   },
   {
     id: 28,
@@ -863,44 +624,8 @@ const exercices = [
   {
     id: 28,
     class: "select-item",
-    name: "Roulade sur les épaules",
-    value: "Roulade sur les épaules",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Roulade en répulsion",
-    value: "Roulade en répulsion",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Pont avec kick par dessus",
-    value: "Pont avec kick par dessus",
-  },
-  {
-    id: 28,
-    class: "select-item",
     name: "Macao",
     value: "Macao",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Roulade avec saut",
-    value: "Roulade avec saut",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Roulade en appui tendu renversé",
-    value: "Roulade en appui tendu renversé",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Saut de main en tombant sur le dos",
-    value: "Saut de main en tombant sur le dos",
   },
   {
     id: 28,
@@ -911,38 +636,8 @@ const exercices = [
   {
     id: 28,
     class: "select-item",
-    name: "Saut de main volant",
-    value: "Saut de main volant",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Flip en tombant sur le dos",
-    value: "Flip en tombant sur le dos",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Flip en courant",
-    value: "Flip en courant",
-  },
-  {
-    id: 28,
-    class: "select-item",
     name: "Flip",
     value: "Flip",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Flip du singe",
-    value: "Flip du singe",
-  },
-  {
-    id: 28,
-    class: "select-item",
-    name: "Flip à quatre points",
-    value: "Flip à quatre points",
   },
   {
     id: 28,
@@ -964,6 +659,13 @@ const exercices = [
   },
 
 
+//CARDIO
+  {
+    id: 1,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
   {
     id: 28,
     class: "select-title",
@@ -982,9 +684,21 @@ const exercices = [
     name: "Course / Footing",
     value: "Course",
   },
+  {
+    id: 28,
+    class: "select-item",
+    name: "Vélo / Bicycle",
+    value: "Vélo",
+  },
 
 
-
+//HALTERO
+  {
+    id: 1,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
   {
     id: 28,
     class: "select-title",
@@ -1017,6 +731,83 @@ const exercices = [
   },
 
 
+//STRONGMAN
+  {
+    id: 1,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
+  {
+    id: 1,
+    class: "select-title",
+    name: "Strongman",
+    value: "title",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Keg Run",
+    value: "Keg Run",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Windmill",
+    value: "Windmill",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Farmer Walk",
+    value: "Farmer Walk",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Prowler Push",
+    value: "Prowler Push",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Sled Drag",
+    value: "Sled Drag",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Yoke Walk",
+    value: "Yoke Walk",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Atlas Stone Load",
+    value: "Atlas Stone Load",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Retournement de pneu",
+    value: "Retournement de pneu",
+  },
+  {
+    id: 12,
+    class: "select-item",
+    name: "Swing",
+    value: "Swing",
+  },
+
+
+
+
+  {
+    id: 1,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
   {
     id: 999,
     class: "select-item-own",
