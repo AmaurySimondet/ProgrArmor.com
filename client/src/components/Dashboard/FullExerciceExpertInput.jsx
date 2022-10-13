@@ -166,6 +166,7 @@ function FullExerciceInput(props){
               <button className="btn btn-dark form-button" onClick={onAddCategorie} type="submit">Ajouter une categorie à cet exercice !</button>
               <br/>
 
+
               <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
               <br/>
           </div>
