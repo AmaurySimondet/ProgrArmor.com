@@ -14,7 +14,7 @@ function createEntry(exercicesTerm) {
   );
 }
 
-function ExerciceInput(props) {
+function ExerciceEchauffementInput(props) {
   const [exercice, setExercice] = useState({name: "", ownExercice: ""});
 
   function handleChange(event){
@@ -28,11 +28,11 @@ function ExerciceInput(props) {
   }
 
   useEffect(() => {
-    props.changeExercice(exercice);
+    props.changeEchauffement(exercice);
   }, [exercice]);
 
     function handleClickPoubelle(){
-         props.onDeleteExercices(props.num);
+         props.onDeleteEchauffements(props.num);
 
          event.preventDefault();
   }
@@ -41,7 +41,7 @@ function ExerciceInput(props) {
     <div>
           <div className="form-group row">
             <label className="col-sm-2 col-form-label exercice-label">
-              Exercice {props.num+1}
+              Echauffement {props.num+1}
             </label>
             <div className="col-sm-9">
                 <select onChange={handleChange} className="custom-select col-sm-10" id="name">
@@ -132,7 +132,7 @@ function ExerciceInput(props) {
   );
 };
 
-export default ExerciceInput;
+export default ExerciceEchauffementInput;
 
 
 

@@ -1,9 +1,9 @@
-import ExerciceInput from "./ExerciceInput";
 import SerieInput from "./SerieInput";
 import exercices from "./Exercices";
 import Select from "./Select";
 import CategorieInput from "./CategorieInput";
 import {React, useState, useEffect} from "react";
+import ExerciceEchauffementInput from "./ExerciceEchauffementInput";
 
 function createEntry(exercicesTerm) {
   return (
@@ -16,17 +16,17 @@ function createEntry(exercicesTerm) {
   );
 }
 
-function FullExerciceInput(props){
+function EchauffementInput(props){
     const [series, setSeries] = useState([]);
     const [categories, setCategories] = useState([]);
 //    const [categories, setCategories] = useState(['Aucune (défaut)', 'Variante','Type de barre / poids', 'Poids barre / poids', 'Elastique', 'Côté (travail unilatéral)', 'Type de prise', 'Ecartement de prise', 'Amplitude', 'Execution', "Vitesse d'execution", 'Accessoire supplémentaire', 'Temps de repos entre les séries'])
-    const [fullExercice, setFullExercice] = useState({});
+    const [echauffement, setEchauffement] = useState({});
 
-    function changeExercice(exercice){
-        setFullExercice(oldFullExercice => {
+    function changeEchauffement(echauffement){
+        setEchauffement(oldEchauffement => {
             return ({
-                ...oldFullExercice,
-                exercice: exercice,
+                ...oldEchauffement,
+                echauffement: echauffement,
             });
         });
     }
@@ -50,9 +50,9 @@ function FullExerciceInput(props){
     useEffect(() => {
         const Series = {...series};
         const Categories = {...categories};
-        const Exercice = {...fullExercice, Series, Categories};
-        props.changeExercices(Exercice, props.num);
-    }, [fullExercice, series, categories])
+        const Echauffement = {...echauffement, Series, Categories};
+        props.changeEchauffements(Echauffement, props.num);
+    }, [echauffement, series, categories])
 
     function onAddSerie(serie, num){
         event.preventDefault();
@@ -118,7 +118,7 @@ function FullExerciceInput(props){
           <div className="exercice-div">
               <hr className="hr-exercice"/>
 
-              <ExerciceInput id="exercice" value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} />
+              <ExerciceEchauffementInput id="exercice" value={echauffement.exercice} num={props.num} onDeleteEchauffements={props.onDeleteEchauffements} changeEchauffement={changeEchauffement} />
 
               {categories ? categories.map((categorie,index) => {
                 return(
@@ -128,7 +128,7 @@ function FullExerciceInput(props){
                   <CategorieInput
                     key={index}
                     num={index}
-                    exercice={fullExercice.exercice}
+                    exercice={echauffement.echauffement}
                     onAddCategorie={onAddCategorie}
                     changeCategorie={changeCategorie}
                     onDeleteCategorie={onDeleteCategorie}
@@ -149,7 +149,7 @@ function FullExerciceInput(props){
                         key={index}
                         num={index}
                         length={series.length}
-                        exercice={fullExercice.exercice}
+                        exercice={echauffement.echauffement}
                         poids={props.poids}
                         onAddSerie={onAddSerie}
                         changeSerie={changeSerie}
@@ -161,7 +161,7 @@ function FullExerciceInput(props){
               : null
               }
 
-              <button className="btn btn-dark form-button" onClick={onAddCategorie} type="submit">Ajouter une categorie à cet exercice !</button>
+              <button className="btn btn-dark form-button" onClick={onAddCategorie} type="submit"> {"Ajouter une categorie à cet exo d'echauffement"} !</button>
               <br/>
 
 
@@ -171,4 +171,4 @@ function FullExerciceInput(props){
     )
 }
 
-export default FullExerciceInput;
+export default EchauffementInput;

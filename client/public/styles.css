@@ -190,9 +190,19 @@ table.profile-table{
 
 }
 
+.detail-div{
+    margin-top: 20px;
+
+}
+
 .hr-exercice{
     border-width: 2px;
     border-color: black;
+}
+
+.hr-detail{
+    border-width: 2px;
+    border-color: #ff0000;
 }
 
 .hr-serie{
@@ -251,6 +261,22 @@ table.profile-table{
 
 }
 
+.expert-title{
+    font-weight: 200;
+    margin-top: 40px;
+
+}
+
+.expert-toggle{
+    width:20px;
+
+}
+
+.expert-toggle-inverted{
+    width:20px;
+    transform: scaleY(-1);
+
+}
 
 /* HOME HEADER*/
 

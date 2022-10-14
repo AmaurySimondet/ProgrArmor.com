@@ -17,11 +17,13 @@ function CategorieHiddenText(){
         Si vous vous croyez malin vous allez surement me dire du curl, et je ne peux pas dire que vous ayez tord <br/>
         {"Mais qui vous dis que j'ai réalisé l'exercice debout et pas sur un banc incliné à 45° ? Etait-ce un leg curl et pas un biceps curl ?"} <br/>
         {"Avec des haltères ou barre EZ ? En prise neutre ou même en rotation ? En m'arrêtant ou en faisant une pause à la parallèle ?"} <br/>
-        {"En y ajoutant des elastiques ? Un curl Zanetti ou peut être sur pupitre ? En unilatéral ? Stricte ?... "} <br/>
+        {"En y ajoutant des élastiques ? Un curl Zanetti ou peut être sur pupitre ? En unilatéral ? Stricte ?... "} <br/>
+        <br/>
+        <i> Toutes les catégories sont combinables et multipliables </i><br/>
         <br/>
         <strong> {"Mais c'est compliqué tout ça !"} </strong> <br/>
         <br/>
-        {"Vous pouvez tout à fait garder une notation telle que ' Curl: 12kg 4*12 reps ' tant que vous vous comprennez."} <br/>
+        {"Vous pouvez tout à fait garder une notation telle que ' Curl: 12kg 4*12 reps ' tant que vous vous comprenez."} <br/>
         {"Sachez en tout cas que ces outils seront là le jour où vous en aurez besoin."} <br/>
         {"Un problème de temps ? ProgrArmor a mis tout en oeuvre pour faciliter votre prise de note avec ses outils."} <br/>
         {"Un problème de place ? ProgrArmor c'est une page infinie sans aucune marge, ecrivez, effacez, modifiez autant que vous voulez."} <br/>
@@ -32,6 +34,8 @@ function CategorieHiddenText(){
         Il vous permet de savoir où, quand, comment, dans quels conditions... vous avez réaliser tel ou tel exercice le tout retrouvable en quelques clics. <br/>
         Vous beneficez aussi de statistiques enrichissantes sur votre pratique et pouvez suivre la progression de vos amis. <br/>
         {"Essayez, c'est gratuit !"} <br/>
+        <br/>
+        <i> {"Cliques à nouveau sur l'icône"} <img className="myDIV" src={require('../../../images/icons/icons8-question-mark-96.png')} alt="?" /> {"pour faire disparaître ce bandeau d'information"} </i>
     </div>
     )
 }

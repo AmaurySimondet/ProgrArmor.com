@@ -9,8 +9,8 @@ const musclesCategorie = [
   {
     id: 2,
     class: "select-item",
-    name: "Avant bras",
-    value: "Avant bras",
+    name: "Avant bras / Forearm",
+    value: "Avant bras / Forearm",
   },
   {
     id: 3,
@@ -33,26 +33,26 @@ const musclesCategorie = [
   {
     id: 6,
     class: "select-item",
-    name: "Back",
-    value: "Back",
+    name: "Dos / Back",
+    value: "Dos / Back",
   },
   {
     id: 7,
     class: "select-item",
-    name: "Leg",
-    value: "Leg",
+    name: "Jambe / Leg",
+    value: "Jambe / Leg",
   },
   {
     id: 8,
     class: "select-item",
-    name: "Hip",
-    value: "Hip",
+    name: "Hanches / Hip",
+    value: "Hanches / Hip",
   },
   {
     id: 9,
     class: "select-item",
-    name: "Epaules",
-    value: "Epaules",
+    name: "Epaules / Shoulders",
+    value: "Epaules / Shoulders",
   },
 ]
 

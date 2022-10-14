@@ -20,8 +20,6 @@ function FullExerciceInput(props){
     const [fullExercice, setFullExercice] = useState({});
 
     function changeExercice(exercice){
-        event.preventDefault();
-
         setFullExercice(oldFullExercice => {
             return ({
                 ...oldFullExercice,

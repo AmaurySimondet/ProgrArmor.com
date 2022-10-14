@@ -27,7 +27,6 @@ function Session() {
     event.preventDefault();
 
     setSwitched(!switched);
-    console.log(switched);
   }
 
   return (

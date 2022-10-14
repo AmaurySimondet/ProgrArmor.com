@@ -25,32 +25,12 @@ import DépartCategorie from "./Categories/DépartCategorie.js";
 import ExplosifCategorie from "./Categories/ExplosifCategorie.js";
 import Halterophilie from "./Categories/Halterophilie.js";
 import AccessoireObjet from "./Categories/AccessoireObjet.js";
+import RPE from "./Categories/RPE.js";
+import Douleur from "./Categories/Douleur.js";
 
 import StreetworkoutHiddenText from "./Categories/StreetworkoutHiddenText.js";
 import CategorieHiddenText from "./Categories/CategorieHiddenText.js";
-
-
-//      {categorie.name === "Variante" && categorie.input==="Avec chaines" ?
-//            <div className="form-group row">
-//                <label className="col-sm-2 col-form-label">
-//                    Poids chaines (kg)
-//                    <img className="myDIV" onClick={handleClickChaine} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
-//                    <div className={chaineClicked}>
-//                      <div className="hidden-text">
-//                        <strong> Attention: ce poids sera ajouté à la charge totale, il ne faut donc pas le compter dans la charge </strong>
-//                      </div>
-//                    </div>
-//                </label>
-//                <div className="col-sm-5">
-//                  <input type="text"
-//                      className="form-control"
-//                      onChange={handleChange}
-//                      id="poidsChaines"
-//                      value={categorie.poidsChaines}
-//                  />
-//                </div>
-//            </div>
-//        :null}
+import ElastiqueHiddenText from "./Categories/ElastiqueHiddenText.js";
 
 const StyleSlider = styled(Slider)(({ theme }) => ({
   '& .MuiSlider-thumb': {
@@ -121,19 +101,19 @@ function createEntry(item) {
 function CategorieInput(props) {
   const [categorie, setCategorie] = useState({num: props.num});
   const [streetworkoutHiddenClicked, setStreetworkoutHiddenClicked] = useState("hide");
-  const [chaineClicked, setChaineClicked] = useState("hide");
   const [categorieHiddenClick, setcategorieHiddenClick] = useState('hide')
+  const [elastiqueHiddenClick, setElastiqueHiddenClick] = useState('hide')
+
+  function handleClickElastique(){
+    if(elastiqueHiddenClick==="hide"){
+        setElastiqueHiddenClick("nothide");
+    } else { setElastiqueHiddenClick("hide")};
+  }
 
   function handleClickCategorie(){
     if(categorieHiddenClick==="hide"){
         setcategorieHiddenClick("nothide");
     } else { setcategorieHiddenClick("hide")};
-  }
-
-  function handleClickChaine(){
-    if(chaineClicked==="hide"){
-        setChaineClicked("nothide");
-    } else { setChaineClicked("hide")};
   }
 
   function handleClickStreetworkout(){
@@ -344,6 +324,41 @@ function CategorieInput(props) {
                 </select>
             </div>
       : null }
+      {categorie.name === "Temps de repos entre les séries" ?
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label">
+                  Temps de repos entre les séries (minutes)
+                </label>
+                <div className="col-sm-9">
+                    <input type="text"
+                          className="form-control"
+                          id="input"
+                          value={categorie.input}
+                          onChange={handleChange}
+                    />
+                </div>
+            </div>
+      : null }
+      {categorie.name === "RPE / Niveau d'intensité" ?
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label">
+                  RPE / Niveau d'intensité
+                </label>
+                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                    {RPE.map(createEntry)}
+                </select>
+            </div>
+      : null }
+      {categorie.name === "Gêne / douleur / blessure" ?
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label">
+                  Gêne / douleur / blessure
+                </label>
+                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                    {Douleur.map(createEntry)}
+                </select>
+            </div>
+      : null }
       {categorie.name === "Type de prise" ?
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
@@ -418,7 +433,7 @@ function CategorieInput(props) {
         <div>
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
-                  Utilisation elastique
+                  Utilisation
                 </label>
                 <select onChange={handleChange} className="custom-select col-sm-9" id="utilisation">
                     <option className="select-title" value="title"> / (défaut) </option>
@@ -439,7 +454,7 @@ function CategorieInput(props) {
             {categorie.input === "mesure" ?
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
-                  Tension elastique (kg)
+                  Tension (kg)
                 </label>
                 <div className="col-sm-9">
                     <input type="text"
@@ -477,6 +492,10 @@ function CategorieInput(props) {
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">
                       Estimation
+                      <img className="myDIV" onClick={handleClickElastique} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                      <div className={elastiqueHiddenClick}>
+                          <ElastiqueHiddenText />
+                      </div>
                     </label>
                     <div className="col-sm-9">
                       <input type="text"

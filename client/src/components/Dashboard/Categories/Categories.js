@@ -216,11 +216,39 @@ const categories = [
   },
 
 
-  {
+
+
+
+
+    {
     id: 32,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
+  {
+    id: 33,
+    class: "select-title",
+    name: "Detail",
+    value: "title",
+  },
+  {
+    id: 34,
     class: "select-item",
     name: "Temps de repos entre les séries",
     value: "Temps de repos entre les séries",
+  },
+  {
+    id: 35,
+    class: "select-item",
+    name: "RPE / Niveau d'intensité",
+    value: "RPE / Niveau d'intensité",
+  },
+  {
+    id: 35,
+    class: "select-item",
+    name: "Gêne / douleur / blessure",
+    value: "Gêne / douleur / blessure",
   },
 
 ];

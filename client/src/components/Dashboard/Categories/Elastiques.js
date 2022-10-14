@@ -48,9 +48,15 @@ const elastiques = [
     value: "110",
   },
   {
+    id: 7,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
+  {
     id: 8,
     class: "select-item",
-    name: "J'ai mesuré la resistance moi-même comme un grand...",
+    name: "J'ai mesuré la tension moi-même comme un grand...",
     value: "mesure",
   },
 

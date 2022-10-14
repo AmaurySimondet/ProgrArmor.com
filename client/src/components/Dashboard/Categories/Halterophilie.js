@@ -2,6 +2,12 @@ const halterophilie = [
 //HALTEROPHILIE
   {
     id: 1,
+    class: "select-title",
+    name: "/ (défaut)",
+    value: "title",
+  },
+  {
+    id: 1,
     class: "select-item",
     name: "Suspendu / Hang",
     value: "Suspendu / Hang",

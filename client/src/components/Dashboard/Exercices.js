@@ -7,6 +7,81 @@ const exercices = [
   },
 
 
+
+//ECHAUFFEMENT
+  {
+    id: 115,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
+  {
+    id: 116,
+    class: "select-title",
+    name: "Échauffement",
+    value: "title",
+  },
+  {
+    id: 6,
+    class: "select-item",
+    name: "Dislocation d'épaule",
+    value: "Dislocation d'épaule",
+  },
+
+
+
+
+//TERME GENERIQUE
+  {
+    id: 16,
+    class: "select-title",
+    name: "",
+    value: "title",
+  },
+  {
+    id: 17,
+    class: "select-title",
+    name: "Terme générique",
+    value: "title",
+  },
+  {
+    id: 18,
+    class: "select-item",
+    name: "Elevation",
+    value: "Elevation",
+  },
+  {
+    id: 19,
+    class: "select-item",
+    name: "Curl",
+    value: "Curl",
+  },
+  {
+    id: 20,
+    class: "select-item",
+    name: "Extension",
+    value: "Extension",
+  },
+  {
+    id: 21,
+    class: "select-item",
+    name: "Abduction",
+    value: "Abduction",
+  },
+  {
+    id: 22,
+    class: "select-item",
+    name: "Adduction",
+    value: "Adduction",
+  },
+  {
+    id: 23,
+    class: "select-item",
+    name: "Press",
+    value: "Press",
+  },
+
+
 //MUSCU HAUT DU CORPS
   {
     id: 1,
@@ -97,58 +172,6 @@ const exercices = [
     class: "select-item",
     name: "Le volant",
     value: "Le volant",
-  },
-
-
-//MUSCU TERME GENERIQUE
-  {
-    id: 16,
-    class: "select-title",
-    name: "",
-    value: "title",
-  },
-  {
-    id: 17,
-    class: "select-title",
-    name: "Musculation - Terme générique",
-    value: "title",
-  },
-  {
-    id: 18,
-    class: "select-item",
-    name: "Elevation",
-    value: "Elevation",
-  },
-  {
-    id: 19,
-    class: "select-item",
-    name: "Curl",
-    value: "Curl",
-  },
-  {
-    id: 20,
-    class: "select-item",
-    name: "Extension",
-    value: "Extension",
-  },
-
-  {
-    id: 21,
-    class: "select-item",
-    name: "Abduction",
-    value: "Abduction",
-  },
-  {
-    id: 22,
-    class: "select-item",
-    name: "Adduction",
-    value: "Adduction",
-  },
-  {
-    id: 23,
-    class: "select-item",
-    name: "Press",
-    value: "Press",
   },
 
 
@@ -802,8 +825,9 @@ const exercices = [
 
 
 
+
   {
-    id: 126,
+    id: 115,
     class: "select-title",
     name: "",
     value: "title",

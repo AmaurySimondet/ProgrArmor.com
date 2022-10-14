@@ -2,7 +2,7 @@ import {React, useState, useEffect} from "react";
 import Select from "./Select";
 
 function NameInput(props) {
-  const [nom, setNom] = useState({ancienNom: "ancien-nom", nouveauNom: ""});
+  const [nom, setNom] = useState({});
   const anciensNoms = [{ancienNom: "ancien-nom", nouveauNom: "Force bas du corps"}, {ancienNom: "ancien-nom", nouveauNom: "Freestyle haut du corps"}];
 
   function handleChange(event){
@@ -27,6 +27,7 @@ function NameInput(props) {
             </label>
             <div className="col-sm-9">
                 <select onChange={handleChange} className="custom-select col-sm-10" id="ancienNom">
+                    <option value="title"> / (défaut) </option>
                     {anciensNoms ? anciensNoms.map((nom,index) => {
                         return <option key={index} value={nom.nouveauNom}> {nom.nouveauNom} </option>
                     })
@@ -43,6 +44,7 @@ function NameInput(props) {
                   <input type="text"
                       className="form-control"
                       onChange={handleChange}
+                      placeholder="Annihilation des biceps"
                       id="nouveauNom"
                       value={nom.nouveauNom}
                   />
