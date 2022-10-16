@@ -37,11 +37,20 @@ function ExerciceEchauffementInput(props) {
          event.preventDefault();
   }
 
+  function handleClickLabel(){
+    props.onClickExercice();
+  }
+
   return (
     <div>
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label exercice-label">
+            <label onClick={handleClickLabel} className="col-sm-2 col-form-label exercice-label">
               Echauffement {props.num+1}
+              {props.clickExercice ?
+                <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+              :
+                <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+              }
             </label>
             <div className="col-sm-9">
                 <select onChange={handleChange} className="custom-select col-sm-10" id="name">

@@ -19,8 +19,13 @@ function createEntry(exercicesTerm) {
 function EchauffementInput(props){
     const [series, setSeries] = useState([]);
     const [categories, setCategories] = useState([]);
-//    const [categories, setCategories] = useState(['Aucune (défaut)', 'Variante','Type de barre / poids', 'Poids barre / poids', 'Elastique', 'Côté (travail unilatéral)', 'Type de prise', 'Ecartement de prise', 'Amplitude', 'Execution', "Vitesse d'execution", 'Accessoire supplémentaire', 'Temps de repos entre les séries'])
     const [echauffement, setEchauffement] = useState({});
+    const [clickExercice, setClickExercice] = useState(false);
+
+  function handleClickExercice(){
+    setClickExercice(!clickExercice);
+
+  }
 
     function changeEchauffement(echauffement){
         setEchauffement(oldEchauffement => {
@@ -118,55 +123,59 @@ function EchauffementInput(props){
           <div className="exercice-div">
               <hr className="hr-exercice"/>
 
-              <ExerciceEchauffementInput id="exercice" value={echauffement.exercice} num={props.num} onDeleteEchauffements={props.onDeleteEchauffements} changeEchauffement={changeEchauffement} />
+              <ExerciceEchauffementInput id="exercice"  onClickExercice={handleClickExercice} clickExercice={clickExercice} value={echauffement.exercice} num={props.num} onDeleteEchauffements={props.onDeleteEchauffements} changeEchauffement={changeEchauffement} />
 
-              {categories ? categories.map((categorie,index) => {
-                return(
+            {clickExercice ?
                 <div>
-                  <hr className="hr-serie"/>
+                  {categories ? categories.map((categorie,index) => {
+                    return(
+                    <div>
+                      <hr className="hr-serie"/>
 
-                  <CategorieInput
-                    key={index}
-                    num={index}
-                    exercice={echauffement.echauffement}
-                    onAddCategorie={onAddCategorie}
-                    changeCategorie={changeCategorie}
-                    onDeleteCategorie={onDeleteCategorie}
-                  />
-
-                </div>
-                );
-              })
-              : null
-              }
-
-              {series ? series.map((serie,index) => {
-                return(
-                <div>
-                    <hr className="hr-serie"/>
-
-                    <SerieInput
+                      <CategorieInput
                         key={index}
                         num={index}
-                        length={series.length}
                         exercice={echauffement.echauffement}
-                        poids={props.poids}
-                        onAddSerie={onAddSerie}
-                        changeSerie={changeSerie}
-                        onDeleteSerie={onDeleteSerie}
-                    />
-                </div>
-                );
-              })
-              : null
-              }
+                        onAddCategorie={onAddCategorie}
+                        changeCategorie={changeCategorie}
+                        onDeleteCategorie={onDeleteCategorie}
+                      />
 
-              <button className="btn btn-dark form-button" onClick={onAddCategorie} type="submit"> {"Ajouter une categorie à cet exo d'echauffement"} !</button>
-              <br/>
+                    </div>
+                    );
+                  })
+                  : null
+                  }
+
+                  {series ? series.map((serie,index) => {
+                    return(
+                    <div>
+                        <hr className="hr-serie"/>
+
+                        <SerieInput
+                            key={index}
+                            num={index}
+                            length={series.length}
+                            exercice={echauffement.echauffement}
+                            poids={props.poids}
+                            onAddSerie={onAddSerie}
+                            changeSerie={changeSerie}
+                            onDeleteSerie={onDeleteSerie}
+                        />
+                    </div>
+                    );
+                  })
+                  : null
+                  }
+
+                  <button className="btn btn-dark form-button" onClick={onAddCategorie} type="submit"> {"Ajouter une categorie à cet exo d'echauffement"} !</button>
+                  <br/>
 
 
-              <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
-              <br/>
+                  <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
+                  <br/>
+              </div>
+            : null }
           </div>
     )
 }
