@@ -19,8 +19,13 @@ function createEntry(exercicesTerm) {
 function FullExerciceInput(props){
     const [series, setSeries] = useState([]);
     const [categories, setCategories] = useState([]);
-//    const [categories, setCategories] = useState(['Aucune (défaut)', 'Variante','Type de barre / poids', 'Poids barre / poids', 'Elastique', 'Côté (travail unilatéral)', 'Type de prise', 'Ecartement de prise', 'Amplitude', 'Execution', "Vitesse d'execution", 'Accessoire supplémentaire', 'Temps de repos entre les séries'])
     const [fullExercice, setFullExercice] = useState({});
+    const [clickExercice, setClickExercice] = useState(false);
+
+  function handleClickExercice(){
+    setClickExercice(!clickExercice);
+
+  }
 
     function changeExercice(exercice){
         setFullExercice(oldFullExercice => {
@@ -118,55 +123,63 @@ function FullExerciceInput(props){
           <div className="exercice-div">
               <hr className="hr-exercice"/>
 
-              <ExerciceInput id="exercice" value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} />
+              <ExerciceInput id="exercice" onClickExercice={handleClickExercice} clickExercice={clickExercice} value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} />
 
-              {categories ? categories.map((categorie,index) => {
-                return(
+
+            {clickExercice ?
                 <div>
-                  <hr className="hr-serie"/>
 
-                  <CategorieInput
-                    key={index}
-                    num={index}
-                    exercice={fullExercice.exercice}
-                    onAddCategorie={onAddCategorie}
-                    changeCategorie={changeCategorie}
-                    onDeleteCategorie={onDeleteCategorie}
-                  />
+                      {categories ? categories.map((categorie,index) => {
+                        return(
+                        <div>
+                          <hr className="hr-serie"/>
 
-                </div>
-                );
-              })
-              : null
-              }
+                          <CategorieInput
+                            key={index}
+                            num={index}
+                            exercice={fullExercice.exercice}
+                            onAddCategorie={onAddCategorie}
+                            changeCategorie={changeCategorie}
+                            onDeleteCategorie={onDeleteCategorie}
+                          />
 
-              {series ? series.map((serie,index) => {
-                return(
-                <div>
-                    <hr className="hr-serie"/>
+                        </div>
+                        );
+                      })
+                      : null
+                      }
 
-                    <SerieInput
-                        key={index}
-                        num={index}
-                        length={series.length}
-                        exercice={fullExercice.exercice}
-                        poids={props.poids}
-                        onAddSerie={onAddSerie}
-                        changeSerie={changeSerie}
-                        onDeleteSerie={onDeleteSerie}
-                    />
-                </div>
-                );
-              })
-              : null
-              }
+                      {series ? series.map((serie,index) => {
+                        return(
+                        <div>
+                            <hr className="hr-serie"/>
 
-              <button className="btn btn-dark form-button" onClick={onAddCategorie} type="submit">Ajouter une categorie à cet exercice !</button>
-              <br/>
+                            <SerieInput
+                                key={index}
+                                num={index}
+                                length={series.length}
+                                exercice={fullExercice.exercice}
+                                poids={props.poids}
+                                onAddSerie={onAddSerie}
+                                changeSerie={changeSerie}
+                                onDeleteSerie={onDeleteSerie}
+                            />
+                        </div>
+                        );
+                      })
+                      : null
+                      }
+
+                      <button className="btn btn-dark form-button" onClick={onAddCategorie} type="submit">Ajouter une categorie à cet exercice !</button>
+                      <br/>
 
 
-              <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
-              <br/>
+                      <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
+                      <br/>
+                  </div>
+              : null}
+
+
           </div>
     )
 }

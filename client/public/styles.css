@@ -269,12 +269,14 @@ table.profile-table{
 
 .expert-toggle{
     width:20px;
-
+    margin-left:5px
+    
 }
 
 .expert-toggle-inverted{
     width:20px;
     transform: scaleY(-1);
+    margin-left:5px
 
 }
 
