@@ -66,18 +66,22 @@ function DetailInput(props) {
 
   return (
   <div style={divStyle(props.num)}>
-      <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
-                  Detail
-            </label>
-            <select onChange={handleChange} className="custom-select col-sm-9" id="name">
-                {Details.map(createEntry)}
-            </select>
+    {detail.name ?
+        null
+    :
+          <div className="form-group row">
+                <label className="col-sm-2 col-form-label">
+                      Detail
+                </label>
+                <select onChange={handleChange} className="custom-select col-sm-9" id="name">
+                    {Details.map(createEntry)}
+                </select>
 
-            <div className="col-sm-1">
-              <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-            </div>
-      </div>
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
+          </div>
+      }
 
       {detail.name === "Condition météorologique défavorable" ?
             <div className="form-group row">
@@ -87,6 +91,10 @@ function DetailInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Meteo.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {detail.name === "Gêne / douleur / blessure" ?
@@ -97,6 +105,10 @@ function DetailInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {DouleurSeance.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {detail.name === "Fatigue" ?
@@ -107,6 +119,10 @@ function DetailInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Fatigue.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {detail.name === "Pre Workout, Café..." ?
@@ -117,6 +133,10 @@ function DetailInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Preworkout.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {detail.name === "Alcool, drogue, sexe..." ?
@@ -127,6 +147,10 @@ function DetailInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {DRUG.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {detail.name === "Etat psychologique" ?
@@ -137,6 +161,10 @@ function DetailInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Psycho.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {detail.name === "Séance seul ou à plusieurs" ?
@@ -147,6 +175,10 @@ function DetailInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Seul.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {detail.name === "Environnement" ?
@@ -157,6 +189,10 @@ function DetailInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Environnement.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {detail.name === "Courbatures / Congestion" ?
@@ -167,6 +203,10 @@ function DetailInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Courbatures.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {detail.name === "Notes" ?
@@ -183,6 +223,10 @@ function DetailInput(props) {
                           rows="5"
                           onChange={handleChange}
                     />
+                </div>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>
             </div>
       : null }
