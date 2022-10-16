@@ -25,7 +25,7 @@ function NameInput(props) {
             <label className="col-sm-2 col-form-label">
               Nom de la séance
             </label>
-            <div className="col-sm-9">
+            <div className="col-sm-10">
                 <select onChange={handleChange} className="custom-select col-sm-10" id="ancienNom">
                     <option value="title"> / (défaut) </option>
                     {anciensNoms ? anciensNoms.map((nom,index) => {

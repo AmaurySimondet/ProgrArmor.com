@@ -173,22 +173,29 @@ function CategorieInput(props) {
 
   return (
   <div style={divStyle(props.num)}>
-      <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
-                  Catégorie ({props.exercice.name})
-                  <img className="myDIV" onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
-                  <div className={categorieHiddenClick}>
-                      <CategorieHiddenText />
-                  </div>
-            </label>
-            <select onChange={handleChange} className="custom-select col-sm-9" id="name">
-                {lesCategories.map(createEntry)}
-            </select>
 
-            <div className="col-sm-1">
-              <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-            </div>
-      </div>
+    {categorie.name ?
+        null
+      :
+        <div className="form-group row">
+                <label className="col-sm-2 col-form-label">
+                      Catégorie ({props.exercice.name})
+                      <img className="myDIV" onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                      <div className={categorieHiddenClick}>
+                          <CategorieHiddenText />
+                      </div>
+                </label>
+                <select onChange={handleChange} className="custom-select col-sm-9" id="name">
+                    {lesCategories.map(createEntry)}
+                </select>
+
+
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
+          </div>
+      }
 
       {categorie.name === "Variante Street Workout" ?
             <div className="form-group row">
@@ -202,6 +209,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Streetworkout.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Type de barre / poids" ?
@@ -212,6 +223,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {lesTypesBarres.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Muscle" ?
@@ -222,6 +237,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {MusclesCategorie.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Positionnement du corps" ?
@@ -232,6 +251,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {PositionCorps.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Positionnement des bras" ?
@@ -242,6 +265,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {PositionBras.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Positionnement des jambes" ?
@@ -252,6 +279,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {PositionJambes.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Positionnement des mains" ?
@@ -262,6 +293,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {PositionMains.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Positionnement des pieds" ?
@@ -272,6 +307,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {PositionPieds.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Placement et axe du corps / banc / barre" ?
@@ -282,6 +321,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {AxeCategorie.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Ouverture coudes / genoux" ?
@@ -292,6 +335,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {CoudeGenou.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Unilatéral" ?
@@ -302,6 +349,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Unilateral.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Type d'éxecution" ?
@@ -312,6 +363,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Execution.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Type d'éxecution spécifique" ?
@@ -322,6 +377,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {ExecutionSpecifique.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Temps de repos entre les séries" ?
@@ -337,6 +396,10 @@ function CategorieInput(props) {
                           onChange={handleChange}
                     />
                 </div>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "RPE / Niveau d'intensité" ?
@@ -347,6 +410,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {RPE.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Gêne / douleur / blessure" ?
@@ -357,6 +424,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Douleur.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Type de prise" ?
@@ -367,6 +438,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {PriseCategorie.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Tempo" ?
@@ -377,6 +452,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {TempoCategorie.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Forme (Partiel)" ?
@@ -387,6 +466,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Partiel.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Point de départ" ?
@@ -397,6 +480,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {DépartCategorie.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Variante d'exercice explosif" ?
@@ -407,6 +494,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {ExplosifCategorie.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Variante d'exercice d'haltérophilie" ?
@@ -417,6 +508,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {Halterophilie.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Accessoire supplémentaire ou objet spécifique" ?
@@ -427,6 +522,10 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                     {AccessoireObjet.map(createEntry)}
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
       : null }
       {categorie.name === "Elastique" ?
@@ -440,6 +539,10 @@ function CategorieInput(props) {
                     <option value="Resistance"> Résistance </option>
                     <option value="Assistance"> Assistance </option>
                 </select>
+
+                <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
             </div>
 
             <div className="form-group row">
