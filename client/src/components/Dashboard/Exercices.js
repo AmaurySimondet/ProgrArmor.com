@@ -10,19 +10,19 @@ const exercices = [
 
 //ECHAUFFEMENT
   {
-    id: 115,
+    id: 127,
     class: "select-title",
     name: "",
     value: "title",
   },
   {
-    id: 116,
+    id: 128,
     class: "select-title",
     name: "Échauffement",
     value: "title",
   },
   {
-    id: 6,
+    id: 129,
     class: "select-item",
     name: "Dislocation d'épaule",
     value: "Dislocation d'épaule",
@@ -827,7 +827,7 @@ const exercices = [
 
 
   {
-    id: 115,
+    id: 126,
     class: "select-title",
     name: "",
     value: "title",
