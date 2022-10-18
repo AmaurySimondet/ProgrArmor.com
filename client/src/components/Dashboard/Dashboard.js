@@ -8,6 +8,7 @@ function Dashboard() {
     const [seances, setSeances] = useState([]);
     const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
     const [params, setParams] = useState({periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
+    const categoriesAddRien = ["rien","rien","rien"]
 
   async function getWorkouts(){
     const {data} = await API.workouts(params);
@@ -109,7 +110,7 @@ function Dashboard() {
                     <label className="col-sm-1 col-form-label">
                       Tri
                     </label>
-                    <div className="col-sm-3">
+                    <div className="col-sm-6">
                         <select onChange={handleChange} className="custom-select col-sm-10" id="tri">
                             <option value="Ordre chronologique décroissant"> Ordre chronologique décroissant (défaut) </option>
                             <option value="Ordre chronologique croissant"> Ordre chronologique croissant </option>
@@ -137,7 +138,9 @@ function Dashboard() {
                     <label className="col-sm-1 col-form-label">
                       Exercice
                     </label>
-                    <ExerciceInput num={0} id="exercice" changeExercice={changeExercice} />
+                    <div className="col-sm-6">
+                        <ExerciceInput taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                    </div>
 
                     <label className="col-sm-1 col-form-label">
                       Reps / Temps
@@ -172,9 +175,12 @@ function Dashboard() {
             <table className="table table-hover table-responsive-md table-dark dashboard-table">
               <thead className="thead-dark">
                 <tr>
-                  <th scope="col">Date (AAAA-MM-JJ) </th>
+                  <th scope="col">Date </th>
                   <th scope="col">Poids</th>
                   <th scope="col">Exercice</th>
+                  <th scope="col">Categorie</th>
+                  <th scope="col">Categorie</th>
+                  <th scope="col">Categorie</th>
                   <th scope="col">Série</th>
                   <th scope="col">Type</th>
                   <th scope="col">Reps / Temps</th>
@@ -200,12 +206,29 @@ function Dashboard() {
                                                     <td style={tdStyle(indexExercice)} className="dashboard-td">
                                                         {exercice.exercice.name==="own-exercice" ? exercice.exercice.ownExercice : exercice.exercice.name}
                                                     </td>
+                                                    {exercice.Categories ?
+                                                        Object.values(exercice.Categories).map((categorie,index) => {
+                                                            return (
+                                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                    {categorie.input}
+                                                                </td>
+                                                            )
+                                                        })
+                                                    :
+                                                        categoriesAddRien.map(rien => {
+                                                            return(
+                                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                /
+                                                                </td>
+                                                            )
+                                                        })
+                                                    }
                                                     <td style={tdStyle(indexExercice)} className="dashboard-td">
                                                         {serie.num+1}
                                                     </td>
                                                     <td style={tdStyle(indexExercice)} className="dashboard-td">
                                                         {serie.typeSerie==="reps" ? "Répétitions" : null}
-                                                        {serie.typeSerie==="time" ? "Temps (secondes)" : null}
+                                                        {serie.typeSerie==="time" ? "Temps (sec)" : null}
                                                     </td>
                                                     <td style={tdStyle(indexExercice)} className="dashboard-td">
                                                         {serie.repsTime}

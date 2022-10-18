@@ -43,24 +43,30 @@ function ExerciceInput(props) {
 
   return (
     <div>
-          <div className="form-group row">
-            <label onClick={handleClickLabel} className="col-sm-2 col-form-label exercice-label">
-              Exercice {props.num+1}
-              {props.clickExercice ?
-                <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
-              :
-                <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
-              }
-            </label>
-            <div className="col-sm-9">
-                <select onChange={handleChange} className="custom-select col-sm-10" id="name">
-                    {lesExercices.map(createEntry)}
-                </select>
-            </div>
-            <div className="col-sm-1 poubelle-div">
-              <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-            </div>
-          </div>
+        {props.taille === "petit" ?
+            <select onChange={handleChange} className="custom-select col-sm-10" id="name">
+                {lesExercices.map(createEntry)}
+            </select>
+        :
+              <div className="form-group row">
+                <label onClick={handleClickLabel} className="col-sm-2 col-form-label exercice-label">
+                  Exercice {props.num+1}
+                  {props.clickExercice ?
+                    <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                  :
+                    <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                  }
+                </label>
+                <div className="col-sm-9">
+                    <select onChange={handleChange} className="custom-select col-sm-10" id="name">
+                        {lesExercices.map(createEntry)}
+                    </select>
+                </div>
+                <div className="col-sm-1 poubelle-div">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>
+              </div>
+        }
 
           {exercice.name === "Elevation" ?
             <div className="form-group row">

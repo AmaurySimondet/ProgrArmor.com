@@ -133,6 +133,12 @@ const executionSpecifique = [
     name: "'Australienne'",
     value: "'Australienne'",
   },
+  {
+    id: 43,
+    class: "select-item",
+    name: "'Baby'",
+    value: "'Baby'",
+  },
 {
     id: 22,
     class: "select-item",

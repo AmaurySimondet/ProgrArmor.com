@@ -20,7 +20,6 @@ function DateInput(props) {
                   value={date}
                   onChange={handleChange}
                   id="date"
-                  autoFocus
               />
             </div>
           </div>

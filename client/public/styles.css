@@ -280,6 +280,14 @@ table.profile-table{
 
 }
 
+@media (max-width: 740px){
+    .slider-style span{
+        margin-left:20px;
+
+    }
+
+}
+
 /* HOME HEADER*/
 
 .navbar-elements{

@@ -570,7 +570,7 @@ function CategorieInput(props) {
             </div>
             :
             <div>
-                <div className="form-group row">
+                <div className="form-group row slider-style">
                     <label className="col-sm-2 col-form-label">
                       Etirement (mètres)
                     </label>
@@ -587,6 +587,7 @@ function CategorieInput(props) {
                         aria-labelledby="discrete-slider-custom"
                         step={0.5}
                         max={9}
+                        min={0.5}
                         valueLabelDisplay="auto"
                         marks={marks}
                     />
