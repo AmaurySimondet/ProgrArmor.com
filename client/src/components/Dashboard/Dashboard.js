@@ -3,19 +3,102 @@ import { Button } from "react-bootstrap";
 import NavigBar from "../NavigBar.jsx"
 import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
+import Slider from '@mui/material/Slider';
+import { alpha, styled } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
+import StreetworkoutHiddenText from "./Categories/StreetworkoutHiddenText.js";
+import CategorieHiddenText from "./Categories/CategorieHiddenText.js";
+import ElastiqueHiddenText from "./Categories/ElastiqueHiddenText.js";
+
+const StyleSlider = styled(Slider)(({ theme }) => ({
+  '& .MuiSlider-thumb': {
+    color: red['A700'],
+  },
+  '& .MuiSlider-thumb:hover': {
+    color: red['A400'],
+  },
+  '& .MuiSlider-dragging': {
+    backgroundColor: red['A700'],
+  },
+  '& .MuiSlider-rail': {
+    backgroundColor: red['A700'],
+  },
+  '& .MuiSlider-track': {
+    backgroundColor: red['A700'],
+  },
+  '& .MuiSlider-mark': {
+    backgroundColor: red['A700'],
+  },
+}));
+
+const marks = [
+  {
+    value: 0,
+    label: '0',
+  },
+  {
+    value: 1,
+    label: '1',
+  },
+  {
+    value: 2,
+    label: '2',
+  },
+  {
+    value: 3,
+    label: '3',
+  },
+  {
+    value: 4,
+    label: '4',
+  },
+  {
+    value: 5,
+    label: '5',
+  },
+
+];
+
+function valuetext(value) {
+  return `${value}`;
+
+}
 
 function Dashboard() {
     const [seances, setSeances] = useState([]);
     const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
     const [params, setParams] = useState({periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
-    const categoriesAddRien = ["rien","rien","rien"]
+    const [categorieNumb, setCategorieNumb] = useState(0)
+    const [detailNumb, setDetailNumb] = useState(0)
+    const [categoriesAddRien, setCategoriesAddRien] = useState([])
+    const [detailsAddRien, setDetailsAddRien] = useState([])
+
+    function handleChangeSliderCategorie(event){
+        setCategorieNumb(event.target.value);
+        let arr = [];
+        for(let i=0; i<event.target.value; i++){
+            arr.push("rien");
+        };
+        setCategoriesAddRien(arr);
+
+    }
+
+    function handleChangeSliderDetail(event){
+        setDetailNumb(event.target.value);
+        let arr = [];
+        for(let i=0; i<event.target.value; i++){
+            arr.push("rien");
+        };
+        setDetailsAddRien(arr);
+
+    }
 
   async function getWorkouts(){
     const {data} = await API.workouts(params);
     if (data.success === false){
         alert(data.message);
     } else {
-        console.log(data.seances);
+//        console.log(data.seances);
         setSeances(data.seances);
     }
   }
@@ -35,20 +118,6 @@ function Dashboard() {
         })
     });
   }
-
-//  useEffect(()=>{
-//    console.log(params);
-//    let string = "";
-//    let keyArray = [];
-//    Object.keys(params).forEach(key => {keyArray.push(key)});
-//    Object.values(params).forEach((param,index) => {
-//        string = string + keyArray[index] + "=" + param
-//        if (index !== (Object.values(params).length-1)){
-//            string = string + "&"
-//        };
-//    })
-//    console.log(string);
-//  },[params]);
 
     function changeExercice(exercice){
         setExercice(oldExercice => {
@@ -110,7 +179,7 @@ function Dashboard() {
                     <label className="col-sm-1 col-form-label">
                       Tri
                     </label>
-                    <div className="col-sm-6">
+                    <div className="col-sm-5">
                         <select onChange={handleChange} className="custom-select col-sm-10" id="tri">
                             <option value="Ordre chronologique décroissant"> Ordre chronologique décroissant (défaut) </option>
                             <option value="Ordre chronologique croissant"> Ordre chronologique croissant </option>
@@ -122,7 +191,7 @@ function Dashboard() {
                     <label className="col-sm-1 col-form-label">
                       Periode
                     </label>
-                    <div className="col-sm-3">
+                    <div className="col-sm-5">
                         <select onChange={handleChange} className="custom-select col-sm-10" id="periode">
                             <option value="max"> Max (défaut) </option>
                             <option value="7d"> 7 derniers jours </option>
@@ -138,35 +207,80 @@ function Dashboard() {
                     <label className="col-sm-1 col-form-label">
                       Exercice
                     </label>
-                    <div className="col-sm-6">
+                    <div className="col-sm-5">
                         <ExerciceInput taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
                     </div>
 
                     <label className="col-sm-1 col-form-label">
                       Reps / Temps
                     </label>
-                    <div className="col-sm-1">
-                        <input type="text"
-                          className="form-control"
-                          value={params.repsFrom}
-                          onChange={handleChange}
-                          placeholder="Aucun filtre"
-                          id="repsFrom"
-                        />
-                    </div>
+                        <div className="col-sm-2">
+                            <input type="text"
+                              className="form-control"
+                              value={params.repsFrom}
+                              onChange={handleChange}
+                              placeholder="Aucun filtre"
+                              id="repsFrom"
+                            />
+                        </div>
+                        <label className="">
+                          à
+                        </label>
+                        <div className="col-sm-2">
+                            <input type="text"
+                              className="form-control"
+                              value={params.repsTo}
+                              onChange={handleChange}
+                              placeholder="Aucun filtre"
+                              id="repsTo"
+                            />
+                        </div>
+                </div>
+
+                <div className="form-group row slider-style">
                     <label className="col-sm-1 col-form-label">
-                      à
+                      Nombre de catégories
                     </label>
-                    <div className="col-sm-1">
-                        <input type="text"
-                          className="form-control"
-                          value={params.repsTo}
-                          onChange={handleChange}
-                          placeholder="Aucun filtre"
-                          id="repsTo"
+                    <div className="col-sm-5">
+                        <StyleSlider
+                            style={
+                            {
+                                width: "70%",
+                            }
+                            }
+                            defaultValue={0}
+                            onChange={handleChangeSliderCategorie}
+                            getAriaValueText={valuetext}
+                            aria-labelledby="discrete-slider-custom"
+                            step={1}
+                            max={5}
+                            min={0}
+                            valueLabelDisplay="auto"
+                            marks={marks}
                         />
                     </div>
 
+                    <label className="col-sm-1 col-form-label">
+                      Nombre de détails
+                    </label>
+                    <div className="col-sm-5">
+                        <StyleSlider
+                            style={
+                            {
+                                width: "70%",
+                            }
+                            }
+                            defaultValue={0}
+                            onChange={handleChangeSliderDetail}
+                            getAriaValueText={valuetext}
+                            aria-labelledby="discrete-slider-custom"
+                            step={1}
+                            max={5}
+                            min={0}
+                            valueLabelDisplay="auto"
+                            marks={marks}
+                        />
+                    </div>
                 </div>
             </form>
 
@@ -178,14 +292,17 @@ function Dashboard() {
                   <th scope="col">Date </th>
                   <th scope="col">Poids</th>
                   <th scope="col">Exercice</th>
-                  <th scope="col">Categorie</th>
-                  <th scope="col">Categorie</th>
-                  <th scope="col">Categorie</th>
+                  {categoriesAddRien.map(rien => {
+                    return <th scope="col">Categorie</th>
+                  })}
                   <th scope="col">Série</th>
                   <th scope="col">Type</th>
                   <th scope="col">Reps / Temps</th>
                   <th scope="col">Charge</th>
                   <th scope="col">% PDC</th>
+                  {detailsAddRien.map(rien => {
+                    return <th scope="col">Detail</th>
+                  })}
                 </tr>
               </thead>
               <tbody>
@@ -206,23 +323,22 @@ function Dashboard() {
                                                     <td style={tdStyle(indexExercice)} className="dashboard-td">
                                                         {exercice.exercice.name==="own-exercice" ? exercice.exercice.ownExercice : exercice.exercice.name}
                                                     </td>
-                                                    {exercice.Categories ?
-                                                        Object.values(exercice.Categories).map((categorie,index) => {
-                                                            return (
+                                                    {categoriesAddRien.map((rien,index) => {
+                                                        console.log(exercice.Categories)
+                                                        if (Object.values(exercice.Categories)[index].input){
+                                                            return(
                                                                 <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                                    {categorie.input}
+                                                                     {Object.values(exercice.Categories)[index].input}
                                                                 </td>
                                                             )
-                                                        })
-                                                    :
-                                                        categoriesAddRien.map(rien => {
+                                                        } else{
                                                             return(
                                                                 <td style={tdStyle(indexExercice)} className="dashboard-td">
                                                                 /
                                                                 </td>
                                                             )
-                                                        })
-                                                    }
+                                                        }
+                                                    })}
                                                     <td style={tdStyle(indexExercice)} className="dashboard-td">
                                                         {serie.num+1}
                                                     </td>

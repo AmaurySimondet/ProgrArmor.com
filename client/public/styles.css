@@ -254,6 +254,12 @@ table.profile-table{
 
 }
 
+.slider-style span{
+    margin-left:5px;
+
+}
+
+
 /* SESSION EXPERT */
 
 .Aucune{
@@ -281,7 +287,7 @@ table.profile-table{
 }
 
 @media (max-width: 740px){
-    .slider-style span{
+    .Categorie .slider-style span{
         margin-left:20px;
 
     }

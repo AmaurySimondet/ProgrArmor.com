@@ -172,7 +172,7 @@ function CategorieInput(props) {
   }
 
   return (
-  <div style={divStyle(props.num)}>
+  <div style={divStyle(props.num)} className="Categorie">
 
     {categorie.name ?
         null
