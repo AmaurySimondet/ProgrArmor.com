@@ -23,7 +23,7 @@ function EchauffementInput(props){
     const [clickExercice, setClickExercice] = useState(false);
 
   function handleClickExercice(){
-    setClickExercice(!clickExercice);
+    setClickExercice(true);
 
   }
 

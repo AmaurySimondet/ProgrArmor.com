@@ -18,15 +18,15 @@ function ExpertForm() {
   const [clickDetails, setClickDetails] = useState(false);
 
   function handleClickEchauffement(){
-    setClickEchauffement(!clickEchauffement);
+    setClickEchauffement(true);
   }
 
   function handleClickExercices(){
-    setClickExercices(!clickExercices);
+    setClickExercices(true);
   }
 
   function handleClickDetails(){
-    setClickDetails(!clickDetails);
+    setClickDetails(true);
   }
 
   async function handleClick() {
