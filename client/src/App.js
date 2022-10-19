@@ -4,6 +4,8 @@ import Dashboard from "./components/Dashboard/Dashboard.js";
 import Inscription from "./components/Inscription";
 import Connexion from "./components/Connexion";
 import CGU from "./components/CGU";
+
+import Stats from "./components/Dashboard/Stats";
 import PrivateRoute from "./components/PrivateRoute.js";
 import Travaux from "./components/Dashboard/Travaux";
 import Session from "./components/Dashboard/Session";
@@ -23,7 +25,7 @@ function App() {
             </Route>
 
             <Route path="/stats/*" element={<PrivateRoute/>}>
-                <Route exact path='/stats/*' element={<Travaux/>}/>
+                <Route exact path='/stats/*' element={<Stats/>}/>
             </Route>
 
             <Route path="/programme/*" element={<PrivateRoute/>}>

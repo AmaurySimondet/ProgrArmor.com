@@ -557,6 +557,10 @@ async function workouts(req, res) {
 
                     }
 
+                    if(req.query.reforme==="true"){
+                        seances = seancesToPerformances(seances)
+                    }
+
                     res.json({ success: true, message: "Utilisateur trouvé !", seances: seances})
                 }
           });

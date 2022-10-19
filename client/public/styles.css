@@ -220,6 +220,23 @@ table.profile-table{
 
 }
 
+/* STATS */
+table.Stats-table{
+    table-layout: fixed;
+    width:100%;
+}
+
+.chart-poids{
+    margin:4%;
+    text-align: center;
+
+}
+
+.Stats-div h1{
+    margin-bottom: 20px;
+
+}
+
 /* DASHBOARD */
 
 .dashboard-table{
