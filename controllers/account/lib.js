@@ -410,22 +410,43 @@ async function workouts(req, res) {
                     }
 
                     //TRI CATEGORIE
-                    if (req.query.categorie0name && req.query.categorie0name !== "title" && req.query.categorie0name !== "" && req.query.categorie0name !== "undefined"){
-                        if (req.query.categorie0name !== "Elastique"){
-                            seances.map((seance,indexSeance) => {
-                                return (seance.exercices.map((exercice, indexExercice) => {
-                                    if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
-                                        return(Object.values(exercice.Categories).map((categorie, indexCategorie) => {
-                                            if (indexCategorie === 0){
-                                                if (categorie.name !== req.query.categorie0name || categorie.input !== req.query.categorie0input){
-                                                    delete seances[indexSeance].exercices[indexExercice]
+                    for(let i=0; i<5; i++){
+                        let catName = "categorie"+i+"name";
+                        let catInput = "categorie"+i+"input";
+                        if (req.query[catName] && req.query[catName] !== "title" && req.query[catName] !== "" && req.query[catName] !== "undefined"){
+                            if (req.query[catName] !== "Elastique"){
+                                seances.map((seance,indexSeance) => {
+                                    return (seance.exercices.map((exercice, indexExercice) => {
+                                        if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
+                                            return(Object.values(exercice.Categories).map((categorie, indexCategorie) => {
+                                                if (indexCategorie === i){
+                                                    if (categorie.name !== req.query[catName] || categorie.input !== req.query[catInput]){
+                                                        delete seances[indexSeance].exercices[indexExercice]
+                                                    }
                                                 }
-                                            }
-                                        }))
-                                    }
-                                    else{ delete seances[indexSeance].exercices[indexExercice] }
-                                }))
-                            })
+                                            }))
+                                        }
+                                        else{ delete seances[indexSeance].exercices[indexExercice] }
+                                    }))
+                                })
+                            }
+                            else{
+                                let catUtilisation = "categorie"+i+"utilisation";
+                                seances.map((seance,indexSeance) => {
+                                    return (seance.exercices.map((exercice, indexExercice) => {
+                                        if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
+                                            return(Object.values(exercice.Categories).map((categorie, indexCategorie) => {
+                                                if (indexCategorie === i){
+                                                    if (categorie.name !== req.query[catName] || categorie.utilisation !== req.query[catUtilisation]){
+                                                        delete seances[indexSeance].exercices[indexExercice]
+                                                    }
+                                                }
+                                            }))
+                                        }
+                                        else{ delete seances[indexSeance].exercices[indexExercice] }
+                                    }))
+                                })
+                            }
                         }
                     }
 

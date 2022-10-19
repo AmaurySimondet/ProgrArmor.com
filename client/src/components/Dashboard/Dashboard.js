@@ -543,11 +543,20 @@ function Dashboard() {
                                                     {categoriesAddRien.map((rien,index) => {
                                                         if (exercice.Categories){
                                                             if (Object.values(exercice.Categories)[index]){
-                                                                return(
-                                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                                         {Object.values(exercice.Categories)[index].input}
-                                                                    </td>
-                                                                )
+                                                                if (Object.values(exercice.Categories)[index].name === "Elastique"){
+                                                                    return(
+                                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                             Elastique en {Object.values(exercice.Categories)[index].utilisation} estimé à {Object.values(exercice.Categories)[index].estimation} kg
+                                                                        </td>
+                                                                    )
+                                                                }
+                                                                else{
+                                                                    return(
+                                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                             {Object.values(exercice.Categories)[index].input}
+                                                                        </td>
+                                                                    )
+                                                                }
                                                             }
                                                             else{
                                                                 return(
