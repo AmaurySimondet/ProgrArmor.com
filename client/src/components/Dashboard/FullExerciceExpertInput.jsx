@@ -138,7 +138,6 @@ function FullExerciceInput(props){
                             key={index}
                             num={index}
                             exercice={fullExercice.exercice}
-                            onAddCategorie={onAddCategorie}
                             changeCategorie={changeCategorie}
                             onDeleteCategorie={onDeleteCategorie}
                           />

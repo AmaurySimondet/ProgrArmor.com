@@ -245,7 +245,7 @@ const categories = [
     value: "RPE / Niveau d'intensité",
   },
   {
-    id: 35,
+    id: 36,
     class: "select-item",
     name: "Gêne / douleur / blessure",
     value: "Gêne / douleur / blessure",

@@ -239,6 +239,22 @@ table.profile-table{
 
 }
 
+.Dashboard h2{
+    margin: 5% 0;
+
+}
+
+
+.Dashboard input[type="checkbox"]:checked {
+    accent-color: #9b0000;
+
+}
+
+.Dashboard input[type="checkbox"] {
+    margin: 10px;
+
+}
+
 .Dashboard .exercice-label{
     display:none;
 

@@ -71,15 +71,16 @@ function DetailInput(props) {
     :
           <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
-                      Detail
+                      Detail {props.dashboard ? props.index+1 : null}
                 </label>
                 <select onChange={handleChange} className="custom-select col-sm-9" id="name">
                     {Details.map(createEntry)}
                 </select>
 
-                <div className="col-sm-1">
+
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>
+                </div>}
           </div>
       }
 
@@ -92,9 +93,9 @@ function DetailInput(props) {
                     {Meteo.map(createEntry)}
                 </select>
 
-                <div className="col-sm-1">
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>
+                </div>}
             </div>
       : null }
       {detail.name === "Gêne / douleur / blessure" ?
@@ -106,9 +107,9 @@ function DetailInput(props) {
                     {DouleurSeance.map(createEntry)}
                 </select>
 
-                <div className="col-sm-1">
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>
+                </div>}
             </div>
       : null }
       {detail.name === "Fatigue" ?
@@ -120,9 +121,9 @@ function DetailInput(props) {
                     {Fatigue.map(createEntry)}
                 </select>
 
-                <div className="col-sm-1">
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>
+                </div>}
             </div>
       : null }
       {detail.name === "Pre Workout, Café..." ?
@@ -134,9 +135,9 @@ function DetailInput(props) {
                     {Preworkout.map(createEntry)}
                 </select>
 
-                <div className="col-sm-1">
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>
+                </div>}
             </div>
       : null }
       {detail.name === "Alcool, drogue, sexe..." ?
@@ -148,9 +149,9 @@ function DetailInput(props) {
                     {DRUG.map(createEntry)}
                 </select>
 
-                <div className="col-sm-1">
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>
+                </div>}
             </div>
       : null }
       {detail.name === "Etat psychologique" ?
@@ -162,9 +163,9 @@ function DetailInput(props) {
                     {Psycho.map(createEntry)}
                 </select>
 
-                <div className="col-sm-1">
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>
+                </div>}
             </div>
       : null }
       {detail.name === "Séance seul ou à plusieurs" ?
@@ -176,9 +177,9 @@ function DetailInput(props) {
                     {Seul.map(createEntry)}
                 </select>
 
-                <div className="col-sm-1">
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>
+                </div>}
             </div>
       : null }
       {detail.name === "Environnement" ?
@@ -190,9 +191,9 @@ function DetailInput(props) {
                     {Environnement.map(createEntry)}
                 </select>
 
-                <div className="col-sm-1">
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>
+                </div>}
             </div>
       : null }
       {detail.name === "Courbatures / Congestion" ?
@@ -204,9 +205,9 @@ function DetailInput(props) {
                     {Courbatures.map(createEntry)}
                 </select>
 
-                <div className="col-sm-1">
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>
+                </div>}
             </div>
       : null }
       {detail.name === "Notes" ?
@@ -225,9 +226,9 @@ function DetailInput(props) {
                     />
                 </div>
 
-                <div className="col-sm-1">
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>
+                </div>}
             </div>
       : null }
   </div>

@@ -44,7 +44,7 @@ function ExerciceInput(props) {
   return (
     <div>
         {props.taille === "petit" ?
-            <select onChange={handleChange} className="custom-select col-sm-10" id="name">
+            <select onChange={handleChange} className="form-control" id="name">
                 {lesExercices.map(createEntry)}
             </select>
         :
