@@ -226,6 +226,13 @@ table.Stats-table{
     width:100%;
 }
 
+.stats-form{
+    width:80%;
+    margin:auto;
+
+
+}
+
 .chart-poids{
     margin:4%;
     text-align: center;
@@ -337,6 +344,7 @@ table.Stats-table{
 .navbar-elements{
     position: absolute;
     right: 1%;
+    z-index: 2;
 }
 
 .bg-light{
@@ -472,7 +480,7 @@ table.connexion-table td.connexion-img-td {
     height: 350px;
     border-radius: 25px;
     top: 0;
-    z-index: 0;
+    z-index: 1;
     position: absolute;
     right: 15px;
 }

@@ -557,6 +557,7 @@ async function workouts(req, res) {
 
                     }
 
+                    //REFORME
                     if(req.query.reforme==="true"){
                         seances = seancesToPerformances(seances)
                     }

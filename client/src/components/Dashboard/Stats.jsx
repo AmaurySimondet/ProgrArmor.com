@@ -1,7 +1,8 @@
 import {React, useState, useEffect} from "react";
 import NavigBar from "../NavigBar.jsx"
-import {LineChart, XAxis, Tooltip, CartesianGrid, Line, ResponsiveContainer } from 'recharts'
+import {LineChart, YAxis, XAxis, Tooltip, CartesianGrid, Line, ResponsiveContainer } from 'recharts'
 import API from "../../utils/API";
+import ExerciceInput from "./ExerciceInput"
 
 const data = [
   { name: 'Page A', uv: 1000, pv: 2400, amt: 2400, uvError: [75, 20] },
@@ -19,7 +20,8 @@ const data = [
 function Stats() {
     const [seances1, setSeances1] = useState([]);
     const [seances2, setSeances2] = useState([]);
-    const [params, setParams] = useState({})
+    const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
+    const [params, setParams] = useState({reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
 
       const [dimensions, setDimensions] = useState({
             height: window.innerHeight,
@@ -128,11 +130,10 @@ function Stats() {
             delete params.details
         }
 
-        const {data} = await API.workouts({reforme:"true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "Developpé couché", exerciceOwnExercice: ""});
+        const {data} = await API.workouts(params);
         if (data.success === false){
             alert(data.message);
         } else {
-            console.log(data.seances);
             setSeances2(data.seances);
         }
     }
@@ -142,6 +143,26 @@ function Stats() {
         setTimeout(getSeance1, 50);
         setTimeout(getSeance2, 50);
     }, [params]);
+
+
+    function changeExercice(exercice){
+        setExercice(oldExercice => {
+            return ({
+                ...oldExercice,
+                exercice: exercice,
+            });
+        });
+    }
+
+    useEffect(() => {
+        setParams(oldParams => {
+            return ({
+                ...oldParams,
+                exerciceName: exercice.exercice.name,
+                exerciceOwnExercice: exercice.exercice.ownExercice,
+            })
+        })
+    },[exercice]);
 
     return (
         <div>
@@ -162,10 +183,10 @@ function Stats() {
                                             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
                                         >
                                             <XAxis dataKey="date" />
+                                            <YAxis />
                                             <Tooltip />
                                             <CartesianGrid stroke="#f5f5f5" />
-                                            <Line type="monotone" dataKey="poids" stroke="#ff7300" yAxisId={0} />
-                                            <Line type="monotone" dataKey="nom.ancienNom" stroke="#387908" yAxisId={1} />
+                                            <Line type="monotone" dataKey="poids" stroke="#9b0000" />
                                         </LineChart>
                                     </ResponsiveContainer >
                                 </div>
@@ -173,6 +194,16 @@ function Stats() {
                             <td>
                                 <div className="chart-poids">
                                     <h1> Evolution de tes performances </h1>
+
+                                    <div className="form-group row stats-form">
+                                        <div className="form-group col-sm-12">
+                                            <label className="col-form-label">
+                                              Exercice
+                                            </label>
+                                            <ExerciceInput taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                                        </div>
+                                    </div>
+
                                     <ResponsiveContainer width="100%" height={400}>
                                         <LineChart
                                             width={400}
@@ -181,10 +212,10 @@ function Stats() {
                                             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
                                         >
                                             <XAxis dataKey="date" />
+                                            <YAxis domain={[0, 200]} />
                                             <Tooltip />
                                             <CartesianGrid stroke="#f5f5f5" />
-                                            <Line type="monotone" dataKey="exercices[0].Series[0].charge" stroke="#ff7300" yAxisId={0} />
-                                            <Line type="monotone" dataKey="exercices[0].exercice.name" stroke="#387908" yAxisId={1} />
+                                            <Line type="monotone" dataKey="exercices[0].Series[0].charge" stroke="#9b0000" />
                                         </LineChart>
                                     </ResponsiveContainer >
                                 </div>
