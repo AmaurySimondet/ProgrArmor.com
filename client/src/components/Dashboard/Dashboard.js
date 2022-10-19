@@ -159,6 +159,10 @@ function Dashboard() {
     getCategories();
   }, [] );
 
+  useEffect(() => {
+    console.log(params);
+  }, [params])
+
   function handleChange(event){
     event.preventDefault();
 
@@ -236,7 +240,31 @@ function Dashboard() {
         setCategories([...otherThanSelected, categorie]);
     }
 
-    useEffect(() => {console.log(categories)}, [categories]);
+    useEffect(() => {
+        setParams(oldParams => {
+            return ({
+                ...oldParams,
+                categories: categories
+            })
+        })
+    },[categories]);
+
+    useEffect(() => {
+        setParams(oldParams => {
+            return ({
+                ...oldParams,
+                details: details
+            })
+        })
+    },[details]);
+
+    function changeDetail(detail, num){
+        const otherThanSelected =  categories.filter((detail, index) => {
+            return detail.num!==(num)
+        });
+
+        setDetails([...otherThanSelected, detail]);
+    }
 
   return (
       <div>
@@ -310,7 +338,6 @@ function Dashboard() {
                 </div>
 
                 {categoriesAddRien.map((rien, index) => {
-                    console.log(index)
                     return(
                         <div className="form-group row">
                             <div className="form-group col-sm-12">
@@ -330,7 +357,7 @@ function Dashboard() {
                                 <label className="col-form-label">
                                   Détail {index+1}
                                 </label>
-                                <DetailInput id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={()=>{return null}} changeDetail={handleChangeDetail}/>
+                                <DetailInput id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
                             </div>
                         </div>
                     )
