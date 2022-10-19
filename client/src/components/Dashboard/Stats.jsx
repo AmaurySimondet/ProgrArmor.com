@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from "react";
 import NavigBar from "../NavigBar.jsx"
-import {LineChart, YAxis, XAxis, Tooltip, CartesianGrid, Line, ResponsiveContainer } from 'recharts'
+import {LineChart, YAxis, XAxis, Tooltip, CartesianGrid, Line, ResponsiveContainer, Bar, ComposedChart} from 'recharts'
 import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
 
@@ -205,7 +205,7 @@ function Stats() {
                                     </div>
 
                                     <ResponsiveContainer width="100%" height={400}>
-                                        <LineChart
+                                        <ComposedChart
                                             width={400}
                                             height={400}
                                             data={seances2}
@@ -215,8 +215,9 @@ function Stats() {
                                             <YAxis domain={[0, 200]} />
                                             <Tooltip />
                                             <CartesianGrid stroke="#f5f5f5" />
+                                            <Bar barSize={20} fill="black" dataKey="exercices[0].Series[0].repsTime" />
                                             <Line type="monotone" dataKey="exercices[0].Series[0].charge" stroke="#9b0000" />
-                                        </LineChart>
+                                        </ComposedChart>
                                     </ResponsiveContainer >
                                 </div>
                             </td>

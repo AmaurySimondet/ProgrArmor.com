@@ -344,7 +344,6 @@ table.Stats-table{
 .navbar-elements{
     position: absolute;
     right: 1%;
-    z-index: 2;
 }
 
 .bg-light{
@@ -506,7 +505,7 @@ table.connexion-table td.connexion-img-td {
 
 .navigbar{
     padding-top:0;
-    z-index:1;
+    z-index:2;
 }
 
 .param-choice-toggle{
