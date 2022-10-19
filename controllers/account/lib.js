@@ -386,6 +386,7 @@ async function workouts(req, res) {
                 }
                 else{
                     let seances = data[0].seances;
+                    console.log(req.query)
 
                     //TRI EXERCICE
                     if (req.query.exerciceName !== "title" && req.query.exerciceName !== ""){
@@ -403,6 +404,26 @@ async function workouts(req, res) {
                                         if (req.query.exerciceOwnExercice !== exercice.exercice.ownExercice){
                                             delete seances[indexSeance].exercices[indexExercice]
                                         }
+                                }))
+                            })
+                        }
+                    }
+
+                    //TRI CATEGORIE
+                    if (req.query.categorie0name && req.query.categorie0name !== "title" && req.query.categorie0name !== "" && req.query.categorie0name !== "undefined"){
+                        if (req.query.categorie0name !== "Elastique"){
+                            seances.map((seance,indexSeance) => {
+                                return (seance.exercices.map((exercice, indexExercice) => {
+                                    if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
+                                        return(Object.values(exercice.Categories).map((categorie, indexCategorie) => {
+                                            if (indexCategorie === 0){
+                                                if (categorie.name !== req.query.categorie0name || categorie.input !== req.query.categorie0input){
+                                                    delete seances[indexSeance].exercices[indexExercice]
+                                                }
+                                            }
+                                        }))
+                                    }
+                                    else{ delete seances[indexSeance].exercices[indexExercice] }
                                 }))
                             })
                         }

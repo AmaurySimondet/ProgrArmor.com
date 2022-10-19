@@ -100,11 +100,49 @@ function Dashboard() {
     }
 
   async function getWorkouts(){
+    if (params.categories){
+        params.categories.forEach((categorie, index) => {
+            if(categorie.name==="Elastique"){
+                setParams(oldParams => {
+                    return ({
+                        ...oldParams,
+                        ["categorie"+index+"name"]: categorie.name,
+                        ["categorie"+index+"utilisation"]: categorie.utilisation,
+                        ["categorie"+index+"input"]: categorie.input,
+                        ["categorie"+index+"estimation"]: categorie.estimation,
+                    })
+                });
+            }
+            else {
+                setParams(oldParams => {
+                    return ({
+                        ...oldParams,
+                        ["categorie"+index+"name"]: categorie.name,
+                        ["categorie"+index+"input"]: categorie.input,
+                    })
+                });
+            }
+        })
+        delete params.categories
+    }
+    if (params.details){
+        params.details.forEach((detail, index) => {
+            setParams(oldParams => {
+                return ({
+                    ...oldParams,
+                    ["detail"+index+"name"]: detail.name,
+                    ["detail"+index+"input"]: detail.input,
+                })
+            });
+        })
+        delete params.details
+    }
+
     const {data} = await API.workouts(params);
     if (data.success === false){
         alert(data.message);
     } else {
-//        console.log(data.seances);
+        console.log(data.seances);
         setSeances(data.seances);
     }
   }
@@ -134,34 +172,9 @@ function Dashboard() {
     }
   }
 
-  async function getCategories(){
-    const {data} = await API.workouts({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
-    if (data.success === false){
-        alert(data.message);
-    } else {
-        let arr = []
-        data.seances.forEach((seance, index) => {
-            if (seance.nom){
-                if (seance.nom.ancienNom !== "nouveau-nom"){
-                    arr.push(seance.nom.ancienNom)
-                }
-                else{
-                    arr.push(seance.nom.nouveauNom)
-                }
-            }
-        })
-        setListeNoms(arr);
-    }
-  }
-
   useEffect(() => {
     getNames();
-    getCategories();
   }, [] );
-
-  useEffect(() => {
-    console.log(params);
-  }, [params])
 
   function handleChange(event){
     event.preventDefault();
@@ -259,7 +272,7 @@ function Dashboard() {
     },[details]);
 
     function changeDetail(detail, num){
-        const otherThanSelected =  categories.filter((detail, index) => {
+        const otherThanSelected =  details.filter((detail, index) => {
             return detail.num!==(num)
         });
 
