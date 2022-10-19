@@ -161,10 +161,14 @@ function Dashboard() {
         data.seances.forEach((seance, index) => {
             if (seance.nom){
                 if (seance.nom.ancienNom !== "nouveau-nom"){
-                    arr.push(seance.nom.ancienNom)
+                    if (!arr.includes(seance.nom.ancienNom)){
+                        arr.push(seance.nom.ancienNom)
+                    }
                 }
                 else{
-                    arr.push(seance.nom.nouveauNom)
+                    if (!arr.includes(seance.nom.nouveauNom)){
+                        arr.push(seance.nom.nouveauNom)
+                    }
                 }
             }
         })

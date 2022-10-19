@@ -1,9 +1,10 @@
 import {React, useState, useEffect} from "react";
 import Select from "./Select";
+import API from "../../utils/API";
 
 function NameInput(props) {
   const [nom, setNom] = useState({});
-  const anciensNoms = [{ancienNom: "ancien-nom", nouveauNom: "Force bas du corps"}, {ancienNom: "ancien-nom", nouveauNom: "Freestyle haut du corps"}];
+  const [listeNoms, setListeNoms] = useState([]);
 
   function handleChange(event){
     event.preventDefault();
@@ -19,6 +20,34 @@ function NameInput(props) {
     props.changeName(nom);
   }, [nom]);
 
+  async function getNames(){
+    const {data} = await API.workouts({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
+    if (data.success === false){
+        alert(data.message);
+    } else {
+        let arr = []
+        data.seances.forEach((seance, index) => {
+            if (seance.nom){
+                if (seance.nom.ancienNom !== "nouveau-nom"){
+                    if (!arr.includes(seance.nom.ancienNom)){
+                        arr.push(seance.nom.ancienNom)
+                    }
+                }
+                else{
+                    if (!arr.includes(seance.nom.nouveauNom)){
+                        arr.push(seance.nom.nouveauNom)
+                    }
+                }
+            }
+        })
+        setListeNoms(arr);
+    }
+  }
+
+  useEffect(() => {
+    getNames();
+  }, [] );
+
   return (
     <div>
           <div className="form-group row">
@@ -28,8 +57,8 @@ function NameInput(props) {
             <div className="col-sm-10">
                 <select onChange={handleChange} className="custom-select col-sm-10" id="ancienNom">
                     <option value="title"> / (défaut) </option>
-                    {anciensNoms ? anciensNoms.map((nom,index) => {
-                        return <option key={index} value={nom.nouveauNom}> {nom.nouveauNom} </option>
+                    {listeNoms ? listeNoms.map((nom,index) => {
+                        return <option key={index} value={nom}> {nom} </option>
                     })
                     : null }
                     <option value="nouveau-nom"> Entrer un nouveau nom de séance... </option>
