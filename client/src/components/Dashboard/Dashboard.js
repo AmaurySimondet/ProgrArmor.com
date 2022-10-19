@@ -117,8 +117,8 @@ function Dashboard() {
                 setParams(oldParams => {
                     return ({
                         ...oldParams,
-                        ["categorie"+index+"name"]: categorie.name,
-                        ["categorie"+index+"input"]: categorie.input,
+                        ["categorie"+categorie.num+"name"]: categorie.name,
+                        ["categorie"+categorie.num+"input"]: categorie.input,
                     })
                 });
             }
@@ -130,8 +130,8 @@ function Dashboard() {
             setParams(oldParams => {
                 return ({
                     ...oldParams,
-                    ["detail"+index+"name"]: detail.name,
-                    ["detail"+index+"input"]: detail.input,
+                    ["detail"+detail.num+"name"]: detail.name,
+                    ["detail"+detail.num+"input"]: detail.input,
                 })
             });
         })
@@ -279,6 +279,14 @@ function Dashboard() {
         setDetails([...otherThanSelected, detail]);
     }
 
+    function resetParameters(){
+        event.preventDefault();
+
+        setDetails([])
+        setDetails([])
+        setParams({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
+    }
+
   return (
       <div>
           <NavigBar location="dashboard"/>
@@ -388,6 +396,10 @@ function Dashboard() {
                             })
                             : null }
                         </select>
+                    </div>
+
+                    <div className="form-group col-sm-3 button-dashboard">
+                        <button className="btn btn-dark form-button" onClick={resetParameters} type="submit">Reset des paramètres</button>
                     </div>
                 </div>
 

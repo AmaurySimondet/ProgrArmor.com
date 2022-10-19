@@ -450,6 +450,26 @@ async function workouts(req, res) {
                         }
                     }
 
+                    //TRI DETAIL
+                    for(let i=0; i<5; i++){
+                        let catName = "detail"+i+"name";
+                        let catInput = "detail"+i+"input";
+                        if (req.query[catName] && req.query[catName] !== "title" && req.query[catName] !== "" && req.query[catName] !== "undefined"){
+                            seances.map((seance,indexSeance) => {
+                                if(seance.details && Object.entries(seance.details).length !== 0){
+                                    return(seance.details.map((detail, indexDetail) => {
+                                        if (indexDetail === i){
+                                            if (detail.name !== req.query[catName] || detail.input !== req.query[catInput]){
+                                                delete seances[indexSeance]
+                                            }
+                                        }
+                                    }))
+                                }
+                                else{ delete seances[indexSeance] }
+                            })
+                        }
+                    }
+
                     //TRI REP RANGE
                     if (req.query.repsFrom !== ""){
                         seances.map((seance,indexSeance) => {

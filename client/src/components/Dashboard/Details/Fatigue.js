@@ -12,13 +12,13 @@ const fatigue = [
     value: "Manque de sommeil",
   },
   {
-    id: 2,
+    id: 3,
     class: "select-item",
     name: "J'avais des courbatures avant la séance",
     value: "J'avais des courbatures avant la séance",
   },
   {
-    id: 2,
+    id: 4,
     class: "select-item",
     name: "J'ai été rapidement essoufflé / manque d'endurance",
     value: "J'ai été rapidement essoufflé / manque d'endurance",
