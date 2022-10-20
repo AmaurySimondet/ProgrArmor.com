@@ -86,7 +86,7 @@ function Stats() {
         if (data.success === false){
             alert(data.message);
         } else {
-            console.log(data.seances);
+//            console.log(data.seances);
             setSeances1(data.seances);
         }
     }
@@ -135,6 +135,7 @@ function Stats() {
             alert(data.message);
         } else {
             setSeances2(data.seances);
+            console.log(data.seances);
         }
     }
 
@@ -186,7 +187,7 @@ function Stats() {
                                             <YAxis />
                                             <Tooltip />
                                             <CartesianGrid stroke="#f5f5f5" />
-                                            <Line type="monotone" dataKey="poids" stroke="#9b0000" />
+                                            <Line type="monotone" dataKey="poids" stroke="#ff0000" />
                                         </LineChart>
                                     </ResponsiveContainer >
                                 </div>
@@ -212,11 +213,11 @@ function Stats() {
                                             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
                                         >
                                             <XAxis dataKey="date" />
-                                            <YAxis domain={[0, 200]} />
+                                            <YAxis domain={[0, 300]} />
                                             <Tooltip />
                                             <CartesianGrid stroke="#f5f5f5" />
-                                            <Bar barSize={20} fill="black" dataKey="exercices[0].Series[0].repsTime" />
-                                            <Line type="monotone" dataKey="exercices[0].Series[0].charge" stroke="#9b0000" />
+                                            <Bar barSize={20} fill="#afafaf" dataKey="exercices[0].Series[0].repsTime" />
+                                            <Line type="monotone" dataKey="exercices[0].Series[0].charge" stroke="#ff0000" />
                                         </ComposedChart>
                                     </ResponsiveContainer >
                                 </div>

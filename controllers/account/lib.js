@@ -350,10 +350,13 @@ async function workouts(req, res) {
 
     }
 
-    function seancesToPerformances(seances){
+    function seancesToPerformances(seances, multiple){
         seances.map((seance,indexSeance) => {
             return (seance.exercices.map((exercice, indexExercice) => {
                     return (Object.values(exercice.Series).map((serie, index) => {
+                        if (multiple){
+                            seances[indexSeance].exercices[indexExercice].Series[index].repsTime = seances[indexSeance].exercices[indexExercice].Series[index].repsTime*multiple
+                        }
                         const obj = {
                             date: seance.date,
                             poids: seance.poids,
@@ -377,6 +380,22 @@ async function workouts(req, res) {
         })
         return seances;
     }
+
+    function removeEmpty(seance) {
+      return (
+          Object.fromEntries(Object.entries(seance).filter(([_, element]) => {
+            if (element[0]) {
+                if (element[0].Series) {
+                    return (element[0].Series != null && Object.entries(element[0].Series).length !== 0)
+                }
+            }
+          }))
+      )
+    }
+
+//    function removeEmpty2(arr) {
+//      return Object.fromEntries(Object.entries(seance).filter(([_, element]) => { Object.entries(element).length !== 0 }))
+//    }
 
     try {
        User.find(
@@ -559,7 +578,17 @@ async function workouts(req, res) {
 
                     //REFORME
                     if(req.query.reforme==="true"){
-                        seances = seancesToPerformances(seances)
+                        seances = seancesToPerformances(seances, 10);
+
+                        let arr = []
+                        seances.forEach(seance => {
+                            arr.push(removeEmpty(seance))
+                        });
+
+                        seances = arr.filter(element => {
+                            return Object.entries(element).length !== 0
+                        });
+
                     }
 
                     res.json({ success: true, message: "Utilisateur trouvé !", seances: seances})
