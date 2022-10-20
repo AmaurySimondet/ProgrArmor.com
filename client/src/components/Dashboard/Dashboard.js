@@ -212,13 +212,28 @@ function Dashboard() {
     }
 
     useEffect(() => {
-        setParams(oldParams => {
-            return ({
-                ...oldParams,
-                exerciceName: exercice.exercice.name,
-                exerciceOwnExercice: exercice.exercice.ownExercice,
+         if(exercice.exercice.name==="Elevation" || exercice.exercice.name==="Curl" || exercice.exercice.name==="Extension" || exercice.exercice.name==="Abduction" || exercice.exercice.name==="Adduction" || exercice.exercice.name==="Press"){
+            if (exercice.exercice.muscle){
+                setParams(oldParams => {
+                    return ({
+                        ...oldParams,
+                        exerciceName: exercice.exercice.name,
+                        exerciceOwnExercice: exercice.exercice.ownExercice,
+                        exerciceMuscle: exercice.exercice.muscle
+                    })
+                })
+            }
+        }
+        else{
+            setParams(oldParams => {
+                return ({
+                    ...oldParams,
+                    exerciceName: exercice.exercice.name,
+                    exerciceOwnExercice: exercice.exercice.ownExercice,
+                    exerciceMuscle: "",
+                })
             })
-        })
+        }
     },[exercice]);
 
     function trStyle(index){

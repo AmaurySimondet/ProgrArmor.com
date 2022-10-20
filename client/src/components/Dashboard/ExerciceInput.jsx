@@ -69,59 +69,119 @@ function ExerciceInput(props) {
         }
 
           {exercice.name === "Elevation" ?
-            <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Muscle
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
-            </div>
+                props.taille === "petit" ?
+                    <div>
+                        <label className="col-form-label">
+                            Muscle
+                        </label>
+                        <select onChange={handleChange} className="form-control" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
+                :
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">
+                          Muscle
+                        </label>
+                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
           : exercice.name === "Curl" ?
-            <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Muscle
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
-            </div>
+                props.taille === "petit" ?
+                    <div>
+                        <label className="col-form-label">
+                            Muscle
+                        </label>
+                        <select onChange={handleChange} className="form-control" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
+                :
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">
+                          Muscle
+                        </label>
+                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
           : exercice.name === "Extension" ?
-            <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Muscle
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
-            </div>
+                props.taille === "petit" ?
+                    <div>
+                        <label className="col-form-label">
+                            Muscle
+                        </label>
+                        <select onChange={handleChange} className="form-control" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
+                :
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">
+                          Muscle
+                        </label>
+                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
           : exercice.name === "Abduction" ?
-            <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Muscle
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
-            </div>
+                props.taille === "petit" ?
+                    <div>
+                        <label className="col-form-label">
+                            Muscle
+                        </label>
+                        <select onChange={handleChange} className="form-control" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
+                :
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">
+                          Muscle
+                        </label>
+                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
           : exercice.name === "Adduction" ?
-            <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Muscle
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
-            </div>
+                props.taille === "petit" ?
+                    <div>
+                        <label className="col-form-label">
+                            Muscle
+                        </label>
+                        <select onChange={handleChange} className="form-control" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
+                :
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">
+                          Muscle
+                        </label>
+                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
           : exercice.name === "Press" ?
-            <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Muscle
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
-            </div>
+                props.taille === "petit" ?
+                    <div>
+                        <label className="col-form-label">
+                            Muscle
+                        </label>
+                        <select onChange={handleChange} className="form-control" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
+                :
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">
+                          Muscle
+                        </label>
+                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
+                            {MusclesCategorie.map(createEntry)}
+                        </select>
+                    </div>
           : null}
 
           {exercice.name === "own-exercice" ?
