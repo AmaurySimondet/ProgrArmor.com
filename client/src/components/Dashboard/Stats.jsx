@@ -4,24 +4,25 @@ import {LineChart, YAxis, XAxis, Tooltip, CartesianGrid, Line, ResponsiveContain
 import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
 
-const data = [
-  { name: 'Page A', uv: 1000, pv: 2400, amt: 2400, uvError: [75, 20] },
-  { name: 'Page B', uv: 300, pv: 4567, amt: 2400, uvError: [90, 40] },
-  { name: 'Page C', uv: 280, pv: 1398, amt: 2400, uvError: 40 },
-  { name: 'Page D', uv: 200, pv: 9800, amt: 2400, uvError: 20 },
-  { name: 'Page E', uv: 278, pv: null, amt: 2400, uvError: 28 },
-  { name: 'Page F', uv: 189, pv: 4800, amt: 2400, uvError: [90, 20] },
-  { name: 'Page G', uv: 189, pv: 4800, amt: 2400, uvError: [28, 40] },
-  { name: 'Page H', uv: 189, pv: 4800, amt: 2400, uvError: 28 },
-  { name: 'Page I', uv: 189, pv: 4800, amt: 2400, uvError: 28 },
-  { name: 'Page J', uv: 189, pv: 4800, amt: 2400, uvError: [15, 60] },
-];
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p className="label">Date : {label}</p>
+        <p className="desc">Valeur : {payload[0].value}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 function Stats() {
     const [seances1, setSeances1] = useState([]);
     const [seances2, setSeances2] = useState([]);
     const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
-    const [params, setParams] = useState({reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
+    const [params2, setParams2] = useState({reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title",exerciceOwnExercice: ""})
+    const [params1, setParams1] = useState({reforme: "poids", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
 
       const [dimensions, setDimensions] = useState({
             height: window.innerHeight,
@@ -44,10 +45,10 @@ function Stats() {
       })
 
     async function getSeance1(){
-        if (params.categories){
-            params.categories.forEach((categorie, index) => {
+        if (params1.categories){
+            params1.categories.forEach((categorie, index) => {
                 if(categorie.name==="Elastique"){
-                    setParams(oldParams => {
+                    setParams1(oldParams => {
                         return ({
                             ...oldParams,
                             ["categorie"+index+"name"]: categorie.name,
@@ -58,7 +59,7 @@ function Stats() {
                     });
                 }
                 else {
-                    setParams(oldParams => {
+                    setParams1(oldParams => {
                         return ({
                             ...oldParams,
                             ["categorie"+categorie.num+"name"]: categorie.name,
@@ -67,10 +68,10 @@ function Stats() {
                     });
                 }
             })
-            delete params.categories
+            delete params1.categories
         }
-        if (params.details){
-            params.details.forEach((detail, index) => {
+        if (params1.details){
+            params1.details.forEach((detail, index) => {
                 setParams(oldParams => {
                     return ({
                         ...oldParams,
@@ -79,10 +80,10 @@ function Stats() {
                     })
                 });
             })
-            delete params.details
+            delete params1.details
         }
 
-        const {data} = await API.workouts({nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
+        const {data} = await API.workouts(params1);
         if (data.success === false){
             alert(data.message);
         } else {
@@ -92,10 +93,10 @@ function Stats() {
     }
 
     async function getSeance2(){
-        if (params.categories){
-            params.categories.forEach((categorie, index) => {
+        if (params2.categories){
+            params2.categories.forEach((categorie, index) => {
                 if(categorie.name==="Elastique"){
-                    setParams(oldParams => {
+                    setParams2(oldParams => {
                         return ({
                             ...oldParams,
                             ["categorie"+index+"name"]: categorie.name,
@@ -106,7 +107,7 @@ function Stats() {
                     });
                 }
                 else {
-                    setParams(oldParams => {
+                    setParams2(oldParams => {
                         return ({
                             ...oldParams,
                             ["categorie"+categorie.num+"name"]: categorie.name,
@@ -115,11 +116,11 @@ function Stats() {
                     });
                 }
             })
-            delete params.categories
+            delete params2.categories
         }
-        if (params.details){
-            params.details.forEach((detail, index) => {
-                setParams(oldParams => {
+        if (params2.details){
+            params2.details.forEach((detail, index) => {
+                setParams2(oldParams => {
                     return ({
                         ...oldParams,
                         ["detail"+detail.num+"name"]: detail.name,
@@ -127,10 +128,10 @@ function Stats() {
                     })
                 });
             })
-            delete params.details
+            delete params2.details
         }
 
-        const {data} = await API.workouts(params);
+        const {data} = await API.workouts(params2);
         if (data.success === false){
             alert(data.message);
         } else {
@@ -140,10 +141,10 @@ function Stats() {
     }
 
     useEffect(() => {
-        console.log(params)
+        console.log(params2)
         setTimeout(getSeance1, 50);
         setTimeout(getSeance2, 50);
-    }, [params]);
+    }, [params2]);
 
 
     function changeExercice(exercice){
@@ -156,13 +157,28 @@ function Stats() {
     }
 
     useEffect(() => {
-        setParams(oldParams => {
-            return ({
-                ...oldParams,
-                exerciceName: exercice.exercice.name,
-                exerciceOwnExercice: exercice.exercice.ownExercice,
+         if(exercice.exercice.name==="Elevation" || exercice.exercice.name==="Curl" || exercice.exercice.name==="Extension" || exercice.exercice.name==="Abduction" || exercice.exercice.name==="Adduction" || exercice.exercice.name==="Press"){
+            if (exercice.exercice.muscle){
+                setParams2(oldParams => {
+                    return ({
+                        ...oldParams,
+                        exerciceName: exercice.exercice.name,
+                        exerciceOwnExercice: exercice.exercice.ownExercice,
+                        exerciceMuscle: exercice.exercice.muscle
+                    })
+                })
+            }
+        }
+        else{
+            setParams2(oldParams => {
+                return ({
+                    ...oldParams,
+                    exerciceName: exercice.exercice.name,
+                    exerciceOwnExercice: exercice.exercice.ownExercice,
+                    exerciceMuscle: "",
+                })
             })
-        })
+        }
     },[exercice]);
 
     return (
@@ -184,10 +200,10 @@ function Stats() {
                                             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
                                         >
                                             <XAxis dataKey="date" />
-                                            <YAxis />
-                                            <Tooltip />
+                                            <YAxis domain={[25, 150]}/>
+                                            <Tooltip content={<CustomTooltip />}/>
                                             <CartesianGrid stroke="#f5f5f5" />
-                                            <Line type="monotone" dataKey="poids" stroke="#ff0000" />
+                                            <Line connectNulls type="monotone" dataKey="poids" stroke="#ff0000" />
                                         </LineChart>
                                     </ResponsiveContainer >
                                 </div>
@@ -214,10 +230,10 @@ function Stats() {
                                         >
                                             <XAxis dataKey="date" />
                                             <YAxis domain={[0, 300]} />
-                                            <Tooltip />
+                                            <Tooltip content={<CustomTooltip />} />
                                             <CartesianGrid stroke="#f5f5f5" />
                                             <Bar barSize={20} fill="#afafaf" dataKey="exercices[0].Series[0].repsTime" />
-                                            <Line type="monotone" dataKey="exercices[0].Series[0].charge" stroke="#ff0000" />
+                                            <Line connectNulls type="monotone" dataKey="exercices[0].Series[0].charge" stroke="#ff0000" />
                                         </ComposedChart>
                                     </ResponsiveContainer >
                                 </div>

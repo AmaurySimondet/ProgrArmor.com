@@ -385,10 +385,21 @@ async function workouts(req, res) {
       return (
           Object.fromEntries(Object.entries(seance).filter(([_, element]) => {
             if (element[0]) {
-                if (element[0].Series) {
-                    return (element[0].Series != null && Object.entries(element[0].Series).length !== 0)
+                if(typeof element !== "string"){
+                    if (element[0].Series) {
+                        return (element[0].Series != null && Object.entries(element[0].Series).length !== 0)
+                    }
                 }
+                else { return typeof element === "string"}
             }
+          }))
+      )
+    }
+
+    function removeEmptyPoids(seance) {
+      return (
+          Object.fromEntries(Object.entries(seance).filter(([_, element]) => {
+            return (element != null && element != [])
           }))
       )
     }
@@ -408,25 +419,29 @@ async function workouts(req, res) {
                     console.log(req.query)
 
                     //TRI EXERCICE
-                    if (req.query.exerciceName !== "title" && req.query.exerciceName !== ""){
-                        if (req.query.exerciceName !== "own-exercice"){
-                            seances.map((seance,indexSeance) => {
-                                return (seance.exercices.map((exercice, indexExercice) => {
+                    seances.map((seance,indexSeance) => {
+                        return (seance.exercices.map((exercice, indexExercice) => {
+                            if (req.query.exerciceName !== "title" && req.query.exerciceName !== ""){
+                                if (req.query.exerciceName !== "own-exercice"){
+                                    if(req.query.exerciceMuscle !== "" && req.query.exerciceMuscle !== "title"){
+                                        if (req.query.exerciceName !== exercice.exercice.name || req.query.exerciceMuscle !== exercice.exercice.muscle){
+                                            delete seances[indexSeance].exercices[indexExercice]
+                                        }
+                                    }
+                                    else{
                                         if (req.query.exerciceName !== exercice.exercice.name){
                                             delete seances[indexSeance].exercices[indexExercice]
                                         }
-                                }))
-                            })
-                        } else {
-                            seances.map((seance,indexSeance) => {
-                                return (seance.exercices.map((exercice, indexExercice) => {
-                                        if (req.query.exerciceOwnExercice !== exercice.exercice.ownExercice){
-                                            delete seances[indexSeance].exercices[indexExercice]
-                                        }
-                                }))
-                            })
-                        }
-                    }
+                                    }
+                                }
+                                else {
+                                    if (req.query.exerciceOwnExercice !== exercice.exercice.ownExercice){
+                                        delete seances[indexSeance].exercices[indexExercice]
+                                    }
+                                }
+                            }
+                        }))
+                    })
 
                     //TRI CATEGORIE
                     for(let i=0; i<5; i++){
@@ -576,13 +591,26 @@ async function workouts(req, res) {
 
                     }
 
-                    //REFORME
+                    //STATS REFORME
                     if(req.query.reforme==="true"){
                         seances = seancesToPerformances(seances, 10);
 
                         let arr = []
                         seances.forEach(seance => {
                             arr.push(removeEmpty(seance))
+                        });
+
+                        seances = arr.filter(seance => {
+                            return (Object.entries(seance).length !== 0 && seance.exercices)
+                        });
+
+                    }
+
+                    //STATS REFORME
+                    if(req.query.reforme==="poids"){
+                        let arr = []
+                        seances.forEach(seance => {
+                            arr.push(removeEmptyPoids(seance))
                         });
 
                         seances = arr.filter(element => {
