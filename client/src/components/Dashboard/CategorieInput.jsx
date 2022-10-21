@@ -183,6 +183,11 @@ function CategorieInput(props) {
     {categorie.name ?
         null
       :
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="name">
+                {lesCategories.map(createEntry)}
+            </select>
+        :
         <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -206,6 +211,11 @@ function CategorieInput(props) {
       }
 
       {categorie.name === "Variante Street Workout" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {Streetworkout.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -228,6 +238,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Type de barre / poids" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {lesTypesBarres.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -246,6 +261,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Muscle" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {MusclesCategorie.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -264,6 +284,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Positionnement du corps" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {PositionCorps.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -282,6 +307,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Positionnement des bras" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {PositionBras.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -300,6 +330,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Positionnement des jambes" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {PositionJambes.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -318,6 +353,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Positionnement des mains" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {PositionMains.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -336,6 +376,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Positionnement des pieds" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {PositionPieds.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -354,6 +399,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Placement et axe du corps / banc / barre" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {AxeCategorie.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -372,6 +422,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Ouverture coudes / genoux" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {CoudeGenou.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -390,6 +445,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Unilatéral" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {Unilateral.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -408,6 +468,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Type d'éxecution" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {Execution.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -426,6 +491,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Type d'éxecution spécifique" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {ExecutionSpecifique.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -444,6 +514,16 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Temps de repos entre les séries" ?
+        props.info === "false" ?
+                <div className={props.info === "false" ? "form-control" : "col-sm-9"}>
+                    <input type="text"
+                          className="form-control"
+                          id="input"
+                          value={categorie.input}
+                          onChange={handleChange}
+                    />
+                </div>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -467,6 +547,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "RPE / Niveau d'intensité" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {RPE.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -485,6 +570,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Gêne / douleur / blessure" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {Douleur.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -503,6 +593,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Type de prise" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {PriseCategorie.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -521,6 +616,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Tempo" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {TempoCategorie.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -539,6 +639,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Forme (Partiel)" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {Partiel.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -557,6 +662,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Point de départ" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {DépartCategorie.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -575,6 +685,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Variante d'exercice explosif" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {ExplosifCategorie.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -593,6 +708,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Variante d'exercice d'haltérophilie" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {Halterophilie.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -611,6 +731,11 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Accessoire supplémentaire ou objet spécifique" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className="form-control" id="input">
+                {AccessoireObjet.map(createEntry)}
+            </select>
+        :
             <div className="form-group row">
                 {props.info === "false" ?
                     null
@@ -629,6 +754,13 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Elastique" ?
+        props.info === "false" ?
+            <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="utilisation">
+                <option className="select-title" value="title"> / (défaut) </option>
+                <option value="Resistance"> Résistance </option>
+                <option value="Assistance"> Assistance </option>
+            </select>
+        :
           props.dashboard ?
             <div className="form-group row">
                     {props.info === "false" ?
