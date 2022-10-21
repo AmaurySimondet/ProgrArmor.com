@@ -38,7 +38,6 @@ passport.use(new FacebookStrategy({
   async (accessToken, refreshToken, profile, done) => {
 
     facebookProfile = profile._json
-    console.log(facebookProfile)
     const user = {
         facebookId : profile._json.id,
         email : profile._json.email,
@@ -113,7 +112,6 @@ passport.use(new GoogleStrategy({
   async (accessToken, refreshToken, profile, done) => {
 
     googleProfile = profile._json
-    console.log(googleProfile)
     const user = {
         googleId : profile._json.sub,
         email : profile._json.email,
@@ -188,7 +186,6 @@ async function signup(req, res) {
             }else{
                 passport.authenticate("local")(req,res,function(){
                     userProfile = user;
-                    console.log(userProfile);
                     const token = jwt.sign({ email: user.email }, process.env.secret, { expiresIn: "24h" });
                     res.json({ success: true, message: "Register successful", token: token });
                 });
@@ -225,7 +222,6 @@ async function login(req, res) {
                     }
                     else {
                         userProfile = user;
-                        console.log(userProfile);
                         const token = jwt.sign({ email: user.email }, process.env.secret, { expiresIn: "24h" });
                         res.json({ success: true, message: "Login successful", token: token });
                     }
@@ -269,9 +265,6 @@ async function debutantform(req, res) {
 
     }
 
-    console.log(seance);
-    console.log(profile);
-
     try {
        User.findOneAndUpdate(
           {"email": profile.email},
@@ -307,8 +300,6 @@ async function workouts(req, res) {
         profile = facebookProfile;
 
     }
-
-    console.log(profile);
 
     function sortDateCroissant(a, b) {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
