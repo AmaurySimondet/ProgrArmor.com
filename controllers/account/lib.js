@@ -496,13 +496,15 @@ async function workouts(req, res) {
                         if (req.query[catName] && req.query[catName] !== "title" && req.query[catName] !== "" && req.query[catName] !== "undefined"){
                             seances.map((seance,indexSeance) => {
                                 if(seance.details && Object.entries(seance.details).length !== 0){
-                                    return(seance.details.map((detail, indexDetail) => {
-                                        if (indexDetail === i){
-                                            if (detail.name !== req.query[catName] || detail.input !== req.query[catInput]){
-                                                delete seances[indexSeance]
-                                            }
+                                    del = true
+                                    seance.details.map((detail, indexDetail) => {
+                                        if (detail.name === req.query[catName] && detail.input === req.query[catInput]){
+                                               del = false
                                         }
-                                    }))
+                                    })
+                                    if (del){
+                                            delete seances[indexSeance]
+                                    }
                                 }
                                 else{ delete seances[indexSeance] }
                             })

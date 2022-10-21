@@ -79,6 +79,7 @@ function Dashboard() {
     const [detailsAddRien, setDetailsAddRien] = useState([])
     const [checkbox, setCheckbox] = useState({affichageCharge: true, affichageReps: true, affichageSérie: true, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: true, affichagePercent: true, affichagePoids: true});
     const [clicked, setClicked] = useState([false,false,false,false,false])
+    const [clickedDetail, setClickedDetail] = useState([false,false,false,false,false])
 
     function handleClick(event){
         let e = parseInt(event.target.id)
@@ -90,6 +91,18 @@ function Dashboard() {
                 ["categorie"+e+"utilisation"]: "",
                 ["categorie"+e+"input"]: "",
                 ["categorie"+e+"estimation"]: "",
+            })
+        });
+    }
+
+    function handleClickDetail(event){
+        let e = parseInt(event.target.id)
+        setClickedDetail(clickedDetail.slice(0,e).concat([!clickedDetail[e]],clickedDetail.slice(e+1,clickedDetail.length)));
+        setParams(oldParams => {
+            return ({
+                ...oldParams,
+                ["detail"+e+"name"]: "",
+                ["detail"+e+"input"]: "",
             })
         });
     }
@@ -317,6 +330,7 @@ function Dashboard() {
         setCategories([])
         setDetails([])
         setClicked([true,true,true,true,true])
+        setClickedDetail([true,true,true,true,true])
         setCategoriesAddRien([])
         setDetailsAddRien([])
         setCategorieNumb(0)
@@ -412,10 +426,10 @@ function Dashboard() {
                     return(
                         <div className="form-group row">
                             <div className="form-group col-sm-12">
-                                <label className="col-form-label">
+                                <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
                                   Détail {index+1}
                                 </label>
-                                <DetailInput id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
+                                <DetailInput click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
                             </div>
                         </div>
                     )

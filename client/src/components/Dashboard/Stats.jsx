@@ -4,6 +4,7 @@ import {LineChart, YAxis, XAxis, Tooltip, Label, CartesianGrid, Line, Responsive
 import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
 import CategorieInput from "./CategorieInput"
+import DetailInput from "./DetailInput"
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -36,13 +37,19 @@ function Stats() {
     const [seances2, setSeances2] = useState([]);
     const [typePerfGraph, setTypePerfGraph] = useState("percent")
     const [categorie, setCategorie] = useState({num: 0})
+    const [detail, setDetail] = useState({num: 0})
     const [clicked, setClicked] = useState(false)
+    const [clickedDetail, setClickedDetail] = useState(false)
     const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
     const [params2, setParams2] = useState({date: "md", reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title",exerciceOwnExercice: ""})
     const [params1, setParams1] = useState({date: "md", reforme: "poids", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
 
     function handleClick(){
         setClicked(!clicked);
+    }
+
+    function handleClickDetail(){
+        setClickedDetail(!clickedDetail);
     }
 
       const [dimensions, setDimensions] = useState({
@@ -135,6 +142,10 @@ function Stats() {
         setCategorie(categorie)
     }
 
+    function changeDetail(detail){
+        setDetail(detail)
+    }
+
     useEffect(() => {
         if(categorie.name==="Elastique"){
             setParams2(oldParams => {
@@ -157,6 +168,16 @@ function Stats() {
             });
         }
     }, [categorie])
+
+    useEffect(() => {
+        setParams2(oldParams => {
+            return ({
+                ...oldParams,
+                ["detail0name"]: detail.name,
+                ["detail0input"]: detail.input,
+            })
+        });
+    }, [detail])
 
   function handleChange2(event){
     event.preventDefault();
@@ -268,7 +289,7 @@ function Stats() {
                                     </div>
 
                                     <div className="form-group row stats-form">
-                                        <div className="form-group col-sm-6">
+                                        <div className="form-group col-sm-4">
                                             <label className="col-form-label">
                                               Format Date
                                             </label>
@@ -279,7 +300,7 @@ function Stats() {
                                             </select>
                                         </div>
 
-                                        <div className="form-group col-sm-6">
+                                        <div className="form-group col-sm-4">
                                             <label className="col-form-label">
                                               Periode
                                             </label>
@@ -291,6 +312,13 @@ function Stats() {
                                                 <option value="180d"> 180 derniers jours (6 mois) </option>
                                                 <option value="1y"> Depuis 1 an </option>
                                             </select>
+                                        </div>
+
+                                        <div className="form-group col-sm-4">
+                                            <label onClick={handleClickDetail} className="col-form-label detail-label">
+                                              Détail
+                                            </label>
+                                            <DetailInput info="false" click={clickedDetail}  id={"detail"+0} index={0} num={0} dashboard={true} changeDetail={changeDetail}/>
                                         </div>
                                     </div>
 

@@ -65,16 +65,27 @@ function DetailInput(props) {
         })
   }
 
+  useEffect(() => {
+    if(props.click){
+        setDetail({num : props.num})
+    }
+  }, [props.click])
+
   return (
   <div style={divStyle(props.num)}>
     {detail.name ?
         null
     :
           <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                      Detail {props.dashboard ? props.index+1 : null}
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="name">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          Detail {props.dashboard ? props.index+1 : null}
+                    </label>
+                }
+
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="name">
                     {Details.map(createEntry)}
                 </select>
 
@@ -87,10 +98,14 @@ function DetailInput(props) {
 
       {detail.name === "Condition météorologique défavorable" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Condition météorologique défavorable
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                      {detail.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Meteo.map(createEntry)}
                 </select>
 
@@ -101,10 +116,14 @@ function DetailInput(props) {
       : null }
       {detail.name === "Gêne / douleur / blessure" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Gêne / douleur / blessure
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                      {detail.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {DouleurSeance.map(createEntry)}
                 </select>
 
@@ -115,10 +134,14 @@ function DetailInput(props) {
       : null }
       {detail.name === "Fatigue" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Fatigue
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                      {detail.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Fatigue.map(createEntry)}
                 </select>
 
@@ -129,10 +152,14 @@ function DetailInput(props) {
       : null }
       {detail.name === "Pre Workout, Café..." ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Pre Workout, Café...
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                      {detail.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Preworkout.map(createEntry)}
                 </select>
 
@@ -143,10 +170,14 @@ function DetailInput(props) {
       : null }
       {detail.name === "Alcool, drogue, sexe..." ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Alcool, drogue, sexe...
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                      {detail.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {DRUG.map(createEntry)}
                 </select>
 
@@ -157,10 +188,14 @@ function DetailInput(props) {
       : null }
       {detail.name === "Etat psychologique" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Etat psychologique
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                      {detail.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Psycho.map(createEntry)}
                 </select>
 
@@ -171,10 +206,14 @@ function DetailInput(props) {
       : null }
       {detail.name === "Séance seul ou à plusieurs" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Séance seul ou à plusieurs
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                      {detail.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Seul.map(createEntry)}
                 </select>
 
@@ -185,10 +224,14 @@ function DetailInput(props) {
       : null }
       {detail.name === "Environnement" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Environnement
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                      {detail.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Environnement.map(createEntry)}
                 </select>
 
@@ -199,10 +242,14 @@ function DetailInput(props) {
       : null }
       {detail.name === "Courbatures / Congestion" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Courbatures / Congestion
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                      {detail.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Courbatures.map(createEntry)}
                 </select>
 
@@ -213,10 +260,14 @@ function DetailInput(props) {
       : null }
       {detail.name === "Notes" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Notes
-                </label>
-                <div className="col-sm-10">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                      {detail.name}
+                    </label>
+                }
+                <div className={props.info === "false" ? "" : "col-sm-10"}>
                     <textarea type="text"
                           className="form-control"
                           id="input"

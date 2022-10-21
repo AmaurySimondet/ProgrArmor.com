@@ -231,6 +231,10 @@ table.Stats-table{
     color: #cfcfcf;
 }
 
+.detail-label:hover{
+    color: #cfcfcf;
+}
+
 .detail-stat{
     font-weight: 200;
     font-size: 15px;
