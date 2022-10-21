@@ -344,7 +344,10 @@ async function workouts(req, res) {
     function seancesToPerformances(seances, multiple){
         seances.map((seance,indexSeance) => {
             return (seance.exercices.map((exercice, indexExercice) => {
-                    return (Object.values(exercice.Series).map((serie, index) => {
+                    return (Object.keys(exercice.Series).map(index => {
+//                        console.log(seance)
+//                        console.log(exercice.Series)
+//                        console.log(Object.keys(exercice.Series))
                         if (multiple){
                             seances[indexSeance].exercices[indexExercice].Series[index].repsTime = seances[indexSeance].exercices[indexExercice].Series[index].repsTime*multiple
                         }
@@ -604,9 +607,18 @@ async function workouts(req, res) {
 
                     //STATS REFORME
                     if(req.query.reforme==="true"){
+                        let arr = []
+                        seances.forEach(seance => {
+                            arr.push(removeEmpty(seance))
+                        });
+
+                        seances.forEach(seance => {
+                            console.log(seance)
+                        });
+
                         seances = seancesToPerformances(seances, 10);
 
-                        let arr = []
+                        arr = []
                         seances.forEach(seance => {
                             arr.push(removeEmpty(seance))
                         });

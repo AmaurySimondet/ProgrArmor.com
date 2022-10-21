@@ -13,7 +13,7 @@ const CustomTooltip = ({ active, payload, label }) => {
         <p className="label">Date : {label}</p>
         {payload.map((payload) => {
             if (payload.dataKey === "exercices[0].Series[0].repsTime"){
-                return (<p className="desc">Reps / Temps : {payload.value}</p>)
+                return (<p className="desc">Reps / Temps : {payload.value/10}</p>)
             }
             if (payload.dataKey === "exercices[0].Series[0].charge"){
                 return (<p className="desc">Charge : {payload.value}</p>)
@@ -36,6 +36,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 function Stats() {
+    let errIter = 0;
     const [seances1, setSeances1] = useState([]);
     const [seances2, setSeances2] = useState([]);
     const [typePerfGraph, setTypePerfGraph] = useState("percent")
@@ -77,8 +78,9 @@ function Stats() {
 
     async function getSeance1(){
         const {data} = await API.workouts(params1);
-        if (data.success === false){
+        if (data.success === false && errIter===0 ){
             alert(data.message);
+            errIter=1;
         } else {
 //            console.log(data.seances);
             setSeances1(data.seances);
@@ -87,8 +89,9 @@ function Stats() {
 
     async function getSeance2(){
         const {data} = await API.workouts(params2);
-        if (data.success === false){
+        if (data.success === false && errIter===0 ){
             alert(data.message);
+            errIter=1;
         } else {
             setSeances2(data.seances);
             console.log(data.seances);
@@ -323,6 +326,29 @@ function Stats() {
                                             </label>
                                             <DetailInput info="false" click={clickedDetail}  id={"detail"+0} index={0} num={0} dashboard={true} changeDetail={changeDetail}/>
                                         </div>
+                                    </div>
+
+                                    <div className="form-group row stats-form">
+                                        <label className="col-form-label col-sm-3">
+                                          Reps / Temps
+                                        </label>
+                                        <input type="text"
+                                          className="form-control col-sm-4"
+                                          value={params2.repsFrom}
+                                          onChange={handleChange2}
+                                          placeholder="Aucun filtre"
+                                          id="repsFrom"
+                                        />
+                                        <label className="col-form-label col-sm-1">
+                                          à
+                                        </label>
+                                        <input type="text"
+                                          className="form-control col-sm-4"
+                                          value={params2.repsTo}
+                                          onChange={handleChange2}
+                                          placeholder="Aucun filtre"
+                                          id="repsTo"
+                                        />
                                     </div>
 
                                     <ResponsiveContainer width="100%" height={400}>
