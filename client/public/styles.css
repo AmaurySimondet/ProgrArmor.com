@@ -227,6 +227,10 @@ table.Stats-table{
     margin: auto
 }
 
+.categorie-label:hover{
+    color: #cfcfcf;
+}
+
 .detail-stat{
     font-weight: 200;
     font-size: 15px;

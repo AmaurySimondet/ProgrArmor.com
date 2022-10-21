@@ -250,10 +250,10 @@ function Stats() {
                                         </div>
 
                                         <div className="form-group col-sm-4">
-                                            <label onClick={handleClick} className="col-form-label">
+                                            <label onClick={handleClick} className="col-form-label categorie-label">
                                               Catégorie
                                             </label>
-                                            <CategorieInput click={clicked} id={"catégorie"+0} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
+                                            <CategorieInput info="false" click={clicked} id={"catégorie"+0} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
                                         </div>
 
                                         <div className="form-group col-sm-4">

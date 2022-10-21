@@ -83,12 +83,16 @@ function Dashboard() {
     function handleClick(event){
         let e = parseInt(event.target.id)
         setClicked(clicked.slice(0,e).concat([!clicked[e]],clicked.slice(e+1,clicked.length)));
-
+        setParams(oldParams => {
+            return ({
+                ...oldParams,
+                ["categorie"+e+"name"]: "",
+                ["categorie"+e+"utilisation"]: "",
+                ["categorie"+e+"input"]: "",
+                ["categorie"+e+"estimation"]: "",
+            })
+        });
     }
-
-    useEffect(() => {
-        console.log(clicked)
-    }, [clicked])
 
     function handleChangeSliderCategorie(event){
         setCategorieNumb(event.target.value);
@@ -153,13 +157,11 @@ function Dashboard() {
     if (data.success === false){
         alert(data.message);
     } else {
-        console.log(data.seances);
         setSeances(data.seances);
     }
   }
 
   useEffect(() => {
-        console.log(params)
         setTimeout(getWorkouts, 50);
   }, [params]);
 
@@ -276,12 +278,12 @@ function Dashboard() {
       }
 
     function changeCategorie(categorie, num){
-        const otherThanSelected =  categories.filter((categorie, index) => {
-            return categorie.num!==(num)
-        });
-
-        setCategories([...otherThanSelected, categorie]);
+        setCategories(categories.slice(0,num).concat([categorie],categories.slice(num+1,categories.length)));
     }
+
+    useEffect(() => {
+        console.log(categories)
+    }, [categories])
 
     useEffect(() => {
         setParams(oldParams => {
@@ -312,8 +314,13 @@ function Dashboard() {
     function resetParameters(){
         event.preventDefault();
 
+        setCategories([])
         setDetails([])
-        setDetails([])
+        setClicked([true,true,true,true,true])
+        setCategoriesAddRien([])
+        setDetailsAddRien([])
+        setCategorieNumb(0)
+        setDetailNumb(0)
         setParams({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
     }
 
@@ -392,7 +399,7 @@ function Dashboard() {
                     return(
                         <div className="form-group row">
                             <div className="form-group col-sm-12">
-                                <label onClick={handleClick} id={index} className="col-form-label">
+                                <label onClick={handleClick} id={index} className="col-form-label categorie-label">
                                   Catégorie {index+1}
                                 </label>
                                 <CategorieInput click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
@@ -516,7 +523,7 @@ function Dashboard() {
                     </div>
                     <div className="form-group col-md-6 col-lg-2 custom-control custom-checkbox">
                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePercent" id="affichagePercent"/>
-                          <label className="col-form-labell" htmlFor="#affichagePercent"> Percent </label>
+                          <label className="col-form-labell" htmlFor="#affichagePercent"> % PDC </label>
                     </div>
                 </div>
             </form>

@@ -184,14 +184,18 @@ function CategorieInput(props) {
         null
       :
         <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                      Catégorie {props.dashboard ? props.index+1 : null} ({props.exercice.name})
-                      <img className="myDIV" onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
-                      <div className={categorieHiddenClick}>
-                          <CategorieHiddenText />
-                      </div>
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="name">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          Catégorie {props.dashboard ? props.index+1 : null} ({props.exercice.name})
+                          <img className="myDIV" onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                          <div className={categorieHiddenClick}>
+                              <CategorieHiddenText />
+                          </div>
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="name">
                     {lesCategories.map(createEntry)}
                 </select>
 
@@ -203,14 +207,18 @@ function CategorieInput(props) {
 
       {categorie.name === "Variante Street Workout" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Variante Street Workout
-                  <img className="myDIV" onClick={handleClickStreetworkout} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
-                  <div className={streetworkoutHiddenClicked}>
-                      <StreetworkoutHiddenText />
-                  </div>
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                          <img className="myDIV" onClick={handleClickStreetworkout} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                          <div className={streetworkoutHiddenClicked}>
+                              <StreetworkoutHiddenText />
+                          </div>
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Streetworkout.map(createEntry)}
                 </select>
 
@@ -221,10 +229,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Type de barre / poids" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Type de barre / poids
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {lesTypesBarres.map(createEntry)}
                 </select>
 
@@ -235,10 +247,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Muscle" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Muscle
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {MusclesCategorie.map(createEntry)}
                 </select>
 
@@ -249,10 +265,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Positionnement du corps" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Positionnement du corps
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {PositionCorps.map(createEntry)}
                 </select>
 
@@ -263,10 +283,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Positionnement des bras" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Positionnement des bras
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {PositionBras.map(createEntry)}
                 </select>
 
@@ -277,10 +301,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Positionnement des jambes" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Positionnement des jambes
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {PositionJambes.map(createEntry)}
                 </select>
 
@@ -291,10 +319,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Positionnement des mains" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Positionnement des mains
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {PositionMains.map(createEntry)}
                 </select>
 
@@ -305,10 +337,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Positionnement des pieds" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Positionnement des pieds
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {PositionPieds.map(createEntry)}
                 </select>
 
@@ -319,10 +355,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Placement et axe du corps / banc / barre" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Placement et axe du corps / banc / barre
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {AxeCategorie.map(createEntry)}
                 </select>
 
@@ -333,10 +373,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Ouverture coudes / genoux" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Ouverture coudes / genoux
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {CoudeGenou.map(createEntry)}
                 </select>
 
@@ -347,10 +391,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Unilatéral" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Unilatéral
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Unilateral.map(createEntry)}
                 </select>
 
@@ -361,10 +409,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Type d'éxecution" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  {"Type d'éxecution"}
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Execution.map(createEntry)}
                 </select>
 
@@ -375,10 +427,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Type d'éxecution spécifique" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  {"Type d'éxecution spécifique"}
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {ExecutionSpecifique.map(createEntry)}
                 </select>
 
@@ -389,10 +445,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Temps de repos entre les séries" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Temps de repos entre les séries (minutes)
-                </label>
-                <div className="col-sm-9">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <div className={props.info === "false" ? "form-control" : "col-sm-9"}>
                     <input type="text"
                           className="form-control"
                           id="input"
@@ -408,10 +468,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "RPE / Niveau d'intensité" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  RPE / Niveau d'intensité
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {RPE.map(createEntry)}
                 </select>
 
@@ -422,10 +486,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Gêne / douleur / blessure" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Gêne / douleur / blessure
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Douleur.map(createEntry)}
                 </select>
 
@@ -436,10 +504,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Type de prise" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  {"Type de prise"}
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {PriseCategorie.map(createEntry)}
                 </select>
 
@@ -450,10 +522,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Tempo" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  {"Tempo"}
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {TempoCategorie.map(createEntry)}
                 </select>
 
@@ -464,10 +540,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Forme (Partiel)" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  {"Forme (Partiel)"}
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Partiel.map(createEntry)}
                 </select>
 
@@ -478,10 +558,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Point de départ" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  {"Point de départ"}
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {DépartCategorie.map(createEntry)}
                 </select>
 
@@ -492,10 +576,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Variante d'exercice explosif" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  {"Variante d'exercice explosif"}
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {ExplosifCategorie.map(createEntry)}
                 </select>
 
@@ -506,10 +594,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Variante d'exercice d'haltérophilie" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  {"Variante d'exercice d'haltérophilie"}
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {Halterophilie.map(createEntry)}
                 </select>
 
@@ -520,10 +612,14 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Accessoire supplémentaire ou objet spécifique" ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  {"Accessoire supplémentaire ou objet spécifique"}
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          {categorie.name}
+                    </label>
+                }
+                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
                     {AccessoireObjet.map(createEntry)}
                 </select>
 
@@ -533,32 +629,56 @@ function CategorieInput(props) {
             </div>
       : null }
       {categorie.name === "Elastique" ?
-        <div>
+          props.dashboard ?
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Utilisation
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="utilisation">
-                    <option className="select-title" value="title"> / (défaut) </option>
-                    <option value="Resistance"> Résistance </option>
-                    <option value="Assistance"> Assistance </option>
-                </select>
+                    {props.info === "false" ?
+                        null
+                    :
+                        <label className="col-sm-2 col-form-label">
+                              {categorie.name}
+                        </label>
+                    }
+                    <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="utilisation">
+                        <option className="select-title" value="title"> / (défaut) </option>
+                        <option value="Resistance"> Résistance </option>
+                        <option value="Assistance"> Assistance </option>
+                    </select>
 
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
+                    {props.dashboard ? null : <div className="col-sm-1">
+                      <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                    </div>}
             </div>
+          :
+            <div>
+                <div className="form-group row">
+                    {props.info === "false" ?
+                        null
+                    :
+                        <label className="col-sm-2 col-form-label">
+                              {categorie.name}
+                        </label>
+                    }
+                    <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="utilisation">
+                        <option className="select-title" value="title"> / (défaut) </option>
+                        <option value="Resistance"> Résistance </option>
+                        <option value="Assistance"> Assistance </option>
+                    </select>
 
-            <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Elastique
-                </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
-                    {lesElastiques.map(createEntry)}
-                </select>
-            </div>
+                    {props.dashboard ? null : <div className="col-sm-1">
+                      <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                    </div>}
+                </div>
 
-            {categorie.input === "mesure" ?
+                <div className="form-group row">
+                    <label className="col-sm-2 col-form-label">
+                      Elastique
+                    </label>
+                    <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                        {lesElastiques.map(createEntry)}
+                    </select>
+                </div>
+
+                {categorie.input === "mesure" ?
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
                   Tension (kg)
@@ -616,7 +736,7 @@ function CategorieInput(props) {
                 </div>
             </div>
             }
-        </div>
+            </div>
       : null }
 
   </div>
