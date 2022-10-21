@@ -78,6 +78,17 @@ function Dashboard() {
     const [categoriesAddRien, setCategoriesAddRien] = useState([])
     const [detailsAddRien, setDetailsAddRien] = useState([])
     const [checkbox, setCheckbox] = useState({affichageCharge: true, affichageReps: true, affichageSérie: true, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: true, affichagePercent: true, affichagePoids: true});
+    const [clicked, setClicked] = useState([false,false,false,false,false])
+
+    function handleClick(event){
+        let e = parseInt(event.target.id)
+        setClicked(clicked.slice(0,e).concat([!clicked[e]],clicked.slice(e+1,clicked.length)));
+
+    }
+
+    useEffect(() => {
+        console.log(clicked)
+    }, [clicked])
 
     function handleChangeSliderCategorie(event){
         setCategorieNumb(event.target.value);
@@ -381,10 +392,10 @@ function Dashboard() {
                     return(
                         <div className="form-group row">
                             <div className="form-group col-sm-12">
-                                <label className="col-form-label">
+                                <label onClick={handleClick} id={index} className="col-form-label">
                                   Catégorie {index+1}
                                 </label>
-                                <CategorieInput id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
+                                <CategorieInput click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
                             </div>
                         </div>
                     )

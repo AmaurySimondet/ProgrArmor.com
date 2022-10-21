@@ -224,12 +224,18 @@ table.profile-table{
 table.Stats-table{
     table-layout: fixed;
     width:100%;
+    margin: auto
+}
+
+.detail-stat{
+    font-weight: 200;
+    font-size: 15px;
+
 }
 
 .stats-form{
-    width:80%;
+    width:95%;
     margin:auto;
-
 
 }
 

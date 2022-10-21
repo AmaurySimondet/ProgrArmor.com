@@ -147,6 +147,12 @@ function CategorieInput(props) {
     props.changeCategorie(categorie, props.num)
   }, [categorie])
 
+  useEffect(() => {
+    if(props.click){
+        setCategorie({num : props.num})
+    }
+  }, [props.click])
+
   function handleClickPoubelle(){
          props.onDeleteCategorie(props.num);
 
@@ -188,8 +194,6 @@ function CategorieInput(props) {
                 <select onChange={handleChange} className="custom-select col-sm-9" id="name">
                     {lesCategories.map(createEntry)}
                 </select>
-
-
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />

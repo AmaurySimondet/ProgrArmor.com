@@ -604,6 +604,22 @@ async function workouts(req, res) {
                             return (Object.entries(seance).length !== 0 && seance.exercices)
                         });
 
+                        seances.forEach(seance => {
+                            seance.exercices[0].Series[0].percent = parseFloat(seance.exercices[0].Series[0].percent);
+                        });
+
+                    }
+
+                    //format date
+                    if(req.query.date==="md"){
+                        seances.forEach(seance => {
+                            seance.date = seance.date.slice(5, seance.date.length)
+                        });
+                    }
+                    if(req.query.date==="d"){
+                        seances.forEach(seance => {
+                            seance.date = seance.date.slice(seance.date.length-2, seance.date.length)
+                        });
                     }
 
                     //STATS REFORME

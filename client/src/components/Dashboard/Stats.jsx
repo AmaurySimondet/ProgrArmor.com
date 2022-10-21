@@ -1,15 +1,29 @@
 import {React, useState, useEffect} from "react";
 import NavigBar from "../NavigBar.jsx"
-import {LineChart, YAxis, XAxis, Tooltip, CartesianGrid, Line, ResponsiveContainer, Bar, ComposedChart} from 'recharts'
+import {LineChart, YAxis, XAxis, Tooltip, Label, CartesianGrid, Line, ResponsiveContainer, Bar, ComposedChart} from 'recharts'
 import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
+import CategorieInput from "./CategorieInput"
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip">
         <p className="label">Date : {label}</p>
-        <p className="desc">Valeur : {payload[0].value}</p>
+        {payload.map((payload) => {
+            if (payload.dataKey === "exercices[0].Series[0].repsTime"){
+                return (<p className="desc">Reps / Temps : {payload.value}</p>)
+            }
+            if (payload.dataKey === "exercices[0].Series[0].charge"){
+                return (<p className="desc">Charge : {payload.value}</p>)
+            }
+            if (payload.dataKey === "exercices[0].Series[0].percent"){
+                return (<p className="desc">% PDC : {payload.value}</p>)
+            }
+            if (payload.dataKey === "poids"){
+                return (<p className="desc">Poids : {payload.value}</p>)
+            }
+        })}
       </div>
     );
   }
@@ -20,9 +34,16 @@ const CustomTooltip = ({ active, payload, label }) => {
 function Stats() {
     const [seances1, setSeances1] = useState([]);
     const [seances2, setSeances2] = useState([]);
+    const [typePerfGraph, setTypePerfGraph] = useState("percent")
+    const [categorie, setCategorie] = useState({num: 0})
+    const [clicked, setClicked] = useState(false)
     const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
-    const [params2, setParams2] = useState({reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title",exerciceOwnExercice: ""})
-    const [params1, setParams1] = useState({reforme: "poids", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
+    const [params2, setParams2] = useState({date: "md", reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title",exerciceOwnExercice: ""})
+    const [params1, setParams1] = useState({date: "md", reforme: "poids", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
+
+    function handleClick(){
+        setClicked(!clicked);
+    }
 
       const [dimensions, setDimensions] = useState({
             height: window.innerHeight,
@@ -45,44 +66,6 @@ function Stats() {
       })
 
     async function getSeance1(){
-        if (params1.categories){
-            params1.categories.forEach((categorie, index) => {
-                if(categorie.name==="Elastique"){
-                    setParams1(oldParams => {
-                        return ({
-                            ...oldParams,
-                            ["categorie"+index+"name"]: categorie.name,
-                            ["categorie"+index+"utilisation"]: categorie.utilisation,
-                            ["categorie"+index+"input"]: categorie.input,
-                            ["categorie"+index+"estimation"]: categorie.estimation,
-                        })
-                    });
-                }
-                else {
-                    setParams1(oldParams => {
-                        return ({
-                            ...oldParams,
-                            ["categorie"+categorie.num+"name"]: categorie.name,
-                            ["categorie"+categorie.num+"input"]: categorie.input,
-                        })
-                    });
-                }
-            })
-            delete params1.categories
-        }
-        if (params1.details){
-            params1.details.forEach((detail, index) => {
-                setParams(oldParams => {
-                    return ({
-                        ...oldParams,
-                        ["detail"+detail.num+"name"]: detail.name,
-                        ["detail"+detail.num+"input"]: detail.input,
-                    })
-                });
-            })
-            delete params1.details
-        }
-
         const {data} = await API.workouts(params1);
         if (data.success === false){
             alert(data.message);
@@ -93,44 +76,6 @@ function Stats() {
     }
 
     async function getSeance2(){
-        if (params2.categories){
-            params2.categories.forEach((categorie, index) => {
-                if(categorie.name==="Elastique"){
-                    setParams2(oldParams => {
-                        return ({
-                            ...oldParams,
-                            ["categorie"+index+"name"]: categorie.name,
-                            ["categorie"+index+"utilisation"]: categorie.utilisation,
-                            ["categorie"+index+"input"]: categorie.input,
-                            ["categorie"+index+"estimation"]: categorie.estimation,
-                        })
-                    });
-                }
-                else {
-                    setParams2(oldParams => {
-                        return ({
-                            ...oldParams,
-                            ["categorie"+categorie.num+"name"]: categorie.name,
-                            ["categorie"+categorie.num+"input"]: categorie.input,
-                        })
-                    });
-                }
-            })
-            delete params2.categories
-        }
-        if (params2.details){
-            params2.details.forEach((detail, index) => {
-                setParams2(oldParams => {
-                    return ({
-                        ...oldParams,
-                        ["detail"+detail.num+"name"]: detail.name,
-                        ["detail"+detail.num+"input"]: detail.input,
-                    })
-                });
-            })
-            delete params2.details
-        }
-
         const {data} = await API.workouts(params2);
         if (data.success === false){
             alert(data.message);
@@ -144,7 +89,7 @@ function Stats() {
         console.log(params2)
         setTimeout(getSeance1, 50);
         setTimeout(getSeance2, 50);
-    }, [params2]);
+    }, [params1, params2]);
 
 
     function changeExercice(exercice){
@@ -181,6 +126,60 @@ function Stats() {
         }
     },[exercice]);
 
+    function changeTypePerfGraph(){
+        setTypePerfGraph(event.target.value)
+
+    }
+
+    function changeCategorie(categorie){
+        setCategorie(categorie)
+    }
+
+    useEffect(() => {
+        if(categorie.name==="Elastique"){
+            setParams2(oldParams => {
+                return ({
+                    ...oldParams,
+                    ["categorie0name"]: categorie.name,
+                    ["categorie0utilisation"]: categorie.utilisation,
+                    ["categorie0input"]: categorie.input,
+                    ["categorie0estimation"]: categorie.estimation,
+                })
+            });
+        }
+        else {
+            setParams2(oldParams => {
+                return ({
+                    ...oldParams,
+                    ["categorie0name"]: categorie.name,
+                    ["categorie0input"]: categorie.input,
+                })
+            });
+        }
+    }, [categorie])
+
+  function handleChange2(event){
+    event.preventDefault();
+
+    setParams2(oldParams => {
+        return ({
+            ...oldParams,
+            [event.target.id]: event.target.value,
+        })
+    });
+  }
+
+  function handleChange1(event){
+    event.preventDefault();
+
+    setParams1(oldParams => {
+        return ({
+            ...oldParams,
+            [event.target.id]: event.target.value,
+        })
+    });
+  }
+
     return (
         <div>
             <NavigBar />
@@ -192,6 +191,36 @@ function Stats() {
                             <td>
                                 <div className="chart-poids">
                                     <h1> Evolution de ton poids </h1>
+
+                                    <div className="form-group row stats-form">
+                                        <div className="form-group col-sm-12">
+                                            <label className="col-form-label">
+                                              Periode
+                                            </label>
+                                            <select onChange={handleChange1} className="form-control" id="periode">
+                                                <option value="max"> Max (défaut) </option>
+                                                <option value="7d"> 7 derniers jours </option>
+                                                <option value="30d"> 30 derniers jours </option>
+                                                <option value="90d"> 90 derniers jours (3 mois) </option>
+                                                <option value="180d"> 180 derniers jours (6 mois) </option>
+                                                <option value="1y"> Depuis 1 an </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group row stats-form">
+                                        <div className="form-group col-sm-12">
+                                            <label className="col-form-label">
+                                              Format Date
+                                            </label>
+                                            <select onChange={handleChange1} className="form-control" id="date">
+                                                <option value="md"> Mois-Jour (défaut) </option>
+                                                <option value="d"> Jour </option>
+                                                <option value=""> Année-Mois-Jour </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
                                     <ResponsiveContainer width="100%" height={400}>
                                         <LineChart
                                             width={400}
@@ -213,11 +242,55 @@ function Stats() {
                                     <h1> Evolution de tes performances </h1>
 
                                     <div className="form-group row stats-form">
-                                        <div className="form-group col-sm-12">
+                                        <div className="form-group col-sm-4">
                                             <label className="col-form-label">
                                               Exercice
                                             </label>
                                             <ExerciceInput taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                                        </div>
+
+                                        <div className="form-group col-sm-4">
+                                            <label onClick={handleClick} className="col-form-label">
+                                              Catégorie
+                                            </label>
+                                            <CategorieInput click={clicked} id={"catégorie"+0} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
+                                        </div>
+
+                                        <div className="form-group col-sm-4">
+                                            <label className="col-form-label">
+                                              Performance
+                                            </label>
+                                            <select onChange={changeTypePerfGraph} className="form-control">
+                                                <option value={"percent"}> Pourcentage du poids de corps (défaut) </option>
+                                                <option value={"charge"}> Charge </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group row stats-form">
+                                        <div className="form-group col-sm-6">
+                                            <label className="col-form-label">
+                                              Format Date
+                                            </label>
+                                            <select onChange={handleChange2} className="form-control" id="date">
+                                                <option value="md"> Mois-Jour (défaut) </option>
+                                                <option value="d"> Jour </option>
+                                                <option value=""> Année-Mois-Jour </option>
+                                            </select>
+                                        </div>
+
+                                        <div className="form-group col-sm-6">
+                                            <label className="col-form-label">
+                                              Periode
+                                            </label>
+                                            <select onChange={handleChange2} className="form-control" id="periode">
+                                                <option value="max"> Max (défaut) </option>
+                                                <option value="7d"> 7 derniers jours </option>
+                                                <option value="30d"> 30 derniers jours </option>
+                                                <option value="90d"> 90 derniers jours (3 mois) </option>
+                                                <option value="180d"> 180 derniers jours (6 mois) </option>
+                                                <option value="1y"> Depuis 1 an </option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -233,9 +306,11 @@ function Stats() {
                                             <Tooltip content={<CustomTooltip />} />
                                             <CartesianGrid stroke="#f5f5f5" />
                                             <Bar barSize={20} fill="#afafaf" dataKey="exercices[0].Series[0].repsTime" />
-                                            <Line connectNulls type="monotone" dataKey="exercices[0].Series[0].charge" stroke="#ff0000" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Series[0]."+typePerfGraph} stroke="#ff0000" />
                                         </ComposedChart>
                                     </ResponsiveContainer >
+
+                                    <i className="detail-stat"> Les répétitions sont multipliées par 10 pour une meilleur lecture </i>
                                 </div>
                             </td>
                         </tr>
