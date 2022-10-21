@@ -24,6 +24,9 @@ const CustomTooltip = ({ active, payload, label }) => {
             if (payload.dataKey === "poids"){
                 return (<p className="desc">Poids : {payload.value}</p>)
             }
+            else{
+                return (<p className="desc">Elastique : {payload.value}</p>)
+            }
         })}
       </div>
     );
@@ -335,6 +338,11 @@ function Stats() {
                                             <CartesianGrid stroke="#f5f5f5" />
                                             <Bar barSize={20} fill="#afafaf" dataKey="exercices[0].Series[0].repsTime" />
                                             <Line connectNulls type="monotone" dataKey={"exercices[0].Series[0]."+typePerfGraph} stroke="#ff0000" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke="#10669C" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke="#10669C" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke="#10669C" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke="#10669C" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke="#10669C" />
                                         </ComposedChart>
                                     </ResponsiveContainer >
 

@@ -348,15 +348,28 @@ async function workouts(req, res) {
                         if (multiple){
                             seances[indexSeance].exercices[indexExercice].Series[index].repsTime = seances[indexSeance].exercices[indexExercice].Series[index].repsTime*multiple
                         }
-                        const obj = {
-                            date: seance.date,
-                            poids: seance.poids,
-                            exercices: [{exercice: {name: exercice.exercice.name,
-                                                       ownExercice: exercice.exercice.ownExercice },
-                                           Series: {0: seances[indexSeance].exercices[indexExercice].Series[index]}
-                                       }]
-                            }
-//                            console.log(obj);
+                        let obj = {}
+                        if(seances[indexSeance].exercices[indexExercice].Categories){
+                            obj = {
+                                date: seance.date,
+                                poids: seance.poids,
+                                exercices: [{exercice: {name: exercice.exercice.name,
+                                                           ownExercice: exercice.exercice.ownExercice },
+                                               Series: {0: seances[indexSeance].exercices[indexExercice].Series[index]},
+                                               Categories: seances[indexSeance].exercices[indexExercice].Categories
+                                           }]
+                                }
+                        }
+                        else {
+                            obj = {
+                                date: seance.date,
+                                poids: seance.poids,
+                                exercices: [{exercice: {name: exercice.exercice.name,
+                                                           ownExercice: exercice.exercice.ownExercice },
+                                               Series: {0: seances[indexSeance].exercices[indexExercice].Series[index]}
+                                           }]
+                                }
+                        }
                         seances.push(obj);
                         delete seances[indexSeance].exercices[indexExercice].Series[index];
                     }))
@@ -604,6 +617,14 @@ async function workouts(req, res) {
 
                         seances.forEach(seance => {
                             seance.exercices[0].Series[0].percent = parseFloat(seance.exercices[0].Series[0].percent);
+                        });
+
+                        seances.forEach(seance => {
+                            for(let k=0; k<5; k++){
+                                if(seance.exercices[0].Categories && seance.exercices[0].Categories[k] && seance.exercices[0].Categories[k].estimation){
+                                    seance.exercices[0].Categories[k].estimation = parseFloat(seance.exercices[0].Categories[k].estimation);
+                                }
+                            }
                         });
 
                     }
