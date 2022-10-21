@@ -248,10 +248,8 @@ function Stats() {
                                         </div>
                                     </div>
 
-                                    <ResponsiveContainer width="100%" height={400}>
+                                    <ResponsiveContainer width="100%" height={dimensions.width<925 ? 280 : 400} className="chart">
                                         <LineChart
-                                            width={400}
-                                            height={400}
                                             data={seances1}
                                             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
                                         >
@@ -264,6 +262,10 @@ function Stats() {
                                     </ResponsiveContainer >
                                 </div>
                             </td>
+
+
+
+                            {dimensions.width>925 ?
                             <td>
                                 <div className="chart-poids">
                                     <h1> Evolution de tes performances </h1>
@@ -351,7 +353,7 @@ function Stats() {
                                         />
                                     </div>
 
-                                    <ResponsiveContainer width="100%" height={400}>
+                                    <ResponsiveContainer width="100%" height={400} className="chart">
                                         <ComposedChart
                                             width={400}
                                             height={400}
@@ -375,7 +377,125 @@ function Stats() {
                                     <i className="detail-stat"> Les répétitions sont multipliées par 10 pour une meilleur lecture </i>
                                 </div>
                             </td>
+                            :
+                            null
+                            }
                         </tr>
+                        {dimensions.width < 925 ?
+                        <tr>
+                            <td>
+                                <div className="chart-poids">
+                                    <h1 className="chart-title"> Evolution de tes performances </h1>
+
+                                    <div className="form-group row stats-form">
+                                        <div className="form-group col-sm-4">
+                                            <label className="col-form-label">
+                                              Exercice
+                                            </label>
+                                            <ExerciceInput taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                                        </div>
+
+                                        <div className="form-group col-sm-4">
+                                            <label onClick={handleClick} className="col-form-label categorie-label">
+                                              Catégorie
+                                            </label>
+                                            <CategorieInput info="false" click={clicked} id={"catégorie"+0} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
+                                        </div>
+
+                                        <div className="form-group col-sm-4">
+                                            <label className="col-form-label">
+                                              Performance
+                                            </label>
+                                            <select onChange={changeTypePerfGraph} className="form-control">
+                                                <option value={"percent"}> Pourcentage du poids de corps (défaut) </option>
+                                                <option value={"charge"}> Charge </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group row stats-form">
+                                        <div className="form-group col-sm-4">
+                                            <label className="col-form-label">
+                                              Format Date
+                                            </label>
+                                            <select onChange={handleChange2} className="form-control" id="date">
+                                                <option value="md"> Mois-Jour (défaut) </option>
+                                                <option value="d"> Jour </option>
+                                                <option value=""> Année-Mois-Jour </option>
+                                            </select>
+                                        </div>
+
+                                        <div className="form-group col-sm-4">
+                                            <label className="col-form-label">
+                                              Periode
+                                            </label>
+                                            <select onChange={handleChange2} className="form-control" id="periode">
+                                                <option value="max"> Max (défaut) </option>
+                                                <option value="7d"> 7 derniers jours </option>
+                                                <option value="30d"> 30 derniers jours </option>
+                                                <option value="90d"> 90 derniers jours (3 mois) </option>
+                                                <option value="180d"> 180 derniers jours (6 mois) </option>
+                                                <option value="1y"> Depuis 1 an </option>
+                                            </select>
+                                        </div>
+
+                                        <div className="form-group col-sm-4">
+                                            <label onClick={handleClickDetail} className="col-form-label detail-label">
+                                              Détail
+                                            </label>
+                                            <DetailInput info="false" click={clickedDetail}  id={"detail"+0} index={0} num={0} dashboard={true} changeDetail={changeDetail}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group row stats-form">
+                                        <label className="col-form-label col-sm-3">
+                                          Reps / Temps
+                                        </label>
+                                        <input type="text"
+                                          className="form-control col-sm-4"
+                                          value={params2.repsFrom}
+                                          onChange={handleChange2}
+                                          placeholder="Aucun filtre"
+                                          id="repsFrom"
+                                        />
+                                        <label className="col-form-label col-sm-1">
+                                          à
+                                        </label>
+                                        <input type="text"
+                                          className="form-control col-sm-4"
+                                          value={params2.repsTo}
+                                          onChange={handleChange2}
+                                          placeholder="Aucun filtre"
+                                          id="repsTo"
+                                        />
+                                    </div>
+
+                                    <ResponsiveContainer width="100%" height={dimensions.width<925 ? 280 : 400} className="chart">
+                                        <ComposedChart
+                                            width={400}
+                                            height={400}
+                                            data={seances2}
+                                            margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+                                        >
+                                            <XAxis dataKey="date" />
+                                            <YAxis domain={[0, 300]} />
+                                            <Tooltip content={<CustomTooltip />} />
+                                            <CartesianGrid stroke="#f5f5f5" />
+                                            <Bar barSize={20} fill="#afafaf" dataKey="exercices[0].Series[0].repsTime" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Series[0]."+typePerfGraph} stroke="#ff0000" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke="#10669C" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke="#10669C" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke="#10669C" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke="#10669C" />
+                                            <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke="#10669C" />
+                                        </ComposedChart>
+                                    </ResponsiveContainer >
+
+                                    <i className="detail-stat"> Les répétitions sont multipliées par 10 pour une meilleur lecture </i>
+                                </div>
+                            </td>
+                            </tr>
+                        : null}
                     </tbody>
                 </table>
             </div>

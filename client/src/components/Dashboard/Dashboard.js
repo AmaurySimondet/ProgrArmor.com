@@ -503,39 +503,31 @@ function Dashboard() {
                 </div>
 
                 <div className="form-group row">
-                    <div className="form-group col-md-6 col-lg-2 custom-control custom-checkbox">
+                    <div className="form-group col-sm-12">
                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageNom" id="affichageNom"/>
                           <label className="col-form-label" htmlFor="#affichageNom"> Nom </label>
-                    </div>
-                    <div className="form-group col-md-6 col-lg-2 custom-control custom-checkbox">
+
                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageDate" id="affichageDate"/>
                           <label className="col-form-label"  htmlFor="#affichageDate"> Date </label>
-                    </div>
-                    <div className="form-group col-md-6 col-lg-2 custom-control custom-checkbox">
+
                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePoids" id="affichagePoids"/>
                           <label className="col-form-label" htmlFor="#affichagePoids"> Poids </label>
-                    </div>
-                    <div className="form-group col-md-6 col-lg-2 custom-control custom-checkbox">
+
                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExercice" id="affichageExercice"/>
                           <label className="col-form-label" htmlFor="#affichageExercice"> Exercice </label>
-                    </div>
-                    <div className="form-group col-md-6 col-lg-2 custom-control custom-checkbox">
+
                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSérie" id="affichageSérie"/>
                           <label className="col-form-label" htmlFor="#affichageSérie"> Série </label>
-                    </div>
-                    <div className="form-group col-md-6 col-lg-2 custom-control custom-checkbox">
+
                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType"/>
                           <label className="col-form-label" htmlFor="#affichageType"> Type </label>
-                    </div>
-                    <div className="form-group col-md-6 col-lg-2 custom-control custom-checkbox">
+
                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageReps" id="affichageReps"/>
                           <label className="col-form-label" htmlFor="#affichageReps"> Reps </label>
-                    </div>
-                    <div className="form-group col-md-6 col-lg-2 custom-control custom-checkbox">
+
                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageCharge" id="affichageCharge"/>
                           <label className="col-form-label" htmlFor="#affichageCharge"> Charge </label>
-                    </div>
-                    <div className="form-group col-md-6 col-lg-2 custom-control custom-checkbox">
+
                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePercent" id="affichagePercent"/>
                           <label className="col-form-labell" htmlFor="#affichagePercent"> % PDC </label>
                     </div>

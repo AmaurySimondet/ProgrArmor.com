@@ -253,6 +253,44 @@ table.Stats-table{
 
 }
 
+.chart{
+    margin-top:20px;
+}
+
+@media (max-width: 925px){
+    .chart{
+        margin-top:50px;
+        position: absolute;
+        right: 20px;
+
+    }
+
+    .chart-title{
+        margin-top: 400px;
+
+    }
+
+    .stats-form{
+        font-size:10px;
+
+    }
+
+    .stats-form select{
+        font-size:10px !important;
+
+    }
+
+    .stats-form input{
+        font-size:10px !important;
+
+    }
+
+    .Stats-div i{
+        font-size:7px !important;
+
+    }
+}
+
 .Stats-div h1{
     margin-bottom: 20px;
 
@@ -279,6 +317,11 @@ table.Stats-table{
 
 .Dashboard h2{
     margin: 3% 0;
+
+}
+
+.Dashboard .form-group{
+    margin-bottom: 2px !important;
 
 }
 
@@ -317,6 +360,34 @@ table.Stats-table{
     margin-left:5px;
 
 }
+
+@media (max-width: 740px){
+    .Dashboard{
+        font-size: 10px !important
+
+    }
+
+    .Dashboard select{
+        font-size: 10px !important
+
+    }
+
+    .Dashboard button{
+        font-size: 10px !important
+
+    }
+
+    .Dashboard input{
+        font-size: 10px !important
+
+    }
+
+    .Dashboard table{
+        font-size: 7px !important
+
+    }
+}
+
 
 
 /* SESSION EXPERT */
