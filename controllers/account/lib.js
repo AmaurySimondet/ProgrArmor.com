@@ -403,6 +403,97 @@ async function workouts(req, res) {
       )
     }
 
+    function seancesToPie(seances , string){
+        let arr = []
+        let arr2 = []
+
+        seances.map((seance,indexSeance) => {
+            return (seance.exercices.map((exercice, indexExercice) => {
+                    return (Object.keys(exercice.Series).map(index => {
+                        if(seances[indexSeance].exercices[indexExercice].Series[index].typeSerie===string || string==="sets"){
+                            if(seances[indexSeance].exercices[indexExercice].exercice.muscle){
+                                arr.push(seances[indexSeance].exercices[indexExercice].exercice.name+" - "+seances[indexSeance].exercices[indexExercice].exercice.muscle)
+                                if (string !== "sets"){
+                                    arr2.push(parseFloat(seances[indexSeance].exercices[indexExercice].Series[index].repsTime))
+                                }
+                                else{
+                                    arr2.push(0)
+                                }
+                            }
+                            else{
+                                arr.push(seances[indexSeance].exercices[indexExercice].exercice.name)
+                                if (string !== "sets"){
+                                    arr2.push(parseFloat(seances[indexSeance].exercices[indexExercice].Series[index].repsTime))
+                                }
+                                else{
+                                    arr2.push(0)
+                                }
+                            }
+                        }
+                    }))
+            }))
+        })
+
+        if (string !== "sets"){
+
+            let index = []
+            arr2 = arr2.filter(function( el, i ) {
+               if (isNaN(el)){
+                    index.push(i)
+                    return false
+               }
+               else{
+                    return true
+               }
+            });
+
+            index.forEach((id) => arr.splice(id,1))
+
+            for(let k=0; k<arr.length; k++){
+                for(let i=0; i<arr.length; i++){
+                    if(k!=i && arr[k]===arr[i]){
+                        arr2[k] = parseFloat(arr2[k]) + parseFloat(arr2[i])
+                        arr.splice(i,1)
+                        arr2.splice(i,1)
+                    }
+                }
+            }
+
+            let arr3 = []
+            for(let k=0; k<arr.length; k++){
+                arr3.push({name: arr[k], repsTime: parseFloat(arr2[k])})
+            }
+
+            return arr3;
+        }
+        else{
+            arr2 = []
+            let arr3 =[]
+
+            for(let k=0; k<arr.length; k++){
+                if(!arr3.includes(arr[k])){
+                    arr3.push(arr[k])
+                    arr2.push(arr.filter(el => {return el===arr[k]}).length)
+                }
+
+
+            }
+
+            let arr4 = []
+            for(let k=0; k<arr.length; k++){
+                arr4.push({name: arr3[k], repsTime: parseFloat(arr2[k])})
+            }
+
+            return arr4;
+
+        }
+    }
+
+    function sortExerciceFav(b,a) {
+        return a.repsTime - b.repsTime;
+
+    }
+
     function removeEmptyPoids(seance) {
       return (
           Object.fromEntries(Object.entries(seance).filter(([_, element]) => {
@@ -612,10 +703,6 @@ async function workouts(req, res) {
                             arr.push(removeEmpty(seance))
                         });
 
-                        seances.forEach(seance => {
-                            console.log(seance)
-                        });
-
                         seances = seancesToPerformances(seances, 10);
 
                         arr = []
@@ -653,7 +740,7 @@ async function workouts(req, res) {
                         });
                     }
 
-                    //STATS REFORME
+                    //STATS REFORME poids
                     if(req.query.reforme==="poids"){
                         let arr = []
                         seances.forEach(seance => {
@@ -664,6 +751,12 @@ async function workouts(req, res) {
                             return Object.entries(element).length !== 0
                         });
 
+                    }
+
+                    //STATS REFORME poids
+                    if(req.query.reforme==="pie"){
+                        seances = seancesToPie(seances, req.query.class)
+                        seances = seances.sort((a,b) => {return b.repsTime - a.repsTime})
                     }
 
                     res.json({ success: true, message: "Utilisateur trouvé !", seances: seances})

@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from "react";
 import NavigBar from "../NavigBar.jsx"
-import {LineChart, YAxis, XAxis, Tooltip, Label, CartesianGrid, Line, ResponsiveContainer, Bar, ComposedChart} from 'recharts'
+import {LineChart, YAxis, XAxis, Tooltip, Label, PieChart, Pie, Sector, CartesianGrid, Line, ResponsiveContainer, Bar, ComposedChart} from 'recharts'
 import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
 import CategorieInput from "./CategorieInput"
@@ -10,7 +10,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="custom-tooltip">
-        <p className="label">Date : {label}</p>
+        {label ? <p className="label">Date : {label}</p> : null}
         {payload.map((payload) => {
             if (payload.dataKey === "exercices[0].Series[0].repsTime"){
                 return (<p className="desc">Reps / Temps : {payload.value/10}</p>)
@@ -24,8 +24,8 @@ const CustomTooltip = ({ active, payload, label }) => {
             if (payload.dataKey === "poids"){
                 return (<p className="desc">Poids : {payload.value}</p>)
             }
-            else{
-                return (<p className="desc">Elastique : {payload.value}</p>)
+            if (payload.dataKey === "repsTime"){
+                return (<p className="desc"> Valeur classification : {payload.value}</p>)
             }
         })}
       </div>
@@ -35,16 +35,22 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
+let renderLabel = function(entry) {
+    return entry.name;
+}
+
 function Stats() {
     let errIter = 0;
     const [seances1, setSeances1] = useState([]);
     const [seances2, setSeances2] = useState([]);
+    const [seances3, setSeances3] = useState([]);
     const [typePerfGraph, setTypePerfGraph] = useState("percent")
     const [categorie, setCategorie] = useState({num: 0})
     const [detail, setDetail] = useState({num: 0})
     const [clicked, setClicked] = useState(false)
     const [clickedDetail, setClickedDetail] = useState(false)
     const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
+    const [params3, setParams3] = useState({top: 5, class: "reps", date: "md", reforme: "pie", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title",exerciceOwnExercice: ""})
     const [params2, setParams2] = useState({date: "md", reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title",exerciceOwnExercice: ""})
     const [params1, setParams1] = useState({date: "md", reforme: "poids", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
 
@@ -56,12 +62,12 @@ function Stats() {
         setClickedDetail(!clickedDetail);
     }
 
-      const [dimensions, setDimensions] = useState({
+    const [dimensions, setDimensions] = useState({
             height: window.innerHeight,
             width: window.innerWidth
-      })
+    })
 
-      useEffect(() => {
+    useEffect(() => {
         function handleResize() {
           setDimensions({
             height: window.innerHeight,
@@ -74,7 +80,7 @@ function Stats() {
             clearTimeout(timeout);;
             timeout = setTimeout(handleResize, 200);
         });
-      })
+    })
 
     async function getSeance1(){
         const {data} = await API.workouts(params1);
@@ -94,15 +100,30 @@ function Stats() {
             errIter=1;
         } else {
             setSeances2(data.seances);
-            console.log(data.seances);
+//            console.log(data.seances);
+        }
+    }
+
+    async function getSeance3(){
+        const {data} = await API.workouts(params3);
+        if (data.success === false && errIter===0 ){
+            alert(data.message);
+            errIter=1;
+        } else {
+            if(params3.top && params3.top !== "max"){
+                setSeances3(data.seances.slice(0,parseInt(params3.top)));
+            }
+            else{
+                setSeances3(data.seances);
+            }
         }
     }
 
     useEffect(() => {
-        console.log(params2)
         setTimeout(getSeance1, 50);
         setTimeout(getSeance2, 50);
-    }, [params1, params2]);
+        setTimeout(getSeance3, 50);
+    }, [params1, params2, params3]);
 
 
     function changeExercice(exercice){
@@ -184,6 +205,17 @@ function Stats() {
             })
         });
     }, [detail])
+
+  function handleChange3(event){
+    event.preventDefault();
+
+    setParams3(oldParams => {
+        return ({
+            ...oldParams,
+            [event.target.id]: event.target.value,
+        })
+    });
+  }
 
   function handleChange2(event){
     event.preventDefault();
@@ -496,8 +528,74 @@ function Stats() {
                             </td>
                             </tr>
                         : null}
+                        <tr>
+                            <td>
+
+                            </td>
+                        </tr>
+
                     </tbody>
                 </table>
+
+                <div className="chart-pie">
+                    <h1 className="chart-title"> Tes exercices préférés </h1>
+
+                    <div className="form-group row stats-form">
+                        <div className="form-group col-sm-4">
+                            <label className="col-form-label">
+                              Periode
+                            </label>
+                            <select onChange={handleChange3} className="form-control" id="periode">
+                                <option value="max"> Max (défaut) </option>
+                                <option value="7d"> 7 derniers jours </option>
+                                <option value="30d"> 30 derniers jours </option>
+                                <option value="90d"> 90 derniers jours (3 mois) </option>
+                                <option value="180d"> 180 derniers jours (6 mois) </option>
+                                <option value="1y"> Depuis 1 an </option>
+                            </select>
+                        </div>
+
+                        <div className="form-group col-sm-4">
+                            <label className="col-form-label">
+                              Classification
+                            </label>
+                            <select onChange={handleChange3} className="form-control" id="class">
+                                <option value="reps"> Somme des répétitions (défaut) </option>
+                                <option value="sets"> Somme des séries </option>
+                                <option value="time"> Somme des secondes </option>
+                            </select>
+                        </div>
+
+                        <div className="form-group col-sm-4">
+                            <label className="col-form-label">
+                              Affichage
+                            </label>
+                            <select onChange={handleChange3} className="form-control" id="top">
+                                <option value={5}> Top 5 (défaut) </option>
+                                <option value={10}> Top 10 </option>
+                                <option value={20}> Top 20 </option>
+                                <option value="max"> Tous </option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <ResponsiveContainer width="100%" height={400}>
+                        <PieChart width={800} height={800}>
+                          <Pie
+                            data={seances3}
+                            innerRadius={100}
+                            outerRadius={150}
+                            fill="#9b0000"
+                            dataKey="repsTime"
+                            label={renderLabel}
+                          />
+                          <Tooltip content={<CustomTooltip />} />
+                        </PieChart>
+                    </ResponsiveContainer>
+                </div>
+
+
             </div>
         </div>
     );

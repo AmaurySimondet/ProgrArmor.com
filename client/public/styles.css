@@ -253,6 +253,12 @@ table.Stats-table{
 
 }
 
+.chart-pie{
+    margin:auto;
+    text-align: center;
+
+}
+
 .chart{
     margin-top:20px;
 }
