@@ -320,9 +320,40 @@ table.Stats-table{
 
 /* DASHBOARD */
 
+
 .Dashboard .icon-navbar{
     filter: invert(1);
     width: 50px;
+
+}
+
+table.table1 {
+  table-layout: fixed ;
+  width: 60%;
+  margin: auto;
+  margin-bottom: 10%;
+}
+
+.table1 .home{
+    margin-right: 70%;
+    width: 20%;
+
+}
+
+.table1 .home2{
+    margin-left: 70%;
+    width: 20%;
+
+}
+
+.Dashboard .fleche1{
+    width: 50%;
+    transform: rotate(60deg);
+}
+
+.Dashboard .fleche2{
+    width: 50%;
+    transform: scaleX(-1) rotate(60deg);;
 
 }
 

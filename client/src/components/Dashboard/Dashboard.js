@@ -350,26 +350,118 @@ function Dashboard() {
 
                 <p>  </p>
 
-                <ul>
-                  <li>
-                    <img className="icon-navbar" src={require('../../images/icons/home.png')} alt='home' />
-                  </li>
-                  <li>
-                    <img className="icon-navbar" src={require('../../images/icons/write.png')} alt='session' />
-                  </li>
-                  <li>
-                    <img className="icon-navbar" src={require('../../images/icons/chart.png')} alt='stats' />
-                  </li>
-                  <li>
-                    <img className="icon-navbar" src={require('../../images/icons/plus.png')} alt='programme' />
-                  </li>
-                  <li>
-                    <img className="icon-navbar" src={require('../../images/icons/social.png')} alt='social' />
-                  </li>
-                  <li>
-                    <img className="icon-navbar" src={require('../../images/icons/gear.png')} alt='parametres' />
-                  </li>
-                </ul>
+                <div className="Design-welcome">
+                    <table className="table1">
+                        <tr>
+                            <td>
+                                <img className="icon-navbar home" src={require('../../images/icons/home.png')} alt='home' />
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img className="fleche1" src={require('../../images/icons/fleche.png')} alt='home' />
+                            </td>
+                            <td>
+                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table className="table1">
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <img className="icon-navbar home2" src={require('../../images/icons/write.png')} alt='session' />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                            </td>
+                            <td>
+                                <img className="fleche2" src={require('../../images/icons/fleche.png')} alt='home' />
+                            </td>
+                        </tr>
+                    </table>
+
+
+                    <table className="table1">
+                        <tr>
+                            <td>
+                                <img className="icon-navbar home" src={require('../../images/icons/chart.png')} alt='stats' />
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img className="fleche1" src={require('../../images/icons/fleche.png')} alt='home' />
+                            </td>
+                            <td>
+                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table className="table1">
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <img className="icon-navbar home2" src={require('../../images/icons/plus.png')} alt='programme' />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                            </td>
+                            <td>
+                                <img className="fleche2" src={require('../../images/icons/fleche.png')} alt='home' />
+                            </td>
+                        </tr>
+                    </table>
+
+
+                    <table className="table1">
+                        <tr>
+                            <td>
+                                <img className="icon-navbar home" src={require('../../images/icons/social.png')} alt='social' />
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img className="fleche1" src={require('../../images/icons/fleche.png')} alt='home' />
+                            </td>
+                            <td>
+                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table className="table1">
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <img className="icon-navbar home2" src={require('../../images/icons/gear.png')} alt='parametres' />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                            </td>
+                            <td>
+                                <img className="fleche2" src={require('../../images/icons/fleche.png')} alt='home' />
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
               </div>
       :
               <div className="Dashboard">
