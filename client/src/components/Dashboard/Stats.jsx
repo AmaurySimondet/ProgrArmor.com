@@ -120,6 +120,7 @@ function Stats() {
     }
 
     useEffect(() => {
+        console.log(seances3)
         setTimeout(getSeance1, 50);
         setTimeout(getSeance2, 50);
         setTimeout(getSeance3, 50);

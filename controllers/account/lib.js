@@ -446,18 +446,20 @@ async function workouts(req, res) {
                     return true
                }
             });
-
             index.forEach((id) => arr.splice(id,1))
 
             for(let k=0; k<arr.length; k++){
                 for(let i=0; i<arr.length; i++){
                     if(k!=i && arr[k]===arr[i]){
                         arr2[k] = parseFloat(arr2[k]) + parseFloat(arr2[i])
-                        arr.splice(i,1)
-                        arr2.splice(i,1)
+                        arr[i] = 0
+                        arr2[i] = 0
                     }
                 }
             }
+
+            arr = arr.filter(el => el!==0)
+            arr2 = arr2.filter(e => e!=0)
 
             let arr3 = []
             for(let k=0; k<arr.length; k++){

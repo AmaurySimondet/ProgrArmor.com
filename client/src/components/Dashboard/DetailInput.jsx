@@ -37,7 +37,6 @@ function DetailInput(props) {
   }
 
   useEffect(() => {
-    console.log(props.num)
     props.changeDetail(detail, props.num)
   }, [detail])
 
