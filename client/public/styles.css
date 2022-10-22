@@ -320,6 +320,17 @@ table.Stats-table{
 
 /* DASHBOARD */
 
+.Dashboard .icon-navbar{
+    filter: invert(1);
+    width: 50px;
+
+}
+
+.Dashboard .icon-navbar:hover{
+    filter: invert(1);
+
+}
+
 .dashboard-table{
     margin-top: 5%;
 
@@ -338,7 +349,7 @@ table.Stats-table{
 }
 
 .Dashboard h2{
-    margin: 3% 0;
+    margin: 40px 0;
 
 }
 
@@ -565,6 +576,41 @@ table.connexion-table td.connexion-img-td {
 }
 
 /* NavigBar */
+.warning-border{
+    margin-top: 1%;
+    background-color: #9b0000;
+    color: white;
+    text-align: justify;
+
+}
+
+.La-croix{
+    text-align: right;
+    margin: 0;
+    font-size : 120%;
+}
+
+.La-croix:hover{
+    color: #9a9a9a
+}
+
+.warning-border .attention{
+    margin-top: -20px;
+
+}
+
+.warning-border p{
+    margin: auto;
+    width: 90%
+
+}
+
+.warning-border .text{
+    padding: 2%;
+
+}
+
+
 .icon-navbar{
     width: 25px;
     margin-right: 20px;

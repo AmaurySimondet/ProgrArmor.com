@@ -338,277 +338,366 @@ function Dashboard() {
         setParams({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
     }
 
+
+
   return (
-      <div>
-          <NavigBar location="dashboard"/>
+<div>
+      <NavigBar location="dashboard"/>
 
-          <div className="Dashboard">
+      {seances ?
+              <div className="Dashboard">
+                <h1 className="Dashboard-h1">Bienvenue !</h1>
 
-            <h1 className="Dashboard-h1">Historique des séances</h1>
+                <p>  </p>
 
-            <form className="debutant-form">
-                <h2> Filtrage </h2>
+                <ul>
+                  <li>
+                    <img className="icon-navbar" src={require('../../images/icons/home.png')} alt='home' />
+                  </li>
+                  <li>
+                    <img className="icon-navbar" src={require('../../images/icons/write.png')} alt='session' />
+                  </li>
+                  <li>
+                    <img className="icon-navbar" src={require('../../images/icons/chart.png')} alt='stats' />
+                  </li>
+                  <li>
+                    <img className="icon-navbar" src={require('../../images/icons/plus.png')} alt='programme' />
+                  </li>
+                  <li>
+                    <img className="icon-navbar" src={require('../../images/icons/social.png')} alt='social' />
+                  </li>
+                  <li>
+                    <img className="icon-navbar" src={require('../../images/icons/gear.png')} alt='parametres' />
+                  </li>
+                </ul>
+              </div>
+      :
+              <div className="Dashboard">
 
-                <div className="form-group row">
-                    <div className="form-group col-sm-6">
-                        <label className="col-sm-1 col-form-label">
-                          Tri
-                        </label>
-                        <select onChange={handleChange} className="custom-select" id="tri">
-                            <option value="Ordre chronologique décroissant"> Ordre chronologique décroissant (défaut) </option>
-                            <option value="Ordre chronologique croissant"> Ordre chronologique croissant </option>
-                            <option value="Charge (ordre décroissant)"> Charge (ordre décroissant) </option>
-                            <option value="PDC (ordre décroissant)"> % PDC (ordre décroissant) </option>
-                        </select>
-                    </div>
+                <h1 className="Dashboard-h1">Historique des séances</h1>
 
-                    <div className="form-group col-sm-6">
-                        <label className="col-sm-1 col-form-label">
-                          Periode
-                        </label>
-                        <select onChange={handleChange} className="custom-select" id="periode">
-                            <option value="max"> Max (défaut) </option>
-                            <option value="7d"> 7 derniers jours </option>
-                            <option value="30d"> 30 derniers jours </option>
-                            <option value="90d"> 90 derniers jours (3 mois) </option>
-                            <option value="180d"> 180 derniers jours (6 mois) </option>
-                            <option value="1y"> Depuis 1 an </option>
-                        </select>
-                    </div>
-                </div>
+                <form className="debutant-form">
+                    <h2> Filtrage </h2>
 
-                <div className="form-group row">
-                    <div className="form-group col-sm-6">
-                        <label className="col-form-label">
-                          Exercice
-                        </label>
-                        <ExerciceInput taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
-                    </div>
-
-                    <div className="form-group col-sm-6">
-                        <label className="col-form-label">
-                          Reps / Temps
-                        </label>
-                        <input type="text"
-                          className="form-control"
-                          value={params.repsFrom}
-                          onChange={handleChange}
-                          placeholder="Aucun filtre"
-                          id="repsFrom"
-                        />
-                        <label className="col-form-label">
-                          à
-                        </label>
-                        <input type="text"
-                          className="form-control"
-                          value={params.repsTo}
-                          onChange={handleChange}
-                          placeholder="Aucun filtre"
-                          id="repsTo"
-                        />
-                    </div>
-                </div>
-
-                {categoriesAddRien.map((rien, index) => {
-                    return(
-                        <div className="form-group row">
-                            <div className="form-group col-sm-12">
-                                <label onClick={handleClick} id={index} className="col-form-label categorie-label">
-                                  Catégorie {index+1}
-                                </label>
-                                <CategorieInput click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
-                            </div>
+                    <div className="form-group row">
+                        <div className="form-group col-sm-6">
+                            <label className="col-sm-1 col-form-label">
+                              Tri
+                            </label>
+                            <select onChange={handleChange} className="custom-select" id="tri">
+                                <option value="Ordre chronologique décroissant"> Ordre chronologique décroissant (défaut) </option>
+                                <option value="Ordre chronologique croissant"> Ordre chronologique croissant </option>
+                                <option value="Charge (ordre décroissant)"> Charge (ordre décroissant) </option>
+                                <option value="PDC (ordre décroissant)"> % PDC (ordre décroissant) </option>
+                            </select>
                         </div>
-                    )
-                })}
 
-                {detailsAddRien.map((rien, index) => {
-                    return(
-                        <div className="form-group row">
-                            <div className="form-group col-sm-12">
-                                <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
-                                  Détail {index+1}
-                                </label>
-                                <DetailInput click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
-                            </div>
+                        <div className="form-group col-sm-6">
+                            <label className="col-sm-1 col-form-label">
+                              Periode
+                            </label>
+                            <select onChange={handleChange} className="custom-select" id="periode">
+                                <option value="max"> Max (défaut) </option>
+                                <option value="7d"> 7 derniers jours </option>
+                                <option value="30d"> 30 derniers jours </option>
+                                <option value="90d"> 90 derniers jours (3 mois) </option>
+                                <option value="180d"> 180 derniers jours (6 mois) </option>
+                                <option value="1y"> Depuis 1 an </option>
+                            </select>
                         </div>
-                    )
-                })}
+                    </div>
 
-                <div className="form-group row">
-                    <div className="form-group col-sm-6">
+                    <div className="form-group row">
+                        <div className="form-group col-sm-6">
+                            <label className="col-form-label">
+                              Exercice
+                            </label>
+                            <ExerciceInput taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                        </div>
+
+                        <div className="form-group col-sm-6">
+                            <label className="col-form-label">
+                              Reps / Temps
+                            </label>
+                            <input type="text"
+                              className="form-control"
+                              value={params.repsFrom}
+                              onChange={handleChange}
+                              placeholder="Aucun filtre"
+                              id="repsFrom"
+                            />
+                            <label className="col-form-label">
+                              à
+                            </label>
+                            <input type="text"
+                              className="form-control"
+                              value={params.repsTo}
+                              onChange={handleChange}
+                              placeholder="Aucun filtre"
+                              id="repsTo"
+                            />
+                        </div>
+                    </div>
+
+                    {categoriesAddRien.map((rien, index) => {
+                        return(
+                            <div className="form-group row">
+                                <div className="form-group col-sm-12">
+                                    <label onClick={handleClick} id={index} className="col-form-label categorie-label">
+                                      Catégorie {index+1}
+                                    </label>
+                                    <CategorieInput click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
+                                </div>
+                            </div>
+                        )
+                    })}
+
+                    {detailsAddRien.map((rien, index) => {
+                        return(
+                            <div className="form-group row">
+                                <div className="form-group col-sm-12">
+                                    <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
+                                      Détail {index+1}
+                                    </label>
+                                    <DetailInput click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
+                                </div>
+                            </div>
+                        )
+                    })}
+
+                    <div className="form-group row">
+                        <div className="form-group col-sm-6">
+                            <label className="col-sm-1 col-form-label">
+                              Nom
+                            </label>
+                            <select onChange={handleChange} className="custom-select" id="nom">
+                                <option value="title"> / (défaut) </option>
+                                {listeNoms ? listeNoms.map((nom,index) => {
+                                    return <option key={index} value={nom}> {nom} </option>
+                                })
+                                : null }
+                            </select>
+                        </div>
+
+                        <div className="form-group col-sm-3 button-dashboard">
+                            <button className="btn btn-dark form-button" onClick={resetParameters} type="submit">Reset des paramètres</button>
+                        </div>
+                    </div>
+
+                    <h2> Affichage </h2>
+
+                    <div className="form-group row slider-style">
                         <label className="col-sm-1 col-form-label">
-                          Nom
+                          Nombre de catégories
                         </label>
-                        <select onChange={handleChange} className="custom-select" id="nom">
-                            <option value="title"> / (défaut) </option>
-                            {listeNoms ? listeNoms.map((nom,index) => {
-                                return <option key={index} value={nom}> {nom} </option>
-                            })
-                            : null }
-                        </select>
+                        <div className="col-sm-5">
+                            <StyleSlider
+                                style={
+                                {
+                                    width: "70%",
+                                }
+                                }
+                                defaultValue={0}
+                                onChange={handleChangeSliderCategorie}
+                                getAriaValueText={valuetext}
+                                aria-labelledby="discrete-slider-custom"
+                                step={1}
+                                max={5}
+                                min={0}
+                                valueLabelDisplay="auto"
+                                marks={marks}
+                            />
+                        </div>
+
+                        <label className="col-sm-1 col-form-label">
+                          Nombre de détails
+                        </label>
+                        <div className="col-sm-5">
+                            <StyleSlider
+                                style={
+                                {
+                                    width: "70%",
+                                }
+                                }
+                                defaultValue={0}
+                                onChange={handleChangeSliderDetail}
+                                getAriaValueText={valuetext}
+                                aria-labelledby="discrete-slider-custom"
+                                step={1}
+                                max={5}
+                                min={0}
+                                valueLabelDisplay="auto"
+                                marks={marks}
+                            />
+                        </div>
                     </div>
 
-                    <div className="form-group col-sm-3 button-dashboard">
-                        <button className="btn btn-dark form-button" onClick={resetParameters} type="submit">Reset des paramètres</button>
+                    <div className="form-group row">
+                        <div className="form-group col-sm-12">
+                              <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageNom" id="affichageNom"/>
+                              <label className="col-form-label" htmlFor="#affichageNom"> Nom </label>
+
+                              <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageDate" id="affichageDate"/>
+                              <label className="col-form-label"  htmlFor="#affichageDate"> Date </label>
+
+                              <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePoids" id="affichagePoids"/>
+                              <label className="col-form-label" htmlFor="#affichagePoids"> Poids </label>
+
+                              <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExercice" id="affichageExercice"/>
+                              <label className="col-form-label" htmlFor="#affichageExercice"> Exercice </label>
+
+                              <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSérie" id="affichageSérie"/>
+                              <label className="col-form-label" htmlFor="#affichageSérie"> Série </label>
+
+                              <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType"/>
+                              <label className="col-form-label" htmlFor="#affichageType"> Type </label>
+
+                              <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageReps" id="affichageReps"/>
+                              <label className="col-form-label" htmlFor="#affichageReps"> Reps </label>
+
+                              <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageCharge" id="affichageCharge"/>
+                              <label className="col-form-label" htmlFor="#affichageCharge"> Charge </label>
+
+                              <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePercent" id="affichagePercent"/>
+                              <label className="col-form-labell" htmlFor="#affichagePercent"> % PDC </label>
+                        </div>
                     </div>
-                </div>
-
-                <h2> Affichage </h2>
-
-                <div className="form-group row slider-style">
-                    <label className="col-sm-1 col-form-label">
-                      Nombre de catégories
-                    </label>
-                    <div className="col-sm-5">
-                        <StyleSlider
-                            style={
-                            {
-                                width: "70%",
-                            }
-                            }
-                            defaultValue={0}
-                            onChange={handleChangeSliderCategorie}
-                            getAriaValueText={valuetext}
-                            aria-labelledby="discrete-slider-custom"
-                            step={1}
-                            max={5}
-                            min={0}
-                            valueLabelDisplay="auto"
-                            marks={marks}
-                        />
-                    </div>
-
-                    <label className="col-sm-1 col-form-label">
-                      Nombre de détails
-                    </label>
-                    <div className="col-sm-5">
-                        <StyleSlider
-                            style={
-                            {
-                                width: "70%",
-                            }
-                            }
-                            defaultValue={0}
-                            onChange={handleChangeSliderDetail}
-                            getAriaValueText={valuetext}
-                            aria-labelledby="discrete-slider-custom"
-                            step={1}
-                            max={5}
-                            min={0}
-                            valueLabelDisplay="auto"
-                            marks={marks}
-                        />
-                    </div>
-                </div>
-
-                <div className="form-group row">
-                    <div className="form-group col-sm-12">
-                          <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageNom" id="affichageNom"/>
-                          <label className="col-form-label" htmlFor="#affichageNom"> Nom </label>
-
-                          <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageDate" id="affichageDate"/>
-                          <label className="col-form-label"  htmlFor="#affichageDate"> Date </label>
-
-                          <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePoids" id="affichagePoids"/>
-                          <label className="col-form-label" htmlFor="#affichagePoids"> Poids </label>
-
-                          <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExercice" id="affichageExercice"/>
-                          <label className="col-form-label" htmlFor="#affichageExercice"> Exercice </label>
-
-                          <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSérie" id="affichageSérie"/>
-                          <label className="col-form-label" htmlFor="#affichageSérie"> Série </label>
-
-                          <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType"/>
-                          <label className="col-form-label" htmlFor="#affichageType"> Type </label>
-
-                          <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageReps" id="affichageReps"/>
-                          <label className="col-form-label" htmlFor="#affichageReps"> Reps </label>
-
-                          <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageCharge" id="affichageCharge"/>
-                          <label className="col-form-label" htmlFor="#affichageCharge"> Charge </label>
-
-                          <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePercent" id="affichagePercent"/>
-                          <label className="col-form-labell" htmlFor="#affichagePercent"> % PDC </label>
-                    </div>
-                </div>
-            </form>
+                </form>
 
 
 
-            <table className="table table-hover table-responsive-lg table-dark dashboard-table">
-              <thead className="thead-dark">
-                <tr>
-                  {checkbox.affichageNom ? <th scope="col">Nom </th> : null}
-                  {checkbox.affichageDate ? <th scope="col">Date </th> : null}
-                  {checkbox.affichagePoids ? <th scope="col">Poids</th> : null}
-                  {checkbox.affichageExercice ? <th scope="col">Exercice</th> : null}
-                  {categoriesAddRien.map(rien => {
-                    return <th scope="col">Categorie</th>
-                  })}
-                  {checkbox.affichageSérie ? <th scope="col">Série</th> : null}
-                  {checkbox.affichageType ? <th scope="col">Type</th> : null}
-                  {checkbox.affichageReps ? <th scope="col">Reps / Temps</th> : null}
-                  {checkbox.affichageCharge ? <th scope="col">Charge</th> : null}
-                  {checkbox.affichagePercent ? <th scope="col">% PDC</th> : null}
-                  {detailsAddRien.map(rien => {
-                    return <th scope="col">Detail</th>
-                  })}
-                </tr>
-              </thead>
-              <tbody>
-                  {seances.map((seance,indexSeance) => {
-                        if (seance !== null) {
-                            return (seance.exercices.map((exercice, indexExercice) => {
-                                if (exercice !== null){
-                                    return (exercice.Series && Object.values(exercice.Series).map((serie, index) => {
-                                       if(serie !== null){
-                                            return (
-                                                <tr style={trStyle(indexSeance)}>
-                                                    {checkbox.affichageNom ?
-                                                        seance.nom ?
-                                                            seance.nom.ancienNom !== "nouveau-nom" ?
-                                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                                    {seance.nom.ancienNom}
-                                                                </td>
+                <table className="table table-hover table-responsive-lg table-dark dashboard-table">
+                  <thead className="thead-dark">
+                    <tr>
+                      {checkbox.affichageNom ? <th scope="col">Nom </th> : null}
+                      {checkbox.affichageDate ? <th scope="col">Date </th> : null}
+                      {checkbox.affichagePoids ? <th scope="col">Poids</th> : null}
+                      {checkbox.affichageExercice ? <th scope="col">Exercice</th> : null}
+                      {categoriesAddRien.map(rien => {
+                        return <th scope="col">Categorie</th>
+                      })}
+                      {checkbox.affichageSérie ? <th scope="col">Série</th> : null}
+                      {checkbox.affichageType ? <th scope="col">Type</th> : null}
+                      {checkbox.affichageReps ? <th scope="col">Reps / Temps</th> : null}
+                      {checkbox.affichageCharge ? <th scope="col">Charge</th> : null}
+                      {checkbox.affichagePercent ? <th scope="col">% PDC</th> : null}
+                      {detailsAddRien.map(rien => {
+                        return <th scope="col">Detail</th>
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {seances.map((seance,indexSeance) => {
+                            if (seance !== null) {
+                                return (seance.exercices.map((exercice, indexExercice) => {
+                                    if (exercice !== null){
+                                        return (exercice.Series && Object.values(exercice.Series).map((serie, index) => {
+                                           if(serie !== null){
+                                                return (
+                                                    <tr style={trStyle(indexSeance)}>
+                                                        {checkbox.affichageNom ?
+                                                            seance.nom ?
+                                                                seance.nom.ancienNom !== "nouveau-nom" ?
+                                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                        {seance.nom.ancienNom}
+                                                                    </td>
+                                                                :
+                                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                        {seance.nom.nouveauNom}
+                                                                    </td>
                                                             :
                                                                 <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                                    {seance.nom.nouveauNom}
+                                                                    /
                                                                 </td>
-                                                        :
+                                                        : null }
+                                                        {checkbox.affichageDate ?
                                                             <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                                /
+                                                                {seance.date}
                                                             </td>
-                                                    : null }
-                                                    {checkbox.affichageDate ?
-                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                            {seance.date}
-                                                        </td>
-                                                    : null }
-                                                    {checkbox.affichagePoids ?
-                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                            {seance.poids}
-                                                        </td>
-                                                    : null }
-                                                    {checkbox.affichageExercice ?
-                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                            {exercice.exercice.name==="own-exercice" ? exercice.exercice.ownExercice : exercice.exercice.name}
-                                                        </td>
-                                                    : null }
-                                                    {categoriesAddRien.map((rien,index) => {
-                                                        if (exercice.Categories){
-                                                            if (Object.values(exercice.Categories)[index]){
-                                                                if (Object.values(exercice.Categories)[index].name === "Elastique"){
+                                                        : null }
+                                                        {checkbox.affichagePoids ?
+                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                {seance.poids}
+                                                            </td>
+                                                        : null }
+                                                        {checkbox.affichageExercice ?
+                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                {exercice.exercice.name==="own-exercice" ? exercice.exercice.ownExercice : exercice.exercice.name}
+                                                            </td>
+                                                        : null }
+                                                        {categoriesAddRien.map((rien,index) => {
+                                                            if (exercice.Categories){
+                                                                if (Object.values(exercice.Categories)[index]){
+                                                                    if (Object.values(exercice.Categories)[index].name === "Elastique"){
+                                                                        return(
+                                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                                 Elastique en {Object.values(exercice.Categories)[index].utilisation} estimé à {Object.values(exercice.Categories)[index].estimation} kg
+                                                                            </td>
+                                                                        )
+                                                                    }
+                                                                    else{
+                                                                        return(
+                                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                                 {Object.values(exercice.Categories)[index].input}
+                                                                            </td>
+                                                                        )
+                                                                    }
+                                                                }
+                                                                else{
                                                                     return(
                                                                         <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                                             Elastique en {Object.values(exercice.Categories)[index].utilisation} estimé à {Object.values(exercice.Categories)[index].estimation} kg
+                                                                        /
+                                                                        </td>
+                                                                    )
+                                                                }
+                                                            }
+                                                            else{
+                                                                return(
+                                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                    /
+                                                                    </td>
+                                                                )
+                                                            }
+                                                        })}
+                                                        {checkbox.affichageSérie ?
+                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                {serie.num+1}
+                                                            </td>
+                                                        : null }
+                                                        {checkbox. affichageType ?
+                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                {serie.typeSerie==="reps" ? "Répétitions" : null}
+                                                                {serie.typeSerie==="time" ? "Temps (sec)" : null}
+                                                            </td>
+                                                        : null }
+                                                        {checkbox.affichageReps ?
+                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                {serie.repsTime}
+                                                            </td>
+                                                        : null }
+                                                        {checkbox.affichageCharge ?
+                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                {serie.charge}
+                                                            </td>
+                                                        : null }
+                                                        {checkbox.affichagePercent ?
+                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                {serie.percent}
+                                                            </td>
+                                                        : null }
+                                                        {detailsAddRien.map((rien,index) => {
+                                                            if (seance.details){
+                                                                if (Object.values(seance.details)[index]){
+                                                                    return(
+                                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                             {Object.values(seance.details)[index].input}
                                                                         </td>
                                                                     )
                                                                 }
                                                                 else{
                                                                     return(
                                                                         <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                                             {Object.values(exercice.Categories)[index].input}
+                                                                        /
                                                                         </td>
                                                                     )
                                                                 }
@@ -620,78 +709,20 @@ function Dashboard() {
                                                                     </td>
                                                                 )
                                                             }
-                                                        }
-                                                        else{
-                                                            return(
-                                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                                /
-                                                                </td>
-                                                            )
-                                                        }
-                                                    })}
-                                                    {checkbox.affichageSérie ?
-                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                            {serie.num+1}
-                                                        </td>
-                                                    : null }
-                                                    {checkbox. affichageType ?
-                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                            {serie.typeSerie==="reps" ? "Répétitions" : null}
-                                                            {serie.typeSerie==="time" ? "Temps (sec)" : null}
-                                                        </td>
-                                                    : null }
-                                                    {checkbox.affichageReps ?
-                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                            {serie.repsTime}
-                                                        </td>
-                                                    : null }
-                                                    {checkbox.affichageCharge ?
-                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                            {serie.charge}
-                                                        </td>
-                                                    : null }
-                                                    {checkbox.affichagePercent ?
-                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                            {serie.percent}
-                                                        </td>
-                                                    : null }
-                                                    {detailsAddRien.map((rien,index) => {
-                                                        if (seance.details){
-                                                            if (Object.values(seance.details)[index]){
-                                                                return(
-                                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                                         {Object.values(seance.details)[index].input}
-                                                                    </td>
-                                                                )
-                                                            }
-                                                            else{
-                                                                return(
-                                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                                    /
-                                                                    </td>
-                                                                )
-                                                            }
-                                                        }
-                                                        else{
-                                                            return(
-                                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
-                                                                /
-                                                                </td>
-                                                            )
-                                                        }
-                                                    })}
-                                                </tr>
-                                            )
-                                        }
-                                    }))
-                                }
-                            }))
-                        }})
-                  }
-              </tbody>
-            </table>
-          </div>
-      </div>
+                                                        })}
+                                                    </tr>
+                                                )
+                                            }
+                                        }))
+                                    }
+                                }))
+                            }})
+                      }
+                  </tbody>
+                </table>
+              </div>
+      }
+</div>
     )
 }
 

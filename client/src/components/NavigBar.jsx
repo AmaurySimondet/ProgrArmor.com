@@ -3,6 +3,7 @@ import React, {useState} from "react";
 function NavigBar(){
     const [gearIsClicked, setGearIsClicked] = useState(false);
     const [toggled, setToggled] = useState(false);
+    const [clickedWarning, setClickedWarning] = useState(false);
 
     function handleClick(){
         setGearIsClicked(oldGear => {
@@ -35,6 +36,11 @@ function NavigBar(){
             timeout = setTimeout(handleResize, 200);
         });
       })
+
+    function handleClickWarning(){
+        setClickedWarning(true);
+
+    }
 
     return(
         <div>
@@ -171,6 +177,24 @@ function NavigBar(){
                 ) : null}
             </div>
         }
+          {clickedWarning ?
+            null
+          :
+              <div className="warning-border">
+                <div className="text">
+                    <p className = "La-croix" onClick={handleClickWarning}> <strong>  X </strong> </p>
+                    <p className = "attention" > <strong> Attention ! </strong>  </p>
+                    <p> Ce site est encore en version pré-alpha, cela signifie : </p>
+                    <p> - que ProgrArmor se garde tout droit concernant votre accès à ce site, </p>
+                    <p> - que ProgrArmor se garde tout droit concernant vos données,
+                    et que celles-ci pourraient être supprimées pour des raisons de développement ou pour tout autre raison, </p>
+                    <p> - que le site peut comporter de nombreux bugs et manquer de fonctionnalités, </p>
+                    <br/>
+                    <p> Vous êtes donc conviez à indiquer toute suggestion et tout bug avec un maximum {"d'information "}
+                    en message direct sur {"l'un de nos réseaux ou par tout autre moyen"}</p>
+                </div>
+              </div>
+          }
         </div>
     )
 }

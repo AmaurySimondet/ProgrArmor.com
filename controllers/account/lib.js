@@ -516,7 +516,7 @@ async function workouts(req, res) {
                 }
                 else{
                     let seances = data[0].seances;
-                    console.log(req.query)
+//                    console.log(req.query)
 
                     //TRI EXERCICE
                     seances.map((seance,indexSeance) => {
