@@ -271,6 +271,7 @@ table.Stats-table{
 
     }
 
+
     .chart-title{
         margin-top: 400px;
 
@@ -295,6 +296,21 @@ table.Stats-table{
         font-size:7px !important;
 
     }
+}
+
+@media (max-width: 700px){
+    .piechart{
+        font-size:10px;
+
+    }
+}
+
+@media (max-width: 330px){
+    .piechart{
+        font-size:5px;
+
+    }
+
 }
 
 .Stats-div h1{

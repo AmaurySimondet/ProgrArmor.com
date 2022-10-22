@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from "react";
 import NavigBar from "../NavigBar.jsx"
-import {LineChart, YAxis, XAxis, Tooltip, Label, PieChart, Pie, Sector, CartesianGrid, Line, ResponsiveContainer, Bar, ComposedChart} from 'recharts'
+import {LineChart, YAxis, XAxis, Cell, Tooltip, Label, PieChart, Pie, Sector, CartesianGrid, Line, ResponsiveContainer, Bar, ComposedChart} from 'recharts'
 import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
 import CategorieInput from "./CategorieInput"
@@ -36,7 +36,9 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 let renderLabel = function(entry) {
-    return entry.name;
+    if(typeof(entry.name) !== "number"){
+        return entry.name;
+    }
 }
 
 function Stats() {
@@ -581,16 +583,54 @@ function Stats() {
                     </div>
 
 
-                    <ResponsiveContainer width="100%" height={400}>
+                    <ResponsiveContainer className="piechart" width="100%" height=
+                    {dimensions.width<330 ?
+                    100
+                    :
+                    dimensions.width<450 ?
+                    200
+                    :
+                    dimensions.width<700 ?
+                    300
+                    :
+                    400
+                    }
+                    >
                         <PieChart width={800} height={800}>
                           <Pie
                             data={seances3}
-                            innerRadius={100}
-                            outerRadius={150}
+                            innerRadius=
+                            {dimensions.width<330 ?
+                            10
+                            :
+                            dimensions.width<450 ?
+                            20
+                            :
+                            dimensions.width<700 ?
+                            40
+                            :
+                            100
+                            }
+                            outerRadius=
+                            {dimensions.width<330 ?
+                            20
+                            :
+                            dimensions.width<450 ?
+                            40
+                            :
+                            dimensions.width<700 ?
+                            70
+                            :
+                            150
+                            }
                             fill="#9b0000"
                             dataKey="repsTime"
                             label={renderLabel}
-                          />
+                            >
+                            {seances3.map((entry, index) => (
+                              <Cell fill={index%2 === 0 ? "#9b0000" : "#E84646"} />
+                            ))}
+                          </Pie>
                           <Tooltip content={<CustomTooltip />} />
                         </PieChart>
                     </ResponsiveContainer>
