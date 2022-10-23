@@ -55,7 +55,7 @@ function NameInput(props) {
               Nom de la séance
             </label>
             <div className="col-sm-10">
-                <select onChange={handleChange} className="custom-select col-sm-10" id="ancienNom">
+                <select onChange={handleChange} className="custom-select" id="ancienNom">
                     <option value="title"> / (défaut) </option>
                     {listeNoms ? listeNoms.map((nom,index) => {
                         return <option key={index} value={nom}> {nom} </option>

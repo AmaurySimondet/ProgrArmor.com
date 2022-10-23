@@ -246,6 +246,14 @@ function Stats() {
         <div>
             <NavigBar />
 
+            {seances1.length===0 ?
+              <div className="Travaux-div">
+                <h1>Rien à afficher ici ! </h1>
+
+                <p> {"Je suis désolé, j'aurais vraiment aimé te fournir des statistiques sur rien mais on va pas réinventer les maths juste pour toi..."} </p>
+                <p> Commence par enregistrer tes premières séances ! </p>
+              </div>
+            :
             <div className="Stats-div">
                 <table className="Stats-table">
                     <tbody>
@@ -638,6 +646,8 @@ function Stats() {
 
 
             </div>
+            }
+
         </div>
     );
 };

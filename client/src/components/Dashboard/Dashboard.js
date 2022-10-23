@@ -344,13 +344,11 @@ function Dashboard() {
 <div>
       <NavigBar location="dashboard"/>
 
-      {seances ?
+      {seances.length===0 ?
               <div className="Dashboard">
                 <h1 className="Dashboard-h1">Bienvenue !</h1>
 
-                <h2 className="Dashboard-h2"> Les choses serieuses commencent, {"laisse moi t'expliquer ce que tu pourras trouver ici"} </h2>
-
-                <p>  </p>
+                <h2 className="Dashboard-h2"> Les choses serieuses commencent, {"laisses moi t'expliquer ce que tu pourras trouver ici"} </h2>
 
                 <div className="Design-welcome">
                     <table className="table1">

@@ -16,10 +16,10 @@ function ConnexionForm(){
     const { email, password } = state;
 
     if (!email || email.length === 0) {
-      return alert("No email given !");
+      return alert("Donne moi ton email !");
     }
     if (!password || password.length === 0) {
-      return alert("No password given !");
+      return alert("Donne moi un mot de passe (pas pourrie de préférence) !");
     }
     try {
       const { data } = await API.login(email, password);
@@ -27,7 +27,7 @@ function ConnexionForm(){
         localStorage.setItem("token", data.token);
         window.location = "/dashboard";
       }else{
-        alert(data.message);
+        alert("Erreur: "+data.message);
       }
     } catch (error) {
       alert(error);
