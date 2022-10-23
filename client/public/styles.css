@@ -10,6 +10,12 @@ h2{
 
 }
 
+h3{
+    font-weight:200;
+    font-size: 20px;
+
+}
+
 /* COMPTE */
 .profile-pic{
     border-radius: 50%;
@@ -320,10 +326,24 @@ table.Stats-table{
 
 /* DASHBOARD */
 
+@media (max-width: 740px){
+    .social{
+        width: 20px;
+
+    }
+}
+
 
 .Dashboard .icon-navbar{
     filter: invert(1);
     width: 50px;
+
+}
+
+.Dashboard .Dashboard-h2{
+    width: 70%;
+    text-align: center;
+    margin: 40px auto;
 
 }
 
@@ -762,6 +782,10 @@ table.connexion-table td.connexion-img-td {
         font-size:15px;
     }
 
+    h3{
+        font-size:10px;
+    }
+
     body{
         font-size:10px;
         overflow-x:visible;
@@ -794,6 +818,10 @@ table.connexion-table td.connexion-img-td {
 
     h2{
         font-size:20px;
+    }
+
+    h3{
+        font-size:15px;
     }
 
     body{

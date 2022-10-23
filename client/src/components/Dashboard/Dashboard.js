@@ -348,6 +348,8 @@ function Dashboard() {
               <div className="Dashboard">
                 <h1 className="Dashboard-h1">Bienvenue !</h1>
 
+                <h2 className="Dashboard-h2"> Les choses serieuses commencent, {"laisse moi t'expliquer ce que tu pourras trouver ici"} </h2>
+
                 <p>  </p>
 
                 <div className="Design-welcome">
@@ -364,7 +366,7 @@ function Dashboard() {
                                 <img className="fleche1" src={require('../../images/icons/fleche.png')} alt='home' />
                             </td>
                             <td>
-                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                                {"Ça c'est l'acceuil, mais tu y es déjà ! Quand tu auras enregistré ta première séance, tu pourras y voir ton historique des seances trié comme bon te semble."}
                             </td>
                         </tr>
                     </table>
@@ -379,7 +381,7 @@ function Dashboard() {
                         </tr>
                         <tr>
                             <td>
-                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                                {"Ici tu pourras enregistrer tes séances. T'inquiètes pas ça va bien se passer."}
                             </td>
                             <td>
                                 <img className="fleche2" src={require('../../images/icons/fleche.png')} alt='home' />
@@ -401,7 +403,7 @@ function Dashboard() {
                                 <img className="fleche1" src={require('../../images/icons/fleche.png')} alt='home' />
                             </td>
                             <td>
-                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                                {"Ça c'est l'onglet statistiques. Les statistiques c'est cool (c'est pas une blague)."}
                             </td>
                         </tr>
                     </table>
@@ -416,7 +418,7 @@ function Dashboard() {
                         </tr>
                         <tr>
                             <td>
-                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                                {"Ici tu trouveras le programme parfait parmis ceux de la communauté."}
                             </td>
                             <td>
                                 <img className="fleche2" src={require('../../images/icons/fleche.png')} alt='home' />
@@ -438,7 +440,7 @@ function Dashboard() {
                                 <img className="fleche1" src={require('../../images/icons/fleche.png')} alt='home' />
                             </td>
                             <td>
-                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                                {"Ça c'est l'onglet social. Si tu as des amis, tu verras leur progression ici."}
                             </td>
                         </tr>
                     </table>
@@ -453,13 +455,39 @@ function Dashboard() {
                         </tr>
                         <tr>
                             <td>
-                                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
+                                {"Ici tu pourras paramétrer ton compte et obtenir de l'aide."}
                             </td>
                             <td>
                                 <img className="fleche2" src={require('../../images/icons/fleche.png')} alt='home' />
                             </td>
                         </tr>
                     </table>
+
+                    <h2 className="Dashboard-h2"> Amuses-toi bien ! </h2>
+
+                    <h3 className="Dashboard-h2"> {"Et n'oublies pas de nous suivre sur nos différents réseaux pour partager ton ressenti et ne rien rater de la suite !"} </h3>
+
+                    <div className="Design-welcome">
+                        <table className="table1">
+                            <tr>
+                                <td>
+                                    <img className="social" src={require('../../images/icons/twitter.png')} alt='twitter' />
+                                </td>
+                                <td>
+                                    <img className="social" src={require('../../images/icons/instagram.png')} alt='instagram' />
+                                </td>
+                                <td>
+                                    <img className="social" src={require('../../images/icons/facebook.png')} alt='facebook' />
+                                </td>
+                                <td>
+                                    <img className="social" src={require('../../images/icons/discord.png')} alt='discord' />
+                                </td>
+                                <td>
+                                    <img className="social" src={require('../../images/icons/tiktok.png')} alt='tiktok' />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
 
                 </div>
               </div>
