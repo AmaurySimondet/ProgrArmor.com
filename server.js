@@ -58,7 +58,7 @@ const router = express.Router();
 app.use("/user", router);
 require(__dirname + "/controllers/userController")(router);
 
-if(process.env.NODE.ENV === 'production') {
+if(process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client', 'build')));
 
   app.get('*', (req, res) => {
