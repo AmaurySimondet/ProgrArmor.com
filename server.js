@@ -58,6 +58,10 @@ const router = express.Router();
 app.use("/user", router);
 require(__dirname + "/controllers/userController")(router);
 
+if(process.env.NODE_ENV === "production") {
+    app.use(express.static('client/build'));
+}
+
 //Définition et mise en place du port d'écoute
-const port = 8800;
+const port = process.env.port || 8800;
 app.listen(port, () => console.log(`Listening on port ${port}`));
