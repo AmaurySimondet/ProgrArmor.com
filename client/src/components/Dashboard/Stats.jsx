@@ -27,8 +27,8 @@ const CustomTooltip = ({ active, payload, label }) => {
             if (payload.dataKey === "repsTime"){
                 return (<p className="desc"> Valeur classification : {payload.value}</p>)
             }
-            if(payload.datakey === "exercices[0].Categories[0].estimation" || payload.datakey === "exercices[0].Categories[1].estimation" || payload.datakey === "exercices[0].Categories[2].estimation" || payload.datakey === "exercices[0].Categories[3].estimation" || payload.datakey === "exercices[0].Categories[4].estimation"){
-                return (<p className="desc"> Elastique estimation (kg) : {payload.value}</p>)
+            if(payload.dataKey === "exercices[0].Categories[0].estimation" || payload.dataKey === "exercices[0].Categories[1].estimation" || payload.dataKey === "exercices[0].Categories[2].estimation" || payload.dataKey === "exercices[0].Categories[3].estimation" || payload.dataKey === "exercices[0].Categories[4].estimation"){
+                return (<p className="desc"> Élastique estimation (kg) : {payload.value}</p>)
             }
         })}
       </div>

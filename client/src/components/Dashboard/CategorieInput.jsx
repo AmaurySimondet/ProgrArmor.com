@@ -767,7 +767,7 @@ function CategorieInput(props) {
                         null
                     :
                         <label className="col-sm-2 col-form-label">
-                              {categorie.name}
+                              Utilisation
                         </label>
                     }
                     <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="utilisation">
@@ -787,7 +787,7 @@ function CategorieInput(props) {
                         null
                     :
                         <label className="col-sm-2 col-form-label">
-                              {categorie.name}
+                              Utilisation
                         </label>
                     }
                     <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="utilisation">
@@ -803,7 +803,7 @@ function CategorieInput(props) {
 
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">
-                      Elastique
+                      Épaisseur / taille élastique
                     </label>
                     <select onChange={handleChange} className="custom-select col-sm-9" id="input">
                         {lesElastiques.map(createEntry)}
