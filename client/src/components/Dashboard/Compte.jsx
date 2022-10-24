@@ -51,60 +51,60 @@ function Compte() {
         <NavigBar location="gear"/>
 
         {modifyInfo ?
-        <form className="modify-info-form">
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
-                Prénom
-            </label>
-            <div className="col-sm-10">
-              <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Monsieur"
-                  value={formInfo.fName}
-                  id="fName"
-                  onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
-                Nom
-            </label>
-            <div className="col-sm-10">
-              <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Fonte"
-                  value={formInfo.lName}
-                  id="lName"
-                  onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
-                email
-            </label>
-            <div className="col-sm-10">
-              <input
-                  type="email"
-                  className="form-control"
-                  placeholder="argent@abonnés.com"
-                  value={formInfo.email}
-                  id="email"
-                  onChange={handleChange}
-              />
-            </div>
-          </div>
-          <Button className="btn btn-dark btn-lg" onClick={handleClickFormInfo} block="true" type="submit">
-              Appliquer les modifications
-          </Button>
-          <br/>
-          <Button className="btn btn-dark btn-lg btn-arriere" onClick={handleModifyForm} block="true" type="submit">
-              Revenir en arrière
-          </Button>
-        </form>
+            <form className="modify-info-form">
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">
+                    Prénom
+                </label>
+                <div className="col-sm-10">
+                  <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Monsieur"
+                      value={formInfo.fName}
+                      id="fName"
+                      onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">
+                    Nom
+                </label>
+                <div className="col-sm-10">
+                  <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Fonte"
+                      value={formInfo.lName}
+                      id="lName"
+                      onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div className="form-group row">
+                <label className="col-sm-2 col-form-label">
+                    email
+                </label>
+                <div className="col-sm-10">
+                  <input
+                      type="email"
+                      className="form-control"
+                      placeholder="argent@abonnés.com"
+                      value={formInfo.email}
+                      id="email"
+                      onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <Button className="btn btn-dark btn-lg" onClick={handleClickFormInfo} block="true" type="submit">
+                  Appliquer les modifications
+              </Button>
+              <br/>
+              <Button className="btn btn-dark btn-lg btn-arriere" onClick={handleModifyForm} block="true" type="submit">
+                  Revenir en arrière
+              </Button>
+            </form>
         :
             <div className="Compte">
                 <table className="profile-table">

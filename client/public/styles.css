@@ -838,11 +838,6 @@ table.connexion-table td.connexion-img-td {
 
     }
 
-    .small-profile{
-        display: none
-
-    }
-
     h1.profile-email {
         font-weight:200;
         font-size: 2rem;
@@ -864,6 +859,12 @@ table.connexion-table td.connexion-img-td {
     }
 }
 
+@media (min-width: 1100px){
+    .small-profile{
+        display: none
 
+    }
+
+}
 
 
