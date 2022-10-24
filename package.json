@@ -2,6 +2,9 @@
   "name": "mernApp",
   "version": "1.0.0",
   "main": "server.js",
+  "engines": {
+    "node": "16.16.0"
+  },
   "scripts": {
     "start": "node server.js",
     "build": "cd client && npm run build",
