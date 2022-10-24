@@ -80,44 +80,6 @@ table.profile-table{
     height:125px;
 }
 
-/* Large layout*/
-@media (max-width: 1030px){
-    .profile-table{
-        display: none
-
-    }
-
-    h1.profile-email {
-        font-weight:200;
-        font-size: 1rem;
-
-    }
-
-}
-
-/* Smallest */
-@media (max-width: 300px){
-    h1.profile-email {
-        font-weight:200;
-        font-size: 0.5rem;
-
-    }
-}
-
-/* Small layout */
-@media (min-width: 1030px){
-    .small-profile{
-        display: none
-
-    }
-
-    h1.profile-email {
-        font-weight:200;
-        font-size: 2rem;
-
-    }
-
-}
 
 /* SESSION DEBUTANT */
 
@@ -269,55 +231,7 @@ table.Stats-table{
     margin-top:20px;
 }
 
-@media (max-width: 925px){
-    .chart{
-        margin-top:50px;
-        position: absolute;
-        right: 20px;
 
-    }
-
-
-    .chart-title{
-        margin-top: 400px;
-
-    }
-
-    .stats-form{
-        font-size:10px;
-
-    }
-
-    .stats-form select{
-        font-size:10px !important;
-
-    }
-
-    .stats-form input{
-        font-size:10px !important;
-
-    }
-
-    .Stats-div i{
-        font-size:7px !important;
-
-    }
-}
-
-@media (max-width: 700px){
-    .piechart{
-        font-size:10px;
-
-    }
-}
-
-@media (max-width: 330px){
-    .piechart{
-        font-size:5px;
-
-    }
-
-}
 
 .Stats-div h1{
     margin-bottom: 20px;
@@ -325,14 +239,6 @@ table.Stats-table{
 }
 
 /* DASHBOARD */
-
-@media (max-width: 580px){
-    .social{
-        width: 20px;
-
-    }
-}
-
 
 .Dashboard .icon-navbar{
     filter: invert(1);
@@ -445,54 +351,6 @@ table.table1 {
 
 }
 
-@media (max-width: 580px){
-/*
-    .Dashboard{
-        font-size: 10px !important
-
-    }
-    */
-
-    .slider-style span{
-        font-size: 7px !important;
-
-    }
-
-    .Dashboard select{
-        font-size: 10px !important
-
-    }
-
-    .Dashboard button{
-        font-size: 10px !important
-
-    }
-
-    .Dashboard input{
-        font-size: 10px !important
-
-    }
-
-    .Dashboard dashboard-table{
-        font-size: 7px !important
-
-    }
-}
-
-@media (max-width: 580px){
-    .Dashboard{
-        font-size: 10px !important
-
-    }
-}
-
-@media (max-width: 330px){
-    .Dashboard{
-        font-size: 7px !important
-
-    }
-}
-
 
 
 /* SESSION EXPERT */
@@ -518,14 +376,6 @@ table.table1 {
     width:20px;
     transform: scaleY(-1);
     margin-left:5px
-
-}
-
-@media (max-width: 580px){
-    .Categorie .slider-style span{
-        margin-left:20px;
-
-    }
 
 }
 
@@ -682,18 +532,6 @@ table.connexion-table td.connexion-img-td {
     font-size: 12px;
 }
 
-@media (max-width: 580px){
-    .warning-border .text{
-        font-size: 7px;
-
-    }
-
-    .warning-border .attention{
-        margin-top: -7px;
-
-    }
-
-}
 
 
 .icon-navbar{
@@ -808,8 +646,19 @@ table.connexion-table td.connexion-img-td {
 
 /* Smallest layout */
 @media (max-width: 330px){
+    .piechart{
+        font-size:5px;
+
+    }
+
     h1{
         font-size:20px !important;
+    }
+
+    h1.profile-email {
+        font-weight:200;
+        font-size: 0.5rem;
+
     }
 
     h2{
@@ -832,12 +681,69 @@ table.connexion-table td.connexion-img-td {
     .logo-navbar{
         width:50px;
     }
+
+    .Dashboard{
+        font-size: 7px !important
+
+    }
+
 }
 
 /* Smartphone layout */
 @media (max-width: 580px){
     .nothide {
         width: 100%;
+
+    }
+
+    .Categorie .slider-style span{
+        margin-left:20px;
+
+    }
+
+
+    .slider-style span{
+        font-size: 7px !important;
+
+    }
+
+    .Dashboard select{
+        font-size: 10px !important
+
+    }
+
+    .Dashboard button{
+        font-size: 10px !important
+
+    }
+
+    .Dashboard input{
+        font-size: 10px !important
+
+    }
+
+    .Dashboard dashboard-table{
+        font-size: 7px !important
+
+    }
+
+    .Dashboard{
+        font-size: 10px !important
+
+    }
+
+    .social{
+        width: 20px;
+
+    }
+
+    .warning-border .text{
+        font-size: 7px;
+
+    }
+
+    .warning-border .attention{
+        margin-top: -7px;
 
     }
 
@@ -871,6 +777,13 @@ table.connexion-table td.connexion-img-td {
     }
 }
 
+@media (max-width: 700px){
+    .piechart{
+        font-size:10px;
+
+    }
+}
+
 /* small-med layout*/
 @media (max-width: 800px){
     .ProgrArmor{
@@ -879,10 +792,67 @@ table.connexion-table td.connexion-img-td {
 
 }
 
+@media (max-width: 925px){
+    .chart{
+        margin-top:50px;
+        position: absolute;
+        right: 20px;
+
+    }
+
+
+    .chart-title{
+        margin-top: 400px;
+
+    }
+
+    .stats-form{
+        font-size:10px;
+
+    }
+
+    .stats-form select{
+        font-size:10px !important;
+
+    }
+
+    .stats-form input{
+        font-size:10px !important;
+
+    }
+
+    .Stats-div i{
+        font-size:7px !important;
+
+    }
+}
+
 /* Medium layout*/
 @media (max-width: 1100px){
     .inscription-img-td{
         display:none;
+    }
+
+    .profile-table{
+        display: none
+
+    }
+
+    .small-profile{
+        display: none
+
+    }
+
+    h1.profile-email {
+        font-weight:200;
+        font-size: 2rem;
+
+    }
+
+    h1.profile-email {
+        font-weight:200;
+        font-size: 1rem;
+
     }
 
     .connexion-img-td{
