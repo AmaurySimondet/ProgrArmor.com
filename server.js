@@ -66,6 +66,9 @@ if(process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
   });
 
+  app.use("/user", router);
+  require(__dirname + "/controllers/userController")(router);
+
 }
 
 //Définition et mise en place du port d'écoute
