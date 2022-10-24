@@ -69,5 +69,5 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 //Définition et mise en place du port d'écoute
-const port = process.env.port || 8800;
+const port = process.env.port;
 app.listen(port, () => console.log(`Listening on port ${port}`));
