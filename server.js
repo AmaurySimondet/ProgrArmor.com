@@ -6,6 +6,7 @@ const passport = require("passport");
 const User = require("./schema/schemaUser.js");
 const session = require('express-session');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 //Depreciation warnings
