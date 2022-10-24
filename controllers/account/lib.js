@@ -32,7 +32,7 @@ passport.use(new FacebookStrategy({
     proxy: true,
     clientID: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: "http://localhost:8800/user/auth/facebook/authenticate",
+    callbackURL: "https://prograrmorprealpha1.herokuapp.com/user/auth/facebook/authenticate",
     profileFields: ['id', 'name', 'email', 'picture.type(large)']
   },
   async (accessToken, refreshToken, profile, done) => {
@@ -70,7 +70,7 @@ passport.use(new FacebookStrategy({
 ))
 
 async function facebook(req, res) {
-    passport.authenticate("facebook", {failureRedirect: '/', scope:['email'], successRedirect: 'http://localhost:3000/dashboard'})(req,res,function(){
+    passport.authenticate("facebook", {failureRedirect: '/', scope:['email'], successRedirect: 'https://prograrmorprealpha1.herokuapp.com/dashboard'})(req,res,function(){
                     const token = jwt.sign({ username: 'facebook' }, process.env.secret, { expiresIn: "24h" });
                     res.json({ success: true, message: "Register Facebook successful", token: token });
     });
@@ -78,8 +78,8 @@ async function facebook(req, res) {
 
 async function facebookAuthenticate(req, res) {
     try {
-        passport.authenticate("facebook", {failureRedirect: '/', successRedirect: 'http://localhost:3000/dashboard'})(req,res,function(){
-            res.redirect('http://localhost:3000/dashboard');
+        passport.authenticate("facebook", {failureRedirect: '/', successRedirect: 'https://prograrmorprealpha1.herokuapp.com/dashboard'})(req,res,function(){
+            res.redirect('https://prograrmorprealpha1.herokuapp.com/dashboard');
         });
         }
     catch (error) {
@@ -106,7 +106,7 @@ passport.use(new GoogleStrategy({
     proxy: true,
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:8800/user/auth/google/authenticate",
+    callbackURL: "https://prograrmorprealpha1.herokuapp.com/user/auth/google/authenticate",
     profileFields: ['id', 'name', 'email', 'photos']
   },
   async (accessToken, refreshToken, profile, done) => {
@@ -144,7 +144,7 @@ passport.use(new GoogleStrategy({
 ))
 
 async function google(req, res) {
-    passport.authenticate("google", {failureRedirect: '/', scope:['email', 'profile'], successRedirect: 'http://localhost:3000/dashboard'})(req,res,function(){
+    passport.authenticate("google", {failureRedirect: '/', scope:['email', 'profile'], successRedirect: 'https://prograrmorprealpha1.herokuapp.com/dashboard'})(req,res,function(){
                     const token = jwt.sign({ username: 'google' }, process.env.secret, { expiresIn: "24h" });
                     res.json({ success: true, message: "Register Google successful", token: token });
     });
@@ -152,8 +152,8 @@ async function google(req, res) {
 
 async function googleAuthenticate(req, res) {
     try {
-        passport.authenticate("google", {failureRedirect: '/', successRedirect: 'http://localhost:3000/dashboard'})(req,res,function(){
-            res.redirect('http://localhost:3000/dashboard');
+        passport.authenticate("google", {failureRedirect: '/', successRedirect: 'https://prograrmorprealpha1.herokuapp.com/dashboard'})(req,res,function(){
+            res.redirect('https://prograrmorprealpha1.herokuapp.com/dashboard');
         });
         }
     catch (error) {
