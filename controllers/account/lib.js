@@ -8,6 +8,9 @@ const findOrCreate = require('mongoose-findorcreate');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+const url = "http://localhost:8800"
+const url2 = "http://localhost:3000"
+
 const app = express();
 
 app.use(session({
@@ -32,7 +35,7 @@ passport.use(new FacebookStrategy({
     proxy: true,
     clientID: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: "https://prograrmorprealpha1.herokuapp.com/user/auth/facebook/authenticate",
+    callbackURL: url+"/user/auth/facebook/authenticate",
     profileFields: ['id', 'name', 'email', 'picture.type(large)']
   },
   async (accessToken, refreshToken, profile, done) => {
@@ -70,7 +73,7 @@ passport.use(new FacebookStrategy({
 ))
 
 async function facebook(req, res) {
-    passport.authenticate("facebook", {failureRedirect: '/', scope:['email'], successRedirect: 'https://prograrmorprealpha1.herokuapp.com/dashboard'})(req,res,function(){
+    passport.authenticate("facebook", {failureRedirect: '/', scope:['email'], successRedirect: url2+'/dashboard'})(req,res,function(){
                     const token = jwt.sign({ username: 'facebook' }, process.env.secret, { expiresIn: "24h" });
                     res.json({ success: true, message: "Register Facebook successful", token: token });
     });
@@ -78,8 +81,8 @@ async function facebook(req, res) {
 
 async function facebookAuthenticate(req, res) {
     try {
-        passport.authenticate("facebook", {failureRedirect: '/', successRedirect: 'https://prograrmorprealpha1.herokuapp.com/dashboard'})(req,res,function(){
-            res.redirect('https://prograrmorprealpha1.herokuapp.com/dashboard');
+        passport.authenticate("facebook", {failureRedirect: '/', successRedirect: url2+'/dashboard'})(req,res,function(){
+            res.redirect(url2+'/dashboard');
         });
         }
     catch (error) {
@@ -106,12 +109,13 @@ passport.use(new GoogleStrategy({
     proxy: true,
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://prograrmorprealpha1.herokuapp.com/user/auth/google/authenticate",
+    callbackURL: url+"/user/auth/google/authenticate",
     profileFields: ['id', 'name', 'email', 'photos']
   },
   async (accessToken, refreshToken, profile, done) => {
 
     googleProfile = profile._json
+
     const user = {
         googleId : profile._json.sub,
         email : profile._json.email,
@@ -120,40 +124,52 @@ passport.use(new GoogleStrategy({
         profilePic: profile._json.picture
     }
 
-    try {
-      const oldUser = await User.findOne({ googleId: user.googleId });
+    const oldUser = await User.findOne({ googleId: user.googleId });
 
-      if (oldUser) {
-        return done(oldUser);
-      }
-    } catch (err) {
-      console.log(err);
-      return done(false);
+    if (oldUser){
+        return done(null, oldUser)
+    }
+    else{
+        const newUser = await new User(user).save();
+        return done(null, newUser)
     }
 
-    // register user
-    try {
-      const newUser = await new User(user).save();
 
-      done(null, newUser);
-    } catch (err) {
-      console.log(err);
-      return done(false);
-    }
+//    try {
+//      const oldUser = await User.findOne({ googleId: user.googleId });
+//
+//      if (oldUser) {
+//        return done(oldUser);
+//      }
+//    } catch (err) {
+//      console.log(err);
+//      return done(false);
+//    }
+//
+//    // register user
+//    try {
+//      const newUser = await new User(user).save();
+//
+//      done(null, newUser);
+//    } catch (err) {
+//      console.log(err);
+//      return done(false);
+//    }
 }
 ))
 
-async function google(req, res) {
-    passport.authenticate("google", {failureRedirect: '/', scope:['email', 'profile'], successRedirect: 'https://prograrmorprealpha1.herokuapp.com/dashboard'})(req,res,function(){
-                    const token = jwt.sign({ username: 'google' }, process.env.secret, { expiresIn: "24h" });
-                    res.json({ success: true, message: "Register Google successful", token: token });
-    });
+function google() {
+//    passport.authenticate("google", {failureRedirect: '/', scope:['email', 'profile'], successRedirect: url+'/dashboard'})(req,res,function(){
+//                    const token = jwt.sign({ username: 'google' }, process.env.secret, { expiresIn: "24h" });
+//                    res.json({ success: true, message: "Register Google successful", token: token });
+//    });
+    passport.authenticate("google", {scope:['email', 'profile']})
 };
 
 async function googleAuthenticate(req, res) {
     try {
-        passport.authenticate("google", {failureRedirect: '/', successRedirect: 'https://prograrmorprealpha1.herokuapp.com/dashboard'})(req,res,function(){
-            res.redirect('https://prograrmorprealpha1.herokuapp.com/dashboard');
+        passport.authenticate("google", {failureRedirect: '/', successRedirect: url+'/dashboard'})(req,res,function(){
+            res.redirect(url+'/dashboard');
         });
         }
     catch (error) {
