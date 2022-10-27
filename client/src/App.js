@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard/Dashboard.js";
 import Inscription from "./components/Inscription";
 import Connexion from "./components/Connexion";
 import CGU from "./components/CGU";
+import Token from "./components/Token";
 
 import Stats from "./components/Dashboard/Stats";
 import PrivateRoute from "./components/PrivateRoute.js";
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/inscription" element={<Inscription/>} />
             <Route exact path="/cgu" element={<CGU/>} />
             <Route exact path="/connexion" element={<Connexion />} />
+            <Route exact path="/token" element={<Token />} />
 
             <Route path="/dashboard/*" element={<PrivateRoute/>}>
                 <Route exact path='/dashboard/*' element={<Dashboard/>}/>

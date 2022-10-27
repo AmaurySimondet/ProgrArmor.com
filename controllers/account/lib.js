@@ -194,7 +194,7 @@ async function googleAuthenticate(req, res) {
 //                            message: "Register Google successful",
 //                            token: token,
 //                            id: req.user._id});
-                res.redirect(url2+'/dashboard?token='+token+'&id='+req.user._id);
+                res.redirect(url2+'/token?token='+token+'&id='+req.user._id);
              }
              else {
                 console.log(err)
@@ -205,6 +205,13 @@ async function googleAuthenticate(req, res) {
       res.send(error);
     }
 };
+
+function verifyToken(req, res){
+    console.log("break")
+    console.log(req.body)
+    res.json({ success: false, message: "Login Google failed" });
+
+}
 
 //async function googleToken(req, res) {
 //    if (!googleProfile) {
@@ -834,3 +841,4 @@ exports.logout = logout;
 exports.debutantform = debutantform;
 exports.workouts = workouts;
 exports.getUser = getUser;
+exports.verifyToken = verifyToken;

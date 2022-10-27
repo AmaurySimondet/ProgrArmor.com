@@ -17,6 +17,11 @@ export default {
 
   },
 
+  verifyToken: function(send) {
+    return axios.post(`${burl}/user/verifyToken`, {send}, { headers: headers });
+
+  },
+
   facebook: function() {
     return axios.get(`${burl}/user/auth/facebook`, { headers: headers })
 
