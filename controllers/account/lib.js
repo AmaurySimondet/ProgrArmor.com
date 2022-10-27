@@ -171,7 +171,6 @@ async function googleToken(req, res) {
     }
 }
 
-
 //SIGNUP
 let userProfile = null;
 
