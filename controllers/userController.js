@@ -7,11 +7,9 @@ module.exports = function (app) {
     app.get('/logout', account.logout);
 
     app.get('/auth/facebook', account.facebook);
-    app.get('/facebookToken', account.facebookToken);
     app.get('/auth/facebook/authenticate', account.facebookAuthenticate);
 
     app.get('/auth/google', account.google);
-    app.get('/googleToken', account.googleToken);
     app.get('/auth/google/authenticate', account.googleAuthenticate);
 
     //SESSION
@@ -21,6 +19,6 @@ module.exports = function (app) {
     app.get('/workouts',account.workouts);
 
     //COMPTE
-    app.get('/getUser', account.getUser);
+    app.post('/getUser', account.getUser);
 
 }

@@ -14,7 +14,7 @@ const url2 = "http://localhost:3000"
 const app = express();
 
 app.use(session({
-    secret: "Our little secret.",
+    secret: process.env.secret,
     resave: false,
     saveUninitialized: false
 }));
@@ -29,8 +29,6 @@ passport.deserializeUser(User.deserializeUser());
 //FACEBOOK
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-let facebookProfile = null;
-
 passport.use(new FacebookStrategy({
     proxy: true,
     clientID: process.env.FACEBOOK_CLIENT_ID,
@@ -40,7 +38,6 @@ passport.use(new FacebookStrategy({
   },
   async (accessToken, refreshToken, profile, done) => {
 
-    facebookProfile = profile._json
     const user = {
         facebookId : profile._json.id,
         email : profile._json.email,
@@ -49,40 +46,69 @@ passport.use(new FacebookStrategy({
         profilePic: profile._json.picture.data.url
     }
 
-    try {
-      const oldUser = await User.findOne({ facebookId: user.facebookId });
+    const oldUser = await User.findOne({ googleId: user.googleId });
 
-      if (oldUser) {
-        return done(oldUser);
-      }
-    } catch (err) {
-      console.log(err);
-      return done(false);
+    if (oldUser){
+        return done(null, oldUser)
+    }
+    else{
+        const newUser = await new User(user).save();
+        return done(null, newUser)
     }
 
-    // register user
-    try {
-      const newUser = await new User(user).save();
-
-      done(null, newUser);
-    } catch (err) {
-      console.log(err);
-      return done(false);
-    }
+//    try {
+//      const oldUser = await User.findOne({ facebookId: user.facebookId });
+//
+//      if (oldUser) {
+//        return done(oldUser);
+//      }
+//    } catch (err) {
+//      console.log(err);
+//      return done(false);
+//    }
+//
+//    // register user
+//    try {
+//      const newUser = await new User(user).save();
+//
+//      done(null, newUser);
+//    } catch (err) {
+//      console.log(err);
+//      return done(false);
+//    }
 }
 ))
 
 async function facebook(req, res) {
-    passport.authenticate("facebook", {failureRedirect: '/', scope:['email'], successRedirect: url2+'/dashboard'})(req,res,function(){
-                    const token = jwt.sign({ username: 'facebook' }, process.env.secret, { expiresIn: "24h" });
-                    res.json({ success: true, message: "Register Facebook successful", token: token });
-    });
+//      passport.authenticate("facebook", {scope:['email']});
+
+    passport.authenticate("facebook", {scope:['email']})(req,res,function(){});
+
+//    passport.authenticate("facebook", {failureRedirect: '/', scope:['email'], successRedirect: url2+'/dashboard'})(req,res,function(){
+//            const token = jwt.sign({ username: 'facebook' }, process.env.secret, { expiresIn: "24h" });
+//            res.json({ success: true, message: "Register Facebook successful", token: token });
+//    });
 };
 
 async function facebookAuthenticate(req, res) {
     try {
-        passport.authenticate("facebook", {failureRedirect: '/', successRedirect: url2+'/dashboard'})(req,res,function(){
-            res.redirect(url2+'/dashboard');
+//        passport.authenticate("facebook", {failureRedirect: '/', successRedirect: url2+'/dashboard'})(req,res,function(){
+//            res.redirect(url2+'/dashboard');
+//        });
+
+        passport.authenticate("facebook")(req,res,function(){
+             if (req.user){
+                 console.log(req.user)
+                 const token = jwt.sign(req.user._id, process.env.secret, { expiresIn: "24h" });
+                 res.json({ success: true,
+                            message: "Register Google successful",
+                            token: token,
+                            id: req.user._id});
+             }
+             else {
+                 res.json({ success: false,
+                                message: "No user"});
+             }
         });
         }
     catch (error) {
@@ -90,20 +116,18 @@ async function facebookAuthenticate(req, res) {
     }
 };
 
-async function facebookToken(req, res) {
-    if (!facebookProfile) {
-        res.json({ success: false, message: "Login Facebook failed" });
-    }
-    else {
-        const token = jwt.sign({ username: facebookProfile.email }, process.env.secret, { expiresIn: "5s" });
-        res.json({ success: true, message: "Login Facebook successful", token: token });
-    }
-}
+//async function facebookToken(req, res) {
+//    if (!facebookProfile) {
+//        res.json({ success: false, message: "Login Facebook failed" });
+//    }
+//    else {
+//        const token = jwt.sign({ username: facebookProfile.email }, process.env.secret, { expiresIn: "5s" });
+//        res.json({ success: true, message: "Login Facebook successful", token: token });
+//    }
+//}
 
 //Google
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
-let googleProfile = null;
 
 passport.use(new GoogleStrategy({
     proxy: true,
@@ -113,8 +137,6 @@ passport.use(new GoogleStrategy({
     profileFields: ['id', 'name', 'email', 'photos']
   },
   async (accessToken, refreshToken, profile, done) => {
-
-    googleProfile = profile._json
 
     const user = {
         googleId : profile._json.sub,
@@ -158,18 +180,25 @@ passport.use(new GoogleStrategy({
 }
 ))
 
-function google() {
-//    passport.authenticate("google", {failureRedirect: '/', scope:['email', 'profile'], successRedirect: url+'/dashboard'})(req,res,function(){
-//                    const token = jwt.sign({ username: 'google' }, process.env.secret, { expiresIn: "24h" });
-//                    res.json({ success: true, message: "Register Google successful", token: token });
-//    });
-    passport.authenticate("google", {scope:['email', 'profile']})
+function google(req,res) {
+    passport.authenticate("google", {scope:['email', 'profile']})(req,res,function(){});
 };
 
 async function googleAuthenticate(req, res) {
     try {
-        passport.authenticate("google", {failureRedirect: '/', successRedirect: url+'/dashboard'})(req,res,function(){
-            res.redirect(url+'/dashboard');
+        passport.authenticate("google")(req,res,function(){
+             if (req.user){
+                 console.log(req.user)
+                 const token = jwt.sign(req.user._id, process.env.secret, { expiresIn: "24h" });
+                 res.json({ success: true,
+                            message: "Register Google successful",
+                            token: token,
+                            id: req.user._id});
+             }
+             else {
+                 res.json({ success: false,
+                                message: "No user"});
+             }
         });
         }
     catch (error) {
@@ -177,20 +206,18 @@ async function googleAuthenticate(req, res) {
     }
 };
 
-async function googleToken(req, res) {
-    if (!googleProfile) {
-        res.json({ success: false, message: "Login Google failed" });
-    }
-    else {
-        const token = jwt.sign({ username: googleProfile.email }, process.env.secret, { expiresIn: "5s" });
-        res.json({ success: true, message: "Login Google successful", token: token });
-    }
-}
+//async function googleToken(req, res) {
+//    if (!googleProfile) {
+//        res.json({ success: false, message: "Login Google failed" });
+//    }
+//    else {
+//        const token = jwt.sign({ username: googleProfile.email }, process.env.secret, { expiresIn: "5s" });
+//        res.json({ success: true, message: "Login Google successful", token: token });
+//    }
+//}
 
 
 //SIGNUP
-let userProfile = null;
-
 async function signup(req, res) {
     User.register(
         {fName: req.body.fName, email: req.body.email, lName: req.body.lName},
@@ -201,9 +228,8 @@ async function signup(req, res) {
                 res.json({ success: false, message: "Your account could not be saved. Error: " + err });
             }else{
                 passport.authenticate("local")(req,res,function(){
-                    userProfile = user;
-                    const token = jwt.sign({ email: user.email }, process.env.secret, { expiresIn: "24h" });
-                    res.json({ success: true, message: "Register successful", token: token });
+                    const token = jwt.sign(user, process.env.secret, { expiresIn: "24h" });
+                    res.json({ success: true, message: "Register successful", token: token, id: user._id });
                 });
             };
     });
@@ -237,9 +263,8 @@ async function login(req, res) {
                         res.json({ success: false, message: "email or password incorrect" });
                     }
                     else {
-                        userProfile = user;
-                        const token = jwt.sign({ email: user.email }, process.env.secret, { expiresIn: "24h" });
-                        res.json({ success: true, message: "Login successful", token: token });
+                        const token = jwt.sign(user, process.env.secret, { expiresIn: "24h" });
+                        res.json({ success: true, message: "Register successful", token: token, id: user._id });
                     }
                 }
             })(req, res);
@@ -253,9 +278,6 @@ async function logout(req, res) {
     req.logout(function (err){
         if (err) {alert (err)}
     });
-    facebookProfile = null;
-    googleProfile = null;
-    userProfile = null;
     res.json({ success: true, message: "Logout successful"})
 }
 
@@ -789,27 +811,13 @@ async function workouts(req, res) {
 
 //COMPTE
 async function getUser(req, res) {
-    let profile = null;
 
-    if (facebookProfile === null){
-        if (googleProfile === null){
-            if (userProfile === null){
-                res.json({ success: false, message: "Merci de vous connecter" });
-            } else {
-                profile = userProfile;
-            }
-        }
-        else{
-            profile = googleProfile;
-        }
-    }else {
-        profile = facebookProfile;
-
-    }
+    console.log(req.body);
+    id = req.body
 
     try{
         User.find(
-          {"email": profile.email}, function (err, data) {
+          {"_id": id}, function (err, data) {
                 if (err){
                     res.json({ success: false, message: err})
                 }
@@ -836,10 +844,8 @@ exports.login = login;
 exports.signup = signup;
 exports.facebook = facebook;
 exports.facebookAuthenticate = facebookAuthenticate;
-exports.facebookToken = facebookToken;
 exports.google = google;
 exports.googleAuthenticate = googleAuthenticate;
-exports.googleToken = googleToken;
 exports.logout = logout;
 exports.debutantform = debutantform;
 exports.workouts = workouts;

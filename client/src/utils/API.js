@@ -78,8 +78,8 @@ export default {
 
   },
 
-  getUser: function(){
-      return axios.get(`${burl}/user/getUser`, { headers: headers });
+  getUser: function(email){
+      return axios.get(`${burl}/user/getUser`, email, { headers: headers });
 
   }
 };
