@@ -186,18 +186,18 @@ function google(req,res) {
 
 async function googleAuthenticate(req, res) {
     try {
-        passport.authenticate("google")(req,res,function(){
+        passport.authenticate("google")(req,res,function(err){
              if (req.user){
                  console.log(req.user)
-                 const token = jwt.sign(req.user._id, process.env.secret, { expiresIn: "24h" });
-                 res.json({ success: true,
-                            message: "Register Google successful",
-                            token: token,
-                            id: req.user._id});
+                 const token = jwt.sign({id: req.user._id}, process.env.secret, { expiresIn: "24h" });
+//                 res.json({ success: true,
+//                            message: "Register Google successful",
+//                            token: token,
+//                            id: req.user._id});
+                res.redirect(url2+'/dashboard?token='+token+'&id='+req.user._id);
              }
              else {
-                 res.json({ success: false,
-                                message: "No user"});
+                console.log(err)
              }
         });
         }
@@ -321,492 +321,476 @@ async function debutantform(req, res) {
 
 //DASHBOARD
 async function workouts(req, res) {
-    let profile = null;
-
-    if (facebookProfile === null){
-        if (googleProfile === null){
-            if (userProfile === null){
-                res.json({ success: false, message: "Merci de vous connecter" });
-            } else {
-                profile = userProfile;
-            }
-        }
-        else{
-            profile = googleProfile;
-        }
-    }else {
-        profile = facebookProfile;
-
-    }
-
-    function sortDateCroissant(a, b) {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
-
-    }
-
-    function sortDateDecroissant(a, b) {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
-
-    }
-
-    function seanceChargeSort(b,a) {
-        const A = parseFloat(a.exercices.map((exercice, indexExercice) => {
-            return (Object.values(exercice.Series).map((serie, index) => {
-                return serie.charge;
-            }))
-        }));
-        const B = parseFloat(b.exercices.map((exercice, indexExercice) => {
-            return (Object.values(exercice.Series).map((serie, index) => {
-                return serie.charge;
-            }))
-        }))
-        return A-B;
-
-    }
-
-    function seancePercentSort(b,a) {
-        const A = parseFloat(a.exercices.map((exercice, indexExercice) => {
-            return (Object.values(exercice.Series).map((serie, index) => {
-                return serie.percent.slice(0,serie.percent.length-1);
-            }))
-        }));
-        const B = parseFloat(b.exercices.map((exercice, indexExercice) => {
-            return (Object.values(exercice.Series).map((serie, index) => {
-                return serie.percent.slice(0,serie.percent.length-1);
-            }))
-        }))
-        return A-B;
-
-    }
-
-    function seancesToPerformances(seances, multiple){
-        seances.map((seance,indexSeance) => {
-            return (seance.exercices.map((exercice, indexExercice) => {
-                    return (Object.keys(exercice.Series).map(index => {
-//                        console.log(seance)
-//                        console.log(exercice.Series)
-//                        console.log(Object.keys(exercice.Series))
-                        if (multiple){
-                            seances[indexSeance].exercices[indexExercice].Series[index].repsTime = seances[indexSeance].exercices[indexExercice].Series[index].repsTime*multiple
-                        }
-                        let obj = {}
-                        if(seances[indexSeance].exercices[indexExercice].Categories){
-                            obj = {
-                                date: seance.date,
-                                poids: seance.poids,
-                                exercices: [{exercice: {name: exercice.exercice.name,
-                                                           ownExercice: exercice.exercice.ownExercice },
-                                               Series: {0: seances[indexSeance].exercices[indexExercice].Series[index]},
-                                               Categories: seances[indexSeance].exercices[indexExercice].Categories
-                                           }]
-                                }
-                        }
-                        else {
-                            obj = {
-                                date: seance.date,
-                                poids: seance.poids,
-                                exercices: [{exercice: {name: exercice.exercice.name,
-                                                           ownExercice: exercice.exercice.ownExercice },
-                                               Series: {0: seances[indexSeance].exercices[indexExercice].Series[index]}
-                                           }]
-                                }
-                        }
-                        seances.push(obj);
-                        delete seances[indexSeance].exercices[indexExercice].Series[index];
-                    }))
-            }))
-        })
-        seances.map((seance,indexSeance) => {
-            return (seance.exercices.map((exercice, indexExercice) => {
-                if (indexExercice>0){
-                    delete seances[indexSeance].exercices[indexExercice]
-                }
-            }))
-        })
-        return seances;
-    }
-
-    function removeEmpty(seance) {
-      return (
-          Object.fromEntries(Object.entries(seance).filter(([_, element]) => {
-            if (element[0]) {
-                if(typeof element !== "string"){
-                    if (element[0].Series) {
-                        return (element[0].Series != null && Object.entries(element[0].Series).length !== 0)
-                    }
-                }
-                else { return typeof element === "string"}
-            }
-          }))
-      )
-    }
-
-    function seancesToPie(seances , string){
-        let arr = []
-        let arr2 = []
-
-        seances.map((seance,indexSeance) => {
-            return (seance.exercices.map((exercice, indexExercice) => {
-                    return (Object.keys(exercice.Series).map(index => {
-                        if(seances[indexSeance].exercices[indexExercice].Series[index].typeSerie===string || string==="sets"){
-                            if(seances[indexSeance].exercices[indexExercice].exercice.muscle){
-                                arr.push(seances[indexSeance].exercices[indexExercice].exercice.name+" - "+seances[indexSeance].exercices[indexExercice].exercice.muscle)
-                                if (string !== "sets"){
-                                    arr2.push(parseFloat(seances[indexSeance].exercices[indexExercice].Series[index].repsTime))
-                                }
-                                else{
-                                    arr2.push(0)
-                                }
-                            }
-                            else{
-                                arr.push(seances[indexSeance].exercices[indexExercice].exercice.name)
-                                if (string !== "sets"){
-                                    arr2.push(parseFloat(seances[indexSeance].exercices[indexExercice].Series[index].repsTime))
-                                }
-                                else{
-                                    arr2.push(0)
-                                }
-                            }
-                        }
-                    }))
-            }))
-        })
-
-        if (string !== "sets"){
-
-            let index = []
-            arr2 = arr2.filter(function( el, i ) {
-               if (isNaN(el)){
-                    index.push(i)
-                    return false
-               }
-               else{
-                    return true
-               }
-            });
-            index.forEach((id) => arr.splice(id,1))
-
-            for(let k=0; k<arr.length; k++){
-                for(let i=0; i<arr.length; i++){
-                    if(k!=i && arr[k]===arr[i]){
-                        arr2[k] = parseFloat(arr2[k]) + parseFloat(arr2[i])
-                        arr[i] = 0
-                        arr2[i] = 0
-                    }
-                }
-            }
-
-            arr = arr.filter(el => el!==0)
-            arr2 = arr2.filter(e => e!=0)
-
-            let arr3 = []
-            for(let k=0; k<arr.length; k++){
-                arr3.push({name: arr[k], repsTime: parseFloat(arr2[k])})
-            }
-
-            return arr3;
-        }
-        else{
-            arr2 = []
-            let arr3 =[]
-
-            for(let k=0; k<arr.length; k++){
-                if(!arr3.includes(arr[k])){
-                    arr3.push(arr[k])
-                    arr2.push(arr.filter(el => {return el===arr[k]}).length)
-                }
-
-
-            }
-
-            let arr4 = []
-            for(let k=0; k<arr.length; k++){
-                arr4.push({name: arr3[k], repsTime: parseFloat(arr2[k])})
-            }
-
-            return arr4;
-
-        }
-    }
-
-    function sortExerciceFav(b,a) {
-        return a.repsTime - b.repsTime;
-
-    }
-
-    function removeEmptyPoids(seance) {
-      return (
-          Object.fromEntries(Object.entries(seance).filter(([_, element]) => {
-            return (element != null && element != [])
-          }))
-      )
-    }
-
-//    function removeEmpty2(arr) {
-//      return Object.fromEntries(Object.entries(seance).filter(([_, element]) => { Object.entries(element).length !== 0 }))
+    console.log(req.query)
+//
+//    function sortDateCroissant(a, b) {
+//        return new Date(a.date).getTime() - new Date(b.date).getTime();
+//
 //    }
-
-    try {
-       User.find(
-          {"email": profile.email}, function (err, data) {
-                if (err){
-                    res.json({ success: false, message: err})
-                }
-                else{
-                    let seances = data[0].seances;
-//                    console.log(req.query)
-
-                    //TRI EXERCICE
-                    seances.map((seance,indexSeance) => {
-                        return (seance.exercices.map((exercice, indexExercice) => {
-                            if (req.query.exerciceName !== "title" && req.query.exerciceName !== ""){
-                                if (req.query.exerciceName !== "own-exercice"){
-                                    if(req.query.exerciceMuscle !== "" && req.query.exerciceMuscle !== "title"){
-                                        if (req.query.exerciceName !== exercice.exercice.name || req.query.exerciceMuscle !== exercice.exercice.muscle){
-                                            delete seances[indexSeance].exercices[indexExercice]
-                                        }
-                                    }
-                                    else{
-                                        if (req.query.exerciceName !== exercice.exercice.name){
-                                            delete seances[indexSeance].exercices[indexExercice]
-                                        }
-                                    }
-                                }
-                                else {
-                                    if (req.query.exerciceOwnExercice !== exercice.exercice.ownExercice){
-                                        delete seances[indexSeance].exercices[indexExercice]
-                                    }
-                                }
-                            }
-                        }))
-                    })
-
-                    //TRI CATEGORIE
-                    let del = true;
-                    for(let i=0; i<5; i++){
-                        let catName = "categorie"+i+"name";
-                        let catInput = "categorie"+i+"input";
-                        if (req.query[catName] && req.query[catName] !== "title" && req.query[catName] !== "" && req.query[catName] !== "undefined"){
-                            if (req.query[catName] !== "Elastique"){
-                                seances.map((seance,indexSeance) => {
-                                    return (seance.exercices.map((exercice, indexExercice) => {
-                                        if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
-                                            del = true
-                                            Object.values(exercice.Categories).map((categorie, indexCategorie) => {
-                                                if (categorie.name === req.query[catName] && categorie.input === req.query[catInput]){
-                                                   del = false
-                                                }
-                                            })
-                                            if (del){
-                                                delete seances[indexSeance].exercices[indexExercice]
-                                            }
-                                        }
-                                        else{ delete seances[indexSeance].exercices[indexExercice] }
-                                    }))
-                                })
-                            }
-                            else{
-                                let catUtilisation = "categorie"+i+"utilisation";
-                                seances.map((seance,indexSeance) => {
-                                    return (seance.exercices.map((exercice, indexExercice) => {
-                                        if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
-                                                del = true
-                                                Object.values(exercice.Categories).map((categorie, indexCategorie) => {
-                                                    if (categorie.name === req.query[catName] && categorie.utilisation === req.query[catUtilisation]){
-                                                       del = false
-                                                    }
-                                                })
-                                                if (del){
-                                                    delete seances[indexSeance].exercices[indexExercice]
-                                                }
-                                        }
-                                        else{ delete seances[indexSeance].exercices[indexExercice] }
-                                    }))
-                                })
-                            }
-                        }
-                    }
-
-                    //TRI DETAIL
-                    for(let i=0; i<5; i++){
-                        let catName = "detail"+i+"name";
-                        let catInput = "detail"+i+"input";
-                        if (req.query[catName] && req.query[catName] !== "title" && req.query[catName] !== "" && req.query[catName] !== "undefined"){
-                            seances.map((seance,indexSeance) => {
-                                if(seance.details && Object.entries(seance.details).length !== 0){
-                                    del = true
-                                    seance.details.map((detail, indexDetail) => {
-                                        if (detail.name === req.query[catName] && detail.input === req.query[catInput]){
-                                               del = false
-                                        }
-                                    })
-                                    if (del){
-                                            delete seances[indexSeance]
-                                    }
-                                }
-                                else{ delete seances[indexSeance] }
-                            })
-                        }
-                    }
-
-                    //TRI REP RANGE
-                    if (req.query.repsFrom !== ""){
-                        seances.map((seance,indexSeance) => {
-                        return (seance.exercices.map((exercice, indexExercice) => {
-                                return (Object.values(exercice.Series).map((serie, index) => {
-                                    if (parseFloat(serie.repsTime)<req.query.repsFrom){
-                                        delete seances[indexSeance].exercices[indexExercice].Series[index]
-                                    }
-                                }))
-                            }))
-                        })
-                    }
-                    if (req.query.repsTo !== ""){
-                        seances.map((seance,indexSeance) => {
-                        return (seance.exercices.map((exercice, indexExercice) => {
-                                return (Object.values(exercice.Series).map((serie, index) => {
-                                    if (parseFloat(serie.repsTime)>req.query.repsTo){
-                                        delete seances[indexSeance].exercices[indexExercice].Series[index]
-                                    }
-                                }))
-                            }))
-                        })
-                    }
-
-                    //TRI PERIODE
-                    let currDate = new Date();
-                    if (req.query.periode === '7d'){
-                        seances.map((seance,indexSeance) => {
-                            let d2 = new Date(seance.date);
-                            if (Math.floor((currDate - d2)/1000/60/60/24) > 7){
-                                delete seances[indexSeance]
-                            }
-                        })
-                    }
-                    if (req.query.periode === '30d'){
-                        seances.map((seance,indexSeance) => {
-                            let d2 = new Date(seance.date);
-                            if (Math.floor((currDate - d2)/1000/60/60/24) > 30){
-                                delete seances[indexSeance]
-                            }
-                        })
-                    }
-                    if (req.query.periode === '90d'){
-                        seances.map((seance,indexSeance) => {
-                            let d2 = new Date(seance.date);
-                            if (Math.floor((currDate - d2)/1000/60/60/24) > 90){
-                                delete seances[indexSeance]
-                            }
-                        })
-                    }
-                    if (req.query.periode === '180d'){
-                        seances.map((seance,indexSeance) => {
-                            let d2 = new Date(seance.date);
-                            if (Math.floor((currDate - d2)/1000/60/60/24) > 180){
-                                delete seances[indexSeance]
-                            }
-                        })
-                    }
-                    if (req.query.periode === '1y'){
-                        seances.map((seance,indexSeance) => {
-                            let d2 = new Date(seance.date);
-                            if (Math.floor((currDate - d2)/1000/60/60/24) > 365){
-                                delete seances[indexSeance]
-                            }
-                        })
-                    }
-
-                    //TRI TYPE TRI
-                    if (req.query.tri === 'Ordre chronologique décroissant'){
-                        seances = seances.sort(sortDateDecroissant);
-
-                    }
-                    if (req.query.tri === 'Ordre chronologique croissant'){
-                        seances = seances.sort(sortDateCroissant);
-
-                    }
-                    if (req.query.tri === 'Charge (ordre décroissant)'){
-                        seances = seancesToPerformances(seances);
-                        seances = seances.sort(seanceChargeSort);
-
-                    }
-                    if (req.query.tri === 'PDC (ordre décroissant)'){
-                        seances = seancesToPerformances(seances);
-                        seances = seances.sort(seancePercentSort);
-
-                    }
-
-                    //STATS REFORME
-                    if(req.query.reforme==="true"){
-                        let arr = []
-                        seances.forEach(seance => {
-                            arr.push(removeEmpty(seance))
-                        });
-
-                        seances = seancesToPerformances(seances, 10);
-
-                        arr = []
-                        seances.forEach(seance => {
-                            arr.push(removeEmpty(seance))
-                        });
-
-                        seances = arr.filter(seance => {
-                            return (Object.entries(seance).length !== 0 && seance.exercices)
-                        });
-
-                        seances.forEach(seance => {
-                            seance.exercices[0].Series[0].percent = parseFloat(seance.exercices[0].Series[0].percent);
-                        });
-
-                        seances.forEach(seance => {
-                            for(let k=0; k<5; k++){
-                                if(seance.exercices[0].Categories && seance.exercices[0].Categories[k] && seance.exercices[0].Categories[k].estimation){
-                                    seance.exercices[0].Categories[k].estimation = parseFloat(seance.exercices[0].Categories[k].estimation);
-                                }
-                            }
-                        });
-
-                    }
-
-                    //format date
-                    if(req.query.date==="md"){
-                        seances.forEach(seance => {
-                            seance.date = seance.date.slice(5, seance.date.length)
-                        });
-                    }
-                    if(req.query.date==="d"){
-                        seances.forEach(seance => {
-                            seance.date = seance.date.slice(seance.date.length-2, seance.date.length)
-                        });
-                    }
-
-                    //STATS REFORME poids
-                    if(req.query.reforme==="poids"){
-                        let arr = []
-                        seances.forEach(seance => {
-                            arr.push(removeEmptyPoids(seance))
-                        });
-
-                        seances = arr.filter(element => {
-                            return Object.entries(element).length !== 0
-                        });
-
-                    }
-
-                    //STATS REFORME poids
-                    if(req.query.reforme==="pie"){
-                        seances = seancesToPie(seances, req.query.class)
-                        seances = seances.sort((a,b) => {return b.repsTime - a.repsTime})
-                    }
-
-                    res.json({ success: true, message: "Utilisateur trouvé !", seances: seances})
-                }
-          });
-
-    }
-    catch(e){
-       console.log(e);
-    }
+//
+//    function sortDateDecroissant(a, b) {
+//        return new Date(b.date).getTime() - new Date(a.date).getTime();
+//
+//    }
+//
+//    function seanceChargeSort(b,a) {
+//        const A = parseFloat(a.exercices.map((exercice, indexExercice) => {
+//            return (Object.values(exercice.Series).map((serie, index) => {
+//                return serie.charge;
+//            }))
+//        }));
+//        const B = parseFloat(b.exercices.map((exercice, indexExercice) => {
+//            return (Object.values(exercice.Series).map((serie, index) => {
+//                return serie.charge;
+//            }))
+//        }))
+//        return A-B;
+//
+//    }
+//
+//    function seancePercentSort(b,a) {
+//        const A = parseFloat(a.exercices.map((exercice, indexExercice) => {
+//            return (Object.values(exercice.Series).map((serie, index) => {
+//                return serie.percent.slice(0,serie.percent.length-1);
+//            }))
+//        }));
+//        const B = parseFloat(b.exercices.map((exercice, indexExercice) => {
+//            return (Object.values(exercice.Series).map((serie, index) => {
+//                return serie.percent.slice(0,serie.percent.length-1);
+//            }))
+//        }))
+//        return A-B;
+//
+//    }
+//
+//    function seancesToPerformances(seances, multiple){
+//        seances.map((seance,indexSeance) => {
+//            return (seance.exercices.map((exercice, indexExercice) => {
+//                    return (Object.keys(exercice.Series).map(index => {
+////                        console.log(seance)
+////                        console.log(exercice.Series)
+////                        console.log(Object.keys(exercice.Series))
+//                        if (multiple){
+//                            seances[indexSeance].exercices[indexExercice].Series[index].repsTime = seances[indexSeance].exercices[indexExercice].Series[index].repsTime*multiple
+//                        }
+//                        let obj = {}
+//                        if(seances[indexSeance].exercices[indexExercice].Categories){
+//                            obj = {
+//                                date: seance.date,
+//                                poids: seance.poids,
+//                                exercices: [{exercice: {name: exercice.exercice.name,
+//                                                           ownExercice: exercice.exercice.ownExercice },
+//                                               Series: {0: seances[indexSeance].exercices[indexExercice].Series[index]},
+//                                               Categories: seances[indexSeance].exercices[indexExercice].Categories
+//                                           }]
+//                                }
+//                        }
+//                        else {
+//                            obj = {
+//                                date: seance.date,
+//                                poids: seance.poids,
+//                                exercices: [{exercice: {name: exercice.exercice.name,
+//                                                           ownExercice: exercice.exercice.ownExercice },
+//                                               Series: {0: seances[indexSeance].exercices[indexExercice].Series[index]}
+//                                           }]
+//                                }
+//                        }
+//                        seances.push(obj);
+//                        delete seances[indexSeance].exercices[indexExercice].Series[index];
+//                    }))
+//            }))
+//        })
+//        seances.map((seance,indexSeance) => {
+//            return (seance.exercices.map((exercice, indexExercice) => {
+//                if (indexExercice>0){
+//                    delete seances[indexSeance].exercices[indexExercice]
+//                }
+//            }))
+//        })
+//        return seances;
+//    }
+//
+//    function removeEmpty(seance) {
+//      return (
+//          Object.fromEntries(Object.entries(seance).filter(([_, element]) => {
+//            if (element[0]) {
+//                if(typeof element !== "string"){
+//                    if (element[0].Series) {
+//                        return (element[0].Series != null && Object.entries(element[0].Series).length !== 0)
+//                    }
+//                }
+//                else { return typeof element === "string"}
+//            }
+//          }))
+//      )
+//    }
+//
+//    function seancesToPie(seances , string){
+//        let arr = []
+//        let arr2 = []
+//
+//        seances.map((seance,indexSeance) => {
+//            return (seance.exercices.map((exercice, indexExercice) => {
+//                    return (Object.keys(exercice.Series).map(index => {
+//                        if(seances[indexSeance].exercices[indexExercice].Series[index].typeSerie===string || string==="sets"){
+//                            if(seances[indexSeance].exercices[indexExercice].exercice.muscle){
+//                                arr.push(seances[indexSeance].exercices[indexExercice].exercice.name+" - "+seances[indexSeance].exercices[indexExercice].exercice.muscle)
+//                                if (string !== "sets"){
+//                                    arr2.push(parseFloat(seances[indexSeance].exercices[indexExercice].Series[index].repsTime))
+//                                }
+//                                else{
+//                                    arr2.push(0)
+//                                }
+//                            }
+//                            else{
+//                                arr.push(seances[indexSeance].exercices[indexExercice].exercice.name)
+//                                if (string !== "sets"){
+//                                    arr2.push(parseFloat(seances[indexSeance].exercices[indexExercice].Series[index].repsTime))
+//                                }
+//                                else{
+//                                    arr2.push(0)
+//                                }
+//                            }
+//                        }
+//                    }))
+//            }))
+//        })
+//
+//        if (string !== "sets"){
+//
+//            let index = []
+//            arr2 = arr2.filter(function( el, i ) {
+//               if (isNaN(el)){
+//                    index.push(i)
+//                    return false
+//               }
+//               else{
+//                    return true
+//               }
+//            });
+//            index.forEach((id) => arr.splice(id,1))
+//
+//            for(let k=0; k<arr.length; k++){
+//                for(let i=0; i<arr.length; i++){
+//                    if(k!=i && arr[k]===arr[i]){
+//                        arr2[k] = parseFloat(arr2[k]) + parseFloat(arr2[i])
+//                        arr[i] = 0
+//                        arr2[i] = 0
+//                    }
+//                }
+//            }
+//
+//            arr = arr.filter(el => el!==0)
+//            arr2 = arr2.filter(e => e!=0)
+//
+//            let arr3 = []
+//            for(let k=0; k<arr.length; k++){
+//                arr3.push({name: arr[k], repsTime: parseFloat(arr2[k])})
+//            }
+//
+//            return arr3;
+//        }
+//        else{
+//            arr2 = []
+//            let arr3 =[]
+//
+//            for(let k=0; k<arr.length; k++){
+//                if(!arr3.includes(arr[k])){
+//                    arr3.push(arr[k])
+//                    arr2.push(arr.filter(el => {return el===arr[k]}).length)
+//                }
+//
+//
+//            }
+//
+//            let arr4 = []
+//            for(let k=0; k<arr.length; k++){
+//                arr4.push({name: arr3[k], repsTime: parseFloat(arr2[k])})
+//            }
+//
+//            return arr4;
+//
+//        }
+//    }
+//
+//    function sortExerciceFav(b,a) {
+//        return a.repsTime - b.repsTime;
+//
+//    }
+//
+//    function removeEmptyPoids(seance) {
+//      return (
+//          Object.fromEntries(Object.entries(seance).filter(([_, element]) => {
+//            return (element != null && element != [])
+//          }))
+//      )
+//    }
+//
+////    function removeEmpty2(arr) {
+////      return Object.fromEntries(Object.entries(seance).filter(([_, element]) => { Object.entries(element).length !== 0 }))
+////    }
+//
+//    try {
+//       User.find(
+//          {"email": profile.email}, function (err, data) {
+//                if (err){
+//                    res.json({ success: false, message: err})
+//                }
+//                else{
+//                    let seances = data[0].seances;
+////                    console.log(req.query)
+//
+//                    //TRI EXERCICE
+//                    seances.map((seance,indexSeance) => {
+//                        return (seance.exercices.map((exercice, indexExercice) => {
+//                            if (req.query.exerciceName !== "title" && req.query.exerciceName !== ""){
+//                                if (req.query.exerciceName !== "own-exercice"){
+//                                    if(req.query.exerciceMuscle !== "" && req.query.exerciceMuscle !== "title"){
+//                                        if (req.query.exerciceName !== exercice.exercice.name || req.query.exerciceMuscle !== exercice.exercice.muscle){
+//                                            delete seances[indexSeance].exercices[indexExercice]
+//                                        }
+//                                    }
+//                                    else{
+//                                        if (req.query.exerciceName !== exercice.exercice.name){
+//                                            delete seances[indexSeance].exercices[indexExercice]
+//                                        }
+//                                    }
+//                                }
+//                                else {
+//                                    if (req.query.exerciceOwnExercice !== exercice.exercice.ownExercice){
+//                                        delete seances[indexSeance].exercices[indexExercice]
+//                                    }
+//                                }
+//                            }
+//                        }))
+//                    })
+//
+//                    //TRI CATEGORIE
+//                    let del = true;
+//                    for(let i=0; i<5; i++){
+//                        let catName = "categorie"+i+"name";
+//                        let catInput = "categorie"+i+"input";
+//                        if (req.query[catName] && req.query[catName] !== "title" && req.query[catName] !== "" && req.query[catName] !== "undefined"){
+//                            if (req.query[catName] !== "Elastique"){
+//                                seances.map((seance,indexSeance) => {
+//                                    return (seance.exercices.map((exercice, indexExercice) => {
+//                                        if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
+//                                            del = true
+//                                            Object.values(exercice.Categories).map((categorie, indexCategorie) => {
+//                                                if (categorie.name === req.query[catName] && categorie.input === req.query[catInput]){
+//                                                   del = false
+//                                                }
+//                                            })
+//                                            if (del){
+//                                                delete seances[indexSeance].exercices[indexExercice]
+//                                            }
+//                                        }
+//                                        else{ delete seances[indexSeance].exercices[indexExercice] }
+//                                    }))
+//                                })
+//                            }
+//                            else{
+//                                let catUtilisation = "categorie"+i+"utilisation";
+//                                seances.map((seance,indexSeance) => {
+//                                    return (seance.exercices.map((exercice, indexExercice) => {
+//                                        if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
+//                                                del = true
+//                                                Object.values(exercice.Categories).map((categorie, indexCategorie) => {
+//                                                    if (categorie.name === req.query[catName] && categorie.utilisation === req.query[catUtilisation]){
+//                                                       del = false
+//                                                    }
+//                                                })
+//                                                if (del){
+//                                                    delete seances[indexSeance].exercices[indexExercice]
+//                                                }
+//                                        }
+//                                        else{ delete seances[indexSeance].exercices[indexExercice] }
+//                                    }))
+//                                })
+//                            }
+//                        }
+//                    }
+//
+//                    //TRI DETAIL
+//                    for(let i=0; i<5; i++){
+//                        let catName = "detail"+i+"name";
+//                        let catInput = "detail"+i+"input";
+//                        if (req.query[catName] && req.query[catName] !== "title" && req.query[catName] !== "" && req.query[catName] !== "undefined"){
+//                            seances.map((seance,indexSeance) => {
+//                                if(seance.details && Object.entries(seance.details).length !== 0){
+//                                    del = true
+//                                    seance.details.map((detail, indexDetail) => {
+//                                        if (detail.name === req.query[catName] && detail.input === req.query[catInput]){
+//                                               del = false
+//                                        }
+//                                    })
+//                                    if (del){
+//                                            delete seances[indexSeance]
+//                                    }
+//                                }
+//                                else{ delete seances[indexSeance] }
+//                            })
+//                        }
+//                    }
+//
+//                    //TRI REP RANGE
+//                    if (req.query.repsFrom !== ""){
+//                        seances.map((seance,indexSeance) => {
+//                        return (seance.exercices.map((exercice, indexExercice) => {
+//                                return (Object.values(exercice.Series).map((serie, index) => {
+//                                    if (parseFloat(serie.repsTime)<req.query.repsFrom){
+//                                        delete seances[indexSeance].exercices[indexExercice].Series[index]
+//                                    }
+//                                }))
+//                            }))
+//                        })
+//                    }
+//                    if (req.query.repsTo !== ""){
+//                        seances.map((seance,indexSeance) => {
+//                        return (seance.exercices.map((exercice, indexExercice) => {
+//                                return (Object.values(exercice.Series).map((serie, index) => {
+//                                    if (parseFloat(serie.repsTime)>req.query.repsTo){
+//                                        delete seances[indexSeance].exercices[indexExercice].Series[index]
+//                                    }
+//                                }))
+//                            }))
+//                        })
+//                    }
+//
+//                    //TRI PERIODE
+//                    let currDate = new Date();
+//                    if (req.query.periode === '7d'){
+//                        seances.map((seance,indexSeance) => {
+//                            let d2 = new Date(seance.date);
+//                            if (Math.floor((currDate - d2)/1000/60/60/24) > 7){
+//                                delete seances[indexSeance]
+//                            }
+//                        })
+//                    }
+//                    if (req.query.periode === '30d'){
+//                        seances.map((seance,indexSeance) => {
+//                            let d2 = new Date(seance.date);
+//                            if (Math.floor((currDate - d2)/1000/60/60/24) > 30){
+//                                delete seances[indexSeance]
+//                            }
+//                        })
+//                    }
+//                    if (req.query.periode === '90d'){
+//                        seances.map((seance,indexSeance) => {
+//                            let d2 = new Date(seance.date);
+//                            if (Math.floor((currDate - d2)/1000/60/60/24) > 90){
+//                                delete seances[indexSeance]
+//                            }
+//                        })
+//                    }
+//                    if (req.query.periode === '180d'){
+//                        seances.map((seance,indexSeance) => {
+//                            let d2 = new Date(seance.date);
+//                            if (Math.floor((currDate - d2)/1000/60/60/24) > 180){
+//                                delete seances[indexSeance]
+//                            }
+//                        })
+//                    }
+//                    if (req.query.periode === '1y'){
+//                        seances.map((seance,indexSeance) => {
+//                            let d2 = new Date(seance.date);
+//                            if (Math.floor((currDate - d2)/1000/60/60/24) > 365){
+//                                delete seances[indexSeance]
+//                            }
+//                        })
+//                    }
+//
+//                    //TRI TYPE TRI
+//                    if (req.query.tri === 'Ordre chronologique décroissant'){
+//                        seances = seances.sort(sortDateDecroissant);
+//
+//                    }
+//                    if (req.query.tri === 'Ordre chronologique croissant'){
+//                        seances = seances.sort(sortDateCroissant);
+//
+//                    }
+//                    if (req.query.tri === 'Charge (ordre décroissant)'){
+//                        seances = seancesToPerformances(seances);
+//                        seances = seances.sort(seanceChargeSort);
+//
+//                    }
+//                    if (req.query.tri === 'PDC (ordre décroissant)'){
+//                        seances = seancesToPerformances(seances);
+//                        seances = seances.sort(seancePercentSort);
+//
+//                    }
+//
+//                    //STATS REFORME
+//                    if(req.query.reforme==="true"){
+//                        let arr = []
+//                        seances.forEach(seance => {
+//                            arr.push(removeEmpty(seance))
+//                        });
+//
+//                        seances = seancesToPerformances(seances, 10);
+//
+//                        arr = []
+//                        seances.forEach(seance => {
+//                            arr.push(removeEmpty(seance))
+//                        });
+//
+//                        seances = arr.filter(seance => {
+//                            return (Object.entries(seance).length !== 0 && seance.exercices)
+//                        });
+//
+//                        seances.forEach(seance => {
+//                            seance.exercices[0].Series[0].percent = parseFloat(seance.exercices[0].Series[0].percent);
+//                        });
+//
+//                        seances.forEach(seance => {
+//                            for(let k=0; k<5; k++){
+//                                if(seance.exercices[0].Categories && seance.exercices[0].Categories[k] && seance.exercices[0].Categories[k].estimation){
+//                                    seance.exercices[0].Categories[k].estimation = parseFloat(seance.exercices[0].Categories[k].estimation);
+//                                }
+//                            }
+//                        });
+//
+//                    }
+//
+//                    //format date
+//                    if(req.query.date==="md"){
+//                        seances.forEach(seance => {
+//                            seance.date = seance.date.slice(5, seance.date.length)
+//                        });
+//                    }
+//                    if(req.query.date==="d"){
+//                        seances.forEach(seance => {
+//                            seance.date = seance.date.slice(seance.date.length-2, seance.date.length)
+//                        });
+//                    }
+//
+//                    //STATS REFORME poids
+//                    if(req.query.reforme==="poids"){
+//                        let arr = []
+//                        seances.forEach(seance => {
+//                            arr.push(removeEmptyPoids(seance))
+//                        });
+//
+//                        seances = arr.filter(element => {
+//                            return Object.entries(element).length !== 0
+//                        });
+//
+//                    }
+//
+//                    //STATS REFORME poids
+//                    if(req.query.reforme==="pie"){
+//                        seances = seancesToPie(seances, req.query.class)
+//                        seances = seances.sort((a,b) => {return b.repsTime - a.repsTime})
+//                    }
+//
+//                    res.json({ success: true, message: "Utilisateur trouvé !", seances: seances})
+//                }
+//          });
+//
+//    }
+//    catch(e){
+//       console.log(e);
+//    }
 };
 
 //COMPTE
