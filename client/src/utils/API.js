@@ -18,7 +18,7 @@ export default {
   },
 
   verifyToken: function(send) {
-    return axios.post(`${burl}/user/verifyToken`, {send}, { headers: headers });
+    return axios.post(`${burl}/user/verifyToken`, send, { headers: headers });
 
   },
 
@@ -42,8 +42,14 @@ export default {
 
   },
 
-  isAuth: function() {
-    return (localStorage.getItem("token") !== null);
+  isAuth: async function() {
+    if (localStorage.getItem("token") !== null){
+        const result = await axios.post(`${burl}/user/verifyToken`, {token: localStorage.getItem("token")}, { headers: headers });
+        if (result.success === true){
+            return true
+        }
+    }
+    return false;
 
   },
 
@@ -83,8 +89,8 @@ export default {
 
   },
 
-  getUser: function(email){
-      return axios.get(`${burl}/user/getUser`, email, { headers: headers });
+  getUser: function(id){
+      return axios.post(`${burl}/user/getUser`, id, { headers: headers });
 
   }
 };

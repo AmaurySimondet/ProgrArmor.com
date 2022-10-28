@@ -6,12 +6,14 @@ function Token(){
     const [searchParams, setSearchParams] = useSearchParams();
 
     async function createTokenAndId(){
-//        console.log(searchParams.get("token"));
-//        console.log(searchParams.get("id"))
-        const result = await API.verifyToken(searchParams.get("token"));
-        if (result.success === true){
+        const result = await API.verifyToken({token: searchParams.get("token")});
+        if (result.data.success === true){
             await localStorage.setItem("token", searchParams.get("token") );
-            await localStorage.setItem("id", searchParams.get("id"))
+            await localStorage.setItem("id", result.data.id)
+            window.location = "/dashboard";
+        }
+        else{
+            alert(result.data.message)
         }
     }
 

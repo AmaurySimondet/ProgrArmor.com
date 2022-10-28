@@ -32,8 +32,13 @@ function PrivateRoute() {
 //    } else {
 //        localStorage.removeItem('reload');
 //    }
+    async function handleAuth(){
+        const res = await API.isAuth();
+    }
 
-    return API.isAuth() ? <Outlet/> : <Navigate to="/" />;
+    handleAuth();
+
+    return res ? <Outlet/> : <Navigate to="/" />;
 };
 
 export default PrivateRoute;

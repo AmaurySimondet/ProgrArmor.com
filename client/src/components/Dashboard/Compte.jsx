@@ -11,11 +11,12 @@ function Compte() {
     async function disconnect() {
         await API.logout();
         localStorage.removeItem('token');
+        localStorage.removeItem('id');
         window.location = "/";
     };
 
     async function getUser(){
-        const {data} = await API.getUser();
+        const {data} = await API.getUser({id: localStorage.getItem("id")});
         if (data.success === false){
             alert(data.message);
         } else {

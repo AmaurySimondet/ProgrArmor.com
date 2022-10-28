@@ -31,10 +31,10 @@ function InscriptionForm(){
     if (password.length<8 || containsSC(password)===false) return alert("Le mot de passe doit contenir 8 caractères dont un spécial")
 
     try {
-      const { data } = await API.signup({ fName, lName, email, password });
+      const { data } = await API.signup({ fName: fName, lName: lName, email: email, password: password });
       if (data.success === true){
-          localStorage.setItem("token", data.token);
-          window.location = "/dashboard";
+          console.log(data)
+          window.location = "/token?token="+data.token;
       } else { alert(data.message); }
     } catch (error) {
       alert(error);

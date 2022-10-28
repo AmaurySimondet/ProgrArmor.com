@@ -92,22 +92,13 @@ async function facebook(req, res) {
 
 async function facebookAuthenticate(req, res) {
     try {
-//        passport.authenticate("facebook", {failureRedirect: '/', successRedirect: url2+'/dashboard'})(req,res,function(){
-//            res.redirect(url2+'/dashboard');
-//        });
-
-        passport.authenticate("facebook")(req,res,function(){
+        passport.authenticate("facebook")(req,res,function(err){
              if (req.user){
-                 console.log(req.user)
-                 const token = jwt.sign(req.user._id, process.env.secret, { expiresIn: "24h" });
-                 res.json({ success: true,
-                            message: "Register Google successful",
-                            token: token,
-                            id: req.user._id});
+                const token = jwt.sign({id: req.user._id}, process.env.secret, { expiresIn: "24h" });
+                res.redirect(url2+'/token?token='+token);
              }
              else {
-                 res.json({ success: false,
-                                message: "No user"});
+                console.log(err)
              }
         });
         }
@@ -188,13 +179,8 @@ async function googleAuthenticate(req, res) {
     try {
         passport.authenticate("google")(req,res,function(err){
              if (req.user){
-                 console.log(req.user)
                  const token = jwt.sign({id: req.user._id}, process.env.secret, { expiresIn: "24h" });
-//                 res.json({ success: true,
-//                            message: "Register Google successful",
-//                            token: token,
-//                            id: req.user._id});
-                res.redirect(url2+'/token?token='+token+'&id='+req.user._id);
+                res.redirect(url2+'/token?token='+token);
              }
              else {
                 console.log(err)
@@ -207,9 +193,16 @@ async function googleAuthenticate(req, res) {
 };
 
 function verifyToken(req, res){
-    console.log("break")
-    console.log(req.body)
-    res.json({ success: false, message: "Login Google failed" });
+    const token = req.body.token
+    jwt.verify(token, process.env.secret, function(err, decoded){
+        console.log(err, decoded)
+        if (err) {
+            res.json({ success: false, message: "Token verification failed "+err.name });
+        }
+        else{
+            res.json({ success: true, message: "Token verification successfull", id: decoded.id });
+        }
+    })
 
 }
 
@@ -235,8 +228,8 @@ async function signup(req, res) {
                 res.json({ success: false, message: "Your account could not be saved. Error: " + err });
             }else{
                 passport.authenticate("local")(req,res,function(){
-                    const token = jwt.sign(user, process.env.secret, { expiresIn: "24h" });
-                    res.json({ success: true, message: "Register successful", token: token, id: user._id });
+                    const token = jwt.sign({id: user._id}, process.env.secret, { expiresIn: "24h" });
+                    res.json({ success: true, message: "Register successful", token: token});
                 });
             };
     });
@@ -270,8 +263,8 @@ async function login(req, res) {
                         res.json({ success: false, message: "email or password incorrect" });
                     }
                     else {
-                        const token = jwt.sign(user, process.env.secret, { expiresIn: "24h" });
-                        res.json({ success: true, message: "Register successful", token: token, id: user._id });
+                        const token = jwt.sign({id: user._id}, process.env.secret, { expiresIn: "24h" });
+                        res.redirect(url2+'/token?token='+token);
                     }
                 }
             })(req, res);
@@ -802,9 +795,7 @@ async function workouts(req, res) {
 
 //COMPTE
 async function getUser(req, res) {
-
-    console.log(req.body);
-    id = req.body
+    id = req.body.id
 
     try{
         User.find(

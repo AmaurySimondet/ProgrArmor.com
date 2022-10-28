@@ -20,7 +20,7 @@ function App() {
             <Route exact path="/inscription" element={<Inscription/>} />
             <Route exact path="/cgu" element={<CGU/>} />
             <Route exact path="/connexion" element={<Connexion />} />
-            <Route exact path="/token" element={<Token />} />
+            <Route exact path="/token/*" element={<Token />} />
 
             <Route path="/dashboard/*" element={<PrivateRoute/>}>
                 <Route exact path='/dashboard/*' element={<Dashboard/>}/>
