@@ -45,21 +45,12 @@ export default {
   isAuth: async function() {
     if (localStorage.getItem("token") !== null){
         const result = await axios.post(`${burl}/user/verifyToken`, {token: localStorage.getItem("token")}, { headers: headers });
-        if (result.success === true){
+        console.log(result)
+        if (result.data.success === true){
             return true
         }
     }
     return false;
-
-  },
-
-  facebookToken: function() {
-    return axios.get(`${burl}/user/facebookToken`, { headers: headers })
-
-  },
-
-  googleToken: function() {
-    return axios.get(`${burl}/user/googleToken`, { headers: headers })
 
   },
 
@@ -69,8 +60,8 @@ export default {
   },
 
   //SESSION
-  debutantform: function(seance) {
-    return axios.post(`${burl}/user/debutantform`,{seance},{headers: headers});
+  debutantform: function(send) {
+    return axios.post(`${burl}/user/debutantform`,send,{headers: headers});
 
   },
 
@@ -85,7 +76,7 @@ export default {
             };
         })
 
-      return axios.get(`${burl}/user/workouts?`+string, { headers: headers });
+      return axios.get(`${burl}/user/workouts?`+string+"&id="+localStorage.getItem("id"), { headers: headers });
 
   },
 

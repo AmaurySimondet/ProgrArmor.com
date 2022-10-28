@@ -24,11 +24,9 @@ function ConnexionForm(){
     try {
       const { data } = await API.login(email, password);
       if (data.success === true){
-        localStorage.setItem("token", data.token);
-        window.location = "/dashboard";
-      }else{
-        alert("Erreur: "+data.message);
-      }
+          console.log(data)
+          window.location = "/token?token="+data.token;
+      } else { alert(data.message); }
     } catch (error) {
       alert(error);
     }

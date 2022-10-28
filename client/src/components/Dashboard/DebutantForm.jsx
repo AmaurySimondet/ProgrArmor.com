@@ -58,7 +58,7 @@ function DebutantForm() {
 
         //API
         try {
-          const { data } = await API.debutantform(seance);
+          const { data } = await API.debutantform({seance: seance, id: localStorage.getItem("id")});
           if (data.success === true){
             window.location = "/dashboard";
           }else{
