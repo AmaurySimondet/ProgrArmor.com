@@ -8,8 +8,8 @@ const findOrCreate = require('mongoose-findorcreate');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const url = "https://prograrmorprealpha1.herokuapp.com" // http://localhost:8800
-const url2 = "https://prograrmorprealpha1.herokuapp.com" // http://localhost:3000
+const url = "http://localhost:8800" // http://localhost:8800 https://prograrmorprealpha1.herokuapp.com
+const url2 = "http://localhost:3000" // http://localhost:8800 https://prograrmorprealpha1.herokuapp.com
 
 const app = express();
 

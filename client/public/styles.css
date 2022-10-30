@@ -240,6 +240,10 @@ table.Stats-table{
 
 /* DASHBOARD */
 
+.Dashboard .group-margin{
+    margin-top:20px;
+}
+
 .Dashboard .icon-navbar{
     filter: invert(1);
     width: 50px;
@@ -289,7 +293,6 @@ table.table1 {
 }
 
 .dashboard-table{
-    margin-top: 5%;
 
 }
 

@@ -11,6 +11,19 @@ import { red } from '@mui/material/colors';
 import StreetworkoutHiddenText from "./Categories/StreetworkoutHiddenText.js";
 import CategorieHiddenText from "./Categories/CategorieHiddenText.js";
 import ElastiqueHiddenText from "./Categories/ElastiqueHiddenText.js";
+import Switch from '@mui/material/Switch';
+
+const GreenSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: red['A700'],
+    '&:hover': {
+      backgroundColor: alpha(red['A700'], theme.palette.action.hoverOpacity),
+    },
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: red['A700'],
+  },
+}));
 
 const StyleSlider = styled(Slider)(({ theme }) => ({
   '& .MuiSlider-thumb': {
@@ -80,6 +93,13 @@ function Dashboard() {
     const [checkbox, setCheckbox] = useState({affichageCharge: true, affichageReps: true, affichageSérie: true, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: true, affichagePercent: true, affichagePoids: true});
     const [clicked, setClicked] = useState([false,false,false,false,false])
     const [clickedDetail, setClickedDetail] = useState([false,false,false,false,false])
+    const [switched, setSwitched] = useState(false);
+
+    function handleChangeSwitch(){
+        event.preventDefault();
+
+        setSwitched(!switched);
+    }
 
     function handleClick(event){
         let e = parseInt(event.target.id)
@@ -262,27 +282,55 @@ function Dashboard() {
         }
     },[exercice]);
 
-    function trStyle(index){
-            let font;
+    function trStyleBlack(index){
+            let backgroundColor;
 
             if (index%2===0){
-                font = "black"
+                backgroundColor = "black"
             } else {
-                font = "#353535"
+                backgroundColor = "#353535"
             }
 
             return ({
-              backgroundColor: font
+              backgroundColor: backgroundColor
             })
       }
 
-    function tdStyle(index){
+    function tdStyleBlack(index){
             let font;
 
             if (index%2===0){
                 font = "#ffbaba"
             } else {
                 font = "white"
+            }
+
+            return ({
+              color: font
+            })
+      }
+
+    function trStyleWhite(index){
+            let backgroundColor;
+
+            if (index%2===0){
+                backgroundColor = "white"
+            } else {
+                backgroundColor = "#f0f0f0"
+            }
+
+            return ({
+              backgroundColor: backgroundColor
+            })
+      }
+
+    function tdStyleWhite(index){
+            let font;
+
+            if (index%2===0){
+                font = "#ff0000"
+            } else {
+                font = "black"
             }
 
             return ({
@@ -648,10 +696,11 @@ function Dashboard() {
                                 marks={marks}
                             />
                         </div>
+
                     </div>
 
                     <div className="form-group row">
-                        <div className="form-group col-sm-12">
+                        <div className="form-group group-margin col-sm-12">
                               <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageNom" id="affichageNom"/>
                               <label className="col-form-label" htmlFor="#affichageNom"> Nom </label>
 
@@ -680,12 +729,18 @@ function Dashboard() {
                               <label className="col-form-labell" htmlFor="#affichagePercent"> % PDC </label>
                         </div>
                     </div>
+
+                    <div className="form-group row">
+                        <div className="form-group group-margin col-sm-12">
+                            <p className=""> Tableau blanc <GreenSwitch onChange={handleChangeSwitch}/> Tableau noir </p>
+                        </div>
+                    </div>
                 </form>
 
 
 
-                <table className="table table-hover table-responsive-lg table-dark dashboard-table">
-                  <thead className="thead-dark">
+                <table className={switched ? "table table-hover table-responsive-lg table-dark dashboard-table" : "table table-hover table-responsive-lg dashboard-table"}>
+                  <thead className={switched ? "thead-dark" : ""}>
                     <tr>
                       {checkbox.affichageNom ? <th scope="col">Nom </th> : null}
                       {checkbox.affichageDate ? <th scope="col">Date </th> : null}
@@ -712,34 +767,34 @@ function Dashboard() {
                                         return (exercice.Series && Object.values(exercice.Series).map((serie, index) => {
                                            if(serie !== null){
                                                 return (
-                                                    <tr style={trStyle(indexSeance)}>
+                                                    <tr style={switched ? trStyleBlack(indexSeance) : trStyleWhite(indexSeance)}>
                                                         {checkbox.affichageNom ?
                                                             seance.nom ?
                                                                 seance.nom.ancienNom !== "nouveau-nom" ?
-                                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                    <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                         {seance.nom.ancienNom}
                                                                     </td>
                                                                 :
-                                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                    <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                         {seance.nom.nouveauNom}
                                                                     </td>
                                                             :
-                                                                <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                     /
                                                                 </td>
                                                         : null }
                                                         {checkbox.affichageDate ?
-                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                            <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                 {seance.date}
                                                             </td>
                                                         : null }
                                                         {checkbox.affichagePoids ?
-                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                            <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                 {seance.poids}
                                                             </td>
                                                         : null }
                                                         {checkbox.affichageExercice ?
-                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                            <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                 {exercice.exercice.name==="own-exercice" ? exercice.exercice.ownExercice : exercice.exercice.name}
                                                             </td>
                                                         : null }
@@ -748,14 +803,14 @@ function Dashboard() {
                                                                 if (Object.values(exercice.Categories)[index]){
                                                                     if (Object.values(exercice.Categories)[index].name === "Elastique"){
                                                                         return(
-                                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                            <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                                  Elastique en {Object.values(exercice.Categories)[index].utilisation} estimé à {Object.values(exercice.Categories)[index].estimation} kg
                                                                             </td>
                                                                         )
                                                                     }
                                                                     else{
                                                                         return(
-                                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                            <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                                  {Object.values(exercice.Categories)[index].input}
                                                                             </td>
                                                                         )
@@ -763,7 +818,7 @@ function Dashboard() {
                                                                 }
                                                                 else{
                                                                     return(
-                                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                        <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                         /
                                                                         </td>
                                                                     )
@@ -771,35 +826,35 @@ function Dashboard() {
                                                             }
                                                             else{
                                                                 return(
-                                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                    <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                     /
                                                                     </td>
                                                                 )
                                                             }
                                                         })}
                                                         {checkbox.affichageSérie ?
-                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                            <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                 {serie.num+1}
                                                             </td>
                                                         : null }
                                                         {checkbox. affichageType ?
-                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                            <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                 {serie.typeSerie==="reps" ? "Répétitions" : null}
                                                                 {serie.typeSerie==="time" ? "Temps (sec)" : null}
                                                             </td>
                                                         : null }
                                                         {checkbox.affichageReps ?
-                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                            <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                 {serie.repsTime}
                                                             </td>
                                                         : null }
                                                         {checkbox.affichageCharge ?
-                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                            <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                 {serie.charge}
                                                             </td>
                                                         : null }
                                                         {checkbox.affichagePercent ?
-                                                            <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                            <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                 {serie.percent}
                                                             </td>
                                                         : null }
@@ -807,14 +862,14 @@ function Dashboard() {
                                                             if (seance.details){
                                                                 if (Object.values(seance.details)[index]){
                                                                     return(
-                                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                        <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                              {Object.values(seance.details)[index].input}
                                                                         </td>
                                                                     )
                                                                 }
                                                                 else{
                                                                     return(
-                                                                        <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                        <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                         /
                                                                         </td>
                                                                     )
@@ -822,7 +877,7 @@ function Dashboard() {
                                                             }
                                                             else{
                                                                 return(
-                                                                    <td style={tdStyle(indexExercice)} className="dashboard-td">
+                                                                    <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                     /
                                                                     </td>
                                                                 )
