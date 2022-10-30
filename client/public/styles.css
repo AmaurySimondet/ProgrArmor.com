@@ -244,6 +244,10 @@ table.Stats-table{
     margin-top:20px;
 }
 
+.Dashboard .form-group .group-margin-last{
+    margin-bottom:20px !important;
+}
+
 .Dashboard .icon-navbar{
     filter: invert(1);
     width: 50px;
@@ -289,10 +293,6 @@ table.table1 {
 
 .Dashboard .icon-navbar:hover{
     filter: invert(1);
-
-}
-
-.dashboard-table{
 
 }
 

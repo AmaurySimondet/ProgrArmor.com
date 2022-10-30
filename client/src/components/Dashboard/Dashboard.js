@@ -90,7 +90,7 @@ function Dashboard() {
     const [detailNumb, setDetailNumb] = useState(0)
     const [categoriesAddRien, setCategoriesAddRien] = useState([])
     const [detailsAddRien, setDetailsAddRien] = useState([])
-    const [checkbox, setCheckbox] = useState({affichageCharge: true, affichageReps: true, affichageSérie: true, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: true, affichagePercent: true, affichagePoids: true});
+    const [checkbox, setCheckbox] = useState({affichageCharge: true, affichageReps: true, affichageSérie: true, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: true, affichagePercent: true, affichagePoids: true, affichageModif: false, affichageSuppr: false});
     const [clicked, setClicked] = useState([false,false,false,false,false])
     const [clickedDetail, setClickedDetail] = useState([false,false,false,false,false])
     const [switched, setSwitched] = useState(false);
@@ -735,6 +735,18 @@ function Dashboard() {
                             <p className=""> Tableau blanc <GreenSwitch onChange={handleChangeSwitch}/> Tableau noir </p>
                         </div>
                     </div>
+
+                    <div className="form-group row">
+                        <div className="form-group col-sm-6">
+                              <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageModif" id="affichageModif"/>
+                              <label className="col-form-label" htmlFor="#affichageModif"> Modifier des séances </label>
+                        </div>
+
+                        <div className="form-group group-margin-last col-sm-6">
+                              <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSuppr" id="affichageSuppr"/>
+                              <label className="col-form-label" htmlFor="#affichageSuppr"> Supprimer des séances </label>
+                        </div>
+                    </div>
                 </form>
 
 
@@ -742,6 +754,8 @@ function Dashboard() {
                 <table className={switched ? "table table-hover table-responsive-lg table-dark dashboard-table" : "table table-hover table-responsive-lg dashboard-table"}>
                   <thead className={switched ? "thead-dark" : ""}>
                     <tr>
+                      {checkbox.affichageModif ? <th scope="col">Modifier </th> : null}
+                      {checkbox.affichageSuppr ? <th scope="col">Supprimer </th> : null}
                       {checkbox.affichageNom ? <th scope="col">Nom </th> : null}
                       {checkbox.affichageDate ? <th scope="col">Date </th> : null}
                       {checkbox.affichagePoids ? <th scope="col">Poids</th> : null}
@@ -764,10 +778,40 @@ function Dashboard() {
                             if (seance !== null) {
                                 return (seance.exercices.map((exercice, indexExercice) => {
                                     if (exercice !== null){
-                                        return (exercice.Series && Object.values(exercice.Series).map((serie, index) => {
+                                        return (exercice.Series && Object.values(exercice.Series).map((serie, indexSerie) => {
                                            if(serie !== null){
                                                 return (
                                                     <tr style={switched ? trStyleBlack(indexSeance) : trStyleWhite(indexSeance)}>
+                                                        {checkbox.affichageModif ?
+                                                            indexExercice === 0 ?
+                                                                indexSerie === 0 ?
+                                                                    <img className="icon-navbar" src={require('../../images/icons/write.png')} alt='session' />
+                                                                :
+                                                                    <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
+
+                                                                    </td>
+                                                            :
+                                                                <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
+
+                                                                </td>
+                                                        :
+                                                            null
+                                                        }
+                                                        {checkbox.affichageSuppr ?
+                                                            indexExercice === 0 ?
+                                                                indexSerie === 0 ?
+                                                                    <img className="icon-navbar" src={require('../../images/icons/icons8-trash-30.png')} alt='session' />
+                                                                :
+                                                                    <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
+
+                                                                    </td>
+                                                            :
+                                                                <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
+
+                                                                </td>
+                                                        :
+                                                            null
+                                                        }
                                                         {checkbox.affichageNom ?
                                                             seance.nom ?
                                                                 seance.nom.ancienNom !== "nouveau-nom" ?
