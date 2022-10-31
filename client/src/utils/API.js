@@ -65,6 +65,11 @@ export default {
 
   },
 
+  supprSeance: function(send) {
+    return axios.post(`${burl}/user/supprSeance`,send,{headers: headers});
+
+  },
+
   workouts: function(params){
         let string = "";
         let keyArray = [];

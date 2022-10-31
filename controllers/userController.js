@@ -24,4 +24,7 @@ module.exports = function (app) {
     //TOKEN
     app.post('/verifyToken', account.verifyToken)
 
+    //SUPPR SEANCE
+    app.post('/supprSeance', account.supprSeance)
+
 }

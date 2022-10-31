@@ -254,6 +254,26 @@ table.Stats-table{
 
 }
 
+.Dashboard .modify-white{
+    filter: invert(1);
+    width:30%;
+    margin-top: 15px;
+}
+
+.Dashboard .modify-black{
+    width:30%;
+    margin-top: 15px;
+}
+
+.Dashboard .suppr-white{
+    margin-top: 15px;
+}
+
+.Dashboard .suppr-black{
+    margin-top: 15px;
+    filter: invert(1);
+}
+
 .Dashboard .Dashboard-h2{
     width: 70%;
     text-align: center;

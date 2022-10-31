@@ -218,8 +218,11 @@ async function debutantform(req, res) {
        User.findOneAndUpdate(
           {"_id": req.body.id},
           { $addToSet:  {"seances": seance}},
+//          {$set: {"seances": seance}},
           (err) => {
-              if (err) {return res.json({ success: false, message: err})}
+              if (err) {
+                console.log(err)
+                res.json({ success: false, message: err})}
               else {res.json({ success: true, message: "Serie enregistrée !"})}
           }
        )
@@ -442,6 +445,9 @@ async function workouts(req, res) {
           {"_id": req.query.id}, function (err, data) {
                 if (err){
                     res.json({ success: false, message: err})
+                }
+                if(!data[0].seances || Object.entries(data[0].seances).length===0){
+                    res.json({ success: false, message: "Aucune séance !"})
                 }
                 else{
                     let seances = data[0].seances;
@@ -702,7 +708,7 @@ async function workouts(req, res) {
 
 //COMPTE
 async function getUser(req, res) {
-    id = req.body.id
+    let id = req.body.id
 
     try{
         User.find(
@@ -728,6 +734,57 @@ async function getUser(req, res) {
     }
 }
 
+//SUPPR SEANCE
+async function supprSeance(req, res){
+    let id = req.body.id;
+    let num = parseInt(req.body.num);
+
+    try{
+        let newSeances;
+
+        query = await User.find(
+          {"_id": id}, function (err, data) {
+                if (err){
+                    res.json({ success: false, message: err});
+                }
+                else{
+                    seances = data[0].seances
+                    newSeances = seances.filter((seance, index) => {
+                        console.log(seance, index)
+                        return index!==(num)
+                    });
+                    return newSeances;
+                }
+        });
+
+        if (newSeances === null || !newSeances){
+            newSeances = [];
+        }
+
+        console.log("\n")
+        console.log(num)
+        console.log(newSeances)
+        console.log(newSeances.length)
+        console.log("\n")
+
+        User.findOneAndUpdate(
+            {"_id": id},
+            {$set: {"seances": newSeances}},
+            {returnNewDocument: true},
+            function (err){
+                if(err){
+                    res.json({ success: false, message: err});
+                }
+                else{ res.json({ success: true, message: "Seance supprimée !"}) }
+            }
+        );
+
+    }
+    catch(e){
+       console.log(e);
+    }
+}
+
 //On exporte nos fonctions
 exports.login = login;
 exports.signup = signup;
@@ -740,3 +797,4 @@ exports.debutantform = debutantform;
 exports.workouts = workouts;
 exports.getUser = getUser;
 exports.verifyToken = verifyToken;
+exports.supprSeance = supprSeance;

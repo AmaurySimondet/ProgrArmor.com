@@ -188,7 +188,10 @@ function Dashboard() {
 
     const {data} = await API.workouts(params);
     if (data.success === false){
-        alert(data.message);
+        if (data.message === "Aucune séance !"){
+            console.log(data.message);
+        }
+        else { alert(data.message); }
     } else {
         setSeances(data.seances);
     }
@@ -201,7 +204,10 @@ function Dashboard() {
   async function getNames(){
     const {data} = await API.workouts({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
     if (data.success === false){
-        alert(data.message);
+        if (data.message === "Aucune séance !"){
+            console.log(data.message);
+        }
+        else { alert(data.message); }
     } else {
         let arr = []
         data.seances.forEach((seance, index) => {
@@ -386,7 +392,17 @@ function Dashboard() {
         setParams({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
     }
 
+    function handleClickModify(event){
+        return null
+    }
 
+    async function handleClickSuppr(event){
+        console.log(event.target.id);
+        const res = await API.supprSeance({id: localStorage.getItem("id"), num: event.target.id})
+        console.log(res.data)
+
+        window.location = "/dashboard"
+    }
 
   return (
 <div>
@@ -785,7 +801,9 @@ function Dashboard() {
                                                         {checkbox.affichageModif ?
                                                             indexExercice === 0 ?
                                                                 indexSerie === 0 ?
-                                                                    <img className="icon-navbar" src={require('../../images/icons/write.png')} alt='session' />
+                                                                    <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
+                                                                        <img id={indexSeance} onClick={handleClickModify} className={switched ? "modify-black" : "modify-white"} src={require('../../images/icons/write.png')} alt='session' />
+                                                                    </td>
                                                                 :
                                                                     <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
 
@@ -800,7 +818,9 @@ function Dashboard() {
                                                         {checkbox.affichageSuppr ?
                                                             indexExercice === 0 ?
                                                                 indexSerie === 0 ?
-                                                                    <img className="icon-navbar" src={require('../../images/icons/icons8-trash-30.png')} alt='session' />
+                                                                    <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
+                                                                        <img id={indexSeance} onClick={handleClickSuppr} className={switched ? "suppr-black" : "suppr-white"} src={require('../../images/icons/icons8-trash-30.png')} alt='session' />
+                                                                    </td>
                                                                 :
                                                                     <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
 
