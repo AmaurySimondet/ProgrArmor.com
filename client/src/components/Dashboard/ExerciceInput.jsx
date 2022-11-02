@@ -1,16 +1,11 @@
 import {React, useState, useEffect} from "react";
 import lesExercices from "./Exercices";
-import Select from "./Select";
 import MusclesCategorie from "./Categories/MusclesCategorie.js";
+import Select from 'react-select';
 
 function createEntry(exercicesTerm) {
   return (
-    <Select
-      key={exercicesTerm.id}
-      class={exercicesTerm.class}
-      name={exercicesTerm.name}
-      value={exercicesTerm.value}
-    />
+    <option key={exercicesTerm.id} value={exercicesTerm.value} className={exercicesTerm.class}> {exercicesTerm.name} </option>
   );
 }
 
@@ -18,13 +13,22 @@ function ExerciceInput(props) {
   const [exercice, setExercice] = useState({name: "", ownExercice: ""});
 
   function handleChange(event){
-    event.preventDefault();
+    console.log(event)
 
-    setExercice(oldExercice => {
-            return ({
-            ...oldExercice,
-            [event.target.id]: event.target.value,
-        })});
+    if (event.target){
+        setExercice(oldExercice => {
+                return ({
+                ...oldExercice,
+                [event.target.id]: event.target.value,
+            })});
+    }
+    else{
+        setExercice(oldExercice => {
+                return ({
+                ...oldExercice,
+                name: event.value,
+            })});
+    }
   }
 
   useEffect(() => {
@@ -41,12 +45,21 @@ function ExerciceInput(props) {
     props.onClickExercice();
   }
 
+//<input onChange={handleChange} class="form-control" list="list-tri" id="tri" placeholder="Type de tri..."/>
+//<datalist id="list-tri">
+//    <option value="Ordre chronologique décroissant"/>
+//    <option value="Ordre chronologique croissant"/>
+//    <option value="Charge (ordre décroissant)"/>
+//    <option value="PDC (ordre décroissant)"/>
+//</datalist>
+
   return (
     <div>
         {props.taille === "petit" ?
-            <select onChange={handleChange} className="form-control" id="name">
-                {lesExercices.map(createEntry)}
-            </select>
+            <Select
+                onChange={handleChange}
+                options={lesExercices}
+            />
         :
               <div className="form-group row">
                 <label onClick={handleClickLabel} className="col-sm-2 col-form-label exercice-label">

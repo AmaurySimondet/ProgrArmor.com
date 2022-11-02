@@ -463,11 +463,11 @@ function Dashboard() {
                                 <label className="col-sm-1 col-form-label">
                                   Tri
                                 </label>
-                                <select onChange={handleChange} className="custom-select" id="tri">
+                                <select onChange={handleChange} id="tri" className="custom-select">
                                     <option value="Ordre chronologique décroissant"> Ordre chronologique décroissant (défaut) </option>
                                     <option value="Ordre chronologique croissant"> Ordre chronologique croissant </option>
                                     <option value="Charge (ordre décroissant)"> Charge (ordre décroissant) </option>
-                                    <option value="PDC (ordre décroissant)"> % PDC (ordre décroissant) </option>
+                                    <option value="PDC (ordre décroissant)"> %PDC (ordre décroissant) </option>
                                 </select>
                             </div>
 
