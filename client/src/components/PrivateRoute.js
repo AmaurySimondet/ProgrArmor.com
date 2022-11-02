@@ -8,13 +8,13 @@ function PrivateRoute() {
 
     async function handleAuth(){
         const res = await API.isAuth();
-        console.log(res);
+//        console.log(res);
         setAuth(res);
     }
 
     useEffect(() => {
         setTimeout(handleAuth(), 50);
-        console.log(auth)
+//        console.log(auth)
     }, []);
 
     if (auth===true){

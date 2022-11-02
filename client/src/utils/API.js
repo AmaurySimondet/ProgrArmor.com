@@ -45,7 +45,7 @@ export default {
   isAuth: async function() {
     if (localStorage.getItem("token") !== null){
         const result = await axios.post(`${burl}/user/verifyToken`, {token: localStorage.getItem("token")}, { headers: headers });
-        console.log(result)
+//        console.log(result)
         if (result.data.success === true){
             return true
         }

@@ -254,6 +254,22 @@ table.Stats-table{
 
 }
 
+.dashboard-table{
+    width:100%;
+    margin-bottom: 40px;
+}
+
+.td-left{
+    padding-right:1%;
+    width:50%;
+}
+
+.td-right{
+    padding-left:1%;
+    width:50%;
+
+}
+
 .Dashboard .modify-white{
     filter: invert(1);
     width:25%;
@@ -338,7 +354,7 @@ table.table1 {
 }
 
 .Dashboard-h1{
-    margin: 2% 0;
+    margin: 20px 0;
 
 }
 
