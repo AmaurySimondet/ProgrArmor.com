@@ -349,10 +349,6 @@ function Dashboard() {
     }
 
     useEffect(() => {
-        console.log(categories)
-    }, [categories])
-
-    useEffect(() => {
         setParams(oldParams => {
             return ({
                 ...oldParams,
@@ -398,7 +394,7 @@ function Dashboard() {
 
     async function handleClickSuppr(event){
         console.log(event.target.id);
-        const res = await API.supprSeance({id: localStorage.getItem("id"), num: event.target.id})
+        const res = await API.supprSeance({id: localStorage.getItem("id"), date: event.target.id})
         console.log(res.data)
 
         window.location = "/dashboard"
@@ -802,7 +798,7 @@ function Dashboard() {
                                                             indexExercice === 0 ?
                                                                 indexSerie === 0 ?
                                                                     <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
-                                                                        <img id={indexSeance} onClick={handleClickModify} className={switched ? "modify-black" : "modify-white"} src={require('../../images/icons/write.png')} alt='session' />
+                                                                        <img id={seance.date} onClick={handleClickModify} className={switched ? "modify-black" : "modify-white"} src={require('../../images/icons/write.png')} alt='session' />
                                                                     </td>
                                                                 :
                                                                     <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
@@ -819,7 +815,7 @@ function Dashboard() {
                                                             indexExercice === 0 ?
                                                                 indexSerie === 0 ?
                                                                     <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
-                                                                        <img id={indexSeance} onClick={handleClickSuppr} className={switched ? "suppr-black" : "suppr-white"} src={require('../../images/icons/icons8-trash-30.png')} alt='session' />
+                                                                        <img id={seance.date} onClick={handleClickSuppr} className={switched ? "suppr-black" : "suppr-white"} src={require('../../images/icons/icons8-trash-30.png')} alt='session' />
                                                                     </td>
                                                                 :
                                                                     <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">

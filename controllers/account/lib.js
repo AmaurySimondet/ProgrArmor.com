@@ -213,6 +213,7 @@ async function logout(req, res) {
 //DEBUTANT FORM
 async function debutantform(req, res) {
     const seance = req.body.seance;
+    seance.id = Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36)
 
     try {
        User.findOneAndUpdate(
@@ -737,7 +738,7 @@ async function getUser(req, res) {
 //SUPPR SEANCE
 async function supprSeance(req, res){
     let id = req.body.id;
-    let num = parseInt(req.body.num);
+    let date = req.body.date;
 
     try{
         let newSeances;
@@ -750,22 +751,15 @@ async function supprSeance(req, res){
                 else{
                     seances = data[0].seances
                     newSeances = seances.filter((seance, index) => {
-                        console.log(seance, index)
-                        return index!==(num)
+                        return seance.date!==date
                     });
-                    return newSeances;
+
                 }
         });
 
         if (newSeances === null || !newSeances){
             newSeances = [];
         }
-
-        console.log("\n")
-        console.log(num)
-        console.log(newSeances)
-        console.log(newSeances.length)
-        console.log("\n")
 
         User.findOneAndUpdate(
             {"_id": id},
