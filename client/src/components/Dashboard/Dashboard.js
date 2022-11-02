@@ -13,6 +13,7 @@ import StreetworkoutHiddenText from "./Categories/StreetworkoutHiddenText.js";
 import CategorieHiddenText from "./Categories/CategorieHiddenText.js";
 import ElastiqueHiddenText from "./Categories/ElastiqueHiddenText.js";
 import Switch from '@mui/material/Switch';
+import Select from 'react-select';
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
@@ -463,12 +464,14 @@ function Dashboard() {
                                 <label className="col-sm-1 col-form-label">
                                   Tri
                                 </label>
-                                <select onChange={handleChange} id="tri" className="custom-select">
-                                    <option value="Ordre chronologique décroissant"> Ordre chronologique décroissant (défaut) </option>
-                                    <option value="Ordre chronologique croissant"> Ordre chronologique croissant </option>
-                                    <option value="Charge (ordre décroissant)"> Charge (ordre décroissant) </option>
-                                    <option value="PDC (ordre décroissant)"> %PDC (ordre décroissant) </option>
-                                </select>
+                                <Select onChange={handleChange} placeholder="Tri..." id="tri"
+                                    options = {[
+                                    {label:"Ordre chronologique décroissant (défaut)", value:"Ordre chronologique décroissant"},
+                                    {label:"Ordre chronologique croissant", value:"Ordre chronologique croissant"},
+                                    {label:"Charge (ordre décroissant)", value:"Charge (ordre décroissant)"},
+                                    {label:"%PDC (ordre décroissant)", value:"PDC (ordre décroissant)"}
+                                    ]}
+                                />
                             </div>
 
                             <div className="form-group col-sm-6">

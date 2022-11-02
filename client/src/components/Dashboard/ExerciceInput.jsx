@@ -45,20 +45,23 @@ function ExerciceInput(props) {
     props.onClickExercice();
   }
 
-//<input onChange={handleChange} class="form-control" list="list-tri" id="tri" placeholder="Type de tri..."/>
-//<datalist id="list-tri">
-//    <option value="Ordre chronologique décroissant"/>
-//    <option value="Ordre chronologique croissant"/>
-//    <option value="Charge (ordre décroissant)"/>
-//    <option value="PDC (ordre décroissant)"/>
-//</datalist>
+    const customStyles = {
+      option: (provided, state) => ({
+        ...provided,
+        backgroundColor: "white",
+        color: "black",
+        fontWeight: state.data.className==="select-title" ? 800 : 500
+      })
+    }
 
   return (
     <div>
         {props.taille === "petit" ?
             <Select
+                placeholder="Exercice..."
                 onChange={handleChange}
                 options={lesExercices}
+                styles={customStyles}
             />
         :
               <div className="form-group row">

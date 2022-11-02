@@ -834,7 +834,7 @@ const exercices = [
   },
   {
     id: 999,
-    className: "select-item-own",
+    className: "select-title",
     label: "Entre ton propre exercice ici...",
     value: "own-exercice",
   },
