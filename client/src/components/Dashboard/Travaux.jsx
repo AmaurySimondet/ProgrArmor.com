@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../Footer.jsx";
 import NavigBar from "../NavigBar.jsx"
 
 function Travaux() {
@@ -16,6 +17,8 @@ function Travaux() {
                 <img className="travaux-icon" src={require('../../images/icons/icons8-brick-48.png')} alt="brique" />
             </p>
           </div>
+
+          <Footer/>
       </div>
     );
 };

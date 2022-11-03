@@ -7,12 +7,10 @@ import ExerciceInput from "./ExerciceInput"
 import DetailInput from "./DetailInput"
 import customStyles from "./customStyles.js";
 import CategorieInput from "./CategorieInput"
+import Footer from "../Footer.jsx";
 import Slider from '@mui/material/Slider';
 import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
-import StreetworkoutHiddenText from "./Categories/StreetworkoutHiddenText.js";
-import CategorieHiddenText from "./Categories/CategorieHiddenText.js";
-import ElastiqueHiddenText from "./Categories/ElastiqueHiddenText.js";
 import Switch from '@mui/material/Switch';
 import Select from 'react-select';
 
@@ -222,7 +220,7 @@ function Dashboard() {
     const {data} = await API.workouts(params);
     if (data.success === false){
         if (data.message === "Aucune séance !"){
-//            console.log(data.message);
+           console.log(data.message);
         }
         else { alert(data.message); }
     } else {
@@ -238,7 +236,7 @@ function Dashboard() {
     const {data} = await API.workouts({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
     if (data.success === false){
         if (data.message === "Aucune séance !"){
-//            console.log(data.message);
+           console.log(data.message);
         }
         else { alert(data.message); }
     } else {
@@ -450,16 +448,15 @@ function Dashboard() {
 
       {
       seances.length===0 ?
-        <div>
             <NavigBar show={true} location="dashboard"/>
-            <Bienvenue />
-        </div>
       :
             <NavigBar show={false} location="dashboard"/>
       }
 
+      
 
-      {dimensions.width<925 ?
+      {seances.length===0 ? <Bienvenue /> :
+      dimensions.width<925 ?
               <div className="Dashboard">
 
                 <h1 className="Dashboard-h1">Historique des séances</h1>
@@ -951,7 +948,7 @@ function Dashboard() {
 
       }
 
-
+      {seances.length===0 ? null :
       <div className="Dashboard">
         <table className={switched ? "table table-hover table-responsive-lg table-dark dashboard-table" : "table table-hover table-responsive-lg dashboard-table"}>
           <thead className={switched ? "thead-dark" : ""}>
@@ -1144,6 +1141,10 @@ function Dashboard() {
           </tbody>
         </table>
       </div>
+    }
+
+    {seances.length===0 ? null : <Footer />}
+
 </div>
     )
 }

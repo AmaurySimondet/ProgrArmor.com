@@ -2,6 +2,7 @@ import React from "react";
 import HomeHeader from "./HomeHeader.jsx"
 import BoutonsSociaux from "./BoutonsSociaux.jsx"
 import ConnexionForm from "./ConnexionForm.jsx"
+import Footer from "./Footer.jsx";
 
 function Connexion(){
     return(
@@ -30,6 +31,8 @@ function Connexion(){
                     </tr>
                 </tbody>
             </table>
+
+            <Footer />
         </div>
     )
 }

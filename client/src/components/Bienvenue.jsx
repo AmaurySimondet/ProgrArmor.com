@@ -1,7 +1,7 @@
 import React from "react";
 
 function Bienvenue(){
-    return
+    return(
           <div className="Dashboard">
                 <h1 className="Dashboard-h1">Bienvenue !</h1>
 
@@ -126,19 +126,22 @@ function Bienvenue(){
                         <table className="table1">
                             <tr>
                                 <td>
-                                    <img className="social" src={require('../images/icons/twitter.png')} alt='twitter' />
+                                    <a href="https://twitter.com/ProgrArmor"><img className="social" src={require('../images/icons/twitter.png')} alt='twitter' /></a>
                                 </td>
                                 <td>
-                                    <img className="social" src={require('../images/icons/instagram.png')} alt='instagram' />
+                                    <a href="https://www.instagram.com/prograrmor/"><img className="social" src={require('../images/icons/instagram.png')} alt='instagram' /></a>
                                 </td>
                                 <td>
-                                    <img className="social" src={require('../images/icons/facebook.png')} alt='facebook' />
+                                    <a href="https://www.facebook.com/profile.php?id=100087568835793"><img className="social" src={require('../images/icons/facebook.png')} alt='facebook' /></a>
                                 </td>
                                 <td>
-                                    <img className="social" src={require('../images/icons/discord.png')} alt='discord' />
+                                    <a href="https://discord.gg/Gj98SjG8"><img className="social" src={require('../images/icons/discord.png')} alt='discord' /></a>
                                 </td>
                                 <td>
-                                    <img className="social" src={require('../images/icons/tiktok.png')} alt='tiktok' />
+                                    <a href="https://www.tiktok.com/@prograrmor"><img className="social" src={require('../images/icons/tiktok.png')} alt='tiktok' /></a>
+                                </td>
+                                <td>
+                                    <a href="https://www.youtube.com/@prograrmor"><img className="social" src={require('../images/icons/youtube.png')} alt='youtube' /></a>
                                 </td>
                             </tr>
                         </table>
@@ -146,6 +149,7 @@ function Bienvenue(){
 
                 </div>
           </div>
+    )
 }
 
 export default Bienvenue;

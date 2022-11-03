@@ -2,6 +2,7 @@ import {React, useState, useEffect} from "react";
 import { Button } from "react-bootstrap";
 import NavigBar from "../NavigBar.jsx"
 import API from "../../utils/API";
+import Footer from "../Footer.jsx";
 
 function Compte() {
     const [user, setUser] = useState({})
@@ -172,6 +173,8 @@ function Compte() {
                 </Button>
             </div>
         }
+
+        <Footer />
     </div>
     )
 }

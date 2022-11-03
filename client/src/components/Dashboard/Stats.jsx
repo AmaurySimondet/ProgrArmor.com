@@ -5,6 +5,7 @@ import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
 import CategorieInput from "./CategorieInput"
 import DetailInput from "./DetailInput"
+import Footer from "../Footer.jsx";
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -90,21 +91,28 @@ function Stats() {
     async function getSeance1(){
         const {data} = await API.workouts(params1);
         if (data.success === false && errIter===0 ){
-            alert(data.message);
+            if (data.message === "Aucune séance !"){
+                console.log(data.message);
+             }
             errIter=1;
         } else {
-//            console.log(data.seances);
-            setSeances1(data.seances);
+            if(data.seances){
+                setSeances1(data.seances);
+            }
         }
     }
 
     async function getSeance2(){
         const {data} = await API.workouts(params2);
         if (data.success === false && errIter===0 ){
-            alert(data.message);
+            if (data.message === "Aucune séance !"){
+                console.log(data.message);
+             }
             errIter=1;
         } else {
-            setSeances2(data.seances);
+            if(data.seances){
+                setSeances2(data.seances);
+            }
 //            console.log(data.seances);
         }
     }
@@ -112,14 +120,18 @@ function Stats() {
     async function getSeance3(){
         const {data} = await API.workouts(params3);
         if (data.success === false && errIter===0 ){
-            alert(data.message);
+            if (data.message === "Aucune séance !"){
+               console.log(data.message);
+            }
             errIter=1;
         } else {
             if(params3.top && params3.top !== "max"){
                 setSeances3(data.seances.slice(0,parseInt(params3.top)));
             }
             else{
-                setSeances3(data.seances);
+                if(data.seances){
+                    setSeances3(data.seances);
+                }
             }
         }
     }
@@ -650,6 +662,8 @@ function Stats() {
 
             </div>
             }
+
+            <Footer />
 
         </div>
     );

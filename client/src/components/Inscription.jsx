@@ -2,6 +2,7 @@ import React from "react";
 import HomeHeader from "./HomeHeader.jsx"
 import BoutonsSociaux from "./BoutonsSociaux.jsx"
 import InscriptionForm from "./InscriptionForm.jsx"
+import Footer from "./Footer.jsx";
 
 function Inscription(){
 
@@ -31,6 +32,8 @@ function Inscription(){
                     </tr>
                 </tbody>
             </table>
+
+            <Footer />
         </div>
     )
 }

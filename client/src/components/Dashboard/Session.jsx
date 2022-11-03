@@ -1,12 +1,11 @@
 import {React, useState} from "react";
-import { Button } from "react-bootstrap";
 import NavigBar from "../NavigBar.jsx"
-import API from "../../utils/API";
 import DebutantForm from "./DebutantForm.jsx"
 import ExpertForm from "./ExpertForm.jsx"
 import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
+import Footer from "../Footer.jsx";
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
@@ -41,7 +40,7 @@ function Session() {
               {switched ? <ExpertForm/> : <DebutantForm/>}
           </div>
 
-
+          <Footer />
       </div>
     );
 };

@@ -200,6 +200,21 @@ table.profile-table{
 
 }
 
+/* FOOTER */
+
+.Design-footer{
+    padding-top: 10px;
+    background-color: #333333;
+    width: 100%;
+    height: 50px;
+}
+
+.Design-footer .social{
+    width: 25px;
+    filter: invert(1);
+}
+
+
 /* STATS */
 table.Stats-table{
     table-layout: fixed;
@@ -252,6 +267,10 @@ table.Stats-table{
 
 /* DASHBOARD */
 
+.social:hover{
+    filter: invert(0.6);
+}
+
 .reset-img{
     width: 15px;
 
@@ -289,7 +308,7 @@ table.Stats-table{
 
 .Dashboard .modify-white{
     filter: invert(1);
-    width:25%;
+    width:20%;
 }
 
 .Dashboard .modify-white:hover{
@@ -297,7 +316,7 @@ table.Stats-table{
 }
 
 .Dashboard .modify-black{
-    width:25%;
+    width:20%;
 }
 
 .Dashboard .modify-black:hover{
@@ -305,7 +324,7 @@ table.Stats-table{
 }
 
 .Dashboard .suppr-white{
-    width:30%
+    width:20%
 }
 
 .Dashboard .suppr-white:hover{
@@ -314,7 +333,7 @@ table.Stats-table{
 
 .Dashboard .suppr-black{
     filter: invert(1);
-    width:30%
+    width:20%
 }
 
 .Dashboard .suppr-black:hover{
@@ -719,6 +738,16 @@ table.connexion-table td.connexion-img-td {
     .piechart{
         font-size:5px;
 
+    }
+
+    .Design-footer{
+        padding-top: 0;
+        height: 25px;
+    }
+    
+    .Design-footer .social{
+        width: 10px;
+        filter: invert(1);
     }
 
     h1{
