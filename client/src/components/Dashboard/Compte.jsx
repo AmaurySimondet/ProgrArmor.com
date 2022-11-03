@@ -49,7 +49,7 @@ function Compte() {
 
     return (
     <div>
-        <NavigBar location="gear"/>
+        <NavigBar show={true} location="gear"/>
 
         {modifyInfo ?
             <form className="modify-info-form">

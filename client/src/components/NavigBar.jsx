@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function NavigBar(){
+function NavigBar(props){
     const [gearIsClicked, setGearIsClicked] = useState(false);
     const [toggled, setToggled] = useState(false);
     const [clickedWarning, setClickedWarning] = useState(false);
@@ -177,7 +177,8 @@ function NavigBar(){
                 ) : null}
             </div>
         }
-          {clickedWarning ?
+          {props.show===true ? 
+          clickedWarning ?
             null
           :
               <div className="warning-border">
@@ -194,7 +195,7 @@ function NavigBar(){
                     en message direct sur {"l'un de nos réseaux ou par tout autre moyen"}</p>
                 </div>
               </div>
-          }
+          : null }
         </div>
     )
 }

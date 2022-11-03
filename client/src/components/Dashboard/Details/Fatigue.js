@@ -1,26 +1,26 @@
 const fatigue = [
   {
-    id: 1,
-    class: "select-title",
-    name: "/ (défaut)",
+    id: "input",
+    className: "select-title",
+    label: "/ (défaut)",
     value: "title",
   },
   {
-    id: 2,
-    class: "select-item",
-    name: "Manque de sommeil",
+    id: "input",
+    className: "select-item",
+    label: "Manque de sommeil",
     value: "Manque de sommeil",
   },
   {
-    id: 3,
-    class: "select-item",
-    name: "J'avais des courbatures avant la séance",
+    id: "input",
+    className: "select-item",
+    label: "J'avais des courbatures avant la séance",
     value: "J'avais des courbatures avant la séance",
   },
   {
-    id: 4,
-    class: "select-item",
-    name: "J'ai été rapidement essoufflé / manque d'endurance",
+    id: "input",
+    className: "select-item",
+    label: "J'ai été rapidement essoufflé / manque d'endurance",
     value: "J'ai été rapidement essoufflé / manque d'endurance",
   },
 ]

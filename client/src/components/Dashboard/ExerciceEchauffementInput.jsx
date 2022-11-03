@@ -1,30 +1,29 @@
 import {React, useState, useEffect} from "react";
 import lesExercices from "./Exercices";
-import Select from "./Select";
+import Select from "react-select";
 import MusclesCategorie from "./Categories/MusclesCategorie.js";
-
-function createEntry(exercicesTerm) {
-  return (
-    <Select
-      key={exercicesTerm.id}
-      class={exercicesTerm.class}
-      name={exercicesTerm.name}
-      value={exercicesTerm.value}
-    />
-  );
-}
+import customStyles from "./customStyles.js";
 
 function ExerciceEchauffementInput(props) {
   const [exercice, setExercice] = useState({name: "", ownExercice: ""});
 
   function handleChange(event){
-    event.preventDefault();
-
-    setExercice(oldExercice => {
-            return ({
+    if(event.target){
+        setExercice(oldExercice => {
+        return ({
             ...oldExercice,
             [event.target.id]: event.target.value,
-        })});
+            })
+        });
+    }
+    else{
+        setExercice(oldExercice => {
+            return ({
+                ...oldExercice,
+                [event.id]: event.value,
+                })
+            });
+    }
   }
 
   useEffect(() => {
@@ -53,9 +52,12 @@ function ExerciceEchauffementInput(props) {
               }
             </label>
             <div className="col-sm-9">
-                <select onChange={handleChange} className="custom-select col-sm-10" id="name">
-                    {lesExercices.map(createEntry)}
-                </select>
+              <Select
+                  placeholder="Exercice..."
+                  onChange={handleChange}
+                  options={lesExercices}
+                  styles={customStyles}
+              />
             </div>
             <div className="col-sm-1 poubelle-div">
               <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -67,54 +69,84 @@ function ExerciceEchauffementInput(props) {
                 <label className="col-sm-2 col-form-label">
                   Muscle
                 </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
+                <div className="col-sm-9">
+                  <Select
+                      placeholder="Muscle..."
+                      onChange={handleChange}
+                      options={MusclesCategorie}
+                      styles={customStyles}
+                  />
+                </div>
             </div>
           : exercice.name === "Curl" ?
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
                   Muscle
                 </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
+                <div className="col-sm-9">
+                  <Select
+                      placeholder="Muscle..."
+                      onChange={handleChange}
+                      options={MusclesCategorie}
+                      styles={customStyles}
+                  />
+                </div>
             </div>
           : exercice.name === "Extension" ?
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
                   Muscle
                 </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
+                <div className="col-sm-9">
+                  <Select
+                      placeholder="Muscle..."
+                      onChange={handleChange}
+                      options={MusclesCategorie}
+                      styles={customStyles}
+                  />
+                </div>
             </div>
           : exercice.name === "Abduction" ?
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
                   Muscle
                 </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
+                <div className="col-sm-9">
+                  <Select
+                      placeholder="Muscle..."
+                      onChange={handleChange}
+                      options={MusclesCategorie}
+                      styles={customStyles}
+                  />
+                </div>
             </div>
           : exercice.name === "Adduction" ?
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
                   Muscle
                 </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
+                <div className="col-sm-9">
+                  <Select
+                      placeholder="Muscle..."
+                      onChange={handleChange}
+                      options={MusclesCategorie}
+                      styles={customStyles}
+                  />
+                </div>
             </div>
           : exercice.name === "Press" ?
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
                   Muscle
                 </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
+                <div className="col-sm-9">
+                  <Select
+                      placeholder="Muscle..."
+                      onChange={handleChange}
+                      options={MusclesCategorie}
+                      styles={customStyles}
+                  />
+                </div>
             </div>
           : null}
 

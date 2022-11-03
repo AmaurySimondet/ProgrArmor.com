@@ -10,6 +10,8 @@ import Psycho from "./Details/Psycho";
 import Seul from "./Details/Seul";
 import Environnement from "./Details/Environnement";
 import Courbatures from "./Details/Courbatures";
+import customStyles from "./customStyles.js";
+import Select from "react-select";
 
 function createEntry(item) {
   return (
@@ -27,13 +29,22 @@ function DetailInput(props) {
   const [detail, setDetail] = useState({num: props.num});
 
   function handleChange(event){
-    event.preventDefault();
-
-    setDetail(oldDetail => {
-            return ({
+    if(event.target){
+        setDetail(oldDetail => {
+        return ({
             ...oldDetail,
             [event.target.id]: event.target.value,
-        })});
+            })
+        });
+    }
+    else{
+        setDetail(oldDetail => {
+            return ({
+                ...oldDetail,
+                [event.id]: event.value,
+                })
+            });
+    }
   }
 
   useEffect(() => {
@@ -75,20 +86,19 @@ function DetailInput(props) {
     {detail.name ?
         null
     :
-        props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="name">
-                        {Details.map(createEntry)}
-            </select>
-        :
           <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
                       Detail {props.dashboard ? props.index+1 : null}
                 </label>
 
-                <select onChange={handleChange} className="custom-select col-sm-9" id="name">
-                    {Details.map(createEntry)}
-                </select>
-
+                <div className={props.info===true ? "col-sm-10" : "col-sm-9"}>
+                <Select
+                    placeholder="Detail..."
+                    onChange={handleChange}
+                    options={Details}
+                    styles={customStyles}
+                />
+                </div>
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -97,18 +107,18 @@ function DetailInput(props) {
       }
 
       {detail.name === "Condition météorologique défavorable" ?
-        props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Meteo.map(createEntry)}
-            </select>
-        :
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
                   {detail.name}
                 </label>
-                <select onChange={handleChange} className="custom-select col-sm-9" id="input">
-                    {Meteo.map(createEntry)}
-                </select>
+                <div className={props.info===true ? "col-sm-10" : "col-sm-9"}>
+                <Select
+                    placeholder="Detail..."
+                    onChange={handleChange}
+                    options={Meteo}
+                    styles={customStyles}
+                />
+                </div>
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -116,22 +126,18 @@ function DetailInput(props) {
             </div>
       : null }
       {detail.name === "Gêne / douleur / blessure" ?
-        props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {DouleurSeance.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                      {detail.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {DouleurSeance.map(createEntry)}
-                </select>
+          <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                {detail.name}
+              </label>
+              <div className={props.info===true ? "col-sm-10" : "col-sm-9"}>
+              <Select
+                  placeholder="Detail..."
+                  onChange={handleChange}
+                  options={DouleurSeance}
+                  styles={customStyles}
+              />
+              </div>
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -140,21 +146,25 @@ function DetailInput(props) {
       : null }
       {detail.name === "Fatigue" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Fatigue.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                      {detail.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Fatigue.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Detail..."
+            onChange={handleChange}
+            options={Fatigue}
+            styles={customStyles}
+        />
+      :
+          <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                {detail.name}
+              </label>
+              <div className={props.info===true ? "col-sm-10" : "col-sm-9"}>
+              <Select
+                  placeholder="Detail..."
+                  onChange={handleChange}
+                  options={Fatigue}
+                  styles={customStyles}
+              />
+              </div>
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -163,21 +173,25 @@ function DetailInput(props) {
       : null }
       {detail.name === "Pre Workout, Café..." ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Preworkout.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                      {detail.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Preworkout.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Detail..."
+            onChange={handleChange}
+            options={Preworkout}
+            styles={customStyles}
+        />
+      :
+          <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                {detail.name}
+              </label>
+              <div className={props.info===true ? "col-sm-10" : "col-sm-9"}>
+              <Select
+                  placeholder="Detail..."
+                  onChange={handleChange}
+                  options={Preworkout}
+                  styles={customStyles}
+              />
+              </div>
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -186,21 +200,25 @@ function DetailInput(props) {
       : null }
       {detail.name === "Alcool, drogue, sexe..." ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {DRUG.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                      {detail.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {DRUG.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Detail..."
+            onChange={handleChange}
+            options={DRUG}
+            styles={customStyles}
+        />
+      :
+          <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                {detail.name}
+              </label>
+              <div className={props.info===true ? "col-sm-10" : "col-sm-9"}>
+              <Select
+                  placeholder="Detail..."
+                  onChange={handleChange}
+                  options={DRUG}
+                  styles={customStyles}
+              />
+              </div>
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -209,21 +227,25 @@ function DetailInput(props) {
       : null }
       {detail.name === "Etat psychologique" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Psycho.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                      {detail.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Psycho.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Detail..."
+            onChange={handleChange}
+            options={Psycho}
+            styles={customStyles}
+        />
+      :
+          <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                {detail.name}
+              </label>
+              <div className={props.info===true ? "col-sm-10" : "col-sm-9"}>
+              <Select
+                  placeholder="Detail..."
+                  onChange={handleChange}
+                  options={Psycho}
+                  styles={customStyles}
+              />
+              </div>
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -232,21 +254,25 @@ function DetailInput(props) {
       : null }
       {detail.name === "Séance seul ou à plusieurs" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Seul.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                      {detail.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Seul.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Detail..."
+            onChange={handleChange}
+            options={Seul}
+            styles={customStyles}
+        />
+      :
+          <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                {detail.name}
+              </label>
+              <div className={props.info===true ? "col-sm-10" : "col-sm-9"}>
+              <Select
+                  placeholder="Detail..."
+                  onChange={handleChange}
+                  options={Seul}
+                  styles={customStyles}
+              />
+              </div>
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -255,21 +281,25 @@ function DetailInput(props) {
       : null }
       {detail.name === "Environnement" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Environnement.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                      {detail.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Environnement.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Detail..."
+            onChange={handleChange}
+            options={Environnement}
+            styles={customStyles}
+        />
+      :
+          <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                {detail.name}
+              </label>
+              <div className={props.info===true ? "col-sm-10" : "col-sm-9"}>
+              <Select
+                  placeholder="Detail..."
+                  onChange={handleChange}
+                  options={Environnement}
+                  styles={customStyles}
+              />
+              </div>
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -278,21 +308,25 @@ function DetailInput(props) {
       : null }
       {detail.name === "Courbatures / Congestion" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Courbatures.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                      {detail.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Courbatures.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Detail..."
+            onChange={handleChange}
+            options={Courbatures}
+            styles={customStyles}
+        />
+      :
+          <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                {detail.name}
+              </label>
+              <div className={props.info===true ? "col-sm-10" : "col-sm-9"}>
+              <Select
+                  placeholder="Detail..."
+                  onChange={handleChange}
+                  options={Courbatures}
+                  styles={customStyles}
+              />
+              </div>
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />

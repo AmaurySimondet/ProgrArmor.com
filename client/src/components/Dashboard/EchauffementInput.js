@@ -125,57 +125,58 @@ function EchauffementInput(props){
 
               <ExerciceEchauffementInput id="exercice"  onClickExercice={handleClickExercice} clickExercice={clickExercice} value={echauffement.exercice} num={props.num} onDeleteEchauffements={props.onDeleteEchauffements} changeEchauffement={changeEchauffement} />
 
-            {clickExercice ?
+              {clickExercice ?
                 <div>
-                  {categories ? categories.map((categorie,index) => {
-                    return(
-                    <div>
-                      <hr className="hr-serie"/>
 
-                      <CategorieInput
-                        key={index}
-                        num={index}
-                        exercice={echauffement.echauffement}
-                        onAddCategorie={onAddCategorie}
-                        changeCategorie={changeCategorie}
-                        onDeleteCategorie={onDeleteCategorie}
-                      />
+                      {categories ? categories.map((categorie,index) => {
+                        return(
+                        <div>
+                          <hr className="hr-serie"/>
 
-                    </div>
-                    );
-                  })
-                  : null
-                  }
-
-                  {series ? series.map((serie,index) => {
-                    return(
-                    <div>
-                        <hr className="hr-serie"/>
-
-                        <SerieInput
+                          <CategorieInput
                             key={index}
                             num={index}
-                            length={series.length}
                             exercice={echauffement.echauffement}
-                            poids={props.poids}
-                            onAddSerie={onAddSerie}
-                            changeSerie={changeSerie}
-                            onDeleteSerie={onDeleteSerie}
-                        />
-                    </div>
-                    );
-                  })
-                  : null
-                  }
+                            changeCategorie={changeCategorie}
+                            onDeleteCategorie={onDeleteCategorie}
+                          />
 
-                  <button className="btn btn-dark form-button" onClick={onAddCategorie} type="submit"> {"Ajouter une categorie à cet exo d'echauffement"} !</button>
-                  <br/>
+                        </div>
+                        );
+                      })
+                      : null
+                      }
+
+                      <button className="btn btn-dark form-button" onClick={onAddCategorie} type="submit">Ajouter une categorie à cet echauffement !</button>
+                      <br/>
+                </div>
+            : null}
+
+            {series ? series.map((serie,index) => {
+            return(
+            <div>
+                <hr className="hr-serie"/>
+
+                <SerieInput
+                    key={index}
+                    num={index}
+                    length={series.length}
+                    exercice={echauffement.echauffement}
+                    poids={props.poids}
+                    onAddSerie={onAddSerie}
+                    changeSerie={changeSerie}
+                    onDeleteSerie={onDeleteSerie}
+                />
+            </div>
+            );
+            })
+            : null
+            }
+
+            <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
+            <br/>
 
 
-                  <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
-                  <br/>
-              </div>
-            : null }
           </div>
     )
 }

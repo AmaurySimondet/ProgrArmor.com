@@ -2,6 +2,8 @@ import {React, useState, useEffect} from "react";
 import Slider from '@mui/material/Slider';
 import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
+import Select from "react-select";
+import customStyles from "./customStyles.js";
 
 import lesCategories from "./Categories/Categories";
 import lesTypesBarres from "./Categories/TypesBarres.js";
@@ -31,6 +33,8 @@ import Douleur from "./Categories/Douleur.js";
 import StreetworkoutHiddenText from "./Categories/StreetworkoutHiddenText.js";
 import CategorieHiddenText from "./Categories/CategorieHiddenText.js";
 import ElastiqueHiddenText from "./Categories/ElastiqueHiddenText.js";
+import positionBras from "./Categories/PositionBras.js";
+
 
 const StyleSlider = styled(Slider)(({ theme }) => ({
   '& .MuiSlider-thumb': {
@@ -123,13 +127,30 @@ function CategorieInput(props) {
   }
 
   function handleChange(event){
-    event.preventDefault();
-
-    setCategorie(oldCategorie => {
-            return ({
+    if(event.target){
+        setCategorie(oldCategorie => {
+        return ({
             ...oldCategorie,
             [event.target.id]: event.target.value,
-        })});
+            })
+        });
+    }
+    if(event.id==="muscle"){
+        setCategorie(oldCategorie => {
+        return ({
+            ...oldCategorie,
+            input: event.value,
+            })
+        });
+    }
+    else{
+        setCategorie(oldCategorie => {
+            return ({
+                ...oldCategorie,
+                [event.id]: event.value,
+                })
+            });
+    }
   }
 
   function handleChangeSlider(event){
@@ -184,9 +205,12 @@ function CategorieInput(props) {
         null
       :
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="name">
-                {lesCategories.map(createEntry)}
-            </select>
+                <Select
+                    placeholder="Categorie..."
+                    onChange={handleChange}
+                    options={lesCategories}
+                    styles={customStyles}
+                />
         :
         <div className="form-group row">
                 {props.info === "false" ?
@@ -200,9 +224,13 @@ function CategorieInput(props) {
                           </div>
                     </label>
                 }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="name">
-                    {lesCategories.map(createEntry)}
-                </select>
+                <Select
+                    placeholder="Categorie..."
+                    onChange={handleChange}
+                    options={lesCategories}
+                    styles={customStyles}
+                    className={props.info === "false" ? "form-control" : " col-sm-9"}
+                />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -212,9 +240,12 @@ function CategorieInput(props) {
 
       {categorie.name === "Variante Street Workout" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Streetworkout.map(createEntry)}
-            </select>
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={Streetworkout}
+                styles={customStyles}
+            />
         :
             <div className="form-group row">
                 {props.info === "false" ?
@@ -228,9 +259,13 @@ function CategorieInput(props) {
                           </div>
                     </label>
                 }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Streetworkout.map(createEntry)}
-                </select>
+                <Select
+                    placeholder="Categorie..."
+                    onChange={handleChange}
+                    options={Streetworkout}
+                    styles={customStyles}
+                    className={props.info === "false" ? "form-control" : " col-sm-9"}
+                />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -239,9 +274,12 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Type de barre / poids" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {lesTypesBarres.map(createEntry)}
-            </select>
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={lesTypesBarres}
+                styles={customStyles}
+            />
         :
             <div className="form-group row">
                 {props.info === "false" ?
@@ -251,9 +289,13 @@ function CategorieInput(props) {
                           {categorie.name}
                     </label>
                 }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {lesTypesBarres.map(createEntry)}
-                </select>
+                <Select
+                    placeholder="Categorie..."
+                    onChange={handleChange}
+                    options={lesTypesBarres}
+                    styles={customStyles}
+                    className={props.info === "false" ? "form-control" : " col-sm-9"}
+                />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -262,21 +304,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Muscle" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {MusclesCategorie.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {MusclesCategorie.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={MusclesCategorie}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={MusclesCategorie}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -285,21 +334,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Positionnement du corps" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {PositionCorps.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {PositionCorps.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={PositionCorps}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={PositionCorps}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -308,21 +364,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Positionnement des bras" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {PositionBras.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {PositionBras.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={PositionBras}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={PositionBras}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -331,21 +394,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Positionnement des jambes" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {PositionJambes.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {PositionJambes.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={PositionJambes}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={PositionJambes}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -354,21 +424,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Positionnement des mains" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {PositionMains.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {PositionMains.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={PositionMains}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={PositionMains}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -377,21 +454,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Positionnement des pieds" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {PositionPieds.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {PositionPieds.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={PositionPieds}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={PositionPieds}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -400,21 +484,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Placement et axe du corps / banc / barre" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {AxeCategorie.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {AxeCategorie.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={AxeCategorie}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={AxeCategorie}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -423,21 +514,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Ouverture coudes / genoux" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {CoudeGenou.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {CoudeGenou.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={CoudeGenou}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={CoudeGenou}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -446,21 +544,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Unilatéral" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Unilateral.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Unilateral.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={Unilateral}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={Unilateral}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -469,21 +574,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Type d'éxecution" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Execution.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Execution.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={Execution}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={Execution}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -492,21 +604,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Type d'éxecution spécifique" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {ExecutionSpecifique.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {ExecutionSpecifique.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={ExecutionSpecifique}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={ExecutionSpecifique}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -548,21 +667,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "RPE / Niveau d'intensité" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {RPE.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {RPE.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={RPE}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={RPE}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -571,21 +697,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Gêne / douleur / blessure" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Douleur.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Douleur.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={Douleur}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={Douleur}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -594,21 +727,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Type de prise" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {PriseCategorie.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {PriseCategorie.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={PriseCategorie}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={PriseCategorie}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -617,21 +757,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Tempo" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {TempoCategorie.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {TempoCategorie.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={TempoCategorie}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={TempoCategorie}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -640,21 +787,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Forme (Partiel)" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Partiel.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Partiel.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={Partiel}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={Partiel}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -663,21 +817,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Point de départ" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {DépartCategorie.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {DépartCategorie.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={DépartCategorie}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={DépartCategorie}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -686,21 +847,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Variante d'exercice explosif" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {ExplosifCategorie.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {ExplosifCategorie.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={ExplosifCategorie}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={ExplosifCategorie}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -709,21 +877,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Variante d'exercice d'haltérophilie" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {Halterophilie.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {Halterophilie.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={Halterophilie}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={Halterophilie}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -732,21 +907,28 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Accessoire supplémentaire ou objet spécifique" ?
         props.info === "false" ?
-            <select onChange={handleChange} className="form-control" id="input">
-                {AccessoireObjet.map(createEntry)}
-            </select>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="input">
-                    {AccessoireObjet.map(createEntry)}
-                </select>
+        <Select
+            placeholder="Categorie..."
+            onChange={handleChange}
+            options={AccessoireObjet}
+            styles={customStyles}
+        />
+    :
+        <div className="form-group row">
+            {props.info === "false" ?
+                null
+            :
+                <label className="col-sm-2 col-form-label">
+                      {categorie.name}
+                </label>
+            }
+            <Select
+                placeholder="Categorie..."
+                onChange={handleChange}
+                options={AccessoireObjet}
+                styles={customStyles}
+                className={props.info === "false" ? "form-control" : " col-sm-9"}
+            />
 
                 {dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -755,7 +937,7 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Elastique" ?
         props.info === "false" ?
-            <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="utilisation">
+            <select onChange={handleChange} className={props.info === "false" ? "form-control" : " col-sm-9"} id="utilisation">
                 <option className="select-title" value="title"> / (défaut) </option>
                 <option value="Resistance"> Résistance </option>
                 <option value="Assistance"> Assistance </option>
@@ -770,7 +952,7 @@ function CategorieInput(props) {
                               Utilisation
                         </label>
                     }
-                    <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="utilisation">
+                    <select onChange={handleChange} className={props.info === "false" ? "form-control" : " col-sm-9"} id="utilisation">
                         <option className="select-title" value="title"> / (défaut) </option>
                         <option value="Resistance"> Résistance </option>
                         <option value="Assistance"> Assistance </option>
@@ -790,7 +972,7 @@ function CategorieInput(props) {
                               Utilisation
                         </label>
                     }
-                    <select onChange={handleChange} className={props.info === "false" ? "form-control" : "custom-select col-sm-9"} id="utilisation">
+                    <select onChange={handleChange} className={props.info === "false" ? "form-control" : " col-sm-9"} id="utilisation">
                         <option className="select-title" value="title"> / (défaut) </option>
                         <option value="Resistance"> Résistance </option>
                         <option value="Assistance"> Assistance </option>
@@ -805,7 +987,7 @@ function CategorieInput(props) {
                     <label className="col-sm-2 col-form-label">
                       Épaisseur / taille élastique
                     </label>
-                    <select onChange={handleChange} className="custom-select col-sm-9" id="input">
+                    <select onChange={handleChange} className=" col-sm-9" id="input">
                         {lesElastiques.map(createEntry)}
                     </select>
                 </div>

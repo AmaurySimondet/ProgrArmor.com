@@ -123,7 +123,7 @@ function FullExerciceInput(props){
           <div className="exercice-div">
               <hr className="hr-exercice"/>
 
-              <ExerciceInput id="exercice" onClickExercice={handleClickExercice} clickExercice={clickExercice} value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} />
+              <ExerciceInput debutant={false} id="exercice" onClickExercice={handleClickExercice} clickExercice={clickExercice} value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} />
 
 
             {clickExercice ?
@@ -148,35 +148,34 @@ function FullExerciceInput(props){
                       : null
                       }
 
-                      {series ? series.map((serie,index) => {
-                        return(
-                        <div>
-                            <hr className="hr-serie"/>
-
-                            <SerieInput
-                                key={index}
-                                num={index}
-                                length={series.length}
-                                exercice={fullExercice.exercice}
-                                poids={props.poids}
-                                onAddSerie={onAddSerie}
-                                changeSerie={changeSerie}
-                                onDeleteSerie={onDeleteSerie}
-                            />
-                        </div>
-                        );
-                      })
-                      : null
-                      }
-
                       <button className="btn btn-dark form-button" onClick={onAddCategorie} type="submit">Ajouter une categorie à cet exercice !</button>
                       <br/>
+                </div>
+            : null}
 
+            {series ? series.map((serie,index) => {
+            return(
+            <div>
+                <hr className="hr-serie"/>
 
-                      <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
-                      <br/>
-                  </div>
-              : null}
+                <SerieInput
+                    key={index}
+                    num={index}
+                    length={series.length}
+                    exercice={fullExercice.exercice}
+                    poids={props.poids}
+                    onAddSerie={onAddSerie}
+                    changeSerie={changeSerie}
+                    onDeleteSerie={onDeleteSerie}
+                />
+            </div>
+            );
+            })
+            : null
+            }
+
+            <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
+            <br/>
 
 
           </div>

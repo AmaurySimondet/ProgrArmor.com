@@ -88,7 +88,7 @@ function FullExerciceInput(props){
           <div className="exercice-div">
               <hr className="hr-exercice"/>
 
-              <ExerciceInput id="exercice" value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} />
+              <ExerciceInput debutant={true} id="exercice" value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} />
 
               {series ? series.map((serie,index) => {
                 return(

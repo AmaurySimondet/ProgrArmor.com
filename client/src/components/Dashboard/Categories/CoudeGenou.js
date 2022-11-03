@@ -1,33 +1,33 @@
 const coudegenou = [
 //COUDES
   {
-    id: 1,
-    class: "select-title",
-    name: "/ (défaut)",
+    id: "input",
+    className: "select-title",
+    label: "/ (défaut)",
     value: "title",
   },
   {
-    id: 2,
-    class: "select-item",
-    name: "Coudes ouverts",
+    id: "input",
+    className: "select-item",
+    label: "Coudes ouverts",
     value: "Coudes ouverts",
   },
   {
-    id: 3,
-    class: "select-item",
-    name: "Coudes fermés",
+    id: "input",
+    className: "select-item",
+    label: "Coudes fermés",
     value: "Coudes fermés",
   },
   {
-    id: 4,
-    class: "select-item",
-    name: "Genoux ouverts",
+    id: "input",
+    className: "select-item",
+    label: "Genoux ouverts",
     value: "Genoux ouverts",
   },
   {
-    id: 5,
-    class: "select-item",
-    name: "Genoux fermés",
+    id: "input",
+    className: "select-item",
+    label: "Genoux fermés",
     value: "Genoux fermés",
   },
 ];

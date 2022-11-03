@@ -5,6 +5,7 @@ import Bienvenue from "../Bienvenue.jsx"
 import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
 import DetailInput from "./DetailInput"
+import customStyles from "./customStyles.js";
 import CategorieInput from "./CategorieInput"
 import Slider from '@mui/material/Slider';
 import { alpha, styled } from '@mui/material/styles';
@@ -85,6 +86,7 @@ function Dashboard() {
     const [seances, setSeances] = useState([]);
     const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
     const [listeNoms, setListeNoms] = useState([]);
+    const [listeNomsOptions, setListeNomsOptions] = useState([]);
     const [details, setDetails] = useState([]);
     const [categories, setCategories] = useState([])
     const [params, setParams] = useState({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
@@ -261,17 +263,30 @@ function Dashboard() {
 
   useEffect(() => {
     getNames();
+    setListeNomsOptions(listeNoms => {
+        let arr = [{id:"nom", value:"title", label: "/ (défaut)"}]
+        listeNoms.forEach(nom => arr.push({id:"nom", value: nom, label: nom}))
+        return arr
+    })
   }, [] );
 
   function handleChange(event){
-    event.preventDefault();
-
-    setParams(oldParams => {
+    if(event.target){
+        setParams(oldParams => {
         return ({
             ...oldParams,
             [event.target.id]: event.target.value,
-        })
-    });
+            })
+        });
+    }
+    else{
+        setParams(oldParams => {
+            return ({
+                ...oldParams,
+                [event.id]: event.value,
+                })
+            });
+    }
   }
 
   function handleChangeCheckbox(e) {
@@ -431,13 +446,16 @@ function Dashboard() {
 
   return (
 <div>
-      <NavigBar location="dashboard"/>
+      
 
       {
       seances.length===0 ?
+        <div>
+            <NavigBar show={true} location="dashboard"/>
             <Bienvenue />
+        </div>
       :
-        null
+            <NavigBar show={false} location="dashboard"/>
       }
 
 
@@ -466,11 +484,12 @@ function Dashboard() {
                                 </label>
                                 <Select onChange={handleChange} placeholder="Tri..." id="tri"
                                     options = {[
-                                    {label:"Ordre chronologique décroissant (défaut)", value:"Ordre chronologique décroissant"},
-                                    {label:"Ordre chronologique croissant", value:"Ordre chronologique croissant"},
-                                    {label:"Charge (ordre décroissant)", value:"Charge (ordre décroissant)"},
-                                    {label:"%PDC (ordre décroissant)", value:"PDC (ordre décroissant)"}
+                                    {id:"tri", label:"Ordre chronologique décroissant (défaut)", value:"Ordre chronologique décroissant"},
+                                    {id:"tri", label:"Ordre chronologique croissant", value:"Ordre chronologique croissant"},
+                                    {id:"tri", label:"Charge (ordre décroissant)", value:"Charge (ordre décroissant)"},
+                                    {id:"tri", label:"%PDC (ordre décroissant)", value:"PDC (ordre décroissant)"}
                                     ]}
+                                    styles={customStyles}
                                 />
                             </div>
 
@@ -478,14 +497,17 @@ function Dashboard() {
                                 <label className="col-sm-1 col-form-label">
                                   Periode
                                 </label>
-                                <select onChange={handleChange} className="custom-select" id="periode">
-                                    <option value="max"> Max (défaut) </option>
-                                    <option value="7d"> 7 derniers jours </option>
-                                    <option value="30d"> 30 derniers jours </option>
-                                    <option value="90d"> 90 derniers jours (3 mois) </option>
-                                    <option value="180d"> 180 derniers jours (6 mois) </option>
-                                    <option value="1y"> Depuis 1 an </option>
-                                </select>
+                                <Select onChange={handleChange} placeholder="Periode..." id="periode"
+                                    options = {[
+                                    {id:"periode", label:"Max (défaut)", value:"max"},
+                                    {id:"periode", label:"7 derniers jours", value:"7d"},
+                                    {id:"periode", label:"30 derniers jours", value:"30d"},
+                                    {id:"periode", label:"90 derniers jours (3 mois)", value:"90d"},
+                                    {id:"periode", label:"180 derniers jours (6 mois)", value:"180d"},
+                                    {id:"periode", label:"Depuis 1 an", value:"1y"}
+                                    ]}
+                                    styles={customStyles}
+                                />
                             </div>
                         </div>
 
@@ -541,7 +563,7 @@ function Dashboard() {
                                         <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
                                           Détail {index+1}
                                         </label>
-                                        <DetailInput click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
+                                        <DetailInput info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
                                     </div>
                                 </div>
                             )
@@ -552,13 +574,10 @@ function Dashboard() {
                                 <label className="col-sm-1 col-form-label">
                                   Nom
                                 </label>
-                                <select onChange={handleChange} className="custom-select" id="nom">
-                                    <option value="title"> / (défaut) </option>
-                                    {listeNoms ? listeNoms.map((nom,index) => {
-                                        return <option key={index} value={nom}> {nom} </option>
-                                    })
-                                    : null }
-                                </select>
+                                <Select onChange={handleChange} placeholder="Nom..." id="nom"
+                                    options = {listeNomsOptions}
+                                    styles={customStyles}
+                                />
                             </div>
 
                             <div className="form-group col-sm-3 button-dashboard">
@@ -707,26 +726,32 @@ function Dashboard() {
                                         <label className="col-sm-1 col-form-label">
                                           Tri
                                         </label>
-                                        <select onChange={handleChange} className="custom-select" id="tri">
-                                            <option value="Ordre chronologique décroissant"> Ordre chronologique décroissant (défaut) </option>
-                                            <option value="Ordre chronologique croissant"> Ordre chronologique croissant </option>
-                                            <option value="Charge (ordre décroissant)"> Charge (ordre décroissant) </option>
-                                            <option value="PDC (ordre décroissant)"> % PDC (ordre décroissant) </option>
-                                        </select>
+                                        <Select onChange={handleChange} placeholder="Tri..." id="tri"
+                                            options = {[
+                                            {id:"tri", label:"Ordre chronologique décroissant (défaut)", value:"Ordre chronologique décroissant"},
+                                            {id:"tri", label:"Ordre chronologique croissant", value:"Ordre chronologique croissant"},
+                                            {id:"tri", label:"Charge (ordre décroissant)", value:"Charge (ordre décroissant)"},
+                                            {id:"tri", label:"%PDC (ordre décroissant)", value:"PDC (ordre décroissant)"}
+                                            ]}
+                                            styles={customStyles}
+                                        />
                                     </div>
 
                                     <div className="form-group col-sm-6">
                                         <label className="col-sm-1 col-form-label">
                                           Periode
                                         </label>
-                                        <select onChange={handleChange} className="custom-select" id="periode">
-                                            <option value="max"> Max (défaut) </option>
-                                            <option value="7d"> 7 derniers jours </option>
-                                            <option value="30d"> 30 derniers jours </option>
-                                            <option value="90d"> 90 derniers jours (3 mois) </option>
-                                            <option value="180d"> 180 derniers jours (6 mois) </option>
-                                            <option value="1y"> Depuis 1 an </option>
-                                        </select>
+                                        <Select onChange={handleChange} placeholder="Periode..." id="periode"
+                                            options = {[
+                                            {id:"periode", label:"Max (défaut)", value:"max"},
+                                            {id:"periode", label:"7 derniers jours", value:"7d"},
+                                            {id:"periode", label:"30 derniers jours", value:"30d"},
+                                            {id:"periode", label:"90 derniers jours (3 mois)", value:"90d"},
+                                            {id:"periode", label:"180 derniers jours (6 mois)", value:"180d"},
+                                            {id:"periode", label:"Depuis 1 an", value:"1y"}
+                                            ]}
+                                            styles={customStyles}
+                                        />
                                     </div>
                                 </div>
 
@@ -782,7 +807,7 @@ function Dashboard() {
                                                 <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
                                                   Détail {index+1}
                                                 </label>
-                                                <DetailInput click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
+                                                <DetailInput info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
                                             </div>
                                         </div>
                                     )
@@ -793,13 +818,10 @@ function Dashboard() {
                                         <label className="col-sm-1 col-form-label">
                                           Nom
                                         </label>
-                                        <select onChange={handleChange} className="custom-select" id="nom">
-                                            <option value="title"> / (défaut) </option>
-                                            {listeNoms ? listeNoms.map((nom,index) => {
-                                                return <option key={index} value={nom}> {nom} </option>
-                                            })
-                                            : null }
-                                        </select>
+                                        <Select onChange={handleChange} placeholder="Nom..." id="nom"
+                                            options = {listeNomsOptions}
+                                            styles={customStyles}
+                                        />
                                     </div>
 
                                     <div className="form-group col-sm-3 button-dashboard">

@@ -2,32 +2,28 @@ import {React, useState, useEffect} from "react";
 import lesExercices from "./Exercices";
 import MusclesCategorie from "./Categories/MusclesCategorie.js";
 import Select from 'react-select';
-
-function createEntry(exercicesTerm) {
-  return (
-    <option key={exercicesTerm.id} value={exercicesTerm.value} className={exercicesTerm.class}> {exercicesTerm.name} </option>
-  );
-}
+import musclesCategorie from "./Categories/MusclesCategorie.js";
+import customStyles from "./customStyles.js";
 
 function ExerciceInput(props) {
   const [exercice, setExercice] = useState({name: "", ownExercice: ""});
 
   function handleChange(event){
-    console.log(event)
-
-    if (event.target){
+    if(event.target){
         setExercice(oldExercice => {
-                return ({
-                ...oldExercice,
-                [event.target.id]: event.target.value,
-            })});
+        return ({
+            ...oldExercice,
+            [event.target.id]: event.target.value,
+            })
+        });
     }
     else{
         setExercice(oldExercice => {
-                return ({
+            return ({
                 ...oldExercice,
-                name: event.value,
-            })});
+                [event.id]: event.value,
+                })
+            });
     }
   }
 
@@ -45,15 +41,6 @@ function ExerciceInput(props) {
     props.onClickExercice();
   }
 
-    const customStyles = {
-      option: (provided, state) => ({
-        ...provided,
-        backgroundColor: "white",
-        color: "black",
-        fontWeight: state.data.className==="select-title" ? 800 : 500
-      })
-    }
-
   return (
     <div>
         {props.taille === "petit" ?
@@ -67,16 +54,19 @@ function ExerciceInput(props) {
               <div className="form-group row">
                 <label onClick={handleClickLabel} className="col-sm-2 col-form-label exercice-label">
                   Exercice {props.num+1}
-                  {props.clickExercice ?
+                  {props.debutant ? null : props.clickExercice ?
                     <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
                   :
                     <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
                   }
                 </label>
                 <div className="col-sm-9">
-                    <select onChange={handleChange} className="custom-select col-sm-10" id="name">
-                        {lesExercices.map(createEntry)}
-                    </select>
+                    <Select
+                        placeholder="Exercice..."
+                        onChange={handleChange}
+                        options={lesExercices}
+                        styles={customStyles}
+                    />
                 </div>
                 <div className="col-sm-1 poubelle-div">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -90,18 +80,28 @@ function ExerciceInput(props) {
                         <label className="col-form-label">
                             Muscle
                         </label>
-                        <select onChange={handleChange} className="form-control" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
                 :
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label">
                           Muscle
                         </label>
-                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
           : exercice.name === "Curl" ?
                 props.taille === "petit" ?
@@ -109,18 +109,28 @@ function ExerciceInput(props) {
                         <label className="col-form-label">
                             Muscle
                         </label>
-                        <select onChange={handleChange} className="form-control" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
                 :
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label">
                           Muscle
                         </label>
-                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
           : exercice.name === "Extension" ?
                 props.taille === "petit" ?
@@ -128,18 +138,28 @@ function ExerciceInput(props) {
                         <label className="col-form-label">
                             Muscle
                         </label>
-                        <select onChange={handleChange} className="form-control" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
                 :
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label">
                           Muscle
                         </label>
-                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
           : exercice.name === "Abduction" ?
                 props.taille === "petit" ?
@@ -147,18 +167,28 @@ function ExerciceInput(props) {
                         <label className="col-form-label">
                             Muscle
                         </label>
-                        <select onChange={handleChange} className="form-control" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
                 :
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label">
                           Muscle
                         </label>
-                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
           : exercice.name === "Adduction" ?
                 props.taille === "petit" ?
@@ -166,18 +196,28 @@ function ExerciceInput(props) {
                         <label className="col-form-label">
                             Muscle
                         </label>
-                        <select onChange={handleChange} className="form-control" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
                 :
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label">
                           Muscle
                         </label>
-                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
           : exercice.name === "Press" ?
                 props.taille === "petit" ?
@@ -185,18 +225,28 @@ function ExerciceInput(props) {
                         <label className="col-form-label">
                             Muscle
                         </label>
-                        <select onChange={handleChange} className="form-control" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
                 :
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label">
                           Muscle
                         </label>
-                        <select onChange={handleChange} className="custom-select col-sm-9" id="muscle">
-                            {MusclesCategorie.map(createEntry)}
-                        </select>
+                        <div className="col-sm-9">
+                            <Select
+                                placeholder="Muscle..."
+                                onChange={handleChange}
+                                options={MusclesCategorie}
+                                styles={customStyles}
+                            />
+                        </div>
                     </div>
           : null}
 
