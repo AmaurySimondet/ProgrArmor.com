@@ -4,6 +4,7 @@ const customStyles = {
       backgroundColor: "white",
       color: "black",
       textAlign: "justify",
+      fontSize: "12px",
       fontWeight: state.data.className==="select-title" ? 800 : 500
     })
   }

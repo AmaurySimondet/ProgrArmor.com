@@ -87,11 +87,13 @@ function DetailInput(props) {
         null
     :
           <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
+                {props.info==="false" ? null :
+                  <label className="col-sm-2 col-form-label">
                       Detail {props.dashboard ? props.index+1 : null}
                 </label>
+                } 
 
-                <div className={props.info===true ? "col-sm-10" : "col-sm-9"}>
+                <div className={props.info===true ? "col-sm-10" : props.info==="false" ? "col-sm-12" : "col-sm-9"}>
                 <Select
                     placeholder="Detail..."
                     onChange={handleChange}
@@ -107,6 +109,14 @@ function DetailInput(props) {
       }
 
       {detail.name === "Condition météorologique défavorable" ?
+        props.info === "false" ?
+        <Select
+            placeholder="Detail..."
+            onChange={handleChange}
+            options={Meteo}
+            styles={customStyles}
+        />
+      :
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
                   {detail.name}
@@ -126,6 +136,14 @@ function DetailInput(props) {
             </div>
       : null }
       {detail.name === "Gêne / douleur / blessure" ?
+        props.info === "false" ?
+        <Select
+            placeholder="Detail..."
+            onChange={handleChange}
+            options={DouleurSeance}
+            styles={customStyles}
+        />
+      :
           <div className="form-group row">
               <label className="col-sm-2 col-form-label">
                 {detail.name}

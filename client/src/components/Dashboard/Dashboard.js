@@ -479,7 +479,7 @@ function Dashboard() {
                     <div>
                         <div className="form-group row">
                             <div className="form-group col-sm-6">
-                                <label className="col-sm-1 col-form-label">
+                                <label className=" col-form-label">
                                   Tri
                                 </label>
                                 <Select onChange={handleChange} placeholder="Tri..." id="tri"
@@ -494,7 +494,7 @@ function Dashboard() {
                             </div>
 
                             <div className="form-group col-sm-6">
-                                <label className="col-sm-1 col-form-label">
+                                <label className=" col-form-label">
                                   Periode
                                 </label>
                                 <Select onChange={handleChange} placeholder="Periode..." id="periode"
@@ -548,9 +548,9 @@ function Dashboard() {
                                 <div className="form-group row">
                                     <div className="form-group col-sm-12">
                                         <label onClick={handleClick} id={index} className="col-form-label categorie-label">
-                                          Catégorie {index+1}
+                                          Catégorie {index+1} <img className="reset-img" onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                         </label>
-                                        <CategorieInput click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
+                                        <CategorieInput info="dash" click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
                                     </div>
                                 </div>
                             )
@@ -561,7 +561,7 @@ function Dashboard() {
                                 <div className="form-group row">
                                     <div className="form-group col-sm-12">
                                         <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
-                                          Détail {index+1}
+                                          Détail {index+1} <img onClick={handleClickDetail} className="reset-img" src={require('../../images/icons/reset.png')} />
                                         </label>
                                         <DetailInput info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
                                     </div>
@@ -571,7 +571,7 @@ function Dashboard() {
 
                         <div className="form-group row">
                             <div className="form-group col-sm-6">
-                                <label className="col-sm-1 col-form-label">
+                                <label className=" col-form-label">
                                   Nom
                                 </label>
                                 <Select onChange={handleChange} placeholder="Nom..." id="nom"
@@ -647,7 +647,7 @@ function Dashboard() {
                         </div>
 
                         <div className="form-group row">
-                            <div className="form-group group-margin col-sm-12">
+                            <div className="form-group group-margin 2">
                                   <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageNom" id="affichageNom"/>
                                   <label className="col-form-label" htmlFor="#affichageNom"> Nom </label>
 
@@ -723,7 +723,7 @@ function Dashboard() {
                             <div>
                                 <div className="form-group row">
                                     <div className="form-group col-sm-6">
-                                        <label className="col-sm-1 col-form-label">
+                                        <label className=" col-form-label">
                                           Tri
                                         </label>
                                         <Select onChange={handleChange} placeholder="Tri..." id="tri"
@@ -738,7 +738,7 @@ function Dashboard() {
                                     </div>
 
                                     <div className="form-group col-sm-6">
-                                        <label className="col-sm-1 col-form-label">
+                                        <label className=" col-form-label">
                                           Periode
                                         </label>
                                         <Select onChange={handleChange} placeholder="Periode..." id="periode"
@@ -792,9 +792,9 @@ function Dashboard() {
                                         <div className="form-group row">
                                             <div className="form-group col-sm-12">
                                                 <label onClick={handleClick} id={index} className="col-form-label categorie-label">
-                                                  Catégorie {index+1}
+                                                  Catégorie {index+1} <img onClick={handleClickDetail} className="reset-img" src={require('../../images/icons/reset.png')} />
                                                 </label>
-                                                <CategorieInput click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
+                                                <CategorieInput info="dash" click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
                                             </div>
                                         </div>
                                     )
@@ -805,7 +805,7 @@ function Dashboard() {
                                         <div className="form-group row">
                                             <div className="form-group col-sm-12">
                                                 <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
-                                                  Détail {index+1}
+                                                  Détail {index+1} <img onClick={handleClickDetail} className="reset-img" src={require('../../images/icons/reset.png')} />
                                                 </label>
                                                 <DetailInput info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
                                             </div>
@@ -815,7 +815,7 @@ function Dashboard() {
 
                                 <div className="form-group row">
                                     <div className="form-group col-sm-6">
-                                        <label className="col-sm-1 col-form-label">
+                                        <label className=" col-form-label">
                                           Nom
                                         </label>
                                         <Select onChange={handleChange} placeholder="Nom..." id="nom"
@@ -895,7 +895,7 @@ function Dashboard() {
                                 </div>
 
                                 <div className="form-group row">
-                                    <div className="form-group group-margin col-sm-12">
+                                    <div className="form-group group-margin 2">
                                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageNom" id="affichageNom"/>
                                           <label className="col-form-label" htmlFor="#affichageNom"> Nom </label>
 

@@ -326,7 +326,7 @@ function Stats() {
 
                                         <div className="form-group col-sm-4">
                                             <label onClick={handleClick} className="col-form-label categorie-label">
-                                              Catégorie
+                                              Catégorie <img className="reset-img" onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                             </label>
                                             <CategorieInput info="false" click={clicked} id={"catégorie"+0} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
                                         </div>
@@ -370,7 +370,7 @@ function Stats() {
 
                                         <div className="form-group col-sm-4">
                                             <label onClick={handleClickDetail} className="col-form-label detail-label">
-                                              Détail
+                                              Détail <img className="reset-img" onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                             </label>
                                             <DetailInput info="false" click={clickedDetail}  id={"detail"+0} index={0} num={0} dashboard={true} changeDetail={changeDetail}/>
                                         </div>
@@ -443,7 +443,7 @@ function Stats() {
 
                                         <div className="form-group col-sm-4">
                                             <label onClick={handleClick} className="col-form-label categorie-label">
-                                              Catégorie
+                                              Catégorie <img className="reset-img" onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                             </label>
                                             <CategorieInput info="false" click={clicked} id={"catégorie"+0} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
                                         </div>
@@ -487,7 +487,7 @@ function Stats() {
 
                                         <div className="form-group col-sm-4">
                                             <label onClick={handleClickDetail} className="col-form-label detail-label">
-                                              Détail
+                                              Détail <img className="reset-img" onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                             </label>
                                             <DetailInput info="false" click={clickedDetail}  id={"detail"+0} index={0} num={0} dashboard={true} changeDetail={changeDetail}/>
                                         </div>

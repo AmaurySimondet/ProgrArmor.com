@@ -16,6 +16,18 @@ h3{
 
 }
 
+select{
+    border-color: hsl(0, 0%, 80%);
+    border-radius: 4px;
+
+}
+
+.col-form-label{
+    padding-left:0 !important;
+    padding-right:0 !important;
+
+}
+
 /* COMPTE */
 .profile-pic{
     border-radius: 50%;
@@ -240,6 +252,11 @@ table.Stats-table{
 
 /* DASHBOARD */
 
+.reset-img{
+    width: 15px;
+
+}
+
 .Dashboard .group-margin{
     margin-top:20px;
 }
@@ -260,12 +277,12 @@ table.Stats-table{
 }
 
 .td-left{
-    padding-right:1%;
+    padding: 0 2%;
     width:50%;
 }
 
 .td-right{
-    padding-left:1%;
+    padding: 0 2%;
     width:50%;
 
 }
@@ -851,6 +868,12 @@ table.connexion-table td.connexion-img-td {
         position: absolute;
         right: 20px;
 
+    }
+
+
+    .reset-img{
+        width: 10px;
+    
     }
 
 
