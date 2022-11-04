@@ -2,12 +2,12 @@
 
 h1{
     font-weight:800;
-
+    margin-top: 5%;
 }
 
 h2{
     font-weight:200;
-
+    margin-top: 2%;
 }
 
 h3{
@@ -564,6 +564,17 @@ table.hometable td.inscription-img-td {
 
 }
 
+/* ADMIN */
+.form-admin{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.form-admin-input{
+    margin: 1%;
+
+}
+
 /* CONNEXION */
 .connexion-img{
     display:block;
@@ -876,6 +887,12 @@ table.connexion-table td.connexion-img-td {
     }
 }
 
+@media (min-width: 580px){
+    p{
+        font-size:15px;
+    }
+}
+
 @media (max-width: 700px){
     .piechart{
         font-size:10px;
@@ -908,6 +925,11 @@ table.connexion-table td.connexion-img-td {
 
     .chart-title{
         margin-top: 400px;
+
+    }
+
+    .Admin .chart-title{
+        margin-top: 40px;
 
     }
 
@@ -958,16 +980,20 @@ table.connexion-table td.connexion-img-td {
     .connexion-img-td{
         display: none;
     }
-
-    h1{
-        margin-top:5%;
-    }
 }
 
 @media (min-width: 1100px){
     .small-profile{
         display: none
 
+    }
+
+    h1{
+        margin-top: 40px;
+    }
+
+    h2{
+        margin-top: 20px;
     }
 
 }

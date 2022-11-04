@@ -11,6 +11,7 @@ import PrivateRoute from "./components/PrivateRoute.js";
 import Travaux from "./components/Dashboard/Travaux";
 import Session from "./components/Dashboard/Session";
 import Compte from "./components/Dashboard/Compte";
+import Admin from "./components/Dashboard/Admin.jsx";
 
 function App() {
 
@@ -56,6 +57,10 @@ function App() {
 
             <Route path="/session/*" element={<PrivateRoute/>}>
                 <Route exact path='/session/*' element={<Session/>}/>
+            </Route>
+
+            <Route path="/admin" element={<PrivateRoute/>}>
+                <Route exact path='/admin' element={<Admin/>}/>
             </Route>
           </Routes>
     );

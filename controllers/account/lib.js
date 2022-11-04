@@ -357,6 +357,15 @@ async function workouts(req, res) {
                                     arr2.push(0)
                                 }
                             }
+                            if(seances[indexSeance].exercices[indexExercice].exercice.ownExercice){
+                                arr.push(seances[indexSeance].exercices[indexExercice].exercice.ownExercice)
+                                if (string !== "sets"){
+                                    arr2.push(parseFloat(seances[indexSeance].exercices[indexExercice].Series[index].repsTime))
+                                }
+                                else{
+                                    arr2.push(0)
+                                }
+                            }
                             else{
                                 arr.push(seances[indexSeance].exercices[indexExercice].exercice.name)
                                 if (string !== "sets"){
@@ -441,9 +450,20 @@ async function workouts(req, res) {
       )
     }
 
+    function isAdmin(query){
+        if(query.admin){
+            if(query.admin===""+process.env.REACT_APP_ADMIN && query.password===""+process.env.REACT_APP_PASSWORD){
+                return {}
+            }
+        }
+        else{
+            return {"_id": query.id}
+        }
+    }
+
     try {
        User.find(
-          {"_id": req.query.id}, function (err, data) {
+          isAdmin(req.query), function (err, data) {
                 if (err){
                     res.json({ success: false, message: err})
                 }
@@ -451,8 +471,43 @@ async function workouts(req, res) {
                     res.json({ success: false, message: "Aucune séance !"})
                 }
                 else{
-                    let seances = data[0].seances;
-//                    console.log(req.query)
+                    // console.log(data)
+                    let seances = [];
+                    let numUsers = 0;
+                    let numSeanceDay = 0;
+                    let numSeances = 0;
+                    let numActiveUsers = 0;
+                    if (isAdmin(req.query)==={"_id": req.query.id}){
+                        seances = data[0].seances;
+                    }
+                    else{
+                        numUsers = data.length;
+                        let seancesDay = [];
+                        data.forEach((user, index) => {if (user.seances.length!==0){
+                            seances.push(...user.seances)
+                            numActiveUsers++;
+                        }})
+                        seances.forEach((seance, index) => {
+                            const todate= new Date();
+                            const today = todate.getDate();
+                            const tomonth = todate.getMonth() + 1; // getMonth() returns month from 0 to 11
+                            const toyear = todate.getFullYear();
+                            const date= new Date(seance.date);
+                            const day = date.getDate();
+                            const month = date.getMonth() + 1; // getMonth() returns month from 0 to 11
+                            const year = date.getFullYear();
+
+                            const full = `${day}/${month}/${year}`;
+                            const tofull = `${today}/${tomonth}/${toyear}`;
+
+                            if(full===tofull){
+                                seancesDay.push(seance.date)
+                            }
+                        })
+                        numSeances = seances.length;
+                        numSeanceDay = seancesDay.length
+                        // console.log(seances)
+                    }
 
                     //TRI EXERCICE
                     seances.map((seance,indexSeance) => {
@@ -697,7 +752,11 @@ async function workouts(req, res) {
                         seances = seances.sort((a,b) => {return b.repsTime - a.repsTime})
                     }
 
-                    res.json({ success: true, message: "Utilisateur trouvé !", seances: seances})
+                    res.json({ success: true, message: "Utilisateur trouvé !", 
+                    seances: seances, numSeanceDay: numSeanceDay, 
+                    numUsers: numUsers, numSeances: numSeances, 
+                    numActiveUsers: numActiveUsers
+                    })
                 }
           });
 
