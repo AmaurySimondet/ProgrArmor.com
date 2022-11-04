@@ -38,7 +38,7 @@ select{
 .small-profile{
     margin-top: 40px;
 
-    
+
 
 }
 
@@ -582,6 +582,11 @@ body{
 table.hometable {
   table-layout: fixed ;
   width: 100%;
+  margin-bottom:40px;
+}
+
+.inscription-img{
+    width:1060px;
 }
 
 table.hometable td.inscription-img-td {
