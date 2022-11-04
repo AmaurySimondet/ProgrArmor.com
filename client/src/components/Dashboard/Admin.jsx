@@ -82,7 +82,6 @@ function Admin(){
                 if(dataJSON.Password){
                     if(dataJSON.Admin === ""+process.env.REACT_APP_ADMIN && dataJSON.Password===""+process.env.REACT_APP_PASSWORD){
                         setCredSuccess(true);
-                        console.log("oups")
         }}}};
     }, [data]);
 

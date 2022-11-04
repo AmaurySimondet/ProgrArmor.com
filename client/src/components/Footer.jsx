@@ -1,6 +1,6 @@
 import {React, useState, useEffect, useRef} from "react";
 
-function Footer(){
+function Footer(props){
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
         width: window.innerWidth
@@ -54,6 +54,8 @@ function Footer(){
     <div>
 
     {y<dimensions.height-50 ?  <div style={{height: ""+dimensions.height-y+50+"px"}}></div> : null }
+
+    {props.warnref ? <div style={{height: ""+props.warnref+"px"}}></div> : null }
 
     <footer ref={boxRef} className="Design-footer">
         <table className="table1">

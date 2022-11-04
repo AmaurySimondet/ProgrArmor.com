@@ -1,10 +1,14 @@
-import {React, useState, useEffect} from "react";
+import {React, useState, useEffect, useRef} from "react";
 import { Button } from "react-bootstrap";
 import NavigBar from "../NavigBar.jsx"
 import API from "../../utils/API";
 import Footer from "../Footer.jsx";
+import { Upload } from "upload-js";
 
 function Compte() {
+    const upload = Upload({ apiKey: "free" });
+    const inputFile = useRef(null);
+    const [text, setText] = useState();
     const [user, setUser] = useState({})
     const [formInfo, setFormInfo] = useState({})
     const [modifyInfo, setModifyInfo] = useState(false);
@@ -44,13 +48,84 @@ function Compte() {
     setModifyInfo(!modifyInfo);
   }
 
+  async function handleClickUpdateUser(event){
+    event.preventDefault();
+
+    console.log(formInfo)
+    let {fName, lName, email} = formInfo;
+
+    if (user.googleId || user.facebookId) return alert("Les utilisateurs inscrits via un partenaire doivent contacter ce dernier afin de modifier leurs informations !")
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) return alert("Email au mauvais format !")
+    if (!email || email.length === 0) return alert("Aucun email fourni !");
+    if (!fName || fName.length === 0) return alert("Aucun prénom fourni !");
+    if (!lName || lName.length === 0) return alert("Aucun mom fourni !");
+
+    else{
+      const res = await API.modifyUser({id: localStorage.getItem("id"), fName: fName, lName: lName, email: email})
+      console.log(res)
+
+      window.location = "/compte"
+    }
+  }
+
   function handleClickFormInfo(formInfo){
     return alert("Pas encore disponible !")
+  }
+
+  const boxRef = useRef();
+
+  // X
+  const [x, setX] = useState();
+
+  // Y
+  const [y, setY] = useState();
+
+  // This function calculate X and Y
+  const getPosition = () => {
+    const x = boxRef.current.offsetLeft;
+    setX(x);
+
+    const y = boxRef.current.offsetTop;
+    setY(y);
+  };
+
+  // Get the position of the red box in the beginning
+  useEffect(() => {
+    getPosition();
+  }, []);
+
+  // Re-calculate X and Y of the red box when the window is resized by the user
+  useEffect(() => {
+    window.addEventListener("resize", getPosition);
+  }, []);
+
+
+  async function onFileSelected(event) {
+
+    if (user.googleId || user.facebookId) return alert("Les utilisateurs inscrits via un partenaire doivent contacter ce dernier afin de modifier leurs informations !")
+
+    else{
+      const [ file ]    = event.target.files;
+      const { fileUrl } = await upload.uploadFile(
+        file,
+        {
+          onBegin:    ({ cancel })   => setText("File upload started!"),
+          onProgress: ({ progress }) => setText(`File uploading... ${progress}%`)
+        }
+      );
+      setText(`File uploaded!`);
+
+      const res = await API.modifyUser({id: localStorage.getItem("id"), profilePic: fileUrl})
+      console.log(res)
+
+      window.location = "/compte"
+    }
   }
 
     return (
     <div>
         <NavigBar show={true} location="gear"/>
+        <div ref={boxRef}></div>
 
         {modifyInfo ?
             <form className="modify-info-form">
@@ -99,7 +174,7 @@ function Compte() {
                   />
                 </div>
               </div>
-              <Button className="btn btn-dark btn-lg" onClick={handleClickFormInfo} block="true" type="submit">
+              <Button className="btn btn-dark btn-lg" onClick={handleClickUpdateUser} block="true" type="submit">
                   Appliquer les modifications
               </Button>
               <br/>
@@ -109,16 +184,27 @@ function Compte() {
             </form>
         :
             <div className="Compte">
+                <input style={{display: "none"}} type="file" onChange={onFileSelected} ref={inputFile} />
+
                 <table className="profile-table">
                     <tbody>
                         <tr>
+
                                 {user.profilePic ?
                                     <td className="profile-td">
-                                        <img className="profile-pic" src={user.profilePic} alt="profile-pic" />
+                                        <div onClick={() => inputFile.current.click()} className="relative">
+                                          <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
+                                          <img className="profile-pic" src={user.profilePic} alt="profile-pic" />
+                                          <p> {text} </p>
+                                        </div>
                                     </td>
                                 :
                                     <td>
-                                        <img className="unknown-profile-pic profile-pic" src={require('../../images/profilepic.png')} alt='unknown-profile-pic' />
+                                        <div onClick={() => inputFile.current.click()} className="relative">
+                                          <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
+                                          <img className="unknown-profile-pic profile-pic" src={require('../../images/profilepic.png')} alt='unknown-profile-pic' />
+                                          <p> {text} </p>
+                                        </div>
                                     </td>
                                 }
 
@@ -145,10 +231,19 @@ function Compte() {
                 </table>
 
                 <div className="small-profile">
+
                     {user.profilePic ?
+                          <div onClick={() => inputFile.current.click()} className="relative">
+                            <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
                             <img className="profile-pic profile-pic-small" src={user.profilePic} alt="profile-pic" />
+                            <p> {text} </p>
+                          </div>
                     :
+                          <div onClick={() => inputFile.current.click()} className="relative">
+                            <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
                             <img className="unknown-profile-pic profile-pic profile-pic-small" src={require('../../images/profilepic.png')} alt='unknown-profile-pic' />
+                            <p> {text} </p>
+                          </div>
                     }
 
                     {user ?
@@ -174,7 +269,7 @@ function Compte() {
             </div>
         }
 
-        <Footer />
+        <Footer warnref={y}/>
     </div>
     )
 }

@@ -20,6 +20,7 @@ module.exports = function (app) {
 
     //COMPTE
     app.post('/getUser', account.getUser);
+    app.post('/modifyUser', account.modifyUser);
 
     //TOKEN
     app.post('/verifyToken', account.verifyToken)

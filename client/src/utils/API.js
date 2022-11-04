@@ -88,5 +88,11 @@ export default {
   getUser: function(id){
       return axios.post(`${burl}/user/getUser`, id, { headers: headers });
 
-  }
+  },
+
+  //COMPTE
+  modifyUser: function(send) {
+    return axios.post(`${burl}/user/modifyUser`,send,{headers: headers});
+
+  },
 };

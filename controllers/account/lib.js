@@ -767,6 +767,41 @@ async function workouts(req, res) {
 };
 
 //COMPTE
+async function modifyUser(req, res) {
+    let id = req.body.id
+
+    let conditions = {
+        _id : id 
+    }
+      
+    let update = {}
+    if(req.body.profilePic){
+        update = {
+            profilePic : req.body.profilePic,
+        }
+    }
+    else{
+        update = {
+            fName : req.body.fName,
+            lName : req.body.lName,
+            email : req.body.email
+        }
+    }
+      
+    try{
+         User.findOneAndUpdate(conditions,{$set: update},function(error,result){
+           if(error){
+             console.log(error)
+           }
+           else{ res.json({ success: true, message: "Seance supprimée !"}) }
+         });
+
+    }
+    catch(e){
+       console.log(e);
+    }
+}
+
 async function getUser(req, res) {
     let id = req.body.id
 
@@ -782,6 +817,13 @@ async function getUser(req, res) {
                         fName: data[0].fName,
                         lName: data[0].lName,
                         profilePic: data[0].profilePic,
+                    }
+
+                    if(data[0].googleId){
+                        obj.googleId = data[0].googleId
+                    }
+                    if(data[0].facebookId){
+                        obj.facebookId = data[0].facebookId
                     }
 
                     res.json({ success: true, message: "Utilisateur trouvé !", profile: obj})
@@ -851,3 +893,4 @@ exports.workouts = workouts;
 exports.getUser = getUser;
 exports.verifyToken = verifyToken;
 exports.supprSeance = supprSeance;
+exports.modifyUser = modifyUser;
