@@ -135,9 +135,6 @@ function Admin(){
         <div>
             <NavigBar />
 
-            
-
-
                 {credSuccess===true ?
                 <div className="Admin chart-pie">
                     <h1> Admin </h1>                     
