@@ -101,10 +101,6 @@ function Compte() {
 
 
   async function onFileSelected(event) {
-
-    if (user.googleId || user.facebookId) return alert("Les utilisateurs inscrits via un partenaire doivent contacter ce dernier afin de modifier leurs informations !")
-
-    else{
       const [ file ]    = event.target.files;
       const { fileUrl } = await upload.uploadFile(
         file,
@@ -119,7 +115,6 @@ function Compte() {
       console.log(res)
 
       window.location = "/compte"
-    }
   }
 
     return (

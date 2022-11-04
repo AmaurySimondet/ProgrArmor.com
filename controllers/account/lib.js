@@ -451,7 +451,6 @@ async function workouts(req, res) {
     }
 
     function isAdmin(query){
-        console.log(query.admin===""+process.env.REACT_APP_ADMIN && query.password===""+process.env.REACT_APP_PASSWORD)
         if(query.admin){
             if(query.admin===""+process.env.REACT_APP_ADMIN && query.password===""+process.env.REACT_APP_PASSWORD){
                 return {}
