@@ -451,6 +451,7 @@ async function workouts(req, res) {
     }
 
     function isAdmin(query){
+        console.log(query.admin===""+process.env.REACT_APP_ADMIN && query.password===""+process.env.REACT_APP_PASSWORD)
         if(query.admin){
             if(query.admin===""+process.env.REACT_APP_ADMIN && query.password===""+process.env.REACT_APP_PASSWORD){
                 return {}
@@ -467,11 +468,12 @@ async function workouts(req, res) {
                 if (err){
                     res.json({ success: false, message: err})
                 }
-                if(!data[0].seances || Object.entries(data[0].seances).length===0){
-                    res.json({ success: false, message: "Aucune séance !"})
+                if (isAdmin(req.query)==={"_id": req.query.id}){
+                    if(!data[0].seances || Object.entries(data[0].seances).length===0){
+                        res.json({ success: false, message: "Aucune séance !"})
+                    }
                 }
                 else{
-                    // console.log(data)
                     let seances = [];
                     let numUsers = 0;
                     let numSeanceDay = 0;

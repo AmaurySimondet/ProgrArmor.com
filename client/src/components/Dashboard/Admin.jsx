@@ -91,6 +91,8 @@ function Admin(){
         setTimeout(getSeance3, 50);
     }, [params3]);
 
+    let errIter = 0;
+
     async function getSeance3(){
         const {data} = await API.workouts(params3);
         if (data.success === false && errIter===0 ){
