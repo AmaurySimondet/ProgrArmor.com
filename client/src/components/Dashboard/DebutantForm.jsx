@@ -6,6 +6,10 @@ import PoidsInput from "./PoidsInput";
 import FullExerciceInput from "./FullExerciceInput"
 import customStyles from "./customStyles";
 
+function createId(date){
+    return date.toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36);
+}
+
 function DebutantForm() {
   const [seance, setSeance] = useState({date: "", poids: "", exercices: {}});
   const [previousSeance, setPreviousSeance] = useState({});
@@ -179,9 +183,9 @@ function DebutantForm() {
                 </div>
             </div>
 
-            <DateInput key={previousSeance.date} date={previousSeance.date} changeDate={changeDate}/>
+            <DateInput key={createId(Date.now())} date={previousSeance.date} changeDate={changeDate}/>
 
-            <PoidsInput changePoids={changePoids}/>
+            <PoidsInput key={createId(Date.now())} poids={previousSeance.poids} changePoids={changePoids}/>
 
             {exercices ? exercices.map((exercice,index) => {
                 return(

@@ -1,7 +1,7 @@
 import {React, useState} from "react";
 
 function PoidsInput(props) {
-  const [poids, setPoids] = useState("");
+  const [poids, setPoids] = useState(props.poids);
 
   const [clicked, setClicked] = useState("hide");
 
