@@ -7,7 +7,8 @@ function createId(date){
 }
 
 function FullExerciceInput(props){
-    const [series, setSeries] = useState([]);
+    console.log(props.exercice)
+    const [series, setSeries] = useState([...Object.values(props.exercice.Series)]);
     const [fullExercice, setFullExercice] = useState(props.exercice);
 
     function changeExercice(exercice){
