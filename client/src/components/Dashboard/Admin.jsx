@@ -51,6 +51,7 @@ function Admin(){
     const [numSeances, setNumSeances] = useState(0);
     const [numActiveUsers, setNumActiveUsers] = useState(0);
     const [seances3, setSeances3] = useState([]);
+    const [ownExercices, setOwnExercices] = useState([]);
     const [params3, setParams3] = useState({admin:"true", top: 5, class: "sets", date: "md", reforme: "pie", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title",exerciceOwnExercice: ""})
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
@@ -94,6 +95,7 @@ function Admin(){
                 setNumUsers(data.numUsers);
                 setNumSeances(data.numSeances);
                 setNumActiveUsers(data.numActiveUsers);
+                setOwnExercices(data.ownExercices);
             }
             else{
                 if(data.seances){
@@ -102,6 +104,7 @@ function Admin(){
                     setNumUsers(data.numUsers);
                     setNumSeances(data.numSeances);
                     setNumActiveUsers(data.numActiveUsers);
+                    setOwnExercices(data.ownExercices);
                 }
             }
         }
@@ -127,19 +130,21 @@ function Admin(){
                 <div className="Admin chart-pie">
                 <h1> Admin </h1>                     
 
-                <h2>Nombre d'utilisateurs</h2>
-                <p>{numUsers}</p>
+                <div className="section">
+                    <h2>Nombre d'utilisateurs</h2>
+                    <p>{numUsers}</p>
 
-                <h2>Nombre d'utilisateurs actifs</h2>
-                <p>{numActiveUsers}</p>
+                    <h2>Nombre d'utilisateurs actifs</h2>
+                    <p>{numActiveUsers}</p>
 
-                <h2>Nombre de séances au total</h2>
-                <p>{numSeances}</p>
+                    <h2>Nombre de séances au total</h2>
+                    <p>{numSeances}</p>
 
-                <h2>Nombre de séances aujourd'hui</h2>
-                <p>{numSeanceDay}</p>
+                    <h2>Nombre de séances aujourd'hui</h2>
+                    <p>{numSeanceDay}</p>
+                </div>
                     
-                <div className="chart-pie">
+                <div className="chart-pie section">
                     <h2> Les exercices préférés </h2>
 
                     
@@ -235,7 +240,14 @@ function Admin(){
                         </PieChart>
                     </ResponsiveContainer>
                 </div>
+
+                <div className="section">
+                    <h2>Exercices personnels</h2>
+                    {ownExercices.map(ownExercice => {
+                        return <p>{ownExercice}</p>
+                    })}
                 </div>
+            </div>
             :
                 <div className="Admin chart-pie">
                     <h1 style={{marginBottom: "800px"}}> Accès refusé </h1>   

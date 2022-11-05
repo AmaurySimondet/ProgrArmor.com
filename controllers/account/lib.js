@@ -472,6 +472,7 @@ async function workouts(req, res) {
                 }
                 else{
                     let seances = [];
+                    let ownExercices = [];
                     let numUsers = 0;
                     let numSeanceDay = 0;
                     let numSeances = 0;
@@ -502,6 +503,12 @@ async function workouts(req, res) {
                             if(full===tofull){
                                 seancesDay.push(seance.date)
                             }
+
+                            seance.exercices.forEach((exercice, indexEx) => {
+                                if (exercice.exercice.ownExercice !== "" && !ownExercices.includes(exercice.exercice.ownExercice)){
+                                    ownExercices.push(exercice.exercice.ownExercice)
+                                }
+                            })
                         })
                         numSeances = seances.length;
                         numSeanceDay = seancesDay.length
@@ -754,7 +761,7 @@ async function workouts(req, res) {
                     res.json({ success: true, message: "Utilisateur trouvé !", 
                     seances: seances, numSeanceDay: numSeanceDay, 
                     numUsers: numUsers, numSeances: numSeances, 
-                    numActiveUsers: numActiveUsers
+                    numActiveUsers: numActiveUsers, ownExercices: ownExercices
                     })
                 }
           });

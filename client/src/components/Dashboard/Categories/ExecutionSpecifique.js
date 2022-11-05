@@ -112,6 +112,12 @@ const executionSpecifique = [
   {
     id: "input",
     className: "select-item",
+    label: "'Gymnaste'",
+    value: "'Gymnaste'",
+  },
+  {
+    id: "input",
+    className: "select-item",
     label: "'Pelican'",
     value: "'Pelican'",
   },
