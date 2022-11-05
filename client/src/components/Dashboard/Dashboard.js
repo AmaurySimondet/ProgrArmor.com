@@ -92,7 +92,7 @@ function Dashboard() {
     const [detailNumb, setDetailNumb] = useState(0)
     const [categoriesAddRien, setCategoriesAddRien] = useState([])
     const [detailsAddRien, setDetailsAddRien] = useState([])
-    const [checkbox, setCheckbox] = useState({affichageCharge: true, affichageReps: true, affichageSérie: false, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: true, affichagePercent: true, affichagePoids: false, affichageModif: false, affichageSuppr: false});
+    const [checkbox, setCheckbox] = useState({affichageCharge: true, affichageReps: true, affichageSérie: false, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: false, affichagePercent: true, affichagePoids: false, affichageModif: false, affichageSuppr: false});
     const [clicked, setClicked] = useState([false,false,false,false,false])
     const [clickedDetail, setClickedDetail] = useState([false,false,false,false,false])
     const [switched, setSwitched] = useState(false);
@@ -660,7 +660,7 @@ function Dashboard() {
                                   <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSérie" id="affichageSérie"/>
                                   <label className="col-form-label" htmlFor="#affichageSérie"> Série </label>
 
-                                  <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType"/>
+                                  <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType"/>
                                   <label className="col-form-label" htmlFor="#affichageType"> Type </label>
 
                                   <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageReps" id="affichageReps"/>
@@ -908,7 +908,7 @@ function Dashboard() {
                                           <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSérie" id="affichageSérie"/>
                                           <label className="col-form-label" htmlFor="#affichageSérie"> Série </label>
 
-                                          <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType"/>
+                                          <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType"/>
                                           <label className="col-form-label" htmlFor="#affichageType"> Type </label>
 
                                           <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageReps" id="affichageReps"/>
