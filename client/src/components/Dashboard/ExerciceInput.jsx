@@ -2,7 +2,6 @@ import {React, useState, useEffect} from "react";
 import lesExercices from "./Exercices";
 import MusclesCategorie from "./Categories/MusclesCategorie.js";
 import Select from 'react-select';
-import musclesCategorie from "./Categories/MusclesCategorie.js";
 import customStyles from "./customStyles.js";
 
 function ExerciceInput(props) {

@@ -234,6 +234,45 @@ async function debutantform(req, res) {
     }
 };
 
+async function loadSeance(req, res) {
+    console.log(req.query);
+
+    function sortDateDecroissant(a, b) {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+
+    }
+
+    try {
+        User.find(
+            {"_id": req.query.id}, function (err, data) {
+                 if (err){
+                     res.json({ success: false, message: err})
+                 }
+                 else{
+                    let seances = data[0].seances;
+                    let seance = {date: "", poids: "", exercices: {}};
+
+                    if(req.query.load === "lastRec"){
+                        seance = seances[seances.length - 1]
+                    }
+
+                    if(req.query.load === "lastDate"){
+                        seances = seances.sort(sortDateDecroissant);
+                        seance = seances[0]
+                        
+                    }
+
+                    res.json({ success: true, message: "Utilisateur trouvé !", seance: seance});
+                 }
+            }
+        )
+    }
+    catch(e){
+        console.log(e);
+    }
+    
+}
+
 //DASHBOARD
 async function workouts(req, res) {
     console.log(req.query)
@@ -900,3 +939,4 @@ exports.getUser = getUser;
 exports.verifyToken = verifyToken;
 exports.supprSeance = supprSeance;
 exports.modifyUser = modifyUser;
+exports.loadSeance = loadSeance;

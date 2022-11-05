@@ -1,13 +1,16 @@
 import {React, useState, useEffect} from "react";
 import API from "../../utils/API";
-import axios from 'axios';
+import Select from "react-select";
 import DateInput from "./DateInput";
 import PoidsInput from "./PoidsInput";
 import FullExerciceInput from "./FullExerciceInput"
+import customStyles from "./customStyles";
 
 function DebutantForm() {
   const [seance, setSeance] = useState({date: "", poids: "", exercices: {}});
+  const [previousSeance, setPreviousSeance] = useState({});
   const [exercices, setExercices] = useState([]);
+  const [params, setParams] = useState({load: ""})
 
   async function handleClick() {
         event.preventDefault();
@@ -128,35 +131,78 @@ function DebutantForm() {
         })
     }
 
+    function handleChange(event){
+        setParams(oldParams => {
+            return ({
+                ...oldParams,
+                [event.id]: event.value,
+                })
+            });
+      }
+
+    async function loadSeance(event){
+        event.preventDefault();
+        console.log(params);
+
+        const {data} = await API.loadSeance(params);
+        if (data.success === false){
+            if (data.message === "Aucune séance !"){
+               console.log(data.message);
+            }
+            else { alert(data.message); }
+        } else {
+            console.log(data.seance)
+            setPreviousSeance(data.seance);
+        }
+    }
 
 
     return(
         <form className="debutant-form">
 
-          <DateInput changeDate={changeDate}/>
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label">Séance précédente</label>
+                <div className="col-sm-7">
+                    <Select
+                        placeholder="Séance précédente à charger..."
+                        onChange={handleChange}
+                        options={[
+                            {id: "load", label: "/ (défaut)", value:"title"},
+                            {id: "load", label: "Dernière séance en date", value:"lastDate"},
+                            {id: "load", label: "Dernière séance enregistrée", value:"lastRec"}
+                    ]}
+                        styles={customStyles}
+                    />
+                </div>
+                <div className="col-sm-3">
+                    <button className="btn btn-dark" onClick={loadSeance} type="submit">Charger la séance</button>
+                </div>
+            </div>
 
-          <PoidsInput changePoids={changePoids}/>
+            <DateInput key={previousSeance.date} date={previousSeance.date} changeDate={changeDate}/>
 
-          {exercices ? exercices.map((exercice,index) => {
-            return(
-                <FullExerciceInput
-                    key={index}
-                    num={index}
-                    poids={seance.poids}
-                    onAddExercices={onAddExercices}
-                    changeExercices={changeExercices}
-                    onDeleteExercices={onDeleteExercices}
-            />);
-          })
-          : null
-          }
+            <PoidsInput changePoids={changePoids}/>
 
-          <button className="btn btn-dark form-button" onClick={onAddExercices} type="submit">Ajouter un exercice à cette séance !</button>
-          <br/>
+            {exercices ? exercices.map((exercice,index) => {
+                return(
+                    <FullExerciceInput
+                        key={index}
+                        num={index}
+                        poids={seance.poids}
+                        onAddExercices={onAddExercices}
+                        changeExercices={changeExercices}
+                        onDeleteExercices={onDeleteExercices}
+                />);
+            })
+            : null
+            }
 
-          <div className="form-button-div">
-            <button className="btn btn-lg btn-dark enregistrer-button" onClick={handleClick} type="submit">Enregistrer la séance !</button>
-          </div>
+            <button className="btn btn-dark form-button" onClick={onAddExercices} type="submit">Ajouter un exercice à cette séance !</button>
+            <br/>
+
+            <div className="form-button-div">
+              <button className="btn btn-lg btn-dark enregistrer-button" onClick={handleClick} type="submit">Enregistrer la séance !</button>
+            </div>
         </form>
     )
 };

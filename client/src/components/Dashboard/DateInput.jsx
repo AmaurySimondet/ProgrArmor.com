@@ -1,13 +1,16 @@
 import {React, useState} from "react";
 
 function DateInput(props) {
-  const [date, setDate] = useState("");
 
-  function handleChange(){
+  const [date, setDate] = useState(props.date);
+  console.log(props.date, date)
+
+  function handleChange(event){
     event.preventDefault();
 
     setDate(event.target.value);
     props.changeDate(event.target.value);
+    
   }
 
   return (

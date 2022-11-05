@@ -4,6 +4,19 @@ const headers = {
 };
 const burl = "http://localhost:8800" // http://localhost:8800 https://prograrmorprealpha1.herokuapp.com
 
+function paramsToString(params){
+  let string = "";
+  let keyArray = [];
+  Object.keys(params).forEach(key => {keyArray.push(key)});
+  Object.values(params).forEach((param,index) => {
+      string = string + keyArray[index] + "=" + param
+      if (index !== (Object.values(params).length-1)){
+          string = string + "&"
+      };
+  })
+  return string
+}
+
 export default {
 
   //LOGIN SIGNUP
@@ -71,17 +84,16 @@ export default {
   },
 
   workouts: function(params){
-        let string = "";
-        let keyArray = [];
-        Object.keys(params).forEach(key => {keyArray.push(key)});
-        Object.values(params).forEach((param,index) => {
-            string = string + keyArray[index] + "=" + param
-            if (index !== (Object.values(params).length-1)){
-                string = string + "&"
-            };
-        })
+      let string = paramsToString(params);
 
       return axios.get(`${burl}/user/workouts?`+string+"&id="+localStorage.getItem("id"), { headers: headers });
+
+  },
+
+  loadSeance: function(params){
+    let string = paramsToString(params);
+
+    return axios.get(`${burl}/user/loadSeance?`+string+"&id="+localStorage.getItem("id"), { headers: headers });
 
   },
 
