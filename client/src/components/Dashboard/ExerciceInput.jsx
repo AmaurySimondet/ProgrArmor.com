@@ -5,7 +5,8 @@ import Select from 'react-select';
 import customStyles from "./customStyles.js";
 
 function ExerciceInput(props) {
-  const [exercice, setExercice] = useState({name: "", ownExercice: ""});
+  const [exercice, setExercice] = useState(props.exercice);
+  console.log(props.exercice, exercice)
   
 
   function handleChange(event){
@@ -49,6 +50,7 @@ function ExerciceInput(props) {
                 onChange={handleChange}
                 options={lesExercices}
                 styles={customStyles}
+                value={exercice ? {value: exercice.name, label: exercice.name} : null}
             />
         :
               <div className="form-group row">
@@ -66,6 +68,7 @@ function ExerciceInput(props) {
                         onChange={handleChange}
                         options={lesExercices}
                         styles={customStyles}
+                        value={exercice ? {value: exercice.name, label: exercice.name} : null}
                     />
                 </div>
                 <div className="col-sm-1 poubelle-div">

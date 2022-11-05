@@ -1,23 +1,14 @@
 import ExerciceInput from "./ExerciceInput";
 import SerieInput from "./SerieInput";
-import exercices from "./Exercices";
-import Select from "./Select";
 import {React, useState, useEffect} from "react";
 
-function createEntry(exercicesTerm) {
-  return (
-    <Select
-      key={exercicesTerm.id}
-      class={exercicesTerm.class}
-      name={exercicesTerm.name}
-      value={exercicesTerm.value}
-    />
-  );
+function createId(date){
+    return date.toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 8*Math.pow(10, 12)).toString(36);
 }
 
 function FullExerciceInput(props){
     const [series, setSeries] = useState([]);
-    const [fullExercice, setFullExercice] = useState({});
+    const [fullExercice, setFullExercice] = useState(props.exercice);
 
     function changeExercice(exercice){
         setFullExercice(oldFullExercice => {
@@ -93,7 +84,10 @@ function FullExerciceInput(props){
           <div className="exercice-div">
               <hr className="hr-exercice"/>
 
-              <ExerciceInput debutant={true} id="exercice" value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} />
+              <ExerciceInput debutant={true} id="exercice" key={props.num}
+                value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} 
+                changeExercice={changeExercice} exercice={fullExercice.exercice}
+              />
 
               {series ? series.map((serie,index) => {
                 return(

@@ -12,7 +12,7 @@ function createId(date){
 
 function DebutantForm() {
   const [seance, setSeance] = useState({date: "", poids: "", exercices: {}});
-  const [previousSeance, setPreviousSeance] = useState({});
+  const [previousSeance, setPreviousSeance] = useState();
   const [exercices, setExercices] = useState([]);
   const [params, setParams] = useState({load: ""})
 
@@ -146,7 +146,6 @@ function DebutantForm() {
 
     async function loadSeance(event){
         event.preventDefault();
-        console.log(params);
 
         const {data} = await API.loadSeance(params);
         if (data.success === false){
@@ -155,7 +154,6 @@ function DebutantForm() {
             }
             else { alert(data.message); }
         } else {
-            console.log(data.seance)
             setPreviousSeance(data.seance);
         }
     }
@@ -183,15 +181,33 @@ function DebutantForm() {
                 </div>
             </div>
 
-            <DateInput key={createId(Date.now())} date={previousSeance.date} changeDate={changeDate}/>
+            {previousSeance ? <DateInput key={createId(Date.now())} date={previousSeance.date} changeDate={changeDate}/> : null}
 
-            <PoidsInput key={createId(Date.now())} poids={previousSeance.poids} changePoids={changePoids}/>
+            {previousSeance ? <PoidsInput key={createId(Date.now())} poids={previousSeance.poids} changePoids={changePoids}/> : null}
 
-            {exercices ? exercices.map((exercice,index) => {
+            {previousSeance ? previousSeance.exercices.map((exercice,index) => {
+                console.log(exercice.exercice.name)
+                if(exercice.exercice.name){
+                    return(
+                        <FullExerciceInput
+                            key={index}
+                            num={index}
+                            exercice={exercice}
+                            poids={seance.poids}
+                            onAddExercices={onAddExercices}
+                            changeExercices={changeExercices}
+                            onDeleteExercices={onDeleteExercices}
+                    />);
+                }
+            })
+            : 
+            exercices ? exercices.map((exercice,index) => {
+
                 return(
                     <FullExerciceInput
                         key={index}
                         num={index}
+                        exercice={{exercice: {name: ""}}}
                         poids={seance.poids}
                         onAddExercices={onAddExercices}
                         changeExercices={changeExercices}
@@ -200,6 +216,8 @@ function DebutantForm() {
             })
             : null
             }
+
+            
 
             <button className="btn btn-dark form-button" onClick={onAddExercices} type="submit">Ajouter un exercice à cette séance !</button>
             <br/>
