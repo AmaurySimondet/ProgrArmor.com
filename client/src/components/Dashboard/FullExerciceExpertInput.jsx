@@ -59,14 +59,19 @@ function FullExerciceInput(props){
         props.changeExercices(Exercice, props.num);
     }, [fullExercice, series, categories])
 
-    function onAddSerie(serie, num){
+    function onAddSerie(event){
         event.preventDefault();
 
-        const otherThanSelected =  series.filter((serie, index) => {
-            return index!==(num)
-        })
+        setSeries([...series, []])
+    }
 
-        setSeries([...otherThanSelected, serie])
+    function onCopySerie(event){
+        event.preventDefault();
+
+        const last = series[series.length - 1]
+        console.log(last)
+
+        setSeries([...series, last])
     }
 
     function onDeleteSerie(num){
@@ -161,6 +166,10 @@ function FullExerciceInput(props){
                 <SerieInput
                     key={index}
                     num={index}
+                    typeSerie={serie.typeSerie}
+                    repsTime={serie.repsTime}
+                    charge={serie.charge}
+                    percent={serie.percent}
                     length={series.length}
                     exercice={fullExercice.exercice}
                     poids={props.poids}
@@ -175,6 +184,7 @@ function FullExerciceInput(props){
             }
 
             <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
+            <button className="btn btn-dark form-button copy-btn" onClick={onCopySerie} type="submit">Recopier la série !</button>
             <br/>
 
 

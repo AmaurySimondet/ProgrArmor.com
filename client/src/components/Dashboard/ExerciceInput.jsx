@@ -7,6 +7,7 @@ import customStyles from "./customStyles.js";
 
 function ExerciceInput(props) {
   const [exercice, setExercice] = useState({name: "", ownExercice: ""});
+  
 
   function handleChange(event){
     if(event.target){

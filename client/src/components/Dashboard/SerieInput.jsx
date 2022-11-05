@@ -3,10 +3,11 @@ import {React, useState, useEffect} from "react";
 function SerieInput(props) {
   const [serie, setSerie] = useState({
     num: props.num,
-    typeSerie: "reps",
-    repsTime: "",
-    charge: "",
-    percent: ""});
+    typeSerie: props.typeSerie,
+    repsTime: props.repsTime,
+    charge: props.charge,
+    percent: props.percent});
+  const [text, setText] = useState();
 
   const [clicked, setClicked] = useState("hide");
 
@@ -16,7 +17,7 @@ function SerieInput(props) {
     } else { setClicked("hide")};
   }
 
-  function handleChange(){
+  function handleChange(event){
     if (event.target.id !== "charge") {
         setSerie(oldSerie => {
                 return ({
@@ -38,6 +39,12 @@ function SerieInput(props) {
 
   useEffect(() => {
     props.changeSerie(serie, props.num, props.exercice)
+    if(serie.typeSerie==="reps" && serie.repsTime >= 25){
+      setText("Ton nombre de reps semble élevé, t'aurais pas inversé charge et reps par hasard ?")
+    }
+    else{
+      setText();
+    }
   }, [serie])
 
   function handleClickPoubelle(){
@@ -182,6 +189,7 @@ function SerieInput(props) {
               <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
             </div>
       </div>
+      <p> {text} </p>
   </div>
   );
 };
