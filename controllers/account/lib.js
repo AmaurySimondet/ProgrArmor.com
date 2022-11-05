@@ -451,10 +451,8 @@ async function workouts(req, res) {
     }
 
     function isAdmin(query){
-        if(query.admin){
-            if(query.admin===""+process.env.REACT_APP_ADMIN && query.password===""+process.env.REACT_APP_PASSWORD){
-                return {}
-            }
+        if(query.admin==="true" && query.id === process.env.ADMIN_ID){
+            return {}
         }
         else{
             return {"_id": query.id}
