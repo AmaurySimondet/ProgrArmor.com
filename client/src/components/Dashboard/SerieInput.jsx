@@ -160,7 +160,7 @@ function SerieInput(props) {
                     <option value="time"> Temps (secondes) </option>
                 </select>
             </div>
-            <div className="col-sm-1">
+            <div className="col-sm-2">
               <input type="text"
                   className="form-control"
                   id="repsTime"
@@ -168,8 +168,8 @@ function SerieInput(props) {
                   onChange={handleChange}
               />
             </div>
-            <label className="col-sm-2 col-form-label">Charge totale (kg)</label>
-            <div className="col-sm-1">
+            <label className="col-sm-1 col-form-label">Charge totale (kg)</label>
+            <div className="col-sm-2">
               <input type="text"
                   className="form-control"
                   id="charge"

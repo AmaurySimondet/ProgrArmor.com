@@ -2,12 +2,8 @@ import ExerciceInput from "./ExerciceInput";
 import SerieInput from "./SerieInput";
 import {React, useState, useEffect} from "react";
 
-function createId(date){
-    return date.toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 8*Math.pow(10, 12)).toString(36);
-}
-
 function FullExerciceInput(props){
-    console.log(props.exercice)
+
     const [series, setSeries] = useState([...Object.values(props.exercice.Series)]);
     const [fullExercice, setFullExercice] = useState(props.exercice);
 
@@ -43,8 +39,13 @@ function FullExerciceInput(props){
     function onCopySerie(event){
         event.preventDefault();
 
-        const last = series[series.length - 1]
-        console.log(last)
+        let last = {}
+        if(series[series.length - 1]){
+            last = series[series.length - 1]
+        }
+        else{
+            last = {typeSerie: "reps", repsTime: "", charge: "", percent: ""}
+        }
 
         setSeries([...series, last])
     }
@@ -59,26 +60,6 @@ function FullExerciceInput(props){
                 })
             )
         })
-    }
-
-    function perc2color(perc,min,max) {
-                var base = (max - min);
-
-                if (base == 0) { perc = 100; }
-                else {
-                    perc = (perc - min) / base * 100;
-                }
-                var r, g, b = 0;
-                if (perc < 50) {
-                    r = 255;
-                    g = Math.round(5.1 * perc);
-                }
-                else {
-                    g = 255;
-                    r = Math.round(510 - 5.10 * perc);
-                }
-                var h = r * 0x10000 + g * 0x100 + b * 0x1;
-                return '#' + ('000000' + h.toString(16)).slice(-6);
     }
 
     return(

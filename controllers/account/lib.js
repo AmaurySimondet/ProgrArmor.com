@@ -250,7 +250,7 @@ async function loadSeance(req, res) {
                  }
                  else{
                     let seances = data[0].seances;
-                    let seance = {date: "", poids: "", exercices: {}};
+                    let seance;
 
                     if(req.query.load === "lastRec"){
                         seance = seances[seances.length - 1]

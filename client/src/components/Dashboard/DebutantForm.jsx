@@ -11,9 +11,7 @@ function createId(date){
 }
 
 function DebutantForm() {
-  const [seance, setSeance] = useState({date: "", poids: "", exercices: {}});
-  const [previousSeance, setPreviousSeance] = useState();
-  const [exercices, setExercices] = useState([]);
+  const [seance, setSeance] = useState({date: "", poids: "", exercices: [{exercice: {name: ""}, Series: {}}]});
   const [params, setParams] = useState({load: ""})
 
   async function handleClick() {
@@ -97,41 +95,40 @@ function DebutantForm() {
     })}
 
     function changeExercices(exercice, num){
-        event.preventDefault();
-
-        const otherThanSelected =  exercices.filter((exercice, index) => {
+        const otherThanSelected =  seance.exercices.filter((exercice, index) => {
             return index!==(num)
         })
 
-        setExercices([...otherThanSelected, exercice])
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                exercices: [...otherThanSelected, exercice]
+            })
+        })
     }
 
-    useEffect(() => {setSeance(oldSeance => {
-            return ({
-            ...oldSeance,
-            exercices: exercices,
-            });
-        });}, [exercices])
-
-    function onAddExercices(exercice, num){
+    function onAddExercices(event){
         event.preventDefault();
 
-        const otherThanSelected =  exercices.filter((exercice, index) => {
-            return index!==(num)
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                exercices: [...oldSeance.exercices, {exercice: {name: ""}, Series: {}}]
+            })
         })
-
-        setExercices([...otherThanSelected, exercice])
     }
 
     function onDeleteExercices(num){
         event.preventDefault();
 
-        setExercices(oldExercices => {
-            return(
-                oldExercices.filter((exercice, index) => {
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                exercices: oldSeance.exercices.filter((exercice, index) => {
+                    // console.log(index, num)
                     return index!==(num)
                 })
-            )
+            })
         })
     }
 
@@ -154,7 +151,13 @@ function DebutantForm() {
             }
             else { alert(data.message); }
         } else {
-            setPreviousSeance(data.seance);
+            console.log(data.seance)
+            if(data.seance){
+                setSeance(data.seance);
+            }
+            else{
+                setSeance({date: "", poids: "", exercices: [{exercice: {name: ""}, Series: {}}]});
+            }
         }
     }
 
@@ -181,13 +184,12 @@ function DebutantForm() {
                 </div>
             </div>
 
-            {previousSeance ? <DateInput key={createId(Date.now())} date={previousSeance.date} changeDate={changeDate}/> : null}
+            <DateInput key={createId(Date.now())} date={seance.date} changeDate={changeDate}/>
 
-            {previousSeance ? <PoidsInput key={createId(Date.now())} poids={previousSeance.poids} changePoids={changePoids}/> : null}
+            <PoidsInput key={createId(Date.now())} poids={seance.poids} changePoids={changePoids}/>
 
-            {previousSeance ? previousSeance.exercices.map((exercice,index) => {
-                console.log(exercice.exercice.name)
-                if(exercice.exercice.name){
+            {seance.exercices.map((exercice,index) => {
+                    console.log(exercice.exercice.name)
                     return(
                         <FullExerciceInput
                             key={index}
@@ -198,26 +200,7 @@ function DebutantForm() {
                             changeExercices={changeExercices}
                             onDeleteExercices={onDeleteExercices}
                     />);
-                }
-            })
-            : 
-            exercices ? exercices.map((exercice,index) => {
-
-                return(
-                    <FullExerciceInput
-                        key={index}
-                        num={index}
-                        exercice={{exercice: {name: ""}}}
-                        poids={seance.poids}
-                        onAddExercices={onAddExercices}
-                        changeExercices={changeExercices}
-                        onDeleteExercices={onDeleteExercices}
-                />);
-            })
-            : null
-            }
-
-            
+            })}
 
             <button className="btn btn-dark form-button" onClick={onAddExercices} type="submit">Ajouter un exercice à cette séance !</button>
             <br/>
