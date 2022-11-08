@@ -242,6 +242,11 @@ async function loadSeance(req, res) {
 
     }
 
+    function sortDateCroissant(a, b) {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+
+    }
+
     try {
         User.find(
             {"_id": req.query.id}, function (err, data) {
@@ -259,7 +264,31 @@ async function loadSeance(req, res) {
                     if(req.query.load === "lastDate"){
                         seances = seances.sort(sortDateDecroissant);
                         seance = seances[0]
-                        
+                    }
+
+                    // LastRec seance
+                    if (req.query.load[7] === "-"){
+                        nomSeance = req.query.load.slice(8, req.query.load.length)
+
+                        seances.forEach((seanceIter, index) => {
+                            if (seanceIter.nom.nouveauNom === nomSeance || seanceIter.nom.ancienNom === nomSeance){
+                                seance = seanceIter
+                            }
+                        })
+                    }
+
+                    // LastDate seance
+                    if (req.query.load[8] === "-"){
+                        nomSeance = req.query.load.slice(9, req.query.load.length)
+                        console.log(nomSeance)
+
+                        seances = seances.sort(sortDateCroissant);
+
+                        seances.forEach((seanceIter, index) => {
+                            if (seanceIter.nom.nouveauNom === nomSeance || seanceIter.nom.ancienNom === nomSeance){
+                                seance = seanceIter
+                            }
+                        })
                     }
 
                     res.json({ success: true, message: "Utilisateur trouvé !", seance: seance});

@@ -14,6 +14,7 @@ function EchauffementInput(props){
 
   }
 
+
     function changeEchauffement(echauffement){
         setEchauffement(oldEchauffement => {
             return ({
@@ -46,22 +47,35 @@ function EchauffementInput(props){
         props.changeEchauffements(Echauffement, props.num);
     }, [echauffement, series, categories])
 
-    function onAddSerie(serie, num){
+    function onAddSerie(event){
         event.preventDefault();
 
-        const otherThanSelected =  series.filter((serie, index) => {
-            return index!==(num)
-        })
+        setSeries([...series, []])
+    }
 
-        setSeries([...otherThanSelected, serie])
+    function onCopySerie(event){
+        event.preventDefault();
+
+        let last = {}
+        if(series[series.length - 1]){
+            last = series[series.length - 1]
+        }
+        else{
+            last = {typeSerie: "reps", repsTime: "", charge: "", percent: ""}
+        }
+
+        setSeries([...series, last])
     }
 
     function onDeleteSerie(num){
         event.preventDefault();
 
+        console.log(num)
+
         setSeries(oldSeries => {
             return(
                 oldSeries.filter((serie, index) => {
+                    console.log(index, num, index!==(num))
                     return index!==(num)
                 })
             )
@@ -170,6 +184,7 @@ function EchauffementInput(props){
             }
 
             <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
+            <button className="btn btn-dark form-button copy-btn" onClick={onCopySerie} type="submit">Recopier la série !</button>
             <br/>
 
 

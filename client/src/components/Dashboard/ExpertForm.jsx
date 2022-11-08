@@ -14,13 +14,21 @@ function createId(date){
     return date.toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36);
 }
 
+function containsObj(arr, obj){
+    let contains = arr.some(elem =>{
+        return JSON.stringify(obj) === JSON.stringify(elem);
+    });
+    return contains
+}
+
 function ExpertForm() {
-  const [seance, setSeance] = useState({date: "", poids: "", exercices: [], nom: {}, echauffements: []});
+  const [seance, setSeance] = useState({date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
   const [clickEchauffement, setClickEchauffement] = useState(false);
+  const [paramsSelect, setParamsSelect] = useState();
   const [clickExercices, setClickExercices] = useState(false);
   const [clickDetails, setClickDetails] = useState(false);
   const [params, setParams] = useState({load: ""});
-  const [data, setData] = useState({date: "", poids: "", exercices: [], nom: {}, echauffements: []});
+  const [data, setData] = useState({date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
   const [listeNoms, setListeNoms] = useState([])
 
   function handleClickEchauffement(){
@@ -217,7 +225,7 @@ function ExpertForm() {
         setSeance(oldSeance => {
             return ({
                 ...oldSeance,
-                exercices: [...oldSeance.exercices, {exercice: {name: ""}, Series: {}}]
+                exercices: [...oldSeance.exercices, {exercice: {name: ""}, Series: {}, Categories: {}}]
             })
         })
     }
@@ -255,7 +263,7 @@ function ExpertForm() {
         setSeance(oldSeance => {
             return ({
                 ...oldSeance,
-                details: [...oldSeance.details, {}]
+                details: [...oldSeance.details, []]
             })
         })
     }
@@ -293,7 +301,7 @@ function ExpertForm() {
         setSeance(oldSeance => {
             return ({
                 ...oldSeance,
-                echauffements: [...oldSeance.echauffements, {exercice: {name: ""}, Series: {}}]
+                echauffements: [...oldSeance.echauffements, {echauffement: {name: ""}, Series: {}, Categories: {}}]
             })
         })
     }
@@ -324,11 +332,20 @@ function ExpertForm() {
         } else {
             console.log(data.seance)
             if(data.seance){
-                setSeance({date: "", poids: "", exercices: [], nom: {}, echauffements: []});
+                setSeance({date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
                 setData(data.seance)
+                setClickExercices(true)
+                if (data.seance.echauffements){
+                    setClickEchauffement(true)
+                }
+                if (data.seance.details.length > 0){
+                    setClickDetails(true)
+                }
             }
             else{
-                setSeance({date: "", poids: "", exercices: [], nom: {}, echauffements: []});
+                setSeance({date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
+                setClickDetails(false)
+                setClickEchauffement(false)
             }
         }
     }
@@ -348,22 +365,54 @@ function ExpertForm() {
             alert(data.message);
         } else {
             let arr = [{label: "/ (défaut)", value:"title"}]
+
+            let arr2 = [
+                {className:"select-title", id: "load", label: "/ (défaut)", value:"title"},
+                {id: "load", label: "Dernière séance en date", value:"lastDate"},
+                {id: "load", label: "Dernière séance enregistrée", value:"lastRec"},
+                {id: "load", label: "", value:"title"},
+                {className:"select-title", id: "load", label: "Par nom de séance", value:"title"}
+            ]
+
             data.seances.forEach((seance, index) => {
                 if (seance.nom){
                     if (seance.nom.ancienNom !== "nouveau-nom"){
                         if (!arr.includes(seance.nom.ancienNom)){
-                            arr.push({label: seance.nom.ancienNom, value: seance.nom.ancienNom})
+                            let obj = {label: seance.nom.ancienNom, value: seance.nom.ancienNom}
+                            if (!containsObj(arr,obj)){
+                                arr.push(obj)
+                            }
+                            let obj1 = {id: "load", label: `Dernière séance "${seance.nom.ancienNom}" enregistrée`, value:`lastRec-${seance.nom.ancienNom}`}
+                            let obj2 = {id: "load", label: `Dernière séance "${seance.nom.ancienNom}" en date`, value:`lastDate-${seance.nom.ancienNom}`}
+                            if(!containsObj(arr2,obj1)){
+                                arr2.push(obj1)
+                            }
+                            if(!containsObj(arr2,obj2)){
+                                arr2.push(obj2)
+                            }
                         }
                     }
                     else{
                         if (!arr.includes(seance.nom.nouveauNom)){
-                            arr.push({label: seance.nom.nouveauNom, value: seance.nom.nouveauNom})
+                            let obj = {label: seance.nom.nouveauNom, value: seance.nom.nouveauNom}
+                            if (!containsObj(arr,obj)){
+                                arr.push(obj)
+                            }
+                            let obj1 = {id: "load", label: `Dernière séance "${seance.nom.nouveauNom}" enregistrée`, value:`lastRec-${seance.nom.nouveauNom}`}
+                            let obj2 = {id: "load", label: `Dernière séance "${seance.nom.nouveauNom}" en date`, value:`lastDate-${seance.nom.nouveauNom}`}
+                            if(!containsObj(arr2,obj1)){
+                                arr2.push(obj1)
+                            }
+                            if(!containsObj(arr2,obj2)){
+                                arr2.push(obj2)
+                            }
                         }
                     }
                 }
             })
             arr.push({value:"nouveau-nom", label: "Entrer un nouveau nom de séance..."})
             setListeNoms(arr);
+            setParamsSelect(arr2)
         }
     }
 
@@ -393,13 +442,6 @@ function ExpertForm() {
 
     useEffect(()=>{
         setSeance(data);
-        setClickExercices(true);
-        if (data.echauffements && data.echauffements.length > 0){
-            setClickEchauffement(true);
-        }
-        if (data.details && data.details.length > 0){
-            setClickDetails(true);
-        }
     }, [data])
 
 
@@ -412,11 +454,7 @@ function ExpertForm() {
                     <Select
                         placeholder="Séance précédente à charger..."
                         onChange={handleChange}
-                        options={[
-                            {id: "load", label: "/ (défaut)", value:"title"},
-                            {id: "load", label: "Dernière séance en date", value:"lastDate"},
-                            {id: "load", label: "Dernière séance enregistrée", value:"lastRec"}
-                        ]}
+                        options={paramsSelect}
                         styles={customStyles}
                     />
                 </div>
@@ -464,7 +502,9 @@ function ExpertForm() {
 
           {clickEchauffement ?
               <div>
-                  <p onClick={handleClickEchauffement} className="expert-title"> Echauffement <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
+                  <p onClick={handleClickEchauffement} className="expert-title"> 
+                    Echauffement <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> 
+                  </p>
                   {seance.echauffements ?
                     seance.echauffements.map((echauffement,index) => {
                         return(
@@ -473,7 +513,7 @@ function ExpertForm() {
                                 num={index}
                                 poids={seance.poids}
                                 echauffement={echauffement}
-                                click={echauffement.Categories[0] ? true : false}
+                                click={echauffement.Categories ? echauffement.Categories[0] ? true : false : false}
                                 onAddEchauffements={onAddEchauffements}
                                 changeEchauffements={changeEchauffements}
                                 onDeleteEchauffements={onDeleteEchauffements}
@@ -503,7 +543,7 @@ function ExpertForm() {
                             num={index}
                             exercice={exercice}
                             poids={seance.poids}
-                            click={exercice.Categories[0] ? true : false}
+                            click={exercice.Categories ? exercice.Categories[0] ? true : false : false}
                             onAddExercices={onAddExercices}
                             changeExercices={changeExercices}
                             onDeleteExercices={onDeleteExercices}
