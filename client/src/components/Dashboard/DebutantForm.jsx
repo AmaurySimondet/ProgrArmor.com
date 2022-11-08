@@ -11,8 +11,9 @@ function createId(date){
 }
 
 function DebutantForm() {
-  const [seance, setSeance] = useState({date: "", poids: "", exercices: [{exercice: {name: ""}, Series: {}}]});
-  const [params, setParams] = useState({load: ""})
+  const [seance, setSeance] = useState({date: "", poids: "", exercices: []});
+  const [params, setParams] = useState({load: ""});
+  const [data, setData] = useState({date: "", poids: "", exercices: []});
 
   async function handleClick() {
         event.preventDefault();
@@ -153,13 +154,18 @@ function DebutantForm() {
         } else {
             console.log(data.seance)
             if(data.seance){
-                setSeance(data.seance);
+                setSeance({date: "", poids: "", exercices: []});
+                setData(data.seance)
             }
             else{
-                setSeance({date: "", poids: "", exercices: [{exercice: {name: ""}, Series: {}}]});
+                setSeance({date: "", poids: "", exercices: []});
             }
         }
     }
+
+    useEffect(()=>{
+        setSeance(data)
+    }, [data])
 
 
     return(

@@ -38,7 +38,7 @@ function SerieInput(props) {
   }
 
   useEffect(() => {
-    props.changeSerie(serie, props.num, props.exercice)
+    props.changeSerie(serie, props.num)
     if(serie.typeSerie==="reps" && serie.repsTime >= 25){
       setText("Ton nombre de reps semble élevé, t'aurais pas inversé charge et reps par hasard ?")
     }

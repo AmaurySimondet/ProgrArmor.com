@@ -53,9 +53,12 @@ function FullExerciceInput(props){
     function onDeleteSerie(num){
         event.preventDefault();
 
+        console.log(num)
+
         setSeries(oldSeries => {
             return(
                 oldSeries.filter((serie, index) => {
+                    console.log(index, num, index!==(num))
                     return index!==(num)
                 })
             )
