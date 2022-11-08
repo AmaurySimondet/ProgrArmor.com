@@ -5,7 +5,8 @@ import MusclesCategorie from "./Categories/MusclesCategorie.js";
 import customStyles from "./customStyles.js";
 
 function ExerciceEchauffementInput(props) {
-  const [exercice, setExercice] = useState({name: "", ownExercice: ""});
+
+  const [exercice, setExercice] = useState(props.echauffement);
 
   function handleChange(event){
     if(event.target){
@@ -57,6 +58,7 @@ function ExerciceEchauffementInput(props) {
                   onChange={handleChange}
                   options={lesExercices}
                   styles={customStyles}
+                  value={{value: exercice.name, label: exercice.name}}
               />
             </div>
             <div className="col-sm-1 poubelle-div">
@@ -75,6 +77,7 @@ function ExerciceEchauffementInput(props) {
                       onChange={handleChange}
                       options={MusclesCategorie}
                       styles={customStyles}
+                      value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>
             </div>
@@ -89,6 +92,7 @@ function ExerciceEchauffementInput(props) {
                       onChange={handleChange}
                       options={MusclesCategorie}
                       styles={customStyles}
+                      value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>
             </div>
@@ -103,6 +107,7 @@ function ExerciceEchauffementInput(props) {
                       onChange={handleChange}
                       options={MusclesCategorie}
                       styles={customStyles}
+                      value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>
             </div>
@@ -117,6 +122,7 @@ function ExerciceEchauffementInput(props) {
                       onChange={handleChange}
                       options={MusclesCategorie}
                       styles={customStyles}
+                      value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>
             </div>
@@ -131,6 +137,7 @@ function ExerciceEchauffementInput(props) {
                       onChange={handleChange}
                       options={MusclesCategorie}
                       styles={customStyles}
+                      value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>
             </div>
@@ -145,6 +152,7 @@ function ExerciceEchauffementInput(props) {
                       onChange={handleChange}
                       options={MusclesCategorie}
                       styles={customStyles}
+                      value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>
             </div>

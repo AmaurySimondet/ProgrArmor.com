@@ -13,20 +13,8 @@ import Courbatures from "./Details/Courbatures";
 import customStyles from "./customStyles.js";
 import Select from "react-select";
 
-function createEntry(item) {
-  return (
-    <option
-      key={item.id}
-      className={item.class}
-      value={item.value}
-    >
-      {item.name}
-    </option>
-  );
-}
-
 function DetailInput(props) {
-  const [detail, setDetail] = useState({num: props.num});
+  const [detail, setDetail] = useState(props.detail);
 
   function handleChange(event){
     if(event.target){
@@ -99,6 +87,7 @@ function DetailInput(props) {
                     onChange={handleChange}
                     options={Details}
                     styles={customStyles}
+                    value={{value: detail.name, label: detail.name }}
                 />
                 </div>
 
@@ -115,6 +104,7 @@ function DetailInput(props) {
             onChange={handleChange}
             options={Meteo}
             styles={customStyles}
+            value={{value: detail.input, label: detail.input }}
         />
       :
             <div className="form-group row">
@@ -127,6 +117,7 @@ function DetailInput(props) {
                     onChange={handleChange}
                     options={Meteo}
                     styles={customStyles}
+                    value={{value: detail.input, label: detail.input }}
                 />
                 </div>
 
@@ -142,6 +133,7 @@ function DetailInput(props) {
             onChange={handleChange}
             options={DouleurSeance}
             styles={customStyles}
+            value={{value: detail.input, label: detail.input }}
         />
       :
           <div className="form-group row">
@@ -154,6 +146,7 @@ function DetailInput(props) {
                   onChange={handleChange}
                   options={DouleurSeance}
                   styles={customStyles}
+                  value={{value: detail.input, label: detail.input }}
               />
               </div>
 
@@ -169,6 +162,7 @@ function DetailInput(props) {
             onChange={handleChange}
             options={Fatigue}
             styles={customStyles}
+            value={{value: detail.input, label: detail.input }}
         />
       :
           <div className="form-group row">
@@ -181,6 +175,7 @@ function DetailInput(props) {
                   onChange={handleChange}
                   options={Fatigue}
                   styles={customStyles}
+                  value={{value: detail.input, label: detail.input }}
               />
               </div>
 
@@ -196,6 +191,7 @@ function DetailInput(props) {
             onChange={handleChange}
             options={Preworkout}
             styles={customStyles}
+            value={{value: detail.input, label: detail.input }}
         />
       :
           <div className="form-group row">
@@ -208,6 +204,7 @@ function DetailInput(props) {
                   onChange={handleChange}
                   options={Preworkout}
                   styles={customStyles}
+                  value={{value: detail.input, label: detail.input }}
               />
               </div>
 
@@ -223,6 +220,7 @@ function DetailInput(props) {
             onChange={handleChange}
             options={DRUG}
             styles={customStyles}
+            value={{value: detail.input, label: detail.input }}
         />
       :
           <div className="form-group row">
@@ -235,6 +233,7 @@ function DetailInput(props) {
                   onChange={handleChange}
                   options={DRUG}
                   styles={customStyles}
+                  value={{value: detail.input, label: detail.input }}
               />
               </div>
 
@@ -250,6 +249,7 @@ function DetailInput(props) {
             onChange={handleChange}
             options={Psycho}
             styles={customStyles}
+            value={{value: detail.input, label: detail.input }}
         />
       :
           <div className="form-group row">
@@ -262,6 +262,7 @@ function DetailInput(props) {
                   onChange={handleChange}
                   options={Psycho}
                   styles={customStyles}
+                  value={{value: detail.input, label: detail.input }}
               />
               </div>
 
@@ -277,6 +278,7 @@ function DetailInput(props) {
             onChange={handleChange}
             options={Seul}
             styles={customStyles}
+            value={{value: detail.input, label: detail.input }}
         />
       :
           <div className="form-group row">
@@ -289,6 +291,7 @@ function DetailInput(props) {
                   onChange={handleChange}
                   options={Seul}
                   styles={customStyles}
+                  value={{value: detail.input, label: detail.input }}
               />
               </div>
 
@@ -304,6 +307,7 @@ function DetailInput(props) {
             onChange={handleChange}
             options={Environnement}
             styles={customStyles}
+            value={{value: detail.input, label: detail.input }}
         />
       :
           <div className="form-group row">
@@ -316,6 +320,7 @@ function DetailInput(props) {
                   onChange={handleChange}
                   options={Environnement}
                   styles={customStyles}
+                  value={{value: detail.input, label: detail.input }}
               />
               </div>
 
@@ -331,6 +336,7 @@ function DetailInput(props) {
             onChange={handleChange}
             options={Courbatures}
             styles={customStyles}
+            value={{value: detail.input, label: detail.input }}
         />
       :
           <div className="form-group row">
@@ -343,6 +349,7 @@ function DetailInput(props) {
                   onChange={handleChange}
                   options={Courbatures}
                   styles={customStyles}
+                  value={{value: detail.input, label: detail.input }}
               />
               </div>
 

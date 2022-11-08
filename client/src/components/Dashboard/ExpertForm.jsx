@@ -4,29 +4,35 @@ import axios from 'axios';
 import DateInput from "./DateInput";
 import NameInput from "./NameInput";
 import PoidsInput from "./PoidsInput";
+import Select from "react-select"
+import customStyles from "./customStyles";
 import DetailInput from "./DetailInput";
 import EchauffementInput from "./EchauffementInput";
 import FullExerciceExpertInput from "./FullExerciceExpertInput"
 
+function createId(date){
+    return date.toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36);
+}
+
 function ExpertForm() {
-  const [seance, setSeance] = useState({date: "", poids: "", exercices: {}, nom: ""});
-  const [exercices, setExercices] = useState([]);
-  const [details, setDetails] = useState([]);
-  const [echauffements, setEchauffements] = useState([]);
+  const [seance, setSeance] = useState({date: "", poids: "", exercices: [], nom: {}, echauffements: []});
   const [clickEchauffement, setClickEchauffement] = useState(false);
   const [clickExercices, setClickExercices] = useState(false);
   const [clickDetails, setClickDetails] = useState(false);
+  const [params, setParams] = useState({load: ""});
+  const [data, setData] = useState({date: "", poids: "", exercices: [], nom: {}, echauffements: []});
+  const [listeNoms, setListeNoms] = useState([])
 
   function handleClickEchauffement(){
-    setClickEchauffement(true);
+    setClickEchauffement(!clickEchauffement);
   }
 
   function handleClickExercices(){
-    setClickExercices(true);
+    setClickExercices(!clickExercices);
   }
 
   function handleClickDetails(){
-    setClickDetails(true);
+    setClickDetails(!clickDetails);
   }
 
   async function handleClick() {
@@ -50,12 +56,12 @@ function ExpertForm() {
 
         }
 
-        if (exercices.length === 0){
+        if (seance.exercices.length === 0){
             alert ("Ah bah super ta séance, y a aucun exo !")
 
         }
 
-        exercices.forEach((exercice,index) => {
+        seance.exercices.forEach((exercice,index) => {
             if (Object.keys(exercice.Series).length === 0){
                 alert("Faut avouer qu'un exercice sans série c'est pas commode (exercice "+(index+1)+" "+exercice.exercice.name+") !")
             }
@@ -100,7 +106,7 @@ function ExpertForm() {
             })
         });
 
-        echauffements.forEach((echauffement,index) => {
+        seance.echauffements.forEach((echauffement,index) => {
             if (Object.keys(echauffement.Series).length === 0){
                 alert("Faut avouer qu'un echauffement sans série c'est pas commode (echauffement "+(index+1)+" "+echauffement.echauffement.name+") !")
             }
@@ -145,7 +151,7 @@ function ExpertForm() {
             })
         });
 
-        details.forEach((detail, index) =>{
+        seance.details.forEach((detail, index) =>{
             if (!detail.name || detail.name==='' || detail.input==='' || !detail.input || detail.input==="title"){
                 alert("Ce n'est peut être qu'un détail, mais il est vide !");
             }
@@ -193,134 +199,286 @@ function ExpertForm() {
     })}
 
     function changeExercices(exercice, num){
-        const otherThanSelected =  exercices.filter((exercice, index) => {
+        const otherThanSelected =  seance.exercices.filter((exercice, index) => {
             return index!==(num)
         })
 
-        setExercices([...otherThanSelected, exercice])
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                exercices: [...otherThanSelected, exercice]
+            })
+        })
     }
 
-    useEffect(() => {setSeance(oldSeance => {
-        return ({
-            ...oldSeance,
-            exercices: exercices,
-        });
-    });}, [exercices])
-
-    useEffect(() => {setSeance(oldSeance => {
-        return ({
-            ...oldSeance,
-            details: details,
-        });
-    });}, [details])
-
-    useEffect(() => {setSeance(oldSeance => {
-        return ({
-            ...oldSeance,
-            echauffements: echauffements,
-        });
-    });}, [echauffements])
-
-    function onAddExercices(exercice, num){
+    function onAddExercices(event){
         event.preventDefault();
 
-        const otherThanSelected =  exercices.filter((exercice, index) => {
-            return index!==(num)
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                exercices: [...oldSeance.exercices, {exercice: {name: ""}, Series: {}}]
+            })
         })
-
-        setExercices([...otherThanSelected, exercice])
     }
 
     function onDeleteExercices(num){
         event.preventDefault();
 
-        setExercices(oldExercices => {
-            return(
-                oldExercices.filter((exercice, index) => {
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                exercices: oldSeance.exercices.filter((exercice, index) => {
+                    // console.log(index, num)
                     return index!==(num)
                 })
-            )
+            })
         })
     }
 
     function changeDetail(detail, num){
-        const otherThanSelected =  details.filter((detail, index) => {
+        const otherThanSelected =  seance.details.filter((detail, index) => {
             return index!==(num)
         });
 
-        setDetails([...otherThanSelected, detail]);
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                details: [...otherThanSelected, detail]
+            })
+        })
     }
 
-    function onAddDetail(detail){
+    function onAddDetail(event){
         event.preventDefault();
 
-        setDetails([...details, detail])
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                details: [...oldSeance.details, {}]
+            })
+        })
     }
 
     function onDeleteDetail(num){
         event.preventDefault();
 
-        setDetails(oldDetails => {
-            return(
-                oldDetails.filter((detail, index) => {
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                details: oldSeance.details.filter((detail, index) => {
+                    // console.log(index, num)
                     return index!==(num)
                 })
-            )
+            })
         })
     }
 
-    function changeEchauffements(echauffement, num){
-        const otherThanSelected =  echauffements.filter((echauffement, index) => {
+    function changeEchauffements(detail, num){
+        const otherThanSelected =  seance.echauffements.filter((detail, index) => {
             return index!==(num)
         });
 
-        setEchauffements([...otherThanSelected, echauffement]);
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                echauffements: [...otherThanSelected, detail]
+            })
+        })
     }
 
-    function onAddEchauffements(echauffement){
+    function onAddEchauffements(event){
         event.preventDefault();
 
-        setEchauffements([...echauffements, echauffement])
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                echauffements: [...oldSeance.echauffements, {exercice: {name: ""}, Series: {}}]
+            })
+        })
     }
 
     function onDeleteEchauffements(num){
         event.preventDefault();
 
-        setEchauffements(oldEchauffements => {
-            return(
-                oldEchauffements.filter((echauffement, index) => {
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                echauffements: oldSeance.echauffements.filter((detail, index) => {
+                    // console.log(index, num)
                     return index!==(num)
                 })
-            )
+            })
         })
     }
 
+    async function loadSeance(event){
+        event.preventDefault();
+
+        const {data} = await API.loadSeance(params);
+        if (data.success === false){
+            if (data.message === "Aucune séance !"){
+               console.log(data.message);
+            }
+            else { alert(data.message); }
+        } else {
+            console.log(data.seance)
+            if(data.seance){
+                setSeance({date: "", poids: "", exercices: [], nom: {}, echauffements: []});
+                setData(data.seance)
+            }
+            else{
+                setSeance({date: "", poids: "", exercices: [], nom: {}, echauffements: []});
+            }
+        }
+    }
+
+    function handleChange(event){
+        setParams(oldParams => {
+            return ({
+                ...oldParams,
+                [event.id]: event.value,
+                })
+            });
+      }
+
+    async function getNames(){
+        const {data} = await API.workouts({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
+        if (data.success === false){
+            alert(data.message);
+        } else {
+            let arr = [{label: "/ (défaut)", value:"title"}]
+            data.seances.forEach((seance, index) => {
+                if (seance.nom){
+                    if (seance.nom.ancienNom !== "nouveau-nom"){
+                        if (!arr.includes(seance.nom.ancienNom)){
+                            arr.push({label: seance.nom.ancienNom, value: seance.nom.ancienNom})
+                        }
+                    }
+                    else{
+                        if (!arr.includes(seance.nom.nouveauNom)){
+                            arr.push({label: seance.nom.nouveauNom, value: seance.nom.nouveauNom})
+                        }
+                    }
+                }
+            })
+            arr.push({value:"nouveau-nom", label: "Entrer un nouveau nom de séance..."})
+            setListeNoms(arr);
+        }
+    }
+
+    function handleChangeName(event){
+        console.log(event.value)
+        if(event.target){
+            setSeance(oldSeance => {
+                return ({
+                    ...oldSeance,
+                    nom: {...seance.nom, nouveauNom: event.target.value}
+                })
+            });
+        }
+        else{
+            setSeance(oldSeance => {
+                return ({
+                    ...oldSeance,
+                    nom: {...seance.nom, ancienNom: event.value},
+                })
+            });
+        }
+      }
+
+    useEffect(() => {
+        getNames();
+    }, [] );
+
+    useEffect(()=>{
+        setSeance(data);
+        setClickExercices(true);
+        if (data.echauffements && data.echauffements.length > 0){
+            setClickEchauffement(true);
+        }
+        if (data.details && data.details.length > 0){
+            setClickDetails(true);
+        }
+    }, [data])
 
 
     return(
         <form className="debutant-form">
 
-          <NameInput changeName={changeName}/>
+            <div className="form-group row">
+                <label className="col-sm-2 col-form-label">Séance précédente</label>
+                <div className="col-sm-7">
+                    <Select
+                        placeholder="Séance précédente à charger..."
+                        onChange={handleChange}
+                        options={[
+                            {id: "load", label: "/ (défaut)", value:"title"},
+                            {id: "load", label: "Dernière séance en date", value:"lastDate"},
+                            {id: "load", label: "Dernière séance enregistrée", value:"lastRec"}
+                        ]}
+                        styles={customStyles}
+                    />
+                </div>
+                <div className="col-sm-3">
+                    <button className="btn btn-dark" onClick={loadSeance} type="submit">Charger la séance</button>
+                </div>
+            </div>
 
-          <DateInput changeDate={changeDate}/>
+            <div className="NameInput">
+                <div className="form-group row">
+                    <label className="col-sm-2 col-form-label">
+                    Nom de la séance
+                    </label>
+                    <div className="col-sm-10">
+                    <Select
+                        placeholder="Nom..."
+                        onChange={handleChangeName}
+                        options={listeNoms}
+                        styles={customStyles}
+                        value={{value: seance.nom.ancienNom, label: seance.nom.ancienNom}}
+                    />
+                    </div>
+                </div>
 
-          <PoidsInput changePoids={changePoids}/>
+                {seance.nom.ancienNom === "nouveau-nom" ?
+                    <div className="form-group row">
+                        <label className="col-sm-2 col-form-label">Nom de la séance</label>
+                        <div className="col-sm-5">
+                        <input type="text"
+                            className="form-control"
+                            onChange={handleChangeName}
+                            placeholder="Annihilation des biceps"
+                            id="nouveauNom"
+                            value={seance.nom.nouveauNom}
+                        />
+                        </div>
+                    </div>
+                : null }
+            </div>
+
+          <DateInput key={createId(Date.now())} date={seance.date} changeDate={changeDate}/>
+
+          <PoidsInput key={createId(Date.now())} poids={seance.poids} changePoids={changePoids}/>
+
 
           {clickEchauffement ?
               <div>
                   <p onClick={handleClickEchauffement} className="expert-title"> Echauffement <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
-                  {echauffements ?
-                  echauffements.map((echauffement,index) => {
-                    return(
-                        <EchauffementInput
-                            key={index}
-                            num={index}
-                            poids={seance.poids}
-                            onAddEchauffements={onAddEchauffements}
-                            changeEchauffements={changeEchauffements}
-                            onDeleteEchauffements={onDeleteEchauffements}
-                    />);
-                  })
+                  {seance.echauffements ?
+                    seance.echauffements.map((echauffement,index) => {
+                        return(
+                            <EchauffementInput
+                                key={index}
+                                num={index}
+                                poids={seance.poids}
+                                echauffement={echauffement}
+                                click={echauffement.Categories[0] ? true : false}
+                                onAddEchauffements={onAddEchauffements}
+                                changeEchauffements={changeEchauffements}
+                                onDeleteEchauffements={onDeleteEchauffements}
+                        />);
+                    })
                   : null
                   }
 
@@ -338,12 +496,14 @@ function ExpertForm() {
           {clickExercices ?
               <div>
                   <p onClick={handleClickExercices} className="expert-title"> Exercices <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
-                  {exercices ? exercices.map((exercice,index) => {
+                  {seance.exercices ? seance.exercices.map((exercice,index) => {
                     return(
                         <FullExerciceExpertInput
                             key={index}
                             num={index}
+                            exercice={exercice}
                             poids={seance.poids}
+                            click={exercice.Categories[0] ? true : false}
                             onAddExercices={onAddExercices}
                             changeExercices={changeExercices}
                             onDeleteExercices={onDeleteExercices}
@@ -365,7 +525,7 @@ function ExpertForm() {
           {clickDetails ?
               <div>
                   <p onClick={handleClickDetails} className="expert-title"> Details <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
-                  {details ? details.map((detail,index) => {
+                  {seance.details ? seance.details.map((detail,index) => {
                     return(
                     <div>
                       <hr className="hr-detail"/>
@@ -373,6 +533,7 @@ function ExpertForm() {
                       <DetailInput
                         key={index}
                         num={index}
+                        detail={detail}
                         onAddDetail={onAddDetail}
                         changeDetail={changeDetail}
                         onDeleteDetail={onDeleteDetail}

@@ -1,52 +1,33 @@
 import {React, useState, useEffect} from "react";
-import Select from "./Select";
-import API from "../../utils/API";
+import Select from "react-select"
+import customStyles from "./customStyles";
 
 function NameInput(props) {
-  const [nom, setNom] = useState({});
-  const [listeNoms, setListeNoms] = useState([]);
+  const [nom, setNom] = useState(props.nom);
 
   function handleChange(event){
-    event.preventDefault();
-
-    setNom(oldNom => {
-            return ({
+    if(event.target){
+        setNom(oldNom => {
+        return ({
             ...oldNom,
             [event.target.id]: event.target.value,
-        })});
-  }
-
-  useEffect(() => {
-    props.changeName(nom);
-  }, [nom]);
-
-  async function getNames(){
-    const {data} = await API.workouts({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
-    if (data.success === false){
-        alert(data.message);
-    } else {
-        let arr = []
-        data.seances.forEach((seance, index) => {
-            if (seance.nom){
-                if (seance.nom.ancienNom !== "nouveau-nom"){
-                    if (!arr.includes(seance.nom.ancienNom)){
-                        arr.push(seance.nom.ancienNom)
-                    }
-                }
-                else{
-                    if (!arr.includes(seance.nom.nouveauNom)){
-                        arr.push(seance.nom.nouveauNom)
-                    }
-                }
-            }
-        })
-        setListeNoms(arr);
+            })
+        });
+    }
+    else{
+      setNom(oldNom => {
+        return ({
+            ...oldNom,
+                [event.id]: event.value,
+                })
+            });
     }
   }
 
   useEffect(() => {
-    getNames();
-  }, [] );
+    console.log(nom)
+    props.changeName(nom);
+  }, [nom]);
 
   return (
     <div>
@@ -55,14 +36,19 @@ function NameInput(props) {
               Nom de la séance
             </label>
             <div className="col-sm-10">
-                <select onChange={handleChange} className="custom-select" id="ancienNom">
-                    <option value="title"> / (défaut) </option>
-                    {listeNoms ? listeNoms.map((nom,index) => {
-                        return <option key={index} value={nom}> {nom} </option>
-                    })
-                    : null }
-                    <option value="nouveau-nom"> Entrer un nouveau nom de séance... </option>
-                </select>
+              <Select
+                  placeholder="Nom..."
+                  onChange={handleChange}
+                  options={[
+                    {label: "/ (défaut)", value:"title"},
+                    props.listeNoms.map((nom,index) => {
+                      return {key:{index}, value: nom, label: nom}
+                    }),
+                    {value:"nouveau-nom", label: "Entrer un nouveau nom de séance..."}
+                  ]}
+                  styles={customStyles}
+                  value={{value: nom.ancienNom, label: nom.ancienNom}}
+              />
             </div>
           </div>
 

@@ -1,29 +1,16 @@
 import ExerciceInput from "./ExerciceInput";
 import SerieInput from "./SerieInput";
-import exercices from "./Exercices";
-import Select from "./Select";
 import CategorieInput from "./CategorieInput";
 import {React, useState, useEffect} from "react";
 
-function createEntry(exercicesTerm) {
-  return (
-    <Select
-      key={exercicesTerm.id}
-      class={exercicesTerm.class}
-      name={exercicesTerm.name}
-      value={exercicesTerm.value}
-    />
-  );
-}
-
 function FullExerciceInput(props){
-    const [series, setSeries] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [fullExercice, setFullExercice] = useState({});
-    const [clickExercice, setClickExercice] = useState(false);
+    const [categories, setCategories] = useState([...Object.values(props.exercice.Categories)]);
+    const [series, setSeries] = useState([...Object.values(props.exercice.Series)]);
+    const [fullExercice, setFullExercice] = useState(props.exercice);
+    const [clickExercice, setClickExercice] = useState(props.click);
 
   function handleClickExercice(){
-    setClickExercice(true);
+    setClickExercice(!clickExercice);
 
   }
 
@@ -68,8 +55,13 @@ function FullExerciceInput(props){
     function onCopySerie(event){
         event.preventDefault();
 
-        const last = series[series.length - 1]
-        console.log(last)
+        let last = {}
+        if(series[series.length - 1]){
+            last = series[series.length - 1]
+        }
+        else{
+            last = {typeSerie: "reps", repsTime: "", charge: "", percent: ""}
+        }
 
         setSeries([...series, last])
     }
@@ -128,7 +120,12 @@ function FullExerciceInput(props){
           <div className="exercice-div">
               <hr className="hr-exercice"/>
 
-              <ExerciceInput debutant={false} id="exercice" onClickExercice={handleClickExercice} clickExercice={clickExercice} value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} />
+              <ExerciceInput 
+                debutant={false} id="exercice" onClickExercice={handleClickExercice} 
+                clickExercice={clickExercice} value={fullExercice.exercice} num={props.num} 
+                onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} 
+                key={props.num} exercice={fullExercice.exercice}
+              />
 
 
             {clickExercice ?
@@ -142,6 +139,7 @@ function FullExerciceInput(props){
                           <CategorieInput
                             key={index}
                             num={index}
+                            categorie={categorie}
                             exercice={fullExercice.exercice}
                             changeCategorie={changeCategorie}
                             onDeleteCategorie={onDeleteCategorie}

@@ -1,29 +1,16 @@
 import SerieInput from "./SerieInput";
-import exercices from "./Exercices";
-import Select from "./Select";
 import CategorieInput from "./CategorieInput";
 import {React, useState, useEffect} from "react";
 import ExerciceEchauffementInput from "./ExerciceEchauffementInput";
 
-function createEntry(exercicesTerm) {
-  return (
-    <Select
-      key={exercicesTerm.id}
-      class={exercicesTerm.class}
-      name={exercicesTerm.name}
-      value={exercicesTerm.value}
-    />
-  );
-}
-
 function EchauffementInput(props){
-    const [series, setSeries] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [echauffement, setEchauffement] = useState({});
-    const [clickExercice, setClickExercice] = useState(false);
+    const [series, setSeries] = useState([...Object.values(props.echauffement.Series)]);
+    const [categories, setCategories] = useState([...Object.values(props.echauffement.Categories)]);
+    const [echauffement, setEchauffement] = useState(props.echauffement);
+    const [clickExercice, setClickExercice] = useState(props.click);
 
   function handleClickExercice(){
-    setClickExercice(true);
+    setClickExercice(!clickExercice);
 
   }
 
@@ -123,7 +110,11 @@ function EchauffementInput(props){
           <div className="exercice-div">
               <hr className="hr-exercice"/>
 
-              <ExerciceEchauffementInput id="exercice"  onClickExercice={handleClickExercice} clickExercice={clickExercice} value={echauffement.exercice} num={props.num} onDeleteEchauffements={props.onDeleteEchauffements} changeEchauffement={changeEchauffement} />
+              <ExerciceEchauffementInput 
+                id="exercice" key={props.num} onClickExercice={handleClickExercice} echauffement={echauffement.echauffement}
+                clickExercice={clickExercice} value={echauffement.exercice} num={props.num} 
+                onDeleteEchauffements={props.onDeleteEchauffements} changeEchauffement={changeEchauffement} 
+              />
 
               {clickExercice ?
                 <div>
@@ -136,6 +127,7 @@ function EchauffementInput(props){
                           <CategorieInput
                             key={index}
                             num={index}
+                            categorie={categorie}
                             exercice={echauffement.echauffement}
                             changeCategorie={changeCategorie}
                             onDeleteCategorie={onDeleteCategorie}
@@ -162,6 +154,10 @@ function EchauffementInput(props){
                     num={index}
                     length={series.length}
                     exercice={echauffement.echauffement}
+                    typeSerie={serie.typeSerie}
+                    repsTime={serie.repsTime}
+                    charge={serie.charge}
+                    percent={serie.percent}
                     poids={props.poids}
                     onAddSerie={onAddSerie}
                     changeSerie={changeSerie}

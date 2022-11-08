@@ -103,7 +103,7 @@ function createEntry(item) {
 }
 
 function CategorieInput(props) {
-  const [categorie, setCategorie] = useState({num: props.num});
+  const [categorie, setCategorie] = useState(props.categorie);
   const [streetworkoutHiddenClicked, setStreetworkoutHiddenClicked] = useState("hide");
   const [categorieHiddenClick, setcategorieHiddenClick] = useState('hide')
   const [elastiqueHiddenClick, setElastiqueHiddenClick] = useState('hide')
@@ -213,6 +213,7 @@ function CategorieInput(props) {
                     onChange={handleChange}
                     options={lesCategories}
                     styles={customStyles}
+                    value={{value: categorie.name, label: categorie.name}}
                 />
         :
         <div className="form-group row">
@@ -233,6 +234,7 @@ function CategorieInput(props) {
                     options={lesCategories}
                     styles={customStyles}
                     className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                    value={{value: categorie.name, label: categorie.name}}
                 />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -248,6 +250,7 @@ function CategorieInput(props) {
                 onChange={handleChange}
                 options={Streetworkout}
                 styles={customStyles}
+                value={{value: categorie.input, label: categorie.input}}
             />
         :
             <div className="form-group row">
@@ -268,6 +271,7 @@ function CategorieInput(props) {
                     options={Streetworkout}
                     styles={customStyles}
                     className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                    value={{value: categorie.input, label: categorie.input}}
                 />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -282,6 +286,7 @@ function CategorieInput(props) {
                 onChange={handleChange}
                 options={lesTypesBarres}
                 styles={customStyles}
+                value={{value: categorie.input, label: categorie.input}}
             />
         :
             <div className="form-group row">
@@ -298,6 +303,7 @@ function CategorieInput(props) {
                     options={lesTypesBarres}
                     styles={customStyles}
                     className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                    value={{value: categorie.input, label: categorie.input}}
                 />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -312,6 +318,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={MusclesCategorie}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -328,6 +335,7 @@ function CategorieInput(props) {
                 options={MusclesCategorie}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -342,6 +350,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={PositionCorps}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -358,6 +367,7 @@ function CategorieInput(props) {
                 options={PositionCorps}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -372,6 +382,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={PositionBras}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -388,6 +399,7 @@ function CategorieInput(props) {
                 options={PositionBras}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -402,6 +414,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={PositionJambes}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -418,6 +431,7 @@ function CategorieInput(props) {
                 options={PositionJambes}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -432,6 +446,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={PositionMains}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -448,6 +463,7 @@ function CategorieInput(props) {
                 options={PositionMains}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -462,6 +478,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={PositionPieds}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -478,6 +495,7 @@ function CategorieInput(props) {
                 options={PositionPieds}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -492,6 +510,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={AxeCategorie}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -508,6 +527,7 @@ function CategorieInput(props) {
                 options={AxeCategorie}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -522,6 +542,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={CoudeGenou}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -538,6 +559,7 @@ function CategorieInput(props) {
                 options={CoudeGenou}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -552,6 +574,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={Unilateral}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -568,6 +591,7 @@ function CategorieInput(props) {
                 options={Unilateral}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -582,6 +606,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={Execution}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -598,6 +623,7 @@ function CategorieInput(props) {
                 options={Execution}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -612,6 +638,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={ExecutionSpecifique}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -628,6 +655,7 @@ function CategorieInput(props) {
                 options={ExecutionSpecifique}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -675,6 +703,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={RPE}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -691,6 +720,7 @@ function CategorieInput(props) {
                 options={RPE}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -705,6 +735,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={Douleur}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -721,6 +752,7 @@ function CategorieInput(props) {
                 options={Douleur}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -735,6 +767,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={PriseCategorie}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -751,6 +784,7 @@ function CategorieInput(props) {
                 options={PriseCategorie}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -765,6 +799,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={TempoCategorie}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -781,6 +816,7 @@ function CategorieInput(props) {
                 options={TempoCategorie}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -795,6 +831,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={Partiel}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -811,6 +848,7 @@ function CategorieInput(props) {
                 options={Partiel}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -825,6 +863,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={DépartCategorie}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -841,6 +880,7 @@ function CategorieInput(props) {
                 options={DépartCategorie}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -855,6 +895,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={ExplosifCategorie}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -871,6 +912,7 @@ function CategorieInput(props) {
                 options={ExplosifCategorie}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -885,6 +927,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={Halterophilie}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -901,6 +944,7 @@ function CategorieInput(props) {
                 options={Halterophilie}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
@@ -915,6 +959,7 @@ function CategorieInput(props) {
             onChange={handleChange}
             options={AccessoireObjet}
             styles={customStyles}
+            value={{value: categorie.input, label: categorie.input}}
         />
     :
         <div className="form-group row">
@@ -931,6 +976,7 @@ function CategorieInput(props) {
                 options={AccessoireObjet}
                 styles={customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                value={{value: categorie.input, label: categorie.input}}
             />
 
                 {dashboard ? null : <div className="col-sm-1">
@@ -940,11 +986,21 @@ function CategorieInput(props) {
       : null }
       {categorie.name === "Elastique" ?
         props.info === "false" ?
-            <select onChange={handleChange} style={{height:"38px"}}className="col-sm-10" id="utilisation">
-                <option className="select-title" value="title"> / (défaut) </option>
-                <option value="Resistance"> Résistance </option>
-                <option value="Assistance"> Assistance </option>
-            </select>
+        <div>
+            <Select
+                placeholder="Utilisation..."
+                onChange={handleChange}
+                styles={customStyles}
+                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                options={[
+                    {className:"select-title", value:"title", label:"/ (défaut)"},
+                    {value:"Resistance", label:"Resistance"},
+                    {value:"Assistance", label:"Assistance"}
+                ]}
+                value={{value: categorie.utilisation, label: categorie.utilisation}}
+            />
+            <div style={{height:"38px"}}className="col-sm-10"></div>
+        </div>
         :
           props.dashboard ?
             <div className="form-group row">
@@ -955,11 +1011,18 @@ function CategorieInput(props) {
                               Utilisation
                         </label>
                     }
-                    <select onChange={handleChange} className={props.info === "dash" ? "col-sm-10" : " col-sm-9"} id="utilisation">
-                        <option className="select-title" value="title"> / (défaut) </option>
-                        <option value="Resistance"> Résistance </option>
-                        <option value="Assistance"> Assistance </option>
-                    </select>
+                    <Select
+                        placeholder="Utilisation..."
+                        onChange={handleChange}
+                        styles={customStyles}
+                        className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                        options={[
+                            {className:"select-title", value:"title", label:"/ (défaut)"},
+                            {value:"Resistance", label:"Resistance"},
+                            {value:"Assistance", label:"Assistance"}
+                        ]}
+                        value={{value: categorie.utilisation, label: categorie.utilisation}}
+                    />
 
                     {props.dashboard ? null : <div className="col-sm-1">
                       <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -975,11 +1038,18 @@ function CategorieInput(props) {
                               Utilisation
                         </label>
                     }
-                    <select onChange={handleChange} className={props.info === "dash" ? "col-sm-10" : " col-sm-9"} id="utilisation">
-                        <option className="select-title" value="title"> / (défaut) </option>
-                        <option value="Resistance"> Résistance </option>
-                        <option value="Assistance"> Assistance </option>
-                    </select>
+                    <Select
+                        placeholder="Utilisation..."
+                        onChange={handleChange}
+                        styles={customStyles}
+                        className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                        options={[
+                            {id: "utilisation", className:"select-title", value:"title", label:"/ (défaut)"},
+                            {id: "utilisation", value:"Resistance", label:"Resistance"},
+                            {id: "utilisation", value:"Assistance", label:"Assistance"}
+                        ]}
+                        value={{value: categorie.utilisation, label: categorie.utilisation}}
+                    />
 
                     {props.dashboard ? null : <div className="col-sm-1">
                       <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
@@ -990,12 +1060,17 @@ function CategorieInput(props) {
                     <label className="col-sm-2 col-form-label">
                       Épaisseur / taille élastique
                     </label>
-                    <select onChange={handleChange} className=" col-sm-9" id="input">
-                        {lesElastiques.map(createEntry)}
-                    </select>
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={lesElastiques}
+                        styles={customStyles}
+                        className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                        value={{value: categorie.input, label: categorie.input}}
+                    />
                 </div>
 
-                {categorie.input === "mesure" ?
+            {categorie.input === "mesure" ?
             <div className="form-group row">
                 <label className="col-sm-2 col-form-label">
                   Tension (kg)
@@ -1022,7 +1097,7 @@ function CategorieInput(props) {
                             marginLeft: "1%"
                         }
                         }
-                        defaultValue={100}
+                        defaultValue={parseInt(categorie.tension)}
                         onChange={handleChangeSlider}
                         getAriaValueText={valuetext}
                         aria-labelledby="discrete-slider-custom"

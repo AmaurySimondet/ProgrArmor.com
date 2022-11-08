@@ -87,6 +87,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>
@@ -101,6 +102,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>
@@ -116,6 +118,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>
@@ -130,6 +133,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>
@@ -145,6 +149,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>
@@ -159,6 +164,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>
@@ -174,6 +180,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>
@@ -188,6 +195,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>
@@ -203,6 +211,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>
@@ -217,6 +226,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>
@@ -232,6 +242,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>
@@ -246,6 +257,7 @@ function ExerciceInput(props) {
                                 onChange={handleChange}
                                 options={MusclesCategorie}
                                 styles={customStyles}
+                                value={{value: exercice.muscle, label: exercice.muscle}}
                             />
                         </div>
                     </div>

@@ -195,7 +195,6 @@ function DebutantForm() {
             <PoidsInput key={createId(Date.now())} poids={seance.poids} changePoids={changePoids}/>
 
             {seance.exercices.map((exercice,index) => {
-                    console.log(exercice.exercice.name)
                     return(
                         <FullExerciceInput
                             key={index}
