@@ -335,7 +335,7 @@ function ExpertForm() {
                 setSeance({date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
                 setData(data.seance)
                 setClickExercices(true)
-                if (data.seance.echauffements){
+                if (data.seance.echauffements.length>0){
                     setClickEchauffement(true)
                 }
                 if (data.seance.details.length > 0){

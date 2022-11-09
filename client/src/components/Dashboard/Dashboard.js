@@ -14,6 +14,13 @@ import { red } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
 import Select from 'react-select';
 
+function containsObj(arr, obj){
+    let contains = arr.some(elem =>{
+        return JSON.stringify(obj) === JSON.stringify(elem);
+    });
+    return contains
+}
+
 const GreenSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
     color: red['A700'],
@@ -84,7 +91,6 @@ function Dashboard() {
     const [seances, setSeances] = useState([]);
     const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
     const [listeNoms, setListeNoms] = useState([]);
-    const [listeNomsOptions, setListeNomsOptions] = useState([]);
     const [details, setDetails] = useState([]);
     const [categories, setCategories] = useState([])
     const [params, setParams] = useState({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
@@ -224,51 +230,54 @@ function Dashboard() {
         }
         else { alert(data.message); }
     } else {
+        console.log(data.seances)
         setSeances(data.seances);
     }
   }
 
   useEffect(() => {
+        console.log(params)
         setTimeout(getWorkouts, 50);
   }, [params]);
 
   async function getNames(){
     const {data} = await API.workouts({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
     if (data.success === false){
-        if (data.message === "Aucune séance !"){
-           console.log(data.message);
-        }
-        else { alert(data.message); }
+        alert(data.message);
     } else {
-        let arr = []
+        let arr = [{id:"nom", label: "/ (défaut)", value:"title"}]
+
         data.seances.forEach((seance, index) => {
             if (seance.nom){
                 if (seance.nom.ancienNom !== "nouveau-nom"){
                     if (!arr.includes(seance.nom.ancienNom)){
-                        arr.push(seance.nom.ancienNom)
+                        let obj = {id:"nom", label: seance.nom.ancienNom, value: seance.nom.ancienNom}
+                        if (!containsObj(arr,obj)){
+                            arr.push(obj)
+                        }
                     }
                 }
                 else{
                     if (!arr.includes(seance.nom.nouveauNom)){
-                        arr.push(seance.nom.nouveauNom)
+                        let obj = {id:"nom", label: seance.nom.nouveauNom, value: seance.nom.nouveauNom}
+                        if (!containsObj(arr,obj)){
+                            arr.push(obj)
+                        }
                     }
                 }
             }
         })
+        arr.push({id:"nom", value:"nouveau-nom", label: "Entrer un nouveau nom de séance..."})
         setListeNoms(arr);
     }
-  }
+}
 
   useEffect(() => {
     getNames();
-    setListeNomsOptions(listeNoms => {
-        let arr = [{id:"nom", value:"title", label: "/ (défaut)"}]
-        listeNoms.forEach(nom => arr.push({id:"nom", value: nom, label: nom}))
-        return arr
-    })
   }, [] );
 
   function handleChange(event){
+    console.log(event)
     if(event.target){
         setParams(oldParams => {
         return ({
@@ -513,7 +522,7 @@ function Dashboard() {
                                 <label className="col-form-label">
                                   Exercice
                                 </label>
-                                <ExerciceInput taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                                <ExerciceInput exercice={exercice.exercice} taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
                             </div>
 
                             <div className="form-group col-sm-6">
@@ -547,7 +556,7 @@ function Dashboard() {
                                         <label onClick={handleClick} id={index} className="col-form-label categorie-label">
                                           Catégorie {index+1} <img className="reset-img" onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                         </label>
-                                        <CategorieInput info="dash" click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
+                                        <CategorieInput categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
                                     </div>
                                 </div>
                             )
@@ -560,7 +569,7 @@ function Dashboard() {
                                         <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
                                           Détail {index+1} <img onClick={handleClickDetail} className="reset-img" src={require('../../images/icons/reset.png')} />
                                         </label>
-                                        <DetailInput info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
+                                        <DetailInput detail={details[index]} info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
                                     </div>
                                 </div>
                             )
@@ -572,7 +581,7 @@ function Dashboard() {
                                   Nom
                                 </label>
                                 <Select onChange={handleChange} placeholder="Nom..." id="nom"
-                                    options = {listeNomsOptions}
+                                    options = {listeNoms}
                                     styles={customStyles}
                                 />
                             </div>
@@ -757,7 +766,7 @@ function Dashboard() {
                                         <label className="col-form-label">
                                           Exercice
                                         </label>
-                                        <ExerciceInput taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                                        <ExerciceInput exercice={exercice.exercice} taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
                                     </div>
 
                                     <div className="form-group col-sm-6">
@@ -816,7 +825,7 @@ function Dashboard() {
                                           Nom
                                         </label>
                                         <Select onChange={handleChange} placeholder="Nom..." id="nom"
-                                            options = {listeNomsOptions}
+                                            options = {listeNoms}
                                             styles={customStyles}
                                         />
                                     </div>

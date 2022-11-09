@@ -33,12 +33,12 @@ function DebutantForm() {
             alert ("Tu pèses combien ? Pas de tricherie avec moi tu m'as pas donné ton poids !")
         }
 
-        if (exercices.length === 0 && err === false){
+        if (seance.exercices.length === 0 && err === false){
             err = true;
             alert ("Ah bah super ta séance, y a aucun exo !")
         }
 
-        exercices.forEach(exercice => {
+        seance.exercices.forEach(exercice => {
             if (Object.keys(exercice.Series).length === 0 && err === false){
                 err = true;
                 alert("Faut avouer qu'un exercice sans série c'est pas commode !")
@@ -155,7 +155,13 @@ function DebutantForm() {
             console.log(data.seance)
             if(data.seance){
                 setSeance({date: "", poids: "", exercices: []});
-                setData(data.seance)
+                if (data.seance.echauffements || data.seance.details){
+                    if (data.seance.echauffements.length>0 || data.seance.details.length > 0){
+                        alert("Vous ne pouvez pas charger une séance expert en mode débutant !")
+                }}
+                else{
+                    setData(data.seance)
+                }
             }
             else{
                 setSeance({date: "", poids: "", exercices: []});
