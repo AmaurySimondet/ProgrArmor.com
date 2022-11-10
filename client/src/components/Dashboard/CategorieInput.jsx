@@ -1016,7 +1016,7 @@ function CategorieInput(props) {
                 value={{value: categorie.input, label: categorie.input}}
             />
 
-                {dashboard ? null : <div className="col-sm-1">
+                {props.dashboard ? null : <div className="col-sm-1">
                   <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
