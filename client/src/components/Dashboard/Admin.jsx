@@ -188,7 +188,7 @@ function Admin(){
                     </div>
 
 
-                    <ResponsiveContainer className="piechart" width="100%" height=
+                    <ResponsiveContainer className="piechart watermark-piechart" width="100%" height=
                     {dimensions.width<330 ?
                     100
                     :
