@@ -235,7 +235,7 @@ const variantes = [
   {
     id: "input",
     className: "select-item",
-    label: "A la chaise romaine",
+    label: "A la chaise romaine / table à lombaire",
     value: "A la chaise romaine",
   },
 

@@ -178,7 +178,7 @@ function SerieInput(props) {
               />
             </div>
             <div className="col-sm-2">
-              <input type="number"
+              <input type="text"
                   className="form-control"
                   id="percent"
                   value={serie.percent}

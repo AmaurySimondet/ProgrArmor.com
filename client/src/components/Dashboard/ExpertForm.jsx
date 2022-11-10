@@ -332,14 +332,19 @@ function ExpertForm() {
         } else {
             console.log(data.seance)
             if(data.seance){
-                setSeance({date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
-                setData(data.seance)
-                setClickExercices(true)
-                if (data.seance.echauffements.length>0){
-                    setClickEchauffement(true)
+                if (!data.seance.nom){
+                    alert("Vous ne pouvez pas charger une séance débutant en mode expert !")
                 }
-                if (data.seance.details.length > 0){
-                    setClickDetails(true)
+                else{
+                    setSeance({date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
+                    setData(data.seance)
+                    setClickExercices(true)
+                    if (data.seance.echauffements.length>0){
+                        setClickEchauffement(true)
+                    }
+                    if (data.seance.details.length > 0){
+                        setClickDetails(true)
+                    }
                 }
             }
             else{

@@ -85,7 +85,7 @@ function EchauffementInput(props){
     function onAddCategorie(categorie){
         event.preventDefault();
 
-        setCategories([...categories, categorie])
+        setCategories([...categories, {num: categories.length}])
     }
 
     function onDeleteCategorie(num){

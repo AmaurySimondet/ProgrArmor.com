@@ -155,10 +155,9 @@ function DebutantForm() {
             console.log(data.seance)
             if(data.seance){
                 setSeance({date: "", poids: "", exercices: []});
-                if (data.seance.echauffements || data.seance.details){
-                    if (data.seance.echauffements.length>0 || data.seance.details.length > 0){
-                        alert("Vous ne pouvez pas charger une séance expert en mode débutant !")
-                }}
+                if (data.seance.nom){
+                    alert("Vous ne pouvez pas charger une séance expert en mode débutant !")
+                }
                 else{
                     setData(data.seance)
                 }
