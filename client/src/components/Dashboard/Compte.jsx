@@ -4,6 +4,21 @@ import NavigBar from "../NavigBar.jsx"
 import API from "../../utils/API";
 import Footer from "../Footer.jsx";
 import { Upload } from "upload-js";
+import { alpha, styled } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
+import Switch from '@mui/material/Switch';
+
+const GreenSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: red['A700'],
+    '&:hover': {
+      backgroundColor: alpha(red['A700'], theme.palette.action.hoverOpacity),
+    },
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: red['A700'],
+  },
+}));
 
 function Compte() {
     const upload = Upload({ apiKey: "free" });
@@ -12,6 +27,26 @@ function Compte() {
     const [user, setUser] = useState({})
     const [formInfo, setFormInfo] = useState({})
     const [modifyInfo, setModifyInfo] = useState(false);
+    const [switched, setSwitched] = useState();
+
+    async function updateMode(){
+      if(switched!=user.modeSombre){
+        const res = await API.modifyUser({id: localStorage.getItem("id"), modeSombre: ""+switched})
+        console.log(res)
+
+        window.location = '/compte'
+      }
+    }
+
+    function handleChangeSwitch(event){
+      event.preventDefault();
+
+      setSwitched(!switched);
+    }
+
+    useEffect(()=>{
+      updateMode();
+    },[switched])
 
     async function disconnect() {
         await API.logout();
@@ -54,7 +89,6 @@ function Compte() {
     console.log(formInfo)
     let {fName, lName, email} = formInfo;
 
-    if (user.googleId || user.facebookId) return alert("Les utilisateurs inscrits via un partenaire doivent contacter ce dernier afin de modifier leurs informations !")
     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) return alert("Email au mauvais format !")
     if (!email || email.length === 0) return alert("Aucun email fourni !");
     if (!fName || fName.length === 0) return alert("Aucun prénom fourni !");
@@ -220,6 +254,13 @@ function Compte() {
                                 <Button className="btn btn-dark" onClick={handleClickFormInfo} block="true" type="submit">
                                   Modifier le mot de passe
                                 </Button>
+
+                                <p className="session-div-switch"> 
+                                  Mode clair 
+                                  <GreenSwitch onChange={handleChangeSwitch} checked={!!user.modeSombre}/>
+                                  Mode Sombre 
+                                </p>
+
                             </td>
                         </tr>
                     </tbody>
@@ -256,6 +297,11 @@ function Compte() {
                     <Button className="btn btn-dark" onClick={handleClickFormInfo} block="true" type="submit">
                       Modifier le mot de passe
                     </Button>
+
+                    <p className="session-div-switch"> 
+                      Mode clair 
+                      <GreenSwitch onChange={handleChangeSwitch} checked={!!user.modeSombre}/> 
+                      Mode Sombre </p>
                 </div>
 
                 <Button className="btn btn-dark btn-lg profile-disconnect-btn" onClick={disconnect} block="true" type="submit">

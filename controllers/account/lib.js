@@ -903,11 +903,18 @@ async function modifyUser(req, res) {
     let conditions = {
         _id : id 
     }
+
+    console.log(req.body.modeSombre)
       
     let update = {}
     if(req.body.profilePic){
         update = {
             profilePic : req.body.profilePic,
+        }
+    }
+    if(req.body.modeSombre){
+        update = {
+            modeSombre: req.body.modeSombre,
         }
     }
     else{
@@ -923,7 +930,8 @@ async function modifyUser(req, res) {
            if(error){
              console.log(error)
            }
-           else{ res.json({ success: true, message: "Seance supprimée !"}) }
+           else{ 
+            res.json({ success: true, message: "Utilisateur mis à jour!"}) }
          });
 
     }
@@ -955,6 +963,11 @@ async function getUser(req, res) {
                     if(data[0].facebookId){
                         obj.facebookId = data[0].facebookId
                     }
+                    if(data[0].modeSombre){
+                        obj.modeSombre = data[0].modeSombre
+                    }
+
+                    console.log(obj)
 
                     res.json({ success: true, message: "Utilisateur trouvé !", profile: obj})
                 }

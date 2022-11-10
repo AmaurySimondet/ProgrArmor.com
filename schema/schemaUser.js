@@ -42,6 +42,9 @@ const userSchema = mongoose.Schema(
     profilePic: {
       type: String
     },
+    modeSombre:{
+      type: Boolean
+    },
     seances: Array,
   },
   { timestamps: { createdAt: "created_at" } }
