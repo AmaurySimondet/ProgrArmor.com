@@ -435,12 +435,14 @@ async function workouts(req, res) {
                                 }
                             }
                             else{
-                                arr.push(seances[indexSeance].exercices[indexExercice].exercice.name)
-                                if (string !== "sets"){
-                                    arr2.push(parseFloat(seances[indexSeance].exercices[indexExercice].Series[index].repsTime))
-                                }
-                                else{
-                                    arr2.push(0)
+                                if(!seances[indexSeance].exercices[indexExercice].exercice.muscle){
+                                    arr.push(seances[indexSeance].exercices[indexExercice].exercice.name)
+                                    if (string !== "sets"){
+                                        arr2.push(parseFloat(seances[indexSeance].exercices[indexExercice].Series[index].repsTime))
+                                    }
+                                    else{
+                                        arr2.push(0)
+                                    }
                                 }
                             }
                         }
