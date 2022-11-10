@@ -243,6 +243,43 @@ function CategorieInput(props) {
           </div>
       }
 
+      {categorie.name==="Aucune" ?
+        props.info === "false" ?
+                <Select
+                    placeholder="Categorie..."
+                    onChange={handleChange}
+                    options={lesCategories}
+                    styles={customStyles}
+                    value={{value: categorie.name, label: categorie.name}}
+                />
+        :
+        <div className="form-group row">
+                {props.info === "false" ?
+                    null
+                :
+                    <label className="col-sm-2 col-form-label">
+                          Catégorie {props.dashboard ? props.index+1 : null} ({props.exercice.name})
+                          <img className="myDIV" onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                          <div className={categorieHiddenClick}>
+                              <CategorieHiddenText />
+                          </div>
+                    </label>
+                }
+                <Select
+                    placeholder="Categorie..."
+                    onChange={handleChange}
+                    options={lesCategories}
+                    styles={customStyles}
+                    className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                    value={{value: categorie.name, label: categorie.name}}
+                />
+
+                {props.dashboard ? null : <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>}
+          </div>
+      : null }
+
       {categorie.name === "Variante Street Workout" ?
         props.info === "false" ?
             <Select

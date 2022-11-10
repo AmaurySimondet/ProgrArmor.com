@@ -622,69 +622,89 @@ async function workouts(req, res) {
 
                     //TRI CATEGORIE
                     let del = true;
-                    for(let i=0; i<5; i++){
-                        let catName = "categorie"+i+"name";
-                        let catInput = "categorie"+i+"input";
-                        if (req.query[catName] && req.query[catName] !== "title" && req.query[catName] !== "" && req.query[catName] !== "undefined"){
-                            if (req.query[catName] !== "Elastique"){
-                                seances.map((seance,indexSeance) => {
-                                    return (seance.exercices.map((exercice, indexExercice) => {
-                                        if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
-                                            del = true
-                                            Object.values(exercice.Categories).map((categorie, indexCategorie) => {
-                                                if (categorie.name === req.query[catName] && categorie.input === req.query[catInput]){
-                                                   del = false
-                                                }
-                                            })
-                                            if (del){
-                                                delete seances[indexSeance].exercices[indexExercice]
-                                            }
-                                        }
-                                        else{ delete seances[indexSeance].exercices[indexExercice] }
-                                    }))
-                                })
-                            }
-                            else{
-                                let catUtilisation = "categorie"+i+"utilisation";
-                                seances.map((seance,indexSeance) => {
-                                    return (seance.exercices.map((exercice, indexExercice) => {
-                                        if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
+                    if (req.query.categorie0name === "Aucune"){
+                        seances.map((seance,indexSeance) => {
+                            return (seance.exercices.map((exercice, indexExercice) => {
+                                if(exercice.Categories && Object.entries(exercice.Categories).length !== 0){
+                                    delete delete seances[indexSeance].exercices[indexExercice]
+                                }
+                            }))
+                        })
+                    }
+                    else{
+                        for(let i=0; i<5; i++){
+                            let catName = "categorie"+i+"name";
+                            let catInput = "categorie"+i+"input";
+                            if (req.query[catName] && req.query[catName] !== "title" && req.query[catName] !== "" && req.query[catName] !== "undefined"){
+                                if (req.query[catName] !== "Elastique"){
+                                    seances.map((seance,indexSeance) => {
+                                        return (seance.exercices.map((exercice, indexExercice) => {
+                                            if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
                                                 del = true
                                                 Object.values(exercice.Categories).map((categorie, indexCategorie) => {
-                                                    if (categorie.name === req.query[catName] && categorie.utilisation === req.query[catUtilisation]){
-                                                       del = false
+                                                    if (categorie.name === req.query[catName] && categorie.input === req.query[catInput]){
+                                                    del = false
                                                     }
                                                 })
                                                 if (del){
                                                     delete seances[indexSeance].exercices[indexExercice]
                                                 }
-                                        }
-                                        else{ delete seances[indexSeance].exercices[indexExercice] }
-                                    }))
-                                })
+                                            }
+                                            else{ delete seances[indexSeance].exercices[indexExercice] }
+                                        }))
+                                    })
+                                }
+                                else{
+                                    let catUtilisation = "categorie"+i+"utilisation";
+                                    seances.map((seance,indexSeance) => {
+                                        return (seance.exercices.map((exercice, indexExercice) => {
+                                            if(exercice.Categories && Object.entries(exercice.Categories ).length !== 0){
+                                                    del = true
+                                                    Object.values(exercice.Categories).map((categorie, indexCategorie) => {
+                                                        if (categorie.name === req.query[catName] && categorie.utilisation === req.query[catUtilisation]){
+                                                        del = false
+                                                        }
+                                                    })
+                                                    if (del){
+                                                        delete seances[indexSeance].exercices[indexExercice]
+                                                    }
+                                            }
+                                            else{ delete seances[indexSeance].exercices[indexExercice] }
+                                        }))
+                                    })
+                                }
                             }
                         }
                     }
 
                     //TRI DETAIL
-                    for(let i=0; i<5; i++){
-                        let catName = "detail"+i+"name";
-                        let catInput = "detail"+i+"input";
-                        if (req.query[catName] && req.query[catName] !== "title" && req.query[catName] !== "" && req.query[catName] !== "undefined"){
-                            seances.map((seance,indexSeance) => {
-                                if(seance.details && Object.entries(seance.details).length !== 0){
-                                    del = true
-                                    seance.details.map((detail, indexDetail) => {
-                                        if (detail.name === req.query[catName] && detail.input === req.query[catInput]){
-                                               del = false
+                    if (req.query.detail0name === "Aucun"){
+                        seances.map((seance,indexSeance) => {
+                            if(seance.details && Object.entries(seance.details).length !== 0){
+                                delete seances[indexSeance]
+                            }
+                        })
+                    }
+                    else{
+                        for(let i=0; i<5; i++){
+                            let catName = "detail"+i+"name";
+                            let catInput = "detail"+i+"input";
+                            if (req.query[catName] && req.query[catName] !== "title" && req.query[catName] !== "" && req.query[catName] !== "undefined"){
+                                seances.map((seance,indexSeance) => {
+                                    if(seance.details && Object.entries(seance.details).length !== 0){
+                                        del = true
+                                        seance.details.map((detail, indexDetail) => {
+                                            if (detail.name === req.query[catName] && detail.input === req.query[catInput]){
+                                                del = false
+                                            }
+                                        })
+                                        if (del){
+                                                delete seances[indexSeance]
                                         }
-                                    })
-                                    if (del){
-                                            delete seances[indexSeance]
                                     }
-                                }
-                                else{ delete seances[indexSeance] }
-                            })
+                                    else{ delete seances[indexSeance] }
+                                })
+                            }
                         }
                     }
 

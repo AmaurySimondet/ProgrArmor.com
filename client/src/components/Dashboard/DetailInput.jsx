@@ -97,6 +97,30 @@ function DetailInput(props) {
           </div>
       }
 
+    {detail.name==="Aucun" ?
+          <div className="form-group row">
+                {props.info==="false" ? null :
+                  <label className="col-sm-2 col-form-label">
+                      Detail {props.dashboard ? props.index+1 : null}
+                </label>
+                } 
+
+                <div className={props.info===true ? "col-sm-10" : props.info==="false" ? "col-sm-12" : "col-sm-9"}>
+                <Select
+                    placeholder="Detail..."
+                    onChange={handleChange}
+                    options={Details}
+                    styles={customStyles}
+                    value={{value: detail.name, label: detail.name }}
+                />
+                </div>
+
+                {props.dashboard ? null : <div className="col-sm-1">
+                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                </div>}
+          </div>
+      : null }
+
       {detail.name === "Condition météorologique défavorable" ?
         props.info === "false" ?
         <Select

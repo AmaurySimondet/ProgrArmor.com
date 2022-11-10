@@ -8,6 +8,12 @@ const detail = [
   {
     id: "name",
     className: "select-item",
+    label: "Aucun",
+    value: "Aucun",
+  },
+  {
+    id: "name",
+    className: "select-item",
     label: "Condition météorologique défavorable",
     value: "Condition météorologique défavorable",
   },
