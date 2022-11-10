@@ -94,8 +94,6 @@ function Dashboard() {
     const [details, setDetails] = useState([]);
     const [categories, setCategories] = useState([])
     const [params, setParams] = useState({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""});
-    const [categorieNumb, setCategorieNumb] = useState(0)
-    const [detailNumb, setDetailNumb] = useState(0)
     const [categoriesAddRien, setCategoriesAddRien] = useState([])
     const [detailsAddRien, setDetailsAddRien] = useState([])
     const [checkbox, setCheckbox] = useState({affichageCharge: true, affichageReps: true, affichageSérie: false, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: false, affichagePercent: true, affichagePoids: false, affichageModif: false, affichageSuppr: false});
@@ -165,23 +163,30 @@ function Dashboard() {
     }
 
     function handleChangeSliderCategorie(event){
-        setCategorieNumb(event.target.value);
         let arr = [];
+        let arr2 = [];
+
         for(let i=0; i<event.target.value; i++){
             arr.push("rien");
+            arr2.push({name: "", num: i})
         };
+
         setCategoriesAddRien(arr);
+        setCategories(arr2)
 
     }
 
     function handleChangeSliderDetail(event){
-        setDetailNumb(event.target.value);
         let arr = [];
+        let arr2 = [];
+
         for(let i=0; i<event.target.value; i++){
             arr.push("rien");
+            arr2.push({name: "", num: i})
         };
+        
         setDetailsAddRien(arr);
-
+        setDetails(arr2)
     }
 
   async function getWorkouts(){
@@ -408,6 +413,8 @@ function Dashboard() {
                 categories: categories
             })
         })
+
+        console.log(categories)
     },[categories]);
 
     useEffect(() => {
@@ -436,8 +443,6 @@ function Dashboard() {
         setClickedDetail([true,true,true,true,true])
         setCategoriesAddRien([])
         setDetailsAddRien([])
-        setCategorieNumb(0)
-        setDetailNumb(0)
         setParams({nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: ""})
     }
 
@@ -464,7 +469,9 @@ function Dashboard() {
 
       
 
-      {seances.length===0 ? <Bienvenue /> :
+      {seances.length===0 ? 
+        <Bienvenue /> 
+      :
       dimensions.width<925 ?
               <div className="Dashboard">
 
@@ -472,13 +479,13 @@ function Dashboard() {
 
                 <form className="debutant-form">
                     <h2
-                    onClick={handleClickFiltrage}>
-                    Filtrage
-                    {clickFiltrage ?
-                        <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
-                      :
-                        <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
-                    }
+                        onClick={handleClickFiltrage}>
+                        Filtrage
+                        {clickFiltrage ?
+                            <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                        :
+                            <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                        }
                     </h2>
 
                     {clickFiltrage ?
@@ -800,7 +807,7 @@ function Dashboard() {
                                                 <label onClick={handleClick} id={index} className="col-form-label categorie-label">
                                                   Catégorie {index+1} <img onClick={handleClickDetail} className="reset-img" src={require('../../images/icons/reset.png')} />
                                                 </label>
-                                                <CategorieInput info="dash" click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
+                                                <CategorieInput categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
                                             </div>
                                         </div>
                                     )
@@ -813,7 +820,7 @@ function Dashboard() {
                                                 <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
                                                   Détail {index+1} <img onClick={handleClickDetail} className="reset-img" src={require('../../images/icons/reset.png')} />
                                                 </label>
-                                                <DetailInput info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
+                                                <DetailInput detail={details[index]} info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
                                             </div>
                                         </div>
                                     )
