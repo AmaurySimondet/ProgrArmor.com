@@ -161,7 +161,7 @@ function SerieInput(props) {
                 </select>
             </div>
             <div className="col-sm-2">
-              <input type="text"
+              <input type="number"
                   className="form-control"
                   id="repsTime"
                   value={serie.repsTime}
@@ -170,7 +170,7 @@ function SerieInput(props) {
             </div>
             <label className="col-sm-1 col-form-label">Charge totale (kg)</label>
             <div className="col-sm-2">
-              <input type="text"
+              <input type="number"
                   className="form-control"
                   id="charge"
                   value={serie.charge}
@@ -178,7 +178,7 @@ function SerieInput(props) {
               />
             </div>
             <div className="col-sm-2">
-              <input type="percent"
+              <input type="number"
                   className="form-control"
                   id="percent"
                   value={serie.percent}

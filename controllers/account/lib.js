@@ -271,9 +271,11 @@ async function loadSeance(req, res) {
                         nomSeance = req.query.load.slice(8, req.query.load.length)
 
                         seances.forEach((seanceIter, index) => {
-                            if (seanceIter.nom.nouveauNom === nomSeance || seanceIter.nom.ancienNom === nomSeance){
-                                seance = seanceIter
-                            }
+                            if(seanceIter.nom){
+                                if (seanceIter.nom.nouveauNom === nomSeance || seanceIter.nom.ancienNom === nomSeance){
+                                    seance = seanceIter
+                                }
+                            }    
                         })
                     }
 
@@ -285,9 +287,11 @@ async function loadSeance(req, res) {
                         seances = seances.sort(sortDateCroissant);
 
                         seances.forEach((seanceIter, index) => {
-                            if (seanceIter.nom.nouveauNom === nomSeance || seanceIter.nom.ancienNom === nomSeance){
-                                seance = seanceIter
-                            }
+                            if(seanceIter.nom){
+                                if (seanceIter.nom.nouveauNom === nomSeance || seanceIter.nom.ancienNom === nomSeance){
+                                    seance = seanceIter
+                                }
+                            }  
                         })
                     }
 

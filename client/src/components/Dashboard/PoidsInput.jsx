@@ -41,7 +41,7 @@ function PoidsInput(props) {
             </label>
             <div className="col-sm-10">
               <input
-                  type="poids"
+                  type="number"
                   className="form-control"
                   placeholder="120"
                   value={poids}

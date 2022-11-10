@@ -316,7 +316,7 @@ function Stats() {
 
                                     <p> Evolution du poids sur la période {params1.periode} </p>
 
-                                    <ResponsiveContainer width="100%" height={dimensions.width<925 ? 280 : 400} className="chart">
+                                    <ResponsiveContainer width="100%" height={dimensions.width<925 ? 280 : 400} className="chart watermark">
                                         <LineChart
                                             data={seances1}
                                             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
@@ -421,11 +421,47 @@ function Stats() {
                                         />
                                     </div>
 
-                                    <p>
-                                        {params2.exerciceName==="title" ? "Tous les exercices" : null}
+                                    <p className="chart-little-title">
+                                        Evolution de tes performances en 
+                                        {typePerfGraph==="percent" ? 
+                                            " % du poids du corps "
+                                        :
+                                            " charge "
+                                        }
+                                        de : 
                                     </p>
 
-                                    <ResponsiveContainer width="100%" height={400} className="chart">
+                                    <p>
+                                        {params2.exerciceName==="title" ? 
+                                            "tous les exercices, "
+                                        : params2.exerciceMuscle!=="" ?
+                                            params2.exerciceName + " - " + params2.exerciceMuscle + ", "
+                                        :
+                                            params2.exerciceName+", "
+                                        }
+
+                                        {params2.categorie0name ?
+                                            params2.categorie0name === "Aucune" ?
+                                                "aucune catégorie - "
+                                            :
+                                                params2.categorie0input + ", "
+                                        :
+                                            "toutes catégories, "
+                                        }
+
+                                        {params2.detail0name ?
+                                            params2.detail0name === "Aucun" ?
+                                                "aucun détail, "
+                                            :
+                                                params2.detail0input + ", "
+                                        :
+                                            "tout détail, "
+                                        }
+
+                                        sur la période {params2.periode}
+                                    </p>
+
+                                    <ResponsiveContainer width="100%" height={400} className="chart watermark">
                                         <ComposedChart
                                             width={400}
                                             height={400}
@@ -548,8 +584,8 @@ function Stats() {
                                         />
                                     </div>
 
-                                    <p>
-                                        Performances en 
+                                    <p className="chart-little-title">
+                                        Evolution de tes performances en 
                                         {typePerfGraph==="percent" ? 
                                             " % du poids du corps "
                                         :
@@ -560,7 +596,7 @@ function Stats() {
 
                                     <p>
                                         {params2.exerciceName==="title" ? 
-                                            "Tous les exercices, "
+                                            "tous les exercices, "
                                         : params2.exerciceMuscle!=="" ?
                                             params2.exerciceName + " - " + params2.exerciceMuscle + ", "
                                         :
@@ -569,27 +605,26 @@ function Stats() {
 
                                         {params2.categorie0name ?
                                             params2.categorie0name === "Aucune" ?
-                                                "Aucune catégorie - "
+                                                "aucune catégorie - "
                                             :
                                                 params2.categorie0input + ", "
                                         :
-                                            "Toutes catégories, "
+                                            "toutes catégories, "
                                         }
 
                                         {params2.detail0name ?
                                             params2.detail0name === "Aucun" ?
-                                                "Aucun détail, "
+                                                "aucun détail, "
                                             :
                                                 params2.detail0input + ", "
                                         :
-                                            "Tout détail, "
+                                            "tout détail, "
                                         }
 
-
-                                        sur la période {params1.periode}
+                                        sur la période {params2.periode}
                                     </p>
 
-                                    <ResponsiveContainer width="100%" height={dimensions.width<925 ? 280 : 400} className="chart">
+                                    <ResponsiveContainer width="100%" height={dimensions.width<925 ? 280 : 400} className="chart watermark">
                                         <ComposedChart
                                             width={400}
                                             height={400}
@@ -672,8 +707,22 @@ function Stats() {
                         </div>
                     </div>
 
+                    <p style={{marginBottom: "0"}}>
+                        Top {params3.top} de tes exercices préférés classés par 
+                        {params3.class==="reps" ?
+                            " répétitions "
+                        :
+                        params3.class==="sets" ?
+                            " séries "
+                        :
+                        params3.class==="time" ?
+                            " temps (secondes) "
+                        : null
+                        } 
+                        sur la période {params3.periode}
+                    </p>
 
-                    <ResponsiveContainer className="piechart" width="100%" height=
+                    <ResponsiveContainer className="piechart watermark-piechart" width="100%" height=
                     {dimensions.width<330 ?
                     100
                     :
