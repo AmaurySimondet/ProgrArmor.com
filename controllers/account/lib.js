@@ -505,11 +505,6 @@ async function workouts(req, res) {
         }
     }
 
-    function sortExerciceFav(b,a) {
-        return a.repsTime - b.repsTime;
-
-    }
-
     function removeEmptyPoids(seance) {
       return (
           Object.fromEntries(Object.entries(seance).filter(([_, element]) => {
@@ -581,6 +576,21 @@ async function workouts(req, res) {
                         numSeances = seances.length;
                         numSeanceDay = seancesDay.length
                         // console.log(seances)
+                    }
+
+                    //TRI NOM
+                    if (req.query.nom !== "" && req.query.nom !== "title"){
+                        seances.map((seance, indexSeance) => {
+                            console.log(seance.nom, req.query.nom)
+                            if(seance.nom){
+                                if (seance.nom.ancienNom !== req.query.nom && seance.nom.nouveauNom !== req.query.nom){
+                                    delete seances[indexSeance]
+                                }
+                            }
+                            else{
+                                delete seances[indexSeance]
+                            }
+                        })
                     }
 
                     //TRI EXERCICE
