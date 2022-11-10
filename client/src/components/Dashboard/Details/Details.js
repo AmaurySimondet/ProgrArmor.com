@@ -2,7 +2,7 @@ const detail = [
   {
     id: "name",
     className: "select-title",
-    label: "/ (défaut)",
+    label: "Tous (défaut)",
     value: "title",
   },
   {

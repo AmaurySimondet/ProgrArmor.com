@@ -747,6 +747,7 @@ function Dashboard() {
                                             {id:"tri", label:"%PDC (ordre décroissant)", value:"PDC (ordre décroissant)"}
                                             ]}
                                             styles={customStyles}
+                                            value = {{label: params.tri, value: params.tri}}
                                         />
                                     </div>
 
@@ -764,6 +765,7 @@ function Dashboard() {
                                             {id:"periode", label:"Depuis 1 an", value:"1y"}
                                             ]}
                                             styles={customStyles}
+                                            value = {{label: params.periode, value: params.periode}}
                                         />
                                     </div>
                                 </div>
@@ -833,7 +835,8 @@ function Dashboard() {
                                         </label>
                                         <Select onChange={handleChange} placeholder="Nom..." id="nom"
                                             options = {listeNoms}
-                                            styles={customStyles}
+                                            styles = {customStyles}
+                                            value = {{label: params.nom, value: params.nom}}
                                         />
                                     </div>
 
@@ -871,7 +874,7 @@ function Dashboard() {
                                                 width: "70%",
                                             }
                                             }
-                                            defaultValue={0}
+                                            defaultValue={categories.length}
                                             onChange={handleChangeSliderCategorie}
                                             getAriaValueText={valuetext}
                                             aria-labelledby="discrete-slider-custom"
@@ -893,7 +896,7 @@ function Dashboard() {
                                                 width: "70%",
                                             }
                                             }
-                                            defaultValue={0}
+                                            defaultValue={details.length}
                                             onChange={handleChangeSliderDetail}
                                             getAriaValueText={valuetext}
                                             aria-labelledby="discrete-slider-custom"
@@ -1059,6 +1062,7 @@ function Dashboard() {
                                                 {checkbox.affichageExercice ?
                                                     <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                         {exercice.exercice.name==="own-exercice" ? exercice.exercice.ownExercice : exercice.exercice.name}
+                                                        {exercice.exercice.muscle ? " - "+exercice.exercice.muscle : null}
                                                     </td>
                                                 : null }
                                                 {categoriesAddRien.map((rien,index) => {

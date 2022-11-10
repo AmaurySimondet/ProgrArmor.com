@@ -796,27 +796,38 @@ async function workouts(req, res) {
                     }
 
                     //STATS REFORME
+                    let percentMax = 0;
+                    let chargeMax = 0;
                     if(req.query.reforme==="true"){
                         let arr = []
                         seances.forEach(seance => {
                             arr.push(removeEmpty(seance))
                         });
 
+                        //to perf
                         seances = seancesToPerformances(seances, 10);
 
+                        //nettoyage
                         arr = []
                         seances.forEach(seance => {
                             arr.push(removeEmpty(seance))
                         });
-
                         seances = arr.filter(seance => {
                             return (Object.entries(seance).length !== 0 && seance.exercices)
                         });
 
+                        //percent en float et recuperation chargemax percentmax
+                        arr = []
+                        let arr2 = []
                         seances.forEach(seance => {
                             seance.exercices[0].Series[0].percent = parseFloat(seance.exercices[0].Series[0].percent);
+                            arr.push(parseFloat(seance.exercices[0].Series[0].percent))
+                            arr2.push(parseFloat(seance.exercices[0].Series[0].charge))
                         });
+                        chargeMax = Math.max(...arr2)
+                        percentMax = Math.max(...arr)
 
+                        //elastique en float
                         seances.forEach(seance => {
                             for(let k=0; k<5; k++){
                                 if(seance.exercices[0].Categories && seance.exercices[0].Categories[k] && seance.exercices[0].Categories[k].estimation){
@@ -840,6 +851,8 @@ async function workouts(req, res) {
                     }
 
                     //STATS REFORME poids
+                    let poidsMax = 0;
+                    let poidsMin = 0;
                     if(req.query.reforme==="poids"){
                         let arr = []
                         seances.forEach(seance => {
@@ -850,6 +863,10 @@ async function workouts(req, res) {
                             return Object.entries(element).length !== 0
                         });
 
+                        arr = []
+                        seances.forEach((seance)=>{arr.push(parseFloat(seance.poids))})
+                        poidsMax = Math.max(...arr)
+                        poidsMin = Math.min(...arr)
                     }
 
                     //STATS REFORME poids
@@ -858,10 +875,13 @@ async function workouts(req, res) {
                         seances = seances.sort((a,b) => {return b.repsTime - a.repsTime})
                     }
 
-                    res.json({ success: true, message: "Utilisateur trouvé !", 
-                    seances: seances, numSeanceDay: numSeanceDay, 
-                    numUsers: numUsers, numSeances: numSeances, 
-                    numActiveUsers: numActiveUsers, ownExercices: ownExercices
+                    res.json({ 
+                        success: true, message: "Utilisateur trouvé !", 
+                        seances: seances, numSeanceDay: numSeanceDay, 
+                        numUsers: numUsers, numSeances: numSeances, 
+                        numActiveUsers: numActiveUsers, ownExercices: ownExercices,
+                        poidsMax: poidsMax, poidsMin: poidsMin, chargeMax: chargeMax,
+                        percentMax: percentMax
                     })
                 }
           });

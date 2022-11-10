@@ -39,6 +39,10 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
+function formatYAxis(value) {
+    return value+"%"
+}
+
 let renderLabel = function(entry) {
     if(typeof(entry.name) !== "number"){
         return entry.name;
@@ -54,6 +58,8 @@ function Stats() {
     const [categorie, setCategorie] = useState({num: 0})
     const [detail, setDetail] = useState({num: 0})
     const [clicked, setClicked] = useState(false)
+    const [infoPoids, setInfoPoids] = useState({})
+    const [infoPerf, setInfoPerf] = useState({})
     const [clickedDetail, setClickedDetail] = useState(false)
     const [exercice, setExercice] = useState({exercice: {name: "title", ownExercice: ""}});
     const [params3, setParams3] = useState({top: 5, class: "reps", date: "md", reforme: "pie", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title",exerciceOwnExercice: ""})
@@ -98,6 +104,7 @@ function Stats() {
         } else {
             if(data.seances){
                 setSeances1(data.seances);
+                setInfoPoids({poidsMin: data.poidsMin, poidsMax: data.poidsMax})
             }
         }
     }
@@ -112,6 +119,7 @@ function Stats() {
         } else {
             if(data.seances){
                 setSeances2(data.seances);
+                setInfoPerf({chargeMax: data.chargeMax, percentMax: data.percentMax})
             }
 //            console.log(data.seances);
         }
@@ -178,7 +186,7 @@ function Stats() {
         }
     },[exercice]);
 
-    function changeTypePerfGraph(){
+    function changeTypePerfGraph(event){
         setTypePerfGraph(event.target.value)
 
     }
@@ -306,13 +314,15 @@ function Stats() {
                                         </div>
                                     </div>
 
+                                    <p> Evolution du poids sur la période {params1.periode} </p>
+
                                     <ResponsiveContainer width="100%" height={dimensions.width<925 ? 280 : 400} className="chart">
                                         <LineChart
                                             data={seances1}
                                             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
                                         >
                                             <XAxis dataKey="date" />
-                                            <YAxis domain={[25, 150]}/>
+                                            <YAxis domain={[parseInt(infoPoids.poidsMin*0.98), parseInt(infoPoids.poidsMax*1.02)]}/>
                                             <Tooltip content={<CustomTooltip />}/>
                                             <CartesianGrid stroke="#f5f5f5" />
                                             <Line connectNulls type="monotone" dataKey="poids" stroke="#ff0000" />
@@ -411,6 +421,10 @@ function Stats() {
                                         />
                                     </div>
 
+                                    <p>
+                                        {params2.exerciceName==="title" ? "Tous les exercices" : null}
+                                    </p>
+
                                     <ResponsiveContainer width="100%" height={400} className="chart">
                                         <ComposedChart
                                             width={400}
@@ -419,7 +433,13 @@ function Stats() {
                                             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
                                         >
                                             <XAxis dataKey="date" />
-                                            <YAxis domain={[0, 300]} />
+                                            <YAxis domain={typePerfGraph==="percent" ? 
+                                                [0, parseInt(infoPerf.percentMax*1.02)]
+                                            : 
+                                                [0, parseInt(infoPerf.chargeMax*1.02)]
+                                            }
+                                                tickFormatter={typePerfGraph==="percent" ? formatYAxis : null }
+                                            />
                                             <Tooltip content={<CustomTooltip />} />
                                             <CartesianGrid stroke="#f5f5f5" />
                                             <Bar barSize={20} fill="#afafaf" dataKey="exercices[0].Series[0].repsTime" />
@@ -528,6 +548,47 @@ function Stats() {
                                         />
                                     </div>
 
+                                    <p>
+                                        Performances en 
+                                        {typePerfGraph==="percent" ? 
+                                            " % du poids du corps "
+                                        :
+                                            " charge "
+                                        }
+                                        de : 
+                                    </p>
+
+                                    <p>
+                                        {params2.exerciceName==="title" ? 
+                                            "Tous les exercices, "
+                                        : params2.exerciceMuscle!=="" ?
+                                            params2.exerciceName + " - " + params2.exerciceMuscle + ", "
+                                        :
+                                            params2.exerciceName+", "
+                                        }
+
+                                        {params2.categorie0name ?
+                                            params2.categorie0name === "Aucune" ?
+                                                "Aucune catégorie - "
+                                            :
+                                                params2.categorie0input + ", "
+                                        :
+                                            "Toutes catégories, "
+                                        }
+
+                                        {params2.detail0name ?
+                                            params2.detail0name === "Aucun" ?
+                                                "Aucun détail, "
+                                            :
+                                                params2.detail0input + ", "
+                                        :
+                                            "Tout détail, "
+                                        }
+
+
+                                        sur la période {params1.periode}
+                                    </p>
+
                                     <ResponsiveContainer width="100%" height={dimensions.width<925 ? 280 : 400} className="chart">
                                         <ComposedChart
                                             width={400}
@@ -536,7 +597,13 @@ function Stats() {
                                             margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
                                         >
                                             <XAxis dataKey="date" />
-                                            <YAxis domain={[0, 300]} />
+                                            <YAxis domain={typePerfGraph==="percent" ? 
+                                                [0, parseInt(infoPerf.percentMax*1.02)]
+                                            : 
+                                                [0, parseInt(infoPerf.chargeMax*1.02)]
+                                            }
+                                                tickFormatter={typePerfGraph==="percent" ? formatYAxis : null }
+                                            />
                                             <Tooltip content={<CustomTooltip />} />
                                             <CartesianGrid stroke="#f5f5f5" />
                                             <Bar barSize={20} fill="#afafaf" dataKey="exercices[0].Series[0].repsTime" />
