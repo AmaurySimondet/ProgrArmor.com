@@ -11,9 +11,9 @@ function createId(date){
 }
 
 function DebutantForm() {
-  const [seance, setSeance] = useState({date: "", poids: "", exercices: []});
+  const [seance, setSeance] = useState({id: createId(Date.now()), date: "", poids: "", exercices: []});
   const [params, setParams] = useState({load: ""});
-  const [data, setData] = useState({date: "", poids: "", exercices: []});
+  const [data, setData] = useState({id: createId(Date.now()), date: "", poids: "", exercices: []});
 
   async function handleClick() {
         event.preventDefault();
@@ -45,7 +45,7 @@ function DebutantForm() {
             }
 
             Object.values(exercice.Series).forEach(serie => {
-                if (serie.repsTime==='' || serie.charge==='' && err === false){
+                if (serie.repsTime==='' || serie.charge==='' || !serie.repsTime || !serie.charge && err === false){
                     err = true;
                     alert("Une serie n'est pas remplie !")
                 }
@@ -63,25 +63,27 @@ function DebutantForm() {
         });
 
         //API
-        try {
-          const { data } = await API.debutantform({seance: seance, id: localStorage.getItem("id")});
-          if (data.success === true){
-            window.location = "/dashboard";
-          }else{
-            alert(data.message);
-          }
-        } catch (error) {
-          alert(error);
+        if(err===false){
+            // try {
+            // const { data } = await API.debutantform({seance: seance, id: localStorage.getItem("id")});
+            // if (data.success === true){
+            //     window.location = "/dashboard";
+            // }else{
+            //     alert(data.message);
+            // }
+            // } catch (error) {
+            // alert(error);
+            // }
         }
     }
 
-    function changeDate(date){
+    function handleChangeDate(event){
         event.preventDefault();
 
         setSeance(oldSeance => {
             return ({
             ...oldSeance,
-            date: date,
+            date: event.target.value,
         });
     })}
 
@@ -96,8 +98,9 @@ function DebutantForm() {
     })}
 
     function changeExercices(exercice, num){
+
         const otherThanSelected =  seance.exercices.filter((exercice, index) => {
-            return index!==(num)
+            return exercice.num!==(num)
         })
 
         setSeance(oldSeance => {
@@ -114,21 +117,27 @@ function DebutantForm() {
         setSeance(oldSeance => {
             return ({
                 ...oldSeance,
-                exercices: [...oldSeance.exercices, {exercice: {name: ""}, Series: {}}]
+                exercices: [...oldSeance.exercices, {exercice: {name: ""}, Series: {}, num: seance.exercices.length}]
             })
         })
     }
 
     function onDeleteExercices(num){
-        event.preventDefault();
+
+        const beforeSelected =  seance.exercices.filter((exercice, index) => {
+            return exercice.num<(num)
+        })
+
+        const afterSelected =  seance.exercices.filter((exercice, index) => {
+            return exercice.num>(num)
+        })
+
+        console.log([...beforeSelected, ...afterSelected.map((ex)=>{return {...ex, num: ex.num-1}})])
 
         setSeance(oldSeance => {
             return ({
                 ...oldSeance,
-                exercices: oldSeance.exercices.filter((exercice, index) => {
-                    // console.log(index, num)
-                    return index!==(num)
-                })
+                exercices: [...beforeSelected, ...afterSelected.map((ex)=>{return {...ex, num: ex.num-1}})]
             })
         })
     }
@@ -154,7 +163,7 @@ function DebutantForm() {
         } else {
             console.log(data.seance)
             if(data.seance){
-                setSeance({date: "", poids: "", exercices: []});
+                setSeance({id: createId(Date.now()), date: "", poids: "", exercices: []});
                 if (data.seance.nom){
                     alert("Vous ne pouvez pas charger une séance expert en mode débutant !")
                 }
@@ -163,7 +172,7 @@ function DebutantForm() {
                 }
             }
             else{
-                setSeance({date: "", poids: "", exercices: []});
+                setSeance({id: createId(Date.now()), date: "", poids: "", exercices: []});
             }
         }
     }
@@ -172,6 +181,14 @@ function DebutantForm() {
         setSeance(data)
     }, [data])
 
+    useEffect(()=>{
+        setSeance(oldSeance =>{
+            return ({
+                ...oldSeance,
+                exercices: seance.exercices.sort((a,b)=>{return a.num - b.num})
+            })
+        })
+    },[seance.exercices])
 
     return(
         <form className="debutant-form">
@@ -195,15 +212,25 @@ function DebutantForm() {
                 </div>
             </div>
 
-            <DateInput key={createId(Date.now())} date={seance.date} changeDate={changeDate}/>
+          <div className="DateInput form-group row">
+            <label className="col-sm-2 col-form-label">Date</label>
+            <div className="col-sm-10">
+              <input type="date"
+                  className="form-control"
+                  value={seance.date}
+                  onChange={handleChangeDate}
+                  id="date"
+              />
+            </div>
+          </div>
 
-            <PoidsInput key={createId(Date.now())} poids={seance.poids} changePoids={changePoids}/>
+            <PoidsInput key={seance.id} poids={seance.poids} changePoids={changePoids}/>
 
             {seance.exercices.map((exercice,index) => {
                     return(
                         <FullExerciceInput
-                            key={index}
-                            num={index}
+                            key={exercice.num}
+                            num={exercice.num}
                             exercice={exercice}
                             poids={seance.poids}
                             onAddExercices={onAddExercices}

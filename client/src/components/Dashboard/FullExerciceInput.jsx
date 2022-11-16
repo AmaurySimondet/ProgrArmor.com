@@ -7,6 +7,11 @@ function FullExerciceInput(props){
     const [series, setSeries] = useState([...Object.values(props.exercice.Series)]);
     const [fullExercice, setFullExercice] = useState(props.exercice);
 
+    console.log("fullExercice")
+    console.log(fullExercice)
+    console.log("props.exercice")
+    console.log(props.exercice)
+
     function changeExercice(exercice){
         setFullExercice(oldFullExercice => {
             return ({

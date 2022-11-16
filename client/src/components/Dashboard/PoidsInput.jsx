@@ -11,7 +11,7 @@ function PoidsInput(props) {
     } else { setClicked("hide")};
   }
 
-  function handleChange(){
+  function handleChange(event){
     event.preventDefault();
 
     setPoids(event.target.value);

@@ -903,8 +903,6 @@ async function modifyUser(req, res) {
     let conditions = {
         _id : id 
     }
-
-    console.log(req.body.modeSombre)
       
     let update = {}
     if(req.body.profilePic){
@@ -917,16 +915,20 @@ async function modifyUser(req, res) {
             modeSombre: req.body.modeSombre,
         }
     }
-    else{
+    if(req.body.fName && req.body.lName && req.body.email){
         update = {
             fName : req.body.fName,
             lName : req.body.lName,
             email : req.body.email
         }
     }
+    else{
+        console.log("\n no update \n")
+        console.log(req.body)
+    }
       
     try{
-         User.findOneAndUpdate(conditions,{$set: update},function(error,result){
+         User.findOneAndUpdate(conditions,update,function(error,result){
            if(error){
              console.log(error)
            }

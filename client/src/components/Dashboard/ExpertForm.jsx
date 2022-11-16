@@ -22,13 +22,13 @@ function containsObj(arr, obj){
 }
 
 function ExpertForm() {
-  const [seance, setSeance] = useState({date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
+  const [seance, setSeance] = useState({id: createId(Date.now), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
   const [clickEchauffement, setClickEchauffement] = useState(false);
   const [paramsSelect, setParamsSelect] = useState();
   const [clickExercices, setClickExercices] = useState(false);
   const [clickDetails, setClickDetails] = useState(false);
   const [params, setParams] = useState({load: ""});
-  const [data, setData] = useState({date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
+  const [data, setData] = useState({id: createId(Date.now), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
   const [listeNoms, setListeNoms] = useState([])
 
   function handleClickEchauffement(){
@@ -48,35 +48,43 @@ function ExpertForm() {
 
         console.log(seance);
 
+        let err = false;
+
         //CONDITIONS
         if (!seance.nom.ancienNom || seance.nom.ancienNom === "title"){
+            err = true;
             alert ("Donne un nom à ta séance pour t'en resservir plus tard !")
 
         }
 
         if (seance.date === ''){
+            err = true;
             alert ("Et c'était quand ça ? tu m'as pas dis la date !")
 
         }
 
         if (seance.poids === ''){
+            err = true;
             alert ("Tu pèses combien ? Pas de tricherie avec moi tu m'as pas donné ton poids !")
 
         }
 
         if (seance.exercices.length === 0){
+            err = true;
             alert ("Ah bah super ta séance, y a aucun exo !")
 
         }
 
         seance.exercices.forEach((exercice,index) => {
             if (Object.keys(exercice.Series).length === 0){
+                err = true;
                 alert("Faut avouer qu'un exercice sans série c'est pas commode (exercice "+(index+1)+" "+exercice.exercice.name+") !")
             }
 
             //serie manquant
             Object.values(exercice.Series).forEach(serie => {
-                if (serie.repsTime==='' || serie.charge===''){
+                if (serie.repsTime==='' || serie.charge==='' || !serie.repsTime || !serie.charge && err === false){
+                    err = true;
                     alert("Une serie n'est pas remplie (exercice "+(index+1)+" "+exercice.exercice.name+") !")
                 }
             })
@@ -84,30 +92,36 @@ function ExpertForm() {
             //muscle manquant
             if(exercice.exercice.name==="Elevation" || exercice.exercice.name==="Curl" || exercice.exercice.name==="Extension" || exercice.exercice.name==="Abduction" || exercice.exercice.name==="Adduction" || exercice.exercice.name==="Press"){
                 if (!exercice.exercice.muscle || exercice.exercice.muscle === "" || exercice.exercice.muscle === "title"){
+                    err = true;
                     alert("Tu ne m'as pas dis quelle muscle pour ton exercice "+(index+1)+" "+exercice.exercice.name+" !")
                 }
             }
 
             //name exercice titre
             if(exercice.exercice.name==="title"){
+                err = true;
                 alert("Un titre n'est pas un exercice voyons (exercice "+(index+1)+" "+exercice.exercice.name+") !")
             }
 
             //name exo manquant
             if(!exercice.exercice.name || exercice.exercice.name===""){
+                err = true;
                 alert("Tu m'as pas donné le nom de ton exo petit cachottier (exercice "+(index+1)+" "+exercice.exercice.name+") !")
             }
 
             //catégorie manquant
             Object.values(exercice.Categories).forEach(categorie => {
                 if (!categorie.name || categorie.name==='' || categorie.input==='' || !categorie.input || categorie.input==="title"){
+                    err = true;
                     alert("Une catégorie n'est pas remplie (exercice "+(index+1)+" "+exercice.exercice.name+") !")
                 }
                 if (categorie.name==='Elastique'){
                     if (categorie.utilisation==='' || !categorie.utilisation || categorie.utilisation==="title"){
+                        err = true;
                         alert("Et l'elastique il sert à quoi ? (exercice "+(index+1)+" "+exercice.exercice.name+") !")
                     }
                     if (categorie.estimation==='' || !categorie.estimation || Number.isNaN(parseFloat(categorie.estimation))){
+                        err = true;
                         alert("Erreur de mesure élastique (exercice "+(index+1)+" "+exercice.exercice.name+") !")
                     }
                 }
@@ -116,12 +130,14 @@ function ExpertForm() {
 
         seance.echauffements.forEach((echauffement,index) => {
             if (Object.keys(echauffement.Series).length === 0){
+                err = true;
                 alert("Faut avouer qu'un echauffement sans série c'est pas commode (echauffement "+(index+1)+" "+echauffement.echauffement.name+") !")
             }
 
             //serie manquant
             Object.values(echauffement.Series).forEach(serie => {
-                if (serie.repsTime==='' || serie.charge===''){
+                if (serie.repsTime==='' || serie.charge==='' || !serie.repsTime || !serie.charge && err === false){
+                    err = true;
                     alert("Une serie n'est pas remplie (echauffement "+(index+1)+" "+echauffement.echauffement.name+") !")
                 }
             })
@@ -129,30 +145,36 @@ function ExpertForm() {
             //muscle echauffement
             if(echauffement.echauffement.name==="Elevation" || echauffement.echauffement.name==="Curl" || echauffement.echauffement.name==="Extension" || echauffement.echauffement.name==="Abduction" || echauffement.echauffement.name==="Adduction" || echauffement.echauffement.name==="Press"){
                 if (!echauffement.echauffement.muscle || echauffement.echauffement.muscle === "" || echauffement.echauffement.muscle === "title"){
+                    err = true;
                     alert("Tu ne m'as pas dis quelle muscle pour ton echauffement "+(index+1)+" "+echauffement.echauffement.name+" !")
                 }
             }
 
             //name echauffement titre
             if(echauffement.echauffement.name==="title"){
+                err = true;
                 alert("Un titre n'est pas un echauffement voyons (echauffement "+(index+1)+" "+echauffement.echauffement.name+") !")
             }
 
             //name echauffement manquant
             if(!echauffement.echauffement.name || echauffement.echauffement.name===""){
+                err = true;
                 alert("Tu t'echauffes en faisant rien ? (echauffement "+(index+1)+" "+echauffement.echauffement.name+") !")
             }
 
             //catégorie manquant
             Object.values(echauffement.Categories).forEach(categorie => {
                 if (!categorie.name || categorie.name==='' || categorie.input==='' || !categorie.input || categorie.input==="title"){
+                    err = true;
                     alert("Une catégorie n'est pas remplie (echauffement "+(index+1)+" "+echauffement.echauffement.name+") !")
                 }
                 if (categorie.name==='Elastique'){
                     if (categorie.utilisation==='' || !categorie.utilisation || categorie.utilisation==="title"){
+                        err = true;
                         alert("Et l'elastique il sert à quoi ? (echauffement "+(index+1)+" "+echauffement.echauffement.name+") !")
                     }
                     if (categorie.estimation==='' || !categorie.estimation || Number.isNaN(parseFloat(categorie.estimation))){
+                        err = true;
                         alert("Erreur de mesure élastique (echauffement "+(index+1)+" "+echauffement.echauffement.name+") !")
                     }
                 }
@@ -161,38 +183,33 @@ function ExpertForm() {
 
         seance.details.forEach((detail, index) =>{
             if (!detail.name || detail.name==='' || detail.input==='' || !detail.input || detail.input==="title"){
+                err = true;
                 alert("Ce n'est peut être qu'un détail, mais il est vide !");
             }
         });
 
         //API
-        try {
-          const { data } = await API.debutantform({seance: seance, id: localStorage.getItem("id")});
-          if (data.success === true){
-            window.location = "/dashboard";
-          }else{
-            alert(data.message);
-          }
-        } catch (error) {
-          alert(error);
+        if(err===false){
+            // try {
+            // const { data } = await API.debutantform({seance: seance, id: localStorage.getItem("id")});
+            // if (data.success === true){
+            //     window.location = "/dashboard";
+            // }else{
+            //     alert(data.message);
+            // }
+            // } catch (error) {
+            // alert(error);
+            // }
         }
     }
 
-    function changeName(name){
-        setSeance(oldSeance => {
-            return ({
-            ...oldSeance,
-            nom: name,
-        });
-    })}
-
-    function changeDate(date){
+    function handleChangeDate(event){
         event.preventDefault();
 
         setSeance(oldSeance => {
             return ({
             ...oldSeance,
-            date: date,
+            date: event.target.value,
         });
     })}
 
@@ -336,7 +353,7 @@ function ExpertForm() {
                     alert("Vous ne pouvez pas charger une séance débutant en mode expert !")
                 }
                 else{
-                    setSeance({date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
+                    setSeance({id: createId(Date.now), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
                     setData(data.seance)
                     setClickExercices(true)
                     if (data.seance.echauffements.length>0){
@@ -348,7 +365,7 @@ function ExpertForm() {
                 }
             }
             else{
-                setSeance({date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
+                setSeance({id: createId(Date.now), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
                 setClickDetails(false)
                 setClickEchauffement(false)
             }
@@ -500,9 +517,19 @@ function ExpertForm() {
                 : null }
             </div>
 
-          <DateInput key={createId(Date.now())} date={seance.date} changeDate={changeDate}/>
+          <div className="DateInput form-group row">
+            <label className="col-sm-2 col-form-label">Date</label>
+            <div className="col-sm-10">
+              <input type="date"
+                  className="form-control"
+                  value={seance.date}
+                  onChange={handleChangeDate}
+                  id="date"
+              />
+            </div>
+          </div>
 
-          <PoidsInput key={createId(Date.now())} poids={seance.poids} changePoids={changePoids}/>
+          <PoidsInput key={seance.id} poids={seance.poids} changePoids={changePoids}/>
 
 
           {clickEchauffement ?
