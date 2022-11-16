@@ -1,11 +1,11 @@
 import {React, useState, useEffect} from "react";
-import { Button } from "react-bootstrap";
 import NavigBar from "../NavigBar.jsx"
 import Bienvenue from "../Bienvenue.jsx"
 import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
 import DetailInput from "./DetailInput"
 import customStyles from "./customStyles.js";
+import customStylesDark from "./customStylesDark.js";
 import CategorieInput from "./CategorieInput"
 import Footer from "../Footer.jsx";
 import Slider from '@mui/material/Slider';
@@ -22,6 +22,7 @@ function containsObj(arr, obj){
 }
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
+
   '& .MuiSwitch-switchBase.Mui-checked': {
     color: red['A700'],
     '&:hover': {
@@ -33,7 +34,7 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const StyleSlider = styled(Slider)(({ theme }) => ({
+let StyleSlider = styled(Slider)(({ theme }) => ({
   '& .MuiSlider-thumb': {
     color: red['A700'],
   },
@@ -106,6 +107,50 @@ function Dashboard() {
     })
     const [clickAffichage, setClickAffichage] = useState(false);
     const [clickFiltrage, setClickFiltrage] = useState(false);
+    const [user, setUser] = useState()
+
+    async function getUser(){
+        const {data} = await API.getUser({id: localStorage.getItem("id")});
+        if (data.success === false){
+            alert(data.message);
+        } else {
+            console.log(data.profile);
+            if (data.profile.modeSombre && data.profile.modeSombre===true){
+              // 👇 add class to body element
+              document.body.classList.add('darkMode');
+              setSwitched(true);
+              
+                StyleSlider = styled(Slider)(({ theme }) => ({
+                    '& .MuiSlider-thumb': {
+                    color: red['A700'],
+                    },
+                    '& .MuiSlider-thumb:hover': {
+                    color: red['A400'],
+                    },
+                    '& .MuiSlider-dragging': {
+                    backgroundColor: red['A700'],
+                    },
+                    '& .MuiSlider-rail': {
+                    backgroundColor: red['A700'],
+                    },
+                    '& .MuiSlider-track': {
+                    backgroundColor: red['A700'],
+                    },
+                    '& .MuiSlider-mark': {
+                    backgroundColor: red['A700'],
+                    },'& .MuiSlider-markLabel': {
+                    color: "white",
+                    }
+                }));
+            }
+            setUser(data.profile);
+        };
+    }
+
+    useEffect(() => {
+        setTimeout(getUser, 50);
+    }, []);
+
 
     function handleClickAffichage() {
         setClickAffichage(!clickAffichage);
@@ -350,9 +395,9 @@ function Dashboard() {
             let backgroundColor;
 
             if (index%2===0){
-                backgroundColor = "black"
+                backgroundColor = "#330000"
             } else {
-                backgroundColor = "#353535"
+                backgroundColor = "#220000"
             }
 
             return ({
@@ -502,7 +547,7 @@ function Dashboard() {
                                     {id:"tri", label:"Charge (ordre décroissant)", value:"Charge (ordre décroissant)"},
                                     {id:"tri", label:"%PDC (ordre décroissant)", value:"PDC (ordre décroissant)"}
                                     ]}
-                                    styles={customStyles}
+                                    styles={user.modeSombre ? customStylesDark : customStyles}
                                 />
                             </div>
 
@@ -519,7 +564,7 @@ function Dashboard() {
                                     {id:"periode", label:"180 derniers jours (6 mois)", value:"180d"},
                                     {id:"periode", label:"Depuis 1 an", value:"1y"}
                                     ]}
-                                    styles={customStyles}
+                                    styles={user.modeSombre ? customStylesDark : customStyles}
                                 />
                             </div>
                         </div>
@@ -589,7 +634,7 @@ function Dashboard() {
                                 </label>
                                 <Select onChange={handleChange} placeholder="Nom..." id="nom"
                                     options = {listeNoms}
-                                    styles={customStyles}
+                                    styles={user.modeSombre ? customStylesDark : customStyles}
                                 />
                             </div>
 
@@ -692,7 +737,11 @@ function Dashboard() {
 
                         <div className="form-group row">
                             <div className="form-group group-margin col-sm-12">
-                                <p className=""> Tableau blanc <GreenSwitch onChange={handleChangeSwitch}/> Tableau noir </p>
+                                <p className=""> Tableau blanc 
+                                    <GreenSwitch 
+                                        onChange={handleChangeSwitch} 
+                                        defaultChecked={user.modeSombre ? user.modeSombre===true ? true : false : false}
+                                    /> Tableau noir </p>
                             </div>
                         </div>
 
@@ -746,7 +795,7 @@ function Dashboard() {
                                             {id:"tri", label:"Charge (ordre décroissant)", value:"Charge (ordre décroissant)"},
                                             {id:"tri", label:"%PDC (ordre décroissant)", value:"PDC (ordre décroissant)"}
                                             ]}
-                                            styles={customStyles}
+                                            styles={user.modeSombre ? customStylesDark : customStyles}
                                             value = {{label: params.tri, value: params.tri}}
                                         />
                                     </div>
@@ -764,7 +813,7 @@ function Dashboard() {
                                             {id:"periode", label:"180 derniers jours (6 mois)", value:"180d"},
                                             {id:"periode", label:"Depuis 1 an", value:"1y"}
                                             ]}
-                                            styles={customStyles}
+                                            styles={user.modeSombre ? customStylesDark : customStyles}
                                             value = {{label: params.periode, value: params.periode}}
                                         />
                                     </div>
@@ -835,7 +884,7 @@ function Dashboard() {
                                         </label>
                                         <Select onChange={handleChange} placeholder="Nom..." id="nom"
                                             options = {listeNoms}
-                                            styles = {customStyles}
+                                            styles = {user.modeSombre ? customStylesDark : customStyles}
                                             value = {{label: params.nom, value: params.nom}}
                                         />
                                     </div>
@@ -943,7 +992,11 @@ function Dashboard() {
 
                                 <div className="form-group row">
                                     <div className="form-group group-margin col-sm-12">
-                                        <p className=""> Tableau blanc <GreenSwitch onChange={handleChangeSwitch}/> Tableau noir </p>
+                                        <p className=""> Tableau blanc 
+                                            <GreenSwitch 
+                                                onChange={handleChangeSwitch}
+                                                defaultChecked={user.modeSombre ? user.modeSombre===true ? true : false : false}
+                                            /> Tableau noir </p>
                                     </div>
                                 </div>
 

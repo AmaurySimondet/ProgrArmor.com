@@ -1,5 +1,10 @@
 /* TAGS */
 
+.darkMode{
+    background-color: #330000;
+    color: white;
+}
+
 h1{
     font-weight:800;
     margin: 5% 0;
@@ -340,6 +345,11 @@ table.Stats-table{
 
 /* DASHBOARD */
 
+.table .thead-dark th{
+    background-color: #000000;
+    border-color: #000000;
+}
+
 .social:hover{
     filter: invert(0.6);
 }
@@ -619,6 +629,11 @@ body{
 .btn-dark{
     background-color: #9b0000;
     border-color: #9b0000;
+}
+
+.btn-dark:hover{
+    background-color: #5c0000;
+    border-color: #5c0000;
 }
 
 .hometable{

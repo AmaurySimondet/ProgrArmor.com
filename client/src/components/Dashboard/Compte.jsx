@@ -61,6 +61,10 @@ function Compte() {
             alert(data.message);
         } else {
             console.log(data.profile);
+            if (data.profile.modeSombre && data.profile.modeSombre===true){
+              // 👇 add class to body element
+              document.body.classList.add('darkMode');
+            }
             setUser(data.profile);
         };
     }
@@ -107,18 +111,12 @@ function Compte() {
   }
 
   const boxRef = useRef();
-
-  // X
   const [x, setX] = useState();
-
-  // Y
   const [y, setY] = useState();
-
   // This function calculate X and Y
   const getPosition = () => {
     const x = boxRef.current.offsetLeft;
     setX(x);
-
     const y = boxRef.current.offsetTop;
     setY(y);
   };
