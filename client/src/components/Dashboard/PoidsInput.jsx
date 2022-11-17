@@ -21,7 +21,11 @@ function PoidsInput(props) {
   return (
           <div className="form-group row">
             <label className="col-sm-2 col-form-label">Ton poids (kg)
-                <img className="myDIV" onClick={handleClickPoids} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                <img 
+                  className={props.modeSombre === true ? "myDIV questionDark" : "myDIV"}
+                  onClick={handleClickPoids} 
+                  src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" 
+                />
                 <div className={clicked}>
                     <div className="hidden-text">
                         <strong> Pourquoi te demander ton poids ? </strong> <br/>
@@ -42,7 +46,7 @@ function PoidsInput(props) {
             <div className="col-sm-10">
               <input
                   type="number"
-                  className="form-control"
+                  className={props.modeSombre === true ? "form-control inputDark" : "form-control"}
                   placeholder="120"
                   value={poids}
                   id="poids"

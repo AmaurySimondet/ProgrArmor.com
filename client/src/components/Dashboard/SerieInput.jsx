@@ -62,10 +62,16 @@ function SerieInput(props) {
          event.preventDefault();
   }
 
-    function divStyle(index){
-            let array = ['ff0000', 'aa0000', '550000', '000000']
+    function divStyle(index, dark){
+            let fourColorsArray = []
+            if(dark){
+              fourColorsArray = ['ffffff', 'ffc9c9', 'ff8282', 'ff0000']
+            }
+            else{
+              fourColorsArray = ['ff0000', 'aa0000', '550000', '000000']
+            }
             let numb = index%4
-            let color = '#' + array[numb]
+            let color = '#' + fourColorsArray[numb]
             let font;
 
             if (index%2===0){
@@ -78,14 +84,14 @@ function SerieInput(props) {
               color: color,
               fontWeight:font
             })
-      }
+    } 
 
   return (
-  <div style={divStyle(props.num)}>
+  <div style={divStyle(props.num, props.modeSombre)}>
       <div className="form-group row">
             <label className="col-sm-2 col-form-label">
                 Série {props.num+1} <p className="nom-exercice-serie"> ({props.exercice.name}) </p>
-                <img className="myDIV" onClick={handleClickQuestion} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                <img className={props.modeSombre === true ? "myDIV questionDark" : "myDIV"} onClick={handleClickQuestion} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                 <div className={clicked}>
                     <div className="hidden-text">
                         <strong> {"C'est quoi cette donnée grisée à côté de la charge ?"} </strong> <br/>
@@ -104,14 +110,14 @@ function SerieInput(props) {
                 </div>
             </label>
             <div className="col-sm-2">
-                <select onChange={handleChange} className="custom-select" id="typeSerie">
+                <select onChange={handleChange} className={props.modeSombre === true ? "custom-select selectDark" : "custom-select"} id="typeSerie">
                     <option value="reps"> Répétitions (défaut) </option>
                     <option value="time"> Temps (secondes) </option>
                 </select>
             </div>
             <div className="col-sm-2">
               <input type="number"
-                  className="form-control"
+                  className={props.modeSombre === true ? "inputDark form-control" : "form-control"}
                   id="repsTime"
                   value={serie.repsTime}
                   onChange={handleChange}
@@ -120,7 +126,7 @@ function SerieInput(props) {
             <label className="col-sm-1 col-form-label">Charge totale (kg)</label>
             <div className="col-sm-2">
               <input type="number"
-                  className="form-control"
+                  className={props.modeSombre === true ? "inputDark form-control" : "form-control"}
                   id="charge"
                   value={serie.charge}
                   onChange={handleChange}
@@ -128,14 +134,14 @@ function SerieInput(props) {
             </div>
             <div className="col-sm-2">
               <input type="text"
-                  className="form-control"
+                  className={props.modeSombre === true ? "inputDark form-control" : "form-control"}
                   id="percent"
                   value={serie.percent}
                   readOnly
               />
             </div>
             <div className="col-sm-1">
-              <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
             </div>
       </div>
       <p> {text} </p>

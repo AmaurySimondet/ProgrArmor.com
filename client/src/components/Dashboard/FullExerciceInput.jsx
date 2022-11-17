@@ -72,17 +72,17 @@ function FullExerciceInput(props){
 
     return(
           <div className="exercice-div">
-              <hr className="hr-exercice"/>
+              <hr className={props.modeSombre === true ? "hr-exercice-dark" : "hr-exercice"}/>
 
               <ExerciceInput debutant={true} id="exercice" key={props.num}
                 value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} 
-                changeExercice={changeExercice} exercice={fullExercice.exercice}
+                changeExercice={changeExercice} exercice={fullExercice.exercice} modeSombre={props.modeSombre}
               />
 
               {series ? series.map((serie,index) => {
                 return(
                 <div>
-                    <hr className="hr-serie"/>
+                    <hr className={props.modeSombre === true ? "hr-serie-dark" : "hr-serie"}/>
 
                     <SerieInput
                         key={index}
@@ -96,6 +96,7 @@ function FullExerciceInput(props){
                         poids={props.poids}
                         changeSerie={changeSerie}
                         onDeleteSerie={onDeleteSerie}
+                        modeSombre={props.modeSombre}
                     />
                 </div>
                 );

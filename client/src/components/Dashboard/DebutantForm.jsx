@@ -1,7 +1,7 @@
 import {React, useState, useEffect} from "react";
 import API from "../../utils/API";
 import Select from "react-select";
-import DateInput from "./DateInput";
+import customStylesDark from "./customStylesDark";
 import PoidsInput from "./PoidsInput";
 import FullExerciceInput from "./FullExerciceInput"
 import customStyles from "./customStyles";
@@ -10,7 +10,7 @@ function createId(date){
     return date.toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36);
 }
 
-function DebutantForm() {
+function DebutantForm(props) {
   const [seance, setSeance] = useState({id: createId(Date.now()), date: "", poids: "", exercices: []});
   const [params, setParams] = useState({load: ""});
   const [data, setData] = useState({id: createId(Date.now()), date: "", poids: "", exercices: []});
@@ -204,7 +204,7 @@ function DebutantForm() {
                             {id: "load", label: "Dernière séance en date", value:"lastDate"},
                             {id: "load", label: "Dernière séance enregistrée", value:"lastRec"}
                     ]}
-                        styles={customStyles}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
                     />
                 </div>
                 <div className="col-sm-3">
@@ -216,7 +216,7 @@ function DebutantForm() {
             <label className="col-sm-2 col-form-label">Date</label>
             <div className="col-sm-10">
               <input type="date"
-                  className="form-control"
+                  className={props.modeSombre === true ? "form-control inputDark" : "form-control"}
                   value={seance.date}
                   onChange={handleChangeDate}
                   id="date"
@@ -224,7 +224,7 @@ function DebutantForm() {
             </div>
           </div>
 
-            <PoidsInput key={seance.id} poids={seance.poids} changePoids={changePoids}/>
+            <PoidsInput modeSombre={props.modeSombre} key={seance.id} poids={seance.poids} changePoids={changePoids}/>
 
             {seance.exercices.map((exercice,index) => {
                     return(
@@ -236,6 +236,7 @@ function DebutantForm() {
                             onAddExercices={onAddExercices}
                             changeExercices={changeExercices}
                             onDeleteExercices={onDeleteExercices}
+                            modeSombre = {props.modeSombre}
                     />);
             })}
 

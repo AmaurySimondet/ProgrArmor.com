@@ -1,7 +1,8 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import NavigBar from "../NavigBar.jsx"
 import DebutantForm from "./DebutantForm.jsx"
 import ExpertForm from "./ExpertForm.jsx"
+import API from "../../utils/API.js";
 import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
@@ -21,6 +22,25 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
 
 function Session() {
   const [switched, setSwitched] = useState(false);
+  const [user, setUser] = useState()
+
+  async function getUser(){
+      const {data} = await API.getUser({id: localStorage.getItem("id")});
+      if (data.success === false){
+          alert(data.message);
+      } else {
+          console.log(data.profile);
+          if (data.profile.modeSombre && data.profile.modeSombre===true){
+            // 👇 add class to body element
+            document.body.classList.add('darkMode');
+          }
+          setUser(data.profile);
+      };
+  }
+
+  useEffect(() => {
+      getUser();
+  }, []);
 
   function handleChange(){
     event.preventDefault();
@@ -37,7 +57,12 @@ function Session() {
 
               <p className="session-div-switch"> Débutant <GreenSwitch onChange={handleChange}/> Expert </p>
 
-              {switched ? <ExpertForm/> : <DebutantForm/>}
+              {switched ? 
+                <ExpertForm modeSombre={user && user.modeSombre ? true : false} /> 
+              : 
+                <DebutantForm modeSombre={user && user.modeSombre ? true : false} />
+              }
+
           </div>
 
           <Footer />

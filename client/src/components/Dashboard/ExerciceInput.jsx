@@ -71,7 +71,7 @@ function ExerciceInput(props) {
                     />
                 </div>
                 <div className="col-sm-1 poubelle-div">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>
               </div>
         }

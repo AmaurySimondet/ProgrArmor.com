@@ -145,6 +145,11 @@ table.profile-table{
 
 }
 
+.selectDark{
+    color: white;
+    background-color: #000000;
+}
+
 .hidden-text{
     padding: 2%;
 
@@ -171,6 +176,10 @@ table.profile-table{
 
 }
 
+.questionDark{
+    filter: invert(1)
+}
+
 .debutant-form{
     width: 90%;
     margin:auto;
@@ -178,7 +187,7 @@ table.profile-table{
 
 .session-div h1{
     text-align:center;
-    margin-top: 2%;
+    margin-top: 40px;
 }
 
 .info-own-exercice{
@@ -196,6 +205,11 @@ table.profile-table{
 
 }
 
+.poubelleDark{
+    margin-top:5px;
+    filter: invert(1);
+}
+
 .exercice-div{
     margin-bottom: 20px;
 
@@ -209,6 +223,11 @@ table.profile-table{
 .hr-exercice{
     border-width: 2px;
     border-color: black;
+}
+
+.hr-exercice-dark{
+    border-width: 2px;
+    border-color: white;
 }
 
 .hr-detail{
@@ -351,6 +370,11 @@ table.Stats-table{
 }
 
 .inputDark{
+    color: white !important;
+    background-color: black !important;
+}
+
+.inputDark:focus{
     color: white;
     background-color: black;
 }
