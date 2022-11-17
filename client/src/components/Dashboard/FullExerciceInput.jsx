@@ -1,18 +1,14 @@
 import ExerciceInput from "./ExerciceInput";
 import SerieInput from "./SerieInput";
-import {React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
-function FullExerciceInput(props){
+function FullExerciceInput(props) {
 
     const [series, setSeries] = useState([...Object.values(props.exercice.Series)]);
     const [fullExercice, setFullExercice] = useState(props.exercice);
 
-    // console.log("fullExercice")
-    // console.log(fullExercice)
-    // console.log("props.exercice")
-    // console.log(props.exercice)
-
-    function changeExercice(exercice){
+    function changeExercice(exercice) {
         setFullExercice(oldFullExercice => {
             return ({
                 ...oldFullExercice,
@@ -21,93 +17,98 @@ function FullExerciceInput(props){
         });
     }
 
-    function changeSerie(serie, num, exerciceOf){
-        const otherThanSelected =  series.filter((serie, index) => {
-            return index!==(num)
-        });
-
-        setSeries([...otherThanSelected, serie]);
-    }
-
     useEffect(() => {
-        const Series = {...series};
-        const Exercice = {...fullExercice, Series};
+        const Series = { ...series };
+        const Exercice = { ...fullExercice, Series };
         props.changeExercices(Exercice, props.id);
     }, [fullExercice, series])
 
-    function onAddSerie(event){
-        event.preventDefault();
+    function changeSerie(changedS, id) {
+        let newS = [...series]
+        let indexOfChg = newS.findIndex(ex => ex.id === id)
 
-        setSeries([...series, []])
+        newS.splice(indexOfChg, 1, changedS)
+
+        setSeries(newS)
     }
 
-    function onCopySerie(event){
+    function onAddSerie(event) {
         event.preventDefault();
+
+        let newSerie = [...series]
+
+        newSerie.push({ id: uuidv4(), typeSerie: "reps", repsTime: "", charge: "", percent: "" })
+
+        setSeries(newSerie)
+    }
+
+    function onCopySerie(event) {
+        event.preventDefault();
+
+        let newSeries = [...series]
 
         let last = {}
-        if(series[series.length - 1]){
-            last = series[series.length - 1]
+        if (newSeries[newSeries.length - 1]) {
+            last = {
+                ...newSeries[newSeries.length - 1],
+                id: uuidv4()
+            }
         }
-        else{
-            last = {typeSerie: "reps", repsTime: "", charge: "", percent: ""}
+        else {
+            last = { id: uuidv4(), typeSerie: "reps", repsTime: "", charge: "", percent: "" }
         }
 
-        setSeries([...series, last])
+        newSeries.push(last)
+
+        setSeries(newSeries)
     }
 
-    function onDeleteSerie(num){
-        event.preventDefault();
+    function onDeleteSerie(id) {
+        let newSeries = [...series];
+        let indexOfDel = newSeries.findIndex(s => s.id === id)
 
-        console.log(num)
+        //replace by nothing
+        newSeries.splice(indexOfDel, 1)
 
-        setSeries(oldSeries => {
-            return(
-                oldSeries.filter((serie, index) => {
-                    console.log(index, num, index!==(num))
-                    return index!==(num)
-                })
-            )
-        })
+        setSeries(newSeries);
     }
 
-    return(
-          <div className="exercice-div">
-              <hr className={props.modeSombre === true ? "hr-exercice-dark" : "hr-exercice"}/>
+    return (
+        <div className="exercice-div">
+            <hr className={props.modeSombre === true ? "hr-exercice-dark" : "hr-exercice"} />
 
-              <ExerciceInput debutant={true} key={props.id} index={props.index}
-                value={fullExercice.exercice} id={props.id} onDeleteExercices={props.onDeleteExercices} 
+            <ExerciceInput debutant={true} key={props.id} index={props.index}
+                value={fullExercice.exercice} id={props.id} onDeleteExercices={props.onDeleteExercices}
                 changeExercice={changeExercice} exercice={fullExercice.exercice} modeSombre={props.modeSombre}
-              />
+            />
 
-              {series ? series.map((serie,index) => {
-                return(
-                <div>
-                    <hr className={props.modeSombre === true ? "hr-serie-dark" : "hr-serie"}/>
+            {series ? series.map((serie, index) => {
+                return (
+                    <div>
+                        <hr className={props.modeSombre === true ? "hr-serie-dark" : "hr-serie"} />
 
-                    <SerieInput
-                        key={index}
-                        num={index}
-                        typeSerie={serie.typeSerie}
-                        repsTime={serie.repsTime}
-                        charge={serie.charge}
-                        percent={serie.percent}
-                        length={series.length}
-                        exercice={fullExercice.exercice}
-                        poids={props.poids}
-                        changeSerie={changeSerie}
-                        onDeleteSerie={onDeleteSerie}
-                        modeSombre={props.modeSombre}
-                    />
-                </div>
+                        <SerieInput
+                            key={serie.id}
+                            id={serie.id}
+                            index={index}
+                            serie={serie}
+                            length={series.length}
+                            exercice={fullExercice.exercice}
+                            poids={props.poids}
+                            changeSerie={changeSerie}
+                            onDeleteSerie={onDeleteSerie}
+                            modeSombre={props.modeSombre}
+                        />
+                    </div>
                 );
-              })
-              : null
-              }
+            })
+                : null
+            }
 
-              <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
-              <button className="btn btn-dark form-button copy-btn" onClick={onCopySerie} type="submit">Recopier la série !</button>
-              <br/>
-          </div>
+            <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
+            <button className="btn btn-dark form-button copy-btn" onClick={onCopySerie} type="submit">Recopier la série !</button>
+            <br />
+        </div>
     )
 }
 

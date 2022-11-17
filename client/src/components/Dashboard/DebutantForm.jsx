@@ -6,14 +6,13 @@ import PoidsInput from "./PoidsInput";
 import FullExerciceInput from "./FullExerciceInput"
 import customStyles from "./customStyles";
 import { v4 as uuidv4 } from 'uuid';
-import exercices from "./Exercices";
 
 function createId(date) {
     return date.toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36);
 }
 
 function DebutantForm(props) {
-    const [seance, setSeance] = useState({ id: createId(Date.now()), date: "", poids: "", exercices: []});
+    const [seance, setSeance] = useState({ id: createId(Date.now()), date: "", poids: "", exercices: [] });
     const [params, setParams] = useState({ load: "" });
 
     async function handleClick() {
@@ -101,11 +100,7 @@ function DebutantForm(props) {
     }
 
     function changeExercices(changedExercice, id) {
-
-        let newSeance = {...seance}
-
-        console.log("CHG ID: ", id)
-
+        let newSeance = { ...seance }
         let indexOfChg = seance.exercices.findIndex(ex => ex.id === id)
 
         newSeance.exercices.splice(indexOfChg, 1, changedExercice)
@@ -114,35 +109,25 @@ function DebutantForm(props) {
     }
 
     function onAddExercices(event) {
-
         event.preventDefault();
 
-        let newS = {
-            ...seance
-        }
+        let newS = { ...seance }
 
         newS = {
-            ...newS, exercices : [...newS.exercices, { exercice: { name: "" }, Series: {}, id: uuidv4()}]
+            ...newS,
+            exercices: [...newS.exercices, { exercice: { name: "" }, Series: {}, id: uuidv4() }]
         }
 
         setSeance(newS)
 
-        console.log(newS);
-        
     }
 
     function onDeleteExercices(id) {
-
         let newSeance = seance;
-
         let indexOfDel = seance.exercices.findIndex(ex => ex.id === id)
-
-        console.log('ID :' ,id);
 
         //replace by nothing
         newSeance.exercices.splice(indexOfDel, 1)
-        
-        console.log('NEWS :' ,newSeance.exercices)
 
         setSeance(oldSeance => {
             return ({
@@ -186,20 +171,6 @@ function DebutantForm(props) {
         }
     }
 
-    useEffect(() => {
-        console.log('LOAD');
-        console.log(seance.exercices);
-    }, [seance])
-
-    // useEffect(()=>{
-    //     setSeance(oldSeance =>{
-    //         return ({
-    //             ...oldSeance,
-    //             exercices: seance.exercices.sort((a,b)=>{return a.num - b.num})
-    //         })
-    //     })
-    // },[seance.exercices])
-
     return (
         <form className="debutant-form">
 
@@ -236,12 +207,11 @@ function DebutantForm(props) {
 
             <PoidsInput modeSombre={props.modeSombre} key={seance.id} poids={seance.poids} changePoids={changePoids} />
 
-
             {seance?.exercices.map((exercice, index) => {
                 return (
                     <FullExerciceInput
                         key={exercice.id}
-                        id = {exercice.id}
+                        id={exercice.id}
                         index={index}
                         exercice={exercice}
                         poids={seance.poids}
