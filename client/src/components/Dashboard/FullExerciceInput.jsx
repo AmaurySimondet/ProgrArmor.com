@@ -7,10 +7,10 @@ function FullExerciceInput(props){
     const [series, setSeries] = useState([...Object.values(props.exercice.Series)]);
     const [fullExercice, setFullExercice] = useState(props.exercice);
 
-    console.log("fullExercice")
-    console.log(fullExercice)
-    console.log("props.exercice")
-    console.log(props.exercice)
+    // console.log("fullExercice")
+    // console.log(fullExercice)
+    // console.log("props.exercice")
+    // console.log(props.exercice)
 
     function changeExercice(exercice){
         setFullExercice(oldFullExercice => {
@@ -32,7 +32,7 @@ function FullExerciceInput(props){
     useEffect(() => {
         const Series = {...series};
         const Exercice = {...fullExercice, Series};
-        props.changeExercices(Exercice, props.num);
+        props.changeExercices(Exercice, props.id);
     }, [fullExercice, series])
 
     function onAddSerie(event){
@@ -74,8 +74,8 @@ function FullExerciceInput(props){
           <div className="exercice-div">
               <hr className={props.modeSombre === true ? "hr-exercice-dark" : "hr-exercice"}/>
 
-              <ExerciceInput debutant={true} id="exercice" key={props.num}
-                value={fullExercice.exercice} num={props.num} onDeleteExercices={props.onDeleteExercices} 
+              <ExerciceInput debutant={true} key={props.id} index={props.index}
+                value={fullExercice.exercice} id={props.id} onDeleteExercices={props.onDeleteExercices} 
                 changeExercice={changeExercice} exercice={fullExercice.exercice} modeSombre={props.modeSombre}
               />
 

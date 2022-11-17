@@ -1,21 +1,22 @@
-import {React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import API from "../../utils/API";
 import Select from "react-select";
 import customStylesDark from "./customStylesDark";
 import PoidsInput from "./PoidsInput";
 import FullExerciceInput from "./FullExerciceInput"
 import customStyles from "./customStyles";
+import { v4 as uuidv4 } from 'uuid';
+import exercices from "./Exercices";
 
-function createId(date){
-    return date.toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36);
+function createId(date) {
+    return date.toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36);
 }
 
 function DebutantForm(props) {
-  const [seance, setSeance] = useState({id: createId(Date.now()), date: "", poids: "", exercices: []});
-  const [params, setParams] = useState({load: ""});
-  const [data, setData] = useState({id: createId(Date.now()), date: "", poids: "", exercices: []});
+    const [seance, setSeance] = useState({ id: createId(Date.now()), date: "", poids: "", exercices: []});
+    const [params, setParams] = useState({ load: "" });
 
-  async function handleClick() {
+    async function handleClick() {
         event.preventDefault();
         let emptySerie = false
         let err = false;
@@ -23,47 +24,47 @@ function DebutantForm(props) {
         console.log(seance);
 
         //CONDITIONS
-        if (seance.date === '' && err === false){
+        if (seance.date === '' && err === false) {
             err = true;
-            alert ("Et c'était quand ça ? tu m'as pas dis la date !")
+            alert("Et c'était quand ça ? tu m'as pas dis la date !")
         }
 
-        if (seance.poids === '' && err === false){
+        if (seance.poids === '' && err === false) {
             err = true;
-            alert ("Tu pèses combien ? Pas de tricherie avec moi tu m'as pas donné ton poids !")
+            alert("Tu pèses combien ? Pas de tricherie avec moi tu m'as pas donné ton poids !")
         }
 
-        if (seance.exercices.length === 0 && err === false){
+        if (seance.exercices.length === 0 && err === false) {
             err = true;
-            alert ("Ah bah super ta séance, y a aucun exo !")
+            alert("Ah bah super ta séance, y a aucun exo !")
         }
 
         seance.exercices.forEach(exercice => {
-            if (Object.keys(exercice.Series).length === 0 && err === false){
+            if (Object.keys(exercice.Series).length === 0 && err === false) {
                 err = true;
                 alert("Faut avouer qu'un exercice sans série c'est pas commode !")
             }
 
             Object.values(exercice.Series).forEach(serie => {
-                if (serie.repsTime==='' || serie.charge==='' || !serie.repsTime || !serie.charge && err === false){
+                if (serie.repsTime === '' || serie.charge === '' || !serie.repsTime || !serie.charge && err === false) {
                     err = true;
                     alert("Une serie n'est pas remplie !")
                 }
             })
 
-            if(exercice.exercice.name==="title" && err === false){
+            if (exercice.exercice.name === "title" && err === false) {
                 err = true;
                 alert("Une catégorie n'est pas un exercice voyons !")
             }
 
-            if(exercice.exercice.name==="" && err === false){
+            if (exercice.exercice.name === "" && err === false) {
                 err = true;
                 alert("Tu m'as pas donné le nom de ton exo petit cachottier !")
             }
         });
 
         //API
-        if(err===false){
+        if (err === false) {
             // try {
             // const { data } = await API.debutantform({seance: seance, id: localStorage.getItem("id")});
             // if (data.success === true){
@@ -77,120 +78,129 @@ function DebutantForm(props) {
         }
     }
 
-    function handleChangeDate(event){
-        event.preventDefault();
-
-        setSeance(oldSeance => {
-            return ({
-            ...oldSeance,
-            date: event.target.value,
-        });
-    })}
-
-    function changePoids(poids){
-        event.preventDefault();
-
-        setSeance(oldSeance => {
-            return ({
-            ...oldSeance,
-            poids: poids,
-        });
-    })}
-
-    function changeExercices(exercice, num){
-
-        const otherThanSelected =  seance.exercices.filter((exercice, index) => {
-            return exercice.num!==(num)
-        })
-
-        setSeance(oldSeance => {
-            return ({
-                ...oldSeance,
-                exercices: [...otherThanSelected, exercice]
-            })
-        })
-    }
-
-    function onAddExercices(event){
+    function handleChangeDate(event) {
         event.preventDefault();
 
         setSeance(oldSeance => {
             return ({
                 ...oldSeance,
-                exercices: [...oldSeance.exercices, {exercice: {name: ""}, Series: {}, num: seance.exercices.length}]
-            })
+                date: event.target.value,
+            });
         })
     }
 
-    function onDeleteExercices(num){
-
-        const beforeSelected =  seance.exercices.filter((exercice, index) => {
-            return exercice.num<(num)
-        })
-
-        const afterSelected =  seance.exercices.filter((exercice, index) => {
-            return exercice.num>(num)
-        })
-
-        console.log([...beforeSelected, ...afterSelected.map((ex)=>{return {...ex, num: ex.num-1}})])
+    function changePoids(poids) {
+        event.preventDefault();
 
         setSeance(oldSeance => {
             return ({
                 ...oldSeance,
-                exercices: [...beforeSelected, ...afterSelected.map((ex)=>{return {...ex, num: ex.num-1}})]
+                poids: poids,
+            });
+        })
+    }
+
+    function changeExercices(changedExercice, id) {
+
+        let newSeance = {...seance}
+
+        console.log("CHG ID: ", id)
+
+        let indexOfChg = seance.exercices.findIndex(ex => ex.id === id)
+
+        newSeance.exercices.splice(indexOfChg, 1, changedExercice)
+
+        setSeance(newSeance)
+    }
+
+    function onAddExercices(event) {
+
+        event.preventDefault();
+
+        let newS = {
+            ...seance
+        }
+
+        newS = {
+            ...newS, exercices : [...newS.exercices, { exercice: { name: "" }, Series: {}, id: uuidv4()}]
+        }
+
+        setSeance(newS)
+
+        console.log(newS);
+        
+    }
+
+    function onDeleteExercices(id) {
+
+        let newSeance = seance;
+
+        let indexOfDel = seance.exercices.findIndex(ex => ex.id === id)
+
+        console.log('ID :' ,id);
+
+        //replace by nothing
+        newSeance.exercices.splice(indexOfDel, 1)
+        
+        console.log('NEWS :' ,newSeance.exercices)
+
+        setSeance(oldSeance => {
+            return ({
+                ...oldSeance,
+                exercices: newSeance.exercices
             })
         })
     }
 
-    function handleChange(event){
+    function handleChange(event) {
         setParams(oldParams => {
             return ({
                 ...oldParams,
                 [event.id]: event.value,
-                })
-            });
-      }
+            })
+        });
+    }
 
-    async function loadSeance(event){
+    async function loadSeance(event) {
         event.preventDefault();
 
-        const {data} = await API.loadSeance(params);
-        if (data.success === false){
-            if (data.message === "Aucune séance !"){
-               console.log(data.message);
+        const { data } = await API.loadSeance(params);
+        if (data.success === false) {
+            if (data.message === "Aucune séance !") {
+                console.log(data.message);
             }
             else { alert(data.message); }
         } else {
             console.log(data.seance)
-            if(data.seance){
-                setSeance({id: createId(Date.now()), date: "", poids: "", exercices: []});
-                if (data.seance.nom){
+            if (data.seance) {
+                if (data.seance.nom) {
                     alert("Vous ne pouvez pas charger une séance expert en mode débutant !")
                 }
-                else{
-                    setData(data.seance)
+                else {
+                    setSeance(data.seance)
                 }
             }
-            else{
-                setSeance({id: createId(Date.now()), date: "", poids: "", exercices: []});
+            else {
+                setSeance({ id: createId(Date.now()), date: "", poids: "", exercices: [] });
             }
         }
     }
 
-    useEffect(()=>{
-        setSeance(data)
-    }, [data])
+    useEffect(() => {
+        console.log('LOAD');
+        console.log(seance.exercices);
+    }, [seance])
 
-    useEffect(()=>{
-        setSeance(oldSeance =>{
-            return ({
-                ...oldSeance,
-                exercices: seance.exercices.sort((a,b)=>{return a.num - b.num})
-            })
-        })
-    },[seance.exercices])
+    // useEffect(()=>{
+    //     setSeance(oldSeance =>{
+    //         return ({
+    //             ...oldSeance,
+    //             exercices: seance.exercices.sort((a,b)=>{return a.num - b.num})
+    //         })
+    //     })
+    // },[seance.exercices])
 
-    return(
+    return (
         <form className="debutant-form">
 
             <div className="form-group row">
@@ -200,10 +210,10 @@ function DebutantForm(props) {
                         placeholder="Séance précédente à charger..."
                         onChange={handleChange}
                         options={[
-                            {id: "load", label: "/ (défaut)", value:"title"},
-                            {id: "load", label: "Dernière séance en date", value:"lastDate"},
-                            {id: "load", label: "Dernière séance enregistrée", value:"lastRec"}
-                    ]}
+                            { id: "load", label: "/ (défaut)", value: "title" },
+                            { id: "load", label: "Dernière séance en date", value: "lastDate" },
+                            { id: "load", label: "Dernière séance enregistrée", value: "lastRec" }
+                        ]}
                         styles={props.modeSombre === true ? customStylesDark : customStyles}
                     />
                 </div>
@@ -212,39 +222,40 @@ function DebutantForm(props) {
                 </div>
             </div>
 
-          <div className="DateInput form-group row">
-            <label className="col-sm-2 col-form-label">Date</label>
-            <div className="col-sm-10">
-              <input type="date"
-                  className={props.modeSombre === true ? "form-control inputDark" : "form-control"}
-                  value={seance.date}
-                  onChange={handleChangeDate}
-                  id="date"
-              />
+            <div className="DateInput form-group row">
+                <label className="col-sm-2 col-form-label">Date</label>
+                <div className="col-sm-10">
+                    <input type="date"
+                        className={props.modeSombre === true ? "form-control inputDark" : "form-control"}
+                        value={seance ? seance.date : Date.now()}
+                        onChange={handleChangeDate}
+                        id="date"
+                    />
+                </div>
             </div>
-          </div>
 
-            <PoidsInput modeSombre={props.modeSombre} key={seance.id} poids={seance.poids} changePoids={changePoids}/>
+            <PoidsInput modeSombre={props.modeSombre} key={seance.id} poids={seance.poids} changePoids={changePoids} />
 
-            {seance.exercices.map((exercice,index) => {
-                    return(
-                        <FullExerciceInput
-                            key={exercice.num}
-                            num={exercice.num}
-                            exercice={exercice}
-                            poids={seance.poids}
-                            onAddExercices={onAddExercices}
-                            changeExercices={changeExercices}
-                            onDeleteExercices={onDeleteExercices}
-                            modeSombre = {props.modeSombre}
+
+            {seance?.exercices.map((exercice, index) => {
+                return (
+                    <FullExerciceInput
+                        key={exercice.id}
+                        id = {exercice.id}
+                        index={index}
+                        exercice={exercice}
+                        poids={seance.poids}
+                        changeExercices={changeExercices}
+                        onDeleteExercices={onDeleteExercices}
+                        modeSombre={props.modeSombre}
                     />);
             })}
 
-            <button className="btn btn-dark form-button" onClick={onAddExercices} type="submit">Ajouter un exercice à cette séance !</button>
-            <br/>
+            <button className="btn btn-dark form-button" onClick={(e) => onAddExercices(e)} type="submit">Ajouter un exercice à cette séance !</button>
+            <br />
 
             <div className="form-button-div">
-              <button className="btn btn-lg btn-dark enregistrer-button" onClick={handleClick} type="submit">Enregistrer la séance !</button>
+                <button className="btn btn-lg btn-dark enregistrer-button" onClick={handleClick} type="submit">Enregistrer la séance !</button>
             </div>
         </form>
     )

@@ -1,11 +1,9 @@
 import {React, useState, useEffect} from "react";
 import API from "../../utils/API";
-import axios from 'axios';
-import DateInput from "./DateInput";
-import NameInput from "./NameInput";
 import PoidsInput from "./PoidsInput";
 import Select from "react-select"
 import customStyles from "./customStyles";
+import customStylesDark from "./customStylesDark";
 import DetailInput from "./DetailInput";
 import EchauffementInput from "./EchauffementInput";
 import FullExerciceExpertInput from "./FullExerciceExpertInput"
@@ -21,7 +19,7 @@ function containsObj(arr, obj){
     return contains
 }
 
-function ExpertForm() {
+function ExpertForm(props) {
   const [seance, setSeance] = useState({id: createId(Date.now), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: []});
   const [clickEchauffement, setClickEchauffement] = useState(false);
   const [paramsSelect, setParamsSelect] = useState();
@@ -477,7 +475,7 @@ function ExpertForm() {
                         placeholder="Séance précédente à charger..."
                         onChange={handleChange}
                         options={paramsSelect}
-                        styles={customStyles}
+                        styles={props.modeSombre===true ? customStylesDark : customStyles}
                     />
                 </div>
                 <div className="col-sm-3">
@@ -495,7 +493,7 @@ function ExpertForm() {
                         placeholder="Nom..."
                         onChange={handleChangeName}
                         options={listeNoms}
-                        styles={customStyles}
+                        styles={props.modeSombre===true ? customStylesDark : customStyles}
                         value={{value: seance.nom.ancienNom, label: seance.nom.ancienNom}}
                     />
                     </div>
@@ -506,7 +504,7 @@ function ExpertForm() {
                         <label className="col-sm-2 col-form-label">Nom de la séance</label>
                         <div className="col-sm-5">
                         <input type="text"
-                            className="form-control"
+                            className={props.modeSombre ? "form-control inputDark" : "form-control"}
                             onChange={handleChangeName}
                             placeholder="Annihilation des biceps"
                             id="nouveauNom"
@@ -521,7 +519,7 @@ function ExpertForm() {
             <label className="col-sm-2 col-form-label">Date</label>
             <div className="col-sm-10">
               <input type="date"
-                  className="form-control"
+                  className={props.modeSombre ? "form-control inputDark" : "form-control"}
                   value={seance.date}
                   onChange={handleChangeDate}
                   id="date"
@@ -529,7 +527,7 @@ function ExpertForm() {
             </div>
           </div>
 
-          <PoidsInput key={seance.id} poids={seance.poids} changePoids={changePoids}/>
+          <PoidsInput modeSombre={props.modeSombre} key={seance.id} poids={seance.poids} changePoids={changePoids}/>
 
 
           {clickEchauffement ?
@@ -543,6 +541,7 @@ function ExpertForm() {
                             <EchauffementInput
                                 key={index}
                                 num={index}
+                                modeSombre={props.modeSombre}
                                 poids={seance.poids}
                                 echauffement={echauffement}
                                 click={echauffement.Categories ? echauffement.Categories[0] ? true : false : false}
@@ -554,14 +553,14 @@ function ExpertForm() {
                   : null
                   }
 
-                  <hr className="hr-serie"/>
+                  <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"}/>
                   <button className="btn btn-dark form-button" onClick={onAddEchauffements} type="submit">Ajouter un échauffement à cette séance !</button>
                   <br/>
               </div>
           :
               <div>
                   <p onClick={handleClickEchauffement} className="expert-title"> Echauffement <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
-                  <hr className="hr-serie"/>
+                  <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"}/>
               </div>
           }
 
@@ -573,6 +572,7 @@ function ExpertForm() {
                         <FullExerciceExpertInput
                             key={index}
                             num={index}
+                            modeSombre={props.modeSombre}
                             exercice={exercice}
                             poids={seance.poids}
                             click={exercice.Categories ? exercice.Categories[0] ? true : false : false}
@@ -583,14 +583,14 @@ function ExpertForm() {
                   })
                   : null }
 
-                  <hr className="hr-serie"/>
+                  <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"}/>
                   <button className="btn btn-dark form-button" onClick={onAddExercices} type="submit">Ajouter un exercice à cette séance !</button>
                   <br/>
               </div>
           :
               <div>
                   <p onClick={handleClickExercices} className="expert-title"> Exercices <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
-                  <hr className="hr-serie"/>
+                  <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"}/>
               </div>
           }
 
@@ -605,6 +605,7 @@ function ExpertForm() {
                       <DetailInput
                         key={index}
                         num={index}
+                        modeSombre={props.modeSombre}
                         detail={detail}
                         onAddDetail={onAddDetail}
                         changeDetail={changeDetail}
@@ -617,7 +618,7 @@ function ExpertForm() {
                   : null}
 
                   <div className="detail-div">
-                    <hr className="hr-serie"/>
+                    <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"}/>
                     <button className="btn btn-dark form-button" onClick={onAddDetail} type="submit">Ajouter un détail à cette séance !</button>
                   </div>
                   <br/>
@@ -625,7 +626,7 @@ function ExpertForm() {
           :
               <div>
                   <p onClick={handleClickDetails} className="expert-title"> Details <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
-                  <hr className="hr-serie"/>
+                  <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"}/>
               </div>
           }
 

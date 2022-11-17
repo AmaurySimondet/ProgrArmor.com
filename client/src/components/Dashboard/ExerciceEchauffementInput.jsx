@@ -3,6 +3,7 @@ import lesExercices from "./Exercices";
 import Select from "react-select";
 import MusclesCategorie from "./Categories/MusclesCategorie.js";
 import customStyles from "./customStyles.js";
+import customStylesDark from "./customStylesDark";
 
 function ExerciceEchauffementInput(props) {
 
@@ -57,12 +58,12 @@ function ExerciceEchauffementInput(props) {
                   placeholder="Exercice..."
                   onChange={handleChange}
                   options={lesExercices}
-                  styles={customStyles}
+                  styles={props.modeSombre===true ? customStylesDark : customStyles}
                   value={{value: exercice.name, label: exercice.name}}
               />
             </div>
             <div className="col-sm-1 poubelle-div">
-              <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+              <img className={props.modeSombre===true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
             </div>
           </div>
 
@@ -76,7 +77,7 @@ function ExerciceEchauffementInput(props) {
                       placeholder="Muscle..."
                       onChange={handleChange}
                       options={MusclesCategorie}
-                      styles={customStyles}
+                      styles={props.modeSombre===true ? customStylesDark : customStyles}
                       value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>
@@ -91,7 +92,7 @@ function ExerciceEchauffementInput(props) {
                       placeholder="Muscle..."
                       onChange={handleChange}
                       options={MusclesCategorie}
-                      styles={customStyles}
+                      styles={props.modeSombre===true ? customStylesDark : customStyles}
                       value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>
@@ -106,7 +107,7 @@ function ExerciceEchauffementInput(props) {
                       placeholder="Muscle..."
                       onChange={handleChange}
                       options={MusclesCategorie}
-                      styles={customStyles}
+                      styles={props.modeSombre===true ? customStylesDark : customStyles}
                       value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>
@@ -121,7 +122,7 @@ function ExerciceEchauffementInput(props) {
                       placeholder="Muscle..."
                       onChange={handleChange}
                       options={MusclesCategorie}
-                      styles={customStyles}
+                      styles={props.modeSombre===true ? customStylesDark : customStyles}
                       value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>
@@ -136,7 +137,7 @@ function ExerciceEchauffementInput(props) {
                       placeholder="Muscle..."
                       onChange={handleChange}
                       options={MusclesCategorie}
-                      styles={customStyles}
+                      styles={props.modeSombre===true ? customStylesDark : customStyles}
                       value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>
@@ -151,7 +152,7 @@ function ExerciceEchauffementInput(props) {
                       placeholder="Muscle..."
                       onChange={handleChange}
                       options={MusclesCategorie}
-                      styles={customStyles}
+                      styles={props.modeSombre===true ? customStylesDark : customStyles}
                       value={{value: exercice.muscle, label: exercice.muscle}}
                   />
                 </div>

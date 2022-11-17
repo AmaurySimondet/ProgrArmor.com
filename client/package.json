@@ -23,7 +23,8 @@
     "react-select": "^5.5.9",
     "recharts": "^2.1.15",
     "serve": "^14.0.1",
-    "upload-js": "^2.2.1"
+    "upload-js": "^2.2.1",
+    "uuid": "^9.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

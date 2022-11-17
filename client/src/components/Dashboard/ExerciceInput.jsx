@@ -31,8 +31,8 @@ function ExerciceInput(props) {
     props.changeExercice(exercice);
   }, [exercice]);
 
-    function handleClickPoubelle(){
-         props.onDeleteExercices(props.num);
+  function handleClickPoubelle(){
+         props.onDeleteExercices(props.id);
 
          event.preventDefault();
   }
@@ -54,7 +54,7 @@ function ExerciceInput(props) {
         :
               <div className="form-group row">
                 <label onClick={handleClickLabel} className="col-sm-2 col-form-label exercice-label">
-                  Exercice {props.num+1}
+                  Exercice {props.index+1}
                   {props.debutant ? null : props.clickExercice ?
                     <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
                   :

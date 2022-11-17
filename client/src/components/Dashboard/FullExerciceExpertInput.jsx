@@ -98,35 +98,15 @@ function FullExerciceInput(props){
         })
     }
 
-    function perc2color(perc,min,max) {
-                var base = (max - min);
-
-                if (base == 0) { perc = 100; }
-                else {
-                    perc = (perc - min) / base * 100;
-                }
-                var r, g, b = 0;
-                if (perc < 50) {
-                    r = 255;
-                    g = Math.round(5.1 * perc);
-                }
-                else {
-                    g = 255;
-                    r = Math.round(510 - 5.10 * perc);
-                }
-                var h = r * 0x10000 + g * 0x100 + b * 0x1;
-                return '#' + ('000000' + h.toString(16)).slice(-6);
-    }
-
     return(
           <div className="exercice-div">
-              <hr className="hr-exercice"/>
+              <hr className={props.modeSombre===true ? "hr-exercice-dark " : "hr-exercice"}/>
 
               <ExerciceInput 
                 debutant={false} id="exercice" onClickExercice={handleClickExercice} 
                 clickExercice={clickExercice} value={fullExercice.exercice} num={props.num} 
                 onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice} 
-                key={props.num} exercice={fullExercice.exercice}
+                key={props.num} exercice={fullExercice.exercice} modeSombre={props.modeSombre}
               />
 
 
@@ -136,7 +116,7 @@ function FullExerciceInput(props){
                       {categories ? categories.map((categorie,index) => {
                         return(
                         <div>
-                          <hr className="hr-serie"/>
+                          <hr className={props.modeSombre===true ? "hr-serie-dark " : "hr-serie"}/>
 
                           <CategorieInput
                             key={index}
@@ -145,6 +125,7 @@ function FullExerciceInput(props){
                             exercice={fullExercice.exercice}
                             changeCategorie={changeCategorie}
                             onDeleteCategorie={onDeleteCategorie}
+                            modeSombre={props.modeSombre}
                           />
 
                         </div>
@@ -161,7 +142,7 @@ function FullExerciceInput(props){
             {series ? series.map((serie,index) => {
             return(
             <div>
-                <hr className="hr-serie"/>
+                <hr className={props.modeSombre===true ? "hr-serie-dark " : "hr-serie"}/>
 
                 <SerieInput
                     key={index}
@@ -176,6 +157,7 @@ function FullExerciceInput(props){
                     onAddSerie={onAddSerie}
                     changeSerie={changeSerie}
                     onDeleteSerie={onDeleteSerie}
+                    modeSombre={props.modeSombre}
                 />
             </div>
             );

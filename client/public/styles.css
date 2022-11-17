@@ -240,6 +240,11 @@ table.profile-table{
 
 }
 
+.hr-serie-dark{
+    border-width: 2px;
+    border-color: rgb(116, 116, 116);
+}
+
 .copy-btn{
     margin-left: 1%;
 }

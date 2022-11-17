@@ -128,6 +128,7 @@ function EchauffementInput(props){
                 id="exercice" key={props.num} onClickExercice={handleClickExercice} echauffement={echauffement.echauffement}
                 clickExercice={clickExercice} value={echauffement.exercice} num={props.num} 
                 onDeleteEchauffements={props.onDeleteEchauffements} changeEchauffement={changeEchauffement} 
+                modeSombre={props.modeSombre}
               />
 
               {clickExercice ?
@@ -139,6 +140,7 @@ function EchauffementInput(props){
                           <hr className="hr-serie"/>
 
                           <CategorieInput
+                            modeSombre={props.modeSombre}
                             key={index}
                             num={index}
                             categorie={categorie}
@@ -176,6 +178,7 @@ function EchauffementInput(props){
                     onAddSerie={onAddSerie}
                     changeSerie={changeSerie}
                     onDeleteSerie={onDeleteSerie}
+                    modeSombre={props.modeSombre}
                 />
             </div>
             );

@@ -4,6 +4,7 @@ import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Select from "react-select";
 import customStyles from "./customStyles.js";
+import customStylesDark from "./customStylesDark.js";
 
 import lesCategories from "./Categories/Categories";
 import lesTypesBarres from "./Categories/TypesBarres.js";
@@ -33,10 +34,9 @@ import Douleur from "./Categories/Douleur.js";
 import StreetworkoutHiddenText from "./Categories/StreetworkoutHiddenText.js";
 import CategorieHiddenText from "./Categories/CategorieHiddenText.js";
 import ElastiqueHiddenText from "./Categories/ElastiqueHiddenText.js";
-import positionBras from "./Categories/PositionBras.js";
 
 
-const StyleSlider = styled(Slider)(({ theme }) => ({
+const StyleSliderWhite = styled(Slider)(({ theme }) => ({
   '& .MuiSlider-thumb': {
     color: red['A700'],
   },
@@ -55,6 +55,29 @@ const StyleSlider = styled(Slider)(({ theme }) => ({
   '& .MuiSlider-mark': {
     backgroundColor: red['A700'],
   },
+}));
+
+const StyleSliderBlack = styled(Slider)(({ theme }) => ({
+    '& .MuiSlider-thumb': {
+    color: red['A700'],
+    },
+    '& .MuiSlider-thumb:hover': {
+    color: red['A400'],
+    },
+    '& .MuiSlider-dragging': {
+    backgroundColor: red['A700'],
+    },
+    '& .MuiSlider-rail': {
+    backgroundColor: red['A700'],
+    },
+    '& .MuiSlider-track': {
+    backgroundColor: red['A700'],
+    },
+    '& .MuiSlider-mark': {
+    backgroundColor: red['A700'],
+    },'& .MuiSlider-markLabel': {
+    color: "white",
+    }
 }));
 
 const marks = [
@@ -183,26 +206,32 @@ function CategorieInput(props) {
          event.preventDefault();
   }
 
-  function divStyle(index){
-        let array = ['ff0000', 'aa0000', '550000', '000000']
-        let numb = index%4
-        let color = '#' + array[numb]
-        let font;
+  function divStyle(index, dark){
+    let fourColorsArray = []
+    if(dark){
+      fourColorsArray = ['ffffff', 'ffc9c9', 'ff8282', 'ff0000']
+    }
+    else{
+      fourColorsArray = ['ff0000', 'aa0000', '550000', '000000']
+    }
+    let numb = index%4
+    let color = '#' + fourColorsArray[numb]
+    let font;
 
-        if (index%2===0){
-            font = 400;
-        } else {
-            font = 500;
-        }
+    if (index%2===0){
+        font = 400;
+    } else {
+        font = 500;
+    }
 
-        return ({
-          color: color,
-          fontWeight:font
-        })
-  }
+    return ({
+      color: color,
+      fontWeight:font
+    })
+} 
 
   return (
-  <div style={divStyle(props.num)} className="Categorie">
+  <div style={divStyle(props.num, props.modeSombre)} className="Categorie">
 
     {categorie.name ?
         null
@@ -212,7 +241,7 @@ function CategorieInput(props) {
                     placeholder="Categorie..."
                     onChange={handleChange}
                     options={lesCategories}
-                    styles={customStyles}
+                    styles={props.modeSombre===true ? customStylesDark : customStyles}
                     value={{value: categorie.name, label: categorie.name}}
                 />
         :
@@ -222,7 +251,7 @@ function CategorieInput(props) {
                 :
                     <label className="col-sm-2 col-form-label">
                           Catégorie {props.dashboard ? props.index+1 : null} ({props.exercice.name})
-                          <img className="myDIV" onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                          <img className={props.modeSombre===true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                           <div className={categorieHiddenClick}>
                               <CategorieHiddenText />
                           </div>
@@ -232,13 +261,13 @@ function CategorieInput(props) {
                     placeholder="Categorie..."
                     onChange={handleChange}
                     options={lesCategories}
-                    styles={customStyles}
+                    styles={props.modeSombre===true ? customStylesDark : customStyles}
                     className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                     value={{value: categorie.name, label: categorie.name}}
                 />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
           </div>
       }
@@ -249,7 +278,7 @@ function CategorieInput(props) {
                     placeholder="Categorie..."
                     onChange={handleChange}
                     options={lesCategories}
-                    styles={customStyles}
+                    styles={props.modeSombre===true ? customStylesDark : customStyles}
                     value={{value: categorie.name, label: categorie.name}}
                 />
         :
@@ -259,7 +288,7 @@ function CategorieInput(props) {
                 :
                     <label className="col-sm-2 col-form-label">
                           Catégorie {props.dashboard ? props.index+1 : null} ({props.exercice.name})
-                          <img className="myDIV" onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                          <img className={props.modeSombre===true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                           <div className={categorieHiddenClick}>
                               <CategorieHiddenText />
                           </div>
@@ -269,13 +298,13 @@ function CategorieInput(props) {
                     placeholder="Categorie..."
                     onChange={handleChange}
                     options={lesCategories}
-                    styles={customStyles}
+                    styles={props.modeSombre===true ? customStylesDark : customStyles}
                     className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                     value={{value: categorie.name, label: categorie.name}}
                 />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
           </div>
       : null }
@@ -286,7 +315,7 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={Streetworkout}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 value={{value: categorie.input, label: categorie.input}}
             />
         :
@@ -296,7 +325,7 @@ function CategorieInput(props) {
                 :
                     <label className="col-sm-2 col-form-label">
                           {categorie.name}
-                          <img className="myDIV" onClick={handleClickStreetworkout} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                          <img className={props.modeSombre===true ? "myDIV questionDark " : "myDIV"} onClick={handleClickStreetworkout} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                           <div className={streetworkoutHiddenClicked}>
                               <StreetworkoutHiddenText />
                           </div>
@@ -306,13 +335,13 @@ function CategorieInput(props) {
                     placeholder="Categorie..."
                     onChange={handleChange}
                     options={Streetworkout}
-                    styles={customStyles}
+                    styles={props.modeSombre===true ? customStylesDark : customStyles}
                     className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                     value={{value: categorie.input, label: categorie.input}}
                 />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -322,7 +351,7 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={lesTypesBarres}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 value={{value: categorie.input, label: categorie.input}}
             />
         :
@@ -338,13 +367,13 @@ function CategorieInput(props) {
                     placeholder="Categorie..."
                     onChange={handleChange}
                     options={lesTypesBarres}
-                    styles={customStyles}
+                    styles={props.modeSombre===true ? customStylesDark : customStyles}
                     className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                     value={{value: categorie.input, label: categorie.input}}
                 />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -354,7 +383,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={MusclesCategorie}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -370,13 +399,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={MusclesCategorie}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -386,7 +415,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={PositionCorps}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -402,13 +431,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={PositionCorps}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -418,7 +447,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={PositionBras}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -434,13 +463,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={PositionBras}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -450,7 +479,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={PositionJambes}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -466,13 +495,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={PositionJambes}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -482,7 +511,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={PositionMains}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -498,13 +527,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={PositionMains}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -514,7 +543,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={PositionPieds}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -530,13 +559,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={PositionPieds}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -546,7 +575,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={AxeCategorie}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -562,13 +591,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={AxeCategorie}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -578,7 +607,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={CoudeGenou}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -594,13 +623,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={CoudeGenou}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -610,7 +639,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={Unilateral}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -626,13 +655,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={Unilateral}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -642,7 +671,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={Execution}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -658,13 +687,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={Execution}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -674,7 +703,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={ExecutionSpecifique}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -690,13 +719,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={ExecutionSpecifique}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -704,7 +733,7 @@ function CategorieInput(props) {
         props.info === "false" ?
                 <div className={props.info === "false" ? "form-control" : "col-sm-9"}>
                     <input type="text"
-                          className="form-control"
+                          className={props.modeSombre===true ? "form-control inputDark " : "form-control"}
                           id="input"
                           value={categorie.input}
                           onChange={handleChange}
@@ -721,7 +750,7 @@ function CategorieInput(props) {
                 }
                 <div className={props.info === "false" ? "form-control" : "col-sm-9"}>
                     <input type="text"
-                          className="form-control"
+                          className={props.modeSombre===true ? "form-control inputDark " : "form-control"}
                           id="input"
                           value={categorie.input}
                           onChange={handleChange}
@@ -729,7 +758,7 @@ function CategorieInput(props) {
                 </div>
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -739,7 +768,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={RPE}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -755,13 +784,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={RPE}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -771,7 +800,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={Douleur}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -787,13 +816,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={Douleur}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -803,7 +832,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={PriseCategorie}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -819,13 +848,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={PriseCategorie}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -835,7 +864,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={TempoCategorie}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -851,13 +880,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={TempoCategorie}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -867,7 +896,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={Partiel}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -883,13 +912,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={Partiel}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -899,7 +928,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={DépartCategorie}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -915,13 +944,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={DépartCategorie}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -931,7 +960,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={ExplosifCategorie}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -947,13 +976,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={ExplosifCategorie}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -963,7 +992,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={Halterophilie}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -979,13 +1008,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={Halterophilie}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -995,7 +1024,7 @@ function CategorieInput(props) {
             placeholder="Categorie..."
             onChange={handleChange}
             options={AccessoireObjet}
-            styles={customStyles}
+            styles={props.modeSombre===true ? customStylesDark : customStyles}
             value={{value: categorie.input, label: categorie.input}}
         />
     :
@@ -1011,13 +1040,13 @@ function CategorieInput(props) {
                 placeholder="Categorie..."
                 onChange={handleChange}
                 options={AccessoireObjet}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 value={{value: categorie.input, label: categorie.input}}
             />
 
                 {props.dashboard ? null : <div className="col-sm-1">
-                  <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                 </div>}
             </div>
       : null }
@@ -1027,7 +1056,7 @@ function CategorieInput(props) {
             <Select
                 placeholder="Utilisation..."
                 onChange={handleChange}
-                styles={customStyles}
+                styles={props.modeSombre===true ? customStylesDark : customStyles}
                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                 options={[
                     {className:"select-title", value:"title", label:"/ (défaut)"},
@@ -1051,7 +1080,7 @@ function CategorieInput(props) {
                     <Select
                         placeholder="Utilisation..."
                         onChange={handleChange}
-                        styles={customStyles}
+                        styles={props.modeSombre===true ? customStylesDark : customStyles}
                         className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                         options={[
                             {className:"select-title", value:"title", label:"/ (défaut)"},
@@ -1062,7 +1091,7 @@ function CategorieInput(props) {
                     />
 
                     {props.dashboard ? null : <div className="col-sm-1">
-                      <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                      <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                     </div>}
             </div>
           :
@@ -1078,7 +1107,7 @@ function CategorieInput(props) {
                     <Select
                         placeholder="Utilisation..."
                         onChange={handleChange}
-                        styles={customStyles}
+                        styles={props.modeSombre===true ? customStylesDark : customStyles}
                         className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                         options={[
                             {id: "utilisation", className:"select-title", value:"title", label:"/ (défaut)"},
@@ -1089,7 +1118,7 @@ function CategorieInput(props) {
                     />
 
                     {props.dashboard ? null : <div className="col-sm-1">
-                      <img className="poubelle" onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                      <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                     </div>}
                 </div>
 
@@ -1101,7 +1130,7 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={lesElastiques}
-                        styles={customStyles}
+                        styles={props.modeSombre===true ? customStylesDark : customStyles}
                         className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                         value={{value: categorie.input, label: categorie.input}}
                     />
@@ -1114,7 +1143,7 @@ function CategorieInput(props) {
                 </label>
                 <div className="col-sm-9">
                     <input type="text"
-                          className="form-control"
+                          className={props.modeSombre===true ? "form-control inputDark " : "form-control"}
                           id="estimation"
                           value={categorie.estimation}
                           onChange={handleChange}
@@ -1127,7 +1156,8 @@ function CategorieInput(props) {
                     <label className="col-sm-2 col-form-label">
                       Etirement (mètres)
                     </label>
-                    <StyleSlider
+                    {props.modeSombre === true ?
+                    <StyleSliderBlack
                         style={
                         {
                             width: "74%",
@@ -1144,19 +1174,38 @@ function CategorieInput(props) {
                         valueLabelDisplay="auto"
                         marks={marks}
                     />
+                    :
+                    <StyleSliderWhite
+                        style={
+                        {
+                            width: "74%",
+                            marginLeft: "1%"
+                        }
+                        }
+                        defaultValue={parseInt(categorie.tension)}
+                        onChange={handleChangeSlider}
+                        getAriaValueText={valuetext}
+                        aria-labelledby="discrete-slider-custom"
+                        step={0.5}
+                        max={9}
+                        min={0.5}
+                        valueLabelDisplay="auto"
+                        marks={marks}
+                    />
+                    }
                 </div>
 
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">
                       Estimation
-                      <img className="myDIV" onClick={handleClickElastique} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                      <img className={props.modeSombre===true ? "myDIV questionDark " : "myDIV"} onClick={handleClickElastique} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                       <div className={elastiqueHiddenClick}>
                           <ElastiqueHiddenText />
                       </div>
                     </label>
                     <div className="col-sm-9">
                       <input type="text"
-                          className="form-control"
+                          className={props.modeSombre===true ? "form-control inputDark " : "form-control"}
                           id="estimation"
                           value={categorie.estimation+" kg"}
                           readOnly
