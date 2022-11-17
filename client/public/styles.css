@@ -350,6 +350,11 @@ table.Stats-table{
     border-color: #000000;
 }
 
+.inputDark{
+    color: white;
+    background-color: black;
+}
+
 .social:hover{
     filter: invert(0.6);
 }
@@ -376,6 +381,10 @@ table.Stats-table{
 .dashboard-table{
     width:100%;
     margin-bottom: 40px;
+}
+
+.table-dark{
+    background-color: #330000;
 }
 
 .td-left{
@@ -473,7 +482,7 @@ table.table1 {
 }
 
 .Dashboard-h1{
-    margin: 20px 0;
+    margin: 40px 0;
 
 }
 
@@ -695,6 +704,13 @@ table.connexion-table td.connexion-img-td {
 }
 
 /* NavigBar */
+
+.div-navigbar-text{
+    text-align: center;
+    margin: -20px 0 0 -5px !important;
+    font-size: 15px !important;
+}
+
 .warning-border{
     margin-top: 1%;
     background-color: #9b0000;
@@ -1095,6 +1111,10 @@ table.connexion-table td.connexion-img-td {
     .piechart{
         font-size:5px;
 
+    }
+
+    .toggle-is-clicked{
+        height: 460px;
     }
 
     

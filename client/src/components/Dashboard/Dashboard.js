@@ -548,6 +548,7 @@ function Dashboard() {
                                     {id:"tri", label:"%PDC (ordre décroissant)", value:"PDC (ordre décroissant)"}
                                     ]}
                                     styles={user.modeSombre ? customStylesDark : customStyles}
+                                    value = {{label: params.tri, value: params.tri}}
                                 />
                             </div>
 
@@ -565,6 +566,7 @@ function Dashboard() {
                                     {id:"periode", label:"Depuis 1 an", value:"1y"}
                                     ]}
                                     styles={user.modeSombre ? customStylesDark : customStyles}
+                                    value = {{label: params.periode, value: params.periode}}
                                 />
                             </div>
                         </div>
@@ -574,7 +576,7 @@ function Dashboard() {
                                 <label className="col-form-label">
                                   Exercice
                                 </label>
-                                <ExerciceInput exercice={exercice.exercice} taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                                <ExerciceInput modeSombre={user.modeSombre ? true : false} exercice={exercice.exercice} taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
                             </div>
 
                             <div className="form-group col-sm-6">
@@ -582,7 +584,7 @@ function Dashboard() {
                                   Reps / Temps
                                 </label>
                                 <input type="text"
-                                  className="form-control"
+                                  className={user.modeSombre ? "inputDark form-control" : "form-control"}
                                   value={params.repsFrom}
                                   onChange={handleChange}
                                   placeholder="Aucun filtre"
@@ -592,7 +594,7 @@ function Dashboard() {
                                   à
                                 </label>
                                 <input type="text"
-                                  className="form-control"
+                                  className={user.modeSombre ? "inputDark form-control" : "form-control"}
                                   value={params.repsTo}
                                   onChange={handleChange}
                                   placeholder="Aucun filtre"
@@ -608,7 +610,7 @@ function Dashboard() {
                                         <label onClick={handleClick} id={index} className="col-form-label categorie-label">
                                           Catégorie {index+1} <img className="reset-img" onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                         </label>
-                                        <CategorieInput categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
+                                        <CategorieInput modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
                                     </div>
                                 </div>
                             )
@@ -621,7 +623,7 @@ function Dashboard() {
                                         <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
                                           Détail {index+1} <img onClick={handleClickDetail} className="reset-img" src={require('../../images/icons/reset.png')} />
                                         </label>
-                                        <DetailInput detail={details[index]} info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
+                                        <DetailInput modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
                                     </div>
                                 </div>
                             )
@@ -635,6 +637,7 @@ function Dashboard() {
                                 <Select onChange={handleChange} placeholder="Nom..." id="nom"
                                     options = {listeNoms}
                                     styles={user.modeSombre ? customStylesDark : customStyles}
+                                    value = {{label: params.nom, value: params.nom}}
                                 />
                             </div>
 
@@ -824,7 +827,11 @@ function Dashboard() {
                                         <label className="col-form-label">
                                           Exercice
                                         </label>
-                                        <ExerciceInput exercice={exercice.exercice} taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                                        <ExerciceInput modeSombre={user.modeSombre ? true : false} 
+                                            exercice={exercice.exercice} 
+                                            taille="petit" 
+                                            typeSerie={0} id="exercice" changeExercice={changeExercice} 
+                                        />
                                     </div>
 
                                     <div className="form-group col-sm-6">
@@ -832,7 +839,7 @@ function Dashboard() {
                                           Reps / Temps
                                         </label>
                                         <input type="text"
-                                          className="form-control"
+                                          className={user.modeSombre ? "inputDark form-control" : "form-control"}
                                           value={params.repsFrom}
                                           onChange={handleChange}
                                           placeholder="Aucun filtre"
@@ -842,7 +849,7 @@ function Dashboard() {
                                           à
                                         </label>
                                         <input type="text"
-                                          className="form-control"
+                                          className={user.modeSombre ? "inputDark form-control" : "form-control"}
                                           value={params.repsTo}
                                           onChange={handleChange}
                                           placeholder="Aucun filtre"
@@ -858,7 +865,7 @@ function Dashboard() {
                                                 <label onClick={handleClick} id={index} className="col-form-label categorie-label">
                                                   Catégorie {index+1} <img onClick={handleClickDetail} className="reset-img" src={require('../../images/icons/reset.png')} />
                                                 </label>
-                                                <CategorieInput categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
+                                                <CategorieInput modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie"+index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie}/>
                                             </div>
                                         </div>
                                     )
@@ -871,7 +878,7 @@ function Dashboard() {
                                                 <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
                                                   Détail {index+1} <img onClick={handleClickDetail} className="reset-img" src={require('../../images/icons/reset.png')} />
                                                 </label>
-                                                <DetailInput detail={details[index]} info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
+                                                <DetailInput modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail"+index} index={index} num={index} dashboard={true} changeDetail={changeDetail}/>
                                             </div>
                                         </div>
                                     )

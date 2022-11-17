@@ -86,26 +86,28 @@ function NavigBar(props){
                                                 <a className="nav-link" href="/social"><img className="icon-navbar" src={require('../images/icons/social.png')} alt='social' /></a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <a className="param-choice" href="/compte"> Compte </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a className="param-choice" href="/aide"> Aide </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a className="param-choice" href="/a_propos"> A propos </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a className="param-choice" href="/CGU"> CGU </a>
-                                            </td>
-                                        </tr>
+                                        <div className="div-navigbar-text">
+                                            <tr>
+                                                <td>
+                                                    <a className="param-choice" href="/compte"> Compte </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a className="param-choice" href="/aide"> Aide </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a className="param-choice" href="/a_propos"> A propos </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a className="param-choice" href="/CGU"> CGU </a>
+                                                </td>
+                                            </tr>
+                                        </div>
                                     </tbody>
                                 </table>
                             </div>

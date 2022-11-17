@@ -14,6 +14,18 @@ const customStylesDark = {
       backgroundColor: "black",
       color: "white",
     }),
+    placeholder: (defaultStyles) => ({
+      ...defaultStyles,
+      color: 'white',
+    }),
+    singleValue: (defaultStyles) => ({
+      ...defaultStyles,
+      color: 'white',
+    }),
+    input: (defaultStyles) => ({
+      ...defaultStyles,
+      color: 'white',
+    }),
   }
 
 export default customStylesDark;
