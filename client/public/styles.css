@@ -283,7 +283,8 @@ table.profile-table {
 table.Stats-table {
     table-layout: fixed;
     width: 100%;
-    margin: auto
+    margin: auto;
+    margin-top: 40px;
 }
 
 .chart-little-title {
@@ -368,7 +369,7 @@ table.Stats-table {
 
 
 .Stats-div h1 {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 
 }
 
