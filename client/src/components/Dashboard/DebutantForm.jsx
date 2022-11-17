@@ -64,16 +64,16 @@ function DebutantForm(props) {
 
         //API
         if (err === false) {
-            // try {
-            // const { data } = await API.debutantform({seance: seance, id: localStorage.getItem("id")});
-            // if (data.success === true){
-            //     window.location = "/dashboard";
-            // }else{
-            //     alert(data.message);
-            // }
-            // } catch (error) {
-            // alert(error);
-            // }
+            try {
+                const { data } = await API.debutantform({ seance: seance, id: localStorage.getItem("id") });
+                if (data.success === true) {
+                    window.location = "/dashboard";
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                alert(error);
+            }
         }
     }
 

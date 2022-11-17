@@ -11,6 +11,7 @@ import Seul from "./Details/Seul";
 import Environnement from "./Details/Environnement";
 import Courbatures from "./Details/Courbatures";
 import customStyles from "./customStyles.js";
+import customStylesDark from "./customStylesDark";
 import Select from "react-select";
 
 function DetailInput(props) {
@@ -83,7 +84,7 @@ function DetailInput(props) {
         <div className="form-group row">
           {props.info === "false" ? null :
             <label className="col-sm-2 col-form-label">
-              Detail {props.dashboard ? props.index + 1 : null} {props.id}
+              Detail {props.index + 1}
             </label>
           }
 
@@ -92,7 +93,7 @@ function DetailInput(props) {
               placeholder="Detail..."
               onChange={handleChange}
               options={Details}
-              styles={customStyles}
+              styles={props.modeSombre === true ? customStylesDark : customStyles}
               value={{ value: detail.name, label: detail.name }}
             />
           </div>
@@ -116,7 +117,7 @@ function DetailInput(props) {
               placeholder="Detail..."
               onChange={handleChange}
               options={Details}
-              styles={customStyles}
+              styles={props.modeSombre === true ? customStylesDark : customStyles}
               value={{ value: detail.name, label: detail.name }}
             />
           </div>
@@ -133,7 +134,7 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Meteo}
-            styles={customStyles}
+            styles={props.modeSombre === true ? customStylesDark : customStyles}
             value={{ value: detail.input, label: detail.input }}
           />
           :
@@ -146,7 +147,7 @@ function DetailInput(props) {
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Meteo}
-                styles={customStyles}
+                styles={props.modeSombre === true ? customStylesDark : customStyles}
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
@@ -162,7 +163,7 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={DouleurSeance}
-            styles={customStyles}
+            styles={props.modeSombre === true ? customStylesDark : customStyles}
             value={{ value: detail.input, label: detail.input }}
           />
           :
@@ -175,7 +176,7 @@ function DetailInput(props) {
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={DouleurSeance}
-                styles={customStyles}
+                styles={props.modeSombre === true ? customStylesDark : customStyles}
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
@@ -191,7 +192,7 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Fatigue}
-            styles={customStyles}
+            styles={props.modeSombre === true ? customStylesDark : customStyles}
             value={{ value: detail.input, label: detail.input }}
           />
           :
@@ -204,7 +205,7 @@ function DetailInput(props) {
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Fatigue}
-                styles={customStyles}
+                styles={props.modeSombre === true ? customStylesDark : customStyles}
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
@@ -220,7 +221,7 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Preworkout}
-            styles={customStyles}
+            styles={props.modeSombre === true ? customStylesDark : customStyles}
             value={{ value: detail.input, label: detail.input }}
           />
           :
@@ -233,7 +234,7 @@ function DetailInput(props) {
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Preworkout}
-                styles={customStyles}
+                styles={props.modeSombre === true ? customStylesDark : customStyles}
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
@@ -249,7 +250,7 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={DRUG}
-            styles={customStyles}
+            styles={props.modeSombre === true ? customStylesDark : customStyles}
             value={{ value: detail.input, label: detail.input }}
           />
           :
@@ -262,7 +263,7 @@ function DetailInput(props) {
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={DRUG}
-                styles={customStyles}
+                styles={props.modeSombre === true ? customStylesDark : customStyles}
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
@@ -278,7 +279,7 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Psycho}
-            styles={customStyles}
+            styles={props.modeSombre === true ? customStylesDark : customStyles}
             value={{ value: detail.input, label: detail.input }}
           />
           :
@@ -291,7 +292,7 @@ function DetailInput(props) {
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Psycho}
-                styles={customStyles}
+                styles={props.modeSombre === true ? customStylesDark : customStyles}
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
@@ -307,7 +308,7 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Seul}
-            styles={customStyles}
+            styles={props.modeSombre === true ? customStylesDark : customStyles}
             value={{ value: detail.input, label: detail.input }}
           />
           :
@@ -320,7 +321,7 @@ function DetailInput(props) {
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Seul}
-                styles={customStyles}
+                styles={props.modeSombre === true ? customStylesDark : customStyles}
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
@@ -336,7 +337,7 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Environnement}
-            styles={customStyles}
+            styles={props.modeSombre === true ? customStylesDark : customStyles}
             value={{ value: detail.input, label: detail.input }}
           />
           :
@@ -349,7 +350,7 @@ function DetailInput(props) {
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Environnement}
-                styles={customStyles}
+                styles={props.modeSombre === true ? customStylesDark : customStyles}
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
@@ -365,7 +366,7 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Courbatures}
-            styles={customStyles}
+            styles={props.modeSombre === true ? customStylesDark : customStyles}
             value={{ value: detail.input, label: detail.input }}
           />
           :
@@ -378,7 +379,7 @@ function DetailInput(props) {
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Courbatures}
-                styles={customStyles}
+                styles={props.modeSombre === true ? customStylesDark : customStyles}
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
