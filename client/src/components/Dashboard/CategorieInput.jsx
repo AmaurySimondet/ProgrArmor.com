@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import Slider from '@mui/material/Slider';
 import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
@@ -37,1188 +37,1189 @@ import ElastiqueHiddenText from "./Categories/ElastiqueHiddenText.js";
 
 
 const StyleSliderWhite = styled(Slider)(({ theme }) => ({
-  '& .MuiSlider-thumb': {
-    color: red['A700'],
-  },
-  '& .MuiSlider-thumb:hover': {
-    color: red['A400'],
-  },
-  '& .MuiSlider-dragging': {
-    backgroundColor: red['A700'],
-  },
-  '& .MuiSlider-rail': {
-    backgroundColor: red['A700'],
-  },
-  '& .MuiSlider-track': {
-    backgroundColor: red['A700'],
-  },
-  '& .MuiSlider-mark': {
-    backgroundColor: red['A700'],
-  },
+    '& .MuiSlider-thumb': {
+        color: red['A700'],
+    },
+    '& .MuiSlider-thumb:hover': {
+        color: red['A400'],
+    },
+    '& .MuiSlider-dragging': {
+        backgroundColor: red['A700'],
+    },
+    '& .MuiSlider-rail': {
+        backgroundColor: red['A700'],
+    },
+    '& .MuiSlider-track': {
+        backgroundColor: red['A700'],
+    },
+    '& .MuiSlider-mark': {
+        backgroundColor: red['A700'],
+    },
 }));
 
 const StyleSliderBlack = styled(Slider)(({ theme }) => ({
     '& .MuiSlider-thumb': {
-    color: red['A700'],
+        color: red['A700'],
     },
     '& .MuiSlider-thumb:hover': {
-    color: red['A400'],
+        color: red['A400'],
     },
     '& .MuiSlider-dragging': {
-    backgroundColor: red['A700'],
+        backgroundColor: red['A700'],
     },
     '& .MuiSlider-rail': {
-    backgroundColor: red['A700'],
+        backgroundColor: red['A700'],
     },
     '& .MuiSlider-track': {
-    backgroundColor: red['A700'],
+        backgroundColor: red['A700'],
     },
     '& .MuiSlider-mark': {
-    backgroundColor: red['A700'],
-    },'& .MuiSlider-markLabel': {
-    color: "white",
+        backgroundColor: red['A700'],
+    }, '& .MuiSlider-markLabel': {
+        color: "white",
     }
 }));
 
 const marks = [
-  {
-    value: 0,
-    label: '0',
-  },
-  {
-    value: 0.5,
-    label: '0.5',
-  },
-  {
-    value: 1.5,
-    label: '1.5',
-  },
-  {
-    value: 3,
-    label: '3',
-  },
-  {
-    value: 6,
-    label: '6',
-  },
-  {
-    value: 9,
-    label: '9',
-  },
+    {
+        value: 0,
+        label: '0',
+    },
+    {
+        value: 0.5,
+        label: '0.5',
+    },
+    {
+        value: 1.5,
+        label: '1.5',
+    },
+    {
+        value: 3,
+        label: '3',
+    },
+    {
+        value: 6,
+        label: '6',
+    },
+    {
+        value: 9,
+        label: '9',
+    },
 
 ];
 
 function valuetext(value) {
-  return `${value}%`;
+    return `${value}%`;
 
 }
 
 function createEntry(item) {
-  return (
-    <option
-      key={item.id}
-      className={item.class}
-      value={item.value}
-    >
-      {item.name}
-    </option>
-  );
+    return (
+        <option
+            key={item.id}
+            className={item.class}
+            value={item.value}
+        >
+            {item.name}
+        </option>
+    );
 }
 
 function CategorieInput(props) {
-  const [categorie, setCategorie] = useState(props.categorie);
-  const [streetworkoutHiddenClicked, setStreetworkoutHiddenClicked] = useState("hide");
-  const [categorieHiddenClick, setcategorieHiddenClick] = useState('hide')
-  const [elastiqueHiddenClick, setElastiqueHiddenClick] = useState('hide')
+    const [categorie, setCategorie] = useState(props.categorie);
+    const [streetworkoutHiddenClicked, setStreetworkoutHiddenClicked] = useState("hide");
+    const [categorieHiddenClick, setcategorieHiddenClick] = useState('hide')
+    const [elastiqueHiddenClick, setElastiqueHiddenClick] = useState('hide')
 
-  function handleClickElastique(){
-    if(elastiqueHiddenClick==="hide"){
-        setElastiqueHiddenClick("nothide");
-    } else { setElastiqueHiddenClick("hide")};
-  }
-
-  function handleClickCategorie(){
-    if(categorieHiddenClick==="hide"){
-        setcategorieHiddenClick("nothide");
-    } else { setcategorieHiddenClick("hide")};
-  }
-
-  function handleClickStreetworkout(){
-    if(streetworkoutHiddenClicked==="hide"){
-        setStreetworkoutHiddenClicked("nothide");
-    } else { setStreetworkoutHiddenClicked("hide")};
-  }
-
-  function handleChange(event){
-    if(event.target){
-        setCategorie(oldCategorie => {
-        return ({
-            ...oldCategorie,
-            [event.target.id]: event.target.value,
-            })
-        });
+    function handleClickElastique() {
+        if (elastiqueHiddenClick === "hide") {
+            setElastiqueHiddenClick("nothide");
+        } else { setElastiqueHiddenClick("hide") };
     }
-    if(event.id==="muscle"){
-        setCategorie(oldCategorie => {
-        return ({
-            ...oldCategorie,
-            input: event.value,
-            })
-        });
+
+    function handleClickCategorie() {
+        if (categorieHiddenClick === "hide") {
+            setcategorieHiddenClick("nothide");
+        } else { setcategorieHiddenClick("hide") };
     }
-    else{
+
+    function handleClickStreetworkout() {
+        if (streetworkoutHiddenClicked === "hide") {
+            setStreetworkoutHiddenClicked("nothide");
+        } else { setStreetworkoutHiddenClicked("hide") };
+    }
+
+    function handleChange(event) {
+        if (event.target) {
+            setCategorie(oldCategorie => {
+                return ({
+                    ...oldCategorie,
+                    [event.target.id]: event.target.value,
+                })
+            });
+        }
+        if (event.id === "muscle") {
+            setCategorie(oldCategorie => {
+                return ({
+                    ...oldCategorie,
+                    input: event.value,
+                })
+            });
+        }
+        else {
+            setCategorie(oldCategorie => {
+                return ({
+                    ...oldCategorie,
+                    [event.id]: event.value,
+                })
+            });
+        }
+    }
+
+    function handleChangeSlider(event) {
+        event.preventDefault();
+
         setCategorie(oldCategorie => {
             return ({
                 ...oldCategorie,
-                [event.id]: event.value,
-                })
-            });
-    }
-  }
-
-  function handleChangeSlider(event){
-    event.preventDefault();
-
-    setCategorie(oldCategorie => {
-            return ({
-            ...oldCategorie,
-            tension: event.target.value,
-            estimation: (event.target.value/3*parseInt(categorie.input)).toFixed(2),
-        })});
-  }
-
-  useEffect(() => {
-    props.changeCategorie(categorie, props.num)
-    if (categorie.name === "title"){
-        props.onDeleteCategorie
-    }
-  }, [categorie])
-
-  useEffect(() => {
-    if(props.click){
-        setCategorie({num : props.num})
-    }
-  }, [props.click])
-
-  function handleClickPoubelle(){
-         props.onDeleteCategorie(props.num);
-
-         event.preventDefault();
-  }
-
-  function divStyle(index, dark){
-    let fourColorsArray = []
-    if(dark){
-      fourColorsArray = ['ffffff', 'ffc9c9', 'ff8282', 'ff0000']
-    }
-    else{
-      fourColorsArray = ['ff0000', 'aa0000', '550000', '000000']
-    }
-    let numb = index%4
-    let color = '#' + fourColorsArray[numb]
-    let font;
-
-    if (index%2===0){
-        font = 400;
-    } else {
-        font = 500;
+                tension: event.target.value,
+                estimation: (event.target.value / 3 * parseInt(categorie.input)).toFixed(2),
+            })
+        });
     }
 
-    return ({
-      color: color,
-      fontWeight:font
-    })
-} 
+    useEffect(() => {
+        props.changeCategorie(categorie, props.id)
+        if (categorie.name === "title") {
+            props.onDeleteCategorie
+        }
+    }, [categorie])
 
-  return (
-  <div style={divStyle(props.num, props.modeSombre)} className="Categorie">
+    useEffect(() => {
+        if (props.click) {
+            setCategorie({ id: props.id })
+        }
+    }, [props.click])
 
-    {categorie.name ?
-        null
-      :
-        props.info === "false" ?
-                <Select
-                    placeholder="Categorie..."
-                    onChange={handleChange}
-                    options={lesCategories}
-                    styles={props.modeSombre===true ? customStylesDark : customStyles}
-                    value={{value: categorie.name, label: categorie.name}}
-                />
-        :
-        <div className="form-group row">
-                {props.info === "false" ?
-                    null
+    function handleClickPoubelle() {
+        props.onDeleteCategorie(props.id);
+
+        event.preventDefault();
+    }
+
+    function divStyle(index, dark) {
+        let fourColorsArray = []
+        if (dark) {
+            fourColorsArray = ['ffffff', 'ffc9c9', 'ff8282', 'ff0000']
+        }
+        else {
+            fourColorsArray = ['ff0000', 'aa0000', '550000', '000000']
+        }
+        let numb = index % 4
+        let color = '#' + fourColorsArray[numb]
+        let font;
+
+        if (index % 2 === 0) {
+            font = 400;
+        } else {
+            font = 500;
+        }
+
+        return ({
+            color: color,
+            fontWeight: font
+        })
+    }
+
+    return (
+        <div style={divStyle(props.index, props.modeSombre)} className="Categorie">
+
+            {categorie.name ?
+                null
                 :
-                    <label className="col-sm-2 col-form-label">
-                          Catégorie {props.dashboard ? props.index+1 : null} ({props.exercice.name})
-                          <img className={props.modeSombre===true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
-                          <div className={categorieHiddenClick}>
-                              <CategorieHiddenText />
-                          </div>
-                    </label>
-                }
-                <Select
-                    placeholder="Categorie..."
-                    onChange={handleChange}
-                    options={lesCategories}
-                    styles={props.modeSombre===true ? customStylesDark : customStyles}
-                    className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                    value={{value: categorie.name, label: categorie.name}}
-                />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-          </div>
-      }
-
-      {categorie.name==="Aucune" ?
-        props.info === "false" ?
-                <Select
-                    placeholder="Categorie..."
-                    onChange={handleChange}
-                    options={lesCategories}
-                    styles={props.modeSombre===true ? customStylesDark : customStyles}
-                    value={{value: categorie.name, label: categorie.name}}
-                />
-        :
-        <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          Catégorie {props.dashboard ? props.index+1 : null} ({props.exercice.name})
-                          <img className={props.modeSombre===true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
-                          <div className={categorieHiddenClick}>
-                              <CategorieHiddenText />
-                          </div>
-                    </label>
-                }
-                <Select
-                    placeholder="Categorie..."
-                    onChange={handleChange}
-                    options={lesCategories}
-                    styles={props.modeSombre===true ? customStylesDark : customStyles}
-                    className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                    value={{value: categorie.name, label: categorie.name}}
-                />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-          </div>
-      : null }
-
-      {categorie.name === "Variante Street Workout" ?
-        props.info === "false" ?
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={Streetworkout}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                          <img className={props.modeSombre===true ? "myDIV questionDark " : "myDIV"} onClick={handleClickStreetworkout} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
-                          <div className={streetworkoutHiddenClicked}>
-                              <StreetworkoutHiddenText />
-                          </div>
-                    </label>
-                }
-                <Select
-                    placeholder="Categorie..."
-                    onChange={handleChange}
-                    options={Streetworkout}
-                    styles={props.modeSombre===true ? customStylesDark : customStyles}
-                    className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                    value={{value: categorie.input, label: categorie.input}}
-                />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Type de barre / poids" ?
-        props.info === "false" ?
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={lesTypesBarres}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <Select
-                    placeholder="Categorie..."
-                    onChange={handleChange}
-                    options={lesTypesBarres}
-                    styles={props.modeSombre===true ? customStylesDark : customStyles}
-                    className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                    value={{value: categorie.input, label: categorie.input}}
-                />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Muscle" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={MusclesCategorie}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={MusclesCategorie}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Positionnement du corps" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={PositionCorps}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={PositionCorps}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Positionnement des bras" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={PositionBras}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={PositionBras}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Positionnement des jambes" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={PositionJambes}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={PositionJambes}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Positionnement des mains" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={PositionMains}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={PositionMains}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Positionnement des pieds" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={PositionPieds}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={PositionPieds}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Placement et axe du corps / banc / barre" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={AxeCategorie}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={AxeCategorie}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Ouverture coudes / genoux" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={CoudeGenou}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={CoudeGenou}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Unilatéral" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={Unilateral}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={Unilateral}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Type d'éxecution" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={Execution}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={Execution}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Type d'éxecution spécifique" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={ExecutionSpecifique}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={ExecutionSpecifique}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Temps de repos entre les séries" ?
-        props.info === "false" ?
-                <div className={props.info === "false" ? "form-control" : "col-sm-9"}>
-                    <input type="text"
-                          className={props.modeSombre===true ? "form-control inputDark " : "form-control"}
-                          id="input"
-                          value={categorie.input}
-                          onChange={handleChange}
-                    />
-                </div>
-        :
-            <div className="form-group row">
-                {props.info === "false" ?
-                    null
-                :
-                    <label className="col-sm-2 col-form-label">
-                          {categorie.name}
-                    </label>
-                }
-                <div className={props.info === "false" ? "form-control" : "col-sm-9"}>
-                    <input type="text"
-                          className={props.modeSombre===true ? "form-control inputDark " : "form-control"}
-                          id="input"
-                          value={categorie.input}
-                          onChange={handleChange}
-                    />
-                </div>
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "RPE / Niveau d'intensité" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={RPE}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={RPE}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Gêne / douleur / blessure" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={Douleur}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={Douleur}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Type de prise" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={PriseCategorie}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={PriseCategorie}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Tempo" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={TempoCategorie}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={TempoCategorie}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Forme (Partiel)" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={Partiel}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={Partiel}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Point de départ" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={DépartCategorie}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={DépartCategorie}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Variante d'exercice explosif" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={ExplosifCategorie}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={ExplosifCategorie}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Variante d'exercice d'haltérophilie" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={Halterophilie}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={Halterophilie}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Accessoire supplémentaire ou objet spécifique" ?
-        props.info === "false" ?
-        <Select
-            placeholder="Categorie..."
-            onChange={handleChange}
-            options={AccessoireObjet}
-            styles={props.modeSombre===true ? customStylesDark : customStyles}
-            value={{value: categorie.input, label: categorie.input}}
-        />
-    :
-        <div className="form-group row">
-            {props.info === "false" ?
-                null
-            :
-                <label className="col-sm-2 col-form-label">
-                      {categorie.name}
-                </label>
-            }
-            <Select
-                placeholder="Categorie..."
-                onChange={handleChange}
-                options={AccessoireObjet}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                value={{value: categorie.input, label: categorie.input}}
-            />
-
-                {props.dashboard ? null : <div className="col-sm-1">
-                  <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                </div>}
-            </div>
-      : null }
-      {categorie.name === "Elastique" ?
-        props.info === "false" ?
-        <div>
-            <Select
-                placeholder="Utilisation..."
-                onChange={handleChange}
-                styles={props.modeSombre===true ? customStylesDark : customStyles}
-                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                options={[
-                    {className:"select-title", value:"title", label:"/ (défaut)"},
-                    {value:"Resistance", label:"Resistance"},
-                    {value:"Assistance", label:"Assistance"}
-                ]}
-                value={{value: categorie.utilisation, label: categorie.utilisation}}
-            />
-            <div style={{height:"38px"}}className="col-sm-10"></div>
-        </div>
-        :
-          props.dashboard ?
-            <div className="form-group row">
-                    {props.info === "false" ?
-                        null
-                    :
-                        <label className="col-sm-2 col-form-label">
-                              Utilisation
-                        </label>
-                    }
-                    <Select
-                        placeholder="Utilisation..."
-                        onChange={handleChange}
-                        styles={props.modeSombre===true ? customStylesDark : customStyles}
-                        className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                        options={[
-                            {className:"select-title", value:"title", label:"/ (défaut)"},
-                            {value:"Resistance", label:"Resistance"},
-                            {value:"Assistance", label:"Assistance"}
-                        ]}
-                        value={{value: categorie.utilisation, label: categorie.utilisation}}
-                    />
-
-                    {props.dashboard ? null : <div className="col-sm-1">
-                      <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                    </div>}
-            </div>
-          :
-            <div>
-                <div className="form-group row">
-                    {props.info === "false" ?
-                        null
-                    :
-                        <label className="col-sm-2 col-form-label">
-                              Utilisation
-                        </label>
-                    }
-                    <Select
-                        placeholder="Utilisation..."
-                        onChange={handleChange}
-                        styles={props.modeSombre===true ? customStylesDark : customStyles}
-                        className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                        options={[
-                            {id: "utilisation", className:"select-title", value:"title", label:"/ (défaut)"},
-                            {id: "utilisation", value:"Resistance", label:"Resistance"},
-                            {id: "utilisation", value:"Assistance", label:"Assistance"}
-                        ]}
-                        value={{value: categorie.utilisation, label: categorie.utilisation}}
-                    />
-
-                    {props.dashboard ? null : <div className="col-sm-1">
-                      <img className={props.modeSombre===true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                    </div>}
-                </div>
-
-                <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">
-                      Épaisseur / taille élastique
-                    </label>
+                props.info === "false" ?
                     <Select
                         placeholder="Categorie..."
                         onChange={handleChange}
-                        options={lesElastiques}
-                        styles={props.modeSombre===true ? customStylesDark : customStyles}
-                        className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
-                        value={{value: categorie.input, label: categorie.input}}
-                    />
-                </div>
-
-            {categorie.input === "mesure" ?
-            <div className="form-group row">
-                <label className="col-sm-2 col-form-label">
-                  Tension (kg)
-                </label>
-                <div className="col-sm-9">
-                    <input type="text"
-                          className={props.modeSombre===true ? "form-control inputDark " : "form-control"}
-                          id="estimation"
-                          value={categorie.estimation}
-                          onChange={handleChange}
-                    />
-                </div>
-            </div>
-            :
-            <div>
-                <div className="form-group row slider-style">
-                    <label className="col-sm-2 col-form-label">
-                      Etirement (mètres)
-                    </label>
-                    {props.modeSombre === true ?
-                    <StyleSliderBlack
-                        style={
-                        {
-                            width: "74%",
-                            marginLeft: "1%"
-                        }
-                        }
-                        defaultValue={parseInt(categorie.tension)}
-                        onChange={handleChangeSlider}
-                        getAriaValueText={valuetext}
-                        aria-labelledby="discrete-slider-custom"
-                        step={0.5}
-                        max={9}
-                        min={0.5}
-                        valueLabelDisplay="auto"
-                        marks={marks}
+                        options={lesCategories}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.name, label: categorie.name }}
                     />
                     :
-                    <StyleSliderWhite
-                        style={
-                        {
-                            width: "74%",
-                            marginLeft: "1%"
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                Catégorie {props.dashboard ? props.index + 1 : null} ({props.exercice.name})
+                                <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                                <div className={categorieHiddenClick}>
+                                    <CategorieHiddenText />
+                                </div>
+                            </label>
                         }
-                        }
-                        defaultValue={parseInt(categorie.tension)}
-                        onChange={handleChangeSlider}
-                        getAriaValueText={valuetext}
-                        aria-labelledby="discrete-slider-custom"
-                        step={0.5}
-                        max={9}
-                        min={0.5}
-                        valueLabelDisplay="auto"
-                        marks={marks}
-                    />
-                    }
-                </div>
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={lesCategories}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.name, label: categorie.name }}
+                        />
 
-                <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">
-                      Estimation
-                      <img className={props.modeSombre===true ? "myDIV questionDark " : "myDIV"} onClick={handleClickElastique} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
-                      <div className={elastiqueHiddenClick}>
-                          <ElastiqueHiddenText />
-                      </div>
-                    </label>
-                    <div className="col-sm-9">
-                      <input type="text"
-                          className={props.modeSombre===true ? "form-control inputDark " : "form-control"}
-                          id="estimation"
-                          value={categorie.estimation+" kg"}
-                          readOnly
-                      />
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
                     </div>
-                </div>
-            </div>
             }
-            </div>
-      : null }
 
-  </div>
-  );
+            {categorie.name === "Aucune" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={lesCategories}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.name, label: categorie.name }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                Catégorie {props.dashboard ? props.index + 1 : null} ({props.exercice.name})
+                                <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                                <div className={categorieHiddenClick}>
+                                    <CategorieHiddenText />
+                                </div>
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={lesCategories}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.name, label: categorie.name }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+
+            {categorie.name === "Variante Street Workout" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={Streetworkout}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                                <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickStreetworkout} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                                <div className={streetworkoutHiddenClicked}>
+                                    <StreetworkoutHiddenText />
+                                </div>
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={Streetworkout}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Type de barre / poids" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={lesTypesBarres}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={lesTypesBarres}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Muscle" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={MusclesCategorie}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={MusclesCategorie}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Positionnement du corps" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={PositionCorps}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={PositionCorps}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Positionnement des bras" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={PositionBras}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={PositionBras}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Positionnement des jambes" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={PositionJambes}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={PositionJambes}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Positionnement des mains" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={PositionMains}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={PositionMains}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Positionnement des pieds" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={PositionPieds}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={PositionPieds}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Placement et axe du corps / banc / barre" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={AxeCategorie}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={AxeCategorie}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Ouverture coudes / genoux" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={CoudeGenou}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={CoudeGenou}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Unilatéral" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={Unilateral}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={Unilateral}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Type d'éxecution" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={Execution}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={Execution}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Type d'éxecution spécifique" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={ExecutionSpecifique}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={ExecutionSpecifique}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Temps de repos entre les séries" ?
+                props.info === "false" ?
+                    <div className={props.info === "false" ? "form-control" : "col-sm-9"}>
+                        <input type="text"
+                            className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
+                            id="input"
+                            value={categorie.input}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <div className={props.info === "false" ? "form-control" : "col-sm-9"}>
+                            <input type="text"
+                                className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
+                                id="input"
+                                value={categorie.input}
+                                onChange={handleChange}
+                            />
+                        </div>
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "RPE / Niveau d'intensité" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={RPE}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={RPE}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Gêne / douleur / blessure" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={Douleur}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={Douleur}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Type de prise" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={PriseCategorie}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={PriseCategorie}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Tempo" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={TempoCategorie}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={TempoCategorie}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Forme (Partiel)" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={Partiel}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={Partiel}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Point de départ" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={DépartCategorie}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={DépartCategorie}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Variante d'exercice explosif" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={ExplosifCategorie}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={ExplosifCategorie}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Variante d'exercice d'haltérophilie" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={Halterophilie}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={Halterophilie}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Accessoire supplémentaire ou objet spécifique" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={AccessoireObjet}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={AccessoireObjet}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Elastique" ?
+                props.info === "false" ?
+                    <div>
+                        <Select
+                            placeholder="Utilisation..."
+                            onChange={handleChange}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            options={[
+                                { className: "select-title", value: "title", label: "/ (défaut)" },
+                                { value: "Resistance", label: "Resistance" },
+                                { value: "Assistance", label: "Assistance" }
+                            ]}
+                            value={{ value: categorie.utilisation, label: categorie.utilisation }}
+                        />
+                        <div style={{ height: "38px" }} className="col-sm-10"></div>
+                    </div>
+                    :
+                    props.dashboard ?
+                        <div className="form-group row">
+                            {props.info === "false" ?
+                                null
+                                :
+                                <label className="col-sm-2 col-form-label">
+                                    Utilisation
+                                </label>
+                            }
+                            <Select
+                                placeholder="Utilisation..."
+                                onChange={handleChange}
+                                styles={props.modeSombre === true ? customStylesDark : customStyles}
+                                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                                options={[
+                                    { className: "select-title", value: "title", label: "/ (défaut)" },
+                                    { value: "Resistance", label: "Resistance" },
+                                    { value: "Assistance", label: "Assistance" }
+                                ]}
+                                value={{ value: categorie.utilisation, label: categorie.utilisation }}
+                            />
+
+                            {props.dashboard ? null : <div className="col-sm-1">
+                                <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            </div>}
+                        </div>
+                        :
+                        <div>
+                            <div className="form-group row">
+                                {props.info === "false" ?
+                                    null
+                                    :
+                                    <label className="col-sm-2 col-form-label">
+                                        Utilisation
+                                    </label>
+                                }
+                                <Select
+                                    placeholder="Utilisation..."
+                                    onChange={handleChange}
+                                    styles={props.modeSombre === true ? customStylesDark : customStyles}
+                                    className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                                    options={[
+                                        { id: "utilisation", className: "select-title", value: "title", label: "/ (défaut)" },
+                                        { id: "utilisation", value: "Resistance", label: "Resistance" },
+                                        { id: "utilisation", value: "Assistance", label: "Assistance" }
+                                    ]}
+                                    value={{ value: categorie.utilisation, label: categorie.utilisation }}
+                                />
+
+                                {props.dashboard ? null : <div className="col-sm-1">
+                                    <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                                </div>}
+                            </div>
+
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-form-label">
+                                    Épaisseur / taille élastique
+                                </label>
+                                <Select
+                                    placeholder="Categorie..."
+                                    onChange={handleChange}
+                                    options={lesElastiques}
+                                    styles={props.modeSombre === true ? customStylesDark : customStyles}
+                                    className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                                    value={{ value: categorie.input, label: categorie.input }}
+                                />
+                            </div>
+
+                            {categorie.input === "mesure" ?
+                                <div className="form-group row">
+                                    <label className="col-sm-2 col-form-label">
+                                        Tension (kg)
+                                    </label>
+                                    <div className="col-sm-9">
+                                        <input type="text"
+                                            className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
+                                            id="estimation"
+                                            value={categorie.estimation}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                </div>
+                                :
+                                <div>
+                                    <div className="form-group row slider-style">
+                                        <label className="col-sm-2 col-form-label">
+                                            Etirement (mètres)
+                                        </label>
+                                        {props.modeSombre === true ?
+                                            <StyleSliderBlack
+                                                style={
+                                                    {
+                                                        width: "74%",
+                                                        marginLeft: "1%"
+                                                    }
+                                                }
+                                                defaultValue={parseInt(categorie.tension)}
+                                                onChange={handleChangeSlider}
+                                                getAriaValueText={valuetext}
+                                                aria-labelledby="discrete-slider-custom"
+                                                step={0.5}
+                                                max={9}
+                                                min={0.5}
+                                                valueLabelDisplay="auto"
+                                                marks={marks}
+                                            />
+                                            :
+                                            <StyleSliderWhite
+                                                style={
+                                                    {
+                                                        width: "74%",
+                                                        marginLeft: "1%"
+                                                    }
+                                                }
+                                                defaultValue={parseInt(categorie.tension)}
+                                                onChange={handleChangeSlider}
+                                                getAriaValueText={valuetext}
+                                                aria-labelledby="discrete-slider-custom"
+                                                step={0.5}
+                                                max={9}
+                                                min={0.5}
+                                                valueLabelDisplay="auto"
+                                                marks={marks}
+                                            />
+                                        }
+                                    </div>
+
+                                    <div className="form-group row">
+                                        <label className="col-sm-2 col-form-label">
+                                            Estimation
+                                            <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickElastique} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                                            <div className={elastiqueHiddenClick}>
+                                                <ElastiqueHiddenText />
+                                            </div>
+                                        </label>
+                                        <div className="col-sm-9">
+                                            <input type="text"
+                                                className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
+                                                id="estimation"
+                                                value={categorie.estimation + " kg"}
+                                                readOnly
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                : null}
+
+        </div>
+    );
 };
 
 export default CategorieInput;
