@@ -29,7 +29,8 @@ const CustomTooltip = ({ active, payload, label }) => {
                         return (<p className="desc"> Valeur classification : {payload.value}</p>)
                     }
                     if (payload.dataKey === "exercices[0].Categories[0].estimation" || payload.dataKey === "exercices[0].Categories[1].estimation" || payload.dataKey === "exercices[0].Categories[2].estimation" || payload.dataKey === "exercices[0].Categories[3].estimation" || payload.dataKey === "exercices[0].Categories[4].estimation") {
-                        return (<p className="desc"> Élastique estimation (kg) : {payload.value}</p>)
+                        let utilisation = payload.payload.exercices[0].Categories[payload.dataKey.slice(payload.dataKey.length - 13, payload.dataKey.length - 12)].utilisation
+                        return (<p className="desc"> {utilisation} élastique estimation (kg) : {payload.value}</p>)
                     }
                 })}
             </div>
@@ -499,11 +500,11 @@ function Stats() {
                                                     <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
                                                     <Bar barSize={20} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="exercices[0].Series[0].repsTime" />
                                                     <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke="#10669C" />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke="#10669C" />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke="#10669C" />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke="#10669C" />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke="#10669C" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
                                                 </ComposedChart>
                                             </ResponsiveContainer >
 
@@ -662,11 +663,11 @@ function Stats() {
                                                     <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
                                                     <Bar barSize={20} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="exercices[0].Series[0].repsTime" />
                                                     <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke="#10669C" />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke="#10669C" />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke="#10669C" />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke="#10669C" />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke="#10669C" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
                                                 </ComposedChart>
                                             </ResponsiveContainer >
 
