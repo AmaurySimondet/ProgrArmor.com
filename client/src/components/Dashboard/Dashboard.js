@@ -13,6 +13,7 @@ import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
 import Select from 'react-select';
+import { v4 as uuidv4 } from 'uuid';
 
 function containsObj(arr, obj) {
     let contains = arr.some(elem => {
@@ -185,7 +186,9 @@ function Dashboard() {
 
     function handleClick(event) {
         let e = parseInt(event.target.id)
+
         setClicked(clicked.slice(0, e).concat([!clicked[e]], clicked.slice(e + 1, clicked.length)));
+
         setParams(oldParams => {
             return ({
                 ...oldParams,
@@ -199,7 +202,9 @@ function Dashboard() {
 
     function handleClickDetail(event) {
         let e = parseInt(event.target.id)
+
         setClickedDetail(clickedDetail.slice(0, e).concat([!clickedDetail[e]], clickedDetail.slice(e + 1, clickedDetail.length)));
+
         setParams(oldParams => {
             return ({
                 ...oldParams,
@@ -215,7 +220,7 @@ function Dashboard() {
 
         for (let i = 0; i < event.target.value; i++) {
             arr.push("rien");
-            arr2.push({ name: "", num: i })
+            arr2.push({ id: uuidv4(), index: i })
         };
 
         setCategoriesAddRien(arr);
@@ -229,7 +234,7 @@ function Dashboard() {
 
         for (let i = 0; i < event.target.value; i++) {
             arr.push("rien");
-            arr2.push({ name: "", num: i })
+            arr2.push({ id: uuidv4(), index: i })
         };
 
         setDetailsAddRien(arr);
@@ -254,8 +259,8 @@ function Dashboard() {
                     setParams(oldParams => {
                         return ({
                             ...oldParams,
-                            ["categorie" + categorie.num + "name"]: categorie.name,
-                            ["categorie" + categorie.num + "input"]: categorie.input,
+                            ["categorie" + categorie.index + "name"]: categorie.name,
+                            ["categorie" + categorie.index + "input"]: categorie.input,
                         })
                     });
                 }
@@ -267,8 +272,8 @@ function Dashboard() {
                 setParams(oldParams => {
                     return ({
                         ...oldParams,
-                        ["detail" + detail.num + "name"]: detail.name,
-                        ["detail" + detail.num + "input"]: detail.input,
+                        ["detail" + detail.index + "name"]: detail.name,
+                        ["detail" + detail.index + "input"]: detail.input,
                     })
                 });
             })
@@ -449,8 +454,13 @@ function Dashboard() {
         })
     }
 
-    function changeCategorie(categorie, num) {
-        setCategories(categories.slice(0, num).concat([categorie], categories.slice(num + 1, categories.length)));
+    function changeCategorie(changedC, id) {
+        let newC = [...categories]
+        let indexOfChg = newC.findIndex(c => c.id === id)
+
+        newC.splice(indexOfChg, 1, changedC)
+
+        setCategories(newC)
     }
 
     useEffect(() => {
@@ -473,12 +483,13 @@ function Dashboard() {
         })
     }, [details]);
 
-    function changeDetail(detail, num) {
-        const otherThanSelected = details.filter((detail, index) => {
-            return detail.num !== (num)
-        });
+    function changeDetail(changedD, id) {
+        let newD = [...details]
+        let indexOfChg = newD.findIndex(d => d.id === id)
 
-        setDetails([...otherThanSelected, detail]);
+        newD.splice(indexOfChg, 1, changedD)
+
+        setCategories(newD)
     }
 
     function resetParameters() {
@@ -498,7 +509,7 @@ function Dashboard() {
     }
 
     async function handleClickSuppr(event) {
-        const res = await API.supprSeance({ id: localStorage.getItem("id"), date: event.target.id })
+        const res = await API.supprSeance({ id: localStorage.getItem("id"), seanceId: event.target.id })
 
         window.location = "/dashboard"
     }
@@ -612,7 +623,7 @@ function Dashboard() {
                                                     <label onClick={handleClick} id={index} className="col-form-label categorie-label">
                                                         Catégorie {index + 1} <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                                     </label>
-                                                    <CategorieInput modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie} />
+                                                    <CategorieInput modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
                                                 </div>
                                             </div>
                                         )
@@ -625,7 +636,7 @@ function Dashboard() {
                                                     <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
                                                         Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.png')} />
                                                     </label>
-                                                    <DetailInput modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} num={index} dashboard={true} changeDetail={changeDetail} />
+                                                    <DetailInput modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
                                                 </div>
                                             </div>
                                         )
@@ -865,9 +876,9 @@ function Dashboard() {
                                                     <div className="form-group row">
                                                         <div className="form-group col-sm-12">
                                                             <label onClick={handleClick} id={index} className="col-form-label categorie-label">
-                                                                Catégorie {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.png')} />
+                                                                Catégorie {index + 1} <img onClick={handleClick} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.png')} />
                                                             </label>
-                                                            <CategorieInput modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} num={index} exercice={exercice.exercice} changeCategorie={changeCategorie} />
+                                                            <CategorieInput modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
                                                         </div>
                                                     </div>
                                                 )
@@ -880,7 +891,7 @@ function Dashboard() {
                                                             <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
                                                                 Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.png')} />
                                                             </label>
-                                                            <DetailInput modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} num={index} dashboard={true} changeDetail={changeDetail} />
+                                                            <DetailInput modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
                                                         </div>
                                                     </div>
                                                 )
@@ -1085,7 +1096,7 @@ function Dashboard() {
                                                                 indexExercice === 0 ?
                                                                     indexSerie === 0 ?
                                                                         <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
-                                                                            <img id={seance.date} onClick={handleClickSuppr} className={switched ? "suppr-black" : "suppr-white"} src={require('../../images/icons/icons8-trash-30.png')} alt='session' />
+                                                                            <img id={seance.id} onClick={handleClickSuppr} className={switched ? "suppr-black" : "suppr-white"} src={require('../../images/icons/icons8-trash-30.png')} alt='session' />
                                                                         </td>
                                                                         :
                                                                         <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
@@ -1165,7 +1176,7 @@ function Dashboard() {
                                                             })}
                                                             {checkbox.affichageSérie ?
                                                                 <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
-                                                                    {serie.num + 1}
+                                                                    {serie.index + 1}
                                                                 </td>
                                                                 : null}
                                                             {checkbox.affichageType ?

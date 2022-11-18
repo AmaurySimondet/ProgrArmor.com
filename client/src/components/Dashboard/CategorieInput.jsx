@@ -6,7 +6,8 @@ import Select from "react-select";
 import customStyles from "./customStyles.js";
 import customStylesDark from "./customStylesDark.js";
 
-import lesCategories from "./Categories/Categories";
+import AllCategories from "./Categories/AllCategories.js";
+
 import lesTypesBarres from "./Categories/TypesBarres.js";
 import lesElastiques from "./Categories/Elastiques.js";
 import Streetworkout from "./Categories/StreetWorkout.js";
@@ -113,18 +114,6 @@ function valuetext(value) {
 
 }
 
-function createEntry(item) {
-    return (
-        <option
-            key={item.id}
-            className={item.class}
-            value={item.value}
-        >
-            {item.name}
-        </option>
-    );
-}
-
 function CategorieInput(props) {
     const [categorie, setCategorie] = useState(props.categorie);
     const [streetworkoutHiddenClicked, setStreetworkoutHiddenClicked] = useState("hide");
@@ -150,7 +139,10 @@ function CategorieInput(props) {
     }
 
     function handleChange(event) {
+        console.log(event)
+
         if (event.target) {
+            console.log(event.target.id, event.target.value)
             setCategorie(oldCategorie => {
                 return ({
                     ...oldCategorie,
@@ -158,21 +150,34 @@ function CategorieInput(props) {
                 })
             });
         }
-        if (event.id === "muscle") {
-            setCategorie(oldCategorie => {
-                return ({
-                    ...oldCategorie,
-                    input: event.value,
-                })
-            });
-        }
         else {
-            setCategorie(oldCategorie => {
-                return ({
-                    ...oldCategorie,
-                    [event.id]: event.value,
-                })
-            });
+            if (event.id === "muscle") {
+                setCategorie(oldCategorie => {
+                    return ({
+                        ...oldCategorie,
+                        input: event.value,
+                        name: "Muscle"
+                    })
+                });
+            }
+            if (event.id && event.id !== "muscle") {
+                setCategorie(oldCategorie => {
+                    return ({
+                        ...oldCategorie,
+                        [event.id]: event.value,
+                        name: event.name
+                    })
+                });
+            }
+            if (!event.name && !categorie.name) {
+                console.log("coucou")
+                setCategorie(oldCategorie => {
+                    return ({
+                        ...oldCategorie,
+                        name: event.label
+                    })
+                });
+            }
         }
     }
 
@@ -197,7 +202,7 @@ function CategorieInput(props) {
 
     useEffect(() => {
         if (props.click) {
-            setCategorie({ id: props.id })
+            setCategorie({ id: props.id, index: props.index })
         }
     }, [props.click])
 
@@ -241,7 +246,7 @@ function CategorieInput(props) {
                     <Select
                         placeholder="Categorie..."
                         onChange={handleChange}
-                        options={lesCategories}
+                        options={AllCategories}
                         styles={props.modeSombre === true ? customStylesDark : customStyles}
                         value={{ value: categorie.name, label: categorie.name }}
                     />
@@ -261,7 +266,7 @@ function CategorieInput(props) {
                         <Select
                             placeholder="Categorie..."
                             onChange={handleChange}
-                            options={lesCategories}
+                            options={AllCategories}
                             styles={props.modeSombre === true ? customStylesDark : customStyles}
                             className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                             value={{ value: categorie.name, label: categorie.name }}
@@ -278,7 +283,7 @@ function CategorieInput(props) {
                     <Select
                         placeholder="Categorie..."
                         onChange={handleChange}
-                        options={lesCategories}
+                        options={AllCategories}
                         styles={props.modeSombre === true ? customStylesDark : customStyles}
                         value={{ value: categorie.name, label: categorie.name }}
                     />
@@ -298,7 +303,7 @@ function CategorieInput(props) {
                         <Select
                             placeholder="Categorie..."
                             onChange={handleChange}
-                            options={lesCategories}
+                            options={AllCategories}
                             styles={props.modeSombre === true ? customStylesDark : customStyles}
                             className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                             value={{ value: categorie.name, label: categorie.name }}
@@ -732,7 +737,7 @@ function CategorieInput(props) {
                 : null}
             {categorie.name === "Temps de repos entre les séries" ?
                 props.info === "false" ?
-                    <div className={props.info === "false" ? "form-control" : "col-sm-9"}>
+                    <div className={props.info === "false" ? "" : "col-sm-9"}>
                         <input type="text"
                             className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
                             id="input"
@@ -749,7 +754,7 @@ function CategorieInput(props) {
                                 {categorie.name}
                             </label>
                         }
-                        <div className={props.info === "false" ? "form-control" : "col-sm-9"}>
+                        <div className={props.info === "false" ? "" : "col-sm-9"}>
                             <input type="text"
                                 className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
                                 id="input"
@@ -1061,8 +1066,8 @@ function CategorieInput(props) {
                             className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                             options={[
                                 { className: "select-title", value: "title", label: "/ (défaut)" },
-                                { value: "Resistance", label: "Resistance" },
-                                { value: "Assistance", label: "Assistance" }
+                                { name: "Elastique", value: "Resistance", label: "Resistance" },
+                                { name: "Elastique", value: "Assistance", label: "Assistance" }
                             ]}
                             value={{ value: categorie.utilisation, label: categorie.utilisation }}
                         />
@@ -1085,8 +1090,8 @@ function CategorieInput(props) {
                                 className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                                 options={[
                                     { className: "select-title", value: "title", label: "/ (défaut)" },
-                                    { value: "Resistance", label: "Resistance" },
-                                    { value: "Assistance", label: "Assistance" }
+                                    { name: "Elastique", value: "Resistance", label: "Resistance" },
+                                    { name: "Elastique", value: "Assistance", label: "Assistance" }
                                 ]}
                                 value={{ value: categorie.utilisation, label: categorie.utilisation }}
                             />
@@ -1111,9 +1116,9 @@ function CategorieInput(props) {
                                     styles={props.modeSombre === true ? customStylesDark : customStyles}
                                     className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                                     options={[
-                                        { id: "utilisation", className: "select-title", value: "title", label: "/ (défaut)" },
-                                        { id: "utilisation", value: "Resistance", label: "Resistance" },
-                                        { id: "utilisation", value: "Assistance", label: "Assistance" }
+                                        { id: "utilisation", name: "Elastique", className: "select-title", value: "title", label: "/ (défaut)" },
+                                        { id: "utilisation", name: "Elastique", value: "Resistance", label: "Resistance" },
+                                        { id: "utilisation", name: "Elastique", value: "Assistance", label: "Assistance" }
                                     ]}
                                     value={{ value: categorie.utilisation, label: categorie.utilisation }}
                                 />

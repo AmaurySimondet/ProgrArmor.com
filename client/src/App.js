@@ -15,7 +15,7 @@ import Admin from "./components/Dashboard/Admin.jsx";
 
 function App() {
 
-    document.body.style.zoom = "80%";
+    // document.body.style.zoom = "95%";
 
     return (
         <Routes>

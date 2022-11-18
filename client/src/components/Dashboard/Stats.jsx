@@ -164,7 +164,6 @@ function Stats() {
     }
 
     useEffect(() => {
-        console.log(seances3)
         setTimeout(getSeance1, 50);
         setTimeout(getSeance2, 50);
         setTimeout(getSeance3, 50);
@@ -453,7 +452,7 @@ function Stats() {
 
                                             <p>
                                                 {params2.exerciceName === "title" ?
-                                                    "tous les exercices, "
+                                                    "Tous les exercices, "
                                                     : params2.exerciceMuscle !== "" ?
                                                         params2.exerciceName + " - " + params2.exerciceMuscle + ", "
                                                         :
@@ -464,7 +463,7 @@ function Stats() {
                                                     params2.categorie0name === "Aucune" ?
                                                         "aucune catégorie - "
                                                         :
-                                                        params2.categorie0input + ", "
+                                                        params2.categorie0name + " : " + params2.categorie0input + ", "
                                                     :
                                                     "toutes catégories, "
                                                 }
@@ -473,7 +472,7 @@ function Stats() {
                                                     params2.detail0name === "Aucun" ?
                                                         "aucun détail, "
                                                         :
-                                                        params2.detail0input + ", "
+                                                        params2.detail0name + " : " + params2.detail0input + ", "
                                                     :
                                                     "tout détail, "
                                                 }
@@ -616,7 +615,7 @@ function Stats() {
 
                                             <p>
                                                 {params2.exerciceName === "title" ?
-                                                    "tous les exercices, "
+                                                    "Tous les exercices, "
                                                     : params2.exerciceMuscle !== "" ?
                                                         params2.exerciceName + " - " + params2.exerciceMuscle + ", "
                                                         :
@@ -627,7 +626,7 @@ function Stats() {
                                                     params2.categorie0name === "Aucune" ?
                                                         "aucune catégorie - "
                                                         :
-                                                        params2.categorie0input + ", "
+                                                        params2.categorie0name + " : " + params2.categorie0input + ", "
                                                     :
                                                     "toutes catégories, "
                                                 }
@@ -636,7 +635,7 @@ function Stats() {
                                                     params2.detail0name === "Aucun" ?
                                                         "aucun détail, "
                                                         :
-                                                        params2.detail0input + ", "
+                                                        params2.detail0name + " : " + params2.detail0input + ", "
                                                     :
                                                     "tout détail, "
                                                 }

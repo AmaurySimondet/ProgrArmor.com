@@ -1003,46 +1003,41 @@ async function getUser(req, res) {
 
 //SUPPR SEANCE
 async function supprSeance(req, res) {
-    let id = req.body.id;
-    let date = req.body.date;
+    let conditions = {}
+    let update = {}
+    let newSeances = [];
 
-    try {
-        let newSeances;
+    conditions = {
+        _id: req.body.id
+    }
 
-        query = await User.find(
-            { "_id": id }, function (err, data) {
-                if (err) {
-                    res.json({ success: false, message: err });
-                }
-                else {
-                    seances = data[0].seances
-                    newSeances = seances.filter((seance, index) => {
-                        return seance.date !== date
-                    });
-
-                }
-            });
-
-        if (newSeances === null || !newSeances) {
-            newSeances = [];
+    //find user seances and newSeance = seance filtered with req.body.seanceId
+    await User.find(conditions, function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
         }
+        else {
+            seances = [...data[0].seances]
 
-        User.findOneAndUpdate(
-            { "_id": id },
-            { $set: { "seances": newSeances } },
-            { returnNewDocument: true },
-            function (err) {
-                if (err) {
-                    res.json({ success: false, message: err });
-                }
-                else { res.json({ success: true, message: "Seance supprimée !" }) }
+            if (seances.length !== 0) {
+                newSeances = seances.filter(seance => seance.id !== req.body.seanceId)
             }
-        );
+        }
+    })
 
+    update = {
+        seances: newSeances
     }
-    catch (e) {
-        console.log(e);
-    }
+
+    //update seances user
+    User.findOneAndUpdate(conditions, update, function (error, result) {
+        if (error) {
+            res.json({ success: false, message: error })
+        }
+        else {
+            res.json({ success: true, message: "Seance supprimée !" })
+        }
+    });
 }
 
 //EDIT DB
