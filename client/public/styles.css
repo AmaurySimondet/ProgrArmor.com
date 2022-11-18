@@ -808,7 +808,6 @@ table.connexion-table td.connexion-img-td {
     z-index: 1;
     position: absolute;
     right: 15px;
-    transition: width 2s, height 2s;
 }
 
 .toggle-is-clicked {

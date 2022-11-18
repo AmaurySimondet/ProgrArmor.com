@@ -227,6 +227,8 @@ function DebutantForm(props) {
             <div className="form-button-div">
                 <button className="btn btn-lg btn-dark enregistrer-button" onClick={handleClick} type="submit">Enregistrer la séance !</button>
             </div>
+
+            <div style={{ marginTop: "10%" }}></div>
         </form>
     )
 };

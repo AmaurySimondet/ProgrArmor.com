@@ -2,8 +2,8 @@ const account = require('./account/lib.js');
 
 module.exports = function (app) {
     //LOGIN SIGNUP
-    app.post('/login',account.login);
-    app.post('/signup',account.signup);
+    app.post('/login', account.login);
+    app.post('/signup', account.signup);
     app.get('/logout', account.logout);
 
     app.get('/auth/facebook', account.facebook);
@@ -13,11 +13,11 @@ module.exports = function (app) {
     app.get('/auth/google/authenticate', account.googleAuthenticate);
 
     //SESSION
-    app.post('/debutantform',account.debutantform);
-    app.get('/loadSeance',account.loadSeance);
+    app.post('/debutantform', account.debutantform);
+    app.get('/loadSeance', account.loadSeance);
 
     //DASHBOARD
-    app.get('/workouts',account.workouts);
+    app.get('/workouts', account.workouts);
 
     //COMPTE
     app.post('/getUser', account.getUser);
@@ -28,5 +28,8 @@ module.exports = function (app) {
 
     //SUPPR SEANCE
     app.post('/supprSeance', account.supprSeance)
+
+    // //EDIT DB
+    // app.get('/editDB', account.editDB)
 
 }

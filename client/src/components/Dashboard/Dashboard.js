@@ -89,6 +89,8 @@ function valuetext(value) {
 }
 
 function Dashboard() {
+
+
     const [seances, setSeances] = useState([]);
     const [exercice, setExercice] = useState({ exercice: { name: "title", ownExercice: "" } });
     const [listeNoms, setListeNoms] = useState([]);
@@ -1032,6 +1034,7 @@ function Dashboard() {
                     <table className={switched ? "table table-hover table-responsive-lg table-dark dashboard-table" : "table table-hover table-responsive-lg dashboard-table"}>
                         <thead className={switched ? "thead-dark" : ""}>
                             <tr>
+                                <th scope="col">id</th>
                                 {checkbox.affichageModif ? <th scope="col">Modifier </th> : null}
                                 {checkbox.affichageSuppr ? <th scope="col">Supprimer </th> : null}
                                 {checkbox.affichageNom ? <th scope="col">Nom </th> : null}
@@ -1077,6 +1080,7 @@ function Dashboard() {
                                                                 :
                                                                 null
                                                             }
+                                                            <td>{seance.id}</td>
                                                             {checkbox.affichageSuppr ?
                                                                 indexExercice === 0 ?
                                                                     indexSerie === 0 ?

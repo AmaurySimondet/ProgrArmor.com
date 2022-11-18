@@ -334,7 +334,7 @@ function Stats() {
                                             </div>
                                         </div>
 
-                                        <p> Evolution du poids sur la période {params1.periode} </p>
+                                        <p> Evolution de ton poids sur la période {params1.periode} </p>
 
                                         <ResponsiveContainer width="100%" height={dimensions.width < 925 ? 280 : 400} className={user.modeSombre === true ? "chart watermark watermarkDark" : "chart watermark"}>
                                             <LineChart

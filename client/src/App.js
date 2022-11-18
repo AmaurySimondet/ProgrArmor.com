@@ -15,54 +15,56 @@ import Admin from "./components/Dashboard/Admin.jsx";
 
 function App() {
 
+    document.body.style.zoom = "80%";
+
     return (
-          <Routes>
-            <Route exact path="/" element={<Inscription/>} />
-            <Route exact path="/inscription" element={<Inscription/>} />
-            <Route exact path="/cgu" element={<CGU/>} />
+        <Routes>
+            <Route exact path="/" element={<Inscription />} />
+            <Route exact path="/inscription" element={<Inscription />} />
+            <Route exact path="/cgu" element={<CGU />} />
             <Route exact path="/connexion" element={<Connexion />} />
             <Route exact path="/token/*" element={<Token />} />
 
-            <Route path="/dashboard/*" element={<PrivateRoute/>}>
-                <Route exact path='/dashboard/*' element={<Dashboard/>}/>
+            <Route path="/dashboard/*" element={<PrivateRoute />}>
+                <Route exact path='/dashboard/*' element={<Dashboard />} />
             </Route>
 
-            <Route path="/stats/*" element={<PrivateRoute/>}>
-                <Route exact path='/stats/*' element={<Stats/>}/>
+            <Route path="/stats/*" element={<PrivateRoute />}>
+                <Route exact path='/stats/*' element={<Stats />} />
             </Route>
 
-            <Route path="/programme/*" element={<PrivateRoute/>}>
-                <Route exact path='/programme/*' element={<Travaux/>}/>
+            <Route path="/programme/*" element={<PrivateRoute />}>
+                <Route exact path='/programme/*' element={<Travaux />} />
             </Route>
 
-            <Route path="/social/*" element={<PrivateRoute/>}>
-                <Route exact path='/social/*' element={<Travaux/>}/>
+            <Route path="/social/*" element={<PrivateRoute />}>
+                <Route exact path='/social/*' element={<Travaux />} />
             </Route>
 
-            <Route path="/compte/*" element={<PrivateRoute/>}>
-                <Route exact path='/compte/*' element={<Compte/>}/>
+            <Route path="/compte/*" element={<PrivateRoute />}>
+                <Route exact path='/compte/*' element={<Compte />} />
             </Route>
 
-            <Route path="/a_propos/*" element={<PrivateRoute/>}>
-                <Route exact path='/a_propos/*' element={<Travaux/>}/>
+            <Route path="/a_propos/*" element={<PrivateRoute />}>
+                <Route exact path='/a_propos/*' element={<Travaux />} />
             </Route>
 
-            <Route path="/aide/*" element={<PrivateRoute/>}>
-                <Route exact path='/aide/*' element={<Travaux/>}/>
+            <Route path="/aide/*" element={<PrivateRoute />}>
+                <Route exact path='/aide/*' element={<Travaux />} />
             </Route>
 
-            <Route path="/cgu/*" element={<PrivateRoute/>}>
-                <Route exact path='/cgu/*' element={<Travaux/>}/>
+            <Route path="/cgu/*" element={<PrivateRoute />}>
+                <Route exact path='/cgu/*' element={<Travaux />} />
             </Route>
 
-            <Route path="/session/*" element={<PrivateRoute/>}>
-                <Route exact path='/session/*' element={<Session/>}/>
+            <Route path="/session/*" element={<PrivateRoute />}>
+                <Route exact path='/session/*' element={<Session />} />
             </Route>
 
-            <Route path="/admin" element={<PrivateRoute/>}>
-                <Route exact path='/admin' element={<Admin/>}/>
+            <Route path="/admin" element={<PrivateRoute />}>
+                <Route exact path='/admin' element={<Admin />} />
             </Route>
-          </Routes>
+        </Routes>
     );
 };
 
