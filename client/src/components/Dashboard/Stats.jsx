@@ -336,7 +336,7 @@ function Stats() {
 
                                         <p> Evolution du poids sur la période {params1.periode} </p>
 
-                                        <ResponsiveContainer width="100%" height={dimensions.width < 925 ? 280 : 400} className="chart watermark">
+                                        <ResponsiveContainer width="100%" height={dimensions.width < 925 ? 280 : 400} className={user.modeSombre === true ? "chart watermark watermarkDark" : "chart watermark"}>
                                             <LineChart
                                                 data={seances1}
                                                 margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
@@ -345,7 +345,7 @@ function Stats() {
                                                 <YAxis tick={user.modeSombre === true ? { fill: 'white' } : { fill: "black" }} tickLine={user.modeSombre === true ? { stroke: 'white' } : null} domain={[parseInt(infoPoids.poidsMin * 0.98), parseInt(infoPoids.poidsMax * 1.02)]} />
                                                 <Tooltip content={<CustomTooltip />} />
                                                 <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
-                                                <Line connectNulls type="monotone" dataKey="poids" stroke="#ff0000" />
+                                                <Line strokeWidth={3} connectNulls type="monotone" dataKey="poids" stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
                                             </LineChart>
                                         </ResponsiveContainer >
                                     </div>
@@ -481,7 +481,7 @@ function Stats() {
                                                 sur la période {params2.periode}
                                             </p>
 
-                                            <ResponsiveContainer width="100%" height={400} className="chart watermark">
+                                            <ResponsiveContainer width="100%" height={400} className={user.modeSombre === true ? "chart watermark watermarkDark" : "chart watermark"}>
                                                 <ComposedChart
                                                     width={400}
                                                     height={400}
@@ -498,13 +498,13 @@ function Stats() {
                                                     />
                                                     <Tooltip content={<CustomTooltip />} />
                                                     <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
-                                                    <Bar barSize={20} fill={user.modeSombre === true ? "#3f3f3f" : "#afafaf"} dataKey="exercices[0].Series[0].repsTime" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke="#ff0000" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke="#10669C" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke="#10669C" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke="#10669C" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke="#10669C" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke="#10669C" />
+                                                    <Bar barSize={20} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="exercices[0].Series[0].repsTime" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke="#10669C" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke="#10669C" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke="#10669C" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke="#10669C" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke="#10669C" />
                                                 </ComposedChart>
                                             </ResponsiveContainer >
 
@@ -644,7 +644,7 @@ function Stats() {
                                                 sur la période {params2.periode}
                                             </p>
 
-                                            <ResponsiveContainer width="100%" height={dimensions.width < 925 ? 280 : 400} className="chart watermark">
+                                            <ResponsiveContainer width="100%" height={dimensions.width < 925 ? 280 : 400} className={user.modeSombre === true ? "chart watermark watermarkDark" : "chart watermark"}>
                                                 <ComposedChart
                                                     width={400}
                                                     height={400}
@@ -661,13 +661,13 @@ function Stats() {
                                                     />
                                                     <Tooltip content={<CustomTooltip />} />
                                                     <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
-                                                    <Bar barSize={20} fill={user.modeSombre === true ? "#3f3f3f" : "#afafaf"} dataKey="exercices[0].Series[0].repsTime" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke="#ff0000" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke="#10669C" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke="#10669C" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke="#10669C" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke="#10669C" />
-                                                    <Line connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke="#10669C" />
+                                                    <Bar barSize={20} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="exercices[0].Series[0].repsTime" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke="#10669C" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke="#10669C" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke="#10669C" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke="#10669C" />
+                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke="#10669C" />
                                                 </ComposedChart>
                                             </ResponsiveContainer >
 
@@ -742,7 +742,7 @@ function Stats() {
                             sur la période {params3.periode}
                         </p>
 
-                        <ResponsiveContainer className="piechart watermark-piechart" width="100%" height=
+                        <ResponsiveContainer className={user.modeSombre === true ? "piechart watermark-piechart watermarkDark" : "piechart watermark-piechart"} width="100%" height=
                             {dimensions.width < 330 ?
                                 100
                                 :

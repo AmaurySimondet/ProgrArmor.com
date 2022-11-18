@@ -1,7 +1,7 @@
 /* TAGS */
 
 .darkMode {
-    background-color: #330000;
+    background-color: #180000;
     color: white;
 }
 
@@ -305,7 +305,7 @@ table.Stats-table {
     position: absolute;
     top: 0px;
     right: -20px;
-    background-image: url('https://upcdn.io/W142hJk/raw/demo/UBRD1hB.png');
+    background-image: url('https://upcdn.io/W142hJk/raw/demo/4mrAKCowDj.png');
     background-size: 100px;
     background-position-x: center;
     background-repeat: no-repeat;
@@ -324,10 +324,15 @@ table.Stats-table {
     height: 150px;
     position: relative;
     margin: auto;
-    background-image: url(https://upcdn.io/W142hJk/raw/demo/UBRD1hB.png);
+    background-image: url(https://upcdn.io/W142hJk/raw/demo/4mrAKCowDj.png);
+    /* https://upcdn.io/W142hJk/raw/demo/UBRD1hB.png */
     background-repeat: no-repeat;
     background-position-x: center;
     opacity: 0.1;
+}
+
+.watermarkDark:after {
+    opacity: 0.4;
 }
 
 .categorie-label:hover {
@@ -803,6 +808,7 @@ table.connexion-table td.connexion-img-td {
     z-index: 1;
     position: absolute;
     right: 15px;
+    transition: width 2s, height 2s;
 }
 
 .toggle-is-clicked {
