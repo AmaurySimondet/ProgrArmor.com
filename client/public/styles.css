@@ -1046,6 +1046,10 @@ table.connexion-table td.connexion-img-td {
 
     }
 
+    .loadButton {
+        margin-top: 4%
+    }
+
     .Categorie .slider-style span {
         margin-left: 20px;
 
@@ -1141,6 +1145,10 @@ table.connexion-table td.connexion-img-td {
     .piechart {
         font-size: 5px;
 
+    }
+
+    .btn {
+        font-size: 10px;
     }
 
     .toggle-is-clicked {

@@ -9,10 +9,6 @@ import EchauffementInput from "./EchauffementInput";
 import FullExerciceExpertInput from "./FullExerciceExpertInput"
 import { v4 as uuidv4 } from 'uuid';
 
-function createId(date) {
-    return date.toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36);
-}
-
 function containsObj(arr, obj) {
     let contains = arr.some(elem => {
         return JSON.stringify(obj) === JSON.stringify(elem);
@@ -21,7 +17,7 @@ function containsObj(arr, obj) {
 }
 
 function ExpertForm(props) {
-    const [seance, setSeance] = useState({ id: createId(Date.now), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: [] });
+    const [seance, setSeance] = useState({ id: uuidv4(), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: [] });
     const [clickEchauffement, setClickEchauffement] = useState(false);
     const [paramsSelect, setParamsSelect] = useState();
     const [clickExercices, setClickExercices] = useState(false);
@@ -364,7 +360,7 @@ function ExpertForm(props) {
                 }
             }
             else {
-                setSeance({ id: createId(Date.now), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: [] });
+                setSeance({ id: uuidv4(), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: [] });
                 setClickDetails(false);
                 setClickEchauffement(false);
             }

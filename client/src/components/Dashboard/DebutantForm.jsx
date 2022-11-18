@@ -7,12 +7,8 @@ import FullExerciceInput from "./FullExerciceInput"
 import customStyles from "./customStyles";
 import { v4 as uuidv4 } from 'uuid';
 
-function createId(date) {
-    return date.toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36);
-}
-
 function DebutantForm(props) {
-    const [seance, setSeance] = useState({ id: createId(Date.now()), date: "", poids: "", exercices: [] });
+    const [seance, setSeance] = useState({ id: uuidv4(), date: "", poids: "", exercices: [] });
     const [params, setParams] = useState({ load: "" });
 
     async function handleClick() {
@@ -166,7 +162,7 @@ function DebutantForm(props) {
                 }
             }
             else {
-                setSeance({ id: createId(Date.now()), date: "", poids: "", exercices: [] });
+                setSeance({ id: uuidv4(), date: "", poids: "", exercices: [] });
             }
         }
     }
@@ -189,7 +185,7 @@ function DebutantForm(props) {
                     />
                 </div>
                 <div className="col-sm-3">
-                    <button className="btn btn-dark" onClick={loadSeance} type="submit">Charger la séance</button>
+                    <button className="btn btn-dark loadButton" onClick={loadSeance} type="submit">Charger la séance</button>
                 </div>
             </div>
 
@@ -228,7 +224,7 @@ function DebutantForm(props) {
                 <button className="btn btn-lg btn-dark enregistrer-button" onClick={handleClick} type="submit">Enregistrer la séance !</button>
             </div>
 
-            <div style={{ marginTop: "10%" }}></div>
+            <div style={{ marginTop: "20%" }}></div>
         </form>
     )
 };
