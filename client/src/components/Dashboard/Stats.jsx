@@ -41,6 +41,18 @@ const CustomTooltip = ({ active, payload, label }) => {
     return null;
 };
 
+const CustomTooltipRegu = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+        return (
+            <div className="custom-tooltip">
+                <p className="desc">{payload[0].payload.name} : {payload[0].payload.score.toFixed(2)}</p>
+            </div>
+        );
+    }
+
+    return null;
+};
+
 function formatYAxis(value) {
     return value + "%"
 }
@@ -179,7 +191,7 @@ function Stats() {
         if (data.success === false) {
             alert(data.message)
         } else {
-            setReguScore(data.reguScore);
+            setReguScore(data);
         }
     }
 
@@ -817,11 +829,15 @@ function Stats() {
 
                     <div className="regu-score">
                         <p style={{ marginBottom: dimensions.width < 350 ? "-50px" : dimensions.width < 950 ? "-100px" : "-300px" }}>
-                            <h1>Ta régularité</h1>
+                            <h1 style={{ marginBottom: "20px" }}>Ta régularité</h1>
                             <img className={user.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickRegu} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                             <div className={ReguHiddenClick}>
                                 <ReguHiddenText />
                             </div>
+
+                            <h2> Ta meilleure série de séances consécutives: {reguScore.bestSerie} </h2>
+
+                            <h2 style={{ marginBottom: "20px" }}> Ta moyenne de séances consécutives: {reguScore.AverageSerie} </h2>
                         </p>
 
                         <ResponsiveContainer
@@ -829,14 +845,14 @@ function Stats() {
                             height={dimensions.width < 350 ? 150 : dimensions.width < 450 ? 300 : dimensions.width < 925 ? 400 : 800}
                             className={user.modeSombre === true ? "regu-score watermark-regu watermark watermarkDark rotate" : "regu-score watermark-regu watermark rotate"}>
                             <BarChart
-                                data={reguScore}
+                                data={reguScore.reguScore}
                             >
                                 <XAxis tick={user.modeSombre === true ? { fill: 'white' } : { fill: "black" }} tickLine={user.modeSombre === true ? { stroke: 'white' } : { stroke: "black" }} dataKey="name" />
                                 <YAxis domain={[0, 100]} tick={user.modeSombre === true ? { fill: 'white' } : { fill: "black" }} tickLine={user.modeSombre === true ? { stroke: 'white' } : null} />
-                                <Tooltip content={<CustomTooltip />} />
+                                <Tooltip content={<CustomTooltipRegu />} />
                                 <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
                                 <Bar barSize={100} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="score">
-                                    {reguScore.map((entry, index) => (
+                                    {reguScore.reguScore.map((entry, index) => (
                                         <Cell fill={
                                             entry.score < 25 ? "#F7A4A4" :
                                                 entry.score < 50 ? "#FEBE8C" :
@@ -847,6 +863,8 @@ function Stats() {
                                 </Bar>
                             </BarChart>
                         </ResponsiveContainer >
+
+
                     </div>
 
                 </div>

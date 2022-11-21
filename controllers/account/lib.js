@@ -1114,6 +1114,13 @@ async function reguScore(req, res) {
             return weeknum;
         };
 
+        let reguScore = [
+            {
+                name: 'Score',
+                score: 80
+            }
+        ]
+
         weekAndYear = [];
 
         seances.forEach(s => {
@@ -1132,8 +1139,6 @@ async function reguScore(req, res) {
         weekAndYear = weekAndYear.sort(sortWeekCroissant);
         weekAndYear = weekAndYear.sort(sortYearCroissant);
 
-        console.log(weekAndYear);
-
         let lastS = weekAndYear[weekAndYear.length - 1];
         let firstS = weekAndYear[0];
 
@@ -1147,7 +1152,7 @@ async function reguScore(req, res) {
 
         let consecutivePeriods = [];
         let consecutiveSeances = 1;
-        for (let k = 0; k < weekAndYear.length - 2; k++) {
+        for (let k = 0; k < weekAndYear.length - 1; k++) {
             let S1 = weekAndYear[k];
             let S2 = weekAndYear[k + 1];
             let bool = false
@@ -1156,21 +1161,35 @@ async function reguScore(req, res) {
                 consecutiveSeances++;
                 bool = true
             }
-            if (bool === false || k === weekAndYear.length - 1) {
+            if (bool === false || k === weekAndYear.length - 2) {
                 consecutivePeriods.push(consecutiveSeances);
                 consecutiveSeances = 1;
             }
         }
 
-        console.log(seancesOnWeeks, consecutivePeriods)
+        const average = array => array.reduce((a, b) => a + b) / array.length;
+
+        // console.log("seanceOnWeeks:", seancesOnWeeks)
+        // console.log("consecutivePeriods:", consecutivePeriods)
+        // console.log("avg(consPeriods)/weeksOvPeriod", average(consecutivePeriods) / weeksOverPeriod)
+        // console.log("consecutivePeriodsLength/LengthMax", consecutivePeriods.length / (weeksOverPeriod / 2))
+
+        //meilleur cas: seanceOnWeeks >= 1, consecutivePeriods = [ >= weeksOverPeriod ]
+        //pire cas: seanceOnWeeks ~= 0, consecutivePeriods = [ 1 / weeksOverPeriod, ~0, ...][weeksOverPeriod / 2]
+
+        let score = (seancesOnWeeks + (average(consecutivePeriods) / weeksOverPeriod) + (consecutivePeriods.length / (weeksOverPeriod / 2))) / 3 * 100
+        console.log("score:", score)
+
+        if (score >= 100) {
+            reguScore[0].score = 100
+        }
+        else {
+            reguScore[0].score = score
+        }
 
         res.json({
-            success: true, message: "Seances trouvées", reguScore: [
-                {
-                    name: 'Score',
-                    score: 80
-                }
-            ]
+            success: true, message: "Seances trouvées", reguScore: reguScore, bestSerie: Math.max(...consecutivePeriods),
+            AverageSerie: average(consecutivePeriods)
         })
     }
     else {
