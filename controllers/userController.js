@@ -18,6 +18,7 @@ module.exports = function (app) {
 
     //DASHBOARD
     app.get('/workouts', account.workouts);
+    app.post('/reguScore', account.reguScore);
 
     //COMPTE
     app.post('/getUser', account.getUser);

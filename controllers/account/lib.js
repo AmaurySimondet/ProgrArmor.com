@@ -1059,6 +1059,47 @@ async function supprSeance(req, res) {
     }
 }
 
+//REGU SCORE
+async function reguScore(req, res) {
+    let conditions = {}
+    let update = {}
+    let newSeances = [];
+    let seances = []
+
+    conditions = {
+        _id: req.body.id
+    }
+
+    //find user seances
+    await User.find(conditions, function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+            seances = [...data[0].seances]
+
+            if (seances.length === 0) {
+                res.json({ success: false, message: "Aucune séance" })
+            }
+        }
+    })
+
+
+    if (seances.length !== 0) {
+        res.json({
+            success: true, message: "Seances trouvées", reguScore: [
+                {
+                    name: 'Score',
+                    score: 80
+                }
+            ]
+        })
+    }
+    else {
+        res.json({ success: false, message: "Seances non trouvées" })
+    }
+}
+
 //EDIT DB
 async function editDB(req, res) {
 
@@ -1186,3 +1227,4 @@ exports.supprSeance = supprSeance;
 exports.modifyUser = modifyUser;
 exports.loadSeance = loadSeance;
 // exports.editDB = editDB;
+exports.reguScore = reguScore;

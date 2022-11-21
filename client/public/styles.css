@@ -140,6 +140,15 @@ table.profile-table {
     width: 500%;
 }
 
+.nothide-big {
+    margin-top: 15%;
+    display: block;
+    background-color: #8e8e8e;
+    color: white;
+    text-align: justify;
+    width: 100%;
+}
+
 .select-title {
     font-weight: 800;
 
@@ -280,6 +289,15 @@ table.profile-table {
 
 
 /* STATS */
+.regu-score {
+    margin: auto;
+    text-align: center;
+}
+
+.rotate {
+    transform: rotate(90deg);
+}
+
 table.Stats-table {
     table-layout: fixed;
     width: 100%;
@@ -1137,6 +1155,11 @@ table.connexion-table td.connexion-img-td {
         top: -110px;
         background-size: 40px;
         background-position-y: -10px;
+    }
+
+    .watermark-regu:after {
+        background-size: 40px;
+        background-position-x: 150px;
     }
 }
 

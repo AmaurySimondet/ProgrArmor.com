@@ -6,51 +6,7 @@ import ExerciceInput from "./ExerciceInput"
 import CategorieInput from "./CategorieInput"
 import DetailInput from "./DetailInput"
 import Footer from "../Footer.jsx";
-
-const data = [
-    {
-        name: 'Page A',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
-    },
-    {
-        name: 'Page B',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
-    },
-    {
-        name: 'Page C',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
-    },
-    {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
-    },
-    {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
-    },
-    {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
-    },
-    {
-        name: 'Page G',
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
-    },
-];
+import ReguHiddenText from "./ReguHiddenText"
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -112,6 +68,14 @@ function Stats() {
     const [params2, setParams2] = useState({ date: "md", reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" })
     const [params1, setParams1] = useState({ date: "md", reforme: "poids", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "" })
     const [user, setUser] = useState()
+    const [reguScore, setReguScore] = useState();
+    const [ReguHiddenClick, setReguHiddenClick] = useState('hide')
+
+    function handleClickRegu() {
+        if (ReguHiddenClick === "hide") {
+            setReguHiddenClick("nothide-big");
+        } else { setReguHiddenClick("hide") };
+    }
 
     async function getUser() {
         const { data } = await API.getUser({ id: localStorage.getItem("id") });
@@ -129,6 +93,7 @@ function Stats() {
 
     useEffect(() => {
         getUser();
+        getReguScore();
     }, []);
 
     function handleClick() {
@@ -206,6 +171,15 @@ function Stats() {
                     setSeances3(data.seances);
                 }
             }
+        }
+    }
+
+    async function getReguScore() {
+        const { data } = await API.reguScore({ id: localStorage.getItem("id") });
+        if (data.success === false) {
+            alert(data.message)
+        } else {
+            setReguScore(data.reguScore);
         }
     }
 
@@ -841,31 +815,39 @@ function Stats() {
                         </ResponsiveContainer>
                     </div>
 
-                    {/* <div className="regu-score">
-                        <ResponsiveContainer width="100%" height={dimensions.width < 925 ? 280 : 400} className={user.modeSombre === true ? "chart watermark watermarkDark" : "chart watermark"}>
+                    <div className="regu-score">
+                        <p style={{ marginBottom: dimensions.width < 350 ? "-50px" : dimensions.width < 950 ? "-100px" : "-300px" }}>
+                            <h1>Ta régularité</h1>
+                            <img className={user.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickRegu} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                            <div className={ReguHiddenClick}>
+                                <ReguHiddenText />
+                            </div>
+                        </p>
+
+                        <ResponsiveContainer
+                            width={dimensions.width < 350 ? 80 : dimensions.width < 450 ? 100 : dimensions.width < 925 ? 200 : 200}
+                            height={dimensions.width < 350 ? 150 : dimensions.width < 450 ? 300 : dimensions.width < 925 ? 400 : 800}
+                            className={user.modeSombre === true ? "regu-score watermark-regu watermark watermarkDark rotate" : "regu-score watermark-regu watermark rotate"}>
                             <BarChart
-                                width={400}
-                                height={400}
-                                data={data}
-                                margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+                                data={reguScore}
                             >
                                 <XAxis tick={user.modeSombre === true ? { fill: 'white' } : { fill: "black" }} tickLine={user.modeSombre === true ? { stroke: 'white' } : { stroke: "black" }} dataKey="name" />
-                                <YAxis tick={user.modeSombre === true ? { fill: 'white' } : { fill: "black" }} tickLine={user.modeSombre === true ? { stroke: 'white' } : null} />
+                                <YAxis domain={[0, 100]} tick={user.modeSombre === true ? { fill: 'white' } : { fill: "black" }} tickLine={user.modeSombre === true ? { stroke: 'white' } : null} />
                                 <Tooltip content={<CustomTooltip />} />
                                 <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
-                                <Bar barSize={20} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="pv">
-                                    {data.map((entry, index) => (
+                                <Bar barSize={100} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="score">
+                                    {reguScore.map((entry, index) => (
                                         <Cell fill={
-                                            user.modeSombre === true ?
-                                                index % 2 === 0 ? "#ffbcbc" : "#ff6666"
-                                                :
-                                                index % 2 === 0 ? "#9b0000" : "#E84646"}
+                                            entry.score < 25 ? "#F7A4A4" :
+                                                entry.score < 50 ? "#FEBE8C" :
+                                                    entry.score < 75 ? "#FFFBC1" :
+                                                        "#B6E2A1"}
                                         />
                                     ))}
                                 </Bar>
                             </BarChart>
                         </ResponsiveContainer >
-                    </div> */}
+                    </div>
 
                 </div>
             }
