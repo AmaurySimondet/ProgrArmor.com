@@ -511,7 +511,12 @@ function Dashboard() {
     async function handleClickSuppr(event) {
         const res = await API.supprSeance({ id: localStorage.getItem("id"), seanceId: event.target.id })
 
-        window.location = "/dashboard"
+        if (res.success === false) {
+            alert(res.message)
+        }
+        else {
+            window.location = "/dashboard"
+        }
     }
 
     return (
@@ -528,7 +533,7 @@ function Dashboard() {
 
 
             {seances.length === 0 ?
-                <Bienvenue />
+                <Bienvenue modeSombre={user?.modeSombre} />
                 :
                 dimensions.width < 925 ?
                     <div className="Dashboard">
@@ -1045,7 +1050,7 @@ function Dashboard() {
                     <table className={switched ? "table table-hover table-responsive-lg table-dark dashboard-table" : "table table-hover table-responsive-lg dashboard-table"}>
                         <thead className={switched ? "thead-dark" : ""}>
                             <tr>
-                                {/* <th scope="col">ID</th> */}
+                                <th scope="col">ID</th>
                                 {checkbox.affichageModif ? <th scope="col">Modifier </th> : null}
                                 {checkbox.affichageSuppr ? <th scope="col">Supprimer </th> : null}
                                 {checkbox.affichageNom ? <th scope="col">Nom </th> : null}
@@ -1078,7 +1083,7 @@ function Dashboard() {
                                                                 indexExercice === 0 ?
                                                                     indexSerie === 0 ?
                                                                         <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
-                                                                            <img id={seance.date} onClick={handleClickModify} className={switched ? "modify-black" : "modify-white"} src={require('../../images/icons/write.png')} alt='session' />
+                                                                            <img id={seance.id} onClick={handleClickModify} className={switched ? "modify-black" : "modify-white"} src={require('../../images/icons/write.png')} alt='session' />
                                                                         </td>
                                                                         :
                                                                         <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
@@ -1091,7 +1096,7 @@ function Dashboard() {
                                                                 :
                                                                 null
                                                             }
-                                                            {/* <td>{seance.id}</td> */}
+                                                            <td>{seance.id}</td>
                                                             {checkbox.affichageSuppr ?
                                                                 indexExercice === 0 ?
                                                                     indexSerie === 0 ?

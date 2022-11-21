@@ -113,7 +113,7 @@ function EchauffementInput(props) {
 
     return (
         <div className="exercice-div">
-            <hr className="hr-exercice" />
+            <hr className={props.modeSombre === true ? "hr-exercice-dark " : "hr-exercice"} />
 
             <ExerciceEchauffementInput
                 id={props.id} key={props.id} onClickExercice={handleClickExercice} echauffement={echauffement.echauffement}
@@ -128,7 +128,7 @@ function EchauffementInput(props) {
                     {categories ? categories.map((categorie, index) => {
                         return (
                             <div>
-                                <hr className="hr-serie" />
+                                <hr className={props.modeSombre === true ? "hr-serie-dark " : "hr-serie"} />
 
                                 <CategorieInput
                                     modeSombre={props.modeSombre}
@@ -155,7 +155,7 @@ function EchauffementInput(props) {
             {series ? series.map((serie, index) => {
                 return (
                     <div>
-                        <hr className="hr-serie" />
+                        <hr className={props.modeSombre === true ? "hr-serie-dark " : "hr-serie"} />
 
                         <SerieInput
                             key={serie.id}

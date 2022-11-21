@@ -118,6 +118,24 @@ function DebutantForm(props) {
 
     }
 
+    function onInsertExercice(event) {
+        event.preventDefault();
+
+        let newS = { ...seance };
+        let newE = { exercice: { name: "" }, Series: {}, id: uuidv4() };
+        let indexInsert = parseInt(event.target.id) + 1;
+
+        newS.exercices.splice(indexInsert, 0, newE)
+
+        newS = {
+            ...newS,
+            exercices: newS.exercices
+        }
+
+        setSeance(newS)
+
+    }
+
     function onDeleteExercices(id) {
         let newSeance = seance;
         let indexOfDel = seance.exercices.findIndex(ex => ex.id === id)
@@ -158,7 +176,7 @@ function DebutantForm(props) {
                     alert("Vous ne pouvez pas charger une séance expert en mode débutant !")
                 }
                 else {
-                    setSeance(data.seance)
+                    setSeance({ ...data.seance, id: uuidv4() })
                 }
             }
             else {
@@ -205,19 +223,24 @@ function DebutantForm(props) {
 
             {seance?.exercices.map((exercice, index) => {
                 return (
-                    <FullExerciceInput
-                        key={exercice.id}
-                        id={exercice.id}
-                        index={index}
-                        exercice={exercice}
-                        poids={seance.poids}
-                        changeExercices={changeExercices}
-                        onDeleteExercices={onDeleteExercices}
-                        modeSombre={props.modeSombre}
-                    />);
+                    <div>
+                        <FullExerciceInput
+                            key={exercice.id}
+                            id={exercice.id}
+                            index={index}
+                            exercice={exercice}
+                            poids={seance.poids}
+                            changeExercices={changeExercices}
+                            onDeleteExercices={onDeleteExercices}
+                            modeSombre={props.modeSombre}
+                        />
+
+                        <button className="btn btn-dark form-button" id={index} onClick={onInsertExercice} type="submit">Insérer un exercice ici !</button>
+                        <br />
+                    </div>)
             })}
 
-            <button className="btn btn-dark form-button" onClick={(e) => onAddExercices(e)} type="submit">Ajouter un exercice à cette séance !</button>
+            <button className="btn btn-dark form-button" onClick={onAddExercices} type="submit">Ajouter un exercice à cette séance !</button>
             <br />
 
             <div className="form-button-div">

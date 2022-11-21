@@ -238,7 +238,7 @@ async function debutantform(req, res) {
 
 //LOAD SEANCE
 async function loadSeance(req, res) {
-    console.log(req.query);
+    // console.log(req.query);
 
     function sortDateDecroissant(a, b) {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -285,7 +285,7 @@ async function loadSeance(req, res) {
                     // LastDate seance
                     if (req.query.load[8] === "-") {
                         nomSeance = req.query.load.slice(9, req.query.load.length)
-                        console.log(nomSeance)
+                        // console.log(nomSeance)
 
                         seances = seances.sort(sortDateCroissant);
 
@@ -312,7 +312,7 @@ async function loadSeance(req, res) {
 //DASHBOARD
 //ALL WORKOUTS / ADMIN
 async function workouts(req, res) {
-    console.log(req.query)
+    // console.log(req.query)
 
     function sortDateCroissant(a, b) {
         return new Date(a.date).getTime() - new Date(b.date).getTime();
@@ -989,7 +989,7 @@ async function getUser(req, res) {
                         obj.modeSombre = data[0].modeSombre
                     }
 
-                    console.log(obj)
+                    // console.log(obj)
 
                     res.json({ success: true, message: "Utilisateur trouvé !", profile: obj })
                 }
@@ -1006,12 +1006,13 @@ async function supprSeance(req, res) {
     let conditions = {}
     let update = {}
     let newSeances = [];
+    let seances = []
 
     conditions = {
         _id: req.body.id
     }
 
-    //find user seances and newSeance = seance filtered with req.body.seanceId
+    //find user seances
     await User.find(conditions, function (err, data) {
         if (err) {
             res.json({ success: false, message: err })
@@ -1019,25 +1020,43 @@ async function supprSeance(req, res) {
         else {
             seances = [...data[0].seances]
 
-            if (seances.length !== 0) {
-                newSeances = seances.filter(seance => seance.id !== req.body.seanceId)
+            if (seances.length === 0) {
+                res.json({ success: false, message: "Aucune séance" })
             }
         }
     })
 
-    update = {
-        seances: newSeances
-    }
 
-    //update seances user
-    User.findOneAndUpdate(conditions, update, function (error, result) {
-        if (error) {
-            res.json({ success: false, message: error })
+    if (seances.length !== 0) {
+        console.log("DEL_ID: ", req.body.seanceId)
+        seances.forEach((seance) => console.log(seance.id))
+
+        //newSeance = seance filtered with req.body.seanceId
+        newSeances = seances.filter(seance => seance.id !== req.body.seanceId)
+
+        update = {
+            seances: newSeances
         }
-        else {
-            res.json({ success: true, message: "Seance supprimée !" })
-        }
-    });
+
+        console.log("newSeances :", newSeances)
+
+        // if (newSeances.length === 0) {
+        //     res.json({ success: false, message: "Toutes les séances seront supprimées !" })
+        // }
+
+        //update seances user
+        User.findOneAndUpdate(conditions, update, function (error, result) {
+            if (error) {
+                res.json({ success: false, message: error })
+            }
+            else {
+                res.json({ success: true, message: "Seance supprimée !" })
+            }
+        });
+    }
+    else {
+        res.json({ success: false, message: "Seances non trouvées" })
+    }
 }
 
 //EDIT DB

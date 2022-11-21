@@ -349,7 +349,7 @@ function ExpertForm(props) {
                     alert("Vous ne pouvez pas charger une séance débutant en mode expert !")
                 }
                 else {
-                    setSeance(data.seance);
+                    setSeance({ ...data.seance, id: uuidv4() })
                     setClickExercices(true);
                     if (data.seance.echauffements.length > 0) {
                         setClickEchauffement(true);
@@ -453,6 +453,42 @@ function ExpertForm(props) {
         }
     }
 
+    function onInsertExercice(event) {
+        event.preventDefault();
+
+        let newS = { ...seance };
+        let newE = { exercice: { name: "" }, Series: {}, Categories: {}, id: uuidv4() };
+        let indexInsert = parseInt(event.target.id) + 1;
+
+        newS.exercices.splice(indexInsert, 0, newE)
+
+        newS = {
+            ...newS,
+            exercices: newS.exercices
+        }
+
+        setSeance(newS)
+
+    }
+
+    function onInsertEchauffement(event) {
+        event.preventDefault();
+
+        let newS = { ...seance };
+        let newE = { echauffement: { name: "" }, Series: {}, Categories: {}, id: uuidv4() };
+        let indexInsert = parseInt(event.target.id) + 1;
+
+        newS.echauffements.splice(indexInsert, 0, newE)
+
+        newS = {
+            ...newS,
+            echauffements: newS.echauffements
+        }
+
+        setSeance(newS)
+
+    }
+
     useEffect(() => {
         getNames();
     }, []);
@@ -472,7 +508,7 @@ function ExpertForm(props) {
                     />
                 </div>
                 <div className="col-sm-3">
-                    <button className="btn btn-dark" onClick={loadSeance} type="submit">Charger la séance</button>
+                    <button className="btn btn-dark loadButton" onClick={loadSeance} type="submit">Charger la séance</button>
                 </div>
             </div>
 
@@ -531,18 +567,23 @@ function ExpertForm(props) {
                     {seance.echauffements ?
                         seance.echauffements.map((echauffement, index) => {
                             return (
-                                <EchauffementInput
-                                    key={echauffement.id}
-                                    index={index}
-                                    id={echauffement.id}
-                                    modeSombre={props.modeSombre}
-                                    poids={seance.poids}
-                                    echauffement={echauffement}
-                                    click={echauffement.Categories ? echauffement.Categories[0] ? true : false : false}
-                                    onAddEchauffements={onAddEchauffements}
-                                    changeEchauffements={changeEchauffements}
-                                    onDeleteEchauffements={onDeleteEchauffements}
-                                />);
+                                <div>
+                                    <EchauffementInput
+                                        key={echauffement.id}
+                                        index={index}
+                                        id={echauffement.id}
+                                        modeSombre={props.modeSombre}
+                                        poids={seance.poids}
+                                        echauffement={echauffement}
+                                        click={echauffement.Categories ? echauffement.Categories[0] ? true : false : false}
+                                        onAddEchauffements={onAddEchauffements}
+                                        changeEchauffements={changeEchauffements}
+                                        onDeleteEchauffements={onDeleteEchauffements}
+                                    />
+
+                                    <button className="btn btn-dark form-button" id={index} onClick={onInsertEchauffement} type="submit">Insérer un echauffement ici !</button>
+                                    <br />
+                                </div>)
                         })
                         : null
                     }
@@ -563,18 +604,23 @@ function ExpertForm(props) {
                     <p onClick={handleClickExercices} className="expert-title"> Exercices <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
                     {seance.exercices ? seance.exercices.map((exercice, index) => {
                         return (
-                            <FullExerciceExpertInput
-                                key={exercice.id}
-                                index={index}
-                                id={exercice.id}
-                                modeSombre={props.modeSombre}
-                                exercice={exercice}
-                                poids={seance.poids}
-                                click={exercice.Categories ? exercice.Categories[0] ? true : false : false}
-                                onAddExercices={onAddExercices}
-                                changeExercices={changeExercices}
-                                onDeleteExercices={onDeleteExercices}
-                            />);
+                            <div>
+                                <FullExerciceExpertInput
+                                    key={exercice.id}
+                                    index={index}
+                                    id={exercice.id}
+                                    modeSombre={props.modeSombre}
+                                    exercice={exercice}
+                                    poids={seance.poids}
+                                    click={exercice.Categories ? exercice.Categories[0] ? true : false : false}
+                                    onAddExercices={onAddExercices}
+                                    changeExercices={changeExercices}
+                                    onDeleteExercices={onDeleteExercices}
+                                />
+
+                                <button className="btn btn-dark form-button" id={index} onClick={onInsertExercice} type="submit">Insérer un exercice ici !</button>
+                                <br />
+                            </div>)
                     })
                         : null}
 
