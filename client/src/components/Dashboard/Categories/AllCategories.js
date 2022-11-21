@@ -1,11 +1,11 @@
 import AccessoireObjets from "./AccessoireObjet.js";
 import lesTypesBarres from "./TypesBarres.js";
-import lesElastiques from "./Elastiques.js";
 import Streetworkout from "./StreetWorkout.js";
 import MusclesCategorie from "./MusclesCategorie.js";
 import PositionCorps from "./PositionCorps.js";
 import PositionBras from "./PositionBras.js";
 import PositionJambes from "./PositionJambes.js";
+import positionElastique from "./PositionElastique.js";
 import PositionMains from "./PositionMains.js";
 import PositionPieds from "./PositionPieds.js";
 import AxeCategorie from "./AxeCategorie.js";
@@ -84,12 +84,6 @@ AllCategories.push({
     {
         id: "name",
         className: "select-title",
-        label: "Positionnement",
-        value: "title",
-    },
-    {
-        id: "name",
-        className: "select-title",
         label: "Positionnement du corps",
         value: "Positionnement du corps",
     }
@@ -162,6 +156,20 @@ AllCategories.push({
 }, {
     id: "name",
     className: "select-title",
+    label: "Positionnement élastique(s)",
+    value: "Positionnement élastique(s)",
+})
+positionElastique.forEach(obj => {
+    AllCategories.push({ ...obj, name: "Positionnement élastique(s)" });
+})
+AllCategories.push({
+    id: "name",
+    className: "select-title",
+    label: "",
+    value: "title",
+}, {
+    id: "name",
+    className: "select-title",
     label: "Ouverture coudes / genoux",
     value: "Ouverture coudes / genoux",
 })
@@ -219,18 +227,12 @@ AllCategories.push({
     className: "select-title",
     label: "",
     value: "title",
-},
-    {
-        id: "name",
-        className: "select-title",
-        label: "Materiel",
-        value: "title",
-    })
+})
 AllCategories.push({
     id: "name",
-    className: "select-item",
+    className: "select-title",
     label: "Type de barre / poids / machine",
-    value: "Type de barre / poids",
+    value: "Type de barre / poids / machine",
 })
 lesTypesBarres.forEach(obj => {
     AllCategories.push({ ...obj, name: "Type de barre / poids" });
@@ -246,9 +248,7 @@ AllCategories.push({
     label: "Elastique",
     value: "Elastique",
 })
-lesElastiques.forEach(obj => {
-    AllCategories.push({ ...obj, name: "Elastique" });
-})
+// pas mettre les elastiques
 AllCategories.push({
     id: "name",
     className: "select-title",
@@ -274,25 +274,8 @@ AllCategories.push({
     className: "select-title",
     label: "",
     value: "title",
-},
-    {
-        id: "name",
-        className: "select-title",
-        label: "Forme",
-        value: "title",
-    })
-AllCategories.push({
-    id: "name",
-    className: "select-title",
-    label: "Forme",
-    value: "title",
 })
 AllCategories.push({
-    id: "name",
-    className: "select-title",
-    label: "",
-    value: "title",
-}, {
     id: "name",
     className: "select-title",
     label: "Unilatéral",
@@ -368,16 +351,10 @@ AllCategories.push({
     className: "select-title",
     label: "",
     value: "title",
-},
-    {
-        id: "name",
-        className: "select-title",
-        label: "Spécifique",
-        value: "title",
-    })
+})
 AllCategories.push({
     id: "name",
-    className: "select-item",
+    className: "select-title",
     label: "Variante Street Workout",
     value: "Variante Street Workout",
 })
@@ -425,18 +402,18 @@ AllCategories.push({
     {
         id: "name",
         className: "select-title",
-        label: "Detail",
-        value: "title",
+        label: "Temps de repos entre les séries",
+        value: "Temps de repos entre les séries",
     },
     {
         id: "name",
-        className: "select-item",
-        label: "Temps de repos entre les séries",
-        value: "Temps de repos entre les séries",
+        className: "select-title",
+        label: "",
+        value: "title",
     })
 AllCategories.push({
     id: "name",
-    className: "select-item",
+    className: "select-title",
     label: "RPE / Niveau d'intensité",
     value: "RPE / Niveau d'intensité",
 })
@@ -462,6 +439,9 @@ Douleur.forEach(obj => {
 //get rid of / défaut
 AllCategories.forEach((obj, indexObj) => {
     if (obj.label === "/ (défaut)") {
+        delete AllCategories[indexObj]
+    }
+    if (obj.label === "Aucun (défaut)") {
         delete AllCategories[indexObj]
     }
 })

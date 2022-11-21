@@ -1,5 +1,5 @@
 const explosif = [
-//EXPLOSIF
+  //EXPLOSIF
   {
     id: "input",
     className: "select-title",
@@ -9,12 +9,6 @@ const explosif = [
 
 
 
-  {
-    id: "input",
-    className: "select-title",
-    label: "",
-    value: "title",
-  },
   {
     id: "input",
     className: "select-title",
@@ -90,7 +84,7 @@ const explosif = [
     label: "Clappé dans le dos",
     value: "Clappé dans le dos",
   },
-    {
+  {
     id: "input",
     className: "select-item",
     label: "Filé",
@@ -182,7 +176,7 @@ const explosif = [
   {
     id: "input",
     className: "select-title",
-    label: "Forme",
+    label: "Mouvement",
     value: "title",
   },
   {

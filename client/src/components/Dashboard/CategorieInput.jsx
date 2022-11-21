@@ -15,6 +15,7 @@ import MusclesCategorie from "./Categories/MusclesCategorie.js";
 import PositionCorps from "./Categories/PositionCorps.js";
 import PositionBras from "./Categories/PositionBras.js";
 import PositionJambes from "./Categories/PositionJambes.js";
+import positionElastique from "./Categories/PositionElastique.js";
 import PositionMains from "./Categories/PositionMains.js";
 import PositionPieds from "./Categories/PositionPieds.js";
 import AxeCategorie from "./Categories/AxeCategorie.js";
@@ -351,7 +352,7 @@ function CategorieInput(props) {
                         </div>}
                     </div>
                 : null}
-            {categorie.name === "Type de barre / poids" ?
+            {categorie.name === "Type de barre / poids / machine" ?
                 props.info === "false" ?
                     <Select
                         placeholder="Categorie..."
@@ -437,6 +438,38 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={PositionCorps}
+                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-sm-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Positionnement élastique(s)" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={positionElastique}
+                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="col-sm-2 col-form-label">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={positionElastique}
                             styles={props.modeSombre === true ? customStylesDark : customStyles}
                             className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
                             value={{ value: categorie.input, label: categorie.input }}
@@ -1188,7 +1221,7 @@ function CategorieInput(props) {
                                                         marginLeft: "1%"
                                                     }
                                                 }
-                                                defaultValue={parseInt(categorie.tension)}
+                                                defaultValue={parseFloat(categorie.tension)}
                                                 onChange={handleChangeSlider}
                                                 getAriaValueText={valuetext}
                                                 aria-labelledby="discrete-slider-custom"

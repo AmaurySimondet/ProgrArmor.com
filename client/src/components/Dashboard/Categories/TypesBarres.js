@@ -10,13 +10,7 @@ const variantes = [
 
 
 
-//BARRES
-  {
-    id: "input",
-    className: "select-title",
-    label: "",
-    value: "title",
-  },
+  //BARRES
   {
     id: "input",
     className: "select-title",
@@ -79,7 +73,7 @@ const variantes = [
   },
 
 
-//POIDS
+  //POIDS
   {
     id: "input",
     className: "select-title",
@@ -118,7 +112,7 @@ const variantes = [
   },
 
 
-//POULIES
+  //POULIES
   {
     id: "input",
     className: "select-title",
@@ -131,7 +125,7 @@ const variantes = [
     label: "Poulie(s)",
     value: "title",
   },
- {
+  {
     id: "input",
     className: "select-item",
     label: "Poulie haute",
@@ -207,7 +201,7 @@ const variantes = [
 
 
 
-//MACHINE
+  //MACHINE
   {
     id: "input",
     className: "select-title",
@@ -241,7 +235,7 @@ const variantes = [
 
 
 
-//STREETWORKOUT
+  //STREETWORKOUT
   {
     id: "input",
     className: "select-title",
@@ -259,6 +253,12 @@ const variantes = [
     className: "select-item",
     label: "Poids de poignets",
     value: "Poids de poignets",
+  },
+  {
+    id: "input",
+    className: "select-item",
+    label: "Barre de traction",
+    value: "Barre de traction",
   },
   {
     id: "input",
@@ -296,10 +296,22 @@ const variantes = [
     label: "Aux barres parallèles",
     value: "Aux barres parallèles",
   },
+  {
+    id: "input",
+    className: "select-item",
+    label: "Avec chaussures",
+    value: "Avec chaussures",
+  },
+  {
+    id: "input",
+    className: "select-item",
+    label: "Sans chaussures",
+    value: "Sans chaussures",
+  },
 
 
 
-//STRONGMAN
+  //STRONGMAN
   {
     id: "input",
     className: "select-title",

@@ -1,5 +1,5 @@
 const executionSpecifique = [
-//EXECUTION SPECIFIQUE
+  //EXECUTION SPECIFIQUE
   {
     id: "input",
     className: "select-title",
@@ -9,13 +9,7 @@ const executionSpecifique = [
 
 
 
-//MUSCU
-  {
-    id: "input",
-    className: "select-title",
-    label: "",
-    value: "title",
-  },
+  //MUSCU,
   {
     id: "input",
     className: "select-title",
@@ -78,7 +72,7 @@ const executionSpecifique = [
   },
 
 
-//STREET
+  //STREET
   {
     id: "input",
     className: "select-title",
@@ -127,7 +121,7 @@ const executionSpecifique = [
     label: "'Korean'",
     value: "'Korean'",
   },
-{
+  {
     id: "input",
     className: "select-item",
     label: "'Commando'",
@@ -145,7 +139,7 @@ const executionSpecifique = [
     label: "'Baby'",
     value: "'Baby'",
   },
-{
+  {
     id: "input",
     className: "select-item",
     label: "'Hindou'",
@@ -165,7 +159,7 @@ const executionSpecifique = [
   },
 
 
-//STREET BAS DU CORPS
+  //STREET BAS DU CORPS
   {
     id: "input",
     className: "select-title",
@@ -178,7 +172,7 @@ const executionSpecifique = [
     label: "Street Workout - Bas du corps",
     value: "title",
   },
-{
+  {
     id: "input",
     className: "select-item",
     label: "'Matrix'",
@@ -222,7 +216,7 @@ const executionSpecifique = [
   },
 
 
-//AUTRE
+  //AUTRE
   {
     id: "input",
     className: "select-title",
