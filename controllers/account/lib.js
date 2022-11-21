@@ -1085,7 +1085,85 @@ async function reguScore(req, res) {
     })
 
 
-    if (seances.length !== 0) {
+    if (seances.length > 1) {
+        Date.prototype.getWeek = function (dowOffset) {
+            /*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
+
+            dowOffset = typeof (dowOffset) == 'number' ? dowOffset : 0; //default dowOffset to zero
+            var newYear = new Date(this.getFullYear(), 0, 1);
+            var day = newYear.getDay() - dowOffset; //the day of week the year begins on
+            day = (day >= 0 ? day : day + 7);
+            var daynum = Math.floor((this.getTime() - newYear.getTime() -
+                (this.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) / 86400000) + 1;
+            var weeknum;
+            //if the year starts before the middle of a week
+            if (day < 4) {
+                weeknum = Math.floor((daynum + day - 1) / 7) + 1;
+                if (weeknum > 52) {
+                    nYear = new Date(this.getFullYear() + 1, 0, 1);
+                    nday = nYear.getDay() - dowOffset;
+                    nday = nday >= 0 ? nday : nday + 7;
+                    /*if the next year starts before the middle of
+                      the week, it is week #1 of that year*/
+                    weeknum = nday < 4 ? 1 : 53;
+                }
+            }
+            else {
+                weeknum = Math.floor((daynum + day - 1) / 7);
+            }
+            return weeknum;
+        };
+
+        weekAndYear = [];
+
+        seances.forEach(s => {
+            date = new Date(s.date)
+            weekAndYear.push({ id: uuidv4(), week: date.getWeek(), year: date.getFullYear() })
+        });
+
+        function sortWeekCroissant(a, b) {
+            return a.week - b.week
+        }
+
+        function sortYearCroissant(a, b) {
+            return a.year - b.year
+        }
+
+        weekAndYear = weekAndYear.sort(sortWeekCroissant);
+        weekAndYear = weekAndYear.sort(sortYearCroissant);
+
+        console.log(weekAndYear);
+
+        let lastS = weekAndYear[weekAndYear.length - 1];
+        let firstS = weekAndYear[0];
+
+        // 42/2021 13/2022
+        let weeksDiff = lastS.week - firstS.week; // 13 - 42 = -29
+        let yearsDiff = lastS.year - firstS.year; // 2022 - 2021 = 1
+
+        let weeksOverPeriod = yearsDiff * 52 + weeksDiff
+
+        let seancesOnWeeks = (seances.length + 1) / weeksOverPeriod
+
+        let consecutivePeriods = [];
+        let consecutiveSeances = 1;
+        for (let k = 0; k < weekAndYear.length - 2; k++) {
+            let S1 = weekAndYear[k];
+            let S2 = weekAndYear[k + 1];
+            let bool = false
+
+            if ((S2.week === (S1.week + 1) || S2.week === S1.week) && S2.year === S1.year) {
+                consecutiveSeances++;
+                bool = true
+            }
+            if (bool === false || k === weekAndYear.length - 1) {
+                consecutivePeriods.push(consecutiveSeances);
+                consecutiveSeances = 1;
+            }
+        }
+
+        console.log(seancesOnWeeks, consecutivePeriods)
+
         res.json({
             success: true, message: "Seances trouvées", reguScore: [
                 {
