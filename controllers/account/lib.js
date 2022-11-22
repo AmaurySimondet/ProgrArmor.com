@@ -1167,6 +1167,16 @@ async function reguScore(req, res) {
             }
         }
 
+        //série actuelle
+        currDate = new Date();
+        currDate = { id: uuidv4(), week: currDate.getWeek(), year: currDate.getFullYear() }
+        if (lastS.week === currDate.week && lastS.year === currDate.year) {
+            currSerie = consecutivePeriods[consecutivePeriods.length - 1];
+        }
+        else {
+            currSerie = 1;
+        }
+
         const average = array => array.reduce((a, b) => a + b) / array.length;
 
         // console.log("seanceOnWeeks:", seancesOnWeeks)
@@ -1178,7 +1188,7 @@ async function reguScore(req, res) {
         //pire cas: seanceOnWeeks ~= 0, consecutivePeriods = [ 1 / weeksOverPeriod, ~0, ...][weeksOverPeriod / 2]
 
         let score = (seancesOnWeeks + (average(consecutivePeriods) / weeksOverPeriod) + (consecutivePeriods.length / (weeksOverPeriod / 2))) / 3 * 100
-        console.log("score:", score)
+        // console.log("score:", score)
 
         if (score >= 100) {
             reguScore[0].score = 100
@@ -1189,7 +1199,7 @@ async function reguScore(req, res) {
 
         res.json({
             success: true, message: "Seances trouvées", reguScore: reguScore, bestSerie: Math.max(...consecutivePeriods),
-            AverageSerie: average(consecutivePeriods)
+            AverageSerie: average(consecutivePeriods), currSerie: currSerie
         })
     }
     else {

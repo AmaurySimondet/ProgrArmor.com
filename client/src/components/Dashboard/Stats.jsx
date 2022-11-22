@@ -835,9 +835,14 @@ function Stats() {
                                 <ReguHiddenText />
                             </div>
 
-                            <h2> Ta meilleure série de séances consécutives: {reguScore.bestSerie} </h2>
+                            <h2> Ta série de séances consécutives actuelle: </h2>
+                            <h2> {reguScore.currSerie} </h2>
 
-                            <h2 style={{ marginBottom: "20px" }}> Ta moyenne de séances consécutives: {reguScore.AverageSerie} </h2>
+                            <h2> Ta meilleure série de séances consécutives: </h2>
+                            <h2> {reguScore.bestSerie} </h2>
+
+                            <h2> Ta moyenne de séances consécutives: </h2>
+                            <h2 style={{ marginBottom: "20px" }}> {reguScore.AverageSerie} </h2>
                         </p>
 
                         <ResponsiveContainer

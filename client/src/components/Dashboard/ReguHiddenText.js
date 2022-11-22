@@ -10,7 +10,8 @@ function CategorieHiddenText() {
             <br />
             <strong> Mais c'est calculé comment ? </strong> <br />
             <br />
-            Le score est obtenu en comparant le nombre de séances et le nombres de semaines sur la période ainsi qu'en analysant le nombre de semaines avec séance   <br />
+            Le score est obtenu en comparant le nombre de séances et le nombres de semaines sur la période ainsi qu'en analysant le nombre de semaines avec séance et  <br />
+            les séries de séances consécutives <br />
             <br />
             <i> {"Cliques à nouveau sur l'icône"} <img className="myDIV" src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" /> {"pour faire disparaître ce bandeau d'information"} </i>
         </div>
