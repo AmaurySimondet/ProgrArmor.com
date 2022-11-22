@@ -27,6 +27,7 @@ function Compte() {
   const [user, setUser] = useState({})
   const [formInfo, setFormInfo] = useState({})
   const [modifyInfo, setModifyInfo] = useState(false);
+  const [modifyPassword, setModifyPassword] = useState(false);
   const [switched, setSwitched] = useState();
 
   async function updateMode() {
@@ -88,28 +89,50 @@ function Compte() {
     setModifyInfo(!modifyInfo);
   }
 
+  function handleModifyPasswordForm() {
+    setModifyPassword(!modifyPassword);
+  }
+
   async function handleClickUpdateUser(event) {
     event.preventDefault();
 
-    console.log(formInfo)
-    let { fName, lName, email } = formInfo;
+    function containsSC(str) {
+      const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+      return specialChars.test(str);
+    }
 
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) return alert("Email au mauvais format !")
-    if (!email || email.length === 0) return alert("Aucun email fourni !");
-    if (!fName || fName.length === 0) return alert("Aucun prénom fourni !");
-    if (!lName || lName.length === 0) return alert("Aucun mom fourni !");
+    // console.log(formInfo)
+    let { fName, lName, email, password, cpassword } = formInfo;
+
+    if (email && fName && lName) {
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) return alert("Email au mauvais format !")
+
+      else {
+        const res = await API.modifyUser({ id: localStorage.getItem("id"), fName: fName, lName: lName, email: email })
+        console.log(res)
+
+        window.location = "/compte"
+      }
+    }
+
+    if (password && cpassword) {
+      if (password.length < 8 || containsSC(password) === false) return alert("Le mot de passe doit contenir 8 caractères dont un spécial")
+      if (password !== cpassword) return alert("Doucement sur la picole t'as pas écris deux fois la même chose !")
+      if (user.googleId || user.facebookId) return alert("Impossible de modifier le mdp pour les utilisateurs google et facebook !")
+
+      else {
+        const res = await API.modifyUser({ id: localStorage.getItem("id"), password: password })
+        console.log(res)
+
+        window.location = "/compte"
+      }
+    }
 
     else {
-      const res = await API.modifyUser({ id: localStorage.getItem("id"), fName: fName, lName: lName, email: email })
-      console.log(res)
-
-      window.location = "/compte"
+      alert("Modifications manquantes !")
     }
   }
 
-  function handleClickFormInfo(formInfo) {
-    return alert("Pas encore disponible !")
-  }
 
   const boxRef = useRef();
   const [x, setX] = useState();
@@ -211,102 +234,143 @@ function Compte() {
           </Button>
         </form>
         :
-        <div className="Compte">
-          <input style={{ display: "none" }} type="file" onChange={onFileSelected} ref={inputFile} />
-
-          <table className="profile-table">
-            <tbody>
-              <tr>
-
-                {user.profilePic ?
-                  <td className="profile-td">
-                    <div onClick={() => inputFile.current.click()} className="relative">
-                      <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
-                      <img className="profile-pic" src={user.profilePic} alt="profile-pic" />
-                      <p> {text} </p>
-                    </div>
-                  </td>
-                  :
-                  <td>
-                    <div onClick={() => inputFile.current.click()} className="relative">
-                      <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
-                      <img className="unknown-profile-pic profile-pic" src={require('../../images/profilepic.png')} alt='unknown-profile-pic' />
-                      <p> {text} </p>
-                    </div>
-                  </td>
-                }
-
-                {user ?
-                  <td className="profile-td">
-                    <h1> {user.fName} {user.lName} </h1>
-                    <h1 className="profile-email"> {user.email} </h1>
-                  </td>
-                  : null}
-
-                <td>
-
-                  <Button className="btn btn-dark profile-btn" onClick={handleModifyForm} block="true" type="submit">
-                    Modifier les infos
-                  </Button>
-                  <br />
-
-                  <Button className="btn btn-dark" onClick={handleClickFormInfo} block="true" type="submit">
-                    Modifier le mot de passe
-                  </Button>
-
-                  <p className="session-div-switch">
-                    Mode clair
-                    <GreenSwitch onChange={handleChangeSwitch} checked={!!user.modeSombre} />
-                    Mode Sombre
-                  </p>
-
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div className="small-profile">
-
-            {user.profilePic ?
-              <div onClick={() => inputFile.current.click()} className="relative">
-                <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
-                <img className="profile-pic profile-pic-small" src={user.profilePic} alt="profile-pic" />
-                <p> {text} </p>
+        modifyPassword ?
+          <form className="modify-info-form">
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                Mot de passe
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="password"
+                  className={user.modeSombre === true ? "form-control inputDark" : "form-control"}
+                  placeholder="GrecqueAndFrites69!"
+                  value={formInfo.password}
+                  id="password"
+                  onChange={handleChange}
+                />
               </div>
-              :
-              <div onClick={() => inputFile.current.click()} className="relative">
-                <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
-                <img className="unknown-profile-pic profile-pic profile-pic-small" src={require('../../images/profilepic.png')} alt='unknown-profile-pic' />
-                <p> {text} </p>
+            </div>
+            <div className="form-group row">
+              <label className="col-sm-2 col-form-label">
+                Confirmer mot de passe
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="password"
+                  className={user.modeSombre === true ? "form-control inputDark" : "form-control"}
+                  placeholder="GrecqueAndFrites69!"
+                  value={formInfo.cpassword}
+                  id="cpassword"
+                  onChange={handleChange}
+                />
               </div>
-            }
-
-            {user ?
-              <div>
-                <h1> {user.fName} {user.lName} </h1>
-                <h1 className="profile-email"> {user.email} </h1>
-              </div>
-              : null}
-
-            <Button className="btn btn-dark profile-btn profile-btn-small" onClick={handleModifyForm} block="true" type="submit">
-              Modifier les infos
+            </div>
+            <Button className="btn btn-dark btn-lg" onClick={handleClickUpdateUser} block="true" type="submit">
+              Appliquer les modifications
             </Button>
             <br />
-
-            <Button className="btn btn-dark" onClick={handleClickFormInfo} block="true" type="submit">
-              Modifier le mot de passe
+            <Button className="btn btn-dark btn-lg btn-arriere" onClick={handleModifyPasswordForm} block="true" type="submit">
+              Revenir en arrière
             </Button>
+          </form>
+          :
+          <div className="Compte">
+            <input style={{ display: "none" }} type="file" onChange={onFileSelected} ref={inputFile} />
 
-            <p className="session-div-switch">
-              Mode clair
-              <GreenSwitch onChange={handleChangeSwitch} checked={!!user.modeSombre} />
-              Mode Sombre </p>
+            <table className="profile-table">
+              <tbody>
+                <tr>
+
+                  {user.profilePic ?
+                    <td className="profile-td">
+                      <div onClick={() => inputFile.current.click()} className="relative">
+                        <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
+                        <img className="profile-pic" src={user.profilePic} alt="profile-pic" />
+                        <p> {text} </p>
+                      </div>
+                    </td>
+                    :
+                    <td>
+                      <div onClick={() => inputFile.current.click()} className="relative">
+                        <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
+                        <img className="unknown-profile-pic profile-pic" src={require('../../images/profilepic.png')} alt='unknown-profile-pic' />
+                        <p> {text} </p>
+                      </div>
+                    </td>
+                  }
+
+                  {user ?
+                    <td className="profile-td">
+                      <h1> {user.fName} {user.lName} </h1>
+                      <h1 className="profile-email"> {user.email} </h1>
+                    </td>
+                    : null}
+
+                  <td>
+
+                    <Button className="btn btn-dark profile-btn" onClick={handleModifyForm} block="true" type="submit">
+                      Modifier les infos
+                    </Button>
+                    <br />
+
+                    <Button className="btn btn-dark" onClick={handleModifyPasswordForm} block="true" type="submit">
+                      Modifier le mot de passe
+                    </Button>
+
+                    <p className="session-div-switch">
+                      Mode clair
+                      <GreenSwitch onChange={handleChangeSwitch} checked={!!user.modeSombre} />
+                      Mode Sombre
+                    </p>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div className="small-profile">
+
+              {user.profilePic ?
+                <div onClick={() => inputFile.current.click()} className="relative">
+                  <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
+                  <img className="profile-pic profile-pic-small" src={user.profilePic} alt="profile-pic" />
+                  <p> {text} </p>
+                </div>
+                :
+                <div onClick={() => inputFile.current.click()} className="relative">
+                  <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
+                  <img className="unknown-profile-pic profile-pic profile-pic-small" src={require('../../images/profilepic.png')} alt='unknown-profile-pic' />
+                  <p> {text} </p>
+                </div>
+              }
+
+              {user ?
+                <div>
+                  <h1> {user.fName} {user.lName} </h1>
+                  <h1 className="profile-email"> {user.email} </h1>
+                </div>
+                : null}
+
+              <Button className="btn btn-dark profile-btn profile-btn-small" onClick={handleModifyForm} block="true" type="submit">
+                Modifier les infos
+              </Button>
+              <br />
+
+              <Button className="btn btn-dark" onClick={handleModifyPasswordForm} block="true" type="submit">
+                Modifier le mot de passe
+              </Button>
+
+              <p className="session-div-switch">
+                Mode clair
+                <GreenSwitch onChange={handleChangeSwitch} checked={!!user.modeSombre} />
+                Mode Sombre </p>
+            </div>
+
+            <Button className="btn btn-dark btn-lg profile-disconnect-btn" onClick={disconnect} block="true" type="submit">
+              Se déconnecter
+            </Button>
           </div>
-
-          <Button className="btn btn-dark btn-lg profile-disconnect-btn" onClick={disconnect} block="true" type="submit">
-            Se déconnecter
-          </Button>
-        </div>
       }
 
       <Footer warnref={y} />

@@ -2,20 +2,6 @@ const mongoose = require("mongoose");
 const findOrCreate = require('mongoose-findorcreate');
 const passportLocalMongoose = require("passport-local-mongoose");
 
-//const seanceSchema = mongoose.Schema(
-//  {
-//    date: {type : String},
-//    poids: {type : String},
-//    exercices: {type : Array},
-//  }
-//);
-
-//const seancesSchema = mongoose.Schema(
-//  {
-//    seance: seanceSchema,
-//  }
-//);
-
 const userSchema = mongoose.Schema(
   {
     facebookId: { type: String },
@@ -42,7 +28,7 @@ const userSchema = mongoose.Schema(
     profilePic: {
       type: String
     },
-    modeSombre:{
+    modeSombre: {
       type: Boolean
     },
     seances: Array,
@@ -50,7 +36,7 @@ const userSchema = mongoose.Schema(
   { timestamps: { createdAt: "created_at" } }
 );
 
-userSchema.plugin(passportLocalMongoose, {usernameField: "email"});
+userSchema.plugin(passportLocalMongoose, { usernameField: "email" });
 userSchema.plugin(findOrCreate);
 
 module.exports = mongoose.model("User", userSchema);

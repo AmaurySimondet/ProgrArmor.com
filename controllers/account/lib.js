@@ -1,5 +1,4 @@
 const User = require("../../schema/schemaUser.js");
-const passwordHash = require("password-hash");
 const session = require('cookie-session');
 const passport = require("passport");
 const express = require("express");
@@ -911,6 +910,7 @@ async function workouts(req, res) {
 //COMPTE
 async function modifyUser(req, res) {
     let id = req.body.id
+    let updated = false;
 
     let conditions = {
         _id: id
@@ -939,25 +939,43 @@ async function modifyUser(req, res) {
             }
         }
     }
+    if (req.body.password) {
+        updated = true;
+
+        User.findById(req.body.id).then(function (foundUser) {
+            if (foundUser) {
+                foundUser.setPassword(req.body.password, function () {
+                    foundUser.save();
+                    res.json({ success: true, message: "Utilisateur mis à jour!" })
+                });
+            } else {
+                res.json({ success: true, message: 'Utilisateur introuvable' });
+            }
+        }, function (err) {
+            console.error(err);
+        })
+    }
 
     else {
         console.log("\n no update \n")
         console.log(req.body)
     }
 
-    try {
-        User.findOneAndUpdate(conditions, update, function (error, result) {
-            if (error) {
-                console.log(error)
-            }
-            else {
-                res.json({ success: true, message: "Utilisateur mis à jour!" })
-            }
-        });
+    if (update === false) {
+        try {
+            User.findOneAndUpdate(conditions, update, function (error, result) {
+                if (error) {
+                    console.log(error)
+                }
+                else {
+                    res.json({ success: true, message: "Utilisateur mis à jour!" })
+                }
+            });
 
-    }
-    catch (e) {
-        console.log(e);
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
 }
 
