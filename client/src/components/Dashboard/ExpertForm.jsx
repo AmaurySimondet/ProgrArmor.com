@@ -8,6 +8,7 @@ import DetailInput from "./DetailInput";
 import EchauffementInput from "./EchauffementInput";
 import FullExerciceExpertInput from "./FullExerciceExpertInput"
 import { v4 as uuidv4 } from 'uuid';
+import { useSearchParams } from "react-router-dom";
 
 function containsObj(arr, obj) {
     let contains = arr.some(elem => {
@@ -17,13 +18,16 @@ function containsObj(arr, obj) {
 }
 
 function ExpertForm(props) {
-    const [seance, setSeance] = useState({ id: uuidv4(), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: [] });
-    const [clickEchauffement, setClickEchauffement] = useState(false);
+    console.log(props.seance)
+
+    const [seance, setSeance] = useState(props.seance);
+    const [clickEchauffement, setClickEchauffement] = useState(props.seance.echauffements.length > 0 ? true : false);
     const [paramsSelect, setParamsSelect] = useState();
-    const [clickExercices, setClickExercices] = useState(false);
-    const [clickDetails, setClickDetails] = useState(false);
+    const [clickExercices, setClickExercices] = useState(props.seance.exercices.length > 0 ? true : false);
+    const [clickDetails, setClickDetails] = useState(props.seance.details.length > 0 ? true : false);
     const [params, setParams] = useState({ load: "" });
-    const [listeNoms, setListeNoms] = useState([])
+    const [listeNoms, setListeNoms] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     function handleClickEchauffement() {
         setClickEchauffement(!clickEchauffement);
@@ -184,15 +188,34 @@ function ExpertForm(props) {
 
         //API
         if (err === false) {
-            try {
-                const { data } = await API.debutantform({ seance: seance, id: localStorage.getItem("id") });
+            let data;
+
+            if (searchParams.get("seanceId")) {
+                data = await API.debutantform(
+                    {
+                        seance:
+                            { ...seance, id: searchParams.get("seanceId") },
+                        id: localStorage.getItem("id")
+                    });
+
                 if (data.success === true) {
                     window.location = "/dashboard";
                 } else {
                     alert(data.message);
                 }
-            } catch (error) {
-                alert(error);
+            }
+            else {
+                data = await API.debutantform(
+                    {
+                        seance: seance,
+                        id: localStorage.getItem("id")
+                    });
+
+                if (data.success === true) {
+                    window.location = "/dashboard";
+                } else {
+                    alert(data.message);
+                }
             }
         }
     }

@@ -505,7 +505,7 @@ function Dashboard() {
     }
 
     function handleClickModify(event) {
-        return null
+        window.location = "/session?seanceId=" + event.target.id
     }
 
     async function handleClickSuppr(event) {

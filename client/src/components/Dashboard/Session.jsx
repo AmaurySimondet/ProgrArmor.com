@@ -1,4 +1,5 @@
-import {React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import NavigBar from "../NavigBar.jsx"
 import DebutantForm from "./DebutantForm.jsx"
 import ExpertForm from "./ExpertForm.jsx"
@@ -7,6 +8,7 @@ import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
 import Footer from "../Footer.jsx";
+import { v4 as uuidv4 } from 'uuid';
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
@@ -21,53 +23,115 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 function Session() {
-  const [switched, setSwitched] = useState(false);
-  const [user, setUser] = useState()
+  const [switched, setSwitched] = useState();
+  const [user, setUser] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [seance, setSeance] = useState();
 
-  async function getUser(){
-      const {data} = await API.getUser({id: localStorage.getItem("id")});
-      if (data.success === false){
-          alert(data.message);
-      } else {
-          console.log(data.profile);
-          if (data.profile.modeSombre && data.profile.modeSombre===true){
-            // 👇 add class to body element
-            document.body.classList.add('darkMode');
+  async function getUser() {
+    const { data } = await API.getUser({ id: localStorage.getItem("id") });
+    if (data.success === false) {
+      alert(data.message);
+    } else {
+      console.log(data.profile);
+      if (data.profile.modeSombre && data.profile.modeSombre === true) {
+        // 👇 add class to body element
+        document.body.classList.add('darkMode');
+      }
+      setUser(data.profile);
+    };
+  }
+
+  async function loadSeanceIfParams() {
+
+    if (searchParams.get("seanceId")) {
+      const { data } = await API.loadSeance({ seanceId: searchParams.get("seanceId") });
+
+      if (data.success === false) {
+        if (data.message === "Aucune séance !") {
+          console.log(data.message);
+        }
+        else { alert(data.message); }
+      }
+
+      else {
+        if (data.seance) {
+          if (data.seance.nom) {
+            setSwitched(true)
+            setSeance(data.seance)
+            console.log(data.seance)
           }
-          setUser(data.profile);
-      };
+          else {
+            setSwitched(false)
+            setSeance(data.seance)
+            console.log(data.seance)
+          }
+        }
+      }
+    }
+    else {
+      setSwitched(false)
+    }
+  }
+
+  function DebutantToExpert(seance) {
+    let expS = { ...seance, nom: {}, echauffements: [], details: [] }
+
+    expS.exercices.forEach((ex, indEx) => {
+      expS.exercices[indEx] = { ...ex, Categories: {} }
+    })
+
+    return expS
   }
 
   useEffect(() => {
-      getUser();
+    getUser();
+    loadSeanceIfParams();
   }, []);
 
-  function handleChange(){
-    event.preventDefault();
-
+  function handleChange() {
     setSwitched(!switched);
   }
 
   return (
-      <div>
-          <NavigBar location="session"/>
+    <div>
+      <NavigBar location="session" />
 
-          <div className="session-div">
-              <h1> Enregistre ta séance ! </h1>
+      <div className="session-div">
+        <h1> Enregistre ta séance ! </h1>
 
-              <p className="session-div-switch"> Débutant <GreenSwitch onChange={handleChange}/> Expert </p>
+        <p className="session-div-switch">
+          Débutant <GreenSwitch defaultChecked={switched} onChange={handleChange} /> Expert
+        </p>
 
-              {switched ? 
-                <ExpertForm modeSombre={user && user.modeSombre ? true : false} /> 
-              : 
-                <DebutantForm modeSombre={user && user.modeSombre ? true : false} />
-              }
+        {switched ?
+          <ExpertForm
+            seance={
+              seance ?
+                seance.nom ?
+                  seance
+                  :
+                  DebutantToExpert(seance)
+                :
+                { id: uuidv4(), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: [] }
+            }
+            modeSombre={user && user.modeSombre ? true : false} />
+          :
+          <DebutantForm
+            seance={
+              seance ?
+                seance
+                :
+                { id: uuidv4(), date: "", poids: "", exercices: [] }
+            }
+            modeSombre={user && user.modeSombre ? true : false} />
+        }
 
-          </div>
-
-          <Footer />
       </div>
-    );
+
+      <Footer />
+    </div>
+  );
 };
 
 export default Session;

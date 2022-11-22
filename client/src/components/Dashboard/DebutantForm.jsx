@@ -6,10 +6,14 @@ import PoidsInput from "./PoidsInput";
 import FullExerciceInput from "./FullExerciceInput"
 import customStyles from "./customStyles";
 import { v4 as uuidv4 } from 'uuid';
+import { useSearchParams } from "react-router-dom";
 
 function DebutantForm(props) {
-    const [seance, setSeance] = useState({ id: uuidv4(), date: "", poids: "", exercices: [] });
+    console.log(props.seance)
+
+    const [seance, setSeance] = useState(props.seance);
     const [params, setParams] = useState({ load: "" });
+    const [searchParams, setSearchParams] = useSearchParams();
 
     async function handleClick() {
         event.preventDefault();
@@ -60,15 +64,37 @@ function DebutantForm(props) {
 
         //API
         if (err === false) {
-            try {
-                const { data } = await API.debutantform({ seance: seance, id: localStorage.getItem("id") });
+            let data;
+            console.log(searchParams.get("seanceId"))
+
+            if (searchParams.get("seanceId")) {
+                data = await API.debutantform(
+                    {
+                        seance:
+                            { ...seance, id: searchParams.get("seanceId") },
+                        id: localStorage.getItem("id")
+                    });
+
+                console.log(data)
+
                 if (data.success === true) {
                     window.location = "/dashboard";
                 } else {
                     alert(data.message);
                 }
-            } catch (error) {
-                alert(error);
+            }
+            else {
+                data = await API.debutantform(
+                    {
+                        seance: seance,
+                        id: localStorage.getItem("id")
+                    });
+
+                if (data.success === true) {
+                    window.location = "/dashboard";
+                } else {
+                    alert(data.message);
+                }
             }
         }
     }
@@ -185,6 +211,12 @@ function DebutantForm(props) {
         }
     }
 
+    useEffect(() => {
+        if (props.seance !== seance) {
+            setSeance(props.seance)
+        }
+    }, [props.seance])
+
     return (
         <form className="debutant-form">
 
@@ -212,7 +244,7 @@ function DebutantForm(props) {
                 <div className="col-sm-10">
                     <input type="date"
                         className={props.modeSombre === true ? "form-control inputDark" : "form-control"}
-                        value={seance ? seance.date : Date.now()}
+                        value={seance.date}
                         onChange={handleChangeDate}
                         id="date"
                     />

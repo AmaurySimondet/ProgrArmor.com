@@ -212,20 +212,25 @@ async function logout(req, res) {
 //SESSION
 //DEBUTANT FORM
 async function debutantform(req, res) {
-    const seance = req.body.seance;
-    seance.id = Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)).toString(36)
+    let conditions = {
+        _id: req.body.id
+    }
+
+    let update = {
+        $addToSet: { seances: req.body.seance }
+    }
+    //          {$set: {"seances": seance}}
 
     try {
         User.findOneAndUpdate(
-            { "_id": req.body.id },
-            { $addToSet: { "seances": seance } },
-            //          {$set: {"seances": seance}},
+            conditions,
+            update,
             (err) => {
                 if (err) {
                     console.log(err)
                     res.json({ success: false, message: err })
                 }
-                else { res.json({ success: true, message: "Serie enregistrée !" }) }
+                else { res.json({ success: true, message: "Seance enregistrée !" }) }
             }
         )
 
@@ -259,42 +264,50 @@ async function loadSeance(req, res) {
                     let seances = data[0].seances;
                     let seance;
 
-                    if (req.query.load === "lastRec") {
-                        seance = seances[seances.length - 1]
-                    }
+                    if (req.query.load) {
+                        if (req.query.load === "lastRec") {
+                            seance = seances[seances.length - 1]
+                        }
 
-                    if (req.query.load === "lastDate") {
-                        seances = seances.sort(sortDateDecroissant);
-                        seance = seances[0]
-                    }
+                        if (req.query.load === "lastDate") {
+                            seances = seances.sort(sortDateDecroissant);
+                            seance = seances[0]
+                        }
 
-                    // LastRec seance
-                    if (req.query.load[7] === "-") {
-                        nomSeance = req.query.load.slice(8, req.query.load.length)
+                        // LastRec seance
+                        if (req.query.load[7] === "-") {
+                            nomSeance = req.query.load.slice(8, req.query.load.length)
 
-                        seances.forEach((seanceIter, index) => {
-                            if (seanceIter.nom) {
-                                if (seanceIter.nom.nouveauNom === nomSeance || seanceIter.nom.ancienNom === nomSeance) {
-                                    seance = seanceIter
+                            seances.forEach((seanceIter, index) => {
+                                if (seanceIter.nom) {
+                                    if (seanceIter.nom.nouveauNom === nomSeance || seanceIter.nom.ancienNom === nomSeance) {
+                                        seance = seanceIter
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }
+
+                        // LastDate seance
+                        if (req.query.load[8] === "-") {
+                            nomSeance = req.query.load.slice(9, req.query.load.length)
+                            // console.log(nomSeance)
+
+                            seances = seances.sort(sortDateCroissant);
+
+                            seances.forEach((seanceIter, index) => {
+                                if (seanceIter.nom) {
+                                    if (seanceIter.nom.nouveauNom === nomSeance || seanceIter.nom.ancienNom === nomSeance) {
+                                        seance = seanceIter
+                                    }
+                                }
+                            })
+                        }
                     }
 
-                    // LastDate seance
-                    if (req.query.load[8] === "-") {
-                        nomSeance = req.query.load.slice(9, req.query.load.length)
-                        // console.log(nomSeance)
+                    if (req.query.seanceId) {
+                        seance = seances.filter(s => s.id === req.query.seanceId)[0]
 
-                        seances = seances.sort(sortDateCroissant);
-
-                        seances.forEach((seanceIter, index) => {
-                            if (seanceIter.nom) {
-                                if (seanceIter.nom.nouveauNom === nomSeance || seanceIter.nom.ancienNom === nomSeance) {
-                                    seance = seanceIter
-                                }
-                            }
-                        })
+                        console.log(req.query.seanceId, seance)
                     }
 
                     res.json({ success: true, message: "Utilisateur trouvé !", seance: seance });
