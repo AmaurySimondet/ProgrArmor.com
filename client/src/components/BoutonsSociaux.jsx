@@ -1,7 +1,7 @@
 import React from "react";
 
 function BoutonsSociaux(props) {
-  const url = "https://prograrmorprealpha2.herokuapp.com" // http://localhost:8800 https://prograrmorprealpha1.herokuapp.com
+  const url = "https://prograrmorprealpha1.herokuapp.com" // http://localhost:8800 https://prograrmorprealpha1.herokuapp.com
 
   return (
     <div>
