@@ -523,6 +523,10 @@ function Dashboard() {
         var csv = [];
         var rows = document.querySelectorAll("table tr");
 
+        csv.push(["Ce tableau est une exportation de Prograrmor"])
+        csv.push(["ProgrArmor outil ultime de la progression sportive: journal et historique programme statistiques de tes amis et autre"])
+        csv.push(["https://prograrmorprealpha2.herokuapp.com/"])
+        csv.push([])
         for (let i = 1; i < rows.length; i++) {
             let row = [], cols = rows[i].querySelectorAll("td, th");
             for (let j = 0; j < cols.length; j++) {
