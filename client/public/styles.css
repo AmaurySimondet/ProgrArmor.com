@@ -1017,7 +1017,6 @@ table.connexion-table td.connexion-img-td {
 @media (max-width: 925px) {
     .chart {
         margin-top: 50px;
-        position: absolute;
         right: 20px;
 
     }
@@ -1025,12 +1024,6 @@ table.connexion-table td.connexion-img-td {
 
     .reset-img {
         width: 10px;
-
-    }
-
-
-    .chart-title {
-        margin-top: 400px;
 
     }
 
