@@ -216,10 +216,48 @@ async function debutantform(req, res) {
         _id: req.body.id
     }
 
-    let update = {
-        $addToSet: { seances: req.body.seance }
+    let update = {}
+
+    if (req.body.seanceId) {
+        console.log("seanceId:", req.body.seanceId);
+        console.log("seanceSent:", req.body.seance)
+
+        let seances = [];
+
+        await User.find(conditions, function (err, data) {
+            if (err) {
+                res.json({ success: false, message: err })
+            }
+            else {
+                seances = [...data[0].seances]
+
+                if (seances.length === 0) {
+                    return res.json({ success: false, message: "Aucune séance" })
+                }
+            }
+        })
+
+        if (seances.length !== 0) {
+            //newSeance = seance filtered with req.body.seanceId
+            newSeances = seances.filter(seance => seance.id !== req.body.seanceId)
+
+            //add seance
+            newSeances.push(req.body.seance)
+
+            update = {
+                seances: newSeances
+            }
+        }
+        else {
+            return res.json({ success: false, message: "Seances non trouvées" })
+        }
+
     }
-    //          {$set: {"seances": seance}}
+    else {
+        update = {
+            $addToSet: { seances: req.body.seance }
+        }
+    }
 
     try {
         User.findOneAndUpdate(
@@ -228,9 +266,9 @@ async function debutantform(req, res) {
             (err) => {
                 if (err) {
                     console.log(err)
-                    res.json({ success: false, message: err })
+                    return res.json({ success: false, message: err })
                 }
-                else { res.json({ success: true, message: "Seance enregistrée !" }) }
+                else { return res.json({ success: true, message: "Seance enregistrée !" }) }
             }
         )
 
@@ -307,7 +345,7 @@ async function loadSeance(req, res) {
                     if (req.query.seanceId) {
                         seance = seances.filter(s => s.id === req.query.seanceId)[0]
 
-                        console.log(req.query.seanceId, seance)
+                        // console.log(req.query.seanceId, seance)
                     }
 
                     res.json({ success: true, message: "Utilisateur trouvé !", seance: seance });

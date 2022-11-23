@@ -189,19 +189,23 @@ function ExpertForm(props) {
         //API
         if (err === false) {
             let data;
+            console.log(searchParams.get("seanceId"))
 
             if (searchParams.get("seanceId")) {
                 data = await API.debutantform(
                     {
                         seance:
                             { ...seance, id: searchParams.get("seanceId") },
+                        seanceId: searchParams.get("seanceId"),
                         id: localStorage.getItem("id")
                     });
 
-                if (data.success === true) {
+                console.log(data.data)
+
+                if (data.data.success === true) {
                     window.location = "/dashboard";
                 } else {
-                    alert(data.message);
+                    alert(data.data.message);
                 }
             }
             else {
@@ -211,10 +215,10 @@ function ExpertForm(props) {
                         id: localStorage.getItem("id")
                     });
 
-                if (data.success === true) {
+                if (data.data.success === true) {
                     window.location = "/dashboard";
                 } else {
-                    alert(data.message);
+                    alert(data.data.message);
                 }
             }
         }

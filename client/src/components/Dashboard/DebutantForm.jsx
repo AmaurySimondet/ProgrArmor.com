@@ -72,15 +72,16 @@ function DebutantForm(props) {
                     {
                         seance:
                             { ...seance, id: searchParams.get("seanceId") },
+                        seanceId: searchParams.get("seanceId"),
                         id: localStorage.getItem("id")
                     });
 
-                console.log(data)
+                console.log(data.data)
 
-                if (data.success === true) {
+                if (data.data.success === true) {
                     window.location = "/dashboard";
                 } else {
-                    alert(data.message);
+                    alert(data.data.message);
                 }
             }
             else {
@@ -90,10 +91,10 @@ function DebutantForm(props) {
                         id: localStorage.getItem("id")
                     });
 
-                if (data.success === true) {
+                if (data.data.success === true) {
                     window.location = "/dashboard";
                 } else {
-                    alert(data.message);
+                    alert(data.data.message);
                 }
             }
         }

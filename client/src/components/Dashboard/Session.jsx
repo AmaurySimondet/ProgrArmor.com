@@ -101,7 +101,7 @@ function Session() {
         <h1> Enregistre ta séance ! </h1>
 
         <p className="session-div-switch">
-          Débutant <GreenSwitch defaultChecked={switched} onChange={handleChange} /> Expert
+          Débutant <GreenSwitch defaultChecked={seance ? !switched : switched} onChange={handleChange} /> Expert
         </p>
 
         {switched ?
