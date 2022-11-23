@@ -6,8 +6,8 @@ const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
 
-const url = "http://localhost:8800" // http://localhost:8800 https://prograrmorprealpha1.herokuapp.com
-const url2 = "http://localhost:3000" // http://localhost:3000 https://prograrmorprealpha1.herokuapp.com
+const url = "https://prograrmorprealpha2.herokuapp.com" // http://localhost:8800 https://prograrmorprealpha1.herokuapp.com
+const url2 = "https://prograrmorprealpha2.herokuapp.com" // http://localhost:3000 https://prograrmorprealpha1.herokuapp.com
 
 const app = express();
 
