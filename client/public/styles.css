@@ -910,6 +910,40 @@ table.connexion-table td.connexion-img-td {
 
 }
 
+
+/* AIDE  */
+
+.basic-div {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+
+.basic-margin-top {
+    margin-top: 20px;
+}
+
+.large-margin-top {
+    margin-top: 40px;
+}
+
+.large-margin-bottom {
+    margin-bottom: 40px;
+}
+
+.large-margin-updown {
+    margin: 40px auto;
+}
+
+.help-button {
+    margin: 20px;
+}
+
+.img-installapp {
+    width: 120%;
+    margin-left: -10%
+}
+
 /* RESPONSIVE LAYOUT */
 
 /* Medium layout*/
@@ -931,6 +965,11 @@ table.connexion-table td.connexion-img-td {
         top: 28%;
         left: 60px;
         width: 40%;
+    }
+
+    .img-installapp {
+        width: 800px;
+        margin-left: auto;
     }
 
     h1 {
@@ -1028,6 +1067,12 @@ table.connexion-table td.connexion-img-td {
 
     .Dashboard .modify-white {
         width: 30px;
+    }
+
+    .ol-installapp {
+        text-align: justify;
+        margin: auto;
+        width: 60%;
     }
 }
 

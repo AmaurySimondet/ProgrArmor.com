@@ -56,7 +56,11 @@ passport.use(new FacebookStrategy({
 ))
 
 async function facebook(req, res) {
-    passport.authenticate("facebook", { scope: ['email'] })(req, res, function () { });
+    passport.authenticate("facebook", { scope: ['email'] })(req, res, function (err) {
+        if (err) {
+            console.log(err)
+        }
+    });
 };
 
 async function facebookAuthenticate(req, res) {
@@ -109,7 +113,11 @@ passport.use(new GoogleStrategy({
 ))
 
 function google(req, res) {
-    passport.authenticate("google", { scope: ['email', 'profile'] })(req, res, function () { });
+    passport.authenticate("google", { scope: ['email', 'profile'] })(req, res, function (err) {
+        if (err) {
+            console.log(err)
+        }
+    });
 };
 
 async function googleAuthenticate(req, res) {

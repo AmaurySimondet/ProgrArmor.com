@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard.js";
 import Inscription from "./components/Inscription";
 import Connexion from "./components/Connexion";
@@ -12,6 +12,8 @@ import Travaux from "./components/Dashboard/Travaux";
 import Session from "./components/Dashboard/Session";
 import Compte from "./components/Dashboard/Compte";
 import Admin from "./components/Dashboard/Admin.jsx";
+import InstallApp from "./components/Dashboard/InstallApp.jsx";
+import Aide from "./components/Dashboard/Aide.jsx";
 
 function App() {
 
@@ -49,8 +51,10 @@ function App() {
                 <Route exact path='/a_propos/*' element={<Travaux />} />
             </Route>
 
-            <Route path="/aide/*" element={<PrivateRoute />}>
-                <Route exact path='/aide/*' element={<Travaux />} />
+            {/* AIDE */}
+            <Route path="/aide" element={<PrivateRoute />}>
+                <Route exact path='/aide' element={<Aide />} />
+                <Route exact path='/aide/InstallApp/*' element={<InstallApp />} />
             </Route>
 
             <Route path="/cgu/*" element={<PrivateRoute />}>
