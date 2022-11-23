@@ -1,8 +1,6 @@
-import Footer from "../Footer";
-import NavigBar from "../NavigBar";
 import { React } from "react"
 
-function InstallApp() {
+function InstallApp(props) {
     return (
         <div>
             <div className="basic-div">
@@ -22,7 +20,7 @@ function InstallApp() {
                             </a>
                             </button>
                         </div>
-                        <img src="https://uploads-ssl.webflow.com/612cdb668b06dbb2a51f99ee/637cacf73009a4a0703e9873_57%20(1).svg" loading="lazy" width="52" alt="" />
+                        <img className={props.modeSombre === true ? "questionDark" : ""} src="https://uploads-ssl.webflow.com/612cdb668b06dbb2a51f99ee/637cacf73009a4a0703e9873_57%20(1).svg" loading="lazy" width="52" alt="" />
                     </div>
                 </div>
 
@@ -42,7 +40,7 @@ function InstallApp() {
                             <br />‍
                         </div>
                         <div >
-                            <img src={require('../../images/help/InstallApp_ProgrArmor_iPhone.png')} className="img-installapp" alt="img-installapp" />
+                            <img src={require('../../../images/help/InstallApp_ProgrArmor_iPhone.png')} className="img-installapp" alt="img-installapp" />
                         </div>
                     </div>
                 </div>
@@ -62,7 +60,7 @@ function InstallApp() {
                             </ol>‍
                         </div>
                         <div >
-                            <img src={require('../../images/help/InstallApp_ProgrArmor_Samsung.png')} className="img-installapp" alt="img-installapp" />
+                            <img src={require('../../../images/help/InstallApp_ProgrArmor_Samsung.png')} className="img-installapp" alt="img-installapp" />
                         </div>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ import Travaux from "./components/Dashboard/Travaux";
 import Session from "./components/Dashboard/Session";
 import Compte from "./components/Dashboard/Compte";
 import Admin from "./components/Dashboard/Admin.jsx";
-import InstallApp from "./components/Dashboard/InstallApp.jsx";
+import InstallApp from "./components/Dashboard/Help/InstallApp.jsx";
 import Aide from "./components/Dashboard/Aide.jsx";
 
 function App() {

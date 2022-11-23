@@ -24,9 +24,9 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
 
 function Session() {
   const [switched, setSwitched] = useState();
-  const [user, setUser] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
   const [seance, setSeance] = useState();
+  const [user, setUser] = useState();
 
   async function getUser() {
     const { data } = await API.getUser({ id: localStorage.getItem("id") });
