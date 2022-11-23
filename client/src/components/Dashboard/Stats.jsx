@@ -842,7 +842,7 @@ function Stats() {
                             <h2> {reguScore.bestSerie} </h2>
 
                             <h2> Ta moyenne de séances consécutives: </h2>
-                            <h2 style={{ marginBottom: "20px" }}> {reguScore.AverageSerie} </h2>
+                            <h2 style={{ marginBottom: "20px" }}> {reguScore.AverageSerie.toFixed(2)} </h2>
                         </p>
 
                         <ResponsiveContainer

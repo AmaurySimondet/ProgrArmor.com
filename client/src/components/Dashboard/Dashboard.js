@@ -100,7 +100,7 @@ function Dashboard() {
     const [params, setParams] = useState({ nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "" });
     const [categoriesAddRien, setCategoriesAddRien] = useState([])
     const [detailsAddRien, setDetailsAddRien] = useState([])
-    const [checkbox, setCheckbox] = useState({ affichageCharge: true, affichageReps: true, affichageSérie: false, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: false, affichagePercent: true, affichagePoids: false, affichageModif: false, affichageSuppr: false });
+    const [checkbox, setCheckbox] = useState({ affichageCharge: true, affichageReps: true, affichageSérie: false, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: false, affichagePercent: true, affichagePoids: false, affichageModif: false, affichageSuppr: false, affichageExport: false });
     const [clicked, setClicked] = useState([false, false, false, false, false])
     const [clickedDetail, setClickedDetail] = useState([false, false, false, false, false])
     const [switched, setSwitched] = useState(false);
@@ -519,6 +519,35 @@ function Dashboard() {
         }
     }
 
+    function exportTableToCSV(html, filename) {
+        var csv = [];
+        var rows = document.querySelectorAll("table tr");
+
+        for (let i = 1; i < rows.length; i++) {
+            let row = [], cols = rows[i].querySelectorAll("td, th");
+            for (let j = 0; j < cols.length; j++) {
+                row.push(cols[j].innerText);
+            }
+            csv.push(row.join(","));
+        }
+
+        // download csv file
+        downloadCSV(csv.join("\n"), "Dashboard.csv");
+    }
+
+    function downloadCSV(csv, filename) {
+        let csvFile;
+        let downloadLink;
+
+        csvFile = new Blob([csv], { type: "text/csv" });
+        downloadLink = document.createElement("a");
+        downloadLink.download = filename;
+        downloadLink.href = window.URL.createObjectURL(csvFile);
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+    }
+
     return (
         <div>
 
@@ -767,14 +796,19 @@ function Dashboard() {
                                     </div>
 
                                     <div className="form-group row">
-                                        <div className="form-group col-sm-6">
+                                        <div className="form-group col-sm-4">
                                             <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageModif" id="affichageModif" />
                                             <label className="col-form-label" htmlFor="#affichageModif"> Modifier des séances </label>
                                         </div>
 
-                                        <div className="form-group group-margin-last col-sm-6">
+                                        <div className="form-group group-margin-last col-sm-4">
                                             <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSuppr" id="affichageSuppr" />
                                             <label className="col-form-label" htmlFor="#affichageSuppr"> Supprimer des séances </label>
+                                        </div>
+
+                                        <div className="form-group group-margin-last col-sm-4">
+                                            <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExport" id="affichageExport" />
+                                            <label className="col-form-label" htmlFor="#affichageExport"> Exporter le tableau en CSV </label>
                                         </div>
                                     </div>
 
@@ -1026,14 +1060,19 @@ function Dashboard() {
                                             </div>
 
                                             <div className="form-group row">
-                                                <div className="form-group col-sm-6">
+                                                <div className="form-group col-sm-4">
                                                     <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageModif" id="affichageModif" />
                                                     <label className="col-form-label" htmlFor="#affichageModif"> Modifier des séances </label>
                                                 </div>
 
-                                                <div className="form-group group-margin-last col-sm-6">
+                                                <div className="form-group group-margin-last col-sm-4">
                                                     <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSuppr" id="affichageSuppr" />
                                                     <label className="col-form-label" htmlFor="#affichageSuppr"> Supprimer des séances </label>
+                                                </div>
+
+                                                <div className="form-group group-margin-last col-sm-4">
+                                                    <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExport" id="affichageExport" />
+                                                    <label className="col-form-label" htmlFor="#affichageExport"> Exporter en CSV </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -1047,6 +1086,12 @@ function Dashboard() {
 
             {seances.length === 0 ? null :
                 <div className="Dashboard">
+                    {checkbox.affichageExport ?
+                        <button className="btn btn-lg btn-dark large-margin-bottom" onClick={exportTableToCSV}>
+                            Exporter le tableau actuel en CSV
+                        </button>
+                        : null}
+
                     <table className={switched ? "table table-hover table-responsive-lg table-dark dashboard-table" : "table table-hover table-responsive-lg dashboard-table"}>
                         <thead className={switched ? "thead-dark" : ""}>
                             <tr>
