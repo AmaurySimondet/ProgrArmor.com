@@ -92,12 +92,25 @@ passport.use(new GoogleStrategy({
 },
     async (accessToken, refreshToken, profile, done) => {
 
-        const user = {
-            googleId: profile._json.sub,
-            email: profile._json.email,
-            fName: profile._json.given_name,
-            lName: profile._json.family_name,
-            profilePic: profile._json.picture
+        let user = {}
+
+        if (profile._json.family_name) {
+            user = {
+                googleId: profile._json.sub,
+                email: profile._json.email,
+                fName: profile._json.given_name,
+                lName: profile._json.family_name,
+                profilePic: profile._json.picture
+            }
+        }
+        else {
+            user = {
+                googleId: profile._json.sub,
+                email: profile._json.email,
+                fName: profile._json.given_name,
+                lName: profile._json.given_name,
+                profilePic: profile._json.picture
+            }
         }
 
         const oldUser = await User.findOne({ googleId: user.googleId });
