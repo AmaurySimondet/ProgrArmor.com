@@ -80,6 +80,7 @@ function FullExerciceInput(props) {
             <ExerciceInput debutant={true} key={props.id} index={props.index}
                 value={fullExercice.exercice} id={props.id} onDeleteExercices={props.onDeleteExercices}
                 changeExercice={changeExercice} exercice={fullExercice.exercice} modeSombre={props.modeSombre}
+                dimensions={props.dimensions}
             />
 
             {series ? series.map((serie, index) => {

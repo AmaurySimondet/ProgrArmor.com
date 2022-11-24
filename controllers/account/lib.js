@@ -994,9 +994,9 @@ async function modifyUser(req, res) {
             profilePic: req.body.profilePic,
         }
     }
-    if (req.body.modeSombre) {
+    if (typeof req.body.modeSombre === "string") {
         update = {
-            modeSombre: req.body.modeSombre,
+            modeSombre: req.body.modeSombre === "true" ? true : false,
         }
     }
     if (req.body.fName && req.body.lName && req.body.email) {
@@ -1028,12 +1028,13 @@ async function modifyUser(req, res) {
         })
     }
 
-    else {
-        console.log("\n no update \n")
-        console.log(req.body)
-    }
+    // else {
+    //     console.log("\n no update \n")
+    //     console.log(req.body)
+    //     res.json({ success: false, message: "Aucune mis à jour!" })
+    // }
 
-    if (update === false) {
+    if (updated === false) {
         try {
             User.findOneAndUpdate(conditions, update, function (error, result) {
                 if (error) {

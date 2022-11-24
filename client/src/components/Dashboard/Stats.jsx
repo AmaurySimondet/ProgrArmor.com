@@ -359,9 +359,9 @@ function Stats() {
                                         </h1>
 
                                         {poidsHidden ? null :
-                                            <div>
+                                            <div className="large-margin-bottom">
                                                 <div className="form-group row stats-form">
-                                                    <div className="form-group col-sm-12">
+                                                    <div className="form-group col-12">
                                                         <label className="col-form-label">
                                                             Periode
                                                         </label>
@@ -378,7 +378,7 @@ function Stats() {
                                                 </div>
 
                                                 <div className="form-group row stats-form">
-                                                    <div className="form-group col-sm-12">
+                                                    <div className="form-group col-12">
                                                         <label className="col-form-label">
                                                             Format Date
                                                         </label>
@@ -423,23 +423,23 @@ function Stats() {
                                             </h1>
 
                                             {perfHidden ? null :
-                                                <div>
+                                                <div className="large-margin-bottom">
                                                     <div className="form-group row stats-form">
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Exercice
                                                             </label>
-                                                            <ExerciceInput modeSombre={user.modeSombre === true ? true : false} taille="petit" typeSerie={0} id="exercice" exercice={exercice.exercice} changeExercice={changeExercice} />
+                                                            <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} taille="petit" typeSerie={0} id="exercice" exercice={exercice.exercice} changeExercice={changeExercice} />
                                                         </div>
 
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label onClick={handleClick} className="col-form-label categorie-label">
                                                                 Catégorie <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                                             </label>
-                                                            <CategorieInput modeSombre={user.modeSombre === true ? true : false} info="false" click={clicked} id={"catégorie" + 0} categorie={categorie} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie} />
+                                                            <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" click={clicked} id={"catégorie" + 0} categorie={categorie} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie} />
                                                         </div>
 
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Performance
                                                             </label>
@@ -451,7 +451,7 @@ function Stats() {
                                                     </div>
 
                                                     <div className="form-group row stats-form">
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Format Date
                                                             </label>
@@ -462,7 +462,7 @@ function Stats() {
                                                             </select>
                                                         </div>
 
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Periode
                                                             </label>
@@ -476,30 +476,30 @@ function Stats() {
                                                             </select>
                                                         </div>
 
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label onClick={handleClickDetail} className="col-form-label detail-label">
                                                                 Détail <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                                             </label>
-                                                            <DetailInput modeSombre={user.modeSombre === true ? true : false} info="false" click={clickedDetail} detail={detail} id={"detail" + 0} index={0} num={0} dashboard={true} changeDetail={changeDetail} />
+                                                            <DetailInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" click={clickedDetail} detail={detail} id={"detail" + 0} index={0} num={0} dashboard={true} changeDetail={changeDetail} />
                                                         </div>
                                                     </div>
 
                                                     <div className="form-group row stats-form">
-                                                        <label className="col-form-label col-sm-3">
+                                                        <label className="col-form-label col-3">
                                                             Reps / Temps
                                                         </label>
                                                         <input type="text"
-                                                            className={user.modeSombre === true ? "form-control col-sm-4 inputDark" : "form-control col-sm-4"}
+                                                            className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
                                                             value={params2.repsFrom}
                                                             onChange={handleChange2}
                                                             placeholder="Aucun filtre"
                                                             id="repsFrom"
                                                         />
-                                                        <label className="col-form-label col-sm-1">
+                                                        <label className="col-form-label col-1">
                                                             à
                                                         </label>
                                                         <input type="text"
-                                                            className={user.modeSombre === true ? "form-control col-sm-4 inputDark" : "form-control col-sm-4"}
+                                                            className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
                                                             value={params2.repsTo}
                                                             onChange={handleChange2}
                                                             placeholder="Aucun filtre"
@@ -601,23 +601,23 @@ function Stats() {
                                             </h1>
 
                                             {perfHidden ? null :
-                                                <div>
+                                                <div className="large-margin-bottom">
                                                     <div className="form-group row stats-form">
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Exercice
                                                             </label>
-                                                            <ExerciceInput modeSombre={user.modeSombre === true ? true : false} taille="petit" exercice={exercice.exercice} typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                                                            <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} taille="petit" exercice={exercice.exercice} typeSerie={0} id="exercice" changeExercice={changeExercice} />
                                                         </div>
 
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label onClick={handleClick} className="col-form-label categorie-label">
                                                                 Catégorie <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                                             </label>
-                                                            <CategorieInput modeSombre={user.modeSombre === true ? true : false} info="false" categorie={categorie} click={clicked} id={"catégorie" + 0} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie} />
+                                                            <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" categorie={categorie} click={clicked} id={"catégorie" + 0} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie} />
                                                         </div>
 
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Performance
                                                             </label>
@@ -629,7 +629,7 @@ function Stats() {
                                                     </div>
 
                                                     <div className="form-group row stats-form">
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Format Date
                                                             </label>
@@ -640,7 +640,7 @@ function Stats() {
                                                             </select>
                                                         </div>
 
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Periode
                                                             </label>
@@ -654,30 +654,30 @@ function Stats() {
                                                             </select>
                                                         </div>
 
-                                                        <div className="form-group col-sm-4">
+                                                        <div className="form-group col-4">
                                                             <label onClick={handleClickDetail} className="col-form-label detail-label">
                                                                 Détail <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                                             </label>
-                                                            <DetailInput modeSombre={user.modeSombre === true ? true : false} info="false" detail={detail} click={clickedDetail} id={"detail" + 0} index={0} num={0} dashboard={true} changeDetail={changeDetail} />
+                                                            <DetailInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" detail={detail} click={clickedDetail} id={"detail" + 0} index={0} num={0} dashboard={true} changeDetail={changeDetail} />
                                                         </div>
                                                     </div>
 
                                                     <div className="form-group row stats-form">
-                                                        <label className="col-form-label col-sm-3">
+                                                        <label className="col-form-label col-3">
                                                             Reps / Temps
                                                         </label>
                                                         <input type="text"
-                                                            className={user.modeSombre === true ? "form-control col-sm-4 inputDark" : "form-control col-sm-4"}
+                                                            className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
                                                             value={params2.repsFrom}
                                                             onChange={handleChange2}
                                                             placeholder="Aucun filtre"
                                                             id="repsFrom"
                                                         />
-                                                        <label className="col-form-label col-sm-1">
+                                                        <label className="col-form-label col-1">
                                                             à
                                                         </label>
                                                         <input type="text"
-                                                            className={user.modeSombre === true ? "form-control col-sm-4 inputDark" : "form-control col-sm-4"}
+                                                            className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
                                                             value={params2.repsTo}
                                                             onChange={handleChange2}
                                                             placeholder="Aucun filtre"
@@ -776,9 +776,9 @@ function Stats() {
                         </h1>
 
                         {prefHidden ? null :
-                            <div>
+                            <div className="large-margin-bottom">
                                 <div className="form-group row stats-form">
-                                    <div className="form-group col-sm-4">
+                                    <div className="form-group col-4">
                                         <label className="col-form-label">
                                             Periode
                                         </label>
@@ -792,7 +792,7 @@ function Stats() {
                                         </select>
                                     </div>
 
-                                    <div className="form-group col-sm-4">
+                                    <div className="form-group col-4">
                                         <label className="col-form-label">
                                             Classification
                                         </label>
@@ -803,7 +803,7 @@ function Stats() {
                                         </select>
                                     </div>
 
-                                    <div className="form-group col-sm-4">
+                                    <div className="form-group col-4">
                                         <label className="col-form-label">
                                             Affichage
                                         </label>

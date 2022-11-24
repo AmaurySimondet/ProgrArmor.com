@@ -10,6 +10,136 @@ h1 {
     margin: 5% 0;
 }
 
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.col,
+.col-1,
+.col-10,
+.col-11,
+.col-12,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-auto,
+.col-lg,
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-auto,
+.col-md,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-auto,
+.col-sm,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-auto,
+.col-xl,
+.col-xl-1,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xl-auto {
+    padding-right: 0px;
+    padding-left: 5px;
+    margin: 0 auto;
+}
+
+.debutant-form .col,
+.debutant-form .col-1,
+.debutant-form .col-10,
+.debutant-form .col-11,
+.debutant-form .col-12,
+.debutant-form .col-2,
+.debutant-form .col-3,
+.debutant-form .col-4,
+.debutant-form .col-5,
+.debutant-form .col-6,
+.debutant-form .col-7,
+.debutant-form .col-8,
+.debutant-form .col-9,
+.debutant-form .col-auto,
+.debutant-form .col-lg,
+.debutant-form .col-lg-1,
+.debutant-form .col-lg-10,
+.debutant-form .col-lg-11,
+.debutant-form .col-lg-12,
+.debutant-form .col-lg-2,
+.debutant-form .col-lg-3,
+.debutant-form .col-lg-4,
+.debutant-form .col-lg-5,
+.debutant-form .col-lg-6,
+.debutant-form .col-lg-7,
+.debutant-form .col-lg-8,
+.debutant-form .col-lg-9,
+.debutant-form .col-lg-auto,
+.debutant-form .col-md,
+.debutant-form .col-md-1,
+.debutant-form .col-md-10,
+.debutant-form .col-md-11,
+.debutant-form .col-md-12,
+.debutant-form .col-md-2,
+.debutant-form .col-md-3,
+.debutant-form .col-md-4,
+.debutant-form .col-md-5,
+.debutant-form .col-md-6,
+.debutant-form .col-md-7,
+.debutant-form .col-md-8,
+.debutant-form .col-md-9,
+.debutant-form .col-md-auto,
+.debutant-form .col-sm {
+    margin: auto;
+}
+
+.css-b62m3t-container>* {
+    height: 50px;
+}
+
 h2 {
     font-weight: 200;
     margin-top: 2%;
@@ -125,6 +255,30 @@ table.profile-table {
 
 
 /* SESSION DEBUTANT */
+
+.btn-black {
+    background-color: black;
+    border-color: white;
+    color: white;
+}
+
+.btn-black:hover {
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+
+.btn-white {
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+
+.btn-white:hover {
+    background-color: black;
+    border-color: white;
+    color: white;
+}
 
 .hide {
     display: none;
@@ -1016,7 +1170,6 @@ table.connexion-table td.connexion-img-td {
 
 @media (max-width: 925px) {
     .chart {
-        margin-top: 50px;
         right: 20px;
 
     }
@@ -1200,55 +1353,29 @@ table.connexion-table td.connexion-img-td {
     }
 }
 
-@media (max-width: 450px) {
-    .watermark-piechart:after {
-        top: -110px;
-        background-size: 40px;
-        background-position-y: -10px;
+@media (max-width: 500px) {
+
+    input,
+    select {
+        height: 20px !important;
     }
 
-    .watermark-regu:after {
-        background-size: 40px;
-        background-position-x: 150px;
-    }
-}
-
-/* Smallest layout */
-@media (max-width: 330px) {
-    .piechart {
-        font-size: 5px;
-
-    }
-
-    .btn {
-        font-size: 10px;
+    .navigbar {
+        height: 50px;
     }
 
     .toggle-is-clicked {
         height: 460px;
     }
 
-
-    .watermark-piechart:after {
-        top: -110px;
-        background-size: 20px;
-        background-position-y: 50px;
+    .btn {
+        max-height: 50px;
+        max-width: 150px;
+        padding: 5px;
     }
 
-    .inner-img {
-        top: 35%;
-        left: 34%;
-        width: 40%;
-    }
-
-    .Design-footer {
-        padding-top: 0;
-        height: 25px;
-    }
-
-    .Design-footer .social {
-        width: 10px;
-        filter: invert(1);
+    .btn {
+        font-size: 10px;
     }
 
     h1 {
@@ -1277,6 +1404,52 @@ table.connexion-table td.connexion-img-td {
     a.nav-link {
         font-size: 10px;
     }
+}
+
+@media (max-width: 450px) {
+    .watermark-piechart:after {
+        top: -110px;
+        background-size: 40px;
+        background-position-y: -10px;
+    }
+
+    .watermark-regu:after {
+        background-size: 40px;
+        background-position-x: 150px;
+    }
+}
+
+/* Smallest layout */
+@media (max-width: 330px) {
+    .piechart {
+        font-size: 5px;
+
+    }
+
+
+    .watermark-piechart:after {
+        top: -110px;
+        background-size: 20px;
+        background-position-y: 50px;
+    }
+
+    .inner-img {
+        top: 35%;
+        left: 34%;
+        width: 40%;
+    }
+
+    .Design-footer {
+        padding-top: 0;
+        height: 25px;
+    }
+
+    .Design-footer .social {
+        width: 10px;
+        filter: invert(1);
+    }
+
+
 
     .logo-navbar {
         width: 50px;

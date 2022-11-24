@@ -119,7 +119,7 @@ function EchauffementInput(props) {
                 id={props.id} key={props.id} onClickExercice={handleClickExercice} echauffement={echauffement.echauffement}
                 clickExercice={clickExercice} value={echauffement.exercice} index={props.index}
                 onDeleteEchauffements={props.onDeleteEchauffements} changeEchauffement={changeEchauffement}
-                modeSombre={props.modeSombre}
+                modeSombre={props.modeSombre} dimensions={props.dimensions}
             />
 
             {clickExercice ?
@@ -135,6 +135,7 @@ function EchauffementInput(props) {
                                     key={categorie.id}
                                     id={categorie.id}
                                     index={index}
+                                    dimensions={props.dimensions}
                                     categorie={categorie}
                                     exercice={echauffement.echauffement}
                                     changeCategorie={changeCategorie}

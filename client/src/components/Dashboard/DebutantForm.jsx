@@ -1,10 +1,9 @@
 import { React, useState, useEffect } from "react";
 import API from "../../utils/API";
 import Select from "react-select";
-import customStylesDark from "./customStylesDark";
+import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from "./customStyles";
 import PoidsInput from "./PoidsInput";
 import FullExerciceInput from "./FullExerciceInput"
-import customStyles from "./customStyles";
 import { v4 as uuidv4 } from 'uuid';
 import { useSearchParams } from "react-router-dom";
 
@@ -222,8 +221,8 @@ function DebutantForm(props) {
         <form className="debutant-form">
 
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Séance précédente</label>
-                <div className="col-sm-7">
+                <label className="col-2 col-form-label">Séance précédente</label>
+                <div className="col-7">
                     <Select
                         placeholder="Séance précédente à charger..."
                         onChange={handleChange}
@@ -232,27 +231,42 @@ function DebutantForm(props) {
                             { id: "load", label: "Dernière séance en date", value: "lastDate" },
                             { id: "load", label: "Dernière séance enregistrée", value: "lastRec" }
                         ]}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                     />
                 </div>
-                <div className="col-sm-3">
+                <div className="col-3">
                     <button className="btn btn-dark loadButton" onClick={loadSeance} type="submit">Charger la séance</button>
                 </div>
             </div>
 
             <div className="DateInput form-group row">
-                <label className="col-sm-2 col-form-label">Date</label>
-                <div className="col-sm-10">
-                    <input type="date"
-                        className={props.modeSombre === true ? "form-control inputDark" : "form-control"}
-                        value={seance.date}
-                        onChange={handleChangeDate}
-                        id="date"
-                    />
+                <div className="col-5 col-form-label" style={{ marginRight: "10px" }}>
+                    <label >Date</label>
+                    <div >
+                        <input type="date"
+                            className={props.modeSombre === true ? "form-control inputDark" : "form-control"}
+                            value={seance.date}
+                            onChange={handleChangeDate}
+                            id="date"
+                        />
+                    </div>
                 </div>
+
+                <PoidsInput modeSombre={props.modeSombre} key={seance.id} poids={seance.poids} changePoids={changePoids} />
             </div>
 
-            <PoidsInput modeSombre={props.modeSombre} key={seance.id} poids={seance.poids} changePoids={changePoids} />
+
 
             {seance?.exercices.map((exercice, index) => {
                 return (
@@ -261,6 +275,7 @@ function DebutantForm(props) {
                             key={exercice.id}
                             id={exercice.id}
                             index={index}
+                            dimensions={props.dimensions}
                             exercice={exercice}
                             poids={seance.poids}
                             changeExercices={changeExercices}
@@ -277,7 +292,7 @@ function DebutantForm(props) {
             <br />
 
             <div className="form-button-div">
-                <button className="btn btn-lg btn-dark enregistrer-button" onClick={handleClick} type="submit">Enregistrer la séance !</button>
+                <button className={props.modeSombre ? "btn btn-lg btn-black enregistrer-button large-margin-updown" : "btn btn-lg btn-white enregistrer-button large-margin-updown"} onClick={handleClick} type="submit">Enregistrer la séance !</button>
             </div>
 
             <div style={{ marginTop: "20%" }}></div>

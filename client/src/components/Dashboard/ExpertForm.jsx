@@ -2,8 +2,7 @@ import { React, useState, useEffect } from "react";
 import API from "../../utils/API";
 import PoidsInput from "./PoidsInput";
 import Select from "react-select"
-import customStyles from "./customStyles";
-import customStylesDark from "./customStylesDark";
+import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from "./customStyles";
 import DetailInput from "./DetailInput";
 import EchauffementInput from "./EchauffementInput";
 import FullExerciceExpertInput from "./FullExerciceExpertInput"
@@ -525,31 +524,53 @@ function ExpertForm(props) {
         <form className="debutant-form">
 
             <div className="form-group row">
-                <label className="col-sm-2 col-form-label">Séance précédente</label>
-                <div className="col-sm-7">
+                <label className="col-2 col-form-label">Séance précédente</label>
+                <div className="col-7">
                     <Select
                         placeholder="Séance précédente à charger..."
                         onChange={handleChange}
                         options={paramsSelect}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                     />
                 </div>
-                <div className="col-sm-3">
+                <div className="col-3">
                     <button className="btn btn-dark loadButton" onClick={loadSeance} type="submit">Charger la séance</button>
                 </div>
             </div>
 
             <div className="NameInput">
                 <div className="form-group row">
-                    <label className="col-sm-2 col-form-label">
+                    <label className="col-2 col-form-label">
                         Nom de la séance
                     </label>
-                    <div className="col-sm-10">
+                    <div className="col-10">
                         <Select
                             placeholder="Nom..."
                             onChange={handleChangeName}
                             options={listeNoms}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
                             value={{ value: seance.nom.ancienNom, label: seance.nom.ancienNom }}
                         />
                     </div>
@@ -557,8 +578,8 @@ function ExpertForm(props) {
 
                 {seance.nom.ancienNom === "nouveau-nom" ?
                     <div className="form-group row">
-                        <label className="col-sm-2 col-form-label">Nom de la séance</label>
-                        <div className="col-sm-5">
+                        <label className="col-2 col-form-label">Nom de la séance</label>
+                        <div className="col-5">
                             <input type="text"
                                 className={props.modeSombre ? "form-control inputDark" : "form-control"}
                                 onChange={handleChangeName}
@@ -572,18 +593,20 @@ function ExpertForm(props) {
             </div>
 
             <div className="DateInput form-group row">
-                <label className="col-sm-2 col-form-label">Date</label>
-                <div className="col-sm-10">
-                    <input type="date"
-                        className={props.modeSombre ? "form-control inputDark" : "form-control"}
-                        value={seance.date}
-                        onChange={handleChangeDate}
-                        id="date"
-                    />
+                <div className="col-5 col-form-label" style={{ marginRight: "10px" }}>
+                    <label >Date</label>
+                    <div >
+                        <input type="date"
+                            className={props.modeSombre === true ? "form-control inputDark" : "form-control"}
+                            value={seance.date}
+                            onChange={handleChangeDate}
+                            id="date"
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <PoidsInput modeSombre={props.modeSombre} key={seance.id} poids={seance.poids} changePoids={changePoids} />
+                <PoidsInput modeSombre={props.modeSombre} key={seance.id} poids={seance.poids} changePoids={changePoids} />
+            </div>
 
 
             {clickEchauffement ?
@@ -598,6 +621,7 @@ function ExpertForm(props) {
                                     <EchauffementInput
                                         key={echauffement.id}
                                         index={index}
+                                        dimensions={props.dimensions}
                                         id={echauffement.id}
                                         modeSombre={props.modeSombre}
                                         poids={seance.poids}
@@ -635,6 +659,7 @@ function ExpertForm(props) {
                                 <FullExerciceExpertInput
                                     key={exercice.id}
                                     index={index}
+                                    dimensions={props.dimensions}
                                     id={exercice.id}
                                     modeSombre={props.modeSombre}
                                     exercice={exercice}
@@ -676,6 +701,7 @@ function ExpertForm(props) {
                                     id={detail.id}
                                     modeSombre={props.modeSombre}
                                     detail={detail}
+                                    dimensions={props.dimensions}
                                     onAddDetail={onAddDetail}
                                     changeDetail={changeDetail}
                                     onDeleteDetail={onDeleteDetail}
@@ -700,7 +726,7 @@ function ExpertForm(props) {
             }
 
             <div className="form-button-div">
-                <button className="btn btn-lg btn-dark enregistrer-button" onClick={handleClick} type="submit">Enregistrer la séance !</button>
+                <button className={props.modeSombre ? "btn btn-lg btn-black enregistrer-button large-margin-updown" : "btn btn-lg btn-white enregistrer-button large-margin-updown"} onClick={handleClick} type="submit">Enregistrer la séance !</button>
             </div>
         </form>
     )

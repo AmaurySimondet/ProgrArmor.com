@@ -119,6 +119,7 @@ function FullExerciceInput(props) {
                 clickExercice={clickExercice} value={fullExercice.exercice} id={props.id} index={props.index}
                 onDeleteExercices={props.onDeleteExercices} changeExercice={changeExercice}
                 key={props.id} exercice={fullExercice.exercice} modeSombre={props.modeSombre}
+                dimensions={props.dimensions}
             />
 
 
@@ -134,6 +135,7 @@ function FullExerciceInput(props) {
                                     key={categorie.id}
                                     id={categorie.id}
                                     index={index}
+                                    dimensions={props.dimensions}
                                     categorie={categorie}
                                     exercice={fullExercice.exercice}
                                     changeCategorie={changeCategorie}

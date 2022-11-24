@@ -4,8 +4,7 @@ import Bienvenue from "../Bienvenue.jsx"
 import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
 import DetailInput from "./DetailInput"
-import customStyles from "./customStyles.js";
-import customStylesDark from "./customStylesDark.js";
+import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from "./customStyles";
 import CategorieInput from "./CategorieInput"
 import Footer from "../Footer.jsx";
 import Slider from '@mui/material/Slider';
@@ -587,7 +586,7 @@ function Dashboard() {
                             {clickFiltrage ?
                                 <div>
                                     <div className="form-group row">
-                                        <div className="form-group col-sm-6">
+                                        <div className="form-group col-6">
                                             <label className=" col-form-label">
                                                 Tri
                                             </label>
@@ -598,12 +597,23 @@ function Dashboard() {
                                                     { id: "tri", label: "Charge (ordre décroissant)", value: "Charge (ordre décroissant)" },
                                                     { id: "tri", label: "%PDC (ordre décroissant)", value: "PDC (ordre décroissant)" }
                                                 ]}
-                                                styles={user.modeSombre ? customStylesDark : customStyles}
+                                                styles={
+                                                    dimensions.width <= 500 ?
+                                                        user.modeSombre === true ?
+                                                            customStylesDarkMini
+                                                            :
+                                                            customStylesMini
+                                                        :
+                                                        user.modeSombre === true ?
+                                                            customStylesDark
+                                                            :
+                                                            customStyles
+                                                }
                                                 value={{ label: params.tri, value: params.tri }}
                                             />
                                         </div>
 
-                                        <div className="form-group col-sm-6">
+                                        <div className="form-group col-6">
                                             <label className=" col-form-label">
                                                 Periode
                                             </label>
@@ -616,21 +626,32 @@ function Dashboard() {
                                                     { id: "periode", label: "180 derniers jours (6 mois)", value: "180d" },
                                                     { id: "periode", label: "Depuis 1 an", value: "1y" }
                                                 ]}
-                                                styles={user.modeSombre ? customStylesDark : customStyles}
+                                                styles={
+                                                    dimensions.width <= 500 ?
+                                                        user.modeSombre === true ?
+                                                            customStylesDarkMini
+                                                            :
+                                                            customStylesMini
+                                                        :
+                                                        user.modeSombre === true ?
+                                                            customStylesDark
+                                                            :
+                                                            customStyles
+                                                }
                                                 value={{ label: params.periode, value: params.periode }}
                                             />
                                         </div>
                                     </div>
 
                                     <div className="form-group row">
-                                        <div className="form-group col-sm-6">
+                                        <div className="form-group col-6">
                                             <label className="col-form-label">
                                                 Exercice
                                             </label>
-                                            <ExerciceInput modeSombre={user.modeSombre ? true : false} exercice={exercice.exercice} taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                                            <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} exercice={exercice.exercice} taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
                                         </div>
 
-                                        <div className="form-group col-sm-6">
+                                        <div className="form-group col-6">
                                             <label className="col-form-label">
                                                 Reps / Temps
                                             </label>
@@ -657,11 +678,11 @@ function Dashboard() {
                                     {categoriesAddRien.map((rien, index) => {
                                         return (
                                             <div className="form-group row">
-                                                <div className="form-group col-sm-12">
+                                                <div className="form-group col-12">
                                                     <label onClick={handleClick} id={index} className="col-form-label categorie-label">
                                                         Catégorie {index + 1} <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.png')} />
                                                     </label>
-                                                    <CategorieInput modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
+                                                    <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
                                                 </div>
                                             </div>
                                         )
@@ -670,29 +691,40 @@ function Dashboard() {
                                     {detailsAddRien.map((rien, index) => {
                                         return (
                                             <div className="form-group row">
-                                                <div className="form-group col-sm-12">
+                                                <div className="form-group col-12">
                                                     <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
                                                         Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.png')} />
                                                     </label>
-                                                    <DetailInput modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
+                                                    <DetailInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
                                                 </div>
                                             </div>
                                         )
                                     })}
 
                                     <div className="form-group row">
-                                        <div className="form-group col-sm-6">
+                                        <div className="form-group col-6" style={{ margin: "0" }}>
                                             <label className=" col-form-label">
                                                 Nom
                                             </label>
                                             <Select onChange={handleChange} placeholder="Nom..." id="nom"
                                                 options={listeNoms}
-                                                styles={user.modeSombre ? customStylesDark : customStyles}
+                                                styles={
+                                                    dimensions.width <= 500 ?
+                                                        user.modeSombre === true ?
+                                                            customStylesDarkMini
+                                                            :
+                                                            customStylesMini
+                                                        :
+                                                        user.modeSombre === true ?
+                                                            customStylesDark
+                                                            :
+                                                            customStyles
+                                                }
                                                 value={{ label: params.nom, value: params.nom }}
                                             />
                                         </div>
 
-                                        <div className="form-group col-sm-3 button-dashboard">
+                                        <div className="form-group col-3 button-dashboard">
                                             <button className="btn btn-dark form-button" onClick={resetParameters} type="submit">Reset des paramètres</button>
                                         </div>
                                     </div>
@@ -712,10 +744,10 @@ function Dashboard() {
                             {clickAffichage ?
                                 <div>
                                     <div className="form-group row slider-style">
-                                        <label className="col-sm-1 col-form-label">
+                                        <label className="col-1 col-form-label">
                                             Nombre de catégories
                                         </label>
-                                        <div className="col-sm-5">
+                                        <div className="col-5">
                                             <StyleSlider
                                                 style={
                                                     {
@@ -734,10 +766,10 @@ function Dashboard() {
                                             />
                                         </div>
 
-                                        <label className="col-sm-1 col-form-label">
+                                        <label className="col-1 col-form-label">
                                             Nombre de détails
                                         </label>
-                                        <div className="col-sm-5">
+                                        <div className="col-5">
                                             <StyleSlider
                                                 style={
                                                     {
@@ -790,7 +822,7 @@ function Dashboard() {
                                     </div>
 
                                     <div className="form-group row">
-                                        <div className="form-group group-margin col-sm-12">
+                                        <div className="form-group group-margin col-12">
                                             <p className=""> Tableau blanc
                                                 <GreenSwitch
                                                     onChange={handleChangeSwitch}
@@ -800,17 +832,17 @@ function Dashboard() {
                                     </div>
 
                                     <div className="form-group row">
-                                        <div className="form-group col-sm-4">
+                                        <div className="form-group col-4">
                                             <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageModif" id="affichageModif" />
                                             <label className="col-form-label" htmlFor="#affichageModif"> Modifier des séances </label>
                                         </div>
 
-                                        <div className="form-group group-margin-last col-sm-4">
+                                        <div className="form-group group-margin-last col-4">
                                             <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSuppr" id="affichageSuppr" />
                                             <label className="col-form-label" htmlFor="#affichageSuppr"> Supprimer des séances </label>
                                         </div>
 
-                                        <div className="form-group group-margin-last col-sm-4">
+                                        <div className="form-group group-margin-last col-4">
                                             <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExport" id="affichageExport" />
                                             <label className="col-form-label" htmlFor="#affichageExport"> Exporter le tableau en CSV </label>
                                         </div>
@@ -843,7 +875,7 @@ function Dashboard() {
                                     {clickFiltrage ?
                                         <div>
                                             <div className="form-group row">
-                                                <div className="form-group col-sm-6">
+                                                <div className="form-group col-6">
                                                     <label className=" col-form-label">
                                                         Tri
                                                     </label>
@@ -854,12 +886,23 @@ function Dashboard() {
                                                             { id: "tri", label: "Charge (ordre décroissant)", value: "Charge (ordre décroissant)" },
                                                             { id: "tri", label: "%PDC (ordre décroissant)", value: "PDC (ordre décroissant)" }
                                                         ]}
-                                                        styles={user.modeSombre ? customStylesDark : customStyles}
+                                                        styles={
+                                                            dimensions.width <= 500 ?
+                                                                user.modeSombre === true ?
+                                                                    customStylesDarkMini
+                                                                    :
+                                                                    customStylesMini
+                                                                :
+                                                                user.modeSombre === true ?
+                                                                    customStylesDark
+                                                                    :
+                                                                    customStyles
+                                                        }
                                                         value={{ label: params.tri, value: params.tri }}
                                                     />
                                                 </div>
 
-                                                <div className="form-group col-sm-6">
+                                                <div className="form-group col-6">
                                                     <label className=" col-form-label">
                                                         Periode
                                                     </label>
@@ -872,25 +915,36 @@ function Dashboard() {
                                                             { id: "periode", label: "180 derniers jours (6 mois)", value: "180d" },
                                                             { id: "periode", label: "Depuis 1 an", value: "1y" }
                                                         ]}
-                                                        styles={user.modeSombre ? customStylesDark : customStyles}
+                                                        styles={
+                                                            dimensions.width <= 500 ?
+                                                                user.modeSombre === true ?
+                                                                    customStylesDarkMini
+                                                                    :
+                                                                    customStylesMini
+                                                                :
+                                                                user.modeSombre === true ?
+                                                                    customStylesDark
+                                                                    :
+                                                                    customStyles
+                                                        }
                                                         value={{ label: params.periode, value: params.periode }}
                                                     />
                                                 </div>
                                             </div>
 
                                             <div className="form-group row">
-                                                <div className="form-group col-sm-6">
+                                                <div className="form-group col-6">
                                                     <label className="col-form-label">
                                                         Exercice
                                                     </label>
-                                                    <ExerciceInput modeSombre={user.modeSombre ? true : false}
+                                                    <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false}
                                                         exercice={exercice.exercice}
                                                         taille="petit"
                                                         typeSerie={0} id="exercice" changeExercice={changeExercice}
                                                     />
                                                 </div>
 
-                                                <div className="form-group col-sm-6">
+                                                <div className="form-group col-6">
                                                     <label className="col-form-label">
                                                         Reps / Temps
                                                     </label>
@@ -917,11 +971,11 @@ function Dashboard() {
                                             {categoriesAddRien.map((rien, index) => {
                                                 return (
                                                     <div className="form-group row">
-                                                        <div className="form-group col-sm-12">
+                                                        <div className="form-group col-12">
                                                             <label onClick={handleClick} id={index} className="col-form-label categorie-label">
                                                                 Catégorie {index + 1} <img onClick={handleClick} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.png')} />
                                                             </label>
-                                                            <CategorieInput modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
+                                                            <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
                                                         </div>
                                                     </div>
                                                 )
@@ -930,29 +984,40 @@ function Dashboard() {
                                             {detailsAddRien.map((rien, index) => {
                                                 return (
                                                     <div className="form-group row">
-                                                        <div className="form-group col-sm-12">
+                                                        <div className="form-group col-12">
                                                             <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
                                                                 Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.png')} />
                                                             </label>
-                                                            <DetailInput modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
+                                                            <DetailInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
                                                         </div>
                                                     </div>
                                                 )
                                             })}
 
                                             <div className="form-group row">
-                                                <div className="form-group col-sm-6">
+                                                <div className="form-group col-6">
                                                     <label className=" col-form-label">
                                                         Nom
                                                     </label>
                                                     <Select onChange={handleChange} placeholder="Nom..." id="nom"
                                                         options={listeNoms}
-                                                        styles={user.modeSombre ? customStylesDark : customStyles}
+                                                        styles={
+                                                            dimensions.width <= 500 ?
+                                                                user.modeSombre === true ?
+                                                                    customStylesDarkMini
+                                                                    :
+                                                                    customStylesMini
+                                                                :
+                                                                user.modeSombre === true ?
+                                                                    customStylesDark
+                                                                    :
+                                                                    customStyles
+                                                        }
                                                         value={{ label: params.nom, value: params.nom }}
                                                     />
                                                 </div>
 
-                                                <div className="form-group col-sm-3 button-dashboard">
+                                                <div className="form-group col-3 button-dashboard">
                                                     <button className="btn btn-dark form-button" onClick={resetParameters} type="submit">Reset des paramètres</button>
                                                 </div>
                                             </div>
@@ -976,10 +1041,10 @@ function Dashboard() {
                                     {clickAffichage ?
                                         <div>
                                             <div className="form-group row slider-style">
-                                                <label className="col-sm-1 col-form-label">
+                                                <label className="col-1 col-form-label">
                                                     Nombre de catégories
                                                 </label>
-                                                <div className="col-sm-5">
+                                                <div className="col-5">
                                                     <StyleSlider
                                                         style={
                                                             {
@@ -998,10 +1063,10 @@ function Dashboard() {
                                                     />
                                                 </div>
 
-                                                <label className="col-sm-1 col-form-label">
+                                                <label className="col-1 col-form-label">
                                                     Nombre de détails
                                                 </label>
-                                                <div className="col-sm-5">
+                                                <div className="col-5">
                                                     <StyleSlider
                                                         style={
                                                             {
@@ -1054,7 +1119,7 @@ function Dashboard() {
                                             </div>
 
                                             <div className="form-group row">
-                                                <div className="form-group group-margin col-sm-12">
+                                                <div className="form-group group-margin col-12">
                                                     <p className=""> Tableau blanc
                                                         <GreenSwitch
                                                             onChange={handleChangeSwitch}
@@ -1064,17 +1129,17 @@ function Dashboard() {
                                             </div>
 
                                             <div className="form-group row">
-                                                <div className="form-group col-sm-4">
+                                                <div className="form-group col-4">
                                                     <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageModif" id="affichageModif" />
                                                     <label className="col-form-label" htmlFor="#affichageModif"> Modifier des séances </label>
                                                 </div>
 
-                                                <div className="form-group group-margin-last col-sm-4">
+                                                <div className="form-group group-margin-last col-4">
                                                     <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSuppr" id="affichageSuppr" />
                                                     <label className="col-form-label" htmlFor="#affichageSuppr"> Supprimer des séances </label>
                                                 </div>
 
-                                                <div className="form-group group-margin-last col-sm-4">
+                                                <div className="form-group group-margin-last col-4">
                                                     <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExport" id="affichageExport" />
                                                     <label className="col-form-label" htmlFor="#affichageExport"> Exporter en CSV </label>
                                                 </div>

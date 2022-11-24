@@ -3,8 +3,7 @@ import Slider from '@mui/material/Slider';
 import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Select from "react-select";
-import customStyles from "./customStyles.js";
-import customStylesDark from "./customStylesDark.js";
+import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "./customStyles.js";
 
 import AllCategories from "./Categories/AllCategories.js";
 
@@ -248,7 +247,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={AllCategories}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.name, label: categorie.name }}
                     />
                     :
@@ -256,7 +266,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 Catégorie {props.dashboard ? props.index + 1 : null} ({props.exercice.name})
                                 <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                                 <div className={categorieHiddenClick}>
@@ -268,12 +278,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={AllCategories}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.name, label: categorie.name }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -285,7 +306,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={AllCategories}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.name, label: categorie.name }}
                     />
                     :
@@ -293,7 +325,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 Catégorie {props.dashboard ? props.index + 1 : null} ({props.exercice.name})
                                 <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                                 <div className={categorieHiddenClick}>
@@ -305,12 +337,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={AllCategories}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.name, label: categorie.name }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -322,7 +365,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={Streetworkout}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -330,7 +384,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                                 <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickStreetworkout} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                                 <div className={streetworkoutHiddenClicked}>
@@ -342,12 +396,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={Streetworkout}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -358,7 +423,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={lesTypesBarres}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -366,7 +442,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -374,12 +450,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={lesTypesBarres}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -390,7 +477,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={MusclesCategorie}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -398,7 +496,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -406,12 +504,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={MusclesCategorie}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -422,7 +531,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={PositionCorps}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -430,7 +550,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -438,12 +558,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={PositionCorps}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -454,7 +585,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={positionElastique}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -462,7 +604,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -470,12 +612,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={positionElastique}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -486,7 +639,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={PositionBras}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -494,7 +658,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -502,12 +666,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={PositionBras}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -518,7 +693,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={PositionJambes}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -526,7 +712,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -534,12 +720,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={PositionJambes}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -550,7 +747,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={PositionMains}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -558,7 +766,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -566,12 +774,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={PositionMains}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -582,7 +801,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={PositionPieds}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -590,7 +820,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -598,12 +828,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={PositionPieds}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -614,7 +855,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={AxeCategorie}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -622,7 +874,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -630,12 +882,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={AxeCategorie}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -646,7 +909,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={CoudeGenou}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -654,7 +928,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -662,12 +936,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={CoudeGenou}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -678,7 +963,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={Unilateral}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -686,7 +982,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -694,12 +990,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={Unilateral}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -710,7 +1017,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={Execution}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -718,7 +1036,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -726,12 +1044,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={Execution}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -742,7 +1071,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={ExecutionSpecifique}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -750,7 +1090,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -758,19 +1098,30 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={ExecutionSpecifique}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
             {categorie.name === "Temps de repos entre les séries" ?
                 props.info === "false" ?
-                    <div className={props.info === "false" ? "" : "col-sm-9"}>
+                    <div className={props.info === "false" ? "" : "col-9"}>
                         <input type="text"
                             className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
                             id="input"
@@ -783,11 +1134,11 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
-                        <div className={props.info === "false" ? "" : "col-sm-9"}>
+                        <div className={props.info === "false" ? "" : "col-9"}>
                             <input type="text"
                                 className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
                                 id="input"
@@ -796,7 +1147,7 @@ function CategorieInput(props) {
                             />
                         </div>
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -807,7 +1158,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={RPE}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -815,7 +1177,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -823,12 +1185,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={RPE}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -839,7 +1212,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={Douleur}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -847,7 +1231,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -855,12 +1239,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={Douleur}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -871,7 +1266,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={PriseCategorie}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -879,7 +1285,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -887,12 +1293,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={PriseCategorie}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -903,7 +1320,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={TempoCategorie}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -911,7 +1339,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -919,12 +1347,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={TempoCategorie}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -935,7 +1374,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={Partiel}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -943,7 +1393,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -951,12 +1401,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={Partiel}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -967,7 +1428,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={DépartCategorie}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -975,7 +1447,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -983,12 +1455,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={DépartCategorie}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -999,7 +1482,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={ExplosifCategorie}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -1007,7 +1501,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -1015,12 +1509,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={ExplosifCategorie}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -1031,7 +1536,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={Halterophilie}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -1039,7 +1555,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -1047,12 +1563,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={Halterophilie}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -1063,7 +1590,18 @@ function CategorieInput(props) {
                         placeholder="Categorie..."
                         onChange={handleChange}
                         options={AccessoireObjet}
-                        styles={props.modeSombre === true ? customStylesDark : customStyles}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
                         value={{ value: categorie.input, label: categorie.input }}
                     />
                     :
@@ -1071,7 +1609,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-sm-2 col-form-label">
+                            <label className="col-2 col-form-label">
                                 {categorie.name}
                             </label>
                         }
@@ -1079,12 +1617,23 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={AccessoireObjet}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
-                        {props.dashboard ? null : <div className="col-sm-1">
+                        {props.dashboard ? null : <div className="col-1">
                             <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                         </div>}
                     </div>
@@ -1095,8 +1644,19 @@ function CategorieInput(props) {
                         <Select
                             placeholder="Utilisation..."
                             onChange={handleChange}
-                            styles={props.modeSombre === true ? customStylesDark : customStyles}
-                            className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-9"}
                             options={[
                                 { className: "select-title", value: "title", label: "/ (défaut)" },
                                 { name: "Elastique", value: "Resistance", label: "Resistance" },
@@ -1104,7 +1664,7 @@ function CategorieInput(props) {
                             ]}
                             value={{ value: categorie.utilisation, label: categorie.utilisation }}
                         />
-                        <div style={{ height: "38px" }} className="col-sm-10"></div>
+                        <div style={{ height: "38px" }} className="col-10"></div>
                     </div>
                     :
                     props.dashboard ?
@@ -1112,15 +1672,26 @@ function CategorieInput(props) {
                             {props.info === "false" ?
                                 null
                                 :
-                                <label className="col-sm-2 col-form-label">
+                                <label className="col-2 col-form-label">
                                     Utilisation
                                 </label>
                             }
                             <Select
                                 placeholder="Utilisation..."
                                 onChange={handleChange}
-                                styles={props.modeSombre === true ? customStylesDark : customStyles}
-                                className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                                styles={
+                                    props.dimensions.width <= 500 ?
+                                        props.modeSombre === true ?
+                                            customStylesDarkMini
+                                            :
+                                            customStylesMini
+                                        :
+                                        props.modeSombre === true ?
+                                            customStylesDark
+                                            :
+                                            customStyles
+                                }
+                                className={props.info === "dash" ? "col-10" : " col-9"}
                                 options={[
                                     { className: "select-title", value: "title", label: "/ (défaut)" },
                                     { name: "Elastique", value: "Resistance", label: "Resistance" },
@@ -1129,7 +1700,7 @@ function CategorieInput(props) {
                                 value={{ value: categorie.utilisation, label: categorie.utilisation }}
                             />
 
-                            {props.dashboard ? null : <div className="col-sm-1">
+                            {props.dashboard ? null : <div className="col-1">
                                 <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                             </div>}
                         </div>
@@ -1139,15 +1710,26 @@ function CategorieInput(props) {
                                 {props.info === "false" ?
                                     null
                                     :
-                                    <label className="col-sm-2 col-form-label">
+                                    <label className="col-2 col-form-label">
                                         Utilisation
                                     </label>
                                 }
                                 <Select
                                     placeholder="Utilisation..."
                                     onChange={handleChange}
-                                    styles={props.modeSombre === true ? customStylesDark : customStyles}
-                                    className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                                    styles={
+                                        props.dimensions.width <= 500 ?
+                                            props.modeSombre === true ?
+                                                customStylesDarkMini
+                                                :
+                                                customStylesMini
+                                            :
+                                            props.modeSombre === true ?
+                                                customStylesDark
+                                                :
+                                                customStyles
+                                    }
+                                    className={props.info === "dash" ? "col-10" : " col-9"}
                                     options={[
                                         { id: "utilisation", name: "Elastique", className: "select-title", value: "title", label: "/ (défaut)" },
                                         { id: "utilisation", name: "Elastique", value: "Resistance", label: "Resistance" },
@@ -1156,31 +1738,42 @@ function CategorieInput(props) {
                                     value={{ value: categorie.utilisation, label: categorie.utilisation }}
                                 />
 
-                                {props.dashboard ? null : <div className="col-sm-1">
+                                {props.dashboard ? null : <div className="col-1">
                                     <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
                                 </div>}
                             </div>
 
                             <div className="form-group row">
-                                <label className="col-sm-2 col-form-label">
+                                <label className="col-2 col-form-label">
                                     Épaisseur / taille élastique
                                 </label>
                                 <Select
                                     placeholder="Categorie..."
                                     onChange={handleChange}
                                     options={lesElastiques}
-                                    styles={props.modeSombre === true ? customStylesDark : customStyles}
-                                    className={props.info === "dash" ? "col-sm-10" : " col-sm-9"}
+                                    styles={
+                                        props.dimensions.width <= 500 ?
+                                            props.modeSombre === true ?
+                                                customStylesDarkMini
+                                                :
+                                                customStylesMini
+                                            :
+                                            props.modeSombre === true ?
+                                                customStylesDark
+                                                :
+                                                customStyles
+                                    }
+                                    className={props.info === "dash" ? "col-10" : " col-9"}
                                     value={{ value: categorie.input, label: categorie.input }}
                                 />
                             </div>
 
                             {categorie.input === "mesure" ?
                                 <div className="form-group row">
-                                    <label className="col-sm-2 col-form-label">
+                                    <label className="col-2 col-form-label">
                                         Tension (kg)
                                     </label>
-                                    <div className="col-sm-9">
+                                    <div className="col-9">
                                         <input type="text"
                                             className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
                                             id="estimation"
@@ -1192,7 +1785,7 @@ function CategorieInput(props) {
                                 :
                                 <div>
                                     <div className="form-group row slider-style">
-                                        <label className="col-sm-2 col-form-label">
+                                        <label className="col-2 col-form-label">
                                             Etirement (mètres)
                                         </label>
                                         {props.modeSombre === true ?
@@ -1235,14 +1828,14 @@ function CategorieInput(props) {
                                     </div>
 
                                     <div className="form-group row">
-                                        <label className="col-sm-2 col-form-label">
+                                        <label className="col-2 col-form-label">
                                             Estimation
                                             <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickElastique} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                                             <div className={elastiqueHiddenClick}>
                                                 <ElastiqueHiddenText />
                                             </div>
                                         </label>
-                                        <div className="col-sm-9">
+                                        <div className="col-9">
                                             <input type="text"
                                                 className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
                                                 id="estimation"

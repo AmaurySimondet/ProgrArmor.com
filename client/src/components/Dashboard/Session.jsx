@@ -27,6 +27,25 @@ function Session() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [seance, setSeance] = useState();
   const [user, setUser] = useState();
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth
+  })
+
+  useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
+    }
+
+    var timeout = false;
+    window.addEventListener('resize', function () {
+      clearTimeout(timeout);;
+      timeout = setTimeout(handleResize, 200);
+    });
+  })
 
   async function getUser() {
     const { data } = await API.getUser({ id: localStorage.getItem("id") });
@@ -115,7 +134,8 @@ function Session() {
                 :
                 { id: uuidv4(), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: [] }
             }
-            modeSombre={user && user.modeSombre ? true : false} />
+            modeSombre={user && user.modeSombre ? true : false}
+            dimensions={dimensions} />
           :
           <DebutantForm
             seance={
@@ -124,7 +144,8 @@ function Session() {
                 :
                 { id: uuidv4(), date: "", poids: "", exercices: [] }
             }
-            modeSombre={user && user.modeSombre ? true : false} />
+            modeSombre={user && user.modeSombre ? true : false}
+            dimensions={dimensions} />
         }
 
       </div>

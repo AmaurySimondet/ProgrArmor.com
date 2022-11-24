@@ -10,8 +10,7 @@ import Psycho from "./Details/Psycho";
 import Seul from "./Details/Seul";
 import Environnement from "./Details/Environnement";
 import Courbatures from "./Details/Courbatures";
-import customStyles from "./customStyles.js";
-import customStylesDark from "./customStylesDark";
+import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "./customStyles.js";
 import Select from "react-select";
 
 function DetailInput(props) {
@@ -83,22 +82,33 @@ function DetailInput(props) {
         :
         <div className="form-group row">
           {props.info === "false" ? null :
-            <label className="col-sm-2 col-form-label">
+            <label className="col-2 col-form-label">
               Detail {props.index + 1}
             </label>
           }
 
-          <div className={props.info === true ? "col-sm-10" : props.info === "false" ? "col-sm-12" : "col-sm-9"}>
+          <div className={props.info === true ? "col-10" : props.info === "false" ? "col-12" : "col-9"}>
             <Select
               placeholder="Detail..."
               onChange={handleChange}
               options={Details}
-              styles={props.modeSombre === true ? customStylesDark : customStyles}
+              styles={
+                props.dimensions.width <= 500 ?
+                  props.modeSombre === true ?
+                    customStylesDarkMini
+                    :
+                    customStylesMini
+                  :
+                  props.modeSombre === true ?
+                    customStylesDark
+                    :
+                    customStyles
+              }
               value={{ value: detail.name, label: detail.name }}
             />
           </div>
 
-          {props.dashboard ? null : <div className="col-sm-1">
+          {props.dashboard ? null : <div className="col-1">
             <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
           </div>}
         </div>
@@ -107,22 +117,33 @@ function DetailInput(props) {
       {detail.name === "Aucun" ?
         <div className="form-group row">
           {props.info === "false" ? null :
-            <label className="col-sm-2 col-form-label">
+            <label className="col-2 col-form-label">
               Detail {props.dashboard ? props.index + 1 : null}
             </label>
           }
 
-          <div className={props.info === true ? "col-sm-10" : props.info === "false" ? "col-sm-12" : "col-sm-9"}>
+          <div className={props.info === true ? "col-10" : props.info === "false" ? "col-12" : "col-9"}>
             <Select
               placeholder="Detail..."
               onChange={handleChange}
               options={Details}
-              styles={props.modeSombre === true ? customStylesDark : customStyles}
+              styles={
+                props.dimensions.width <= 500 ?
+                  props.modeSombre === true ?
+                    customStylesDarkMini
+                    :
+                    customStylesMini
+                  :
+                  props.modeSombre === true ?
+                    customStylesDark
+                    :
+                    customStyles
+              }
               value={{ value: detail.name, label: detail.name }}
             />
           </div>
 
-          {props.dashboard ? null : <div className="col-sm-1">
+          {props.dashboard ? null : <div className="col-1">
             <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
           </div>}
         </div>
@@ -134,25 +155,47 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Meteo}
-            styles={props.modeSombre === true ? customStylesDark : customStyles}
+            styles={
+              props.dimensions.width <= 500 ?
+                props.modeSombre === true ?
+                  customStylesDarkMini
+                  :
+                  customStylesMini
+                :
+                props.modeSombre === true ?
+                  customStylesDark
+                  :
+                  customStyles
+            }
             value={{ value: detail.input, label: detail.input }}
           />
           :
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
+            <label className="col-2 col-form-label">
               {detail.name}
             </label>
-            <div className={props.info === true ? "col-sm-10" : "col-sm-9"}>
+            <div className={props.info === true ? "col-10" : "col-9"}>
               <Select
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Meteo}
-                styles={props.modeSombre === true ? customStylesDark : customStyles}
+                styles={
+                  props.dimensions.width <= 500 ?
+                    props.modeSombre === true ?
+                      customStylesDarkMini
+                      :
+                      customStylesMini
+                    :
+                    props.modeSombre === true ?
+                      customStylesDark
+                      :
+                      customStyles
+                }
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
 
-            {props.dashboard ? null : <div className="col-sm-1">
+            {props.dashboard ? null : <div className="col-1">
               <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
@@ -163,25 +206,47 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={DouleurSeance}
-            styles={props.modeSombre === true ? customStylesDark : customStyles}
+            styles={
+              props.dimensions.width <= 500 ?
+                props.modeSombre === true ?
+                  customStylesDarkMini
+                  :
+                  customStylesMini
+                :
+                props.modeSombre === true ?
+                  customStylesDark
+                  :
+                  customStyles
+            }
             value={{ value: detail.input, label: detail.input }}
           />
           :
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
+            <label className="col-2 col-form-label">
               {detail.name}
             </label>
-            <div className={props.info === true ? "col-sm-10" : "col-sm-9"}>
+            <div className={props.info === true ? "col-10" : "col-9"}>
               <Select
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={DouleurSeance}
-                styles={props.modeSombre === true ? customStylesDark : customStyles}
+                styles={
+                  props.dimensions.width <= 500 ?
+                    props.modeSombre === true ?
+                      customStylesDarkMini
+                      :
+                      customStylesMini
+                    :
+                    props.modeSombre === true ?
+                      customStylesDark
+                      :
+                      customStyles
+                }
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
 
-            {props.dashboard ? null : <div className="col-sm-1">
+            {props.dashboard ? null : <div className="col-1">
               <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
@@ -192,25 +257,47 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Fatigue}
-            styles={props.modeSombre === true ? customStylesDark : customStyles}
+            styles={
+              props.dimensions.width <= 500 ?
+                props.modeSombre === true ?
+                  customStylesDarkMini
+                  :
+                  customStylesMini
+                :
+                props.modeSombre === true ?
+                  customStylesDark
+                  :
+                  customStyles
+            }
             value={{ value: detail.input, label: detail.input }}
           />
           :
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
+            <label className="col-2 col-form-label">
               {detail.name}
             </label>
-            <div className={props.info === true ? "col-sm-10" : "col-sm-9"}>
+            <div className={props.info === true ? "col-10" : "col-9"}>
               <Select
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Fatigue}
-                styles={props.modeSombre === true ? customStylesDark : customStyles}
+                styles={
+                  props.dimensions.width <= 500 ?
+                    props.modeSombre === true ?
+                      customStylesDarkMini
+                      :
+                      customStylesMini
+                    :
+                    props.modeSombre === true ?
+                      customStylesDark
+                      :
+                      customStyles
+                }
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
 
-            {props.dashboard ? null : <div className="col-sm-1">
+            {props.dashboard ? null : <div className="col-1">
               <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
@@ -221,25 +308,47 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Preworkout}
-            styles={props.modeSombre === true ? customStylesDark : customStyles}
+            styles={
+              props.dimensions.width <= 500 ?
+                props.modeSombre === true ?
+                  customStylesDarkMini
+                  :
+                  customStylesMini
+                :
+                props.modeSombre === true ?
+                  customStylesDark
+                  :
+                  customStyles
+            }
             value={{ value: detail.input, label: detail.input }}
           />
           :
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
+            <label className="col-2 col-form-label">
               {detail.name}
             </label>
-            <div className={props.info === true ? "col-sm-10" : "col-sm-9"}>
+            <div className={props.info === true ? "col-10" : "col-9"}>
               <Select
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Preworkout}
-                styles={props.modeSombre === true ? customStylesDark : customStyles}
+                styles={
+                  props.dimensions.width <= 500 ?
+                    props.modeSombre === true ?
+                      customStylesDarkMini
+                      :
+                      customStylesMini
+                    :
+                    props.modeSombre === true ?
+                      customStylesDark
+                      :
+                      customStyles
+                }
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
 
-            {props.dashboard ? null : <div className="col-sm-1">
+            {props.dashboard ? null : <div className="col-1">
               <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
@@ -250,25 +359,47 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={DRUG}
-            styles={props.modeSombre === true ? customStylesDark : customStyles}
+            styles={
+              props.dimensions.width <= 500 ?
+                props.modeSombre === true ?
+                  customStylesDarkMini
+                  :
+                  customStylesMini
+                :
+                props.modeSombre === true ?
+                  customStylesDark
+                  :
+                  customStyles
+            }
             value={{ value: detail.input, label: detail.input }}
           />
           :
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
+            <label className="col-2 col-form-label">
               {detail.name}
             </label>
-            <div className={props.info === true ? "col-sm-10" : "col-sm-9"}>
+            <div className={props.info === true ? "col-10" : "col-9"}>
               <Select
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={DRUG}
-                styles={props.modeSombre === true ? customStylesDark : customStyles}
+                styles={
+                  props.dimensions.width <= 500 ?
+                    props.modeSombre === true ?
+                      customStylesDarkMini
+                      :
+                      customStylesMini
+                    :
+                    props.modeSombre === true ?
+                      customStylesDark
+                      :
+                      customStyles
+                }
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
 
-            {props.dashboard ? null : <div className="col-sm-1">
+            {props.dashboard ? null : <div className="col-1">
               <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
@@ -279,25 +410,47 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Psycho}
-            styles={props.modeSombre === true ? customStylesDark : customStyles}
+            styles={
+              props.dimensions.width <= 500 ?
+                props.modeSombre === true ?
+                  customStylesDarkMini
+                  :
+                  customStylesMini
+                :
+                props.modeSombre === true ?
+                  customStylesDark
+                  :
+                  customStyles
+            }
             value={{ value: detail.input, label: detail.input }}
           />
           :
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
+            <label className="col-2 col-form-label">
               {detail.name}
             </label>
-            <div className={props.info === true ? "col-sm-10" : "col-sm-9"}>
+            <div className={props.info === true ? "col-10" : "col-9"}>
               <Select
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Psycho}
-                styles={props.modeSombre === true ? customStylesDark : customStyles}
+                styles={
+                  props.dimensions.width <= 500 ?
+                    props.modeSombre === true ?
+                      customStylesDarkMini
+                      :
+                      customStylesMini
+                    :
+                    props.modeSombre === true ?
+                      customStylesDark
+                      :
+                      customStyles
+                }
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
 
-            {props.dashboard ? null : <div className="col-sm-1">
+            {props.dashboard ? null : <div className="col-1">
               <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
@@ -308,25 +461,47 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Seul}
-            styles={props.modeSombre === true ? customStylesDark : customStyles}
+            styles={
+              props.dimensions.width <= 500 ?
+                props.modeSombre === true ?
+                  customStylesDarkMini
+                  :
+                  customStylesMini
+                :
+                props.modeSombre === true ?
+                  customStylesDark
+                  :
+                  customStyles
+            }
             value={{ value: detail.input, label: detail.input }}
           />
           :
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
+            <label className="col-2 col-form-label">
               {detail.name}
             </label>
-            <div className={props.info === true ? "col-sm-10" : "col-sm-9"}>
+            <div className={props.info === true ? "col-10" : "col-9"}>
               <Select
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Seul}
-                styles={props.modeSombre === true ? customStylesDark : customStyles}
+                styles={
+                  props.dimensions.width <= 500 ?
+                    props.modeSombre === true ?
+                      customStylesDarkMini
+                      :
+                      customStylesMini
+                    :
+                    props.modeSombre === true ?
+                      customStylesDark
+                      :
+                      customStyles
+                }
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
 
-            {props.dashboard ? null : <div className="col-sm-1">
+            {props.dashboard ? null : <div className="col-1">
               <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
@@ -337,25 +512,47 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Environnement}
-            styles={props.modeSombre === true ? customStylesDark : customStyles}
+            styles={
+              props.dimensions.width <= 500 ?
+                props.modeSombre === true ?
+                  customStylesDarkMini
+                  :
+                  customStylesMini
+                :
+                props.modeSombre === true ?
+                  customStylesDark
+                  :
+                  customStyles
+            }
             value={{ value: detail.input, label: detail.input }}
           />
           :
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
+            <label className="col-2 col-form-label">
               {detail.name}
             </label>
-            <div className={props.info === true ? "col-sm-10" : "col-sm-9"}>
+            <div className={props.info === true ? "col-10" : "col-9"}>
               <Select
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Environnement}
-                styles={props.modeSombre === true ? customStylesDark : customStyles}
+                styles={
+                  props.dimensions.width <= 500 ?
+                    props.modeSombre === true ?
+                      customStylesDarkMini
+                      :
+                      customStylesMini
+                    :
+                    props.modeSombre === true ?
+                      customStylesDark
+                      :
+                      customStyles
+                }
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
 
-            {props.dashboard ? null : <div className="col-sm-1">
+            {props.dashboard ? null : <div className="col-1">
               <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
@@ -366,32 +563,54 @@ function DetailInput(props) {
             placeholder="Detail..."
             onChange={handleChange}
             options={Courbatures}
-            styles={props.modeSombre === true ? customStylesDark : customStyles}
+            styles={
+              props.dimensions.width <= 500 ?
+                props.modeSombre === true ?
+                  customStylesDarkMini
+                  :
+                  customStylesMini
+                :
+                props.modeSombre === true ?
+                  customStylesDark
+                  :
+                  customStyles
+            }
             value={{ value: detail.input, label: detail.input }}
           />
           :
           <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
+            <label className="col-2 col-form-label">
               {detail.name}
             </label>
-            <div className={props.info === true ? "col-sm-10" : "col-sm-9"}>
+            <div className={props.info === true ? "col-10" : "col-9"}>
               <Select
                 placeholder="Detail..."
                 onChange={handleChange}
                 options={Courbatures}
-                styles={props.modeSombre === true ? customStylesDark : customStyles}
+                styles={
+                  props.dimensions.width <= 500 ?
+                    props.modeSombre === true ?
+                      customStylesDarkMini
+                      :
+                      customStylesMini
+                    :
+                    props.modeSombre === true ?
+                      customStylesDark
+                      :
+                      customStyles
+                }
                 value={{ value: detail.input, label: detail.input }}
               />
             </div>
 
-            {props.dashboard ? null : <div className="col-sm-1">
+            {props.dashboard ? null : <div className="col-1">
               <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
         : null}
       {detail.name === "Notes" ?
         props.info === "false" ?
-          <div className={props.info === "false" ? "" : "col-sm-10"}>
+          <div className={props.info === "false" ? "" : "col-10"}>
             <textarea type="text"
               className="form-control"
               id="input"
@@ -406,11 +625,11 @@ function DetailInput(props) {
             {props.info === "false" ?
               null
               :
-              <label className="col-sm-2 col-form-label">
+              <label className="col-2 col-form-label">
                 {detail.name}
               </label>
             }
-            <div className={props.info === "false" ? "" : "col-sm-10"}>
+            <div className={props.info === "false" ? "" : "col-10"}>
               <textarea type="text"
                 className="form-control"
                 id="input"
@@ -421,7 +640,7 @@ function DetailInput(props) {
               />
             </div>
 
-            {props.dashboard ? null : <div className="col-sm-1">
+            {props.dashboard ? null : <div className="col-1">
               <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
