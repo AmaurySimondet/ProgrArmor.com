@@ -1,4 +1,5 @@
 const account = require('./account/lib.js');
+const programme = require('./account/libprogramme.js');
 
 module.exports = function (app) {
     //LOGIN SIGNUP
@@ -32,5 +33,8 @@ module.exports = function (app) {
 
     // //EDIT DB
     // app.get('/editDB', account.editDB)
+
+    //PROGRAMME
+    app.post('/createProgramme', programme.create);
 
 }
