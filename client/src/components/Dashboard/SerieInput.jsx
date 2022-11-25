@@ -33,6 +33,18 @@ function SerieInput(props) {
   }
 
   useEffect(() => {
+    let percentChanged = "" + (serie.charge / props.poids * 100).toFixed(2) + "%"
+    if (percentChanged !== serie.percent) {
+      setSerie(oldSerie => {
+        return ({
+          ...oldSerie,
+          percent: percentChanged
+        })
+      })
+    }
+  }, [props.poids])
+
+  useEffect(() => {
     props.changeSerie(serie, props.id)
 
     if (serie.typeSerie === "reps" && serie.repsTime >= 25) {
@@ -46,7 +58,7 @@ function SerieInput(props) {
         });
       });
     }
-    else {
+    else if (serie.typeSerie === "time" || serie.repsTime <= 25) {
       setText();
     }
   }, [serie])
@@ -83,9 +95,8 @@ function SerieInput(props) {
 
   return (
     <div style={divStyle(props.index, props.modeSombre)}>
-      <div className="form-group row">
-        <label className="col-2 col-form-label">
-          Série {props.index + 1} <p className="nom-exercice-serie"> ({props.exercice.name}) </p>
+      {props.index === 0 ?
+        <div>
           <img className={props.modeSombre === true ? "myDIV questionDark" : "myDIV"} onClick={handleClickQuestion} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
           <div className={clicked}>
             <div className="hidden-text">
@@ -103,44 +114,61 @@ function SerieInput(props) {
               <i> {"Cliques à nouveau sur l'icone"} <img className="myDIV" src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" /> {"pour faire disparaître ce bandeau d'information"} </i>
             </div>
           </div>
-        </label>
-        <div className="col-2">
-          <select onChange={handleChange} className={props.modeSombre === true ? "custom-select selectDark" : "custom-select"} id="typeSerie">
-            <option value="reps"> Répétitions (défaut) </option>
-            <option value="time"> Temps (secondes) </option>
-          </select>
         </div>
-        <div className="col-2">
-          <input type="number"
-            className={props.modeSombre === true ? "inputDark form-control" : "form-control"}
-            id="repsTime"
-            value={serie.repsTime}
-            onChange={handleChange}
-          />
+        : null}
+
+      <div className="form-group row">
+        <div className="col-5 col-form-label" style={{ marginRight: "10px" }}>
+
+          <label className="nom-exercice-serie">
+            Série {props.index + 1} {props.dimensions > 500 ? "(" + props.exercice.name + ")" : null}
+          </label>
+          <div style={{ paddingLeft: "0", display: "inline-block" }}>
+            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+          </div>
+          <br />
+
+          <div className="col-6" style={{ display: "inline-block" }}>
+            <select onChange={handleChange} className={props.modeSombre === true ? "custom-select selectDark" : "custom-select"} id="typeSerie">
+              <option value="reps"> Répétitions (défaut) </option>
+              <option value="time"> Temps (secondes) </option>
+            </select>
+          </div>
+          <div className="col-6" style={{ display: "inline-block" }}>
+            <input type="number"
+              className={props.modeSombre === true ? "inputDark form-control" : "form-control"}
+              id="repsTime"
+              value={serie.repsTime}
+              onChange={handleChange}
+            />
+          </div>
         </div>
-        <label className="col-1 col-form-label">Charge totale (kg)</label>
-        <div className="col-2">
-          <input type="number"
-            className={props.modeSombre === true ? "inputDark form-control" : "form-control"}
-            id="charge"
-            value={serie.charge}
-            onChange={handleChange}
-          />
+
+        <div className="col-6 col-form-label">
+          <label>Charge totale (kg)</label>
+          <br />
+
+          <div className="col-6" style={{ display: "inline-block" }}>
+            <input type="number"
+              className={props.modeSombre === true ? "inputDark form-control" : "form-control"}
+              id="charge"
+              value={serie.charge}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col-6" style={{ display: "inline-block" }}>
+            <input type="text"
+              className={props.modeSombre === true ? "inputReadOnlyDark form-control" : "form-control"}
+              id="percent"
+              value={serie.percent}
+              readOnly
+            />
+          </div>
         </div>
-        <div className="col-2">
-          <input type="text"
-            className={props.modeSombre === true ? "inputDark form-control" : "form-control"}
-            id="percent"
-            value={serie.percent}
-            readOnly
-          />
-        </div>
-        <div className="col-1" style={{ paddingLeft: "0" }}>
-          <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-        </div>
+
       </div>
       <p> {text} </p>
-    </div>
+    </div >
   );
 };
 

@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import NavigBar from "../NavigBar.jsx"
 import { LineChart, YAxis, XAxis, Cell, Tooltip, Label, Legend, BarChart, PieChart, Pie, Sector, CartesianGrid, Line, ResponsiveContainer, Bar, ComposedChart } from 'recharts'
 import API from "../../utils/API";
@@ -6,7 +6,7 @@ import ExerciceInput from "./ExerciceInput"
 import CategorieInput from "./CategorieInput"
 import DetailInput from "./DetailInput"
 import Footer from "../Footer.jsx";
-import ReguHiddenText from "./ReguHiddenText"
+import ReguHiddenText from "./ReguHiddenText";
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -85,6 +85,11 @@ function Stats() {
     const [poidsHidden, setPoidsHidden] = useState(true);
     const [perfHidden, setPerfHidden] = useState(true);
     const [prefHidden, setPrefHidden] = useState(true);
+    const imageRef = useRef(null);
+
+    function handleShare() {
+        return null
+    }
 
     function handleClickPoids() {
         setPoidsHidden(!poidsHidden);
@@ -360,7 +365,7 @@ function Stats() {
 
                                         {poidsHidden ? null :
                                             <div className="large-margin-bottom">
-                                                <div className="form-group row stats-form">
+                                                <div className="form-group row stats-form mini-margin-bottom">
                                                     <div className="form-group col-12">
                                                         <label className="col-form-label">
                                                             Periode
@@ -377,7 +382,7 @@ function Stats() {
                                                     </div>
                                                 </div>
 
-                                                <div className="form-group row stats-form">
+                                                <div className="form-group row stats-form mini-margin-bottom">
                                                     <div className="form-group col-12">
                                                         <label className="col-form-label">
                                                             Format Date
@@ -406,6 +411,8 @@ function Stats() {
                                                 <Line strokeWidth={3} connectNulls type="monotone" dataKey="poids" stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
                                             </LineChart>
                                         </ResponsiveContainer >
+
+
                                     </div>
                                 </td>
 
@@ -424,7 +431,7 @@ function Stats() {
 
                                             {perfHidden ? null :
                                                 <div className="large-margin-bottom">
-                                                    <div className="form-group row stats-form">
+                                                    <div className="form-group row stats-form mini-margin-bottom">
                                                         <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Exercice
@@ -450,7 +457,7 @@ function Stats() {
                                                         </div>
                                                     </div>
 
-                                                    <div className="form-group row stats-form">
+                                                    <div className="form-group row stats-form mini-margin-bottom">
                                                         <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Format Date
@@ -484,7 +491,7 @@ function Stats() {
                                                         </div>
                                                     </div>
 
-                                                    <div className="form-group row stats-form">
+                                                    <div className="form-group row stats-form mini-margin-bottom">
                                                         <label className="col-form-label col-3">
                                                             Reps / Temps
                                                         </label>
@@ -577,6 +584,9 @@ function Stats() {
                                             </ResponsiveContainer >
 
                                             <i className="detail-stat"> Les répétitions sont multipliées par 10 pour une meilleur lecture </i>
+                                            <br />
+
+
                                         </div>
                                     </td>
                                     :
@@ -602,7 +612,7 @@ function Stats() {
 
                                             {perfHidden ? null :
                                                 <div className="large-margin-bottom">
-                                                    <div className="form-group row stats-form">
+                                                    <div className="form-group row stats-form mini-margin-bottom">
                                                         <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Exercice
@@ -628,7 +638,7 @@ function Stats() {
                                                         </div>
                                                     </div>
 
-                                                    <div className="form-group row stats-form">
+                                                    <div className="form-group row stats-form mini-margin-bottom">
                                                         <div className="form-group col-4">
                                                             <label className="col-form-label">
                                                                 Format Date
@@ -662,7 +672,7 @@ function Stats() {
                                                         </div>
                                                     </div>
 
-                                                    <div className="form-group row stats-form">
+                                                    <div className="form-group row stats-form mini-margin-bottom">
                                                         <label className="col-form-label col-3">
                                                             Reps / Temps
                                                         </label>
@@ -755,6 +765,9 @@ function Stats() {
                                             </ResponsiveContainer >
 
                                             <i className="detail-stat"> Les répétitions sont multipliées par 10 pour une meilleur lecture </i>
+                                            <br />
+
+
                                         </div>
                                     </td>
                                 </tr>
@@ -777,7 +790,7 @@ function Stats() {
 
                         {prefHidden ? null :
                             <div className="large-margin-bottom">
-                                <div className="form-group row stats-form">
+                                <div className="form-group row stats-form mini-margin-bottom">
                                     <div className="form-group col-4">
                                         <label className="col-form-label">
                                             Periode
@@ -833,62 +846,69 @@ function Stats() {
                             sur la période {params3.periode}
                         </p>
 
-                        <ResponsiveContainer className={user.modeSombre === true ? "piechart watermark-piechart watermarkDark" : "piechart watermark-piechart"} width="100%" height=
-                            {dimensions.width < 330 ?
-                                100
-                                :
-                                dimensions.width < 450 ?
-                                    200
+                        <div ref={imageRef}>
+                            <ResponsiveContainer className={user.modeSombre === true ? "piechart watermark-piechart watermarkDark" : "piechart watermark-piechart"} width="100%" height=
+                                {dimensions.width < 330 ?
+                                    100
                                     :
-                                    dimensions.width < 700 ?
-                                        300
+                                    dimensions.width < 450 ?
+                                        200
                                         :
-                                        400
-                            }
-                        >
-                            <PieChart width={800} height={800}>
-                                <Pie
-                                    data={seances3}
-                                    innerRadius=
-                                    {dimensions.width < 330 ?
-                                        10
-                                        :
-                                        dimensions.width < 450 ?
+                                        dimensions.width < 700 ?
+                                            300
+                                            :
+                                            400
+                                }
+                            >
+                                <PieChart width={800} height={800}>
+                                    <Pie
+                                        data={seances3}
+                                        innerRadius=
+                                        {dimensions.width < 330 ?
+                                            10
+                                            :
+                                            dimensions.width < 450 ?
+                                                20
+                                                :
+                                                dimensions.width < 700 ?
+                                                    40
+                                                    :
+                                                    100
+                                        }
+                                        outerRadius=
+                                        {dimensions.width < 330 ?
                                             20
                                             :
-                                            dimensions.width < 700 ?
+                                            dimensions.width < 450 ?
                                                 40
                                                 :
-                                                100
-                                    }
-                                    outerRadius=
-                                    {dimensions.width < 330 ?
-                                        20
-                                        :
-                                        dimensions.width < 450 ?
-                                            40
-                                            :
-                                            dimensions.width < 700 ?
-                                                70
-                                                :
-                                                150
-                                    }
-                                    fill="#9b0000"
-                                    dataKey="repsTime"
-                                    label={renderLabel}
-                                >
-                                    {seances3.map((entry, index) => (
-                                        <Cell fill={
-                                            user.modeSombre === true ?
-                                                index % 2 === 0 ? "#ffbcbc" : "#ff6666"
-                                                :
-                                                index % 2 === 0 ? "#9b0000" : "#E84646"}
-                                        />
-                                    ))}
-                                </Pie>
-                                <Tooltip content={<CustomTooltip />} />
-                            </PieChart>
-                        </ResponsiveContainer>
+                                                dimensions.width < 700 ?
+                                                    70
+                                                    :
+                                                    150
+                                        }
+                                        fill="#9b0000"
+                                        dataKey="repsTime"
+                                        label={renderLabel}
+                                    >
+                                        {seances3.map((entry, index) => (
+                                            <Cell fill={
+                                                user.modeSombre === true ?
+                                                    index % 2 === 0 ? "#ffbcbc" : "#ff6666"
+                                                    :
+                                                    index % 2 === 0 ? "#9b0000" : "#E84646"}
+                                            />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip content={<CustomTooltip />} />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
+
+
+
+
+
                     </div>
 
                     <div className="regu-score">

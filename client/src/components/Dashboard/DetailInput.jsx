@@ -80,14 +80,18 @@ function DetailInput(props) {
       {detail.name ?
         null
         :
-        <div className="form-group row">
+        <div>
           {props.info === "false" ? null :
-            <label className="col-2 col-form-label">
+            <label>
               Detail {props.index + 1}
             </label>
           }
 
-          <div className={props.info === true ? "col-10" : props.info === "false" ? "col-12" : "col-9"}>
+          {props.dashboard ? null : <div style={{ display: "inline-block" }}>
+            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+          </div>}
+
+          <div className={props.info === true ? "col-10" : props.info === "false" ? "col-12" : "col-12"}>
             <Select
               placeholder="Detail..."
               onChange={handleChange}
@@ -108,16 +112,14 @@ function DetailInput(props) {
             />
           </div>
 
-          {props.dashboard ? null : <div className="col-1">
-            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
-          </div>}
+
         </div>
       }
 
       {detail.name === "Aucun" ?
         <div className="form-group row">
           {props.info === "false" ? null :
-            <label className="col-2 col-form-label">
+            <label>
               Detail {props.dashboard ? props.index + 1 : null}
             </label>
           }
@@ -171,7 +173,7 @@ function DetailInput(props) {
           />
           :
           <div className="form-group row">
-            <label className="col-2 col-form-label">
+            <label>
               {detail.name}
             </label>
             <div className={props.info === true ? "col-10" : "col-9"}>
@@ -222,7 +224,7 @@ function DetailInput(props) {
           />
           :
           <div className="form-group row">
-            <label className="col-2 col-form-label">
+            <label>
               {detail.name}
             </label>
             <div className={props.info === true ? "col-10" : "col-9"}>
@@ -273,7 +275,7 @@ function DetailInput(props) {
           />
           :
           <div className="form-group row">
-            <label className="col-2 col-form-label">
+            <label>
               {detail.name}
             </label>
             <div className={props.info === true ? "col-10" : "col-9"}>
@@ -324,7 +326,7 @@ function DetailInput(props) {
           />
           :
           <div className="form-group row">
-            <label className="col-2 col-form-label">
+            <label>
               {detail.name}
             </label>
             <div className={props.info === true ? "col-10" : "col-9"}>
@@ -375,7 +377,7 @@ function DetailInput(props) {
           />
           :
           <div className="form-group row">
-            <label className="col-2 col-form-label">
+            <label>
               {detail.name}
             </label>
             <div className={props.info === true ? "col-10" : "col-9"}>
@@ -426,7 +428,7 @@ function DetailInput(props) {
           />
           :
           <div className="form-group row">
-            <label className="col-2 col-form-label">
+            <label>
               {detail.name}
             </label>
             <div className={props.info === true ? "col-10" : "col-9"}>
@@ -477,7 +479,7 @@ function DetailInput(props) {
           />
           :
           <div className="form-group row">
-            <label className="col-2 col-form-label">
+            <label>
               {detail.name}
             </label>
             <div className={props.info === true ? "col-10" : "col-9"}>
@@ -528,7 +530,7 @@ function DetailInput(props) {
           />
           :
           <div className="form-group row">
-            <label className="col-2 col-form-label">
+            <label>
               {detail.name}
             </label>
             <div className={props.info === true ? "col-10" : "col-9"}>
@@ -579,7 +581,7 @@ function DetailInput(props) {
           />
           :
           <div className="form-group row">
-            <label className="col-2 col-form-label">
+            <label>
               {detail.name}
             </label>
             <div className={props.info === true ? "col-10" : "col-9"}>
@@ -625,7 +627,7 @@ function DetailInput(props) {
             {props.info === "false" ?
               null
               :
-              <label className="col-2 col-form-label">
+              <label>
                 {detail.name}
               </label>
             }

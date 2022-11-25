@@ -256,6 +256,8 @@ table.profile-table {
 
 /* SESSION DEBUTANT */
 
+
+
 .btn-black {
     background-color: black;
     border-color: white;
@@ -369,12 +371,12 @@ table.profile-table {
 }
 
 .poubelle {
-    margin-top: 5px;
+    /* margin-top: 5px; */
 
 }
 
 .poubelleDark {
-    margin-top: 5px;
+    /* margin-top: 5px; */
     filter: invert(1);
 }
 
@@ -565,6 +567,11 @@ table.Stats-table {
 .inputDark:focus {
     color: white;
     background-color: black;
+}
+
+.inputReadOnlyDark {
+    color: white !important;
+    background-color: rgb(62, 62, 62) !important;
 }
 
 .social:hover {
@@ -1077,6 +1084,14 @@ table.connexion-table td.connexion-img-td {
     margin-top: 20px;
 }
 
+.basic-margin-bottom {
+    margin-bottom: 20px;
+}
+
+.mini-margin-bottom {
+    margin-bottom: 0.5rem;
+}
+
 .large-margin-top {
     margin-top: 40px;
 }
@@ -1267,10 +1282,6 @@ table.connexion-table td.connexion-img-td {
 
     }
 
-    .loadButton {
-        margin-top: 4%
-    }
-
     .Categorie .slider-style span {
         margin-left: 20px;
 
@@ -1358,6 +1369,14 @@ table.connexion-table td.connexion-img-td {
     input,
     select {
         height: 20px !important;
+        font-size: 10px !important;
+        padding: 5px !important;
+    }
+
+    .poubelle,
+    .poubelleDark {
+        width: 20px;
+        margin-left: 5px;
     }
 
     .navigbar {

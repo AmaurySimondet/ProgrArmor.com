@@ -523,38 +523,45 @@ function ExpertForm(props) {
     return (
         <form className="debutant-form">
 
-            <div className="form-group row">
-                <label className="col-2 col-form-label">Séance précédente</label>
-                <div className="col-7">
-                    <Select
-                        placeholder="Séance précédente à charger..."
-                        onChange={handleChange}
-                        options={paramsSelect}
-                        styles={
-                            props.dimensions.width <= 500 ?
-                                props.modeSombre === true ?
-                                    customStylesDarkMini
+            <div className=" row">
+                <div className="col-12 col-form-label" style={{ marginRight: "10px" }}>
+                    <label>Séance précédente</label>
+                    <div>
+                        <Select
+                            placeholder="Séance précédente à charger..."
+                            onChange={handleChange}
+                            options={[
+                                { id: "load", label: "/ (défaut)", value: "title" },
+                                { id: "load", label: "Dernière séance en date", value: "lastDate" },
+                                { id: "load", label: "Dernière séance enregistrée", value: "lastRec" }
+                            ]}
+                            className="mini-margin-bottom"
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
                                     :
-                                    customStylesMini
-                                :
-                                props.modeSombre === true ?
-                                    customStylesDark
-                                    :
-                                    customStyles
-                        }
-                    />
-                </div>
-                <div className="col-3">
-                    <button className="btn btn-dark loadButton" onClick={loadSeance} type="submit">Charger la séance</button>
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                        />
+                    </div>
+                    <div>
+                        <button className="btn btn-dark loadButton" onClick={loadSeance} type="submit">Charger la séance</button>
+                    </div>
                 </div>
             </div>
 
-            <div className="NameInput">
-                <div className="form-group row">
-                    <label className="col-2 col-form-label">
+            <div className="NameInput row">
+                <div className="col-12 col-form-label" style={{ marginRight: "10px" }}>
+                    <label className="">
                         Nom de la séance
                     </label>
-                    <div className="col-10">
+                    <div className="">
                         <Select
                             placeholder="Nom..."
                             onChange={handleChangeName}

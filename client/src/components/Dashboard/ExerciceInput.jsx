@@ -28,6 +28,10 @@ function ExerciceInput(props) {
 
     useEffect(() => {
         props.changeExercice(exercice);
+
+        if (exercice.name !== "Elevation" && exercice.name !== "Press" && exercice.name !== "Extension" && exercice.name !== "Abduction" && exercice.name !== "Adduction" && exercice.name !== "Curl") {
+            delete exercice.muscle;
+        }
     }, [exercice]);
 
     function handleClickPoubelle() {
@@ -63,15 +67,22 @@ function ExerciceInput(props) {
                 />
                 :
                 <div className="form-group row">
-                    <label onClick={handleClickLabel} className="col-2 col-form-label exercice-label">
-                        Exercice {props.index + 1}
+                    <div onClick={handleClickLabel}>
+                        <label className="exercice-label">
+                            Exercice {props.index + 1}
+                        </label>
                         {props.debutant ? null : props.clickExercice ?
                             <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
                             :
                             <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
                         }
-                    </label>
-                    <div className="col-9">
+                    </div>
+                    <div className="poubelle-div" style={{ paddingLeft: "0" }}>
+                        <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                    </div>
+                    <br />
+
+                    <div className="col-12">
                         <Select
                             placeholder="Exercice..."
                             onChange={handleChange}
@@ -91,9 +102,7 @@ function ExerciceInput(props) {
                             value={{ value: exercice.name, label: exercice.name }}
                         />
                     </div>
-                    <div className="col-1 poubelle-div" style={{ paddingLeft: "0" }}>
-                        <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                    </div>
+
                 </div>
             }
 

@@ -70,6 +70,7 @@ AllCategories.push({
     })
 MusclesCategorie.forEach(obj => {
     AllCategories.push({ ...obj, name: "Muscle" });
+    obj.name = "Muscle"
 })
 
 
@@ -90,6 +91,7 @@ AllCategories.push({
 )
 PositionCorps.forEach(obj => {
     AllCategories.push({ ...obj, name: "Positionnement du corps" });
+    obj.name = "Positionnement du corps"
 })
 AllCategories.push(
     {
@@ -105,6 +107,7 @@ AllCategories.push(
 })
 PositionBras.forEach(obj => {
     AllCategories.push({ ...obj, name: "Positionnement des bras" });
+    obj.name = "Positionnement des bras"
 })
 AllCategories.push({
     id: "name",
@@ -119,6 +122,7 @@ AllCategories.push({
 })
 PositionJambes.forEach(obj => {
     AllCategories.push({ ...obj, name: "Positionnement des jambes" });
+    obj.name = "Positionnement des jambes"
 })
 AllCategories.push({
     id: "name",
@@ -133,6 +137,7 @@ AllCategories.push({
 })
 PositionMains.forEach(obj => {
     AllCategories.push({ ...obj, name: "Positionnement des mains" });
+    obj.name = "Positionnement des mains"
 })
 AllCategories.push({
     id: "name",
@@ -147,6 +152,7 @@ AllCategories.push({
 })
 PositionPieds.forEach(obj => {
     AllCategories.push({ ...obj, name: "Positionnement des pieds" });
+    obj.name = "Positionnement des pieds"
 })
 AllCategories.push({
     id: "name",
@@ -161,6 +167,7 @@ AllCategories.push({
 })
 positionElastique.forEach(obj => {
     AllCategories.push({ ...obj, name: "Positionnement élastique(s)" });
+    obj.name = "Positionnement élastique(s)"
 })
 AllCategories.push({
     id: "name",
@@ -175,6 +182,7 @@ AllCategories.push({
 })
 CoudeGenou.forEach(obj => {
     AllCategories.push({ ...obj, name: "Ouverture coudes / genoux" });
+    obj.name = "Ouverture coudes / genoux"
 })
 AllCategories.push({
     id: "name",
@@ -189,6 +197,7 @@ AllCategories.push({
 })
 AxeCategorie.forEach(obj => {
     AllCategories.push({ ...obj, name: "Placement et axe du corps / banc / barre" });
+    obj.name = "Placement et axe du corps / banc / barre"
 })
 AllCategories.push({
     id: "name",
@@ -203,6 +212,7 @@ AllCategories.push({
 })
 PriseCategorie.forEach(obj => {
     AllCategories.push({ ...obj, name: "Type de prise" });
+    obj.name = "Type de prise"
 })
 AllCategories.push({
     id: "name",
@@ -217,6 +227,7 @@ AllCategories.push({
 })
 DépartCategorie.forEach(obj => {
     AllCategories.push({ ...obj, name: "Point de départ" });
+    obj.name = "Point de départ"
 })
 
 
@@ -236,6 +247,7 @@ AllCategories.push({
 })
 lesTypesBarres.forEach(obj => {
     AllCategories.push({ ...obj, name: "Type de barre / poids" });
+    obj.name = "Type de barre / poids"
 })
 AllCategories.push({
     id: "name",
@@ -262,6 +274,7 @@ AllCategories.push({
 })
 AccessoireObjets.forEach(obj => {
     AllCategories.push({ ...obj, name: "Accessoire supplémentaire ou objet spécifique" });
+    obj.name = "Accessoire supplémentaire ou objet spécifique"
 })
 
 
@@ -283,6 +296,7 @@ AllCategories.push({
 })
 Unilateral.forEach(obj => {
     AllCategories.push({ ...obj, name: "Unilatéral" });
+    obj.name = "Unilatéral"
 })
 AllCategories.push({
     id: "name",
@@ -297,6 +311,7 @@ AllCategories.push({
 })
 Execution.forEach(obj => {
     AllCategories.push({ ...obj, name: "Type d'éxecution" });
+    obj.name = "Type d'éxecution"
 })
 AllCategories.push({
     id: "name",
@@ -311,6 +326,7 @@ AllCategories.push({
 })
 ExecutionSpecifique.forEach(obj => {
     AllCategories.push({ ...obj, name: "Type d'éxecution spécifique" });
+    obj.name = "Type d'éxecution spécifique"
 })
 AllCategories.push({
     id: "name",
@@ -325,6 +341,7 @@ AllCategories.push({
 })
 TempoCategorie.forEach(obj => {
     AllCategories.push({ ...obj, name: "Tempo" });
+    obj.name = "Tempo"
 })
 AllCategories.push({
     id: "name",
@@ -339,6 +356,7 @@ AllCategories.push({
 })
 Partiel.forEach(obj => {
     AllCategories.push({ ...obj, name: "Forme (Partiel)" });
+    obj.name = "Forme (Partiel)"
 })
 
 
@@ -360,6 +378,7 @@ AllCategories.push({
 })
 Streetworkout.forEach(obj => {
     AllCategories.push({ ...obj, name: "Variante Street Workout" });
+    obj.name = "Variante Street Workout"
 })
 AllCategories.push({
     id: "name",
@@ -374,6 +393,7 @@ AllCategories.push({
 })
 ExplosifCategorie.forEach(obj => {
     AllCategories.push({ ...obj, name: "Variante d'exercice explosif" });
+    obj.name = "Variante d'exercice explosif"
 })
 AllCategories.push({
     id: "name",
@@ -388,6 +408,7 @@ AllCategories.push({
 })
 Halterophilie.forEach(obj => {
     AllCategories.push({ ...obj, name: "Variante d'exercice d'haltérophilie" });
+    obj.name = "Variante d'exercice d'haltérophilie"
 })
 
 
@@ -419,6 +440,7 @@ AllCategories.push({
 })
 RPE.forEach(obj => {
     AllCategories.push({ ...obj, name: "RPE / Niveau d'intensité" });
+    obj.name = "RPE / Niveau d'intensité"
 })
 AllCategories.push({
     id: "name",
@@ -433,6 +455,7 @@ AllCategories.push({
 })
 Douleur.forEach(obj => {
     AllCategories.push({ ...obj, name: "Gêne / douleur / blessure" });
+    obj.name = "Gêne / douleur / blessure"
 })
 
 
@@ -450,7 +473,7 @@ AllCategories.forEach((obj, indexObj) => {
 let AllCategoriesUniqueLabels = [];
 AllCategories.forEach(obj => {
     let stringRes = JSON.stringify(AllCategoriesUniqueLabels)
-    if (!stringRes.includes(obj.label) || obj.label === "") {
+    if (!stringRes.includes(obj.label) || obj.label === "" || obj.label === "Elastique") {
         AllCategoriesUniqueLabels.push(obj)
     }
 })

@@ -161,6 +161,7 @@ function CategorieInput(props) {
                 });
             }
             if (event.id && event.id !== "muscle") {
+                console.log(event.id, event.value, event.name)
                 setCategorie(oldCategorie => {
                     return ({
                         ...oldCategorie,
@@ -266,13 +267,29 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
-                                Catégorie {props.dashboard ? props.index + 1 : null} ({props.exercice.name})
-                                <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
-                                <div className={categorieHiddenClick}>
-                                    <CategorieHiddenText />
+                            !props.dashboard ?
+                                <div>
+                                    <label>
+                                        Catégorie {props.dashboard ? props.index + 1 : null} {props.dimensions > 500 ? "(" + props.exercice.name + ")" : null}
+                                    </label>
+                                    <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                                    <div className={categorieHiddenClick}>
+                                        <CategorieHiddenText />
+                                    </div>
+                                    <div style={{ display: "inline-block" }}>
+                                        <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                                    </div>
                                 </div>
-                            </label>
+                                :
+                                <div>
+                                    <label>
+                                        Catégorie {props.dashboard ? props.index + 1 : null} {props.dimensions > 500 ? "(" + props.exercice.name + ")" : null}
+                                    </label>
+                                    <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                                    <div className={categorieHiddenClick}>
+                                        <CategorieHiddenText />
+                                    </div>
+                                </div>
                         }
                         <Select
                             placeholder="Categorie..."
@@ -290,13 +307,10 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-12"}
                             value={{ value: categorie.name, label: categorie.name }}
                         />
 
-                        {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-                        </div>}
                     </div>
             }
 
@@ -325,8 +339,8 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
-                                Catégorie {props.dashboard ? props.index + 1 : null} ({props.exercice.name})
+                            <label>
+                                Catégorie {props.dashboard ? props.index + 1 : null} {props.dimensions > 500 ? "(" + props.exercice.name + ")" : null}
                                 <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                                 <div className={categorieHiddenClick}>
                                     <CategorieHiddenText />
@@ -349,7 +363,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.name, label: categorie.name }}
                         />
 
@@ -384,7 +398,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label>
                                 {categorie.name}
                                 <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickStreetworkout} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                                 <div className={streetworkoutHiddenClicked}>
@@ -408,7 +422,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -442,7 +456,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -462,7 +476,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -496,7 +510,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -516,7 +530,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -550,7 +564,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -570,7 +584,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -604,7 +618,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -624,7 +638,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -658,7 +672,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -678,7 +692,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -712,7 +726,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -732,7 +746,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -766,7 +780,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -786,7 +800,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -820,7 +834,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -840,7 +854,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -874,7 +888,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -894,7 +908,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -928,7 +942,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -948,7 +962,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -982,7 +996,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1002,7 +1016,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1036,7 +1050,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1056,7 +1070,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1090,7 +1104,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1110,7 +1124,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1121,7 +1135,7 @@ function CategorieInput(props) {
                 : null}
             {categorie.name === "Temps de repos entre les séries" ?
                 props.info === "false" ?
-                    <div className={props.info === "false" ? "" : "col-9"}>
+                    <div className={props.info === "false" ? "" : "col-11"}>
                         <input type="text"
                             className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
                             id="input"
@@ -1134,11 +1148,11 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
-                        <div className={props.info === "false" ? "" : "col-9"}>
+                        <div className={props.info === "false" ? "" : "col-11"}>
                             <input type="text"
                                 className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
                                 id="input"
@@ -1177,7 +1191,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1197,7 +1211,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1231,7 +1245,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1251,7 +1265,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1285,7 +1299,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1305,7 +1319,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1339,7 +1353,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1359,7 +1373,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1393,7 +1407,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1413,7 +1427,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1447,7 +1461,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1467,7 +1481,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1501,7 +1515,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1521,7 +1535,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1555,7 +1569,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1575,7 +1589,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1609,7 +1623,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="col-2 col-form-label">
+                            <label className="">
                                 {categorie.name}
                             </label>
                         }
@@ -1629,7 +1643,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             value={{ value: categorie.input, label: categorie.input }}
                         />
 
@@ -1656,7 +1670,7 @@ function CategorieInput(props) {
                                         :
                                         customStyles
                             }
-                            className={props.info === "dash" ? "col-10" : " col-9"}
+                            className={props.info === "dash" ? "col-10" : " col-11"}
                             options={[
                                 { className: "select-title", value: "title", label: "/ (défaut)" },
                                 { name: "Elastique", value: "Resistance", label: "Resistance" },
@@ -1672,7 +1686,7 @@ function CategorieInput(props) {
                             {props.info === "false" ?
                                 null
                                 :
-                                <label className="col-2 col-form-label">
+                                <label className="">
                                     Utilisation
                                 </label>
                             }
@@ -1691,7 +1705,7 @@ function CategorieInput(props) {
                                             :
                                             customStyles
                                 }
-                                className={props.info === "dash" ? "col-10" : " col-9"}
+                                className={props.info === "dash" ? "col-10" : " col-11"}
                                 options={[
                                     { className: "select-title", value: "title", label: "/ (défaut)" },
                                     { name: "Elastique", value: "Resistance", label: "Resistance" },
@@ -1710,7 +1724,7 @@ function CategorieInput(props) {
                                 {props.info === "false" ?
                                     null
                                     :
-                                    <label className="col-2 col-form-label">
+                                    <label className="">
                                         Utilisation
                                     </label>
                                 }
@@ -1729,7 +1743,7 @@ function CategorieInput(props) {
                                                 :
                                                 customStyles
                                     }
-                                    className={props.info === "dash" ? "col-10" : " col-9"}
+                                    className={props.info === "dash" ? "col-10" : " col-11"}
                                     options={[
                                         { id: "utilisation", name: "Elastique", className: "select-title", value: "title", label: "/ (défaut)" },
                                         { id: "utilisation", name: "Elastique", value: "Resistance", label: "Resistance" },
@@ -1744,7 +1758,7 @@ function CategorieInput(props) {
                             </div>
 
                             <div className="form-group row">
-                                <label className="col-2 col-form-label">
+                                <label className="">
                                     Épaisseur / taille élastique
                                 </label>
                                 <Select
@@ -1763,17 +1777,17 @@ function CategorieInput(props) {
                                                 :
                                                 customStyles
                                     }
-                                    className={props.info === "dash" ? "col-10" : " col-9"}
+                                    className={props.info === "dash" ? "col-10" : " col-11"}
                                     value={{ value: categorie.input, label: categorie.input }}
                                 />
                             </div>
 
                             {categorie.input === "mesure" ?
                                 <div className="form-group row">
-                                    <label className="col-2 col-form-label">
+                                    <label className="">
                                         Tension (kg)
                                     </label>
-                                    <div className="col-9">
+                                    <div className="col-11">
                                         <input type="text"
                                             className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
                                             id="estimation"
@@ -1785,7 +1799,7 @@ function CategorieInput(props) {
                                 :
                                 <div>
                                     <div className="form-group row slider-style">
-                                        <label className="col-2 col-form-label">
+                                        <label className="">
                                             Etirement (mètres)
                                         </label>
                                         {props.modeSombre === true ?
@@ -1828,14 +1842,14 @@ function CategorieInput(props) {
                                     </div>
 
                                     <div className="form-group row">
-                                        <label className="col-2 col-form-label">
+                                        <label className="">
                                             Estimation
                                             <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickElastique} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
                                             <div className={elastiqueHiddenClick}>
                                                 <ElastiqueHiddenText />
                                             </div>
                                         </label>
-                                        <div className="col-9">
+                                        <div className="col-11">
                                             <input type="text"
                                                 className={props.modeSombre === true ? "form-control inputDark " : "form-control"}
                                                 id="estimation"

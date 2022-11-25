@@ -43,6 +43,7 @@ const customStylesMini = {
   indicatorsContainer: (provided, state) => ({
     ...provided,
     height: '20px',
+    marginTop: "-1px",
   }),
 };
 
@@ -120,6 +121,16 @@ const customStylesDarkMini = {
     padding: '0 6px'
   }),
 
+  placeholder: (defaultStyles) => ({
+    ...defaultStyles,
+    color: 'white',
+  }),
+  singleValue: (defaultStyles) => ({
+    ...defaultStyles,
+    color: 'white',
+  }),
+
+
   input: (provided, state) => ({
     ...provided,
     margin: '0px',
@@ -133,6 +144,7 @@ const customStylesDarkMini = {
   indicatorsContainer: (provided, state) => ({
     ...provided,
     height: '20px',
+    marginTop: "-1px"
   }),
 };
 

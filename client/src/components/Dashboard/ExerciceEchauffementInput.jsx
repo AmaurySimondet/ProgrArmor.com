@@ -1,11 +1,10 @@
 import { React, useState, useEffect } from "react";
 import lesExercices from "./Exercices";
-import Select from "react-select";
 import MusclesCategorie from "./Categories/MusclesCategorie.js";
+import Select from 'react-select';
 import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "./customStyles.js";
 
 function ExerciceEchauffementInput(props) {
-
   const [exercice, setExercice] = useState(props.echauffement);
 
   function handleChange(event) {
@@ -28,7 +27,11 @@ function ExerciceEchauffementInput(props) {
   }
 
   useEffect(() => {
-    props.changeEchauffement(exercice, props.id);
+    props.changeEchauffement(exercice);
+
+    if (exercice.name !== "Elevation" && exercice.name !== "Press" && exercice.name !== "Extension" && exercice.name !== "Abduction" && exercice.name !== "Adduction" && exercice.name !== "Curl") {
+      delete exercice.muscle;
+    }
   }, [exercice]);
 
   function handleClickPoubelle() {
@@ -43,50 +46,47 @@ function ExerciceEchauffementInput(props) {
 
   return (
     <div>
-      <div className="form-group row">
-        <label onClick={handleClickLabel} className="col-2 col-form-label exercice-label">
-          Echauffement {props.index + 1}
-          {props.clickExercice ?
-            <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
-            :
-            <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
-          }
-        </label>
-        <div className="col-9">
-          <Select
-            placeholder="Exercice..."
-            onChange={handleChange}
-            options={lesExercices}
-            styles={
-              props.dimensions.width <= 500 ?
-                props.modeSombre === true ?
-                  customStylesDarkMini
-                  :
-                  customStylesMini
+      {props.taille === "petit" ?
+        <Select
+          placeholder="Exercice..."
+          onChange={handleChange}
+          options={lesExercices}
+          styles={
+            props.dimensions.width <= 500 ?
+              props.modeSombre === true ?
+                customStylesDarkMini
                 :
-                props.modeSombre === true ?
-                  customStylesDark
-                  :
-                  customStyles
-            }
-            value={{ value: exercice.name, label: exercice.name }}
-          />
-        </div>
-        <div className="col-1 poubelle-div">
-          <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
-        </div>
-      </div>
-
-      {exercice.name === "Elevation" ?
+                customStylesMini
+              :
+              props.modeSombre === true ?
+                customStylesDark
+                :
+                customStyles
+          }
+          value={{ value: exercice.name, label: exercice.name }}
+        />
+        :
         <div className="form-group row">
-          <label className="col-2 col-form-label">
-            Muscle
-          </label>
-          <div className="col-9">
+          <div onClick={handleClickLabel}>
+            <label className="exercice-label">
+              Echauffement {props.index + 1}
+            </label>
+            {props.debutant ? null : props.clickExercice ?
+              <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+              :
+              <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+            }
+          </div>
+          <div className="poubelle-div" style={{ paddingLeft: "0" }}>
+            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+          </div>
+          <br />
+
+          <div className="col-12">
             <Select
-              placeholder="Muscle..."
+              placeholder="Exercice..."
               onChange={handleChange}
-              options={MusclesCategorie}
+              options={lesExercices}
               styles={
                 props.dimensions.width <= 500 ?
                   props.modeSombre === true ?
@@ -99,11 +99,41 @@ function ExerciceEchauffementInput(props) {
                     :
                     customStyles
               }
-              value={{ value: exercice.muscle, label: exercice.muscle }}
+              value={{ value: exercice.name, label: exercice.name }}
             />
           </div>
+
         </div>
-        : exercice.name === "Curl" ?
+      }
+
+      {exercice.name === "Elevation" ?
+        props.taille === "petit" ?
+          <div>
+            <label className="col-form-label">
+              Muscle
+            </label>
+            <div className="col-9">
+              <Select
+                placeholder="Muscle..."
+                onChange={handleChange}
+                options={MusclesCategorie}
+                styles={
+                  props.dimensions.width <= 500 ?
+                    props.modeSombre === true ?
+                      customStylesDarkMini
+                      :
+                      customStylesMini
+                    :
+                    props.modeSombre === true ?
+                      customStylesDark
+                      :
+                      customStyles
+                }
+                value={{ value: exercice.muscle, label: exercice.muscle }}
+              />
+            </div>
+          </div>
+          :
           <div className="form-group row">
             <label className="col-2 col-form-label">
               Muscle
@@ -129,7 +159,34 @@ function ExerciceEchauffementInput(props) {
               />
             </div>
           </div>
-          : exercice.name === "Extension" ?
+        : exercice.name === "Curl" ?
+          props.taille === "petit" ?
+            <div>
+              <label className="col-form-label">
+                Muscle
+              </label>
+              <div className="col-9">
+                <Select
+                  placeholder="Muscle..."
+                  onChange={handleChange}
+                  options={MusclesCategorie}
+                  styles={
+                    props.dimensions.width <= 500 ?
+                      props.modeSombre === true ?
+                        customStylesDarkMini
+                        :
+                        customStylesMini
+                      :
+                      props.modeSombre === true ?
+                        customStylesDark
+                        :
+                        customStyles
+                  }
+                  value={{ value: exercice.muscle, label: exercice.muscle }}
+                />
+              </div>
+            </div>
+            :
             <div className="form-group row">
               <label className="col-2 col-form-label">
                 Muscle
@@ -155,7 +212,34 @@ function ExerciceEchauffementInput(props) {
                 />
               </div>
             </div>
-            : exercice.name === "Abduction" ?
+          : exercice.name === "Extension" ?
+            props.taille === "petit" ?
+              <div>
+                <label className="col-form-label">
+                  Muscle
+                </label>
+                <div className="col-9">
+                  <Select
+                    placeholder="Muscle..."
+                    onChange={handleChange}
+                    options={MusclesCategorie}
+                    styles={
+                      props.dimensions.width <= 500 ?
+                        props.modeSombre === true ?
+                          customStylesDarkMini
+                          :
+                          customStylesMini
+                        :
+                        props.modeSombre === true ?
+                          customStylesDark
+                          :
+                          customStyles
+                    }
+                    value={{ value: exercice.muscle, label: exercice.muscle }}
+                  />
+                </div>
+              </div>
+              :
               <div className="form-group row">
                 <label className="col-2 col-form-label">
                   Muscle
@@ -181,7 +265,34 @@ function ExerciceEchauffementInput(props) {
                   />
                 </div>
               </div>
-              : exercice.name === "Adduction" ?
+            : exercice.name === "Abduction" ?
+              props.taille === "petit" ?
+                <div>
+                  <label className="col-form-label">
+                    Muscle
+                  </label>
+                  <div className="col-9">
+                    <Select
+                      placeholder="Muscle..."
+                      onChange={handleChange}
+                      options={MusclesCategorie}
+                      styles={
+                        props.dimensions.width <= 500 ?
+                          props.modeSombre === true ?
+                            customStylesDarkMini
+                            :
+                            customStylesMini
+                          :
+                          props.modeSombre === true ?
+                            customStylesDark
+                            :
+                            customStyles
+                      }
+                      value={{ value: exercice.muscle, label: exercice.muscle }}
+                    />
+                  </div>
+                </div>
+                :
                 <div className="form-group row">
                   <label className="col-2 col-form-label">
                     Muscle
@@ -207,7 +318,34 @@ function ExerciceEchauffementInput(props) {
                     />
                   </div>
                 </div>
-                : exercice.name === "Press" ?
+              : exercice.name === "Adduction" ?
+                props.taille === "petit" ?
+                  <div>
+                    <label className="col-form-label">
+                      Muscle
+                    </label>
+                    <div className="col-9">
+                      <Select
+                        placeholder="Muscle..."
+                        onChange={handleChange}
+                        options={MusclesCategorie}
+                        styles={
+                          props.dimensions.width <= 500 ?
+                            props.modeSombre === true ?
+                              customStylesDarkMini
+                              :
+                              customStylesMini
+                            :
+                            props.modeSombre === true ?
+                              customStylesDark
+                              :
+                              customStyles
+                        }
+                        value={{ value: exercice.muscle, label: exercice.muscle }}
+                      />
+                    </div>
+                  </div>
+                  :
                   <div className="form-group row">
                     <label className="col-2 col-form-label">
                       Muscle
@@ -233,6 +371,59 @@ function ExerciceEchauffementInput(props) {
                       />
                     </div>
                   </div>
+                : exercice.name === "Press" ?
+                  props.taille === "petit" ?
+                    <div>
+                      <label className="col-form-label">
+                        Muscle
+                      </label>
+                      <div className="col-9">
+                        <Select
+                          placeholder="Muscle..."
+                          onChange={handleChange}
+                          options={MusclesCategorie}
+                          styles={
+                            props.dimensions.width <= 500 ?
+                              props.modeSombre === true ?
+                                customStylesDarkMini
+                                :
+                                customStylesMini
+                              :
+                              props.modeSombre === true ?
+                                customStylesDark
+                                :
+                                customStyles
+                          }
+                          value={{ value: exercice.muscle, label: exercice.muscle }}
+                        />
+                      </div>
+                    </div>
+                    :
+                    <div className="form-group row">
+                      <label className="col-2 col-form-label">
+                        Muscle
+                      </label>
+                      <div className="col-9">
+                        <Select
+                          placeholder="Muscle..."
+                          onChange={handleChange}
+                          options={MusclesCategorie}
+                          styles={
+                            props.dimensions.width <= 500 ?
+                              props.modeSombre === true ?
+                                customStylesDarkMini
+                                :
+                                customStylesMini
+                              :
+                              props.modeSombre === true ?
+                                customStylesDark
+                                :
+                                customStyles
+                          }
+                          value={{ value: exercice.muscle, label: exercice.muscle }}
+                        />
+                      </div>
+                    </div>
                   : null}
 
       {exercice.name === "own-exercice" ?
