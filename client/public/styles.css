@@ -619,7 +619,7 @@ table.Stats-table {
 
 .Dashboard .modify-white {
     filter: invert(1);
-    width: 70%;
+    width: 50%;
 }
 
 .Dashboard .modify-white:hover {
@@ -627,7 +627,7 @@ table.Stats-table {
 }
 
 .Dashboard .modify-black {
-    width: 70%;
+    width: 50%;
 }
 
 .Dashboard .modify-black:hover {
@@ -635,7 +635,7 @@ table.Stats-table {
 }
 
 .Dashboard .suppr-white {
-    width: 20%
+    width: 40%
 }
 
 .Dashboard .suppr-white:hover {
@@ -644,7 +644,7 @@ table.Stats-table {
 
 .Dashboard .suppr-black {
     filter: invert(1);
-    width: 20%
+    width: 40%
 }
 
 .Dashboard .suppr-black:hover {
@@ -1227,6 +1227,14 @@ table.connexion-table td.connexion-img-td {
     }
 
     .Dashboard .modify-white {
+        width: 30px;
+    }
+
+    .Dashboard .suppr-black {
+        width: 30px;
+    }
+
+    .Dashboard .suppr-white {
         width: 30px;
     }
 

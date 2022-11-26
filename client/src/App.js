@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard.js";
 import Inscription from "./components/Inscription";
@@ -14,8 +14,50 @@ import Compte from "./components/Dashboard/Compte";
 import Admin from "./components/Dashboard/Admin.jsx";
 import InstallApp from "./components/Dashboard/Help/InstallApp.jsx";
 import Aide from "./components/Dashboard/Aide.jsx";
+import Programme from "./components/Dashboard/Programme.jsx";
+
+import API from "./utils/API.js";
 
 function App() {
+    const [user, setUser] = useState()
+    const [dimensions, setDimensions] = useState({
+        height: window.innerHeight,
+        width: window.innerWidth
+    })
+
+    async function getUser() {
+        const { data } = await API.getUser({ id: localStorage.getItem("id") });
+        if (data.success === false) {
+            alert(data.message);
+        } else {
+            console.log(data.profile);
+            if (data.profile.modeSombre && data.profile.modeSombre === true) {
+                // 👇 add class to body element
+                document.body.classList.add('darkMode');
+            }
+            setUser(data.profile);
+        };
+    }
+
+    useEffect(() => {
+        setTimeout(getUser, 50);
+    }, []);
+
+
+    useEffect(() => {
+        function handleResize() {
+            setDimensions({
+                height: window.innerHeight,
+                width: window.innerWidth
+            })
+        }
+
+        var timeout = false;
+        window.addEventListener('resize', function () {
+            clearTimeout(timeout);;
+            timeout = setTimeout(handleResize, 200);
+        });
+    })
 
     // document.body.style.zoom = "95%";
 
@@ -35,8 +77,12 @@ function App() {
                 <Route exact path='/stats/*' element={<Stats />} />
             </Route>
 
-            <Route path="/programme/*" element={<PrivateRoute />}>
+            {/* <Route path="/programme/*" element={<PrivateRoute />}>
                 <Route exact path='/programme/*' element={<Travaux />} />
+            </Route> */}
+
+            <Route path="/programme/*" element={<PrivateRoute />}>
+                <Route exact path='/programme/*' element={<Programme modeSombre={user?.modeSombre} />} />
             </Route>
 
             <Route path="/social/*" element={<PrivateRoute />}>
@@ -66,7 +112,7 @@ function App() {
             </Route>
 
             <Route path="/admin" element={<PrivateRoute />}>
-                <Route exact path='/admin' element={<Admin />} />
+                <Route exact path='/admin' element={<Admin modeSombre={user?.modeSombre} dimensions={dimensions} />} />
             </Route>
         </Routes>
     );
