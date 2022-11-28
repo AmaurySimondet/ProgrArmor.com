@@ -1,19 +1,36 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 function ProgrammeCard(props) {
     const [programme, setProgramme] = useState(props.programme);
+    const [dimensions, setDimensions] = useState({
+        height: window.innerHeight,
+        width: window.innerWidth
+    });
 
-    console.log(programme)
+    useEffect(() => {
+        function handleResize() {
+            setDimensions({
+                height: window.innerHeight,
+                width: window.innerWidth
+            })
+        }
+
+        var timeout = false;
+        window.addEventListener('resize', function () {
+            clearTimeout(timeout);;
+            timeout = setTimeout(handleResize, 200);
+        });
+    });
 
     return (
         <div className="programme-card">
-            <div>
+            <div style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
                 <h1 style={{ marginBottom: "1rem", marginTop: "20px" }}>{programme.titre ? programme.titre : "Programme sans titre"} </h1>
                 <p>{programme.description ? programme.description : "/"} </p>
                 <p>{programme.id}</p>
             </div>
 
-            <div style={{ margin: "40px" }}>
+            <div style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
                 <p>{programme.type}</p>
                 <p>{programme.niveau}</p>
                 <p>{programme.seancesSemaine}</p>
@@ -29,8 +46,12 @@ function ProgrammeCard(props) {
                 )}
             </div>
 
+            <i style={dimensions.width < 850 ? { fontSize: "5px" } : { fontSize: "10px" }}>
+                Cliquez sur le programme pour en savoir plus
+            </i>
+
             {/* PROFILE */}
-            <footer style={{ position: "absolute", bottom: "20px" }}>
+            <footer style={dimensions.width > 850 ? { position: "absolute", bottom: "20px" } : { position: "absolute", bottom: "5px" }} className="programme-card-profile">
                 <table className="basic-table">
                     <tr>
                         <td>

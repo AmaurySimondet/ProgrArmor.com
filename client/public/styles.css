@@ -1128,10 +1128,18 @@ table.connexion-table td.connexion-img-td {
     transition: 0.3s
 }
 
+.programme-card-explication {
+    background-color: #333333;
+}
+
 .programme-card:hover {
-    border-width: 2px;
     background-color: rgb(81, 81, 81);
 }
+
+.programme-card-explication:hover {
+    background-color: #333333;
+}
+
 
 .programme-card h1 {
     font-size: large;
@@ -1261,6 +1269,30 @@ table.connexion-table td.connexion-img-td {
     }
 }
 
+@media (max-width: 850px) {
+    .programme-card {
+        height: 400px;
+        width: 250px;
+    }
+
+    .programme-card p {
+        margin: 5px;
+    }
+
+    .programme-card .profile-pic {
+        width: 40px;
+        height: 40px;
+    }
+
+    .programme-card-profile p {
+        font-size: 10px !important;
+    }
+
+    .small-img {
+        width: 20px;
+    }
+}
+
 @media (min-width: 800px) {
     .Dashboard .modify-black {
         width: 30px;
@@ -1315,6 +1347,37 @@ table.connexion-table td.connexion-img-td {
         font-size: 10px;
 
     }
+}
+
+@media (max-width: 625px) {
+    .programme-card {
+        height: 300px;
+        width: 150px;
+    }
+
+    .programme-card p {
+        margin: 0px;
+        font-size: 10px;
+    }
+
+    .programme-card .profile-pic {
+        width: 30px;
+        height: 30px;
+    }
+
+    .programme-card h1 {
+        font-size: 12px !important;
+    }
+
+    .programme-card-profile p {
+        font-size: 7px !important;
+        overflow: hidden;
+    }
+
+    .small-img {
+        width: 15px;
+    }
+
 }
 
 @media (min-width: 580px) {
