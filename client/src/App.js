@@ -20,10 +20,6 @@ import API from "./utils/API.js";
 
 function App() {
     const [user, setUser] = useState()
-    const [dimensions, setDimensions] = useState({
-        height: window.innerHeight,
-        width: window.innerWidth
-    })
 
     async function getUser() {
         const { data } = await API.getUser({ id: localStorage.getItem("id") });
@@ -42,22 +38,6 @@ function App() {
     useEffect(() => {
         setTimeout(getUser, 50);
     }, []);
-
-
-    useEffect(() => {
-        function handleResize() {
-            setDimensions({
-                height: window.innerHeight,
-                width: window.innerWidth
-            })
-        }
-
-        var timeout = false;
-        window.addEventListener('resize', function () {
-            clearTimeout(timeout);;
-            timeout = setTimeout(handleResize, 200);
-        });
-    })
 
     // document.body.style.zoom = "95%";
 
@@ -112,7 +92,7 @@ function App() {
             </Route>
 
             <Route path="/admin" element={<PrivateRoute />}>
-                <Route exact path='/admin' element={<Admin modeSombre={user?.modeSombre} dimensions={dimensions} />} />
+                <Route exact path='/admin' element={<Admin modeSombre={user?.modeSombre} />} />
             </Route>
         </Routes>
     );

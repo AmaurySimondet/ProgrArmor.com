@@ -39,3 +39,16 @@ exports.create = (req, res) => {
         });
     }
 };
+
+// Retrieve all Programmes from the database.
+exports.getProgrammes = (req, res) => {
+    Programme.find({},
+        (err, data) => {
+            if (err) {
+                console.log(err)
+                return res.json({ success: false, message: err })
+            }
+            else { return res.json({ success: true, message: "Programmes trouvés !", programmes: data }) }
+        }
+    )
+};

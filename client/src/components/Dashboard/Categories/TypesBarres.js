@@ -20,8 +20,8 @@ const variantes = [
   {
     id: "input",
     className: "select-item",
-    label: "Olympique droite classNameique",
-    value: "Olympique droite classNameique",
+    label: "Olympique droite",
+    value: "Olympique droite",
   },
   {
     id: "input",

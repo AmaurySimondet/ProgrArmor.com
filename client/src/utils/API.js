@@ -112,4 +112,10 @@ export default {
     return axios.post(`${burl}/user/reguScore`, send, { headers: headers });
 
   },
+
+  //PROGRAMMES
+  getProgrammes: function (send) {
+    return axios.post(`${burl}/user/getProgrammes`, send, { headers: headers });
+
+  },
 };

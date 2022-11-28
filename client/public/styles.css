@@ -1076,7 +1076,7 @@ table.connexion-table td.connexion-img-td {
 
 .basic-div {
     text-align: center;
-    width: 80%;
+    width: 90%;
     margin: auto;
 }
 
@@ -1111,6 +1111,46 @@ table.connexion-table td.connexion-img-td {
 .img-installapp {
     width: 120%;
     margin-left: -10%
+}
+
+
+/* PROGRAMMES */
+
+.programme-card {
+    display: inline-block;
+    height: 550px;
+    width: 350px;
+    border-color: white;
+    border-radius: 20px;
+    border: solid;
+    margin: 10px;
+    position: relative;
+    transition: 0.3s
+}
+
+.programme-card:hover {
+    border-width: 2px;
+    background-color: rgb(81, 81, 81);
+}
+
+.programme-card h1 {
+    font-size: large;
+}
+
+.programme-card .profile-pic {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.small-img {
+    width: 30px;
+}
+
+.basic-table {
+    table-layout: fixed;
+    width: 80%;
+    margin: auto;
 }
 
 /* RESPONSIVE LAYOUT */
