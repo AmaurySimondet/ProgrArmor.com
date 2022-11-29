@@ -52,7 +52,7 @@ function ProgrammeCard(props) {
                         </i>
 
                         {/* PROFILE */}
-                        <footer style={dimensions.width > 850 ? { position: "absolute", bottom: "20px" } : { position: "absolute", bottom: "5px" }} className="programme-card-profile">
+                        <footer className="programme-card-profile">
                             <table className="basic-table">
                                 <tr>
                                     <td>

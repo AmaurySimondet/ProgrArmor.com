@@ -1127,6 +1127,12 @@ table.connexion-table td.connexion-img-td {
     transition: 0.3s
 }
 
+.programmes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    row-gap: 40px;
+}
+
 .programme-card-explication {
     background-color: #333333;
 }
@@ -1149,20 +1155,30 @@ table.connexion-table td.connexion-img-td {
     height: 60px;
 }
 
+.programme-card-profile {
+    position: absolute;
+    bottom: 30px;
+    overflow: hidden;
+}
+
 .react-card {
-    display: inline-block;
+    display: flex;
 }
 
 .panties {
-    width: 105%;
+    width: 100%;
     height: 50%;
     position: absolute;
-    bottom: -6%;
-    left: -2.5%;
+    bottom: -2%;
+    left: 0%;
 }
 
 .small-img {
     width: 30px;
+}
+
+.small-img:hover {
+    filter: invert(0.6);
 }
 
 .basic-table {
@@ -1285,6 +1301,12 @@ table.connexion-table td.connexion-img-td {
         width: 250px;
     }
 
+    .programmes {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        row-gap: 40px;
+    }
+
     .programme-card p {
         margin: 5px;
     }
@@ -1363,6 +1385,12 @@ table.connexion-table td.connexion-img-td {
     .programme-card {
         height: 300px;
         width: 150px;
+    }
+
+    .programmes {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        row-gap: 40px;
     }
 
     .programme-card p {

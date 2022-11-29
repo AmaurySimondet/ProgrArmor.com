@@ -118,4 +118,14 @@ export default {
     return axios.post(`${burl}/user/getProgrammes`, send, { headers: headers });
 
   },
+
+  getProgramme: function (send) {
+    return axios.post(`${burl}/user/getProgramme`, send, { headers: headers });
+
+  },
+
+  likeProgramme: function (send) {
+    return axios.post(`${burl}/user/likeProgramme`, send, { headers: headers });
+
+  },
 };

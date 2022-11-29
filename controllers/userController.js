@@ -37,5 +37,6 @@ module.exports = function (app) {
     //PROGRAMME
     app.post('/createProgramme', programme.create);
     app.post('/getProgrammes', programme.getProgrammes);
-
+    app.post('/getProgramme', programme.getProgramme);
+    app.post('/likeProgramme', programme.likeProgramme);
 }

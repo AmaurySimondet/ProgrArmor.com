@@ -28,7 +28,7 @@ exports.create = (req, res) => {
             titre: req.body.titre,
             seancesSemaine: req.body.seancesSemaine,
             seancesTotal: req.body.seancesTotal,
-            likes: 0,
+            likes: [],
             comments: []
         });
 
@@ -52,3 +52,75 @@ exports.getProgrammes = (req, res) => {
         }
     )
 };
+
+async function likeProgramme(req, res) {
+    let conditions = { id: req.body.programmeId }
+
+    let programmeLikes = [];
+    let userInLikes = false;
+    let likeElement = {};
+
+    //trouver le programme
+    await Programme.find(conditions, function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+            programmeLikes = data[0].likes;
+        }
+    })
+
+    //trouver si l'utilisateur a déjà liké
+    programmeLikes.forEach(el => {
+        if (el.userId === req.body.userId) {
+            userInLikes = true;
+            likeElement = el;
+        }
+    })
+
+    //supprimer le like
+    if (userInLikes) {
+        update = {
+            $pull: { likes: likeElement }
+        }
+    }
+
+    //ajouter le like
+    else {
+        update = {
+            $addToSet: { likes: { userId: req.body.userId, date: Date.now() } }
+        }
+    }
+
+    Programme.findOneAndUpdate(
+        conditions,
+        update,
+        (err) => {
+            if (err) {
+                console.log(err)
+                return res.json({ success: false, message: err })
+            }
+            else { return res.json({ success: true, message: "Like enregistré !" }) }
+        }
+    )
+
+}
+
+exports.getProgramme = (req, res) => {
+    let conditions = { id: req.body.programmeId }
+
+    //trouver le programme
+    Programme.find(conditions, function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+            res.json({
+                success: true, programme: data[0],
+                message: "Programme trouvé !", numLikes: data[0].likes.length
+            })
+        }
+    })
+};
+
+exports.likeProgramme = likeProgramme;

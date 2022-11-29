@@ -57,6 +57,25 @@ function Admin(props) {
         height: window.innerHeight,
         width: window.innerWidth
     })
+    const [user, setUser] = useState({ modeSombre: false })
+
+    async function getUser() {
+        const { data } = await API.getUser({ id: localStorage.getItem("id") });
+        if (data.success === false) {
+            alert(data.message);
+        } else {
+            console.log(data.profile);
+            if (data.profile.modeSombre && data.profile.modeSombre === true) {
+                // 👇 add class to body element
+                document.body.classList.add('darkMode');
+            }
+            setUser(data.profile);
+        };
+    }
+
+    useEffect(() => {
+        getUser();
+    }, []);
 
     useEffect(() => {
         function handleResize() {
@@ -153,7 +172,7 @@ function Admin(props) {
                                 <label className="col-form-label">
                                     Periode
                                 </label>
-                                <select onChange={handleChange3} className={props.modeSombre === true ? "form-control selectDark" : "form-control"} id="periode">
+                                <select onChange={handleChange3} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="periode">
                                     <option value="max"> Max (défaut) </option>
                                     <option value="7d"> 7 derniers jours </option>
                                     <option value="30d"> 30 derniers jours </option>
@@ -167,7 +186,7 @@ function Admin(props) {
                                 <label className="col-form-label">
                                     Classification
                                 </label>
-                                <select onChange={handleChange3} className={props.modeSombre === true ? "form-control selectDark" : "form-control"} id="class">
+                                <select onChange={handleChange3} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="class">
                                     <option value="sets"> Somme des séries (défaut) </option>
                                     <option value="reps"> Somme des répétitions </option>
                                     <option value="time"> Somme des secondes </option>
@@ -178,7 +197,7 @@ function Admin(props) {
                                 <label className="col-form-label">
                                     Affichage
                                 </label>
-                                <select onChange={handleChange3} className={props.modeSombre === true ? "form-control selectDark" : "form-control"} id="top">
+                                <select onChange={handleChange3} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="top">
                                     <option value={5}> Top 5 (défaut) </option>
                                     <option value={10}> Top 10 </option>
                                     <option value={20}> Top 20 </option>

@@ -16,6 +16,25 @@ function Programme(props) {
         width: window.innerWidth
     });
     const [programmes, setProgrammes] = useState([]);
+    const [user, setUser] = useState({ modeSombre: false })
+
+    async function getUser() {
+        const { data } = await API.getUser({ id: localStorage.getItem("id") });
+        if (data.success === false) {
+            alert(data.message);
+        } else {
+            console.log(data.profile);
+            if (data.profile.modeSombre && data.profile.modeSombre === true) {
+                // 👇 add class to body element
+                document.body.classList.add('darkMode');
+            }
+            setUser(data.profile);
+        };
+    }
+
+    useEffect(() => {
+        setTimeout(getUser, 50);
+    }, []);
 
     useEffect(() => {
         function handleResize() {
@@ -34,13 +53,13 @@ function Programme(props) {
 
     function styleOnDim() {
         if (dimensions.width > 500) {
-            if (props.modeSombre === true) {
+            if (user.modeSombre === true) {
                 return customStylesDark;
             } else {
                 return customStyles;
             }
         } else {
-            if (props.modeSombre === true) {
+            if (user.modeSombre === true) {
                 return customStylesDarkMini;
             } else {
                 return customStylesMini;
@@ -127,12 +146,12 @@ function Programme(props) {
 
                         <div className="col-6 col-md-3">
                             <label className="col-form-label">ID du créateur</label>
-                            <input type="text" className={props.modeSombre === true ? "inputDark form-control" : "form-control"} placeholder="123456..." />
+                            <input type="text" className={user.modeSombre === true ? "inputDark form-control" : "form-control"} placeholder="123456..." />
                         </div>
 
                         <div className="col-6 col-md-3">
                             <label className="col-form-label">ID du programme</label>
-                            <input type="text" className={props.modeSombre === true ? "inputDark form-control" : "form-control"} placeholder="123456..." />
+                            <input type="text" className={user.modeSombre === true ? "inputDark form-control" : "form-control"} placeholder="123456..." />
                         </div>
 
                         <div className="col-12">

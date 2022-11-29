@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import ReactCardFlip from 'react-card-flip';
+import API from '../../utils/API';
 
 function ProgrammeCard(props) {
     const [programme, setProgramme] = useState(props.programme);
@@ -8,6 +9,8 @@ function ProgrammeCard(props) {
         width: window.innerWidth
     });
     const [isFlipped, setIsFlipped] = useState(false);
+    const [likes, setLikes] = useState(props.programme.likes.length);
+    const [liked, setLiked] = useState(false);
 
     function handleFlip() {
         setIsFlipped(!isFlipped);
@@ -28,18 +31,36 @@ function ProgrammeCard(props) {
         });
     });
 
+    async function handleLike() {
+        const { data } = await API.likeProgramme({ programmeId: programme.id, userId: localStorage.getItem('id') });
+        if (data.success) {
+            window.location.reload();
+        }
+        else {
+            alert(data.message);
+        }
+    }
+
+    useEffect(() => {
+        programme.likes.forEach(el => {
+            if (el.userId === localStorage.getItem('id')) {
+                setLiked(true);
+            }
+        })
+    }, []);
+
     return (
         <div className="react-card">
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-                <div className="YOUR_FRONT_CCOMPONENT" onClick={handleFlip}>
-                    <div className="programme-card">
-                        <div style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
+                <div className="YOUR_FRONT_CCOMPONENT">
+                    <div className="programme-card" >
+                        <div onClick={handleFlip} style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
                             <h1 style={{ marginBottom: "1rem", marginTop: "20px" }}>{programme.titre ? programme.titre : "Programme sans titre"} </h1>
                             <p>{programme.description ? programme.description : "/"} </p>
                             <p>{programme.id}</p>
                         </div>
 
-                        <div style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
+                        <div onClick={handleFlip} style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
                             <p>{programme.type}</p>
                             <p>{programme.niveau}</p>
                             <p>{programme.seancesSemaine}</p>
@@ -55,12 +76,12 @@ function ProgrammeCard(props) {
                             )}
                         </div>
 
-                        <i style={dimensions.width < 850 ? { fontSize: "5px" } : { fontSize: "10px" }}>
+                        <i onClick={handleFlip} style={dimensions.width < 850 ? { fontSize: "5px" } : { fontSize: "10px" }}>
                             Cliquez sur le programme pour en savoir plus
                         </i>
 
                         {/* PROFILE */}
-                        <footer style={dimensions.width > 850 ? { position: "absolute", bottom: "20px" } : { position: "absolute", bottom: "5px" }} className="programme-card-profile">
+                        <footer className="programme-card-profile">
                             <table className="basic-table">
                                 <tr>
                                     <td>
@@ -82,10 +103,22 @@ function ProgrammeCard(props) {
                             <table className="basic-table">
                                 <tr>
                                     <td>
-                                        <img className="small-img" src={require('../../images/icons/like.png')} alt='like' />
+                                        {liked ?
+                                            <img
+                                                className="small-img"
+                                                src={require('../../images/icons/like-red.png')}
+                                                onClick={handleLike}
+                                                alt='liked' />
+                                            :
+                                            <img
+                                                className="small-img"
+                                                src={require('../../images/icons/like.png')}
+                                                onClick={handleLike}
+                                                alt='like' />
+                                        }
                                     </td>
                                     <td>
-                                        <p style={{ margin: "auto" }}> 0 </p>
+                                        <p style={{ margin: "auto" }}> {likes} </p>
                                     </td>
                                     <td>
                                         <img className="small-img" src={require('../../images/icons/comment.png')} alt='comment' />

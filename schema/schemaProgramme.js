@@ -46,7 +46,7 @@ const programmeSchema = mongoose.Schema(
       required: true
     },
     likes: {
-      type: Number,
+      type: Array,
       required: true
     },
     comments: {

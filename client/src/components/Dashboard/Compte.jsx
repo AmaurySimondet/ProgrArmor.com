@@ -50,7 +50,7 @@ function Compte() {
   }, [switched])
 
   async function disconnect() {
-    await API.logout();
+    // await API.logout();
     localStorage.removeItem('token');
     localStorage.removeItem('id');
     window.location = "/";
