@@ -1117,14 +1117,13 @@ table.connexion-table td.connexion-img-td {
 /* PROGRAMMES */
 
 .programme-card {
-    display: inline-block;
     height: 550px;
-    width: 350px;
+    width: 300px;
     border-color: white;
     border-radius: 20px;
     border: solid;
     margin: 10px;
-    position: relative;
+    background-color: #330000;
     transition: 0.3s
 }
 
@@ -1140,7 +1139,6 @@ table.connexion-table td.connexion-img-td {
     background-color: #333333;
 }
 
-
 .programme-card h1 {
     font-size: large;
 }
@@ -1149,6 +1147,18 @@ table.connexion-table td.connexion-img-td {
     border-radius: 50%;
     width: 60px;
     height: 60px;
+}
+
+.react-card {
+    display: inline-block;
+}
+
+.panties {
+    width: 105%;
+    height: 50%;
+    position: absolute;
+    bottom: -6%;
+    left: -2.5%;
 }
 
 .small-img {
