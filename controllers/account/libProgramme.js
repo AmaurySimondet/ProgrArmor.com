@@ -1,4 +1,7 @@
 const Programme = require("../../schema/schemaProgramme.js");
+const Comment = require("../../schema/schemaComment.js");
+const Like = require("../../schema/schemaLike.js");
+const User = require("../../schema/schemaUser.js");
 const express = require("express");
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
@@ -6,8 +9,8 @@ require('dotenv').config();
 const app = express();
 
 // Create a new Programme
-exports.create = (req, res) => {
-    console.log(req.body)
+async function create(req, res) {
+    // console.log(req.body)
 
     // Validate request
     if (!req.body || !req.body.programme || !req.body.materiel) {
@@ -32,11 +35,22 @@ exports.create = (req, res) => {
             comments: []
         });
 
-        // Save Programme in the database
-        Programme.create(programme, (err, data) => {
-            if (err) res.json({ success: false, message: err })
-            else res.json({ success: true, message: "Programme created successfully", data: data });
-        });
+        await programme.save((err) => {
+            if (err) {
+                res.json({ success: false, message: err })
+            }
+        })
+
+        // console.log(programme._id)
+
+        User.findOneAndUpdate({ _id: req.body.createdBy }, { $addToSet: { programmes: programme._id } }, (err) => {
+            if (err) {
+                res.json({ success: false, message: err })
+            }
+            else {
+                res.json({ success: true, message: "Programme créé" })
+            }
+        })
     }
 };
 
@@ -54,21 +68,13 @@ exports.getProgrammes = (req, res) => {
 };
 
 async function likeProgramme(req, res) {
-    let conditions = { id: req.body.programmeId }
+    let conditions = { programme: req.body.programmeId }
 
     let programmeLikes = [];
     let userInLikes = false;
     let likeElement = {};
 
-    //trouver le programme
-    await Programme.find(conditions, function (err, data) {
-        if (err) {
-            res.json({ success: false, message: err })
-        }
-        else {
-            programmeLikes = data[0].likes;
-        }
-    })
+    await Like.find(conditions)
 
     //trouver si l'utilisateur a déjà liké
     programmeLikes.forEach(el => {
@@ -123,4 +129,18 @@ exports.getProgramme = (req, res) => {
     })
 };
 
+
+// exports.editDB2 = (req, res) => {
+//     User.updateMany({}, { $set: { programmes: [] } }, (err) => {
+//         if (err) {
+//             res.json({ success: false, message: err })
+//         }
+//         else {
+//             res.json({ success: true, message: "Users updated" })
+//         }
+//     })
+// }
+
+
 exports.likeProgramme = likeProgramme;
+exports.create = create;

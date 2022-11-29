@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 const programmeSchema = mongoose.Schema(
   {
@@ -7,10 +8,7 @@ const programmeSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    createdBy: {
-      type: String,
-      required: true
-    },
+    createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
     materiel: {
       type: Array,
       required: true
@@ -45,14 +43,8 @@ const programmeSchema = mongoose.Schema(
       type: Number,
       required: true
     },
-    likes: {
-      type: Array,
-      required: true
-    },
-    comments: {
-      type: Array,
-      required: true
-    }
+    likes: [{ type: Schema.Types.ObjectId, ref: 'Like' }],
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 
   },
   { timestamps: { createdAt: "created_at" } }

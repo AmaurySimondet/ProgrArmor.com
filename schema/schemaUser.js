@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const findOrCreate = require('mongoose-findorcreate');
 const passportLocalMongoose = require("passport-local-mongoose");
+const { Schema } = mongoose;
 
 const userSchema = mongoose.Schema(
   {
@@ -32,6 +33,7 @@ const userSchema = mongoose.Schema(
       type: Boolean
     },
     seances: Array,
+    programmes: [{ type: Schema.Types.ObjectId, ref: 'Programme' }],
   },
   { timestamps: { createdAt: "created_at" } }
 );

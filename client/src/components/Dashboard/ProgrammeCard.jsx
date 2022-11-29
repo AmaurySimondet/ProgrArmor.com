@@ -32,7 +32,7 @@ function ProgrammeCard(props) {
     });
 
     async function handleLike() {
-        const { data } = await API.likeProgramme({ programmeId: programme.id, userId: localStorage.getItem('id') });
+        const { data } = await API.likeProgramme({ programmeId: programme._id, userId: localStorage.getItem('id') });
         if (data.success) {
             window.location.reload();
         }
