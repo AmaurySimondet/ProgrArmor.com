@@ -11,13 +11,15 @@ function ProgrammeCard(props) {
     });
     const [isFlipped, setIsFlipped] = useState(false);
     const [liked, setLiked] = useState(false);
+    const [commented, setCommented] = useState(false);
     const [likes, setLikes] = useState(0);
     const [flipWhoLiked, setFlipWhoLiked] = useState(false);
     const [whoLikedArray, setWhoLikedArray] = useState([]);
     const [programmeCreator, setProgrammeCreator] = useState({});
     const [mouseEnter, setMouseEnter] = useState(false);
     const [flipComment, setFlipComment] = useState(false);
-    const [whoCommentedrray, setWhoCommentedArray] = useState([]);
+    const [whoCommentedArray, setWhoCommentedArray] = useState([]);
+    const [comment, setComment] = useState('');
 
     function handleFlip() {
         setIsFlipped(!isFlipped);
@@ -26,11 +28,6 @@ function ProgrammeCard(props) {
     function handleFlipWhoLiked() {
         setIsFlipped(false);
         setFlipWhoLiked(false)
-    }
-
-    function handleFlipWhoCommented() {
-        setIsFlipped(false);
-        setFlipWhoCommented(false)
     }
 
     function handleMouseEnter() {
@@ -79,13 +76,23 @@ function ProgrammeCard(props) {
     async function handleLiked() {
         const { data } = await API.isProgrammeLiked({ programmeId: programme._id, userId: localStorage.getItem('id') });
         if (data.success) {
-            console.log(data.liked)
             setLiked(data.liked);
         }
         else {
             alert(data.message);
         }
     }
+
+    async function handleCommented() {
+        const { data } = await API.isProgrammeCommented({ programmeId: programme._id, userId: localStorage.getItem('id') });
+        if (data.success) {
+            setCommented(data.commented);
+        }
+        else {
+            alert(data.message);
+        }
+    }
+
 
     async function getLikes() {
         const { data } = await API.getProgrammeLikes({ programmeId: programme._id });
@@ -120,19 +127,43 @@ function ProgrammeCard(props) {
         }
     }
 
-    function whoCommented() {
-        return null
+    async function sendComment() {
+        const { data } = await API.sendComment({ programmeId: programme._id, userId: localStorage.getItem('id'), comment: comment });
+        if (data.success) {
+            window.location.reload();
+        }
+        else {
+            alert(data.message);
+        }
     }
 
-    function handleFlipComment() {
+    async function getComments() {
+        const { data } = await API.getComments({ programmeId: programme._id });
+        if (data.success) {
+            setWhoCommentedArray(data.comments)
+        }
+        else {
+            alert(data.message);
+        }
+    }
+
+
+    function handleFlipCommentTrue() {
         setIsFlipped(true);
         setFlipComment(true);
     }
 
+    function handleFlipCommentFalse() {
+        setIsFlipped(false);
+        setFlipComment(false);
+    }
+
     useEffect(() => {
         handleLiked();
+        handleCommented();
         getLikes();
         getProgrammeCreator();
+        getComments();
     }, []);
 
     return (
@@ -148,7 +179,7 @@ function ProgrammeCard(props) {
                                 <div onClick={handleFlip} style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
                                     <h1 style={{ marginBottom: "1rem", marginTop: "20px" }}>{programme.titre ? programme.titre : "Programme sans titre"} </h1>
                                     <p>{programme.description ? programme.description : "/"} </p>
-                                    <p>{programme._id}</p>
+                                    <p> <i>{programme._id}</i> </p>
                                 </div>
 
                                 <div onClick={handleFlip} style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
@@ -215,10 +246,14 @@ function ProgrammeCard(props) {
                                             <p style={{ margin: "auto" }} className="hover-text" onClick={whoLiked}> {likes} </p>
                                         </td>
                                         <td>
-                                            <img className="small-img" src={require('../../images/icons/comment.png')} onClick={handleFlipComment} alt='comment' />
+                                            {commented ?
+                                                <img className="small-img" src={require('../../images/icons/comment-red.png')} onClick={handleFlipCommentTrue} alt='comment' />
+                                                :
+                                                <img className="small-img" src={require('../../images/icons/comment.png')} onClick={handleFlipCommentTrue} alt='comment' />
+                                            }
                                         </td>
                                         <td>
-                                            <p style={{ margin: "auto" }} className="hover-text" onClick={whoCommented}> 0 </p>
+                                            <p style={{ margin: "auto" }} className="hover-text" onClick={handleFlipCommentTrue}> {whoCommentedArray.length} </p>
                                         </td>
                                     </tr>
                                 </table>
@@ -236,8 +271,8 @@ function ProgrammeCard(props) {
                                 whoLikedArray.map((user, index) => {
                                     return (
                                         <table className="basic-table" style={index === 0 ? { marginTop: "20px" } : null}>
-                                            <col style={{ width: "35%" }} />
-                                            <col style={{ width: "65%" }} />
+                                            <col style={{ width: "20%" }} />
+                                            <col style={{ width: "80%" }} />
                                             <tr>
                                                 <td>
                                                     <img
@@ -264,42 +299,53 @@ function ProgrammeCard(props) {
                     }
 
                     {flipComment ?
-                        <div className="programme-card" onClick={handleFlipComment}>
-                            {/* {whoCommentedArray.length > 0 ?
-                                whoCommentedArray.map((user, index) => {
-                                    return (
-                                        <table className="basic-table" style={index === 0 ? { marginTop: "20px" } : null}>
-                                            <col style={{ width: "35%" }} />
-                                            <col style={{ width: "65%" }} />
-                                            <tr>
-                                                <td>
-                                                    <img
-                                                        className="profile-pic"
-                                                        src={user.user.profilePic}
-                                                        alt="profile-pic"
-                                                    />
-                                                </td>
-                                                <td>
-                                                    <p style={{ margin: "auto", display: "inline-block" }}>{user.user.fName} {user.user.lName}</p>
-                                                </td>
-                                                <td>
-                                                    { }
-                                                </td>
-                                            </tr>
-                                        </table>)
-                                })
-                                :
-                                null} */}
-                            <div className='form-group row'>
-                                <input type='text' className='form-control col-10 comment'
-                                    placeholder="Même ma grand-mère peut le faire"
-                                    onChange={e => setComment(e.target.value)}
-                                />
-                                <img
-                                    className="small-img col-2"
-                                    src={require('../../images/icons/send-comment.png')}
-                                    alt='send' />
-                            </div>
+                        <div className="programme-card">
+                            <Scrollbars autoHide>
+                                <div style={{ overflow: "auto" }} onClick={handleFlipCommentFalse}>
+                                    {whoCommentedArray.length > 0 ?
+                                        whoCommentedArray.map((comment, index) => {
+                                            return (
+                                                <table className="comment-table" style={index === 0 ? { marginTop: "20px" } : null}>
+                                                    <col style={{ width: "20%" }} />
+                                                    <col style={{ width: "80%" }} />
+                                                    <tr>
+                                                        <td>
+                                                            <img
+                                                                className="profile-pic"
+                                                                src={comment.user.profilePic}
+                                                                alt="profile-pic"
+                                                                style={{ width: "100%", height: "100%" }}
+                                                            />
+                                                        </td>
+                                                        <td>
+                                                            <div style={{ padding: "5%" }}>
+                                                                <p style={{ margin: "auto", display: "inline-block", fontSize: "7px" }}>{comment.user.fName} {comment.user.lName}</p>
+                                                                <br />
+                                                                <p style={{ margin: "auto", display: "inline-block" }}>{comment.comment}</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>)
+                                        })
+                                        :
+                                        <button onClick={handleFlipCommentFalse} className="btn btn-dark large-margin-updown">
+                                            Retour au programme
+                                        </button>}
+                                </div>
+
+
+                                <div className='form-group row'>
+                                    <input type='text' className='form-control col-10 comment'
+                                        placeholder="Même ma grand-mère peut le faire"
+                                        onChange={e => setComment(e.target.value)}
+                                    />
+                                    <img
+                                        className="small-img col-2"
+                                        src={require('../../images/icons/send-comment.png')}
+                                        alt='send'
+                                        onClick={sendComment} />
+                                </div>
+                            </Scrollbars>
                         </div>
                         : null
                     }

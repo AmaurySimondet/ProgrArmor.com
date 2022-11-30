@@ -164,6 +164,24 @@ async function isProgrammeLiked(req, res) {
     })
 }
 
+async function isProgrammeCommented(req, res) {
+    let conditions = { programme: req.body.programmeId, user: req.body.userId }
+
+    await Comment.find(conditions, function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+            if (data.length > 0) {
+                res.json({ success: true, message: "Programme commenté", commented: true })
+            }
+            else {
+                res.json({ success: true, message: "Programme non commenté", commented: false })
+            }
+        }
+    })
+}
+
 async function getProgrammeLikes(req, res) {
     let conditions = { programme: req.body.programmeId }
 
@@ -205,7 +223,26 @@ async function getProgrammeCreator(req, res) {
     })
 }
 
-async function whoCommented(req, res) {
+async function sendComment(req, res) {
+    let comment = new Comment({
+        id: uuidv4(),
+        programme: req.body.programmeId,
+        user: req.body.userId,
+        comment: req.body.comment
+    })
+
+    await comment.save((err) => {
+        if (err) {
+            console.log(err)
+            res.json({ success: false, message: err.Error })
+        }
+        else {
+            res.json({ success: true, message: "Commentaire ajouté" })
+        }
+    })
+}
+
+async function getComments(req, res) {
     let conditions = { programme: req.body.programmeId }
 
     await Comment.find(conditions).populate('user').exec(function (err, data) {
@@ -213,10 +250,11 @@ async function whoCommented(req, res) {
             res.json({ success: false, message: err })
         }
         else {
-            res.json({ success: true, message: "Commentaires trouvés", whoCommented: data })
+            res.json({ success: true, message: "Commentaires trouvés", comments: data })
         }
     })
 }
+
 
 
 exports.likeProgramme = likeProgramme;
@@ -225,4 +263,6 @@ exports.isProgrammeLiked = isProgrammeLiked;
 exports.getProgrammeLikes = getProgrammeLikes;
 exports.whoLiked = whoLiked;
 exports.getProgrammeCreator = getProgrammeCreator;
-exports.whoCommented = whoCommented;
+exports.sendComment = sendComment;
+exports.getComments = getComments;
+exports.isProgrammeCommented = isProgrammeCommented;

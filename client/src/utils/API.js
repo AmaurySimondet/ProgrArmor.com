@@ -139,6 +139,11 @@ export default {
 
   },
 
+  isProgrammeCommented: function (send) {
+    return axios.post(`${burl}/user/isProgrammeCommented`, send, { headers: headers });
+
+  },
+
   whoLiked: function (send) {
     return axios.post(`${burl}/user/whoLiked`, send, { headers: headers });
 
@@ -151,6 +156,16 @@ export default {
 
   whoCommented: function (send) {
     return axios.post(`${burl}/user/whoCommented`, send, { headers: headers });
+
+  },
+
+  sendComment: function (send) {
+    return axios.post(`${burl}/user/sendComment`, send, { headers: headers });
+
+  },
+
+  getComments: function (send) {
+    return axios.post(`${burl}/user/getComments`, send, { headers: headers });
 
   },
 };

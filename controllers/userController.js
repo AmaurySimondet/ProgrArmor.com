@@ -40,9 +40,11 @@ module.exports = function (app) {
     app.post('/getProgramme', programme.getProgramme);
     app.post('/likeProgramme', programme.likeProgramme);
     app.post('/isProgrammeLiked', programme.isProgrammeLiked);
+    app.post('/isProgrammeCommented', programme.isProgrammeCommented);
     app.post('/getProgrammeLikes', programme.getProgrammeLikes);
     app.post('/whoLiked', programme.whoLiked);
     app.post('/getProgrammeCreator', programme.getProgrammeCreator);
-    app.post('/whoCommented', programme.whoCommented);
+    app.post('/sendComment', programme.sendComment);
+    app.post('/getComments', programme.getComments);
     // app.post('/editDB2', programme.editDB2);
 }
