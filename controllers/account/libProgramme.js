@@ -10,7 +10,7 @@ const app = express();
 
 // Create a new Programme
 async function create(req, res) {
-    // console.log(req.body)
+    // 
 
     // Validate request
     if (!req.body || !req.body.programme || !req.body.materiel) {
@@ -41,7 +41,7 @@ async function create(req, res) {
             }
         })
 
-        // console.log(programme._id)
+        // 
 
         User.findOneAndUpdate({ _id: req.body.createdBy }, { $addToSet: { programmes: programme._id } }, (err) => {
             if (err) {
@@ -59,7 +59,7 @@ exports.getProgrammes = (req, res) => {
     Programme.find({},
         (err, data) => {
             if (err) {
-                console.log(err)
+
                 return res.json({ success: false, message: err })
             }
             else { return res.json({ success: true, message: "Programmes trouvés !", programmes: data }) }
@@ -68,48 +68,52 @@ exports.getProgrammes = (req, res) => {
 };
 
 async function likeProgramme(req, res) {
-    let conditions = { programme: req.body.programmeId }
+    let conditions = { programme: req.body.programmeId, user: req.body.userId }
 
-    let programmeLikes = [];
-    let userInLikes = false;
+    let likeData = [];
     let likeElement = {};
 
-    await Like.find(conditions)
-
-    //trouver si l'utilisateur a déjà liké
-    programmeLikes.forEach(el => {
-        if (el.userId === req.body.userId) {
-            userInLikes = true;
-            likeElement = el;
+    //trouver le programme s'il est liké par user
+    await Like.find(conditions, function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+            likeData = data;
         }
     })
 
-    //supprimer le like
-    if (userInLikes) {
-        update = {
-            $pull: { likes: likeElement }
-        }
-    }
+    //si le programme est liké par user, supprimer le like
+    if (likeData.length > 0) {
+        let deleteEl = { programme: likeData[0].programme, user: likeData[0].user }
 
-    //ajouter le like
-    else {
-        update = {
-            $addToSet: { likes: { userId: req.body.userId, date: Date.now() } }
-        }
-    }
-
-    Programme.findOneAndUpdate(
-        conditions,
-        update,
-        (err) => {
+        await Like.deleteOne(deleteEl, function (err, data) {
             if (err) {
-                console.log(err)
-                return res.json({ success: false, message: err })
+                res.json({ success: false, message: err })
             }
-            else { return res.json({ success: true, message: "Like enregistré !" }) }
-        }
-    )
+            else {
+                res.json({ success: true, message: "Like supprimé" })
+            }
+        })
+    }
 
+    //sinon, ajouter le like
+    else {
+        likeElement = new Like({
+            id: uuidv4(),
+            programme: req.body.programmeId,
+            user: req.body.userId
+        })
+
+        await likeElement.save((err) => {
+            if (err) {
+                res.json({ success: false, message: err })
+            }
+            else {
+                res.json({ success: true, message: "Like ajouté" })
+            }
+        })
+    }
 }
 
 exports.getProgramme = (req, res) => {
@@ -141,6 +145,70 @@ exports.getProgramme = (req, res) => {
 //     })
 // }
 
+async function isProgrammeLiked(req, res) {
+    let conditions = { programme: req.body.programmeId, user: req.body.userId }
+
+    await Like.find(conditions, function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+
+            if (data.length > 0) {
+                res.json({ success: true, message: "Programme liké", liked: true })
+            }
+            else {
+                res.json({ success: true, message: "Programme non liké", liked: false })
+            }
+        }
+    })
+}
+
+async function getProgrammeLikes(req, res) {
+    let conditions = { programme: req.body.programmeId }
+
+    await Like.find(conditions, function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+            res.json({ success: true, message: "Likes trouvés", likes: data.length })
+        }
+    })
+}
+
+async function whoLiked(req, res) {
+    let conditions = { programme: req.body.programmeId }
+
+    await Like.find(conditions).populate('user').exec(function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+
+
+            res.json({ success: true, message: "Likes trouvés", whoLiked: data })
+        }
+    })
+}
+
+async function getProgrammeCreator(req, res) {
+    let conditions = { _id: req.body.programmeId }
+
+    await Programme.find(conditions).populate('createdBy').exec(function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+            res.json({ success: true, message: "Créateur trouvé", creator: data[0].createdBy })
+        }
+    })
+}
+
 
 exports.likeProgramme = likeProgramme;
 exports.create = create;
+exports.isProgrammeLiked = isProgrammeLiked;
+exports.getProgrammeLikes = getProgrammeLikes;
+exports.whoLiked = whoLiked;
+exports.getProgrammeCreator = getProgrammeCreator;

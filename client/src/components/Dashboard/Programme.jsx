@@ -91,7 +91,7 @@ function Programme(props) {
 
                 <div className="tri">
                     <div className="form-group row">
-                        <div className="col-6 col-md-3">
+                        <div className="col-3 col-md-1">
                             <label className="col-form-label">Tri par</label>
                             <Select
                                 options={[
@@ -104,7 +104,7 @@ function Programme(props) {
                             />
                         </div>
 
-                        <div className="col-6 col-md-3">
+                        <div className="col-3 col-md-1">
                             <label className="col-form-label">Type</label>
                             <Select
                                 options={[
@@ -114,7 +114,7 @@ function Programme(props) {
                             />
                         </div>
 
-                        <div className="col-6 col-md-3">
+                        <div className="col-3 col-md-1">
                             <label className="col-form-label">Niveau</label>
                             <Select
                                 options={[
@@ -124,7 +124,7 @@ function Programme(props) {
                             />
                         </div>
 
-                        <div className="col-6 col-md-3">
+                        <div className="col-3 col-md-1">
                             <label className="col-form-label">Durée max d'une séance</label>
                             <Select
                                 options={[
@@ -134,7 +134,7 @@ function Programme(props) {
                             />
                         </div>
 
-                        <div className="col-6 col-md-3">
+                        <div className="col-3 col-md-1">
                             <label className="col-form-label">Séances par semaine</label>
                             <Select
                                 options={[
@@ -144,14 +144,29 @@ function Programme(props) {
                             />
                         </div>
 
-                        <div className="col-6 col-md-3">
+                        <div className="col-3 col-md-1">
                             <label className="col-form-label">ID du créateur</label>
                             <input type="text" className={user.modeSombre === true ? "inputDark form-control" : "form-control"} placeholder="123456..." />
                         </div>
 
-                        <div className="col-6 col-md-3">
+                        <div className="col-3 col-md-1">
                             <label className="col-form-label">ID du programme</label>
                             <input type="text" className={user.modeSombre === true ? "inputDark form-control" : "form-control"} placeholder="123456..." />
+                        </div>
+
+                        <div className="col-3 col-md-1">
+                            <label className="col-form-label">Mes programmes</label>
+                            <input type="checkbox" className={user.modeSombre === true ? "inputDark form-control" : "form-control"} />
+                        </div>
+
+                        <div className="col-3 col-md-1">
+                            <label className="col-form-label">Programmes likés</label>
+                            <input type="checkbox" className={user.modeSombre === true ? "inputDark form-control" : "form-control"} />
+                        </div>
+
+                        <div className="col-3 col-md-1">
+                            <label className="col-form-label">Programmes commentés</label>
+                            <input type="checkbox" className={user.modeSombre === true ? "inputDark form-control" : "form-control"} />
                         </div>
 
                         <div className="col-12">

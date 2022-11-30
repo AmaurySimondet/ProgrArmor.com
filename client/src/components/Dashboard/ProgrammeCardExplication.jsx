@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import ReactCardFlip from "react-card-flip";
+import { Scrollbars } from 'react-custom-scrollbars';
 
 function ProgrammeCard(props) {
     const [dimensions, setDimensions] = useState({
@@ -32,24 +33,27 @@ function ProgrammeCard(props) {
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
                 <div className="YOUR_FRONT_CCOMPONENT" onClick={handleFlip}>
                     <div className="programme-card programme-card-explication">
-                        <div style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
-                            <h1 style={{ marginBottom: "1rem", marginTop: "20px" }}> Titre </h1>
-                            <p> Description </p>
-                            <p style={{ margin: "0" }}> ID du programme</p>
-                            <p style={{ margin: "0" }}> ... </p>
-                        </div>
+                        <Scrollbars autoHide>
+                            <div className="programme-card-header">
+                                <div style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
+                                    <h1 style={{ marginBottom: "1rem", marginTop: "20px" }}> Titre </h1>
+                                    <p> Description </p>
+                                    <p style={{ margin: "0" }}> ID du programme</p>
+                                </div>
 
-                        <div style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
-                            <p> Type de programme </p>
-                            <p> Niveau conseillé </p>
-                            <p> Séances / semaine</p>
-                            <p> Durée max d'une séance</p>
-                            <p> Materiel nécessaire</p>
-                        </div>
+                                <div style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
+                                    <p> Type de programme </p>
+                                    <p> Niveau conseillé </p>
+                                    <p> Séances / semaine</p>
+                                    <p> Durée max d'une séance</p>
+                                    <p> Materiel nécessaire</p>
+                                </div>
 
-                        <i style={dimensions.width < 850 ? { fontSize: "5px" } : { fontSize: "10px" }}>
-                            Cliquez sur le programme pour en savoir plus
-                        </i>
+                                <i style={dimensions.width < 850 ? { fontSize: "5px" } : { fontSize: "10px" }}>
+                                    Cliquez sur le programme pour en savoir plus
+                                </i>
+                            </div>
+                        </Scrollbars>
 
                         {/* PROFILE */}
                         <footer className="programme-card-profile">
@@ -84,6 +88,7 @@ function ProgrammeCard(props) {
                                 </tr>
                             </table>
                         </footer >
+
                     </div>
                 </div>
 

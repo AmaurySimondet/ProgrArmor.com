@@ -128,4 +128,24 @@ export default {
     return axios.post(`${burl}/user/likeProgramme`, send, { headers: headers });
 
   },
+
+  getProgrammeLikes: function (send) {
+    return axios.post(`${burl}/user/getProgrammeLikes`, send, { headers: headers });
+
+  },
+
+  isProgrammeLiked: function (send) {
+    return axios.post(`${burl}/user/isProgrammeLiked`, send, { headers: headers });
+
+  },
+
+  whoLiked: function (send) {
+    return axios.post(`${burl}/user/whoLiked`, send, { headers: headers });
+
+  },
+
+  getProgrammeCreator: function (send) {
+    return axios.post(`${burl}/user/getProgrammeCreator`, send, { headers: headers });
+
+  },
 };

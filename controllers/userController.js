@@ -39,5 +39,9 @@ module.exports = function (app) {
     app.post('/getProgrammes', programme.getProgrammes);
     app.post('/getProgramme', programme.getProgramme);
     app.post('/likeProgramme', programme.likeProgramme);
+    app.post('/isProgrammeLiked', programme.isProgrammeLiked);
+    app.post('/getProgrammeLikes', programme.getProgrammeLikes);
+    app.post('/whoLiked', programme.whoLiked);
+    app.post('/getProgrammeCreator', programme.getProgrammeCreator);
     // app.post('/editDB2', programme.editDB2);
 }
