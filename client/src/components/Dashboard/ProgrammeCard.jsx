@@ -142,7 +142,7 @@ function ProgrammeCard(props) {
                                     )}
                                 </div>
 
-                                <i onClick={handleFlip} style={dimensions.width < 850 ? { fontSize: "5px" } : { fontSize: "10px" }}>
+                                <i onClick={handleFlip} style={{ fontSize: "10px" }}>
                                     Cliquez sur le programme pour en savoir plus
                                 </i>
 

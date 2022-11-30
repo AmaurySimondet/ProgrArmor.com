@@ -1202,6 +1202,10 @@ table.connexion-table td.connexion-img-td {
     width: 30px;
 }
 
+.explication {
+    background-color: #333333;
+}
+
 .small-img:hover {
     filter: invert(0.6);
 }
