@@ -148,4 +148,9 @@ export default {
     return axios.post(`${burl}/user/getProgrammeCreator`, send, { headers: headers });
 
   },
+
+  whoCommented: function (send) {
+    return axios.post(`${burl}/user/whoCommented`, send, { headers: headers });
+
+  },
 };

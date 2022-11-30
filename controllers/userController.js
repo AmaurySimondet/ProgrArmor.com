@@ -43,5 +43,6 @@ module.exports = function (app) {
     app.post('/getProgrammeLikes', programme.getProgrammeLikes);
     app.post('/whoLiked', programme.whoLiked);
     app.post('/getProgrammeCreator', programme.getProgrammeCreator);
+    app.post('/whoCommented', programme.whoCommented);
     // app.post('/editDB2', programme.editDB2);
 }

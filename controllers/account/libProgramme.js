@@ -205,6 +205,19 @@ async function getProgrammeCreator(req, res) {
     })
 }
 
+async function whoCommented(req, res) {
+    let conditions = { programme: req.body.programmeId }
+
+    await Comment.find(conditions).populate('user').exec(function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+            res.json({ success: true, message: "Commentaires trouvés", whoCommented: data })
+        }
+    })
+}
+
 
 exports.likeProgramme = likeProgramme;
 exports.create = create;
@@ -212,3 +225,4 @@ exports.isProgrammeLiked = isProgrammeLiked;
 exports.getProgrammeLikes = getProgrammeLikes;
 exports.whoLiked = whoLiked;
 exports.getProgrammeCreator = getProgrammeCreator;
+exports.whoCommented = whoCommented;
