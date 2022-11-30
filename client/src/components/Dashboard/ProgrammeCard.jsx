@@ -311,10 +311,9 @@ function ProgrammeCard(props) {
                                                     <tr>
                                                         <td>
                                                             <img
-                                                                className="profile-pic"
+                                                                className="profile-pic profile-pic-comment"
                                                                 src={comment.user.profilePic}
                                                                 alt="profile-pic"
-                                                                style={{ width: "100%", height: "100%" }}
                                                             />
                                                         </td>
                                                         <td>
@@ -328,9 +327,12 @@ function ProgrammeCard(props) {
                                                 </table>)
                                         })
                                         :
-                                        <button onClick={handleFlipCommentFalse} className="btn btn-dark large-margin-updown">
-                                            Retour au programme
-                                        </button>}
+                                        <div>
+                                            <button onClick={handleFlipCommentFalse} className="btn btn-dark large-margin-updown">
+                                                Retour au programme
+                                            </button>
+                                            <p> Tu seras le premier à commenter, c'est un privilège </p>
+                                        </div>}
                                 </div>
 
 

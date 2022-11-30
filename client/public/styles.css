@@ -170,6 +170,14 @@ select {
     height: 200px;
 }
 
+.profile-pic-comment {
+    width: 20px !important;
+    height: 20px !important;
+    top: 3px;
+    position: absolute;
+    left: 3px;
+}
+
 .small-profile {
     margin-top: 40px;
 
@@ -1109,6 +1117,10 @@ table.connexion-table td.connexion-img-td {
     margin: 40px auto;
 }
 
+.basic-margin-updown {
+    margin: 10px auto;
+}
+
 .help-button {
     margin: 20px;
 }
@@ -1228,6 +1240,7 @@ table.connexion-table td.connexion-img-td {
     table-layout: fixed;
     width: 95%;
     margin: auto;
+    position: relative;
     margin-bottom: 10px;
     background-color: #333333;
     border-radius: 10px;
@@ -1433,6 +1446,15 @@ table.connexion-table td.connexion-img-td {
     }
 }
 
+@media (min-width: 625px) {
+    .profile-pic-comment {
+        width: 40px !important;
+        height: 40px !important;
+        top: 10px;
+        left: 10px;
+    }
+}
+
 @media (max-width: 625px) {
     .programme-card {
         height: 300px;
@@ -1577,6 +1599,11 @@ table.connexion-table td.connexion-img-td {
     input,
     select {
         height: 20px !important;
+        font-size: 10px !important;
+        padding: 5px !important;
+    }
+
+    textarea {
         font-size: 10px !important;
         padding: 5px !important;
     }
