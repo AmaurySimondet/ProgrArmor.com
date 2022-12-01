@@ -1,6 +1,10 @@
 import { React, useState, useEffect } from "react";
 import PriseDeNoteHiddenText from "./PriseDeNoteHiddenText";
 import API from "../../utils/API";
+import Exercices from "./Exercices";
+import AllCategories from "./Categories/AllCategories";
+import AllDetails from "./Details/AllDetails";
+import musclesCategorie from "./Categories/MusclesCategorie";
 
 function PriseDeNote(props) {
     const [note, setNote] = useState();
@@ -21,7 +25,10 @@ function PriseDeNote(props) {
     async function handleSubmitNotes() {
         console.log(note);
 
-        const { data } = await API.priseDeNote({ note: note });
+        const { data } = await API.priseDeNote({
+            note: note, muscles: musclesCategorie,
+            exercices: Exercices, details: AllDetails, categories: AllCategories, seance: seance
+        });
 
         if (data.success === true) {
             setSeance(data.seance);

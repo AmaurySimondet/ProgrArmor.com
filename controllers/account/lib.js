@@ -4,6 +4,7 @@ const passport = require("passport");
 const express = require("express");
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
+const stringSimilarity = require('string-similarity');
 require('dotenv').config();
 
 const url = "http://localhost:8800" // http://localhost:8800 https://prograrmorprealpha1.herokuapp.com
@@ -383,6 +384,11 @@ async function loadSeance(req, res) {
 //PRISE DE NOTE
 async function priseDeNote(req, res) {
     let linesToRow = req.body.note.split('\n');
+    let AllExercices = req.body.exercices;
+    let AllCategories = req.body.categories;
+    let AllDetails = req.body.details;
+    let AllMuscles = req.body.muscles;
+
     let echauffements = [];
     let details = [];
 
@@ -390,6 +396,19 @@ async function priseDeNote(req, res) {
         let date = linesToRow[1].split('/');
         date = date[2] + "-" + date[1] + "-" + date[0];
         return date
+    }
+
+    function getBestSimilarity(string, referencesArray) {
+        let exerciceElement = {};
+        let max = 0;
+        referencesArray.forEach((reference, index) => {
+            let similarity = stringSimilarity.compareTwoStrings(exercice.label, string)
+            if (similarity > max) {
+                max = similarity;
+                exerciceElement = reference;
+            }
+        })
+        return exerciceElement;
     }
 
     function getEchauchements(linesToRow) {
@@ -407,21 +426,34 @@ async function priseDeNote(req, res) {
             let Serie = echauffement[1].split('x');
 
             echauffement = {
+                id: uuidv4(),
                 Categories: {},
                 Series: {},
                 echauffement: {}
             }
 
             if (ExoCat[0].split('-').length > 1) {
-                // trouver la similitude exercice de note et exercice de base
-                // trouver la similitude muscle de note et muscle de base
+                echauffement.echauffement = {
+                    name: getBestSimilarity(ExoCat[0].split('-')[0], AllExercices).label,
+                    muscle: getBestSimilarity(ExoCat[0].split('-')[1], AllMuscles).label
+                }
             }
             if (ExoCat[0].split('-').length === 1) {
-                // trouver la similitude exercice de note et exercice de base
+                echauffement.echauffement = {
+                    name: getBestSimilarity(ExoCat[0], AllExercices).label
+                }
             }
 
             if (ExoCat.length > 1) {
-                // trouver la similitude categorie de note et categorie de base
+                ExoCat.forEach((cat, index) => {
+                    let resultElement = getBestSimilarity(cat, AllCategories);
+                    if (index !== 0) {
+                        echauffement.Categories[index - 1] = {
+                            id: uuidv4(),
+                            name: resultElement.label,
+                            input: resultElement.input
+                        }
+                    })
             }
 
             if (Serie[Serie.length - 1].split('[').length > 1) {

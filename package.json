@@ -32,6 +32,7 @@
     "passport-local-mongoose": "^7.1.2",
     "password-hash": "^1.2.2",
     "path": "^0.12.7",
+    "string-similarity": "^4.0.4",
     "uuid": "^9.0.0"
   }
 }
