@@ -1,9 +1,11 @@
 import { React, useState, useEffect } from "react";
 import PriseDeNoteHiddenText from "./PriseDeNoteHiddenText";
+import API from "../../utils/API";
 
 function PriseDeNote(props) {
     const [note, setNote] = useState();
     const [clicked, setClicked] = useState("hide");
+    const [seance, setSeance] = useState();
 
     function handleClickQuestion() {
         if (clicked === "hide") {
@@ -16,8 +18,17 @@ function PriseDeNote(props) {
         setNote(event.target.value);
     }
 
-    function handleSubmitNotes() {
-        return null
+    async function handleSubmitNotes() {
+        console.log(note);
+
+        const { data } = await API.priseDeNote({ note: note });
+
+        if (data.success === true) {
+            setSeance(data.seance);
+        }
+        else {
+            alert(data.message);
+        }
     }
 
 

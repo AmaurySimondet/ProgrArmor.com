@@ -21,11 +21,11 @@ function PriseDeNoteHiddenText() {
             Ton poids en kg (juste le chiffre) <br />
             <br />
             Echauffements: (écrit ceci si tu notes un ou plusieurs échauffements) <br />
-            Exercice, catégorie (, catégorie ,... ) : nombre de sériesxnombre de répétitionsxcharge en kg [temps de repos entre les séries + min (optionnel)], (répétable à l'infini)<br />
+            Exercice (- muscle), catégorie (, catégorie ,... ) : nombre de sériesxnombre de répétitionsxcharge en kg [temps de repos entre les séries + min (optionnel)], (répétable à l'infini)<br />
             (tu peux répéter autant de fois que tu veux) <br />
             <br />
             Exercices: (écrit ceci si tu notes un ou plusieurs exercices) <br />
-            Exercice, catégorie (, catégorie ,... ) : nombre de sériesxnombre de répétitionsxcharge en kg [temps de repos entre les séries + min (optionnel)], (répétable à l'infini)<br />
+            Exercice (- muscle), catégorie (, catégorie ,... ) : nombre de sériesxnombre de répétitionsxcharge en kg [temps de repos entre les séries + min (optionnel)], (répétable à l'infini)<br />
             (tu peux répéter autant de fois que tu veux) <br />
             <br />
             Details: (écrit ceci si tu notes un ou plusieurs détails) <br />
@@ -49,6 +49,7 @@ function PriseDeNoteHiddenText() {
             Squat, pistol, pieds surrelevés, barre olympique : 3x1x20 [4min] <br />
             Developpé couché, sur banc, haltères : 1x1x100 [4min], 1x1x105 [3min], 0x1x110 [5min], 1x1x107.5 <br />
             Tractions, {"{assistance, 5, mesure: 5}"} : 3x10x0 [2min] <br />
+            Curl - Biceps, barre EZ, assis: 4x12x40 [1min] <br />
             <br />
             Details: <br />
             Manque de sommeil <br />

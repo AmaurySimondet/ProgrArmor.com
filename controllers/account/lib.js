@@ -380,6 +380,79 @@ async function loadSeance(req, res) {
 
 }
 
+//PRISE DE NOTE
+async function priseDeNote(req, res) {
+    let linesToRow = req.body.note.split('\n');
+    let echauffements = [];
+    let details = [];
+
+    function getDate(linesToRow) {
+        let date = linesToRow[1].split('/');
+        date = date[2] + "-" + date[1] + "-" + date[0];
+        return date
+    }
+
+    function getEchauchements(linesToRow) {
+        let index = 5;
+        let echauffements = [];
+
+        while (linesToRow[index] !== "") {
+            echauffements.push(linesToRow[index]);
+            index++;
+        }
+
+        echauffements.forEach((e, i) => {
+            let echauffement = e.split(':');
+            let ExoCat = echauffement[0].split(',');
+            let Serie = echauffement[1].split('x');
+
+            echauffement = {
+                Categories: {},
+                Series: {},
+                echauffement: {}
+            }
+
+            if (ExoCat[0].split('-').length > 1) {
+                // trouver la similitude exercice de note et exercice de base
+                // trouver la similitude muscle de note et muscle de base
+            }
+            if (ExoCat[0].split('-').length === 1) {
+                // trouver la similitude exercice de note et exercice de base
+            }
+
+            if (ExoCat.length > 1) {
+                // trouver la similitude categorie de note et categorie de base
+            }
+
+            if (Serie[Serie.length - 1].split('[').length > 1) {
+                // écrire la série
+                // inscrire temps de repos
+            }
+            if (Serie[Serie.length - 1].split('[').length === 1) {
+                // écrire la série
+            }
+
+            echauffements.push(echauffement)
+        })
+
+        return echauffements;
+    }
+
+    if (linesToRow[4] === "Echauffements") {
+        echauffements = getEchauchements(linesToRow);
+    }
+
+    let seance = {
+        id: uuidv4(),
+        nom: { ancienNom: "nouveau-nom", nouveauNom: linesToRow[0] },
+        date: getDate(linesToRow),
+        poids: linesToRow[2],
+        echauffements: echauffements,
+    }
+
+    console.log(seance);
+}
+
 //DASHBOARD
 //ALL WORKOUTS / ADMIN
 async function workouts(req, res) {
@@ -1426,3 +1499,4 @@ exports.modifyUser = modifyUser;
 exports.loadSeance = loadSeance;
 // exports.editDB = editDB;
 exports.reguScore = reguScore;
+exports.priseDeNote = priseDeNote;

@@ -584,17 +584,15 @@ function ExpertForm(props) {
                 </div>
 
                 {seance.nom.ancienNom === "nouveau-nom" ?
-                    <div className="form-group row">
-                        <label className="col-2 col-form-label">Nom de la séance</label>
-                        <div className="col-5">
-                            <input type="text"
-                                className={props.modeSombre ? "form-control inputDark" : "form-control"}
-                                onChange={handleChangeName}
-                                placeholder="Annihilation des biceps"
-                                id="nouveauNom"
-                                value={seance.nom.nouveauNom}
-                            />
-                        </div>
+                    <div className="form-group row col-12">
+                        <label className="col-form-label">Nom de la séance</label>
+                        <input type="text"
+                            className={props.modeSombre ? "form-control inputDark" : "form-control"}
+                            onChange={handleChangeName}
+                            placeholder="Annihilation des biceps"
+                            id="nouveauNom"
+                            value={seance.nom.nouveauNom}
+                        />
                     </div>
                     : null}
             </div>
@@ -616,126 +614,129 @@ function ExpertForm(props) {
             </div>
 
 
-            {clickEchauffement ?
-                <div>
-                    <p onClick={handleClickEchauffement} className="expert-title">
-                        Echauffement <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
-                    </p>
-                    {seance.echauffements ?
-                        seance.echauffements.map((echauffement, index) => {
+            {
+                clickEchauffement ?
+                    <div>
+                        <p onClick={handleClickEchauffement} className="expert-title">
+                            Echauffement <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                        </p>
+                        {seance.echauffements ?
+                            seance.echauffements.map((echauffement, index) => {
+                                return (
+                                    <div>
+                                        <EchauffementInput
+                                            key={echauffement.id}
+                                            index={index}
+                                            dimensions={props.dimensions}
+                                            id={echauffement.id}
+                                            modeSombre={props.modeSombre}
+                                            poids={seance.poids}
+                                            echauffement={echauffement}
+                                            click={echauffement.Categories ? echauffement.Categories[0] ? true : false : false}
+                                            onAddEchauffements={onAddEchauffements}
+                                            changeEchauffements={changeEchauffements}
+                                            onDeleteEchauffements={onDeleteEchauffements}
+                                        />
+
+                                        <button className="btn btn-dark form-button" id={index} onClick={onInsertEchauffement} type="submit">Insérer un echauffement ici !</button>
+                                        <br />
+                                    </div>)
+                            })
+                            : null
+                        }
+
+                        <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
+                        <button className="btn btn-dark form-button" onClick={onAddEchauffements} type="submit">Ajouter un échauffement à cette séance !</button>
+                        <br />
+                    </div>
+                    :
+                    <div>
+                        <p onClick={handleClickEchauffement} className="expert-title"> Echauffement <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
+                        <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
+                    </div>
+            }
+
+            {
+                clickExercices ?
+                    <div>
+                        <p onClick={handleClickExercices} className="expert-title"> Exercices <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
+                        {seance.exercices ? seance.exercices.map((exercice, index) => {
                             return (
                                 <div>
-                                    <EchauffementInput
-                                        key={echauffement.id}
+                                    <FullExerciceExpertInput
+                                        key={exercice.id}
                                         index={index}
                                         dimensions={props.dimensions}
-                                        id={echauffement.id}
+                                        id={exercice.id}
                                         modeSombre={props.modeSombre}
+                                        exercice={exercice}
                                         poids={seance.poids}
-                                        echauffement={echauffement}
-                                        click={echauffement.Categories ? echauffement.Categories[0] ? true : false : false}
-                                        onAddEchauffements={onAddEchauffements}
-                                        changeEchauffements={changeEchauffements}
-                                        onDeleteEchauffements={onDeleteEchauffements}
+                                        click={exercice.Categories ? exercice.Categories[0] ? true : false : false}
+                                        onAddExercices={onAddExercices}
+                                        changeExercices={changeExercices}
+                                        onDeleteExercices={onDeleteExercices}
                                     />
 
-                                    <button className="btn btn-dark form-button" id={index} onClick={onInsertEchauffement} type="submit">Insérer un echauffement ici !</button>
+                                    <button className="btn btn-dark form-button" id={index} onClick={onInsertExercice} type="submit">Insérer un exercice ici !</button>
                                     <br />
                                 </div>)
                         })
-                        : null
-                    }
+                            : null}
 
-                    <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
-                    <button className="btn btn-dark form-button" onClick={onAddEchauffements} type="submit">Ajouter un échauffement à cette séance !</button>
-                    <br />
-                </div>
-                :
-                <div>
-                    <p onClick={handleClickEchauffement} className="expert-title"> Echauffement <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
-                    <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
-                </div>
-            }
-
-            {clickExercices ?
-                <div>
-                    <p onClick={handleClickExercices} className="expert-title"> Exercices <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
-                    {seance.exercices ? seance.exercices.map((exercice, index) => {
-                        return (
-                            <div>
-                                <FullExerciceExpertInput
-                                    key={exercice.id}
-                                    index={index}
-                                    dimensions={props.dimensions}
-                                    id={exercice.id}
-                                    modeSombre={props.modeSombre}
-                                    exercice={exercice}
-                                    poids={seance.poids}
-                                    click={exercice.Categories ? exercice.Categories[0] ? true : false : false}
-                                    onAddExercices={onAddExercices}
-                                    changeExercices={changeExercices}
-                                    onDeleteExercices={onDeleteExercices}
-                                />
-
-                                <button className="btn btn-dark form-button" id={index} onClick={onInsertExercice} type="submit">Insérer un exercice ici !</button>
-                                <br />
-                            </div>)
-                    })
-                        : null}
-
-                    <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
-                    <button className="btn btn-dark form-button" onClick={onAddExercices} type="submit">Ajouter un exercice à cette séance !</button>
-                    <br />
-                </div>
-                :
-                <div>
-                    <p onClick={handleClickExercices} className="expert-title"> Exercices <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
-                    <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
-                </div>
-            }
-
-            {clickDetails ?
-                <div>
-                    <p onClick={handleClickDetails} className="expert-title"> Details <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
-                    {seance.details ? seance.details.map((detail, index) => {
-                        return (
-                            <div>
-                                <hr className="hr-detail" />
-
-                                <DetailInput
-                                    key={detail.id}
-                                    index={index}
-                                    id={detail.id}
-                                    modeSombre={props.modeSombre}
-                                    detail={detail}
-                                    dimensions={props.dimensions}
-                                    onAddDetail={onAddDetail}
-                                    changeDetail={changeDetail}
-                                    onDeleteDetail={onDeleteDetail}
-                                />
-
-                            </div>
-                        );
-                    })
-                        : null}
-
-                    <div className="detail-div">
                         <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
-                        <button className="btn btn-dark form-button" onClick={onAddDetail} type="submit">Ajouter un détail à cette séance !</button>
+                        <button className="btn btn-dark form-button" onClick={onAddExercices} type="submit">Ajouter un exercice à cette séance !</button>
+                        <br />
                     </div>
-                    <br />
-                </div>
-                :
-                <div>
-                    <p onClick={handleClickDetails} className="expert-title"> Details <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
-                    <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
-                </div>
+                    :
+                    <div>
+                        <p onClick={handleClickExercices} className="expert-title"> Exercices <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
+                        <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
+                    </div>
+            }
+
+            {
+                clickDetails ?
+                    <div>
+                        <p onClick={handleClickDetails} className="expert-title"> Details <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
+                        {seance.details ? seance.details.map((detail, index) => {
+                            return (
+                                <div>
+                                    <hr className="hr-detail" />
+
+                                    <DetailInput
+                                        key={detail.id}
+                                        index={index}
+                                        id={detail.id}
+                                        modeSombre={props.modeSombre}
+                                        detail={detail}
+                                        dimensions={props.dimensions}
+                                        onAddDetail={onAddDetail}
+                                        changeDetail={changeDetail}
+                                        onDeleteDetail={onDeleteDetail}
+                                    />
+
+                                </div>
+                            );
+                        })
+                            : null}
+
+                        <div className="detail-div">
+                            <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
+                            <button className="btn btn-dark form-button" onClick={onAddDetail} type="submit">Ajouter un détail à cette séance !</button>
+                        </div>
+                        <br />
+                    </div>
+                    :
+                    <div>
+                        <p onClick={handleClickDetails} className="expert-title"> Details <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
+                        <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
+                    </div>
             }
 
             <div className="form-button-div">
                 <button className={props.modeSombre ? "btn btn-lg btn-black enregistrer-button large-margin-updown" : "btn btn-lg btn-white enregistrer-button large-margin-updown"} onClick={handleClick} type="submit">Enregistrer la séance !</button>
             </div>
-        </form>
+        </form >
     )
 };
 

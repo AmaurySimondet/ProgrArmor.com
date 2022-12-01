@@ -102,6 +102,12 @@ export default {
 
   },
 
+  priseDeNote: function (send) {
+    return axios.post(`${burl}/user/priseDeNote`, send, { headers: headers });
+
+  },
+
+
   //COMPTE
   modifyUser: function (send) {
     return axios.post(`${burl}/user/modifyUser`, send, { headers: headers });
