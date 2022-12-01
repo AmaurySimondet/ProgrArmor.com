@@ -1,0 +1,62 @@
+import { React, useState, useEffect } from "react";
+import elastiques from "./Categories/Elastiques";
+
+function PriseDeNoteHiddenText() {
+    return (
+        <div className="hidden-text">
+            <strong> C'est quoi la prise de note rapide ? </strong> <br />
+            <br />
+            On est tous d'accord, écrire une séance en mode normal c'est fastidieux, surtout la toute première fois <br />
+            Mais tu sais bien que ProgrArmor est l'outil ultime de tracking, on ne va pas se contenter du mode normal <br />
+            En prise de note rapide, tu vas écrire ta séance plus ou moins comme tu le ferais dans tes notes de téléphone <br />
+            Sauf qu'ici notre programme va générer tout seul la séance à partir des notes et tu pourras bénéficier de tous les autres avantages du site <br />
+            <br />
+            <strong> Ok je suis bouillant maintenant alors on fait comment ? </strong> <br />
+            <br />
+            Je vais te donner le formalisme et ensuite un exemple pour que tu comprennes bien. <br />
+            Tes notes doivent être écrites comme suit : <br />
+            <br />
+            Nom de la séance  <br />
+            Date de la séance écrite comme suit : jj/mm/aaaa <br />
+            Ton poids en kg (juste le chiffre) <br />
+            <br />
+            Echauffements: (écrit ceci si tu notes un ou plusieurs échauffements) <br />
+            Exercice, catégorie (, catégorie ,... ) : nombre de sériesxnombre de répétitionsxcharge en kg [temps de repos entre les séries + min (optionnel)], (répétable à l'infini)<br />
+            (tu peux répéter autant de fois que tu veux) <br />
+            <br />
+            Exercices: (écrit ceci si tu notes un ou plusieurs exercices) <br />
+            Exercice, catégorie (, catégorie ,... ) : nombre de sériesxnombre de répétitionsxcharge en kg [temps de repos entre les séries + min (optionnel)], (répétable à l'infini)<br />
+            (tu peux répéter autant de fois que tu veux) <br />
+            <br />
+            Details: (écrit ceci si tu notes un ou plusieurs détails) <br />
+            Detail <br />
+            (tu peux répéter autant de fois que tu veux) <br />
+            <br />
+            Pour la catégorie elastique c'est plus compliqué, tu dois écrire (à la place de catégorie) : <br />
+            {'{resistance ou assistance, "poids" elastique, mesure: mesure en kg de la tension} (si tu as mesuré)'} <br />
+            {'{resistance ou assistance, "poids" elastique, tension: tension en m estimée} (sinon)'} <br />
+            <br />
+            <strong> Exemple </strong> <br />
+            <br />
+            Epopée de la force <br />
+            12/05/1998 <br />
+            120 <br />
+            <br />
+            Echauffements: <br />
+            {"Dislocation d'épaule, {resistance, 12, tension: 10} : 3x10x0"} <br />
+            <br />
+            Exercices: <br />
+            Squat, pistol, pieds surrelevés, barre olympique : 3x1x20 [4min] <br />
+            Developpé couché, sur banc, haltères : 1x1x100 [4min], 1x1x105 [3min], 0x1x110 [5min], 1x1x107.5 <br />
+            Tractions, {"{assistance, 5, mesure: 5}"} : 3x10x0 [2min] <br />
+            <br />
+            Details: <br />
+            Manque de sommeil <br />
+            Trop chaud <br />
+            <br />
+            <i> {"Cliques à nouveau sur l'icone"} <img className="myDIV" src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" /> {"pour faire disparaître ce bandeau d'information"} </i>
+        </div>
+    )
+}
+
+export default PriseDeNoteHiddenText;

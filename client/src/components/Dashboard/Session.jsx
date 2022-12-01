@@ -9,6 +9,7 @@ import { red } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
 import Footer from "../Footer.jsx";
 import { v4 as uuidv4 } from 'uuid';
+import PriseDeNote from "./PriseDeNote.jsx"
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
@@ -31,6 +32,11 @@ function Session() {
     height: window.innerHeight,
     width: window.innerWidth
   })
+  const [priseDeNote, setPriseDeNote] = useState(false);
+
+  function handlePriseDeNote() {
+    setPriseDeNote(!priseDeNote);
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -116,39 +122,48 @@ function Session() {
     <div>
       <NavigBar location="session" />
 
-      <div className="session-div">
-        <h1> Enregistre ta séance ! </h1>
+      <button className="btn btn-black" style={{ margin: "20px" }} onClick={handlePriseDeNote}>
+        {!priseDeNote ? "Mode prise de note rapide" : "Mode normal"}
+      </button>
 
-        <p className="session-div-switch">
-          Débutant <GreenSwitch defaultChecked={seance ? !switched : switched} onChange={handleChange} /> Expert
-        </p>
+      {priseDeNote ?
+        <PriseDeNote modeSombre={user.modeSombre} />
+        :
+        <div className="session-div">
 
-        {switched ?
-          <ExpertForm
-            seance={
-              seance ?
-                seance.nom ?
+          <h1> Enregistre ta séance ! </h1>
+
+          <p className="session-div-switch">
+            Débutant <GreenSwitch defaultChecked={seance ? !switched : switched} onChange={handleChange} /> Expert
+          </p>
+
+          {switched ?
+            <ExpertForm
+              seance={
+                seance ?
+                  seance.nom ?
+                    seance
+                    :
+                    DebutantToExpert(seance)
+                  :
+                  { id: uuidv4(), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: [] }
+              }
+              modeSombre={user && user.modeSombre ? true : false}
+              dimensions={dimensions} />
+            :
+            <DebutantForm
+              seance={
+                seance ?
                   seance
                   :
-                  DebutantToExpert(seance)
-                :
-                { id: uuidv4(), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: [] }
-            }
-            modeSombre={user && user.modeSombre ? true : false}
-            dimensions={dimensions} />
-          :
-          <DebutantForm
-            seance={
-              seance ?
-                seance
-                :
-                { id: uuidv4(), date: "", poids: "", exercices: [] }
-            }
-            modeSombre={user && user.modeSombre ? true : false}
-            dimensions={dimensions} />
-        }
+                  { id: uuidv4(), date: "", poids: "", exercices: [] }
+              }
+              modeSombre={user && user.modeSombre ? true : false}
+              dimensions={dimensions} />
+          }
 
-      </div>
+        </div>
+      }
 
       <Footer />
     </div>
