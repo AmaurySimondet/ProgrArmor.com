@@ -20,9 +20,21 @@ function ProgrammeCard(props) {
     const [flipComment, setFlipComment] = useState(false);
     const [whoCommentedArray, setWhoCommentedArray] = useState([]);
     const [comment, setComment] = useState('');
+    const [flipProgramme, setFlipProgramme] = useState(false);
+    const [flipThreeDots, setFlipThreeDots] = useState(false);
 
     function handleFlip() {
         setIsFlipped(!isFlipped);
+    }
+
+    function handleFlipProgramme() {
+        setIsFlipped(!isFlipped);
+        setFlipProgramme(!flipProgramme);
+    }
+
+    function handleFlipThreeDots() {
+        setIsFlipped(!isFlipped);
+        setFlipThreeDots(!flipThreeDots);
     }
 
     function handleFlipWhoLiked() {
@@ -147,6 +159,17 @@ function ProgrammeCard(props) {
         }
     }
 
+    function handleDeleteProgramme() {
+        return null
+    }
+
+    function handleEditProgramme() {
+        return null
+    }
+
+    function handleSignalerProgramme() {
+        return null
+    }
 
     function handleFlipCommentTrue() {
         setIsFlipped(true);
@@ -176,13 +199,24 @@ function ProgrammeCard(props) {
                         <Scrollbars autoHide>
                             <div className="programme-card-header">
 
-                                <div onClick={handleFlip} style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
-                                    <h1 style={{ marginBottom: "1rem", marginTop: "20px" }}>{programme.titre ? programme.titre : "Programme sans titre"} </h1>
-                                    <p>{programme.description ? programme.description : "/"} </p>
-                                    <p> <i>{programme._id}</i> </p>
+                                <div style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
+                                    <div style={{ position: "relative" }}>
+                                        <h1 onClick={handleFlipProgramme} style={{ marginBottom: "1rem", marginTop: "20px" }}>
+                                            {programme.titre ? programme.titre : "Programme sans titre"}
+                                        </h1>
+                                        <img
+                                            className={props.modeSombre ? "small-img questionDark" : "small-img"}
+                                            src={require('../../images/icons/three-dots.png')}
+                                            alt='three-dots'
+                                            onClick={handleFlipThreeDots}
+                                            style={{ position: "absolute", right: "0", top: "0" }} />
+                                    </div>
+
+                                    <p onClick={handleFlipProgramme}>{programme.description ? programme.description : "/"} </p>
+                                    <p onClick={handleFlipProgramme}> <i>{programme._id}</i> </p>
                                 </div>
 
-                                <div onClick={handleFlip} style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
+                                <div onClick={handleFlipProgramme} style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
                                     <p>{programme.type}</p>
                                     <p>{programme.niveau}</p>
                                     <p>{programme.seancesSemaine}</p>
@@ -198,7 +232,7 @@ function ProgrammeCard(props) {
                                     )}
                                 </div>
 
-                                <i onClick={handleFlip} style={{ fontSize: "10px" }}>
+                                <i onClick={handleFlipProgramme} style={{ fontSize: "10px" }}>
                                     Cliquez sur le programme pour en savoir plus
                                 </i>
 
@@ -351,6 +385,33 @@ function ProgrammeCard(props) {
                         </div>
                         : null
                     }
+
+                    {flipProgramme ?
+                        <div className="programme-card" onClick={handleFlipProgramme}>
+                        </div>
+                        : null}
+
+                    {flipThreeDots ?
+                        <div className="programme-card">
+                            <Scrollbars autoHide>
+                                <button className='btn btn-black large-margin-top mini-margin-bottom' onClick={handleFlipThreeDots}>
+                                    Revenir au programme
+                                </button>
+
+                                <button className='btn btn-dark basic-margin-updown' onClick={handleEditProgramme}>
+                                    Modifier le programme
+                                </button>
+
+                                <button className='btn btn-dark basic-margin-updown' onClick={handleDeleteProgramme}>
+                                    Supprimer le programme
+                                </button>
+
+                                <button className='btn btn-dark basic-margin-updown' onClick={handleSignalerProgramme}>
+                                    Signaler le programme
+                                </button>
+                            </Scrollbars>
+                        </div>
+                        : null}
 
                 </div>
             </ReactCardFlip>

@@ -209,6 +209,7 @@ function Programme(props) {
                                 id={programme.id}
                                 index={index}
                                 programme={programme}
+                                modeSombre={user.modeSombre}
                             />
                         ))}
                     </div>
