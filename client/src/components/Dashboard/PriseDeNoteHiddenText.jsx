@@ -21,11 +21,11 @@ function PriseDeNoteHiddenText() {
             Ton poids en kg (juste le chiffre) <br />
             <br />
             Echauffements: (écrit ceci si tu notes un ou plusieurs échauffements) <br />
-            Exercice (- muscle), catégorie (, catégorie ,... ) : nombre de sériesxnombre de répétitionsxcharge en kg [temps de repos entre les séries + min (optionnel)], (répétable à l'infini)<br />
+            Exercice (- muscle), catégorie (, catégorie ,... ) : nombre de sériesxnombre de répétitions(si c'est un temps noter sec juxtaposé)xcharge en kg [temps de repos entre les séries + min (optionnel)], (répétable à l'infini)<br />
             (tu peux répéter autant de fois que tu veux) <br />
             <br />
             Exercices: (écrit ceci si tu notes un ou plusieurs exercices) <br />
-            Exercice (- muscle), catégorie (, catégorie ,... ) : nombre de sériesxnombre de répétitionsxcharge en kg [temps de repos entre les séries + min (optionnel)], (répétable à l'infini)<br />
+            Exercice (- muscle), catégorie (, catégorie ,... ) : nombre de sériesxnombre de répétitions(si c'est un temps noter sec juxtaposé)xcharge en kg [temps de repos entre les séries + min (optionnel)], (répétable à l'infini)<br />
             (tu peux répéter autant de fois que tu veux) <br />
             <br />
             Details: (écrit ceci si tu notes un ou plusieurs détails) <br />
@@ -33,8 +33,8 @@ function PriseDeNoteHiddenText() {
             (tu peux répéter autant de fois que tu veux) <br />
             <br />
             Pour la catégorie elastique c'est plus compliqué, tu dois écrire (à la place de catégorie) : <br />
-            {'{resistance ou assistance, "poids" elastique, mesure: mesure en kg de la tension} (si tu as mesuré)'} <br />
-            {'{resistance ou assistance, "poids" elastique, tension: tension en m estimée} (sinon)'} <br />
+            {'{resistance ou assistance; "poids" elastique ou épaisseur; mesure=mesure en kg de la tension} (si tu as mesuré)'} <br />
+            {'{resistance ou assistance; "poids" elastique ou épaisseur; tension=tension en m estimée} (sinon)'} <br />
             <br />
             <strong> Exemple </strong> <br />
             <br />
@@ -43,13 +43,14 @@ function PriseDeNoteHiddenText() {
             120 <br />
             <br />
             Echauffements: <br />
-            {"Dislocation d'épaule, {resistance, 12, tension: 10} : 3x10x0"} <br />
+            {"Dislocation d'épaule, {resistance; moyen; tension=10} : 3x10x0"} <br />
             <br />
             Exercices: <br />
             Squat, pistol, pieds surrelevés, barre olympique : 3x1x20 [4min] <br />
             Developpé couché, sur banc, haltères : 1x1x100 [4min], 1x1x105 [3min], 0x1x110 [5min], 1x1x107.5 <br />
-            Tractions, {"{assistance, 5, mesure: 5}"} : 3x10x0 [2min] <br />
+            Tractions, {"{assistance; 5; mesure=5}"} : 3x10x0 <br />
             Curl - Biceps, barre EZ, assis: 4x12x40 [1min] <br />
+            Front Lever, full : 1x20secx0 <br />
             <br />
             Details: <br />
             Manque de sommeil <br />

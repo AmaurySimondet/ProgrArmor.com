@@ -129,7 +129,7 @@ function SerieInput(props) {
           <br />
 
           <div className="col-6" style={{ display: "inline-block" }}>
-            <select onChange={handleChange} className={props.modeSombre === true ? "custom-select selectDark" : "custom-select"} id="typeSerie">
+            <select onChange={handleChange} value={serie.typeSerie} className={props.modeSombre === true ? "custom-select selectDark" : "custom-select"} id="typeSerie">
               <option value="reps"> Répétitions (défaut) </option>
               <option value="time"> Temps (secondes) </option>
             </select>

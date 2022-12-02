@@ -5,11 +5,11 @@ import Exercices from "./Exercices";
 import AllCategories from "./Categories/AllCategories";
 import AllDetails from "./Details/AllDetails";
 import musclesCategorie from "./Categories/MusclesCategorie";
+import Elastiques from "./Categories/Elastiques";
 
 function PriseDeNote(props) {
     const [note, setNote] = useState();
     const [clicked, setClicked] = useState("hide");
-    const [seance, setSeance] = useState();
 
     function handleClickQuestion() {
         if (clicked === "hide") {
@@ -26,12 +26,12 @@ function PriseDeNote(props) {
         console.log(note);
 
         const { data } = await API.priseDeNote({
-            note: note, muscles: musclesCategorie,
-            exercices: Exercices, details: AllDetails, categories: AllCategories, seance: seance
+            note: note, muscles: musclesCategorie, elastiques: Elastiques,
+            exercices: Exercices, details: AllDetails, categories: AllCategories
         });
 
         if (data.success === true) {
-            setSeance(data.seance);
+            props.submitNote(data.seance);
         }
         else {
             alert(data.message);
@@ -63,18 +63,19 @@ function PriseDeNote(props) {
                 </div>
             </p>
 
-
-
-
             <textarea
                 name="note"
                 value={note}
                 className="inputDark form-control"
                 onChange={handleNoteChange}
-                placeholder="Saisissez votre note ici"
+
+                placeholder="Epopée de la force
+                12/05/1998
+                120..."
                 rows="10"
-                cols="50"
             />
+
+
 
             <button className="btn btn-black large-margin-updown" onClick={handleSubmitNotes}>
                 Valider et générer la séance

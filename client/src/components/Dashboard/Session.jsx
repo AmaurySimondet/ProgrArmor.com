@@ -118,6 +118,12 @@ function Session() {
     setSwitched(!switched);
   }
 
+  function submitNote(seance) {
+    setPriseDeNote(false);
+    setSwitched(true);
+    setSeance(seance);
+  }
+
   return (
     <div>
       <NavigBar location="session" />
@@ -127,7 +133,7 @@ function Session() {
       </button>
 
       {priseDeNote ?
-        <PriseDeNote modeSombre={user.modeSombre} />
+        <PriseDeNote submitNote={submitNote} modeSombre={user.modeSombre} />
         :
         <div className="session-div">
 

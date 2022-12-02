@@ -388,6 +388,7 @@ async function priseDeNote(req, res) {
     let AllCategories = req.body.categories;
     let AllDetails = req.body.details;
     let AllMuscles = req.body.muscles;
+    let AllElastiques = req.body.elastiques;
 
     let echauffements = [];
     let details = [];
@@ -399,31 +400,32 @@ async function priseDeNote(req, res) {
     }
 
     function getBestSimilarity(string, referencesArray) {
-        let exerciceElement = {};
+        let foundElement = {};
         let max = 0;
         referencesArray.forEach((reference, index) => {
-            let similarity = stringSimilarity.compareTwoStrings(exercice.label, string)
+            let similarity = stringSimilarity.compareTwoStrings(reference.label, string)
             if (similarity > max) {
                 max = similarity;
-                exerciceElement = reference;
+                foundElement = reference;
             }
         })
-        return exerciceElement;
+        return foundElement;
     }
 
     function getEchauchements(linesToRow) {
         let index = 5;
         let echauffements = [];
+        let echauffementNoteLines = [];
 
         while (linesToRow[index] !== "") {
-            echauffements.push(linesToRow[index]);
+            echauffementNoteLines.push(linesToRow[index]);
             index++;
         }
 
-        echauffements.forEach((e, i) => {
+        echauffementNoteLines.forEach((e, i) => {
             let echauffement = e.split(':');
             let ExoCat = echauffement[0].split(',');
-            let Serie = echauffement[1].split('x');
+            let Serie = echauffement[1].split(',');
 
             echauffement = {
                 id: uuidv4(),
@@ -432,6 +434,7 @@ async function priseDeNote(req, res) {
                 echauffement: {}
             }
 
+            //name & muscle
             if (ExoCat[0].split('-').length > 1) {
                 echauffement.echauffement = {
                     name: getBestSimilarity(ExoCat[0].split('-')[0], AllExercices).label,
@@ -444,25 +447,135 @@ async function priseDeNote(req, res) {
                 }
             }
 
+            //categorie
             if (ExoCat.length > 1) {
                 ExoCat.forEach((cat, index) => {
-                    let resultElement = getBestSimilarity(cat, AllCategories);
-                    if (index !== 0) {
-                        echauffement.Categories[index - 1] = {
-                            id: uuidv4(),
-                            name: resultElement.label,
-                            input: resultElement.input
+
+                    //elastique
+                    if (cat.includes('{')) {
+                        let catSplit = cat.split('{')[1].split('}')[0].split(';');
+
+                        let utilisationPossible = ["Resistance", "Assistance"];
+                        let utilisation = stringSimilarity.findBestMatch(catSplit[0], utilisationPossible).bestMatch.target;
+
+                        let input = getBestSimilarity(catSplit[1], AllElastiques).value;
+
+                        let tension = parseFloat(catSplit[2].split('=')[1]);
+
+                        let estimation = (tension / 3 * parseInt(input)).toFixed(2)
+
+                        //first index is exerice name
+                        if (index !== 0) {
+
+                            if (catSplit[2].includes('tension')) {
+
+                                echauffement.Categories[index - 1] = {
+                                    id: uuidv4(),
+                                    name: "Elastique",
+                                    utilisation: utilisation,
+                                    input: input,
+                                    tension: tension,
+                                    estimation: estimation
+                                }
+                            }
+
+                            if (catSplit[2].includes('mesure')) {
+                                let mesure = parseFloat(catSplit[2].split('=')[1]);
+
+                                echauffement.Categories[index - 1] = {
+                                    id: uuidv4(),
+                                    name: "Elastique",
+                                    utilisation: utilisation,
+                                    input: "mesure",
+                                    estimation: mesure,
+                                }
+                            }
                         }
-                    })
+                    }
+
+                    //pas elastique
+                    else {
+                        let resultElement = getBestSimilarity(cat, AllCategories);
+                        //first index is exerice name
+                        if (index !== 0) {
+                            echauffement.Categories[index - 1] = {
+                                id: uuidv4(),
+                                name: resultElement.name,
+                                input: resultElement.label
+                            }
+                        }
+                    }
+                })
             }
 
-            if (Serie[Serie.length - 1].split('[').length > 1) {
-                // écrire la série
-                // inscrire temps de repos
-            }
-            if (Serie[Serie.length - 1].split('[').length === 1) {
-                // écrire la série
-            }
+            //series
+            let nmbreSeries = 0;
+            Serie.forEach((serie, index) => {
+                let serieSplit = [];
+
+                if (serie.split('[').length > 1) {
+                    serieSplit = serie.split('[')[0].split('x');
+
+                    echauffement.Categories[ExoCat.length] = {
+                        id: uuidv4(),
+                        name: "Temps de repos entre les séries",
+                        input: serie.split('[')[1].split('min]')[0]
+                    }
+                }
+                if (serie.split('[').length === 1) {
+                    serieSplit = serie.split('x');
+
+                }
+
+                let charge = serieSplit[2].replace(' ', '');
+                let percent = "" + (parseFloat(charge) / parseFloat(linesToRow[2]) * 100).toFixed(2) + "%"
+
+
+                if (serieSplit[0] > 1) {
+                    for (let i = 0; i < serieSplit[0]; i++) {
+                        if (serieSplit[1].includes('sec')) {
+                            echauffement.Series[nmbreSeries] = {
+                                id: uuidv4(),
+                                typeSerie: "time",
+                                repsTime: serieSplit[1].split('sec')[0],
+                                charge: charge,
+                                percent: percent
+                            }
+                        }
+                        else {
+                            echauffement.Series[nmbreSeries] = {
+                                id: uuidv4(),
+                                typeSerie: "reps",
+                                repsTime: serieSplit[1],
+                                charge: charge,
+                                percent: percent
+                            }
+                        }
+                        nmbreSeries++;
+                    }
+                }
+                if (serieSplit[0] === 1) {
+                    if (serieSplit[1].includes('sec')) {
+                        echauffement.Series[nmbreSeries] = {
+                            id: uuidv4(),
+                            typeSerie: "time",
+                            repsTime: serieSplit[1].split('sec')[0],
+                            charge: charge,
+                            percent: percent
+                        }
+                    }
+                    else {
+                        echauffement.Series[nmbreSeries] = {
+                            id: uuidv4(),
+                            typeSerie: "reps",
+                            repsTime: serieSplit[1],
+                            charge: charge,
+                            percent: percent
+                        }
+                    }
+                    nmbreSeries++;
+                }
+            })
 
             echauffements.push(echauffement)
         })
@@ -470,8 +583,211 @@ async function priseDeNote(req, res) {
         return echauffements;
     }
 
-    if (linesToRow[4] === "Echauffements") {
+    function getExercices(linesToRow) {
+        let index = linesToRow.indexOf("Exercices:") + 1;
+        let exercices = [];
+        let exerciceNoteLines = [];
+
+        while (linesToRow[index] !== "") {
+            exerciceNoteLines.push(linesToRow[index]);
+            index++;
+        }
+
+        exerciceNoteLines.forEach((e, i) => {
+            let exercice = e.split(':');
+            let ExoCat = exercice[0].split(',');
+            let Serie = exercice[1].split(',');
+
+            exercice = {
+                id: uuidv4(),
+                Categories: {},
+                Series: {},
+                exercice: {}
+            }
+
+            //name & muscle
+            if (ExoCat[0].split('-').length > 1) {
+                exercice.exercice = {
+                    name: getBestSimilarity(ExoCat[0].split('-')[0], AllExercices).label,
+                    muscle: getBestSimilarity(ExoCat[0].split('-')[1], AllMuscles).label
+                }
+            }
+            if (ExoCat[0].split('-').length === 1) {
+                exercice.exercice = {
+                    name: getBestSimilarity(ExoCat[0], AllExercices).label
+                }
+            }
+
+            //categorie
+            if (ExoCat.length > 1) {
+                ExoCat.forEach((cat, index) => {
+
+                    //elastique
+                    if (cat.includes('{')) {
+                        let catSplit = cat.split('{')[1].split('}')[0].split(';');
+
+                        let utilisationPossible = ["Resistance", "Assistance"];
+                        let utilisation = stringSimilarity.findBestMatch(catSplit[0], utilisationPossible).bestMatch.target;
+
+                        let input = getBestSimilarity(catSplit[1], AllElastiques).value;
+
+                        let tension = parseFloat(catSplit[2].split('=')[1]);
+
+                        let estimation = (tension / 3 * parseInt(input)).toFixed(2)
+
+                        //first index is exerice name
+                        if (index !== 0) {
+
+                            if (catSplit[2].includes('tension')) {
+
+                                exercice.Categories[index - 1] = {
+                                    id: uuidv4(),
+                                    name: "Elastique",
+                                    utilisation: utilisation,
+                                    input: input,
+                                    tension: tension,
+                                    estimation: estimation
+                                }
+                            }
+
+                            if (catSplit[2].includes('mesure')) {
+                                let mesure = parseFloat(catSplit[2].split('=')[1]);
+
+                                exercice.Categories[index - 1] = {
+                                    id: uuidv4(),
+                                    name: "Elastique",
+                                    utilisation: utilisation,
+                                    input: "mesure",
+                                    estimation: mesure,
+                                }
+                            }
+                        }
+                    }
+
+                    //pas elastique
+                    else {
+                        let resultElement = getBestSimilarity(cat, AllCategories);
+                        //first index is exerice name
+                        if (index !== 0) {
+                            exercice.Categories[index - 1] = {
+                                id: uuidv4(),
+                                name: resultElement.name,
+                                input: resultElement.label
+                            }
+                        }
+                    }
+                })
+            }
+
+            //series
+            let nmbreSeries = 0;
+            Serie.forEach((serie, index) => {
+
+                let serieSplit = [];
+
+                if (serie.split('[').length > 1) {
+                    serieSplit = serie.split('[')[0].split('x');
+
+                    exercice.Categories[ExoCat.length] = {
+                        id: uuidv4(),
+                        name: "Temps de repos entre les séries",
+                        input: serie.split('[')[1].split('min]')[0]
+                    }
+                }
+                if (serie.split('[').length === 1) {
+                    serieSplit = serie.split('x');
+
+                }
+
+                let charge = serieSplit[2].replace(' ', '');
+                let percent = "" + (parseFloat(charge) / parseFloat(linesToRow[2]) * 100).toFixed(2) + "%"
+
+                if (serieSplit[0] > 1) {
+                    for (let i = 0; i < serieSplit[0]; i++) {
+                        if (serieSplit[1].includes('sec')) {
+                            exercice.Series[nmbreSeries] = {
+                                id: uuidv4(),
+                                typeSerie: "time",
+                                repsTime: serieSplit[1].split('sec')[0],
+                                charge: charge,
+                                percent: percent
+                            }
+                        }
+                        else {
+                            exercice.Series[nmbreSeries] = {
+                                id: uuidv4(),
+                                typeSerie: "reps",
+                                repsTime: serieSplit[1],
+                                charge: charge,
+                                percent: percent
+                            }
+                        }
+                        nmbreSeries++;
+                    }
+                }
+                else {
+                    if (serieSplit[1].includes('sec')) {
+                        exercice.Series[nmbreSeries] = {
+                            id: uuidv4(),
+                            typeSerie: "time",
+                            repsTime: serieSplit[1].split('sec')[0],
+                            charge: charge,
+                            percent: percent
+                        }
+                    }
+                    else {
+                        exercice.Series[nmbreSeries] = {
+                            id: uuidv4(),
+                            typeSerie: "reps",
+                            repsTime: serieSplit[1],
+                            charge: charge,
+                            percent: percent
+                        }
+                    }
+                    nmbreSeries++;
+                }
+            })
+
+            exercices.push(exercice)
+        })
+
+        return exercices;
+    }
+
+    function getDetails(linesToRow) {
+        let index = linesToRow.indexOf("Details:") + 1;
+        let details = [];
+        let detailNoteLines = [];
+
+        while (index !== linesToRow.length) {
+            detailNoteLines.push(linesToRow[index]);
+            index++;
+        }
+
+        detailNoteLines.forEach((detail, i) => {
+
+            let detailElement = getBestSimilarity(detail, AllDetails);
+
+            let savedDetail = {
+                id: uuidv4(),
+                input: detailElement.label,
+                name: detailElement.name
+            }
+
+            details.push(savedDetail);
+        })
+
+        return details;
+    }
+
+    if (linesToRow[4] === "Echauffements:") {
         echauffements = getEchauchements(linesToRow);
+    }
+
+    let exercices = getExercices(linesToRow);
+
+    if (linesToRow.indexOf("Details:") !== -1) {
+        details = getDetails(linesToRow);
     }
 
     let seance = {
@@ -480,9 +796,23 @@ async function priseDeNote(req, res) {
         date: getDate(linesToRow),
         poids: linesToRow[2],
         echauffements: echauffements,
+        exercices: exercices,
+        details: details
     }
 
-    console.log(seance);
+    // Object.values(seance).forEach((element, index) => {
+    //     if (Array.isArray(element)) {
+    //         element.forEach((el, i) => {
+    //             console.log(el)
+    //         })
+    //     }
+    //     else {
+    //         console.log(element)
+    //     }
+    // })
+
+    res.json({ success: true, seance: seance })
+
 }
 
 //DASHBOARD
