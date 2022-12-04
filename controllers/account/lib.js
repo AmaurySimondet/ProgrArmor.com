@@ -395,6 +395,12 @@ async function priseDeNote(req, res) {
 
     function getDate(linesToRow) {
         let date = linesToRow[1].split('/');
+        if (date.length < 3) {
+            return "error"
+        }
+        if (date[2].length < 4 || date[1].length < 2 || date[0].length < 2) {
+            return "error"
+        }
         date = date[2] + "-" + date[1] + "-" + date[0];
         return date
     }
@@ -424,6 +430,10 @@ async function priseDeNote(req, res) {
 
         echauffementNoteLines.forEach((e, i) => {
             let echauffement = e.split(':');
+            if (echauffement.length < 2) {
+                return "error"
+            }
+
             let ExoCat = echauffement[0].split(',');
             let Serie = echauffement[1].split(',');
 
@@ -441,6 +451,7 @@ async function priseDeNote(req, res) {
                     muscle: getBestSimilarity(ExoCat[0].split('-')[1], AllMuscles).label
                 }
             }
+            //name
             if (ExoCat[0].split('-').length === 1) {
                 echauffement.echauffement = {
                     name: getBestSimilarity(ExoCat[0], AllExercices).label
@@ -515,6 +526,9 @@ async function priseDeNote(req, res) {
 
                 if (serie.split('[').length > 1) {
                     serieSplit = serie.split('[')[0].split('x');
+                    if (serieSplit.length < 3) {
+                        return "error"
+                    }
 
                     echauffement.Categories[ExoCat.length] = {
                         id: uuidv4(),
@@ -524,7 +538,9 @@ async function priseDeNote(req, res) {
                 }
                 if (serie.split('[').length === 1) {
                     serieSplit = serie.split('x');
-
+                    if (serieSplit.length < 3) {
+                        return "error"
+                    }
                 }
 
                 let charge = serieSplit[2].replace(' ', '');
@@ -588,13 +604,16 @@ async function priseDeNote(req, res) {
         let exercices = [];
         let exerciceNoteLines = [];
 
-        while (linesToRow[index] !== "") {
+        while (linesToRow[index] !== "" && index !== linesToRow.length) {
             exerciceNoteLines.push(linesToRow[index]);
             index++;
         }
 
         exerciceNoteLines.forEach((e, i) => {
             let exercice = e.split(':');
+            if (exercice.length < 2) {
+                return "error"
+            }
             let ExoCat = exercice[0].split(',');
             let Serie = exercice[1].split(',');
 
@@ -687,6 +706,9 @@ async function priseDeNote(req, res) {
 
                 if (serie.split('[').length > 1) {
                     serieSplit = serie.split('[')[0].split('x');
+                    if (serieSplit.length < 3) {
+                        return "error"
+                    }
 
                     exercice.Categories[ExoCat.length] = {
                         id: uuidv4(),
@@ -696,6 +718,9 @@ async function priseDeNote(req, res) {
                 }
                 if (serie.split('[').length === 1) {
                     serieSplit = serie.split('x');
+                    if (serieSplit.length < 3) {
+                        return "error"
+                    }
 
                 }
 
@@ -780,38 +805,58 @@ async function priseDeNote(req, res) {
         return details;
     }
 
-    if (linesToRow[4] === "Echauffements:") {
-        echauffements = getEchauchements(linesToRow);
+
+    try {
+        let date = getDate(linesToRow);
+        if (date === "error") {
+            return res.json({ success: false, message: "Erreur de formalisme de la note (date : jj/mm/aaaa)" })
+        }
+
+        if (linesToRow[4] === "Echauffements:") {
+            echauffements = getEchauchements(linesToRow);
+            if (echauffements === "error") {
+                return res.json({ success: false, message: "Erreur de formalisme de la note (échauffements)" })
+            }
+        }
+
+        if (linesToRow.indexOf("Exercices:") === -1) {
+            return res.json({ success: false, message: "Aucun exercice donné !" })
+        }
+        let exercices = getExercices(linesToRow);
+        if (exercices === "error") {
+            return res.json({ success: false, message: "Erreur de formalisme de la note (exercices)" })
+        }
+
+        if (linesToRow.indexOf("Details:") !== -1) {
+            details = getDetails(linesToRow);
+        }
+
+        let seance = {
+            id: uuidv4(),
+            nom: { ancienNom: "nouveau-nom", nouveauNom: linesToRow[0] },
+            date: date,
+            poids: linesToRow[2],
+            echauffements: echauffements,
+            exercices: exercices,
+            details: details
+        }
+
+        // Object.values(seance).forEach((element, index) => {
+        //     if (Array.isArray(element)) {
+        //         element.forEach((el, i) => {
+        //             console.log(el)
+        //         })
+        //     }
+        //     else {
+        //         console.log(element)
+        //     }
+        // })
+
+        return res.json({ success: true, seance: seance })
     }
-
-    let exercices = getExercices(linesToRow);
-
-    if (linesToRow.indexOf("Details:") !== -1) {
-        details = getDetails(linesToRow);
+    catch (error) {
+        return res.json({ success: false, message: "Erreur de formalisme de la note" })
     }
-
-    let seance = {
-        id: uuidv4(),
-        nom: { ancienNom: "nouveau-nom", nouveauNom: linesToRow[0] },
-        date: getDate(linesToRow),
-        poids: linesToRow[2],
-        echauffements: echauffements,
-        exercices: exercices,
-        details: details
-    }
-
-    // Object.values(seance).forEach((element, index) => {
-    //     if (Array.isArray(element)) {
-    //         element.forEach((el, i) => {
-    //             console.log(el)
-    //         })
-    //     }
-    //     else {
-    //         console.log(element)
-    //     }
-    // })
-
-    res.json({ success: true, seance: seance })
 
 }
 
