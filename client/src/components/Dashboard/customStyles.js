@@ -148,7 +148,7 @@ const customStylesDarkMini = {
   }),
 };
 
-exports.customStylesMini = customStylesMini;
-exports.customStyles = customStyles;
-exports.customStylesDarkMini = customStylesDarkMini;
-exports.customStylesDark = customStylesDark;
+export { customStylesMini };
+export { customStyles };
+export { customStylesDarkMini };
+export { customStylesDark };
