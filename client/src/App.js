@@ -38,13 +38,13 @@ function App() {
                 <Route exact path='/stats/*' element={<Stats />} />
             </Route>
 
-            {/* <Route path="/programme/*" element={<PrivateRoute />}>
+            <Route path="/programme/*" element={<PrivateRoute />}>
                 <Route exact path='/programme/*' element={<Travaux />} />
-            </Route> */}
-
+            </Route>
+            {/* 
             <Route path="/programme/*" element={<PrivateRoute />}>
                 <Route exact path='/programme/*' element={<Programme />} />
-            </Route>
+            </Route> */}
 
             <Route path="/social/*" element={<PrivateRoute />}>
                 <Route exact path='/social/*' element={<Travaux />} />
