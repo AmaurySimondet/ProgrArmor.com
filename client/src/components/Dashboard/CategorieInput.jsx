@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import Slider from '@mui/material/Slider';
-import { alpha, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Select from "react-select";
 import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "./customStyles.js";

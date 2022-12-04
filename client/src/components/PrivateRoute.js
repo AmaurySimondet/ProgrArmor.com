@@ -1,26 +1,25 @@
-import {React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 import API from "../utils/API.js";
 import { Outlet, Navigate } from "react-router-dom";
-import {useLocation} from "react-router-dom";
 
 function PrivateRoute() {
     const [auth, setAuth] = useState();
 
-    async function handleAuth(){
+    async function handleAuth() {
         const res = await API.isAuth();
-//        console.log(res);
+        //        console.log(res);
         setAuth(res);
     }
 
     useEffect(() => {
         setTimeout(handleAuth(), 50);
-//        console.log(auth)
+        //        console.log(auth)
     }, []);
 
-    if (auth===true){
-        return <Outlet/>
+    if (auth === true) {
+        return <Outlet />
     }
-    if (auth === false){
+    if (auth === false) {
         return <Navigate to="/" />
     }
 

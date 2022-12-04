@@ -1,5 +1,4 @@
 import { React, useState, useEffect, useRef } from "react";
-import { Button } from "react-bootstrap";
 import NavigBar from "../NavigBar.jsx"
 import API from "../../utils/API";
 import Footer from "../Footer.jsx";
@@ -225,13 +224,13 @@ function Compte() {
               />
             </div>
           </div>
-          <Button className="btn btn-dark btn-lg" onClick={handleClickUpdateUser} block="true" type="submit">
+          <button className="btn btn-dark btn-lg" onClick={handleClickUpdateUser} block="true" type="submit">
             Appliquer les modifications
-          </Button>
+          </button>
           <br />
-          <Button className="btn btn-dark btn-lg btn-arriere" onClick={handleModifyForm} block="true" type="submit">
+          <button className="btn btn-dark btn-lg btn-arriere" onClick={handleModifyForm} block="true" type="submit">
             Revenir en arrière
-          </Button>
+          </button>
         </form>
         :
         modifyPassword ?
@@ -266,13 +265,13 @@ function Compte() {
                 />
               </div>
             </div>
-            <Button className="btn btn-dark btn-lg" onClick={handleClickUpdateUser} block="true" type="submit">
+            <button className="btn btn-dark btn-lg" onClick={handleClickUpdateUser} block="true" type="submit">
               Appliquer les modifications
-            </Button>
+            </button>
             <br />
-            <Button className="btn btn-dark btn-lg btn-arriere" onClick={handleModifyPasswordForm} block="true" type="submit">
+            <button className="btn btn-dark btn-lg btn-arriere" onClick={handleModifyPasswordForm} block="true" type="submit">
               Revenir en arrière
-            </Button>
+            </button>
           </form>
           :
           <div className="Compte">
@@ -309,14 +308,14 @@ function Compte() {
 
                   <td>
 
-                    <Button className="btn btn-dark profile-btn" onClick={handleModifyForm} block="true" type="submit">
+                    <button className="btn btn-dark profile-btn" onClick={handleModifyForm} block="true" type="submit">
                       Modifier les infos
-                    </Button>
+                    </button>
                     <br />
 
-                    <Button className="btn btn-dark" onClick={handleModifyPasswordForm} block="true" type="submit">
+                    <button className="btn btn-dark" onClick={handleModifyPasswordForm} block="true" type="submit">
                       Modifier le mot de passe
-                    </Button>
+                    </button>
 
                     <p className="session-div-switch">
                       Mode clair
@@ -352,14 +351,14 @@ function Compte() {
                 </div>
                 : null}
 
-              <Button className="btn btn-dark profile-btn profile-btn-small" onClick={handleModifyForm} block="true" type="submit">
+              <button className="btn btn-dark profile-btn profile-btn-small" onClick={handleModifyForm} block="true" type="submit">
                 Modifier les infos
-              </Button>
+              </button>
               <br />
 
-              <Button className="btn btn-dark" onClick={handleModifyPasswordForm} block="true" type="submit">
+              <button className="btn btn-dark" onClick={handleModifyPasswordForm} block="true" type="submit">
                 Modifier le mot de passe
-              </Button>
+              </button>
 
               <p className="session-div-switch">
                 Mode clair
@@ -367,9 +366,9 @@ function Compte() {
                 Mode Sombre </p>
             </div>
 
-            <Button className="btn btn-dark btn-lg profile-disconnect-btn" onClick={disconnect} block="true" type="submit">
+            <button className="btn btn-dark btn-lg profile-disconnect-btn" onClick={disconnect} block="true" type="submit">
               Se déconnecter
-            </Button>
+            </button>
           </div>
       }
 
