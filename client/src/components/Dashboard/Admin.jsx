@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import NavigBar from "../NavigBar";
-import { useForm } from "react-hook-form"
 import { useEffect } from "react";
 import { Cell, Tooltip, PieChart, Pie, ResponsiveContainer } from 'recharts'
 import API from "../../utils/API";
