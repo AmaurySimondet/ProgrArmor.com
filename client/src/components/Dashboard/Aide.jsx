@@ -43,9 +43,9 @@ function Aide() {
 
                     Installer l'application ProgrArmor
                     {clickInstallApp ?
-                        <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                        <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                         :
-                        <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                        <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                     }
                 </h2>
 

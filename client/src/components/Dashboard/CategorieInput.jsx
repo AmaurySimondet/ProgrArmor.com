@@ -272,12 +272,12 @@ function CategorieInput(props) {
                                     <label>
                                         Catégorie {props.dashboard ? props.index + 1 : null} {props.dimensions > 500 ? "(" + props.exercice.name + ")" : null}
                                     </label>
-                                    <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                                    <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" />
                                     <div className={categorieHiddenClick}>
                                         <CategorieHiddenText />
                                     </div>
                                     <div style={{ display: "inline-block" }}>
-                                        <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                                        <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                                     </div>
                                 </div>
                                 :
@@ -285,7 +285,7 @@ function CategorieInput(props) {
                                     <label>
                                         Catégorie {props.dashboard ? props.index + 1 : null} {props.dimensions > 500 ? "(" + props.exercice.name + ")" : null}
                                     </label>
-                                    <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                                    <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" />
                                     <div className={categorieHiddenClick}>
                                         <CategorieHiddenText />
                                     </div>
@@ -341,7 +341,7 @@ function CategorieInput(props) {
                             :
                             <label>
                                 Catégorie {props.dashboard ? props.index + 1 : null} {props.dimensions > 500 ? "(" + props.exercice.name + ")" : null}
-                                <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                                <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickCategorie} src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" />
                                 <div className={categorieHiddenClick}>
                                     <CategorieHiddenText />
                                 </div>
@@ -368,7 +368,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -400,7 +400,7 @@ function CategorieInput(props) {
                             :
                             <label>
                                 {categorie.name}
-                                <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickStreetworkout} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                                <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickStreetworkout} src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" />
                                 <div className={streetworkoutHiddenClicked}>
                                     <StreetworkoutHiddenText />
                                 </div>
@@ -427,7 +427,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -481,7 +481,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -535,7 +535,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -589,7 +589,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -643,7 +643,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -697,7 +697,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -751,7 +751,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -805,7 +805,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -859,7 +859,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -913,7 +913,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -967,7 +967,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1021,7 +1021,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1075,7 +1075,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1129,7 +1129,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1162,7 +1162,7 @@ function CategorieInput(props) {
                         </div>
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1216,7 +1216,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1270,7 +1270,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1324,7 +1324,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1378,7 +1378,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1432,7 +1432,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1486,7 +1486,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1540,7 +1540,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1594,7 +1594,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1648,7 +1648,7 @@ function CategorieInput(props) {
                         />
 
                         {props.dashboard ? null : <div className="col-1">
-                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                         </div>}
                     </div>
                 : null}
@@ -1715,7 +1715,7 @@ function CategorieInput(props) {
                             />
 
                             {props.dashboard ? null : <div className="col-1">
-                                <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                                <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                             </div>}
                         </div>
                         :
@@ -1753,7 +1753,7 @@ function CategorieInput(props) {
                                 />
 
                                 {props.dashboard ? null : <div className="col-1">
-                                    <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+                                    <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
                                 </div>}
                             </div>
 
@@ -1844,7 +1844,7 @@ function CategorieInput(props) {
                                     <div className="form-group row">
                                         <label className="">
                                             Estimation
-                                            <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickElastique} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                                            <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickElastique} src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" />
                                             <div className={elastiqueHiddenClick}>
                                                 <ElastiqueHiddenText />
                                             </div>

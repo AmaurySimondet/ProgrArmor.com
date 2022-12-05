@@ -487,7 +487,7 @@ table.Stats-table {
     position: absolute;
     top: 0px;
     right: -20px;
-    background-image: url('https://upcdn.io/W142hJk/raw/demo/4mrAKCowDj.png');
+    background-image: url('https://upcdn.io/W142hJk/raw/demo/4mrAKCowDj.webp');
     background-size: 100px;
     background-position-x: center;
     background-repeat: no-repeat;
@@ -506,8 +506,8 @@ table.Stats-table {
     height: 150px;
     position: relative;
     margin: auto;
-    background-image: url(https://upcdn.io/W142hJk/raw/demo/4mrAKCowDj.png);
-    /* https://upcdn.io/W142hJk/raw/demo/UBRD1hB.png */
+    background-image: url(https://upcdn.io/W142hJk/raw/demo/4mrAKCowDj.webp);
+    /* https://upcdn.io/W142hJk/raw/demo/UBRD1hB.webp */
     background-repeat: no-repeat;
     background-position-x: center;
     opacity: 0.1;

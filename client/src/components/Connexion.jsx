@@ -4,8 +4,8 @@ import BoutonsSociaux from "./BoutonsSociaux.jsx"
 import ConnexionForm from "./ConnexionForm.jsx"
 import Footer from "./Footer.jsx";
 
-function Connexion(){
-    return(
+function Connexion() {
+    return (
         <div>
             <HomeHeader />
 
@@ -13,7 +13,7 @@ function Connexion(){
                 <tbody>
                     <tr className="tr-connexion">
                         <td className="connexion-img-td">
-                            <img className="connexion-img" src={require('../images/connexion.png')} alt="ad" />
+                            <img className="connexion-img" src={require('../images/connexion.webp')} alt="ad" />
                         </td>
 
                         <td>

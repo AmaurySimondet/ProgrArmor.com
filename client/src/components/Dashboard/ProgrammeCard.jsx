@@ -206,7 +206,7 @@ function ProgrammeCard(props) {
                                         </h1>
                                         <img
                                             className={props.modeSombre ? "small-img questionDark" : "small-img"}
-                                            src={require('../../images/icons/three-dots.png')}
+                                            src={require('../../images/icons/three-dots.webp')}
                                             alt='three-dots'
                                             onClick={handleFlipThreeDots}
                                             style={{ position: "absolute", right: "0", top: "0" }} />
@@ -265,13 +265,13 @@ function ProgrammeCard(props) {
                                             {liked ?
                                                 <img
                                                     className="small-img"
-                                                    src={require('../../images/icons/like-red.png')}
+                                                    src={require('../../images/icons/like-red.webp')}
                                                     onClick={handleLike}
                                                     alt='liked' />
                                                 :
                                                 <img
                                                     className="small-img"
-                                                    src={require('../../images/icons/like.png')}
+                                                    src={require('../../images/icons/like.webp')}
                                                     onClick={handleLike}
                                                     alt='like' />
                                             }
@@ -281,9 +281,9 @@ function ProgrammeCard(props) {
                                         </td>
                                         <td>
                                             {commented ?
-                                                <img className="small-img" src={require('../../images/icons/comment-red.png')} onClick={handleFlipCommentTrue} alt='comment' />
+                                                <img className="small-img" src={require('../../images/icons/comment-red.webp')} onClick={handleFlipCommentTrue} alt='comment' />
                                                 :
-                                                <img className="small-img" src={require('../../images/icons/comment.png')} onClick={handleFlipCommentTrue} alt='comment' />
+                                                <img className="small-img" src={require('../../images/icons/comment.webp')} onClick={handleFlipCommentTrue} alt='comment' />
                                             }
                                         </td>
                                         <td>
@@ -377,7 +377,7 @@ function ProgrammeCard(props) {
                                     />
                                     <img
                                         className="small-img col-2"
-                                        src={require('../../images/icons/send-comment.png')}
+                                        src={require('../../images/icons/send-comment.webp')}
                                         alt='send'
                                         onClick={sendComment} />
                                 </div>

@@ -97,7 +97,7 @@ function SerieInput(props) {
     <div style={divStyle(props.index, props.modeSombre)}>
       {props.index === 0 ?
         <div>
-          <img className={props.modeSombre === true ? "myDIV questionDark" : "myDIV"} onClick={handleClickQuestion} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+          <img className={props.modeSombre === true ? "myDIV questionDark" : "myDIV"} onClick={handleClickQuestion} src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" />
           <div className={clicked}>
             <div className="hidden-text">
               <strong> {"C'est quoi cette donnée grisée à côté de la charge ?"} </strong> <br />
@@ -111,7 +111,7 @@ function SerieInput(props) {
               <br />
               A jeter tes déchets evidemment, mais ici elle sert à supprimer la série ou {"l'exercice correspondant"}, alors fais attention ! <br />
               <br />
-              <i> {"Cliques à nouveau sur l'icone"} <img className="myDIV" src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" /> {"pour faire disparaître ce bandeau d'information"} </i>
+              <i> {"Cliques à nouveau sur l'icone"} <img className="myDIV" src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" /> {"pour faire disparaître ce bandeau d'information"} </i>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@ function SerieInput(props) {
             Série {props.index + 1} {props.dimensions > 500 ? "(" + props.exercice.name + ")" : null}
           </label>
           <div style={{ paddingLeft: "0", display: "inline-block" }}>
-            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
           </div>
           <br />
 

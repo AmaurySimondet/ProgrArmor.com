@@ -4,3 +4,5 @@ npm-debug.log
 /*.env
 /config
 client/.env
+client/node_modules
+client/src/images/old

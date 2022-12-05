@@ -284,7 +284,7 @@ function Compte() {
                   {user.profilePic ?
                     <td className="profile-td">
                       <div onClick={() => inputFile.current.click()} className="relative">
-                        <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
+                        <img className="inner-img" src={require('../../images/icons/camera.webp')} alt="camera" />
                         <img className="profile-pic" src={user.profilePic} alt="profile-pic" />
                         <p> {text} </p>
                       </div>
@@ -292,8 +292,8 @@ function Compte() {
                     :
                     <td>
                       <div onClick={() => inputFile.current.click()} className="relative">
-                        <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
-                        <img className="unknown-profile-pic profile-pic" src={require('../../images/profilepic.png')} alt='unknown-profile-pic' />
+                        <img className="inner-img" src={require('../../images/icons/camera.webp')} alt="camera" />
+                        <img className="unknown-profile-pic profile-pic" src={require('../../images/profilepic.webp')} alt='unknown-profile-pic' />
                         <p> {text} </p>
                       </div>
                     </td>
@@ -332,14 +332,14 @@ function Compte() {
 
               {user.profilePic ?
                 <div onClick={() => inputFile.current.click()} className="relative">
-                  <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
+                  <img className="inner-img" src={require('../../images/icons/camera.webp')} alt="camera" />
                   <img className="profile-pic profile-pic-small" src={user.profilePic} alt="profile-pic" />
                   <p> {text} </p>
                 </div>
                 :
                 <div onClick={() => inputFile.current.click()} className="relative">
-                  <img className="inner-img" src={require('../../images/icons/camera.png')} alt="camera" />
-                  <img className="unknown-profile-pic profile-pic profile-pic-small" src={require('../../images/profilepic.png')} alt='unknown-profile-pic' />
+                  <img className="inner-img" src={require('../../images/icons/camera.webp')} alt="camera" />
+                  <img className="unknown-profile-pic profile-pic profile-pic-small" src={require('../../images/profilepic.webp')} alt='unknown-profile-pic' />
                   <p> {text} </p>
                 </div>
               }

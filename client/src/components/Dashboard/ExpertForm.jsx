@@ -618,7 +618,7 @@ function ExpertForm(props) {
                 clickEchauffement ?
                     <div>
                         <p onClick={handleClickEchauffement} className="expert-title">
-                            Echauffement <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                            Echauffement <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                         </p>
                         {seance.echauffements ?
                             seance.echauffements.map((echauffement, index) => {
@@ -651,7 +651,7 @@ function ExpertForm(props) {
                     </div>
                     :
                     <div>
-                        <p onClick={handleClickEchauffement} className="expert-title"> Echauffement <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
+                        <p onClick={handleClickEchauffement} className="expert-title"> Echauffement <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} /> </p>
                         <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
                     </div>
             }
@@ -659,7 +659,7 @@ function ExpertForm(props) {
             {
                 clickExercices ?
                     <div>
-                        <p onClick={handleClickExercices} className="expert-title"> Exercices <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
+                        <p onClick={handleClickExercices} className="expert-title"> Exercices <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} /> </p>
                         {seance.exercices ? seance.exercices.map((exercice, index) => {
                             return (
                                 <div>
@@ -689,7 +689,7 @@ function ExpertForm(props) {
                     </div>
                     :
                     <div>
-                        <p onClick={handleClickExercices} className="expert-title"> Exercices <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
+                        <p onClick={handleClickExercices} className="expert-title"> Exercices <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} /> </p>
                         <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
                     </div>
             }
@@ -697,7 +697,7 @@ function ExpertForm(props) {
             {
                 clickDetails ?
                     <div>
-                        <p onClick={handleClickDetails} className="expert-title"> Details <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
+                        <p onClick={handleClickDetails} className="expert-title"> Details <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} /> </p>
                         {seance.details ? seance.details.map((detail, index) => {
                             return (
                                 <div>
@@ -728,7 +728,7 @@ function ExpertForm(props) {
                     </div>
                     :
                     <div>
-                        <p onClick={handleClickDetails} className="expert-title"> Details <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} /> </p>
+                        <p onClick={handleClickDetails} className="expert-title"> Details <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} /> </p>
                         <hr className={props.modeSombre ? "hr-serie-dark" : "hr-serie"} />
                     </div>
             }

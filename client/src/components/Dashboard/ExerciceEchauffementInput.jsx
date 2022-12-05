@@ -72,13 +72,13 @@ function ExerciceEchauffementInput(props) {
               Echauffement {props.index + 1}
             </label>
             {props.debutant ? null : props.clickExercice ?
-              <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+              <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
               :
-              <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+              <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
             }
           </div>
           <div className="poubelle-div" style={{ paddingLeft: "0" }}>
-            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt="Poubelle" />
+            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
           </div>
           <br />
 

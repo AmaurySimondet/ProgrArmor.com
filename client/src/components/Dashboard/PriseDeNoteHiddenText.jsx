@@ -56,7 +56,7 @@ function PriseDeNoteHiddenText() {
             Manque de sommeil <br />
             Trop chaud <br />
             <br />
-            <i> {"Cliques à nouveau sur l'icone"} <img className="myDIV" src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" /> {"pour faire disparaître ce bandeau d'information"} </i>
+            <i> {"Cliques à nouveau sur l'icone"} <img className="myDIV" src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" /> {"pour faire disparaître ce bandeau d'information"} </i>
         </div>
     )
 }

@@ -15,7 +15,7 @@ function SeanceOfProgramme(props) {
                 <div className='col-2' style={{ margin: "auto" }}>
                     <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"}
                         onClick={handleClickPoubelle}
-                        src={require('../../images/icons/icons8-trash-30.png')}
+                        src={require('../../images/icons/icons8-trash-30.webp')}
                         alt="Poubelle" />
                 </div>
 

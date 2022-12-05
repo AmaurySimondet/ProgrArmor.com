@@ -52,7 +52,7 @@ function PriseDeNote(props) {
                         </h1>
                     </td>
                     <td>
-                        <img className={props.modeSombre === true ? "myDIV questionDark" : "myDIV"} onClick={handleClickQuestion} src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" />
+                        <img className={props.modeSombre === true ? "myDIV questionDark" : "myDIV"} onClick={handleClickQuestion} src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" />
                     </td>
                 </tr>
             </table>
@@ -66,7 +66,7 @@ function PriseDeNote(props) {
             <textarea
                 name="note"
                 value={note}
-                className="inputDark form-control"
+                className={props.modeSombre ? "inputDark form-control" : "form-control"}
                 onChange={handleNoteChange}
 
                 placeholder="Epopée de la force
@@ -77,7 +77,8 @@ function PriseDeNote(props) {
 
 
 
-            <button className="btn btn-black large-margin-updown" onClick={handleSubmitNotes}>
+            <button className={props.modeSombre ? "btn btn-black large-margin-updown" : "btn btn-white large-margin-updown"}
+                onClick={handleSubmitNotes}>
                 Valider et générer la séance
             </button>
         </div >

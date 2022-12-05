@@ -4,9 +4,9 @@ import BoutonsSociaux from "./BoutonsSociaux.jsx"
 import InscriptionForm from "./InscriptionForm.jsx"
 import Footer from "./Footer.jsx";
 
-function Inscription(){
+function Inscription() {
 
-    return(
+    return (
         <div>
             <HomeHeader />
 
@@ -27,7 +27,7 @@ function Inscription(){
                         </td>
 
                         <td className="inscription-img-td">
-                            <img className="inscription-img" src={require('../images/inscription.png')} alt="ad" />
+                            <img className="inscription-img" src={require('../images/inscription.webp')} alt="ad" />
                         </td>
                     </tr>
                 </tbody>

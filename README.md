@@ -1,6 +1,6 @@
 # Amaury Simondet - ProgrArmor 💪
 
-![Design preview for ProgrArmor](./client/src/images/designs/inscription.png)
+![Design preview for ProgrArmor](./client/src/images/designs/inscription.webp)
 
 ## Salut ! 👋
 
@@ -13,11 +13,11 @@ Le front-end React communique avec l'API back-end Node pour gérer la base de do
 
 ## Designs 📸
 
-![Design preview for ProgrArmor](./client/src/images/designs/welcome.png)
-![Design preview for ProgrArmor](./client/src/images/designs/session.png)
-![Design preview for ProgrArmor](./client/src/images/designs/historique.png)
-![Design preview for ProgrArmor](./client/src/images/designs/stats.png)
-![Design preview for ProgrArmor](./client/src/images/designs/compte.png)
+![Design preview for ProgrArmor](./client/src/images/designs/welcome.webp)
+![Design preview for ProgrArmor](./client/src/images/designs/session.webp)
+![Design preview for ProgrArmor](./client/src/images/designs/historique.webp)
+![Design preview for ProgrArmor](./client/src/images/designs/stats.webp)
+![Design preview for ProgrArmor](./client/src/images/designs/compte.webp)
 
 ## Un commentaire ? / Got feedback for me?
 

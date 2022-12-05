@@ -128,7 +128,7 @@ function Session() {
     <div>
       <NavigBar location="session" />
 
-      <button className="btn btn-black" style={{ margin: "20px" }} onClick={handlePriseDeNote}>
+      <button className={user && user.modeSombre ? "btn btn-black" : "btn btn-white"} style={{ margin: "20px" }} onClick={handlePriseDeNote}>
         {!priseDeNote ? "Mode prise de note rapide" : "Mode normal"}
       </button>
 

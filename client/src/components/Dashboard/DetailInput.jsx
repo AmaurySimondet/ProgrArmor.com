@@ -88,7 +88,7 @@ function DetailInput(props) {
           }
 
           {props.dashboard ? null : <div style={{ display: "inline-block" }}>
-            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
           </div>}
 
           <div className={props.info === true ? "col-10" : props.info === "false" ? "col-12" : "col-12"}>
@@ -146,7 +146,7 @@ function DetailInput(props) {
           </div>
 
           {props.dashboard ? null : <div className="col-1">
-            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+            <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
           </div>}
         </div>
         : null}
@@ -198,7 +198,7 @@ function DetailInput(props) {
             </div>
 
             {props.dashboard ? null : <div className="col-1">
-              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
         : null}
@@ -249,7 +249,7 @@ function DetailInput(props) {
             </div>
 
             {props.dashboard ? null : <div className="col-1">
-              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
         : null}
@@ -300,7 +300,7 @@ function DetailInput(props) {
             </div>
 
             {props.dashboard ? null : <div className="col-1">
-              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
         : null}
@@ -351,7 +351,7 @@ function DetailInput(props) {
             </div>
 
             {props.dashboard ? null : <div className="col-1">
-              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
         : null}
@@ -402,7 +402,7 @@ function DetailInput(props) {
             </div>
 
             {props.dashboard ? null : <div className="col-1">
-              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
         : null}
@@ -453,7 +453,7 @@ function DetailInput(props) {
             </div>
 
             {props.dashboard ? null : <div className="col-1">
-              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
         : null}
@@ -504,7 +504,7 @@ function DetailInput(props) {
             </div>
 
             {props.dashboard ? null : <div className="col-1">
-              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
         : null}
@@ -555,7 +555,7 @@ function DetailInput(props) {
             </div>
 
             {props.dashboard ? null : <div className="col-1">
-              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
         : null}
@@ -606,7 +606,7 @@ function DetailInput(props) {
             </div>
 
             {props.dashboard ? null : <div className="col-1">
-              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
         : null}
@@ -643,7 +643,7 @@ function DetailInput(props) {
             </div>
 
             {props.dashboard ? null : <div className="col-1">
-              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.png')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
+              <img className={props.modeSombre === true ? "poubelleDark" : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt={props.modeSombre === true ? "poubelleDark" : "poubelle"} />
             </div>}
           </div>
         : null}

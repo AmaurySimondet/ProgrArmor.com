@@ -24,7 +24,7 @@ function PoidsInput(props) {
         <img
           className={props.modeSombre === true ? "myDIV questionDark" : "myDIV"}
           onClick={handleClickPoids}
-          src={require('../../images/icons/icons8-question-mark-96.png')} alt="?"
+          src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?"
         />
         <div className={clicked}>
           <div className="hidden-text">
@@ -39,7 +39,7 @@ function PoidsInput(props) {
             Pèses toi au moins une fois par semaine et toujours dans les mêmes conditions pour un traçage optimal <br />
             Tu peux gérer la visibilité de ton poids par tes amis dans les paramètres de ton compte <br />
             <br />
-            <i> {"Cliques à nouveau sur l'icone"} <img className="myDIV" src={require('../../images/icons/icons8-question-mark-96.png')} alt="?" /> {"pour faire disparaître ce bandeau d'information"} </i>
+            <i> {"Cliques à nouveau sur l'icone"} <img className="myDIV" src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" /> {"pour faire disparaître ce bandeau d'information"} </i>
           </div>
         </div>
       </label>

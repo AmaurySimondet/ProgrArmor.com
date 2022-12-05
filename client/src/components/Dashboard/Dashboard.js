@@ -577,9 +577,9 @@ function Dashboard() {
                                 onClick={handleClickFiltrage}>
                                 Filtrage
                                 {clickFiltrage ?
-                                    <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                                    <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                     :
-                                    <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                                    <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                 }
                             </h2>
 
@@ -680,7 +680,7 @@ function Dashboard() {
                                             <div className="form-group row">
                                                 <div className="form-group col-12">
                                                     <label onClick={handleClick} id={index} className="col-form-label categorie-label">
-                                                        Catégorie {index + 1} <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.png')} />
+                                                        Catégorie {index + 1} <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.webp')} />
                                                     </label>
                                                     <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
                                                 </div>
@@ -693,7 +693,7 @@ function Dashboard() {
                                             <div className="form-group row">
                                                 <div className="form-group col-12">
                                                     <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
-                                                        Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.png')} />
+                                                        Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.webp')} />
                                                     </label>
                                                     <DetailInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
                                                 </div>
@@ -735,9 +735,9 @@ function Dashboard() {
                                 onClick={handleClickAffichage}>
                                 Affichage
                                 {clickAffichage ?
-                                    <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                                    <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                     :
-                                    <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                                    <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                 }
                             </h2>
 
@@ -866,9 +866,9 @@ function Dashboard() {
                                         onClick={handleClickFiltrage}>
                                         Filtrage
                                         {clickFiltrage ?
-                                            <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                                            <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                             :
-                                            <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                                            <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                         }
                                     </h2>
 
@@ -973,7 +973,7 @@ function Dashboard() {
                                                     <div className="form-group row">
                                                         <div className="form-group col-12">
                                                             <label onClick={handleClick} id={index} className="col-form-label categorie-label">
-                                                                Catégorie {index + 1} <img onClick={handleClick} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.png')} />
+                                                                Catégorie {index + 1} <img onClick={handleClick} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.webp')} />
                                                             </label>
                                                             <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
                                                         </div>
@@ -986,7 +986,7 @@ function Dashboard() {
                                                     <div className="form-group row">
                                                         <div className="form-group col-12">
                                                             <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
-                                                                Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.png')} />
+                                                                Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.webp')} />
                                                             </label>
                                                             <DetailInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
                                                         </div>
@@ -1032,9 +1032,9 @@ function Dashboard() {
                                         onClick={handleClickAffichage}>
                                         Affichage
                                         {clickAffichage ?
-                                            <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                                            <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                             :
-                                            <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.png')} />
+                                            <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                         }
                                     </h2>
 
@@ -1197,7 +1197,7 @@ function Dashboard() {
                                                                 indexExercice === 0 ?
                                                                     indexSerie === 0 ?
                                                                         <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
-                                                                            <img id={seance.id} onClick={handleClickModify} className={switched ? "modify-black" : "modify-white"} src={require('../../images/icons/write.png')} alt='session' />
+                                                                            <img id={seance.id} onClick={handleClickModify} className={switched ? "modify-black" : "modify-white"} src={require('../../images/icons/write.webp')} alt='session' />
                                                                         </td>
                                                                         :
                                                                         <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
@@ -1215,7 +1215,7 @@ function Dashboard() {
                                                                 indexExercice === 0 ?
                                                                     indexSerie === 0 ?
                                                                         <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
-                                                                            <img id={seance.id} onClick={handleClickSuppr} className={switched ? "suppr-black" : "suppr-white"} src={require('../../images/icons/icons8-trash-30.png')} alt='session' />
+                                                                            <img id={seance.id} onClick={handleClickSuppr} className={switched ? "suppr-black" : "suppr-white"} src={require('../../images/icons/icons8-trash-30.webp')} alt='session' />
                                                                         </td>
                                                                         :
                                                                         <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">

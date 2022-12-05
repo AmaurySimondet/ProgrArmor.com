@@ -62,7 +62,7 @@ function ProgrammeCard(props) {
                                 <table className="basic-table">
                                     <tr>
                                         <td>
-                                            <img className="unknown-profile-pic profile-pic" src={require('../../images/profilepic.png')} alt='unknown-profile-pic' />
+                                            <img className="unknown-profile-pic profile-pic" src={require('../../images/profilepic.webp')} alt='unknown-profile-pic' />
                                         </td>
                                         <td>
                                             <p style={{ margin: "auto", display: "inline-block" }}>Prénom Nom</p>
@@ -76,13 +76,13 @@ function ProgrammeCard(props) {
                                 <table className="basic-table">
                                     <tr>
                                         <td>
-                                            <img className="small-img" src={require('../../images/icons/like.png')} alt='like' />
+                                            <img className="small-img" src={require('../../images/icons/like.webp')} alt='like' />
                                         </td>
                                         <td>
                                             <p style={{ margin: "auto", fontSize: "50%" }}> Nbre de likes </p>
                                         </td>
                                         <td>
-                                            <img className="small-img" src={require('../../images/icons/comment.png')} alt='comment' />
+                                            <img className="small-img" src={require('../../images/icons/comment.webp')} alt='comment' />
                                         </td>
                                         <td>
                                             <p style={{ margin: "auto", fontSize: "50%" }}> Nbre de commentaires </p>
@@ -100,7 +100,7 @@ function ProgrammeCard(props) {
                     <div className="programme-card programme-card-explication">
                         <div>
 
-                            <img className="panties" src={require('../../images/other/panties.png')} alt='panties' />
+                            <img className="panties" src={require('../../images/other/panties.webp')} alt='panties' />
                         </div>
                     </div>
                 </div>
