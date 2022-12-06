@@ -264,6 +264,13 @@ table.profile-table {
 
 /* SESSION DEBUTANT */
 
+.clickOnMe {
+    color: #9b0000;
+}
+
+.clickOnMe:hover {
+    color: #ff0000;
+}
 
 
 .btn-black {

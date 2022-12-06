@@ -1,7 +1,29 @@
-import { React, useState, useEffect } from "react";
-import elastiques from "./Categories/Elastiques";
+import { React } from "react";
 
 function PriseDeNoteHiddenText() {
+
+    function copyToClipboard() {
+        const text = "Epopée de la force \n" +
+            "12/05/1998 \n" +
+            "120 \n" +
+            "\n" +
+            "Echauffements: \n" +
+            "Dislocation d'épaule, {resistance; moyen; tension=10} : 3x10x0 \n" +
+            "\n" +
+            "Exercices: \n" +
+            "Squat, pistol, pieds surrelevés, barre olympique : 3x1x20 [4min] \n" +
+            "Developpé couché, sur banc, haltères : 1x1x100 [4min], 1x1x105 [3min], 0x1x110 [5min], 1x1x107.5 \n" +
+            "Tractions, {assistance; 5; mesure=5} : 3x10x0 \n" +
+            "Curl - Biceps, barre EZ, assis: 4x12x40 [1min] \n" +
+            "Front Lever, full : 1x20secx0 \n" +
+            "\n" +
+            "Details: \n" +
+            "Manque de sommeil \n" +
+            "Trop chaud "
+
+        navigator.clipboard.writeText(text);
+    }
+
     return (
         <div className="hidden-text">
             <strong> C'est quoi la prise de note rapide ? </strong> <br />
@@ -55,6 +77,8 @@ function PriseDeNoteHiddenText() {
             Details: <br />
             Manque de sommeil <br />
             Trop chaud <br />
+            <br />
+            <strong className="clickOnMe" onClick={copyToClipboard}> {"---> Cliques sur moi pour copier l'exemple <--"} </strong> <br />
             <br />
             <i> {"Cliques à nouveau sur l'icone"} <img className="myDIV" src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" /> {"pour faire disparaître ce bandeau d'information"} </i>
         </div>

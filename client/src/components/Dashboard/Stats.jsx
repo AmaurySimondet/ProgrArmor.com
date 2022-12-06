@@ -87,10 +87,6 @@ function Stats() {
     const [prefHidden, setPrefHidden] = useState(true);
     const imageRef = useRef(null);
 
-    function handleShare() {
-        return null
-    }
-
     function handleClickPoids() {
         setPoidsHidden(!poidsHidden);
     }
@@ -112,7 +108,7 @@ function Stats() {
     async function getUser() {
         const { data } = await API.getUser({ id: localStorage.getItem("id") });
         if (data.success === false) {
-            alert(data.message);
+            console.log(data.message);
         } else {
             console.log(data.profile);
             if (data.profile.modeSombre && data.profile.modeSombre === true) {
@@ -209,8 +205,9 @@ function Stats() {
     async function getReguScore() {
         const { data } = await API.reguScore({ id: localStorage.getItem("id") });
         if (data.success === false) {
-            alert(data.message)
+            console.log(data.message);
         } else {
+            console.log(data);
             setReguScore(data);
         }
     }
@@ -219,6 +216,7 @@ function Stats() {
         setTimeout(getSeance1, 50);
         setTimeout(getSeance2, 50);
         setTimeout(getSeance3, 50);
+        getReguScore();
     }, [params1, params2, params3]);
 
 
@@ -911,50 +909,64 @@ function Stats() {
 
                     </div>
 
-                    <div className="regu-score">
-                        <p style={{ marginBottom: dimensions.width < 350 ? "-50px" : dimensions.width < 950 ? "-100px" : "-300px" }}>
-                            <h1 style={{ marginBottom: "20px" }}>Ta régularité</h1>
-                            <img className={user.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickRegu} src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" />
-                            <div className={ReguHiddenClick}>
-                                <ReguHiddenText />
-                            </div>
+                    {reguScore ?
+                        <div className="regu-score">
+                            <p style={{ marginBottom: dimensions.width < 350 ? "-50px" : dimensions.width < 950 ? "-100px" : "-300px" }}>
+                                <h1 style={{ marginBottom: "20px" }}>Ta régularité</h1>
+                                <img className={user.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickRegu} src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" />
+                                <div className={ReguHiddenClick}>
+                                    <ReguHiddenText />
+                                </div>
 
-                            <h2> Ta série de séances consécutives actuelle: </h2>
-                            <h2> {reguScore.currSerie} </h2>
+                                <h2> Ta série de séances consécutives actuelle: </h2>
+                                <h2> {reguScore.currSerie} </h2>
 
-                            <h2> Ta meilleure série de séances consécutives: </h2>
-                            <h2> {reguScore.bestSerie} </h2>
+                                <h2> Ta meilleure série de séances consécutives: </h2>
+                                <h2> {reguScore.bestSerie} </h2>
 
-                            <h2> Ta moyenne de séances consécutives: </h2>
-                            <h2 style={{ marginBottom: "20px" }}> {reguScore.AverageSerie.toFixed(2)} </h2>
-                        </p>
+                                <h2> Ta moyenne de séances consécutives: </h2>
+                                <h2 style={{ marginBottom: "20px" }}> {reguScore.AverageSerie.toFixed(2)} </h2>
+                            </p>
 
-                        <ResponsiveContainer
-                            width={dimensions.width < 350 ? 80 : dimensions.width < 450 ? 100 : dimensions.width < 925 ? 200 : 200}
-                            height={dimensions.width < 350 ? 150 : dimensions.width < 450 ? 300 : dimensions.width < 925 ? 400 : 800}
-                            className={user.modeSombre === true ? "regu-score watermark-regu watermark watermarkDark rotate" : "regu-score watermark-regu watermark rotate"}>
-                            <BarChart
-                                data={reguScore.reguScore}
-                            >
-                                <XAxis tick={user.modeSombre === true ? { fill: 'white' } : { fill: "black" }} tickLine={user.modeSombre === true ? { stroke: 'white' } : { stroke: "black" }} dataKey="name" />
-                                <YAxis domain={[0, 100]} tick={user.modeSombre === true ? { fill: 'white' } : { fill: "black" }} tickLine={user.modeSombre === true ? { stroke: 'white' } : null} />
-                                <Tooltip content={<CustomTooltipRegu />} />
-                                <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
-                                <Bar barSize={100} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="score">
-                                    {reguScore.reguScore.map((entry, index) => (
-                                        <Cell fill={
-                                            entry.score < 25 ? "#F7A4A4" :
-                                                entry.score < 50 ? "#FEBE8C" :
-                                                    entry.score < 75 ? "#FFFBC1" :
-                                                        "#B6E2A1"}
-                                        />
-                                    ))}
-                                </Bar>
-                            </BarChart>
-                        </ResponsiveContainer >
+                            <ResponsiveContainer
+                                width={dimensions.width < 350 ? 80 : dimensions.width < 450 ? 100 : dimensions.width < 925 ? 200 : 200}
+                                height={dimensions.width < 350 ? 150 : dimensions.width < 450 ? 300 : dimensions.width < 925 ? 400 : 800}
+                                className={user.modeSombre === true ? "regu-score watermark-regu watermark watermarkDark rotate" : "regu-score watermark-regu watermark rotate"}>
+                                <BarChart
+                                    data={reguScore.reguScore}
+                                >
+                                    <XAxis tick={user.modeSombre === true ? { fill: 'white' } : { fill: "black" }} tickLine={user.modeSombre === true ? { stroke: 'white' } : { stroke: "black" }} dataKey="name" />
+                                    <YAxis domain={[0, 100]} tick={user.modeSombre === true ? { fill: 'white' } : { fill: "black" }} tickLine={user.modeSombre === true ? { stroke: 'white' } : null} />
+                                    <Tooltip content={<CustomTooltipRegu />} />
+                                    <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
+                                    <Bar barSize={100} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="score">
+                                        {reguScore.reguScore.map((entry, index) => (
+                                            <Cell fill={
+                                                entry.score < 25 ? "#F7A4A4" :
+                                                    entry.score < 50 ? "#FEBE8C" :
+                                                        entry.score < 75 ? "#FFFBC1" :
+                                                            "#B6E2A1"}
+                                            />
+                                        ))}
+                                    </Bar>
+                                </BarChart>
+                            </ResponsiveContainer >
 
 
-                    </div>
+                        </div>
+                        :
+                        <div className="regu-score">
+                            <p>
+                                <h1 style={{ marginBottom: "20px" }}>Ta régularité</h1>
+                                <img className={user.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickRegu} src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" />
+                                <div className={ReguHiddenClick}>
+                                    <ReguHiddenText />
+                                </div>
+                            </p>
+
+                            <p> Je ne peux pas calculer un score de régularité avec une seule séance, retourne t'entraîner !</p>
+
+                        </div>}
 
                 </div>
             }

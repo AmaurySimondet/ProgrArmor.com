@@ -84,12 +84,12 @@ function Session() {
           if (data.seance.nom) {
             setSwitched(true)
             setSeance(data.seance)
-            console.log(data.seance)
+            console.log("seance from params", data.seance)
           }
           else {
             setSwitched(false)
             setSeance(data.seance)
-            console.log(data.seance)
+            console.log("seance from params", data.seance)
           }
         }
       }
@@ -120,6 +120,11 @@ function Session() {
 
   function submitNote(seance) {
     setPriseDeNote(false);
+    setSwitched(true);
+    setSeance(seance);
+  }
+
+  function loadExpert(seance) {
     setSwitched(true);
     setSeance(seance);
   }
@@ -158,6 +163,7 @@ function Session() {
               dimensions={dimensions} />
             :
             <DebutantForm
+              loadExpert={loadExpert}
               seance={
                 seance ?
                   seance

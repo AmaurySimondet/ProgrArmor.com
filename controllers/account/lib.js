@@ -8,12 +8,13 @@ const stringSimilarity = require('string-similarity');
 require('dotenv').config();
 
 const url = "https://www.prograrmor.com" // https://www.prograrmor.com https://prograrmorprealpha1.herokuapp.com
-const url2 = "https://www.prograrmor.com" // http://localhost:3000 https://prograrmorprealpha1.herokuapp.com
+const url2 = "https://www.prograrmor.com" // http://192.168.1.88:3000 https://prograrmorprealpha1.herokuapp.com
 
 const app = express();
 
 app.use(session({
     secret: process.env.secret,
+    keys: [process.env.secret],
     resave: false,
     saveUninitialized: false
 }));
@@ -1633,8 +1634,6 @@ async function supprSeance(req, res) {
 //REGU SCORE
 async function reguScore(req, res) {
     let conditions = {}
-    let update = {}
-    let newSeances = [];
     let seances = []
 
     conditions = {

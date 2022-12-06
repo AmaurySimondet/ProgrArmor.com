@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSearchParams } from "react-router-dom";
 
 function DebutantForm(props) {
-    console.log(props.seance)
+    console.log("debutant seance from props", props.seance)
 
     const [seance, setSeance] = useState(props.seance);
     const [params, setParams] = useState({ load: "" });
@@ -19,7 +19,7 @@ function DebutantForm(props) {
         let emptySerie = false
         let err = false;
 
-        console.log(seance);
+        console.log("debutant recording seance", seance);
 
         //CONDITIONS
         if (seance.date === '' && err === false) {
@@ -196,10 +196,10 @@ function DebutantForm(props) {
             }
             else { alert(data.message); }
         } else {
-            console.log(data.seance)
+            console.log("loaded seance", data.seance)
             if (data.seance) {
                 if (data.seance.nom) {
-                    alert("Vous ne pouvez pas charger une séance expert en mode débutant !")
+                    props.loadExpert(data.seance)
                 }
                 else {
                     setSeance({ ...data.seance, id: uuidv4() })
@@ -211,11 +211,11 @@ function DebutantForm(props) {
         }
     }
 
-    useEffect(() => {
-        if (props.seance !== seance) {
-            setSeance(props.seance)
-        }
-    }, [props.seance])
+    // useEffect(() => {
+    //     if (props.seance !== seance) {
+    //         setSeance(props.seance)
+    //     }
+    // }, [props.seance])
 
     return (
         <form className="debutant-form">

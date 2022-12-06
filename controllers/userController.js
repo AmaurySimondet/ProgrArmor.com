@@ -1,5 +1,5 @@
 const account = require('./account/lib.js');
-const programme = require('./account/libprogramme.js');
+const programme = require('./account/libProgramme.js');
 
 module.exports = function (app) {
     //LOGIN SIGNUP

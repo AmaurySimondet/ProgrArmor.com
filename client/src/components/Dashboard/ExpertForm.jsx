@@ -17,7 +17,7 @@ function containsObj(arr, obj) {
 }
 
 function ExpertForm(props) {
-    console.log(props.seance)
+    console.log("expert seance from props", props.seance)
 
     const [seance, setSeance] = useState(props.seance);
     const [clickEchauffement, setClickEchauffement] = useState(props.seance.echauffements.length > 0 ? true : false);
@@ -43,7 +43,7 @@ function ExpertForm(props) {
     async function handleClick() {
         event.preventDefault();
 
-        console.log(seance);
+        console.log("expert recording seance", seance);
 
         let err = false;
 
@@ -188,7 +188,7 @@ function ExpertForm(props) {
         //API
         if (err === false) {
             let data;
-            console.log(searchParams.get("seanceId"))
+            console.log("id from params", searchParams.get("seanceId"))
 
             if (searchParams.get("seanceId")) {
                 data = await API.debutantform(
@@ -198,8 +198,6 @@ function ExpertForm(props) {
                         seanceId: searchParams.get("seanceId"),
                         id: localStorage.getItem("id")
                     });
-
-                console.log(data.data)
 
                 if (data.data.success === true) {
                     window.location = "/dashboard";
@@ -369,7 +367,7 @@ function ExpertForm(props) {
             }
             else { alert(data.message); }
         } else {
-            console.log(data.seance)
+            console.log("loaded seance", data.seance)
             if (data.seance) {
                 if (!data.seance.nom) {
                     alert("Vous ne pouvez pas charger une séance débutant en mode expert !")
@@ -460,7 +458,6 @@ function ExpertForm(props) {
     }
 
     function handleChangeName(event) {
-        console.log(event.value)
         if (event.target) {
             setSeance(oldSeance => {
                 return ({
