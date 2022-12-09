@@ -61,7 +61,13 @@ const CustomTooltip = ({ active, payload, label }) => {
                         return (<p className="chart-desc">Poids : {payload.value}</p>)
                     }
                     if (payload.dataKey === "repsTime") {
-                        return (<p className="chart-desc"> Valeur classification : {payload.value}</p>)
+                        return (
+                            <p className="chart-desc">
+                                {payload.payload.class === "reps" ? "Total répétitions : " + payload.value
+                                    : payload.payload.class === "time" ? "Temps total (secondes) : " + payload.value
+                                        : payload.payload.class === "sets" ? "Total séries : " + payload.value
+                                            : null}
+                            </p>)
                     }
                     if (payload.dataKey === "exercices[0].Categories[0].assistance" || payload.dataKey === "exercices[0].Categories[1].assistance" || payload.dataKey === "exercices[0].Categories[2].assistance" || payload.dataKey === "exercices[0].Categories[3].assistance" || payload.dataKey === "exercices[0].Categories[4].assistance") {
                         return (<p className="chart-desc"> Assistance élastique (kg) : {payload.value}</p>)
@@ -81,7 +87,7 @@ const CustomTooltipRegu = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
             <div className="custom-tooltip">
-                <p className="desc">{payload[0].payload.name} : {payload[0].payload.score.toFixed(2)}</p>
+                <p className="chart-desc">{payload[0].payload.name} : {payload[0].payload.score.toFixed(2)}</p>
             </div>
         );
     }
@@ -253,7 +259,6 @@ function Stats() {
         setTimeout(getSeance2, 50);
         setTimeout(getSeance3, 50);
         getReguScore();
-        console.log("params2", params2)
     }, [params1, params2, params3]);
 
 
@@ -297,13 +302,7 @@ function Stats() {
     }
 
     function changeCategorie(categorie) {
-        let newCategorie = {
-            ...categorie,
-            name: categorie.name,
-            utilisation: categorie.utilisation,
-        }
-        console.log("newCategorie", newCategorie)
-        setCategorie(newCategorie)
+        setCategorie(categorie)
     }
 
     function changeDetail(detail) {
@@ -440,7 +439,10 @@ function Stats() {
 
                                         <p> Evolution de ton poids sur la période {params1.periode} </p>
 
-                                        <ResponsiveContainer width="100%" height={dimensions.width < 925 ? 280 : 400} className={user.modeSombre === true ? "chart watermark watermarkDark" : "chart watermark"}>
+                                        <ResponsiveContainer width="100%" height={
+                                            dimensions.width < 500 ? 280 : 400
+                                        }
+                                            className={user.modeSombre === true ? "chart watermark watermarkDark" : "chart watermark"}>
                                             <LineChart
                                                 data={seances1}
                                                 margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
@@ -452,6 +454,11 @@ function Stats() {
                                                 <Line strokeWidth={3} connectNulls type="monotone" dataKey="poids" stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
                                             </LineChart>
                                         </ResponsiveContainer >
+
+                                        <div className="chart-legende">
+                                            <hr style={user.modeSombre === true ? { borderColor: "#ff6666", borderWidth: "4px", width: "60px" } : { borderColor: "#ff0000", borderWidth: "4px", width: "60px" }} />
+                                            <p style={{ margin: "auto" }}> Ton poids en kg </p>
+                                        </div>
 
 
                                     </div>
@@ -532,7 +539,7 @@ function Stats() {
                                                         </div>
                                                     </div>
 
-                                                    <div className="form-group row stats-form mini-margin-bottom">
+                                                    <div className="form-group row stats-form basic-margin-top mini-margin-bottom">
                                                         <label className="col-form-label col-3">
                                                             Reps / Temps
                                                         </label>
@@ -627,7 +634,6 @@ function Stats() {
                                                     <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
                                                     <Bar barSize={20} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="exercices[0].Series[0].repsTime" />
                                                     <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
-                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
                                                     <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[0].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
                                                     <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[1].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
                                                     <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[2].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
@@ -642,9 +648,19 @@ function Stats() {
                                                 </ComposedChart>
                                             </ResponsiveContainer >
 
+                                            <div className="chart-legende">
+                                                <hr style={user.modeSombre === true ? { borderColor: "#ff6666", borderWidth: "4px", width: "60px" } : { borderColor: "#ff0000", borderWidth: "4px", width: "60px" }} />
+                                                <p style={{ margin: "auto" }}> {typePerfGraph === "percent" ? "Performance en % Poids Du Corps" : "Performance en charge (kg)"} </p>
+                                                <hr style={user.modeSombre === true ? { borderColor: "#4DBAFF", borderWidth: "4px", width: "60px" } : { borderColor: "#10669C", borderWidth: "4px", width: "60px" }} />
+                                                <p style={{ margin: "auto" }}> Resistance élastique estimée/mesurée en kg </p>
+                                                <hr style={user.modeSombre === true ? { borderColor: "#66E891", borderWidth: "4px", width: "60px" } : { borderColor: "#24B34C", borderWidth: "4px", width: "60px" }} />
+                                                <p style={{ margin: "auto" }}> Assistance élastique estimée/mesurée en kg </p>
+                                                <hr style={user.modeSombre === true ? { borderColor: "#626262", borderWidth: "12px", width: "60px" } : { borderColor: "#afafa6", borderWidth: "12px", width: "60px" }} />
+                                                <p style={{ margin: "auto" }}> Répétitions / secondes </p>
+                                            </div>
+
                                             <i className="detail-stat"> Les répétitions sont multipliées par 10 pour une meilleur lecture </i>
                                             <br />
-
 
                                         </div>
                                     </td>
@@ -731,7 +747,7 @@ function Stats() {
                                                         </div>
                                                     </div>
 
-                                                    <div className="form-group row stats-form mini-margin-bottom">
+                                                    <div className="form-group row stats-form basic-margin-top mini-margin-bottom">
                                                         <label className="col-form-label col-3">
                                                             Reps / Temps
                                                         </label>
@@ -807,7 +823,7 @@ function Stats() {
                                                 sur la période {params2.periode}
                                             </p>
 
-                                            <ResponsiveContainer width="100%" height={dimensions.width < 925 ? 280 : 400} className={user.modeSombre === true ? "chart watermark watermarkDark" : "chart watermark"}>
+                                            <ResponsiveContainer width="100%" height={dimensions.width < 500 ? 280 : 400} className={user.modeSombre === true ? "chart watermark watermarkDark" : "chart watermark"}>
                                                 <ComposedChart
                                                     width={400}
                                                     height={400}
@@ -839,6 +855,17 @@ function Stats() {
                                                     <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[4].assistance"} stroke={user.modeSombre === true ? "#66E891" : "#24B34C"} />
                                                 </ComposedChart>
                                             </ResponsiveContainer >
+
+                                            <div className="chart-legende">
+                                                <hr style={user.modeSombre === true ? { borderColor: "#ff6666", borderWidth: "4px", width: "60px" } : { borderColor: "#ff0000", borderWidth: "4px", width: "60px" }} />
+                                                <p style={{ margin: "auto" }}> {typePerfGraph === "percent" ? "Performance en % Poids Du Corps" : "Performance en charge (kg)"} </p>
+                                                <hr style={user.modeSombre === true ? { borderColor: "#4DBAFF", borderWidth: "4px", width: "60px" } : { borderColor: "#10669C", borderWidth: "4px", width: "60px" }} />
+                                                <p style={{ margin: "auto" }}> Resistance élastique estimée/mesurée en kg </p>
+                                                <hr style={user.modeSombre === true ? { borderColor: "#66E891", borderWidth: "4px", width: "60px" } : { borderColor: "#24B34C", borderWidth: "4px", width: "60px" }} />
+                                                <p style={{ margin: "auto" }}> Assistance élastique estimée/mesurée en kg </p>
+                                                <hr style={user.modeSombre === true ? { borderColor: "#626262", borderWidth: "12px", width: "60px" } : { borderColor: "#afafa6", borderWidth: "12px", width: "60px" }} />
+                                                <p style={{ margin: "auto" }}> Répétitions / secondes </p>
+                                            </div>
 
                                             <p style={{ fontStyle: "italic" }}> Les répétitions sont multipliées par 10 pour une meilleur lecture </p>
                                             <br />

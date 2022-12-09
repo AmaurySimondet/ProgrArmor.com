@@ -53,8 +53,8 @@ const exercices = [
   {
     id: "name",
     className: "select-item",
-    label: "Curl",
-    value: "Curl",
+    label: "Curl / Flexion",
+    value: "Curl / Flexion",
   },
   {
     id: "name",
@@ -772,6 +772,18 @@ const exercices = [
     className: "select-item",
     label: "COC / Captains of crush",
     value: "COC",
+  },
+  {
+    id: "name",
+    className: "select-item",
+    label: "Bobine d'andrieu",
+    value: "Bobine d'andrieu",
+  },
+  {
+    id: "name",
+    className: "select-item",
+    label: "",
+    value: "",
   },
 
 

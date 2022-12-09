@@ -1447,6 +1447,9 @@ async function workouts(req, res) {
                     if (req.query.reforme === "pie") {
                         seances = seancesToPie(seances, req.query.class)
                         seances = seances.sort((a, b) => { return b.repsTime - a.repsTime })
+                        seances.forEach((seance) => {
+                            seance.class = req.query.class
+                        })
                     }
 
                     res.json({

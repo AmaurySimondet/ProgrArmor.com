@@ -31,6 +31,7 @@ import Halterophilie from "./Categories/Halterophilie.js";
 import AccessoireObjet from "./Categories/AccessoireObjet.js";
 import RPE from "./Categories/RPE.js";
 import Douleur from "./Categories/Douleur.js";
+import TermeGenerique from "./Categories/TermeGenerique.js";
 
 import StreetworkoutHiddenText from "./Categories/StreetworkoutHiddenText.js";
 import CategorieHiddenText from "./Categories/CategorieHiddenText.js";
@@ -1589,6 +1590,60 @@ function CategorieInput(props) {
                             placeholder="Categorie..."
                             onChange={handleChange}
                             options={Halterophilie}
+                            styles={
+                                props.dimensions.width <= 500 ?
+                                    props.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    props.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            className={props.info === "dash" ? "col-10" : " col-11"}
+                            value={{ value: categorie.input, label: categorie.input }}
+                        />
+
+                        {props.dashboard ? null : <div className="col-1">
+                            <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
+                        </div>}
+                    </div>
+                : null}
+            {categorie.name === "Terme générique" ?
+                props.info === "false" ?
+                    <Select
+                        placeholder="Categorie..."
+                        onChange={handleChange}
+                        options={TermeGenerique}
+                        styles={
+                            props.dimensions.width <= 500 ?
+                                props.modeSombre === true ?
+                                    customStylesDarkMini
+                                    :
+                                    customStylesMini
+                                :
+                                props.modeSombre === true ?
+                                    customStylesDark
+                                    :
+                                    customStyles
+                        }
+                        value={{ value: categorie.input, label: categorie.input }}
+                    />
+                    :
+                    <div className="form-group row">
+                        {props.info === "false" ?
+                            null
+                            :
+                            <label className="">
+                                {categorie.name}
+                            </label>
+                        }
+                        <Select
+                            placeholder="Categorie..."
+                            onChange={handleChange}
+                            options={TermeGenerique}
                             styles={
                                 props.dimensions.width <= 500 ?
                                     props.modeSombre === true ?
