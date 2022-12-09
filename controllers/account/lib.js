@@ -7,8 +7,8 @@ const { v4: uuidv4 } = require('uuid');
 const stringSimilarity = require('string-similarity');
 require('dotenv').config();
 
-const url = "https://www.prograrmor.com" // https://www.prograrmor.com https://prograrmorprealpha1.herokuapp.com
-const url2 = "https://www.prograrmor.com" // http://192.168.1.88:3000 https://prograrmorprealpha1.herokuapp.com
+const url = "http://192.168.1.88:8800" // http://192.168.1.88:8800 https://prograrmorprealpha1.herokuapp.com
+const url2 = "http://192.168.1.88:3000" // http://192.168.1.88:3000 https://prograrmorprealpha1.herokuapp.com
 
 const app = express();
 
@@ -1400,6 +1400,12 @@ async function workouts(req, res) {
                             for (let k = 0; k < 5; k++) {
                                 if (seance.exercices[0].Categories && seance.exercices[0].Categories[k] && seance.exercices[0].Categories[k].estimation) {
                                     seance.exercices[0].Categories[k].estimation = parseFloat(seance.exercices[0].Categories[k].estimation);
+                                    if (seance.exercices[0].Categories[k].utilisation === "Resistance") {
+                                        seance.exercices[0].Categories[k].resistance = parseFloat(seance.exercices[0].Categories[k].estimation)
+                                    }
+                                    if (seance.exercices[0].Categories[k].utilisation === "Assistance") {
+                                        seance.exercices[0].Categories[k].assistance = parseFloat(seance.exercices[0].Categories[k].estimation)
+                                    }
                                 }
                             }
                         });
@@ -1635,6 +1641,7 @@ async function supprSeance(req, res) {
 async function reguScore(req, res) {
     let conditions = {}
     let seances = []
+    let error = null;
 
     conditions = {
         _id: req.body.id
@@ -1643,17 +1650,20 @@ async function reguScore(req, res) {
     //find user seances
     await User.find(conditions, function (err, data) {
         if (err) {
-            res.json({ success: false, message: err })
+            error = { success: false, message: err }
         }
         else {
             seances = [...data[0].seances]
 
             if (seances.length === 0) {
-                res.json({ success: false, message: "Aucune séance" })
+                error = { success: false, message: "Aucune séance" }
             }
         }
     })
 
+    if (error !== null) {
+        return res.json(error)
+    }
 
     if (seances.length > 1) {
         Date.prototype.getWeek = function (dowOffset) {

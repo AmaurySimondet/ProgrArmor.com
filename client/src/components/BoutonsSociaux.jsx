@@ -1,7 +1,7 @@
 import React from "react";
 
 function BoutonsSociaux(props) {
-  const url = "https://www.prograrmor.com" // https://www.prograrmor.com https://www.prograrmor.com
+  const url = "http://192.168.1.88:8800" // http://192.168.1.88:8800 http://192.168.1.88:8800
 
   return (
     <div>

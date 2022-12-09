@@ -7,17 +7,17 @@ function PriseDeNoteHiddenText() {
             "12/05/1998 \n" +
             "120 \n" +
             "\n" +
-            "Echauffements: \n" +
+            "Echauffements:\n" +
             "Dislocation d'épaule, {resistance; moyen; tension=10} : 3x10x0 \n" +
             "\n" +
-            "Exercices: \n" +
+            "Exercices:\n" +
             "Squat, pistol, pieds surrelevés, barre olympique : 3x1x20 [4min] \n" +
             "Developpé couché, sur banc, haltères : 1x1x100 [4min], 1x1x105 [3min], 0x1x110 [5min], 1x1x107.5 \n" +
             "Tractions, {assistance; 5; mesure=5} : 3x10x0 \n" +
             "Curl - Biceps, barre EZ, assis: 4x12x40 [1min] \n" +
             "Front Lever, full : 1x20secx0 \n" +
             "\n" +
-            "Details: \n" +
+            "Details:\n" +
             "Manque de sommeil \n" +
             "Trop chaud "
 

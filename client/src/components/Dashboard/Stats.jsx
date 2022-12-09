@@ -12,26 +12,62 @@ const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
             <div className="custom-tooltip">
-                {label ? <p className="label">Date : {label}</p> : null}
+                {label ? <p className="chart-desc">Date : {label}</p> : null}
                 {payload.map((payload) => {
                     if (payload.dataKey === "exercices[0].Series[0].repsTime") {
-                        return (<p className="desc">Reps / Temps : {payload.value / 10}</p>)
+                        return (
+                            <div>
+                                <p className="chart-desc">
+                                    Exercice: {
+                                        payload.payload.exercices[0].Categories ?
+                                            payload.payload.exercices[0].exercice.name + ", "
+                                            :
+                                            payload.payload.exercices[0].exercice.name
+                                    }
+                                    {
+                                        payload.payload.exercices[0].Categories ?
+                                            Object.values(payload.payload.exercices[0].Categories).map((categorie, index) => {
+                                                if (index === Object.values(payload.payload.exercices[0].Categories).length - 1) {
+                                                    return (
+                                                        categorie.name === "Elastique" ?
+                                                            categorie.name
+                                                            :
+                                                            categorie.input
+                                                    )
+                                                }
+                                                else {
+                                                    return (
+                                                        categorie.name === "Elastique" ?
+                                                            categorie.name + ", "
+                                                            :
+                                                            categorie.input + ", "
+                                                    )
+                                                }
+                                            })
+                                            :
+                                            null
+                                    }
+                                </p>
+                                <p className="chart-desc">Reps / Temps : {payload.value / 10}</p>
+                            </div>)
                     }
                     if (payload.dataKey === "exercices[0].Series[0].charge") {
-                        return (<p className="desc">Charge : {payload.value}</p>)
+                        return (<p className="chart-desc">Charge : {payload.value}</p>)
                     }
                     if (payload.dataKey === "exercices[0].Series[0].percent") {
-                        return (<p className="desc">% PDC : {payload.value}</p>)
+                        return (<p className="chart-desc">% PDC : {payload.value}</p>)
                     }
                     if (payload.dataKey === "poids") {
-                        return (<p className="desc">Poids : {payload.value}</p>)
+                        return (<p className="chart-desc">Poids : {payload.value}</p>)
                     }
                     if (payload.dataKey === "repsTime") {
-                        return (<p className="desc"> Valeur classification : {payload.value}</p>)
+                        return (<p className="chart-desc"> Valeur classification : {payload.value}</p>)
                     }
-                    if (payload.dataKey === "exercices[0].Categories[0].estimation" || payload.dataKey === "exercices[0].Categories[1].estimation" || payload.dataKey === "exercices[0].Categories[2].estimation" || payload.dataKey === "exercices[0].Categories[3].estimation" || payload.dataKey === "exercices[0].Categories[4].estimation") {
-                        let utilisation = payload.payload.exercices[0].Categories[payload.dataKey.slice(payload.dataKey.length - 13, payload.dataKey.length - 12)].utilisation
-                        return (<p className="desc"> {utilisation} élastique estimation (kg) : {payload.value}</p>)
+                    if (payload.dataKey === "exercices[0].Categories[0].assistance" || payload.dataKey === "exercices[0].Categories[1].assistance" || payload.dataKey === "exercices[0].Categories[2].assistance" || payload.dataKey === "exercices[0].Categories[3].assistance" || payload.dataKey === "exercices[0].Categories[4].assistance") {
+                        return (<p className="chart-desc"> Assistance élastique (kg) : {payload.value}</p>)
+                    }
+                    if (payload.dataKey === "exercices[0].Categories[0].resistance" || payload.dataKey === "exercices[0].Categories[1].resistance" || payload.dataKey === "exercices[0].Categories[2].resistance" || payload.dataKey === "exercices[0].Categories[3].resistance" || payload.dataKey === "exercices[0].Categories[4].resistance") {
+                        return (<p className="chart-desc"> Resistance élastique (kg) : {payload.value}</p>)
                     }
                 })}
             </div>
@@ -217,6 +253,7 @@ function Stats() {
         setTimeout(getSeance2, 50);
         setTimeout(getSeance3, 50);
         getReguScore();
+        console.log("params2", params2)
     }, [params1, params2, params3]);
 
 
@@ -260,7 +297,13 @@ function Stats() {
     }
 
     function changeCategorie(categorie) {
-        setCategorie(categorie)
+        let newCategorie = {
+            ...categorie,
+            name: categorie.name,
+            utilisation: categorie.utilisation,
+        }
+        console.log("newCategorie", newCategorie)
+        setCategorie(newCategorie)
     }
 
     function changeDetail(detail) {
@@ -535,7 +578,7 @@ function Stats() {
 
                                                 {params2.categorie0name ?
                                                     params2.categorie0name === "Aucune" ?
-                                                        "aucune catégorie - "
+                                                        "aucune catégorie, "
                                                         :
                                                         params2.categorie0name + " : " + params2.categorie0input + ", "
                                                     :
@@ -550,6 +593,17 @@ function Stats() {
                                                     :
                                                     "tout détail, "
                                                 }
+
+                                                {params2.repsFrom !== "" ?
+                                                    params2.repsTo !== "" ?
+                                                        "de " + params2.repsFrom + " à " + params2.repsTo + " réps/sec, "
+                                                        :
+                                                        params2.repsFrom + " reps/sec minimum, "
+                                                    :
+                                                    params2.repsTo !== "" ?
+                                                        params2.repsTo + " reps/sec maximum, "
+                                                        :
+                                                        "toutes les réps/sec, "}
 
                                                 sur la période {params2.periode}
                                             </p>
@@ -572,12 +626,19 @@ function Stats() {
                                                     <Tooltip content={<CustomTooltip />} />
                                                     <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
                                                     <Bar barSize={20} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="exercices[0].Series[0].repsTime" />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[0].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[1].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[2].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[3].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[4].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[0].assistance"} stroke={user.modeSombre === true ? "#66E891" : "#24B34C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[1].assistance"} stroke={user.modeSombre === true ? "#66E891" : "#24B34C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[2].assistance"} stroke={user.modeSombre === true ? "#66E891" : "#24B34C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[3].assistance"} stroke={user.modeSombre === true ? "#66E891" : "#24B34C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[4].assistance"} stroke={user.modeSombre === true ? "#66E891" : "#24B34C"} />
                                                 </ComposedChart>
                                             </ResponsiveContainer >
 
@@ -716,7 +777,7 @@ function Stats() {
 
                                                 {params2.categorie0name ?
                                                     params2.categorie0name === "Aucune" ?
-                                                        "aucune catégorie - "
+                                                        "aucune catégorie, "
                                                         :
                                                         params2.categorie0name + " : " + params2.categorie0input + ", "
                                                     :
@@ -731,6 +792,17 @@ function Stats() {
                                                     :
                                                     "tout détail, "
                                                 }
+
+                                                {params2.repsFrom !== "" ?
+                                                    params2.repsTo !== "" ?
+                                                        "de " + params2.repsFrom + " à " + params2.repsTo + " réps/sec, "
+                                                        :
+                                                        params2.repsFrom + " reps/sec minimum, "
+                                                    :
+                                                    params2.repsTo !== "" ?
+                                                        params2.repsTo + " reps/sec maximum, "
+                                                        :
+                                                        "toutes les réps/sec, "}
 
                                                 sur la période {params2.periode}
                                             </p>
@@ -753,16 +825,22 @@ function Stats() {
                                                     <Tooltip content={<CustomTooltip />} />
                                                     <CartesianGrid fill={user.modeSombre === true ? "black" : "white"} stroke="#f5f5f5" />
                                                     <Bar barSize={20} fill={user.modeSombre === true ? "#626262" : "#afafaf"} dataKey="exercices[0].Series[0].repsTime" />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[0].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[1].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[2].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[3].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
-                                                    <Line strokeWidth={3} connectNulls type="monotone" dataKey={"exercices[0].Categories[4].estimation"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Series[0]." + typePerfGraph} stroke={user.modeSombre === true ? "#ff6666" : "#ff0000"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[0].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[1].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[2].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[3].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[4].resistance"} stroke={user.modeSombre === true ? "#4DBAFF" : "#10669C"} />
+
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[0].assistance"} stroke={user.modeSombre === true ? "#66E891" : "#24B34C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[1].assistance"} stroke={user.modeSombre === true ? "#66E891" : "#24B34C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[2].assistance"} stroke={user.modeSombre === true ? "#66E891" : "#24B34C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[3].assistance"} stroke={user.modeSombre === true ? "#66E891" : "#24B34C"} />
+                                                    <Line strokeWidth={3} type="monotone" dataKey={"exercices[0].Categories[4].assistance"} stroke={user.modeSombre === true ? "#66E891" : "#24B34C"} />
                                                 </ComposedChart>
                                             </ResponsiveContainer >
 
-                                            <i className="detail-stat"> Les répétitions sont multipliées par 10 pour une meilleur lecture </i>
+                                            <p style={{ fontStyle: "italic" }}> Les répétitions sont multipliées par 10 pour une meilleur lecture </p>
                                             <br />
 
 

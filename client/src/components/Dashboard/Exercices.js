@@ -8,7 +8,7 @@ const exercices = [
 
 
 
-//ECHAUFFEMENT
+  //ECHAUFFEMENT
   {
     id: "name",
     className: 'select-title',
@@ -31,7 +31,7 @@ const exercices = [
 
 
 
-//TERME GENERIQUE
+  //TERME GENERIQUE
   {
     id: "name",
     className: "select-title",
@@ -82,7 +82,7 @@ const exercices = [
   },
 
 
-//MUSCU HAUT DU CORPS
+  //MUSCU HAUT DU CORPS
   {
     id: "name",
     className: "select-title",
@@ -98,7 +98,7 @@ const exercices = [
   {
     id: "name",
     className: "select-item",
-    label: "Developpé couché",
+    label: "Developpé couché / benchpress / DC",
     value: "Developpé couché",
   },
   {
@@ -110,7 +110,7 @@ const exercices = [
   {
     id: "name",
     className: "select-item",
-    label: "Developpé militaire",
+    label: "Developpé militaire / DM",
     value: "Developpé militaire",
   },
   {
@@ -176,7 +176,7 @@ const exercices = [
 
 
 
-//MUSCU BAS DU CORPS
+  //MUSCU BAS DU CORPS
   {
     id: "name",
     className: "select-title",
@@ -198,7 +198,7 @@ const exercices = [
   {
     id: "name",
     className: "select-item",
-    label: "Soulevé de terre",
+    label: "Soulevé de terre / Deadlift / DL",
     value: "Soulevé de terre",
   },
   {
@@ -224,7 +224,7 @@ const exercices = [
 
 
 
-//STREET HAUT DU CORPS
+  //STREET HAUT DU CORPS
   {
     id: "name",
     className: "select-title",
@@ -299,7 +299,7 @@ const exercices = [
   },
 
 
-//STREET FIGURES
+  //STREET FIGURES
   {
     id: "name",
     className: "select-title",
@@ -399,7 +399,7 @@ const exercices = [
 
 
 
-//STREET FREESTYLE
+  //STREET FREESTYLE
   {
     id: "name",
     className: "select-title",
@@ -447,7 +447,7 @@ const exercices = [
 
 
 
-//MUSCU ABDO LOMBAIRES
+  //MUSCU ABDO LOMBAIRES
   {
     id: "name",
     className: "select-title",
@@ -577,7 +577,7 @@ const exercices = [
 
 
 
-//EXPLOSIF
+  //EXPLOSIF
   {
     id: "name",
     className: "select-title",
@@ -682,7 +682,7 @@ const exercices = [
   },
 
 
-//CARDIO
+  //CARDIO
   {
     id: "name",
     className: "select-title",
@@ -715,7 +715,7 @@ const exercices = [
   },
 
 
-//HALTERO
+  //HALTERO
   {
     id: "name",
     className: "select-title",
@@ -754,7 +754,28 @@ const exercices = [
   },
 
 
-//STRONGMAN
+  //BRAS DE FER
+  {
+    id: "name",
+    className: "select-title",
+    label: "",
+    value: "title",
+  },
+  {
+    id: "name",
+    className: "select-title",
+    label: "Bras de fer",
+    value: "title",
+  },
+  {
+    id: "name",
+    className: "select-item",
+    label: "COC / Captains of crush",
+    value: "COC",
+  },
+
+
+  //STRONGMAN
   {
     id: "name",
     className: "select-title",

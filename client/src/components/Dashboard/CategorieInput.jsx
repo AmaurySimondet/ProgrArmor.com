@@ -139,7 +139,7 @@ function CategorieInput(props) {
     }
 
     function handleChange(event) {
-        console.log(event)
+        console.log("event", event)
 
         if (event.target) {
             console.log(event.target.id, event.target.value)
@@ -171,7 +171,6 @@ function CategorieInput(props) {
                 });
             }
             if (!event.name && !categorie.name) {
-                console.log("coucou")
                 setCategorie(oldCategorie => {
                     return ({
                         ...oldCategorie,
@@ -195,6 +194,19 @@ function CategorieInput(props) {
     }
 
     useEffect(() => {
+        if (categorie.name === "Elastique") {
+            categorie.estimation = (categorie.tension / 3 * parseInt(categorie.input)).toFixed(2)
+        }
+    }, [categorie.input])
+
+    useEffect(() => {
+        if (categorie.name === "Elastique") {
+            categorie.estimation = (categorie.tension / 3 * parseInt(categorie.input)).toFixed(2)
+        }
+    }, [categorie.tension])
+
+    useEffect(() => {
+        console.log("categorie changed", categorie)
         props.changeCategorie(categorie, props.id)
         if (categorie.name === "title") {
             props.onDeleteCategorie
@@ -1672,9 +1684,9 @@ function CategorieInput(props) {
                             }
                             className={props.info === "dash" ? "col-10" : " col-11"}
                             options={[
-                                { className: "select-title", value: "title", label: "/ (défaut)" },
-                                { name: "Elastique", value: "Resistance", label: "Resistance" },
-                                { name: "Elastique", value: "Assistance", label: "Assistance" }
+                                { className: "select-title", id: "utilisation", value: "title", label: "/ (défaut)" },
+                                { name: "Elastique", id: "utilisation", value: "Resistance", label: "Resistance" },
+                                { name: "Elastique", id: "utilisation", value: "Assistance", label: "Assistance" }
                             ]}
                             value={{ value: categorie.utilisation, label: categorie.utilisation }}
                         />
@@ -1707,19 +1719,33 @@ function CategorieInput(props) {
                                 }
                                 className={props.info === "dash" ? "col-10" : " col-11"}
                                 options={[
-                                    { className: "select-title", value: "title", label: "/ (défaut)" },
-                                    { name: "Elastique", value: "Resistance", label: "Resistance" },
-                                    { name: "Elastique", value: "Assistance", label: "Assistance" }
+                                    { className: "select-title", id: "utilisation", value: "title", label: "/ (défaut)" },
+                                    { name: "Elastique", id: "utilisation", value: "Resistance", label: "Resistance" },
+                                    { name: "Elastique", id: "utilisation", value: "Assistance", label: "Assistance" }
                                 ]}
                                 value={{ value: categorie.utilisation, label: categorie.utilisation }}
                             />
 
                             {props.dashboard ? null : <div className="col-1">
-                                <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
+                                <img
+                                    className={props.modeSombre === true ? "poubelleDark " : "poubelle"}
+                                    onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')}
+                                    alt="Poubelle"
+                                />
                             </div>}
                         </div>
                         :
                         <div>
+                            <h2 style={{ textAlign: "center" }}>
+                                Elastique
+                                <img
+                                    className={props.modeSombre === true ? "poubelleDark " : "poubelle"}
+                                    onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')}
+                                    style={{ marginLeft: "2vw" }}
+                                    alt="Poubelle" />
+
+                            </h2>
+
                             <div className="form-group row">
                                 {props.info === "false" ?
                                     null
@@ -1752,9 +1778,6 @@ function CategorieInput(props) {
                                     value={{ value: categorie.utilisation, label: categorie.utilisation }}
                                 />
 
-                                {props.dashboard ? null : <div className="col-1">
-                                    <img className={props.modeSombre === true ? "poubelleDark " : "poubelle"} onClick={handleClickPoubelle} src={require('../../images/icons/icons8-trash-30.webp')} alt="Poubelle" />
-                                </div>}
                             </div>
 
                             <div className="form-group row">

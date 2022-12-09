@@ -122,30 +122,7 @@ function Bienvenue(props) {
 
                 <h3 className="Dashboard-h2"> {"Et n'oublies pas de nous suivre sur nos différents réseaux pour partager ton ressenti et ne rien rater de la suite !"} </h3>
 
-                <div className="Design-welcome">
-                    <table className="table1">
-                        <tr>
-                            <td>
-                                <a href="https://twitter.com/ProgrArmor"><img className={props.modeSombre === true ? "social questionDark" : "social"} src={require('../images/icons/twitter.webp')} alt='twitter' /></a>
-                            </td>
-                            <td>
-                                <a href="https://www.instagram.com/prograrmor/"><img className={props.modeSombre === true ? "social questionDark" : "social"} src={require('../images/icons/instagram.webp')} alt='instagram' /></a>
-                            </td>
-                            <td>
-                                <a href="https://www.facebook.com/profile.php?id=100087568835793"><img className={props.modeSombre === true ? "social questionDark" : "social"} src={require('../images/icons/facebook.webp')} alt='facebook' /></a>
-                            </td>
-                            <td>
-                                <a href="https://discord.gg/Gj98SjG8"><img className={props.modeSombre === true ? "social questionDark" : "social"} src={require('../images/icons/discord.webp')} alt='discord' /></a>
-                            </td>
-                            <td>
-                                <a href="https://www.tiktok.com/@prograrmor"><img className={props.modeSombre === true ? "social questionDark" : "social"} src={require('../images/icons/tiktok.webp')} alt='tiktok' /></a>
-                            </td>
-                            <td>
-                                <a href="https://www.youtube.com/@prograrmor"><img className={props.modeSombre === true ? "social questionDark" : "social"} src={require('../images/icons/youtube.webp')} alt='youtube' /></a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+
 
             </div>
         </div>

@@ -446,20 +446,26 @@ table.profile-table {
 
 /* FOOTER */
 
-.Design-footer {
-    padding-top: 10px;
-    background-color: #333333;
-    width: 100%;
-    height: 50px;
+.footer .social {
+    width: 25px;
+    margin: 0 4vw;
 }
 
-.Design-footer .social {
-    width: 25px;
+.footer-black {
     filter: invert(1);
+    background-color: #c5c5c5;
 }
 
 
 /* STATS */
+
+.chart-desc {
+    margin: 0;
+    font-size: 10px;
+    background-color: #333333;
+    opacity: 0.7;
+}
+
 .regu-score {
     margin: auto;
     text-align: center;
@@ -532,12 +538,6 @@ table.Stats-table {
     color: #cfcfcf;
 }
 
-.detail-stat {
-    font-weight: 200;
-    font-size: 15px;
-
-}
-
 .stats-form {
     width: 95%;
     margin: auto;
@@ -568,6 +568,12 @@ table.Stats-table {
 }
 
 /* DASHBOARD */
+
+.table1 {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 20px;
+}
 
 .table .thead-dark th {
     background-color: #000000;
@@ -673,11 +679,16 @@ table.Stats-table {
 
 }
 
-table.table1 {
+.footer {
     table-layout: fixed;
-    width: 60%;
+    width: 100%;
     margin: auto;
-    margin-bottom: 10%;
+    /* margin-bottom: 10%; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
 }
 
 .table1 .home {
@@ -933,6 +944,7 @@ table.hometable td.inscription-img-td {
 table.connexion-table {
     table-layout: fixed;
     width: 100%;
+    min-height: 80vh;
 }
 
 table.connexion-table td.connexion-img-td {
@@ -1080,6 +1092,7 @@ table.connexion-table td.connexion-img-td {
     margin-top: 10%;
     margin-left: 5%;
     margin-right: 5%;
+    min-height: 80vh;
 }
 
 .travaux-icon {
@@ -1556,7 +1569,7 @@ table.connexion-table td.connexion-img-td {
         font-size: 10px !important
     }
 
-    .social {
+    .footer .social {
         width: 20px;
 
     }
@@ -1700,16 +1713,13 @@ table.connexion-table td.connexion-img-td {
         width: 40%;
     }
 
-    .Design-footer {
-        padding-top: 0;
-        height: 25px;
-    }
-
-    .Design-footer .social {
+    .footer .social {
         width: 10px;
-        filter: invert(1);
     }
 
+    .footer {
+        height: 50px;
+    }
 
 
     .logo-navbar {

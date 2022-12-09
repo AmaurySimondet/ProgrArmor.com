@@ -565,7 +565,10 @@ function Dashboard() {
 
 
             {seances.length === 0 ?
-                <Bienvenue modeSombre={user?.modeSombre} />
+                <div >
+                    <Bienvenue modeSombre={user?.modeSombre} />
+                    <Footer />
+                </div>
                 :
                 dimensions.width < 925 ?
                     <div className="Dashboard">
