@@ -82,6 +82,11 @@ function Connexion() {
         setIntervalId(newInterval);
     }
 
+    function containsSC(str) {
+        const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+        return specialChars.test(str);
+    }
+
     useEffect(() => {
         if (timer <= 0) {
             setSentClicked(false);
@@ -102,6 +107,10 @@ function Connexion() {
         }
         if (codeEmail !== code) {
             alert("Le code est incorrect");
+            error = true;
+        }
+        if (containsSC(newMDP) === false) {
+            alert("Le mot de passe doit contenir au moins un caractère spécial");
             error = true;
         }
 
