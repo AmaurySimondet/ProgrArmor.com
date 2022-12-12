@@ -54,7 +54,7 @@ const exercices = [
     id: "name",
     className: "select-item",
     label: "Curl / Flexion",
-    value: "Curl / Flexion",
+    value: "Curl",
   },
   {
     id: "name",

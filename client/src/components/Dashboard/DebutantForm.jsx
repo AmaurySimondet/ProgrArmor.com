@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSearchParams } from "react-router-dom";
 
 function DebutantForm(props) {
-    console.log("debutant seance from props", props.seance)
+    // console.log("debutant seance from props", props.seance)
 
     const [seance, setSeance] = useState(props.seance);
     const [params, setParams] = useState({ load: "" });

@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import API from "../utils/API";
 
-function ConnexionForm() {
+function ConnexionForm(props) {
   const stateNull = {
     email: "",
     password: ""
@@ -41,8 +41,8 @@ function ConnexionForm() {
   };
 
   return (
-    <form className="inscription-form">
-      <div className="form-group row">
+    <div>
+      <div className="form-group row large-margin-top">
         <label className="col-sm-2 col-form-label">Email</label>
         <div className="col-sm-10">
           <input type="email"
@@ -55,7 +55,8 @@ function ConnexionForm() {
           />
         </div>
       </div>
-      <div className="form-group row">
+
+      <div className="form-group row mini-margin-bottom">
         <label className="col-sm-2 col-form-label">Mot de passe</label>
         <div className="col-sm-10">
           <input
@@ -69,8 +70,13 @@ function ConnexionForm() {
           />
         </div>
       </div>
+
+      <p onClick={props.handleClickMdp}
+        className="basic-margin-bottom mdpOublié">
+        Mot de passe oublié ?</p>
+
       <button className="btn btn-lg btn-dark" onClick={handleClick} type="submit">Connexion</button>
-    </form>
+    </div>
   )
 }
 

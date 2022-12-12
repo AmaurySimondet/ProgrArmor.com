@@ -1545,34 +1545,44 @@ async function modifyUser(req, res) {
 //GET USER INFO
 async function getUser(req, res) {
     let id = req.body.id
+    let conditions = { "_id": id }
+
+    if (req.body.email) {
+        conditions = { "email": req.body.email }
+    }
 
     try {
         User.find(
-            { "_id": id }, function (err, data) {
+            conditions, function (err, data) {
                 if (err) {
                     res.json({ success: false, message: err })
                 }
                 else {
-                    const obj = {
-                        email: data[0].email,
-                        fName: data[0].fName,
-                        lName: data[0].lName,
-                        profilePic: data[0].profilePic,
+                    if (data.length === 0) {
+                        res.json({ success: false, message: "Utilisateur introuvable !" })
                     }
+                    else {
+                        const obj = {
+                            email: data[0].email,
+                            fName: data[0].fName,
+                            lName: data[0].lName,
+                            profilePic: data[0].profilePic,
+                        }
 
-                    if (data[0].googleId) {
-                        obj.googleId = data[0].googleId
-                    }
-                    if (data[0].facebookId) {
-                        obj.facebookId = data[0].facebookId
-                    }
-                    if (data[0].modeSombre) {
-                        obj.modeSombre = data[0].modeSombre
-                    }
+                        if (data[0].googleId) {
+                            obj.googleId = data[0].googleId
+                        }
+                        if (data[0].facebookId) {
+                            obj.facebookId = data[0].facebookId
+                        }
+                        if (data[0].modeSombre) {
+                            obj.modeSombre = data[0].modeSombre
+                        }
 
-                    // console.log(obj)
+                        // console.log(obj)
 
-                    res.json({ success: true, message: "Utilisateur trouvé !", profile: obj })
+                        res.json({ success: true, message: "Utilisateur trouvé !", profile: obj })
+                    }
                 }
             });
 

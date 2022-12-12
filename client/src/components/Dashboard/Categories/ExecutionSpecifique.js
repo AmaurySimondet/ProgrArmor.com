@@ -157,6 +157,18 @@ const executionSpecifique = [
     label: "'Zanetti'",
     value: "'Zanetti'",
   },
+  {
+    id: "input",
+    className: "select-item",
+    label: "Radial",
+    value: "Radial",
+  },
+  {
+    id: "input",
+    className: "select-item",
+    label: "Ulnaire",
+    value: "Ulnaire",
+  },
 
 
   //STREET BAS DU CORPS

@@ -17,7 +17,7 @@ function containsObj(arr, obj) {
 }
 
 function ExpertForm(props) {
-    console.log("expert seance from props", props.seance)
+    // console.log("expert seance from props", props.seance)
 
     const [seance, setSeance] = useState(props.seance);
     const [clickEchauffement, setClickEchauffement] = useState(props.seance.echauffements.length > 0 ? true : false);
@@ -527,11 +527,7 @@ function ExpertForm(props) {
                         <Select
                             placeholder="Séance précédente à charger..."
                             onChange={handleChange}
-                            options={[
-                                { id: "load", label: "/ (défaut)", value: "title" },
-                                { id: "load", label: "Dernière séance en date", value: "lastDate" },
-                                { id: "load", label: "Dernière séance enregistrée", value: "lastRec" }
-                            ]}
+                            options={paramsSelect}
                             className="mini-margin-bottom"
                             styles={
                                 props.dimensions.width <= 500 ?
@@ -629,7 +625,7 @@ function ExpertForm(props) {
                                             modeSombre={props.modeSombre}
                                             poids={seance.poids}
                                             echauffement={echauffement}
-                                            click={echauffement.Categories ? echauffement.Categories[0] ? true : false : false}
+                                            click={true}
                                             onAddEchauffements={onAddEchauffements}
                                             changeEchauffements={changeEchauffements}
                                             onDeleteEchauffements={onDeleteEchauffements}
@@ -668,7 +664,7 @@ function ExpertForm(props) {
                                         modeSombre={props.modeSombre}
                                         exercice={exercice}
                                         poids={seance.poids}
-                                        click={exercice.Categories ? exercice.Categories[0] ? true : false : false}
+                                        click={true}
                                         onAddExercices={onAddExercices}
                                         changeExercices={changeExercices}
                                         onDeleteExercices={onDeleteExercices}

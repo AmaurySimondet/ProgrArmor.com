@@ -1,5 +1,5 @@
 const execution = [
-// EXECUTION
+  // EXECUTION
   {
     id: "input",
     className: "select-title",
@@ -15,7 +15,7 @@ const execution = [
   {
     id: "input",
     className: "select-item",
-    label: "Statique",
+    label: "Statique / Isométrique",
     value: "Statique",
   },
   {

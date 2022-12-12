@@ -16,18 +16,20 @@ import InstallApp from "./components/Dashboard/Help/InstallApp.jsx";
 import Aide from "./components/Dashboard/Aide.jsx";
 import Programme from "./components/Dashboard/Programme.jsx";
 
-import eruda from "eruda";
+// import eruda from "eruda";
 
 function App() {
 
     // document.body.style.zoom = "95%";
-    let el = document.createElement('div');
-    document.body.appendChild(el);
 
-    eruda.init({
-        container: el,
-        tool: ['console', 'elements']
-    });
+    // //console
+    // let el = document.createElement('div');
+    // document.body.appendChild(el);
+
+    // eruda.init({
+    //     container: el,
+    //     tool: ['console', 'elements']
+    // });
 
     return (
         <Routes>

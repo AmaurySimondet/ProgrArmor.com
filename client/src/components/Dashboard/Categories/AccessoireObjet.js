@@ -1,5 +1,5 @@
 const accessoire = [
-// OBJECTS SPECIFIQUES
+  // OBJECTS SPECIFIQUES
   {
     id: "input",
     className: "select-title",
@@ -63,8 +63,8 @@ const accessoire = [
   {
     id: "input",
     className: "select-item",
-    label: "Bandes de poignets",
-    value: "Bandes de poignets",
+    label: "Bandes de poignets / sangles",
+    value: "Bandes de poignets / sangles",
   },
   {
     id: "input",

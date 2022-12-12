@@ -162,12 +162,12 @@ AllCategories.push({
 }, {
     id: "name",
     className: "select-title",
-    label: "Positionnement élastique(s)",
-    value: "Positionnement élastique(s)",
+    label: "Positionnement élastique(s)/sangle(s)",
+    value: "Positionnement élastique(s)/sangle(s)",
 })
 positionElastique.forEach(obj => {
-    AllCategories.push({ ...obj, name: "Positionnement élastique(s)" });
-    obj.name = "Positionnement élastique(s)"
+    AllCategories.push({ ...obj, name: "Positionnement élastique(s)/sangle(s)" });
+    obj.name = "Positionnement élastique(s)/sangle(s)"
 })
 AllCategories.push({
     id: "name",

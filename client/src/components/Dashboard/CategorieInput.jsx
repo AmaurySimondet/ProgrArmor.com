@@ -207,7 +207,7 @@ function CategorieInput(props) {
     }, [categorie.tension])
 
     useEffect(() => {
-        console.log("categorie changed", categorie)
+        // console.log("categorie changed", categorie)
         props.changeCategorie(categorie, props.id)
         if (categorie.name === "title") {
             props.onDeleteCategorie
@@ -469,7 +469,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -523,7 +523,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -577,7 +577,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -606,7 +606,7 @@ function CategorieInput(props) {
                         </div>}
                     </div>
                 : null}
-            {categorie.name === "Positionnement élastique(s)" ?
+            {categorie.name === "Positionnement élastique(s)/sangle(s)" ?
                 props.info === "false" ?
                     <Select
                         placeholder="Categorie..."
@@ -631,7 +631,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -685,7 +685,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -739,7 +739,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -793,7 +793,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -847,7 +847,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -901,7 +901,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -955,7 +955,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1009,7 +1009,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1063,7 +1063,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1117,7 +1117,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1161,7 +1161,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1204,7 +1204,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1258,7 +1258,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1312,7 +1312,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1366,7 +1366,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1420,7 +1420,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1474,7 +1474,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1528,7 +1528,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1582,7 +1582,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1636,7 +1636,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1690,7 +1690,7 @@ function CategorieInput(props) {
                         {props.info === "false" ?
                             null
                             :
-                            <label className="">
+                            <label className="col-12">
                                 {categorie.name}
                             </label>
                         }
@@ -1753,7 +1753,7 @@ function CategorieInput(props) {
                             {props.info === "false" ?
                                 null
                                 :
-                                <label className="">
+                                <label className="col-12">
                                     Utilisation
                                 </label>
                             }
@@ -1805,7 +1805,7 @@ function CategorieInput(props) {
                                 {props.info === "false" ?
                                     null
                                     :
-                                    <label className="">
+                                    <label className="col-12">
                                         Utilisation
                                     </label>
                                 }
@@ -1836,7 +1836,7 @@ function CategorieInput(props) {
                             </div>
 
                             <div className="form-group row">
-                                <label className="">
+                                <label className="col-12">
                                     Épaisseur / taille élastique
                                 </label>
                                 <Select
@@ -1862,7 +1862,7 @@ function CategorieInput(props) {
 
                             {categorie.input === "mesure" ?
                                 <div className="form-group row">
-                                    <label className="">
+                                    <label className="col-12">
                                         Tension (kg)
                                     </label>
                                     <div className="col-11">
@@ -1877,7 +1877,7 @@ function CategorieInput(props) {
                                 :
                                 <div>
                                     <div className="form-group row slider-style">
-                                        <label className="">
+                                        <label className="col-12">
                                             Etirement (mètres)
                                         </label>
                                         {props.modeSombre === true ?
@@ -1920,7 +1920,7 @@ function CategorieInput(props) {
                                     </div>
 
                                     <div className="form-group row">
-                                        <label className="">
+                                        <label className="col-12">
                                             Estimation
                                             <img className={props.modeSombre === true ? "myDIV questionDark " : "myDIV"} onClick={handleClickElastique} src={require('../../images/icons/icons8-question-mark-96.webp')} alt="?" />
                                             <div className={elastiqueHiddenClick}>

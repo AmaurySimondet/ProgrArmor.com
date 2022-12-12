@@ -936,6 +936,16 @@ table.hometable td.inscription-img-td {
 }
 
 /* CONNEXION */
+.mdpOublié {
+    text-align: left;
+    font-weight: 800;
+    padding-left: 5%;
+}
+
+.mdpOublié:hover {
+    color: rgb(118, 118, 118);
+}
+
 .connexion-img {
     display: block;
     width: 100%;

@@ -24,6 +24,43 @@ function FullExerciceInput(props) {
         });
     }
 
+    function writeSeries(series) {
+        let sameReps = true;
+        let sameCharge = true;
+
+        let reps = series[0].repsTime;
+        let charge = series[0].charge;
+        series.map((serie, index) => {
+            if (index > 0) {
+                if (serie.repsTime !== reps) {
+                    sameReps = false;
+                }
+                if (serie.charge !== charge) {
+                    sameCharge = false;
+                }
+            }
+        })
+
+        if (sameReps && sameCharge) {
+            return series.length + "x" + reps + "x" + charge;
+        }
+        else {
+            let text = "";
+            series.map((serie, index) => {
+                if (index > 0) {
+                    text += "\n";
+                }
+                if (index !== series.length - 1) {
+                    text += "1x" + serie.repsTime + "x" + serie.charge + ", ";
+                }
+                else {
+                    text += "1x" + serie.repsTime + "x" + serie.charge;
+                }
+            })
+            return text;
+        }
+    }
+
     useEffect(() => {
         const Series = { ...series };
         const Categories = { ...categories };
@@ -125,7 +162,6 @@ function FullExerciceInput(props) {
 
             {clickExercice ?
                 <div>
-
                     {categories ? categories.map((categorie, index) => {
                         return (
                             <div>
@@ -146,44 +182,96 @@ function FullExerciceInput(props) {
                             </div>
                         );
                     })
-                        : null
-                    }
+                        : null}
+
 
                     <button className="btn btn-dark form-button" onClick={onAddCategorie} type="submit">Ajouter une categorie à cet exercice !</button>
                     <br />
+
+
+                    {
+                        series ? series.map((serie, index) => {
+                            return (
+                                <div>
+                                    <hr className={props.modeSombre === true ? "hr-serie-dark " : "hr-serie"} />
+
+                                    <SerieInput
+                                        key={serie.id}
+                                        id={serie.id}
+                                        index={index}
+                                        serie={serie}
+                                        length={series.length}
+                                        exercice={fullExercice.exercice}
+                                        poids={props.poids}
+                                        onAddSerie={onAddSerie}
+                                        changeSerie={changeSerie}
+                                        onDeleteSerie={onDeleteSerie}
+                                        modeSombre={props.modeSombre}
+                                    />
+                                </div>
+                            );
+                        })
+                            : null
+                    }
+
+                    <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
+                    <button className="btn btn-dark form-button copy-btn" onClick={onCopySerie} type="submit">Recopier la série !</button>
+                    <br />
                 </div>
-                : null}
+                :
+                <div>
+                    {"Catégories: "}
 
-            {series ? series.map((serie, index) => {
-                return (
-                    <div>
-                        <hr className={props.modeSombre === true ? "hr-serie-dark " : "hr-serie"} />
+                    <br />
 
-                        <SerieInput
-                            key={serie.id}
-                            id={serie.id}
-                            index={index}
-                            serie={serie}
-                            length={series.length}
-                            exercice={fullExercice.exercice}
-                            poids={props.poids}
-                            onAddSerie={onAddSerie}
-                            changeSerie={changeSerie}
-                            onDeleteSerie={onDeleteSerie}
-                            modeSombre={props.modeSombre}
-                        />
-                    </div>
-                );
-            })
-                : null
+                    {categories ? categories.map((categorie, index) => {
+                        if (categorie.name !== "Elastique") {
+                            if (index === categories.length - 1) {
+                                return categorie.input
+                            }
+                            else {
+                                return categorie.input + ", "
+                            }
+                        }
+                        else {
+                            if (index === categories.length - 1) {
+                                if (categorie.input === "mesure") {
+                                    return "{" + categorie.utilisation + ";" + categorie.estimation + ";mesure=" + categorie.estimation + "}"
+                                }
+                                else {
+                                    return "{" + categorie.utilisation + ";" + categorie.input + ";tension=" + categorie.estimation + "}"
+                                }
+                            }
+                            else {
+                                if (categorie.input === "mesure") {
+                                    return "{" + categorie.utilisation + ";" + categorie.estimation + ";mesure=" + categorie.estimation + "}, "
+                                }
+                                else {
+                                    return "{" + categorie.utilisation + ";" + categorie.input + ";tension=" + categorie.estimation + "}, "
+                                }
+                            }
+                        }
+                    })
+                        : null}
+
+                    <br />
+                    <br />
+
+                    {series.length > 0 ?
+                        <div>
+                            {"Séries: "}
+                            <br />
+                            {writeSeries(series)}
+                        </div>
+                        : null}
+                </div>
             }
 
-            <button className="btn btn-dark form-button" onClick={onAddSerie} type="submit">Ajouter une série !</button>
-            <button className="btn btn-dark form-button copy-btn" onClick={onCopySerie} type="submit">Recopier la série !</button>
-            <br />
 
 
-        </div>
+
+
+        </div >
     )
 }
 
