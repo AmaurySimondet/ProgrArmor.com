@@ -10,6 +10,7 @@
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.7",
     "axios": "^0.27.2",
+    "dotenv-webpack": "^8.0.1",
     "eruda": "^2.6.2",
     "react": "^18.2.0",
     "react-card-flip": "^1.2.0",

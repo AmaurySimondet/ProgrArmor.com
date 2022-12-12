@@ -19,6 +19,7 @@
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
+    "emailjs-com": "^3.2.0",
     "eruda": "^2.6.2",
     "express": "^4.16.2",
     "jsonwebtoken": "^8.5.1",
@@ -30,6 +31,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^7.1.2",
     "string-similarity": "^4.0.4",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "xhr2": "^0.2.1"
   }
 }

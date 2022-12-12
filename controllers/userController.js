@@ -25,6 +25,7 @@ module.exports = function (app) {
     //COMPTE
     app.post('/getUser', account.getUser);
     app.post('/modifyUser', account.modifyUser);
+    app.post('/resetPassword', account.resetPassword);
 
     //TOKEN
     app.post('/verifyToken', account.verifyToken)

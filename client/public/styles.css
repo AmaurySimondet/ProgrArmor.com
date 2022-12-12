@@ -947,14 +947,18 @@ table.hometable td.inscription-img-td {
 }
 
 .connexion-img {
-    display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 .connexion-div {
     text-align: center;
 
+}
+
+.tr-connexion {
+    display: flex;
 }
 
 table.connexion-table {
@@ -965,7 +969,7 @@ table.connexion-table {
 
 table.connexion-table td.connexion-img-td {
     width: 55%;
-
+    flex-grow: 1;
 }
 
 /* NavigBar */

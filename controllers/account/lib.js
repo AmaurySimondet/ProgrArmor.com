@@ -1542,6 +1542,33 @@ async function modifyUser(req, res) {
     }
 }
 
+//RESET PASSWORD
+async function resetPassword(req, res) {
+    let conditions = {
+        email: req.body.email
+    }
+
+    try {
+        User.findOne(conditions).then(function (foundUser) {
+            if (foundUser) {
+                // console.log(foundUser)
+                foundUser.setPassword(req.body.password, function () {
+                    foundUser.save();
+                    res.json({ success: true, message: "Utilisateur mis à jour!" })
+                });
+            } else {
+                res.json({ success: true, message: 'Utilisateur introuvable' });
+            }
+        }, function (err) {
+            console.error(err);
+        })
+    }
+    catch (e) {
+        console.log(e);
+    }
+
+}
+
 //GET USER INFO
 async function getUser(req, res) {
     let id = req.body.id
@@ -1929,3 +1956,4 @@ exports.loadSeance = loadSeance;
 // exports.editDB = editDB;
 exports.reguScore = reguScore;
 exports.priseDeNote = priseDeNote;
+exports.resetPassword = resetPassword;
