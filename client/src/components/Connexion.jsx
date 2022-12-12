@@ -153,8 +153,11 @@ function Connexion() {
                                         <div>
                                             <p className="basic-margin-top">
                                                 Un mail de récupération a été envoyé à l'adresse
-                                                {" " + email + " "}.
+                                                <br />
+                                                {" " + email + " "}
+                                                <br />
                                                 Vérifies tes spams aussi au cas où !
+                                                <br />
                                                 Tu pourras renvoyer un mail dans 60 secondes.
                                             </p>
 
