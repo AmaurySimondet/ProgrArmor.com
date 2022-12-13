@@ -83,6 +83,18 @@ const Streetworkout = [
     label: "Lean / penché ",
     value: "Lean",
   },
+  {
+    id: "input",
+    className: "select-item",
+    label: "Lean up ",
+    value: "Lean up",
+  },
+  {
+    id: "input",
+    className: "select-item",
+    label: "Up",
+    value: "Up",
+  },
 ]
 
 export default Streetworkout;

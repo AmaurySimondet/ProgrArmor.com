@@ -7,8 +7,8 @@ const { v4: uuidv4 } = require('uuid');
 const stringSimilarity = require('string-similarity');
 require('dotenv').config();
 
-const url = "http://192.168.1.88:8800" // http://192.168.1.88:8800 https://prograrmorprealpha1.herokuapp.com
-const url2 = "http://192.168.1.88:3000" // http://192.168.1.88:3000 https://prograrmorprealpha1.herokuapp.com
+const url = "https://www.prograrmor.com" // https://www.prograrmor.com https://prograrmorprealpha1.herokuapp.com
+const url2 = "https://www.prograrmor.com" // http://192.168.1.88:3000 https://prograrmorprealpha1.herokuapp.com
 
 const app = express();
 

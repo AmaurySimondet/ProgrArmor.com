@@ -446,20 +446,32 @@ table.profile-table {
 
 /* FOOTER */
 
-.Design-footer {
-    padding-top: 10px;
-    background-color: #333333;
-    width: 100%;
-    height: 50px;
+.footer .social {
+    width: 25px;
+    margin: 0 4vw;
 }
 
-.Design-footer .social {
-    width: 25px;
+.footer-black {
     filter: invert(1);
+    background-color: #c5c5c5;
 }
 
 
 /* STATS */
+
+.chart-legende {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.chart-desc {
+    margin: 0;
+    font-size: 10px;
+    background-color: #333333;
+    color: white;
+    opacity: 0.7;
+}
+
 .regu-score {
     margin: auto;
     text-align: center;
@@ -494,7 +506,7 @@ table.Stats-table {
     position: absolute;
     top: 0px;
     right: -20px;
-    background-image: url('https://upcdn.io/W142hJk/raw/demo/4mrAKCowDj.webp');
+    background-image: url('https://i.ibb.co/WvCpGSL/logo-png-dark.webp');
     background-size: 100px;
     background-position-x: center;
     background-repeat: no-repeat;
@@ -513,7 +525,7 @@ table.Stats-table {
     height: 150px;
     position: relative;
     margin: auto;
-    background-image: url(https://upcdn.io/W142hJk/raw/demo/4mrAKCowDj.webp);
+    background-image: url("https://i.ibb.co/WvCpGSL/logo-png-dark.webp");
     /* https://upcdn.io/W142hJk/raw/demo/UBRD1hB.webp */
     background-repeat: no-repeat;
     background-position-x: center;
@@ -530,12 +542,6 @@ table.Stats-table {
 
 .detail-label:hover {
     color: #cfcfcf;
-}
-
-.detail-stat {
-    font-weight: 200;
-    font-size: 15px;
-
 }
 
 .stats-form {
@@ -568,6 +574,12 @@ table.Stats-table {
 }
 
 /* DASHBOARD */
+
+.table1 {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 20px;
+}
 
 .table .thead-dark th {
     background-color: #000000;
@@ -673,11 +685,16 @@ table.Stats-table {
 
 }
 
-table.table1 {
+.footer {
     table-layout: fixed;
-    width: 60%;
+    width: 100%;
     margin: auto;
-    margin-bottom: 10%;
+    /* margin-bottom: 10%; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
 }
 
 .table1 .home {
@@ -846,6 +863,84 @@ table.table1 {
 
 /* INSCRIPTION */
 
+.basic-flex {
+    display: flex;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+}
+
+.hr-inscription {
+    margin: 0;
+    border-color: #9b0000;
+    border-width: 20px;
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+.not-visible {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 300ms, opacity 300ms;
+}
+
+.basic-flexed {
+    height: 800px;
+    flex: 1;
+    /* overflow: hidden; */
+}
+
+.btn-to-top {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    z-index: 100;
+    background-color: #9b0000;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.basic-noflexed {
+    height: 850px;
+}
+
+.basic-noflexed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.basic-noflexed500 {
+    height: 400px;
+}
+
+.basic-noflexed500 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.basic-flexed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* box-shadow: 0px -1000px 25px rgb(10 10 10 / 50%), 0px 10px 10px rgb(0 0 0 / 70%); */
+    /* margin-left: 10px; */
+}
+
 body {
     overflow-x: hidden;
     font-family: 'Montserrat', sans-serif;
@@ -854,7 +949,6 @@ body {
 
 .p-cgu {
     font-weight: 200;
-    font-size: 15px;
 }
 
 .inscription-div {
@@ -865,6 +959,7 @@ body {
 .btn-social {
     margin: 5px;
     margin-top: 20px;
+    box-shadow: none !important;
 }
 
 .inscription-form {
@@ -893,10 +988,6 @@ table.hometable {
     margin-bottom: 40px;
 }
 
-.inscription-img {
-    width: 1060px;
-}
-
 table.hometable td.inscription-img-td {
     position: absolute;
     width: 60%;
@@ -919,10 +1010,20 @@ table.hometable td.inscription-img-td {
 }
 
 /* CONNEXION */
+.mdpOublié {
+    text-align: left;
+    font-weight: 800;
+    padding-left: 5%;
+}
+
+.mdpOublié:hover {
+    color: rgb(118, 118, 118);
+}
+
 .connexion-img {
-    display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 .connexion-div {
@@ -930,14 +1031,19 @@ table.hometable td.inscription-img-td {
 
 }
 
+.tr-connexion {
+    display: flex;
+}
+
 table.connexion-table {
     table-layout: fixed;
     width: 100%;
+    min-height: 80vh;
 }
 
 table.connexion-table td.connexion-img-td {
     width: 55%;
-
+    flex-grow: 1;
 }
 
 /* NavigBar */
@@ -1080,6 +1186,7 @@ table.connexion-table td.connexion-img-td {
     margin-top: 10%;
     margin-left: 5%;
     margin-right: 5%;
+    min-height: 80vh;
 }
 
 .travaux-icon {
@@ -1556,7 +1663,7 @@ table.connexion-table td.connexion-img-td {
         font-size: 10px !important
     }
 
-    .social {
+    .footer .social {
         width: 20px;
 
     }
@@ -1700,16 +1807,13 @@ table.connexion-table td.connexion-img-td {
         width: 40%;
     }
 
-    .Design-footer {
-        padding-top: 0;
-        height: 25px;
-    }
-
-    .Design-footer .social {
+    .footer .social {
         width: 10px;
-        filter: invert(1);
     }
 
+    .footer {
+        height: 50px;
+    }
 
 
     .logo-navbar {

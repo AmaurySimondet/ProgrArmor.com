@@ -892,12 +892,12 @@ table.Stats-table {
 .basic-flexed {
     height: 800px;
     flex: 1;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .btn-to-top {
     position: fixed;
-    bottom: 120px;
+    bottom: 60px;
     right: 20px;
     z-index: 100;
     background-color: #9b0000;
@@ -924,7 +924,7 @@ table.Stats-table {
 }
 
 .basic-noflexed500 {
-    height: 650px;
+    height: 400px;
 }
 
 .basic-noflexed500 img {
@@ -1038,8 +1038,7 @@ table.hometable td.inscription-img-td {
 table.connexion-table {
     table-layout: fixed;
     width: 100%;
-    min-height: 50vh;
-    height: 50vh;
+    min-height: 80vh;
 }
 
 table.connexion-table td.connexion-img-td {
