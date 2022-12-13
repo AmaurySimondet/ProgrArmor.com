@@ -9,7 +9,7 @@ J'ai réalisé ce site d'outils d'aide à la musculation en projet personnel !
 De par ce projet, j'ai pu approfondir mes connaissances en React, CSS et surtout Node Javascript.
 Le front-end React communique avec l'API back-end Node pour gérer la base de donnée MongoDB.
 
-![Security preview for ProgrArmor](./client/src/images/designs/security.jpg)
+![Security preview for ProgrArmor](./client/src/images/designs/security.webp)
 
 ## Designs 📸
 
