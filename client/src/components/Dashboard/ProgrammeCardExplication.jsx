@@ -31,7 +31,7 @@ function ProgrammeCard(props) {
     return (
         <div className="react-card">
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-                <div className="YOUR_FRONT_CCOMPONENT" onClick={handleFlip}>
+                <div className="YOUR_FRONT_CCOMPONENT" onClick={handleFlip} style={props.modeSombre ? null : { color: "white" }}>
 
                     <div className="programme-card programme-card-explication">
                         <Scrollbars autoHide>

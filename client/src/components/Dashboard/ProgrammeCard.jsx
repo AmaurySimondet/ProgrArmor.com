@@ -193,7 +193,7 @@ function ProgrammeCard(props) {
         <div className="react-card">
 
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-                <div className="YOUR_FRONT_CCOMPONENT">
+                <div className="YOUR_FRONT_CCOMPONENT" style={props.modeSombre ? null : { color: "white" }}>
 
                     <div className="programme-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
                         <Scrollbars autoHide>

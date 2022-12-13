@@ -140,10 +140,10 @@ function CategorieInput(props) {
     }
 
     function handleChange(event) {
-        console.log("event", event)
+        // console.log("event", event)
 
         if (event.target) {
-            console.log(event.target.id, event.target.value)
+            // console.log(event.target.id, event.target.value)
             setCategorie(oldCategorie => {
                 return ({
                     ...oldCategorie,
@@ -162,7 +162,7 @@ function CategorieInput(props) {
                 });
             }
             if (event.id && event.id !== "muscle") {
-                console.log(event.id, event.value, event.name)
+                // console.log(event.id, event.value, event.name)
                 setCategorie(oldCategorie => {
                     return ({
                         ...oldCategorie,

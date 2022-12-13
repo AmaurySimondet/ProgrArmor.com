@@ -99,7 +99,7 @@ function Dashboard() {
     const [params, setParams] = useState({ nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "" });
     const [categoriesAddRien, setCategoriesAddRien] = useState([])
     const [detailsAddRien, setDetailsAddRien] = useState([])
-    const [checkbox, setCheckbox] = useState({ affichageCharge: true, affichageReps: true, affichageSérie: false, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: false, affichagePercent: true, affichagePoids: false, affichageModif: false, affichageSuppr: false, affichageExport: false });
+    const [checkbox, setCheckbox] = useState({ affichageCharge: true, affichageReps: true, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: false, affichagePercent: true, affichagePoids: false, affichageModif: false, affichageSuppr: false, affichageExport: false });
     const [clicked, setClicked] = useState([false, false, false, false, false])
     const [clickedDetail, setClickedDetail] = useState([false, false, false, false, false])
     const [switched, setSwitched] = useState(false);
@@ -807,9 +807,6 @@ function Dashboard() {
                                             <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExercice" id="affichageExercice" />
                                             <label className="col-form-label" htmlFor="#affichageExercice"> Exercice </label>
 
-                                            <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSérie" id="affichageSérie" />
-                                            <label className="col-form-label" htmlFor="#affichageSérie"> Série </label>
-
                                             <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType" />
                                             <label className="col-form-label" htmlFor="#affichageType"> Type </label>
 
@@ -1104,9 +1101,6 @@ function Dashboard() {
                                                     <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExercice" id="affichageExercice" />
                                                     <label className="col-form-label" htmlFor="#affichageExercice"> Exercice </label>
 
-                                                    <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSérie" id="affichageSérie" />
-                                                    <label className="col-form-label" htmlFor="#affichageSérie"> Série </label>
-
                                                     <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType" />
                                                     <label className="col-form-label" htmlFor="#affichageType"> Type </label>
 
@@ -1177,7 +1171,6 @@ function Dashboard() {
                                 {categoriesAddRien.map(rien => {
                                     return <th scope="col">Categorie</th>
                                 })}
-                                {checkbox.affichageSérie ? <th scope="col">Série</th> : null}
                                 {checkbox.affichageType ? <th scope="col">Type</th> : null}
                                 {checkbox.affichageReps ? <th scope="col">Reps / Temps</th> : null}
                                 {checkbox.affichageCharge ? <th scope="col">Charge (kg)</th> : null}
@@ -1296,11 +1289,6 @@ function Dashboard() {
                                                                     )
                                                                 }
                                                             })}
-                                                            {checkbox.affichageSérie ?
-                                                                <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
-                                                                    {serie.index + 1}
-                                                                </td>
-                                                                : null}
                                                             {checkbox.affichageType ?
                                                                 <td style={switched ? tdStyleBlack(indexExercice) : tdStyleWhite(indexExercice)} className="dashboard-td">
                                                                     {serie.typeSerie === "reps" ? "Répétitions" : null}
