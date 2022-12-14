@@ -2,7 +2,7 @@ import axios from "axios";
 const headers = {
   "Content-Type": "application/json"
 };
-const burl = "https://www.prograrmor.com" // https://www.prograrmor.com https://prograrmorprealpha1.herokuapp.com
+const burl = "http://192.168.1.88:8800" // http://192.168.1.88:8800 https://prograrmorprealpha1.herokuapp.com
 
 function paramsToString(params) {
   let string = "";

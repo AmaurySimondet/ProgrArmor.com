@@ -22,6 +22,7 @@ function ProgrammeCard(props) {
     const [comment, setComment] = useState('');
     const [flipProgramme, setFlipProgramme] = useState(false);
     const [flipThreeDots, setFlipThreeDots] = useState(false);
+    const [dropComment, setDropComment] = useState({});
 
     function handleFlip() {
         setIsFlipped(!isFlipped);
@@ -35,6 +36,15 @@ function ProgrammeCard(props) {
     function handleFlipThreeDots() {
         setIsFlipped(!isFlipped);
         setFlipThreeDots(!flipThreeDots);
+    }
+
+    function handleThreeDotsComment(event) {
+        if (dropComment[event.target.id]) {
+            setDropComment({ [event.target.id]: false });
+        }
+        else {
+            setDropComment({ [event.target.id]: true });
+        }
     }
 
     function handleFlipWhoLiked() {
@@ -298,6 +308,15 @@ function ProgrammeCard(props) {
                 </div>
 
 
+
+
+
+
+
+
+
+
+
                 <div className="YOUR_BACK_COMPONENT">
                     {flipWhoLiked ?
                         <div className="programme-card" onClick={handleFlipWhoLiked}>
@@ -335,7 +354,8 @@ function ProgrammeCard(props) {
                     {flipComment ?
                         <div className="programme-card">
                             <Scrollbars autoHide>
-                                <div style={{ overflow: "auto" }} onClick={handleFlipCommentFalse}>
+
+                                <div style={{ height: "1000px" }}>
                                     {whoCommentedArray.length > 0 ?
                                         whoCommentedArray.map((comment, index) => {
                                             return (
@@ -352,9 +372,31 @@ function ProgrammeCard(props) {
                                                         </td>
                                                         <td>
                                                             <div style={{ padding: "5%" }}>
-                                                                <p style={{ margin: "auto", display: "inline-block", fontSize: "7px" }}>{comment.user.fName} {comment.user.lName}</p>
+                                                                <p onClick={handleFlipCommentFalse} style={{ margin: "auto", display: "inline-block", fontSize: "7px" }}>{comment.user.fName} {comment.user.lName}</p>
+
+                                                                <img
+                                                                    className={props.modeSombre ? "small-img questionDark" : "small-img"}
+                                                                    src={require('../../images/icons/three-dots.webp')}
+                                                                    alt='three-dots'
+                                                                    id={comment._id}
+                                                                    onClick={handleThreeDotsComment}
+                                                                    style={{ position: "absolute", right: "0", top: "5px" }} />
+
+
+                                                                <div className={dropComment[comment._id] ? "dropComment" + " " + "visible" : "dropComment" + " " + "not-visible"}
+                                                                    aria-labelledby={comment._id}>
+                                                                    <a className="" href="#">Modifier</a>
+                                                                    <br />
+                                                                    <a className="" href="#">Supprimer</a>
+                                                                    <br />
+                                                                    <a className="" href="#">Signaler</a>
+                                                                    <br />
+                                                                    <a className="" href="#">Repondre</a>
+                                                                </div>
+
+
                                                                 <br />
-                                                                <p style={{ margin: "auto", display: "inline-block" }}>{comment.comment}</p>
+                                                                <p onClick={handleFlipCommentFalse} style={{ margin: "auto", display: "inline-block" }}>{comment.comment}</p>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -370,7 +412,7 @@ function ProgrammeCard(props) {
                                 </div>
 
 
-                                <div className='form-group row'>
+                                <div className='from-group row'>
                                     <input type='text' className='form-control col-10 comment'
                                         placeholder="Même ma grand-mère peut le faire"
                                         onChange={e => setComment(e.target.value)}
@@ -381,6 +423,7 @@ function ProgrammeCard(props) {
                                         alt='send'
                                         onClick={sendComment} />
                                 </div>
+
                             </Scrollbars>
                         </div>
                         : null

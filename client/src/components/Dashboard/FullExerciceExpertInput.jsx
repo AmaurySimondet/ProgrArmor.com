@@ -3,6 +3,7 @@ import SerieInput from "./SerieInput";
 import CategorieInput from "./CategorieInput";
 import { React, useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import { writeSeries, writeCategories } from "../../utils/WriteExercice";
 
 function FullExerciceInput(props) {
     const [categories, setCategories] = useState([...Object.values(props.exercice.Categories)]);
@@ -22,43 +23,6 @@ function FullExerciceInput(props) {
                 exercice: exercice,
             });
         });
-    }
-
-    function writeSeries(series) {
-        let sameReps = true;
-        let sameCharge = true;
-
-        let reps = series[0].repsTime;
-        let charge = series[0].charge;
-        series.map((serie, index) => {
-            if (index > 0) {
-                if (serie.repsTime !== reps) {
-                    sameReps = false;
-                }
-                if (serie.charge !== charge) {
-                    sameCharge = false;
-                }
-            }
-        })
-
-        if (sameReps && sameCharge) {
-            return series.length + "x" + reps + "x" + charge;
-        }
-        else {
-            let text = "";
-            series.map((serie, index) => {
-                if (index > 0) {
-                    text += "\n";
-                }
-                if (index !== series.length - 1) {
-                    text += "1x" + serie.repsTime + "x" + serie.charge + ", ";
-                }
-                else {
-                    text += "1x" + serie.repsTime + "x" + serie.charge;
-                }
-            })
-            return text;
-        }
     }
 
     useEffect(() => {
@@ -224,34 +188,8 @@ function FullExerciceInput(props) {
 
                     <br />
 
-                    {categories ? categories.map((categorie, index) => {
-                        if (categorie.name !== "Elastique") {
-                            if (index === categories.length - 1) {
-                                return categorie.input
-                            }
-                            else {
-                                return categorie.input + ", "
-                            }
-                        }
-                        else {
-                            if (index === categories.length - 1) {
-                                if (categorie.input === "mesure") {
-                                    return "{" + categorie.utilisation + ";" + categorie.estimation + ";mesure=" + categorie.estimation + "}"
-                                }
-                                else {
-                                    return "{" + categorie.utilisation + ";" + categorie.input + ";tension=" + categorie.estimation + "}"
-                                }
-                            }
-                            else {
-                                if (categorie.input === "mesure") {
-                                    return "{" + categorie.utilisation + ";" + categorie.estimation + ";mesure=" + categorie.estimation + "}, "
-                                }
-                                else {
-                                    return "{" + categorie.utilisation + ";" + categorie.input + ";tension=" + categorie.estimation + "}, "
-                                }
-                            }
-                        }
-                    })
+                    {categories ?
+                        writeCategories(categories)
                         : null}
 
                     <br />

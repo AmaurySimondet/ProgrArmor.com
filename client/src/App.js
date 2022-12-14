@@ -15,6 +15,7 @@ import Admin from "./components/Dashboard/Admin.jsx";
 import InstallApp from "./components/Dashboard/Help/InstallApp.jsx";
 import Aide from "./components/Dashboard/Aide.jsx";
 import Programme from "./components/Dashboard/Programme.jsx";
+import Profil from "./components/Dashboard/Profil.jsx";
 
 // import eruda from "eruda";
 
@@ -47,13 +48,17 @@ function App() {
                 <Route exact path='/stats/*' element={<Stats />} />
             </Route>
 
-            <Route path="/programme/*" element={<PrivateRoute />}>
+            {/* <Route path="/programme/*" element={<PrivateRoute />}>
                 <Route exact path='/programme/*' element={<Travaux />} />
+            </Route> */}
+
+            <Route path="/programme/*" element={<PrivateRoute />}>
+                <Route exact path='/programme/*' element={<Programme />} />
             </Route>
 
-            {/* <Route path="/programme/*" element={<PrivateRoute />}>
-                <Route exact path='/programme/*' element={<Programme />} />
-            </Route> */}
+            <Route path="/profil/*" element={<PrivateRoute />}>
+                <Route exact path='/profil/*' element={<Profil />} />
+            </Route>
 
             <Route path="/social/*" element={<PrivateRoute />}>
                 <Route exact path='/social/*' element={<Travaux />} />

@@ -15,6 +15,10 @@ h1 {
     margin-right: 0;
 }
 
+img {
+    font-size: 6px;
+}
+
 .col,
 .col-1,
 .col-10,
@@ -1247,6 +1251,24 @@ table.connexion-table td.connexion-img-td {
 
 /* PROGRAMMES */
 
+.dropComment {
+    position: absolute;
+    background-color: #9b0000;
+    right: 0;
+    z-index: 1;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.dropComment a {
+    color: white;
+    text-decoration: none;
+}
+
+.dropComment a:hover {
+    color: #9a9a9a;
+}
+
 .programme-card {
     height: 550px;
     width: 300px;
@@ -1359,6 +1381,43 @@ table.connexion-table td.connexion-img-td {
     background-color: #333333;
     border-radius: 10px;
     text-align: left;
+    /* overflow: auto; */
+}
+
+
+
+/* PROFIL */
+
+.basic-flex2 {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 80vh;
+    margin: 40px auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.basic-flexed2 .profile-pic {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.basic-flexed2 {
+    display: inline-flex;
+    align-items: center;
+}
+
+.Profile {
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #330000;
+}
+
+.Profile .section {
+    border-right: 1px solid;
+    margin: 0;
 }
 
 
