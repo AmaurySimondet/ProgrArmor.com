@@ -118,9 +118,9 @@ function Stats() {
     const [infoPerf, setInfoPerf] = useState({})
     const [clickedDetail, setClickedDetail] = useState(false)
     const [exercice, setExercice] = useState({ exercice: { name: "title", ownExercice: "" } });
-    const [params3, setParams3] = useState({ top: 5, class: "reps", date: "md", reforme: "pie", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" })
-    const [params2, setParams2] = useState({ date: "md", reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" })
-    const [params1, setParams1] = useState({ date: "md", reforme: "poids", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "" })
+    const [params3, setParams3] = useState({ id: localStorage.getItem("id"), top: 5, class: "reps", date: "md", reforme: "pie", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" })
+    const [params2, setParams2] = useState({ id: localStorage.getItem("id"), date: "md", reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" })
+    const [params1, setParams1] = useState({ id: localStorage.getItem("id"), date: "md", reforme: "poids", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "" })
     const [user, setUser] = useState()
     const [reguScore, setReguScore] = useState();
     const [ReguHiddenClick, setReguHiddenClick] = useState('hide')

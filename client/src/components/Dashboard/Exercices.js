@@ -198,7 +198,7 @@ const exercices = [
   {
     id: "name",
     className: "select-item",
-    label: "Soulevé de terre / Deadlift / DL",
+    label: "Soulevé de terre / SDT / Deadlift / DL",
     value: "Soulevé de terre",
   },
   {

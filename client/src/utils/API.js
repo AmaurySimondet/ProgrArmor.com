@@ -86,7 +86,7 @@ export default {
   workouts: function (params) {
     let string = paramsToString(params);
 
-    return axios.get(`${burl}/user/workouts?` + string + "&id=" + localStorage.getItem("id"), { headers: headers });
+    return axios.get(`${burl}/user/workouts?` + string, { headers: headers });
 
   },
 
@@ -127,6 +127,11 @@ export default {
   //PROGRAMMES
   getProgrammes: function (send) {
     return axios.post(`${burl}/user/getProgrammes`, send, { headers: headers });
+
+  },
+
+  getProgrammesByUser: function (send) {
+    return axios.post(`${burl}/user/getProgrammesByUser`, send, { headers: headers });
 
   },
 

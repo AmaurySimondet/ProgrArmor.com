@@ -96,7 +96,7 @@ function Dashboard() {
     const [listeNoms, setListeNoms] = useState([]);
     const [details, setDetails] = useState([]);
     const [categories, setCategories] = useState([])
-    const [params, setParams] = useState({ nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "" });
+    const [params, setParams] = useState({ id: localStorage.getItem("id"), nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "" });
     const [categoriesAddRien, setCategoriesAddRien] = useState([])
     const [detailsAddRien, setDetailsAddRien] = useState([])
     const [checkbox, setCheckbox] = useState({ affichageCharge: true, affichageReps: true, affichageNom: true, affichageDate: true, affichageExercice: true, affichageType: false, affichagePercent: true, affichagePoids: false, affichageModif: false, affichageSuppr: false, affichageExport: false });

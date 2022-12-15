@@ -1101,7 +1101,7 @@ async function workouts(req, res) {
                         res.json({ success: false, message: "Aucune séance !" })
                     }
                 }
-                else {
+                if (isAdmin(req.query) === {}) {
                     let seances = [];
                     let ownExercices = [];
                     let numUsers = 0;
@@ -1590,6 +1590,7 @@ async function getUser(req, res) {
                     }
                     else {
                         const obj = {
+                            id: data[0]._id,
                             email: data[0].email,
                             fName: data[0].fName,
                             lName: data[0].lName,

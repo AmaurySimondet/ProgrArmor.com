@@ -40,6 +40,7 @@ module.exports = function (app) {
     app.post('/createProgramme', programme.create);
     app.post('/getProgrammes', programme.getProgrammes);
     app.post('/getProgramme', programme.getProgramme);
+    app.post('/getProgrammesByUser', programme.getProgrammesByUser);
     app.post('/likeProgramme', programme.likeProgramme);
     app.post('/isProgrammeLiked', programme.isProgrammeLiked);
     app.post('/isProgrammeCommented', programme.isProgrammeCommented);

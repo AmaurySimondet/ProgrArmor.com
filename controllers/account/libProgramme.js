@@ -116,6 +116,7 @@ async function likeProgramme(req, res) {
     }
 }
 
+//get programme by its id
 exports.getProgramme = (req, res) => {
     let conditions = { id: req.body.programmeId }
 
@@ -133,6 +134,24 @@ exports.getProgramme = (req, res) => {
     })
 };
 
+//get programme by user id
+exports.getProgrammesByUser = (req, res) => {
+    let conditions = { createdBy: req.body.userId }
+    // console.log(conditions)
+
+    //trouver le programme
+    Programme.find(conditions, function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+            res.json({
+                success: true, programmes: data,
+                message: "Programme trouvé !"
+            })
+        }
+    })
+};
 
 // exports.editDB2 = (req, res) => {
 //     User.updateMany({}, { $set: { programmes: [] } }, (err) => {

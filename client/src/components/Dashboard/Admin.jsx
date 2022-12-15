@@ -51,7 +51,7 @@ function Admin(props) {
     const [numActiveUsers, setNumActiveUsers] = useState(0);
     const [seances3, setSeances3] = useState([]);
     const [ownExercices, setOwnExercices] = useState([]);
-    const [params3, setParams3] = useState({ admin: "true", top: 5, class: "sets", date: "md", reforme: "pie", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" })
+    const [params3, setParams3] = useState({ id: localStorage.getItem("id"), admin: "true", top: 5, class: "sets", date: "md", reforme: "pie", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" })
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
         width: window.innerWidth

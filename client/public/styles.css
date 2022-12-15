@@ -1418,6 +1418,12 @@ table.connexion-table td.connexion-img-td {
 .Profile .section {
     border-right: 1px solid;
     margin: 0;
+    padding: 20px;
+    width: 90%;
+}
+
+.Profile .smartphoneSection {
+    margin-bottom: 40px;
 }
 
 

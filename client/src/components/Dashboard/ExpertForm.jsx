@@ -24,7 +24,7 @@ function ExpertForm(props) {
     const [paramsSelect, setParamsSelect] = useState();
     const [clickExercices, setClickExercices] = useState(props.seance.exercices.length > 0 ? true : false);
     const [clickDetails, setClickDetails] = useState(props.seance.details.length > 0 ? true : false);
-    const [params, setParams] = useState({ load: "" });
+    const [params, setParams] = useState({ id: localStorage.getItem("id"), load: "" });
     const [listeNoms, setListeNoms] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
 
