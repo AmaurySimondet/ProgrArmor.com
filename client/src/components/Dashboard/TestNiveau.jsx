@@ -50,13 +50,13 @@ function TestNiveau() {
 
 
         if (sumInterm === 0 && sumConfirme === 0 && sumExpert === 0) {
-            setResult("Vous êtes officiellement Débutant(e) !");
+            setResult({ text: "Vous êtes officiellement Débutant(e) !", color: "blue" });
         } else if (sumExpert >= 1) {
-            setResult("Vous êtes officiellement Expert(e) !");
+            setResult({ text: "Vous êtes officiellement Expert(e) !", color: "red" });
         } else if (sumConfirme >= 1 && sumExpert === 0) {
-            setResult("Vous êtes officiellement Confirmé(e) !");
+            setResult({ text: "Vous êtes officiellement Confirmé(e) !", color: "orange" });
         } else if (sumInterm >= 1 && sumConfirme === 0 && sumExpert === 0) {
-            setResult("Vous êtes officiellement Intermédiaire !");
+            setResult({ text: "Vous êtes officiellement Intermédiaire !", color: "yellow" });
         }
 
 
@@ -814,7 +814,7 @@ function TestNiveau() {
                     : null}
 
                 <button className="btn btn-dark large-margin-updown" onClick={handleLoad}>
-                    Determine mon niveau !
+                    Determine mon niveau avec mes séances !
                 </button>
                 <p>
                     {text}
@@ -839,8 +839,8 @@ function TestNiveau() {
                     </tbody>
                 </table>
 
-                <h1>
-                    {result}
+                <h1 style={{ color: result?.color }}>
+                    {result?.text}
                 </h1>
 
             </div>
