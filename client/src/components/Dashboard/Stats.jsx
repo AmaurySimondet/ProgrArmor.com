@@ -258,6 +258,8 @@ function Stats() {
         setTimeout(getSeance1, 50);
         setTimeout(getSeance2, 50);
         setTimeout(getSeance3, 50);
+        console.log("params3", params3)
+        console.log("seances3", seances3)
         getReguScore();
     }, [params1, params2, params3]);
 

@@ -292,7 +292,7 @@ function Dashboard() {
     }
 
     useEffect(() => {
-        console.log(params)
+        console.log("params", params)
         setTimeout(getWorkouts, 50);
     }, [params]);
 
@@ -469,8 +469,6 @@ function Dashboard() {
                 categories: categories
             })
         })
-
-        console.log(categories)
     }, [categories]);
 
     useEffect(() => {

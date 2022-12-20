@@ -5,6 +5,10 @@
     color: white;
 }
 
+.block {
+    display: block;
+}
+
 h1 {
     font-weight: 800;
     margin: 5% 0;

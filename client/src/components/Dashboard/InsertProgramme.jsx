@@ -74,54 +74,56 @@ function InsertProgramme(props) {
     }
 
     return (
-        <div className='form-group row'>
-            <div className='col-12 basic-margin-updown'>
-                <label>Titre</label>
-                <input type="text"
-                    onChange={handleChange}
-                    id="titre"
-                    placeholder="FullStack... heu je veux dire FullBody"
-                    className='form-control inputDark' value={titre} />
-            </div>
+        <div>
+            <div className='form-group row'>
+                <div className='col-12 basic-margin-updown'>
+                    <label>Titre</label>
+                    <input type="text"
+                        onChange={handleChange}
+                        id="titre"
+                        placeholder="FullStack... heu je veux dire FullBody"
+                        className='form-control inputDark' value={titre} />
+                </div>
 
-            <div className='col-12 basic-margin-updown'>
-                <label>Description</label>
-                <textarea type="text"
-                    onChange={handleChange}
-                    id="description"
-                    placeholder="Vous savez, le truc qui explique ce que c'est"
-                    className='form-control inputDark'
-                    value={description} />
-            </div>
+                <div className='col-12 basic-margin-updown'>
+                    <label>Description</label>
+                    <textarea type="text"
+                        onChange={handleChange}
+                        id="description"
+                        placeholder="Vous savez, le truc qui explique ce que c'est"
+                        className='form-control inputDark'
+                        value={description} />
+                </div>
 
-            <div className='col-4 basic-margin-updown'>
-                <label> Type de programme </label>
-                <Select options={[
-                    { id: "type", label: 'test', value: 'test' }
-                ]}
-                    onChange={handleChange}
-                    value={{ id: type.id, label: type.label, value: type.value }}
-                    styles={styleOnDim(dimensions)} />
-            </div>
+                <div className='col-4 basic-margin-updown'>
+                    <label> Type de programme </label>
+                    <Select options={[
+                        { id: "type", label: 'test', value: 'test' }
+                    ]}
+                        onChange={handleChange}
+                        value={{ id: type.id, label: type.label, value: type.value }}
+                        styles={styleOnDim(dimensions)} />
+                </div>
 
-            <div className='col-4 basic-margin-updown'>
-                <label> Niveau </label>
-                <Select options={[
-                    { id: "niveau", label: 'test', value: 'test' }
-                ]}
-                    onChange={handleChange}
-                    value={{ id: niveau.id, label: niveau.label, value: niveau.value }}
-                    styles={styleOnDim(dimensions)} />
-            </div>
+                <div className='col-4 basic-margin-updown'>
+                    <label> Niveau </label>
+                    <Select options={[
+                        { id: "niveau", label: 'test', value: 'test' }
+                    ]}
+                        onChange={handleChange}
+                        value={{ id: niveau.id, label: niveau.label, value: niveau.value }}
+                        styles={styleOnDim(dimensions)} />
+                </div>
 
-            <div className='col-4 basic-margin-updown'>
-                <label> Durée max d'une séance </label>
-                <Select options={[
-                    { id: "duree", label: 'test', value: 'test' }
-                ]}
-                    onChange={handleChange}
-                    value={{ id: duree.id, label: duree.label, value: duree.value }}
-                    styles={styleOnDim(dimensions)} />
+                <div className='col-4 basic-margin-updown'>
+                    <label> Durée max d'une séance </label>
+                    <Select options={[
+                        { id: "duree", label: 'test', value: 'test' }
+                    ]}
+                        onChange={handleChange}
+                        value={{ id: duree.id, label: duree.label, value: duree.value }}
+                        styles={styleOnDim(dimensions)} />
+                </div>
             </div>
 
             {seances?.map((seance, index) => {
@@ -137,8 +139,15 @@ function InsertProgramme(props) {
                 )
             })}
 
-            <button className='btn btn-dark' onClick={addSeance}>
+            <button className='btn btn-dark block large-margin-updown'
+                style={{ marginLeft: "0" }}
+                onClick={addSeance}>
                 Ajouter une séance
+            </button>
+
+            <button className='btn btn-black block large-margin-updown'
+                onClick={addSeance}>
+                Enregistrer le programme !
             </button>
         </div>
     )
