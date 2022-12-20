@@ -16,6 +16,7 @@ import InstallApp from "./components/Dashboard/Help/InstallApp.jsx";
 import Aide from "./components/Dashboard/Aide.jsx";
 import Programme from "./components/Dashboard/Programme.jsx";
 import Profil from "./components/Dashboard/Profil.jsx";
+import TestNiveau from "./components/Dashboard/TestNiveau.jsx";
 
 // import eruda from "eruda";
 
@@ -72,11 +73,17 @@ function App() {
                 <Route exact path='/a_propos/*' element={<Travaux />} />
             </Route>
 
+            <Route path="/testniveau/*" element={<PrivateRoute />}>
+                <Route exact path='/testniveau/*' element={<TestNiveau />} />
+            </Route>
+
             {/* AIDE */}
             <Route path="/aide" element={<PrivateRoute />}>
                 <Route exact path='/aide' element={<Aide />} />
                 <Route exact path='/aide/InstallApp/*' element={<InstallApp />} />
             </Route>
+
+
 
             <Route path="/cgu/*" element={<PrivateRoute />}>
                 <Route exact path='/cgu/*' element={<Travaux />} />

@@ -94,6 +94,12 @@ const executionSpecifique = [
   {
     id: "input",
     className: "select-item",
+    label: "90° (push-up)",
+    value: "90° (push-up)",
+  },
+  {
+    id: "input",
+    className: "select-item",
     label: "'Tiger'",
     value: "'Tiger'",
   },
@@ -193,8 +199,8 @@ const executionSpecifique = [
   {
     id: "input",
     className: "select-item",
-    label: "'Natural Leg'",
-    value: "'Natural Leg'",
+    label: "'Natural'",
+    value: "'Natural'",
   },
   {
     id: "input",

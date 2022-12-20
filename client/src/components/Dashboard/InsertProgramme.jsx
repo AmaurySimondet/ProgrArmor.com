@@ -3,6 +3,8 @@ import Select from 'react-select';
 import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from './customStyles';
 import SeanceOfProgramme from './SeanceOfProgramme';
 import { v4 as uuidv4 } from 'uuid';
+import TypesDeProgrammes from './Programme/TypeDeProgrammes'
+import Niveaux from './Programme/Niveaux'
 
 function InsertProgramme(props) {
     const [titre, setTitre] = useState("");
@@ -97,9 +99,7 @@ function InsertProgramme(props) {
 
                 <div className='col-4 basic-margin-updown'>
                     <label> Type de programme </label>
-                    <Select options={[
-                        { id: "type", label: 'test', value: 'test' }
-                    ]}
+                    <Select options={TypesDeProgrammes}
                         onChange={handleChange}
                         value={{ id: type.id, label: type.label, value: type.value }}
                         styles={styleOnDim(dimensions)} />
@@ -107,9 +107,7 @@ function InsertProgramme(props) {
 
                 <div className='col-4 basic-margin-updown'>
                     <label> Niveau </label>
-                    <Select options={[
-                        { id: "niveau", label: 'test', value: 'test' }
-                    ]}
+                    <Select options={Niveaux}
                         onChange={handleChange}
                         value={{ id: niveau.id, label: niveau.label, value: niveau.value }}
                         styles={styleOnDim(dimensions)} />
@@ -117,12 +115,13 @@ function InsertProgramme(props) {
 
                 <div className='col-4 basic-margin-updown'>
                     <label> Durée max d'une séance </label>
-                    <Select options={[
-                        { id: "duree", label: 'test', value: 'test' }
-                    ]}
+                    <input
+                        type="number"
                         onChange={handleChange}
-                        value={{ id: duree.id, label: duree.label, value: duree.value }}
-                        styles={styleOnDim(dimensions)} />
+                        id="duree"
+                        placeholder="En minutes"
+                        className='form-control inputDark'
+                        value={duree} />
                 </div>
             </div>
 

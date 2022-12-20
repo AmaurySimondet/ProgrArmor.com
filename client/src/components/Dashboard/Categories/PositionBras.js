@@ -1,5 +1,5 @@
 const positionBras = [
-//POSITION MEMBRES
+  //POSITION MEMBRES
   {
     id: "input",
     className: "select-title",
@@ -21,8 +21,8 @@ const positionBras = [
   {
     id: "input",
     className: "select-item",
-    label: "Bras pliées",
-    value: "Bras pliées",
+    label: "Bras pliées / flechies",
+    value: "Bras pliées / flechies",
   },
   {
     id: "input",

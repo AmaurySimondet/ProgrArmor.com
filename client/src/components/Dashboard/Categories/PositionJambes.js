@@ -1,5 +1,5 @@
 const positionJambes = [
-//POSITION MEMBRES
+  //POSITION MEMBRES
   {
     id: "input",
     className: "select-title",
@@ -21,8 +21,26 @@ const positionJambes = [
   {
     id: "input",
     className: "select-item",
-    label: "Jambes pliées",
-    value: "Jambes pliées",
+    label: "Jambes pliées / flechies",
+    value: "Jambes pliées / flechies",
+  },
+  {
+    id: "input",
+    className: "select-item",
+    label: "Hanches très flechies",
+    value: "Hanches très flechies",
+  },
+  {
+    id: "input",
+    className: "select-item",
+    label: "Hanches flechies",
+    value: "Hanches flechies",
+  },
+  {
+    id: "input",
+    className: "select-item",
+    label: "Hanches en extension",
+    value: "Hanches en extension",
   },
   {
     id: "input",

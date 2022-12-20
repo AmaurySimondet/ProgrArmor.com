@@ -36,6 +36,9 @@ module.exports = function (app) {
     // //EDIT DB
     // app.get('/editDB', account.editDB)
 
+    //NIVEAU
+    app.post('/getNiveau', account.getNiveau)
+
     //PROGRAMME
     app.post('/createProgramme', programme.create);
     app.post('/getProgrammes', programme.getProgrammes);

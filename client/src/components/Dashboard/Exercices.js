@@ -327,7 +327,7 @@ const exercices = [
   {
     id: "name",
     className: "select-item",
-    label: "Planche",
+    label: "Planche (Street Workout)",
     value: "Planche",
   },
   {
@@ -529,7 +529,7 @@ const exercices = [
   {
     id: "name",
     className: "select-item",
-    label: "Planche / Plank",
+    label: "Planche / Plank (Gainage)",
     value: "Planche / Plank",
   },
   {

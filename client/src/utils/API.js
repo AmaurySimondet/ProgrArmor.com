@@ -72,6 +72,12 @@ export default {
 
   },
 
+  //NIVEAU
+  getNiveau: function (send) {
+    return axios.post(`${burl}/user/getNiveau`, send, { headers: headers });
+
+  },
+
   //SESSION
   debutantform: function (send) {
     return axios.post(`${burl}/user/debutantform`, send, { headers: headers });

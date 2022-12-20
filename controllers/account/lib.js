@@ -861,6 +861,276 @@ async function priseDeNote(req, res) {
 
 }
 
+//NIVEAU
+
+async function getNiveau(req, res) {
+    let seances = [];
+    let err = false;
+    let checkItems = {};
+
+    function checkPerformance(seances, exerciceName, muscleName, categoriesList, typeSerieInput, repsTimeInput, percentInput, chargeInput) {
+        let check = false;
+
+        seances.forEach((seance, index) => {
+            seance.exercices.forEach((exercice, indexExercice) => {
+                if (exercice.exercice.name === exerciceName) {
+
+                    if (muscleName === "" || exercice.exercice.muscle === muscleName) {
+
+                        let allCategories = [];
+                        let checkCategories = false;
+
+                        if (categoriesList.length > 0 && exercice.Categories && Object.keys(exercice.Categories).length > 0) {
+                            Object.values(exercice.Categories).forEach((categorie, indexCategorie) => {
+                                allCategories.push(categorie.input);
+                            })
+
+                            for (const element of categoriesList) {
+                                if (allCategories.includes(element)) {
+                                    checkCategories = true;
+                                }
+                            }
+                        }
+                        if (categoriesList.length === 0) {
+                            checkCategories = true;
+                        }
+
+                        if (checkCategories === true) {
+                            Object.values(exercice.Series).forEach((serie, indexSerie) => {
+                                if (serie.typeSerie === typeSerieInput) {
+                                    if (parseFloat(serie.repsTime) >= repsTimeInput) {
+                                        console.log(serie.percent, parseFloat(serie.percent.slice(0, serie.percent.length - 1)), percentInput)
+                                        if (parseFloat(serie.percent.slice(0, serie.percent.length - 1)) >= percentInput) {
+                                            if (serie.charge >= chargeInput) {
+                                                check = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+        })
+
+        return check
+    }
+
+    await User.findById(req.body.id, (err, user) => {
+        if (err) {
+            err = true;
+            return res.json({ success: false, message: "Erreur de récupération de l'utilisateur" })
+        }
+        else {
+            if (user) {
+                if (user.seances.length === 0) {
+                    err = true;
+                    return res.json({ success: false, message: "Aucune séance enregistrée" })
+                }
+                else {
+                    seances = user.seances;
+                }
+            }
+            else {
+                err = true;
+                return res.json({ success: false, message: "Utilisateur non trouvé" })
+            }
+        }
+    })
+
+    if (err === false) {
+
+        //INTERMEDIAIRE
+        checkItems["statiqueIntermItem1"] = checkPerformance(seances,
+            "Front Lever", ["One leg"], "time", 5, 0, 0) || checkPerformance(seances,
+                "Front Lever", "", ["Unilatéral"], "time", 2, 0, 0)
+
+        checkItems["statiqueIntermItem2"] = checkPerformance(seances,
+            "Planche", "", ["Tuck"], "time", 20, 0, 0) || checkPerformance(seances,
+                "Planche", "", ["Advanced tuck"], "time", 10, 0, 0)
+
+        checkItems["statiqueIntermItem3"] = checkPerformance(seances,
+            "L Sit", "", [], "time", 15, 0, 0)
+
+        checkItems["statiqueIntermItem4"] = checkPerformance(seances,
+            "Back Lever", "", ["Closed hip straddle"], "time", 1, 0, 0)
+
+        checkItems["pdcIntermItem1"] = checkPerformance(seances,
+            "Dips", "", [], "reps", 15, 0, 0)
+
+        checkItems["pdcIntermItem2"] = checkPerformance(seances,
+            "Traction / Pull up", "", [], "reps", 12, 0, 0)
+
+        checkItems["pdcIntermItem3"] = checkPerformance(seances,
+            "Muscle Up", "", [], "reps", 3, 0, 0)
+
+        checkItems["pdcIntermItem4"] = checkPerformance(seances,
+            "Pompe / Push up", "", ["Archer / Lateral"], 12, 0, 0)
+
+        checkItems["pdcIntermItem5"] = checkPerformance(seances,
+            "Squat", "", ['Pistol'], "reps", 5, 0, 0) || checkPerformance(seances,
+                "Squat", "", ['Unilatéral'], "reps", 5, 0, 0)
+
+        checkItems["pdcIntermItem6"] = checkPerformance(seances,
+            "Squat", "", ['Matrix', "Demi / Half"], "reps", 5, 0, 0) || checkPerformance(seances,
+                "Squat", "", ['Matrix', "1/2 haut"], "reps", 5, 0, 0) || checkPerformance(seances,
+                    "Extension", "Jambe / Leg", ['Natural'], "reps", 5, 0, 0)
+
+        checkItems["pdcIntermItem7"] = checkPerformance(seances,
+            "Curl", "Jambe / Leg", ['Nordic', "Hanches très flechies"], "reps", 15, 0, 0) || checkPerformance(seances,
+                "Curl", "Jambe / Leg", ['Nordic', "Hanches flechies"], "reps", 15, 0, 0)
+
+        checkItems["streetliftIntermItem1"] = checkPerformance(seances,
+            "Dips", "", [], "reps", 1, 50, 0)
+
+        checkItems["streetliftIntermItem2"] = checkPerformance(seances,
+            "Traction / Pull up", "", [], "reps", 1, 30, 0)
+
+        checkItems["streetliftIntermItem3"] = checkPerformance(seances,
+            "Muscle Up", "", [], "reps", 3, 0, 0)
+
+        checkItems["streetliftIntermItem4"] = checkPerformance(seances,
+            "Squat", "", [], 1, 130, 0)
+
+        checkItems["streetliftIntermItem5"] = checkPerformance(seances,
+            "Soulevé de terre", "", [], 1, 170, 0)
+
+        checkItems["equilibreIntermItem1"] = checkPerformance(seances,
+            "Handstand", "", [], "time", 10, 0, 0)
+
+        checkItems["equilibreIntermItem2"] = checkPerformance(seances,
+            "Handstand", "", [], "reps", 3, 0, 0)
+
+        checkItems["equilibreIntermItem3"] = checkPerformance(seances,
+            "Elbow Lever", "", [], "time", 30, 0, 0)
+
+
+        //CONFIRME
+
+        checkItems["statiqueConfirmeItem1"] = checkPerformance(seances,
+            "Front Lever", "", [], "time", 10, 0, 0)
+
+        checkItems["statiqueConfirmeItem2"] = checkPerformance(seances,
+            "Planche", "", ["Closed hip straddle"], "time", 10, 0, 0)
+
+        checkItems["statiqueConfirmeItem3"] = checkPerformance(seances,
+            "Drapeau", "", [], "time", 15, 0, 0)
+
+        checkItems["pdcConfirmeItem1"] = checkPerformance(seances,
+            "Dips", "", ["Archer / Lateral"], "reps", 10, 0, 0)
+
+        checkItems["pdcConfirmeItem2"] = checkPerformance(seances,
+            "Traction / Pull up", "", ["Archer / Lateral"], "reps", 10, 0, 0) || checkPerformance(seances,
+                "Traction / Pull up", "", ["Unilatéral"], "reps", 1, 0, 0)
+
+        checkItems["pdcConfirmeItem3"] = checkPerformance(seances,
+            "Muscle Up", "", [], "reps", 8, 0, 0)
+
+        checkItems["pdcConfirmeItem4"] = checkPerformance(seances,
+            "Pompe / Push up", "", ["Unilatéral"], 20, 0, 0)
+
+        checkItems["pdcConfirmeItem5"] = checkPerformance(seances,
+            "Squat", "", ['Pistol'], "reps", 1, 40, 0)
+
+        checkItems["pdcConfirmeItem6"] = checkPerformance(seances,
+            "Squat", "", ['Matrix'], "reps", 5, 0, 0)
+
+        checkItems["pdcConfirmeItem7"] = checkPerformance(seances,
+            "Curl", "Jambe / Leg", ['Nordic', "Hanches flechies"], "reps", 5, 0, 0)
+
+        checkItems["streetliftConfirmeItem1"] = checkPerformance(seances,
+            "Dips", "", [], "reps", 1, 100, 0)
+
+        checkItems["streetliftConfirmeItem2"] = checkPerformance(seances,
+            "Traction / Pull up", "", [], "reps", 1, 75, 0)
+
+        checkItems["streetliftConfirmeItem3"] = checkPerformance(seances,
+            "Muscle Up", "", [], "reps", 8, 0, 0)
+
+        checkItems["streetliftConfirmeItem4"] = checkPerformance(seances,
+            "Squat", "", [], 1, 200, 0)
+
+        checkItems["streetliftConfirmeItem5"] = checkPerformance(seances,
+            "Soulevé de terre", "", [], 1, 250, 0)
+
+        checkItems["equilibreConfirmeItem1"] = checkPerformance(seances,
+            "Handstand", "", [], "time", 40, 0, 0)
+
+        checkItems["equilibreConfirmeItem2"] = checkPerformance(seances,
+            "Handstand", "", [], "reps", 5, 0, 0)
+
+        checkItems["equilibreConfirmeItem3"] = checkPerformance(seances,
+            "Elbow Lever", "", ["Unilatéral"], "time", 30, 0, 0)
+
+
+        //EXPERT
+        checkItems["statiqueExpertItem1"] = checkPerformance(seances,
+            "Front Lever", "", [], "time", 20, 0, 0) || checkPerformance(seances,
+                "Front Lever", "", [], ["Unilatéral"], "time", 1, 0, 0)
+
+        checkItems["statiqueExpertItem2"] = checkPerformance(seances,
+            "Planche", "", [], "time", 10, 0, 0) || checkPerformance(seances,
+                "Maltese", "", [], "time", 10, 0, 0)
+
+        checkItems["statiqueExpertItem3"] = checkPerformance(seances,
+            "Iron Cross", "", [], "time", 10, 0, 0)
+
+        checkItems["statiqueExpertItem4"] = checkPerformance(seances,
+            "Drapeau", "", [], "time", 30, 0, 0)
+
+        checkItems["pdcExpertItem1"] = checkPerformance(seances,
+            "Dips", "", ["Unilatéral"], "reps", 5, 0, 0)
+
+        checkItems["pdcExpertItem2"] = checkPerformance(seances,
+            "Traction / Pull up", "", ["Unilatéral"], "reps", 3, 0, 0)
+
+        checkItems["pdcExpertItem3"] = checkPerformance(seances,
+            "Muscle Up", "", [], "reps", 12, 0, 0)
+
+        checkItems["pdcExpertItem4"] = checkPerformance(seances,
+            "Planche", "", [], "reps", 5, 0, 0)
+
+        checkItems["pdcExpertItem5"] = checkPerformance(seances,
+            "Squat", "", ['Pistol'], "reps", 1, 60, 0)
+
+        checkItems["pdcExpertItem6"] = checkPerformance(seances,
+            "Squat", "", ['Matrix'], "reps", 10, 0, 0)
+
+        checkItems["pdcExpertItem7"] = checkPerformance(seances,
+            "Curl", "Jambe / Leg", ['Nordic', "Hanches en extension"], "reps", 1, 0, 0)
+
+        checkItems["streetliftExpertItem1"] = checkPerformance(seances,
+            "Dips", "", [], "reps", 1, 130, 0)
+
+        checkItems["streetliftExpertItem2"] = checkPerformance(seances,
+            "Traction / Pull up", "", [], "reps", 1, 100, 0)
+
+        checkItems["streetliftExpertItem3"] = checkPerformance(seances,
+            "Muscle Up", "", [], "reps", 3, 25, 0)
+
+        checkItems["streetliftExpertItem4"] = checkPerformance(seances,
+            "Squat", "", [], 1, 230, 0)
+
+        checkItems["streetliftExpertItem5"] = checkPerformance(seances,
+            "Soulevé de terre", "", [], 1, 300, 0)
+
+        checkItems["equilibreExpertItem1"] = checkPerformance(seances,
+            "Handstand", "", [], "time", 90, 0, 0)
+
+        checkItems["equilibreExpertItem2"] = checkPerformance(seances,
+            "Handstand", "", [], "reps", 10, 0, 0)
+
+        checkItems["equilibreExpertItem3"] = checkPerformance(seances,
+            "Pompe / Push up", "", ["90° (push-up)"], "reps", 10, 0, 0)
+
+        console.log(checkItems)
+
+        res.json({ success: true, message: "Niveau", checkItems: checkItems })
+
+    }
+}
+
 //DASHBOARD
 //ALL WORKOUTS / ADMIN
 async function workouts(req, res) {
@@ -1962,3 +2232,4 @@ exports.loadSeance = loadSeance;
 exports.reguScore = reguScore;
 exports.priseDeNote = priseDeNote;
 exports.resetPassword = resetPassword;
+exports.getNiveau = getNiveau;
