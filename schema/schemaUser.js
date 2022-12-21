@@ -33,6 +33,7 @@ const userSchema = mongoose.Schema(
       type: Boolean
     },
     seances: Array,
+    checkItems: Object,
     programmes: [{ type: Schema.Types.ObjectId, ref: 'Programme' }],
   },
   { timestamps: { createdAt: "created_at" } }

@@ -9,6 +9,16 @@
     display: block;
 }
 
+.basic-form-control {
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
 h1 {
     font-weight: 800;
     margin: 5% 0;
@@ -269,6 +279,102 @@ table.profile-table {
     height: 125px;
 }
 
+/* ACCOMPLISSEMENTS */
+
+.achieveTxtHolder {
+    min-height: 80px;
+    position: relative;
+    background: #222222;
+    /* display: flex; */
+    align-items: center;
+}
+
+#topSummaryBoxContent {
+    position: relative;
+    background-color: #222222;
+    padding: 6px 10px 6px 10px;
+    color: #747474;
+    border-radius: 3px;
+    min-height: 69px;
+    margin-bottom: 16px;
+}
+
+#topSummaryLeft {
+    float: left;
+}
+
+#topSummaryAchievements {
+    float: right;
+    max-width: 309px;
+    padding: 5px 6px 0 0;
+    line-height: 18px;
+}
+
+.achieveBar {
+    background: #3a3a3a;
+    padding: 1px;
+    border: 1px solid #aeaeae;
+}
+
+.achieveBarProgress {
+    height: 8px;
+    background-color: #aeaeae;
+}
+
+.achieveRow {
+    position: relative;
+    padding-left: 71px;
+    min-height: 80px;
+    margin-bottom: 12px;
+}
+
+.achieveTxt h5 {
+    font-weight: normal;
+    font-size: 15px;
+    color: #898989;
+    white-space: normal;
+    max-height: 28px;
+}
+
+.achieveTxt h3 {
+    font-weight: bold;
+    font-size: 25px;
+    color: #e1e1e1;
+}
+
+.achieveTxt {
+    padding: 6px 6px 6px 6px;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#mainContents {
+    margin: 0;
+    text-align: left;
+}
+
+.achieveImgHolder {
+    position: absolute;
+    left: -10px;
+    top: 0px;
+}
+
+.achieveUnlockTime {
+    margin-left: auto;
+    padding-right: 6px;
+    color: #898989;
+    font-size: 12px;
+}
+
+.achieveImgHolder img,
+.CachieveImgHolder img {
+    width: 80px;
+    height: 80px;
+}
 
 /* SESSION DEBUTANT */
 
@@ -1400,6 +1506,13 @@ table.connexion-table td.connexion-img-td {
     margin-right: 40px;
 }
 
+.grid-test {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 16px;
+}
+
 /* PROFIL */
 
 .basic-flex2 {
@@ -1774,6 +1887,10 @@ table.connexion-table td.connexion-img-td {
         font-size: 15px;
     }
 
+    h5 {
+        font-size: 10px;
+    }
+
     body {
         font-size: 15px;
     }
@@ -1789,16 +1906,21 @@ table.connexion-table td.connexion-img-td {
 
 @media (max-width: 500px) {
 
+    .grid-test {
+        grid-gap: 5px;
+    }
+
     input,
+    .basic-form-control,
     select {
         height: 20px !important;
         font-size: 10px !important;
-        padding: 5px !important;
+        padding: 1px !important;
     }
 
     textarea {
         font-size: 10px !important;
-        padding: 5px !important;
+        padding: 1px !important;
     }
 
     .poubelle,
@@ -1841,6 +1963,10 @@ table.connexion-table td.connexion-img-td {
 
     h3 {
         font-size: 10px !important;
+    }
+
+    h5 {
+        font-size: 7px !important;
     }
 
     body {

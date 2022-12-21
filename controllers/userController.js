@@ -35,6 +35,7 @@ module.exports = function (app) {
 
     // //EDIT DB
     // app.get('/editDB', account.editDB)
+    app.get('/editDB2', account.editDB2)
 
     //NIVEAU
     app.post('/getNiveau', account.getNiveau)

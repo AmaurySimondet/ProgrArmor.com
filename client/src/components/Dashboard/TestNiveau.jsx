@@ -3,6 +3,24 @@ import NavigBar from '../NavigBar';
 import Footer from '../Footer';
 import API from '../../utils/API';
 
+const Berger = [
+    { rep: 1, percent: 100 },
+    { rep: 2, percent: 97.4 },
+    { rep: 3, percent: 94.9 },
+    { rep: 4, percent: 92.4 },
+    { rep: 5, percent: 89.8 },
+    { rep: 6, percent: 87.6 },
+    { rep: 7, percent: 85.5 },
+    { rep: 8, percent: 83.3 },
+    { rep: 9, percent: 81.1 },
+    { rep: 10, percent: 78.8 },
+    { rep: 11, percent: 75 },
+    { rep: 12, percent: 72.5 },
+    { rep: 13, percent: 70 },
+    { rep: 14, percent: 67.5 },
+    { rep: 15, percent: 65 },
+]
+
 function TestNiveau() {
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
@@ -15,8 +33,15 @@ function TestNiveau() {
     let [expert, setExpert] = useState(0);
     let [confirme, setConfirme] = useState(0);
     let [result, setResult] = useState();
-    let [text, setText] = useState("");
+    let [textPerf, setTextPerf] = useState("");
+    let [textObjective, setTextObjective] = useState("");
     let [total, setTotal] = useState(0);
+    const [reps, setReps] = useState(8);
+    const [pdc, setPdc] = useState(85);
+    const [repsObjective, setRepsObjective] = useState(1);
+    const [pdcObjective, setPdcObjective] = useState(100);
+    const [convertedObjective, setConvertedObjective] = useState(0);
+    const [check, setCheck] = useState(false);
 
     const handleChange = (event) => {
         setCheckedItems({
@@ -50,13 +75,13 @@ function TestNiveau() {
 
 
         if (sumInterm === 0 && sumConfirme === 0 && sumExpert === 0) {
-            setResult({ text: "Vous êtes officiellement Débutant(e) !", color: "blue" });
+            setResult({ text: "Débutant(e) !", color: "#10669C" });
         } else if (sumExpert >= 1) {
-            setResult({ text: "Vous êtes officiellement Expert(e) !", color: "red" });
+            setResult({ text: "Expert(e) !", color: "red" });
         } else if (sumConfirme >= 1 && sumExpert === 0) {
-            setResult({ text: "Vous êtes officiellement Confirmé(e) !", color: "orange" });
+            setResult({ text: "Confirmé(e) !", color: "orange" });
         } else if (sumInterm >= 1 && sumConfirme === 0 && sumExpert === 0) {
-            setResult({ text: "Vous êtes officiellement Intermédiaire !", color: "yellow" });
+            setResult({ text: "Intermédiaire !", color: "yellow" });
         }
 
 
@@ -107,8 +132,72 @@ function TestNiveau() {
         console.log("checkedItems", checkedItems);
     }, [checkedItems]);
 
+
+    useEffect(() => {
+        let checkTemp = 0;
+        let perfReps = parseFloat(reps);
+        let perfPdc = parseFloat(pdc);
+        let objectiveReps = parseFloat(repsObjective);
+        let objectivePdc = parseFloat(pdcObjective);
+        let convertedBergerTemp = 1;
+        let convertedObjectiveTemp = parseFloat(objectivePdc);
+
+        if (objectiveReps <= 15 && objectiveReps > 0 && perfReps <= 15 && perfReps > 0) {
+            if (objectiveReps !== perfReps) {
+                let bergerInput = Berger.find(e => e.rep === objectiveReps).percent; // 94.9%
+                let bergerSerie = Berger.find(e => e.rep === perfReps).percent; // 72.5%
+
+                let conversion = (100 / bergerInput) / 100; // 1.0537
+
+                convertedBergerTemp = (bergerSerie * conversion); // 0.765
+                convertedBergerTemp = convertedBergerTemp.toFixed(2)
+                convertedObjectiveTemp = objectivePdc * convertedBergerTemp; // 114.6%
+
+
+                if (perfPdc >= convertedObjectiveTemp) {
+                    checkTemp = 1;
+                }
+
+            }
+
+            else {
+                if (perfReps >= objectiveReps) {
+                    if (perfPdc >= objectivePdc) {
+                        checkTemp = 1;
+                    }
+                }
+            }
+
+            setTextObjective("");
+            setTextPerf("");
+        }
+
+        else {
+            if (objectiveReps > 15 || objectiveReps <= 0) {
+                setTextObjective("Veuillez entrer un nombre de répétitions entre 1 et 15");
+            }
+            if (perfReps > 15 || perfReps <= 0) {
+                setTextPerf("Veuillez entrer un nombre de répétitions entre 1 et 15");
+            }
+
+            if (perfReps >= objectiveReps) {
+                if (perfPdc >= objectivePdc) {
+                    checkTemp = 1;
+                    convertedBergerTemp = "/"
+
+                }
+            }
+        }
+
+        setCheck(checkTemp);
+        setConvertedObjective(convertedObjectiveTemp);
+
+    }, [reps, pdc, repsObjective, pdcObjective]);
+
+
+
     async function handleLoad() {
-        setText("Chargement des critères en cours...");
+        // setText("Chargement des critères en cours...");
         const { data } = await API.getNiveau({ id: localStorage.getItem("id") });
 
         if (data.success === false) {
@@ -116,12 +205,16 @@ function TestNiveau() {
         }
         else {
             // console.log(data);
-            console.log(Object.values(data.checkItems).length)
+            // console.log(Object.values(data.checkItems).length)
             setCheckedItems(data.checkItems);
-            setText("Vos critères ont bien été chargés automatiquement, désolé pour toi si tu n'as remplis aucun objectif !")
+            // setText("Vos critères ont bien été chargés automatiquement, désolé pour toi si tu n'as remplis aucun objectif !")
         }
 
     }
+
+    useEffect(() => {
+        handleLoad()
+    }, []);
 
     return (
         <div>
@@ -136,10 +229,97 @@ function TestNiveau() {
                 <p className='large-margin-bottom'>
                     Vous pouvez cocher vous même les critères qui vous correspondent,
                     ou bien cliquer sur le bouton afin de déterminer automatiquement votre niveau basé sur vos séances enregistrées.
+                    Les objectifs prennent aussi en compte leur équivalent par la table de Berger des % de 1RM.
+                </p>
+
+                <div >
+                    <h2 className='large-margin-bottom'> Conversion des tables de Berger (%1RM)</h2>
+
+
+                    <div className='grid-test large-margin-bottom'>
+                        <div>{ }</div>
+                        <label className=''>
+                            Reps
+                        </label>
+                        <label className=''>
+                            Charge en % PDC
+                        </label>
+                        <label className=''>
+                            % PDC converti
+                        </label>
+                        <label className=''>
+                            {dimensions.width <= 500 ? "Equiva -lent ?" : "Equivalent ?"}
+                        </label>
+
+
+                        <label className=''>
+                            Perf
+                        </label>
+
+                        <input
+                            type="number"
+                            name="reps"
+                            className={user.modeSombre ? "inputDark form-control " : "form-control "}
+                            value={reps}
+                            onChange={e => setReps(e.target.value)}
+                        />
+
+
+                        <input
+                            type="number"
+                            name="pdc"
+                            className={user.modeSombre ? "inputDark form-control " : "form-control "}
+                            value={pdc}
+                            onChange={e => setPdc(e.target.value)}
+                        />
+                        <div>{ }</div>
+                        <div>{ }</div>
+
+
+                        <label className=''>
+                            {dimensions.width <= 500 ? "Obje -ctif" : "Objectif"}
+                        </label>
+
+                        <input
+                            type="number"
+                            className={user.modeSombre ? "inputDark form-control " : "form-control "}
+                            name="reps"
+                            value={repsObjective}
+                            onChange={e => setRepsObjective(e.target.value)}
+                        />
+
+                        <input
+                            type="number"
+                            className={user.modeSombre ? "inputDark form-control " : "form-control "}
+                            name="pdc"
+                            value={pdcObjective}
+                            onChange={e => setPdcObjective(e.target.value)}
+                        />
+                        <input
+                            type="number"
+                            name="convertedObjective"
+                            className={user.modeSombre ? "inputReadOnlyDark form-control " : "form-control "}
+                            value={convertedObjective}
+                            readOnly
+                        />
+                        <div className='basic-form-control'
+                            style={check === 1 ? { backgroundColor: "#24B34C" } : { backgroundColor: "#ff0000" }}>
+                            {check === 1 ? "Oui !" : "Non !"}
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <p>
+                    {textObjective}
+                </p>
+                <p>
+                    {textPerf}
                 </p>
 
                 {/* CRITERES */}
-                <h2 id="criteres" onClick={handleClick}>
+                <h2 className='large-margin-bottom' id="criteres" onClick={handleClick}>
                     Voir les critères :
                     {click.criteres ?
                         <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
@@ -149,7 +329,7 @@ function TestNiveau() {
                 </h2>
 
                 {click.criteres ?
-                    <div>
+                    <div className='large-margin-bottom'>
                         <h2>1. Débutant(e) :</h2>
                         <p>Vous êtes Débutant(e) si vous avez moins d'un an de pratique, et/ou que vous ne réussissez pas les test des niveaux supérieur.</p>
 
@@ -330,6 +510,22 @@ function TestNiveau() {
                                             onChange={handleChange}
                                             className="checkbox-test" />
                                         pouvoir exécuter 1 soulevé de terre à 170% de votre poids du corps en lest.
+                                    </li>
+
+                                    <li className='li-test'>
+                                        <input type="checkbox" name="streetliftIntermItem6"
+                                            checked={checkedItems.streetliftIntermItem6}
+                                            onChange={handleChange}
+                                            className="checkbox-test" />
+                                        pouvoir exécuter 1 developpé couché à 100% de votre poids du corps.
+                                    </li>
+
+                                    <li className='li-test'>
+                                        <input type="checkbox" name="streetliftIntermItem7"
+                                            checked={checkedItems.streetliftIntermItem7}
+                                            onChange={handleChange}
+                                            className="checkbox-test" />
+                                        pouvoir exécuter 1 hip-thrust à 200% de votre poids du corps.
                                     </li>
                                 </ul>
                                 : null}
@@ -540,6 +736,22 @@ function TestNiveau() {
                                             onChange={handleChange}
                                             className="checkbox-test" />
                                         pouvoir exécuter 1 soulevé de terre à 250% de votre poids du corps en lest.
+                                    </li>
+
+                                    <li className='li-test'>
+                                        <input type="checkbox" name="streetliftConfirmeItem6"
+                                            checked={checkedItems.streetliftConfirmeItem6}
+                                            onChange={handleChange}
+                                            className="checkbox-test" />
+                                        pouvoir exécuter 1 developpé couché à 150% de votre poids du corps.
+                                    </li>
+
+                                    <li className='li-test'>
+                                        <input type="checkbox" name="streetliftConfirmeItem7"
+                                            checked={checkedItems.streetliftConfirmeItem7}
+                                            onChange={handleChange}
+                                            className="checkbox-test" />
+                                        pouvoir exécuter 1 hip-thrust à 300% de votre poids du corps.
                                     </li>
                                 </ul>
                                 : null}
@@ -765,6 +977,22 @@ function TestNiveau() {
                                             className="checkbox-test" />
                                         pouvoir exécuter 1 soulevé de terre à 300% de votre poids du corps en lest.
                                     </li>
+
+                                    <li className='li-test'>
+                                        <input type="checkbox" name="streetliftExpertItem6"
+                                            checked={checkedItems.streetlifttExperttem6}
+                                            onChange={handleChange}
+                                            className="checkbox-test" />
+                                        pouvoir exécuter 1 developpé couché à 200% de votre poids du corps.
+                                    </li>
+
+                                    <li className='li-test'>
+                                        <input type="checkbox" name="streetliftExpertItem7"
+                                            checked={checkedItems.streetliftExpertItem7}
+                                            onChange={handleChange}
+                                            className="checkbox-test" />
+                                        pouvoir exécuter 1 hip-thrust à 400% de votre poids du corps.
+                                    </li>
                                 </ul>
                                 : null}
 
@@ -813,14 +1041,10 @@ function TestNiveau() {
 
                     : null}
 
-                <button className="btn btn-dark large-margin-updown" onClick={handleLoad}>
-                    Determine mon niveau avec mes séances !
-                </button>
-                <p>
-                    {text}
-                </p>
 
-                <table className={user.modeSombre ? "table table-hover table-responsive-lg table-dark dashboard-table" : "table table-hover table-responsive-lg dashboard-table"}>
+
+                <table className={user.modeSombre ? "table table-hover table-responsive-lg table-dark dashboard-table" : "table table-hover table-responsive-lg dashboard-table"}
+                    style={{ display: "inline-table" }}>
                     <thead>
                         <tr>
                             <th>Intermédiaire</th>
@@ -834,11 +1058,12 @@ function TestNiveau() {
                             <td>{intermediate}</td>
                             <td>{confirme}</td>
                             <td>{expert}</td>
-                            <td>{total}/56</td>
+                            <td>{total}/62</td>
                         </tr>
                     </tbody>
                 </table>
 
+                <h1> Vous êtes officiellement... </h1>
                 <h1 style={{ color: result?.color }}>
                     {result?.text}
                 </h1>

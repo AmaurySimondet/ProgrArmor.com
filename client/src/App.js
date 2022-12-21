@@ -17,6 +17,7 @@ import Aide from "./components/Dashboard/Aide.jsx";
 import Programme from "./components/Dashboard/Programme.jsx";
 import Profil from "./components/Dashboard/Profil.jsx";
 import TestNiveau from "./components/Dashboard/TestNiveau.jsx";
+import Accomplissements from "./components/Dashboard/Accomplissements.jsx";
 
 // import eruda from "eruda";
 
@@ -75,6 +76,10 @@ function App() {
 
             <Route path="/testniveau/*" element={<PrivateRoute />}>
                 <Route exact path='/testniveau/*' element={<TestNiveau />} />
+            </Route>
+
+            <Route path="/accomplissements/*" element={<PrivateRoute />}>
+                <Route exact path='/accomplissements/*' element={<Accomplissements />} />
             </Route>
 
             {/* AIDE */}
