@@ -141,8 +141,15 @@ function TestNiveau() {
         let objectivePdc = parseFloat(pdcObjective);
         let convertedBergerTemp = 1;
         let convertedObjectiveTemp = parseFloat(objectivePdc);
+        let cent = false;
 
         if (objectiveReps <= 15 && objectiveReps > 0 && perfReps <= 15 && perfReps > 0) {
+            if (objectivePdc === 0) {
+                objectivePdc = 100;
+                perfPdc += 100;
+                cent = true
+            }
+
             if (objectiveReps !== perfReps) {
                 let bergerInput = Berger.find(e => e.rep === objectiveReps).percent; // 94.9%
                 let bergerSerie = Berger.find(e => e.rep === perfReps).percent; // 72.5%
@@ -153,6 +160,10 @@ function TestNiveau() {
                 convertedBergerTemp = convertedBergerTemp.toFixed(2)
                 convertedObjectiveTemp = objectivePdc * convertedBergerTemp; // 114.6%
 
+                if (cent === true) {
+                    convertedObjectiveTemp -= 100;
+                    perfPdc -= 100;
+                }
 
                 if (perfPdc >= convertedObjectiveTemp) {
                     checkTemp = 1;
@@ -180,17 +191,18 @@ function TestNiveau() {
                 setTextPerf("Veuillez entrer un nombre de répétitions entre 1 et 15");
             }
 
+            console.log("perfReps", perfReps)
+
             if (perfReps >= objectiveReps) {
                 if (perfPdc >= objectivePdc) {
                     checkTemp = 1;
                     convertedBergerTemp = "/"
-
                 }
             }
         }
 
         setCheck(checkTemp);
-        setConvertedObjective(convertedObjectiveTemp);
+        setConvertedObjective(convertedObjectiveTemp.toFixed(2));
 
     }, [reps, pdc, repsObjective, pdcObjective]);
 

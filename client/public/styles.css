@@ -304,7 +304,8 @@ table.profile-table {
 }
 
 #topSummaryAchievements {
-    float: right;
+    /* float: right; */
+    margin: auto;
     max-width: 309px;
     padding: 5px 6px 0 0;
     line-height: 18px;
@@ -741,6 +742,7 @@ table.Stats-table {
 .dashboard-table {
     width: 100%;
     margin-bottom: 40px;
+    display: inline-table;
 }
 
 .table-dark {

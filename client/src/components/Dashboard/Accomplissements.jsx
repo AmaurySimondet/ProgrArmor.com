@@ -111,8 +111,8 @@ function Accomplissements() {
                             sur {" " + Object.values(checkedItems).length + "  "}
                             ({(Object.values(checkedItems).filter(value => value === true).length / Object.values(checkedItems).length).toFixed(2)}%)
                         </div>
-                        <div class="achieveBar">
-                            <div class="achieveBarProgress" style={{ width: "88%" }}></div>
+                        <div class="achieveBar basic-margin-bottom">
+                            <div class="achieveBarProgress" style={{ width: (Object.values(checkedItems).filter(value => value === true).length / Object.values(checkedItems).length).toFixed(2) + "%" }}></div>
                         </div>
                     </div>
                     <div style={{ clear: "both" }}></div>
@@ -155,9 +155,74 @@ function Accomplissements() {
                         :
                         null}
 
+                    {checkedItems.pdcIntermItem2 === true ?
+                        <Accomplissement
+                            titre="Tracteur rouillé"
+                            id="pdcIntermItem2"
+                            description="Pouvoir exécuter 12 tractions complètes (ou équivalent via table de conversion %1RM)"
+                            accomplished={true}
+                            img={require("../../images/accomplissements/Tracteur_rouillé.webp")}
+                        />
+                        :
+                        null}
+
+                    {checkedItems.pdcConfirmeItem2 === true ?
+                        <Accomplissement
+                            titre="Tracteur Ford"
+                            id="pdcConfirmeItem2"
+                            description="Pouvoir exécuter 10 tractions archer ou 1 traction une main (ou équivalent via table de conversion %1RM)"
+                            accomplished={true}
+                            img={require("../../images/accomplissements/Tracteur_Ford.webp")}
+                        />
+                        :
+                        null}
+
+                    {checkedItems.pdcExpertItem2 === true ?
+                        <Accomplissement
+                            titre="Tracteur Ferrari"
+                            id="pdcExpertItem2"
+                            description="Pouvoir exécuter 3 traction à une main (ou équivalent via table de conversion %1RM)"
+                            accomplished={true}
+                            img={require("../../images/accomplissements/Tracteur_Ferrari.webp")}
+                        />
+                        :
+                        null}
+
+                    {checkedItems.streetliftIntermItem2 === true ?
+                        <Accomplissement
+                            titre="Distraction"
+                            id="streetliftIntermItem2"
+                            description="Pouvoir exécuter 1 traction à 30% PDC (ou équivalent via table de conversion %1RM)"
+                            accomplished={true}
+                            img={require("../../images/accomplissements/Distraction.webp")}
+                        />
+                        :
+                        null}
+
+                    {checkedItems.streetliftConfirmeItem2 === true ?
+                        <Accomplissement
+                            titre="Contraction"
+                            id="streetliftConfirmeItem2"
+                            description="Pouvoir exécuter 1 traction à 75% PDC (ou équivalent via table de conversion %1RM)"
+                            accomplished={true}
+                            img={require("../../images/accomplissements/Contraction.webp")}
+                        />
+                        :
+                        null}
+
+                    {checkedItems.streetliftExpertItem2 === true ?
+                        <Accomplissement
+                            titre="Decontraction"
+                            id="streetliftExpertItem2"
+                            description="Pouvoir exécuter 1 traction à 100% PDC (ou équivalent via table de conversion %1RM)"
+                            accomplished={true}
+                            img={require("../../images/accomplissements/Decontraction.webp")}
+                        />
+                        :
+                        null}
 
 
-                    <br /><br /><br />
+
 
                     <h2 className='large-margin-updown'> Accomplissements non debloqués</h2>
 
@@ -186,6 +251,62 @@ function Accomplissements() {
                             id="statiqueExpertItem1"
                             description="Tenir un Front Lever pendant 20 secondes ou un Front Lever à une main"
                             img={require("../../images/accomplissements/FrontForever.webp")}
+                        />}
+
+                    {checkedItems.pdcIntermItem2 === true ?
+                        null :
+                        <Accomplissement
+                            titre="Tracteur rouillé"
+                            id="pdcIntermItem2"
+                            description="Pouvoir exécuter 12 tractions complètes (ou équivalent via table de conversion %1RM)"
+                            img={require("../../images/accomplissements/Tracteur_rouillé.webp")}
+                        />}
+
+                    {checkedItems.pdcConfirmeItem2 === true ?
+                        null :
+                        <Accomplissement
+                            titre="Tracteur Ford"
+                            id="pdcConfirmeItem2"
+                            description="Pouvoir exécuter 10 tractions archer ou 1 traction une main (ou équivalent via table de conversion %1RM)"
+                            img={require("../../images/accomplissements/Tracteur_Ford.webp")}
+                        />}
+
+                    {checkedItems.pdcExpertItem2 === true ?
+                        null :
+                        <Accomplissement
+                            titre="Tracteur Ferrari"
+                            id="pdcExpertItem2"
+                            description="Pouvoir exécuter 3 traction à une main (ou équivalent via table de conversion %1RM)"
+                            img={require("../../images/accomplissements/Tracteur_Ferrari.webp")}
+                        />}
+
+                    {checkedItems.streetliftIntermItem2 === true ?
+                        null :
+                        <Accomplissement
+                            titre="Distraction"
+                            id="streetliftIntermItem2"
+                            description="Pouvoir exécuter 1 traction à 30% PDC (ou équivalent via table de conversion %1RM)"
+                            accomplished={true}
+                            img={require("../../images/accomplissements/Distraction.webp")}
+                        />}
+
+                    {checkedItems.streetliftConfirmeItem2 === true ?
+                        null :
+                        <Accomplissement
+                            titre="Contraction"
+                            id="streetliftConfirmeItem2"
+                            description="Pouvoir exécuter 1 traction à 75% PDC (ou équivalent via table de conversion %1RM)"
+                            img={require("../../images/accomplissements/Contraction.webp")}
+                        />}
+
+                    {checkedItems.streetliftExpertItem2 === true ?
+                        null :
+                        <Accomplissement
+                            titre="Decontraction"
+                            id="streetliftExpertItem2"
+                            description="Pouvoir exécuter 1 traction à 100% PDC (ou équivalent via table de conversion %1RM)"
+                            accomplished={true}
+                            img={require("../../images/accomplissements/Decontraction.webp")}
                         />}
 
                     <Accomplissement

@@ -936,6 +936,7 @@ async function getNiveau(req, res) {
 
     function equivalentPercent(repsTimeInput, repsTimeSerie, percentInput, percentSerie) {
         let check = false;
+        let cent = false;
         const Berger = [
             { rep: 1, percent: 100 },
             { rep: 2, percent: 97.4 },
@@ -956,6 +957,13 @@ async function getNiveau(req, res) {
 
         if (repsTimeInput <= 15 && repsTimeInput > 0 && repsTimeSerie <= 15 && repsTimeSerie > 0) {
             if (repsTimeInput !== repsTimeSerie) {
+
+                if (percentInput === 0) {
+                    percentInput = 100;
+                    percentSerie += 100;
+                    cent = true
+                }
+
                 let bergerInput = Berger.find(e => e.rep === repsTimeInput).percent; // 94.9%
                 let bergerSerie = Berger.find(e => e.rep === repsTimeSerie).percent; // 72.5%
 
@@ -964,6 +972,10 @@ async function getNiveau(req, res) {
                 let convertedBerger = (bergerSerie * conversion); // 0.765
                 let convertedObjective = percentInput * convertedBerger; // 114.6%
 
+                if (cent === true) {
+                    convertedObjective -= 100;
+                    percentSerie -= 100;
+                }
 
                 if (percentSerie >= convertedObjective) {
                     check = true;
