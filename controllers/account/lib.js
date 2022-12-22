@@ -1223,7 +1223,7 @@ async function getNiveau(req, res) {
             "Handstand", "", [], "reps", 10, 0)
 
         checkItems["equilibreExpertItem3"] = checkPerformance(seances,
-            "Pompe / Push up", "", ["90° (push-up)"], "reps", 10, 0)
+            "Pompe / Push up", "", ["90° (push-up)"], "reps", 3, 0)
 
         // console.log(checkItems)
         let same = true;
@@ -1231,21 +1231,41 @@ async function getNiveau(req, res) {
             if (item !== Object.values(userCheckItems)[index]) {
                 same = false;
             }
+            if (Object.values(userCheckItems)[index] === true && item === false) {
+                let key = Object.keys(checkItems)[index]
+                checkItems[key] = true
+            }
         })
 
-        if (same === false) {
+        if (same === false && Object.values(userCheckItems).length > 0) {
+            console.log("same", same)
+            console.log('\n')
+            console.log("checkItems", checkItems)
+            console.log('\n')
+            console.log("userCheckItems", userCheckItems)
+            console.log('\n')
+
+
             await User.updateOne({ _id: req.body.id }, { $set: { checkItems: checkItems } }, function (err, result) {
                 if (err) {
                     console.log(err)
                 }
             })
+
+            return res.json({ success: true, message: "Niveau", checkItems: checkItems })
+        }
+        else if (same === true && Object.values(userCheckItems).length > 0) {
+            return res.json({ success: true, message: "Niveau", checkItems: checkItems })
+        }
+        else {
+            return res.json({ success: false, message: "Problème de chargement" })
         }
 
-        console.log("same", same)
 
-        res.json({ success: true, message: "Niveau", checkItems: checkItems })
 
     }
+
+
 }
 
 //DASHBOARD
