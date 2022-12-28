@@ -173,8 +173,6 @@ function Accomplissements() {
                         <h2 className='large-margin-updown'> Accomplissements debloqués</h2>
 
                         {accomplissements.map((item, index) => {
-
-                            // console.log("item", item)
                             return (
                                 <Accomplissement
                                     key={index}
@@ -191,7 +189,6 @@ function Accomplissements() {
                         <h2 className='large-margin-updown'> Accomplissements non debloqués</h2>
 
                         {nonaAccomplissements.map((item, index) => {
-                            // console.log("item", item)
                             return (
                                 <Accomplissement
                                     key={index}

@@ -1076,9 +1076,9 @@ async function getNiveau(req, res) {
             level: "Intermédiaire",
             categorie: "Poids du corps",
             date: new Date(),
-            titre: "",
+            titre: "Dip",
             id: "pdcIntermItem1",
-            description: "",
+            description: "Pouvoir exécuter 15 dips",
             valeur: checkPerformance(seances,
                 "Dips", "", [], "reps", 15, 0)
         }
@@ -1158,9 +1158,9 @@ async function getNiveau(req, res) {
             level: "Intermédiaire",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
-            titre: "",
+            titre: "Complexe de Dip",
             id: "streetliftIntermItem1",
-            description: "",
+            description: "Pouvoir exécuter 1 Dip à 50% PDC",
             valeur: checkPerformance(seances,
                 "Dips", "", [], "reps", 1, 50)
         }
@@ -1304,9 +1304,9 @@ async function getNiveau(req, res) {
             level: "Intermédiaire",
             categorie: "Poids du corps",
             date: new Date(),
-            titre: "",
+            titre: "Diper",
             id: "pdcConfirmeItem1",
-            description: "",
+            description: "Pouvoir exécuter 10 dips archer",
             valeur: checkPerformance(seances,
                 "Dips", "", ["Archer / Lateral"], "reps", 10, 0)
         }
@@ -1382,9 +1382,9 @@ async function getNiveau(req, res) {
             level: "Intermédiaire",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
-            titre: "",
+            titre: "Compète de Dips",
             id: "streetliftConfirmeItem1",
-            description: "",
+            description: "Pouvoir exécuter 1 Dip à 100% PDC",
             valeur: checkPerformance(seances,
                 "Dips", "", [], "reps", 1, 100)
         }
@@ -1540,9 +1540,9 @@ async function getNiveau(req, res) {
             level: "Intermédiaire",
             categorie: "Poids du corps",
             date: new Date(),
-            titre: "",
+            titre: "Dipest",
             id: "pdcExpertItem1",
-            description: "",
+            description: "Pouvoir exécuter 5 dips à une main",
             valeur: checkPerformance(seances,
                 "Dips", "", ["Unilatéral"], "reps", 5, 0)
         }
@@ -1617,9 +1617,9 @@ async function getNiveau(req, res) {
             level: "Intermédiaire",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
-            titre: "",
+            titre: "Dip-lômé",
             id: "streetliftExpertItem1",
-            description: "",
+            description: "Pouvoir exécuter 1 dip à 130% PDC",
             valeur: checkPerformance(seances,
                 "Dips", "", [], "reps", 1, 130)
         }
