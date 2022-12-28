@@ -86,6 +86,16 @@ function NavigBar(props) {
                                                         <a className="nav-link" href="/social"><img className="icon-navbar" src={require('../images/icons/social.webp')} alt='social' /></a>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a className="nav-link" href="/accomplissements"><img className="icon-navbar" src={require('../images/icons/accomplissements.webp')} alt='accomplissements' /></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a className="nav-link" href="/notifications"><img className="icon-navbar" src={require('../images/icons/notifications.webp')} alt='notifications' /></a>
+                                                    </td>
+                                                </tr>
                                                 <div className="div-navigbar-text">
                                                     <tr>
                                                         <td>
@@ -139,6 +149,12 @@ function NavigBar(props) {
                                     </li>
                                     <li className="nav-item active">
                                         <a className="nav-link" href="/social"><img className="icon-navbar" src={require('../images/icons/social.webp')} alt='social' /></a>
+                                    </li>
+                                    <li className="nav-item active">
+                                        <a className="nav-link" href="/accomplissements"><img style={{ width: "19px" }} className="icon-navbar" src={require('../images/icons/accomplissements.webp')} alt='accomplissements' /></a>
+                                    </li>
+                                    <li className="nav-item active">
+                                        <a className="nav-link" href="/notifications"><img style={{ width: "19px" }} className="icon-navbar" src={require('../images/icons/notifications.webp')} alt='notifications' /></a>
                                     </li>
                                     <li className="nav-item active">
                                         <a onClick={handleClick} className="nav-link"><img className="icon-navbar" src={require('../images/icons/gear.webp')} alt='parametres' /></a>
