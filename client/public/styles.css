@@ -366,6 +366,7 @@ table.profile-table {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding-top: 5px;
 }
 
 #mainContents {
@@ -1011,14 +1012,45 @@ table.Stats-table {
 .visible {
     visibility: visible;
     opacity: 1;
-    transition: visibility 0s linear 0s, opacity 300ms;
+    transition: visibility 0s linear 0s, opacity 0.7s;
 }
 
 .not-visible {
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s linear 300ms, opacity 300ms;
+    transition: visibility 0s linear 0.7s, opacity 0.7s;
 }
+
+.extended {
+    max-height: 1500px;
+    transition: max-height 0.7s linear;
+}
+
+.not-extended {
+    max-height: 0px;
+    transition: max-height 0.7s linear;
+}
+
+.rotated {
+    transform: rotate(180deg);
+    transition: transform 0.7s linear;
+}
+
+.not-rotated {
+    transform: rotate(0deg);
+    transition: transform 0.7s linear;
+}
+
+.scaled {
+    transform: scaleX(1.5);
+    transition: transform 0.7s linear;
+}
+
+.not-scaled {
+    transform: scaleX(1);
+    transition: transform 0.7s linear;
+}
+
 
 .basic-flexed {
     height: 800px;
@@ -1837,6 +1869,10 @@ table.connexion-table td.connexion-img-td {
     .nothide {
         width: 100%;
 
+    }
+
+    .gear-is-clicked {
+        height: 310px;
     }
 
     .Categorie .slider-style span {

@@ -53,76 +53,74 @@ function NavigBar(props) {
                         <a className="navbar-brand" href="/dashboard"><img className="logo-navbar" src={require('../images/icons/logo-navbar.webp')} alt="logo" /></a>
                         <a className="navbar-brand" href="/dashboard"><h1 className="ProgrArmor">ProgrArmor</h1></a>
                         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                            <img className="toggler-icon" onClick={toggling} src={require('../images/icons/output-onlinepngtools.webp')} alt="logo" />
-                            {toggled ?
-                                (
-                                    <div>
-                                        <div className="toggle-is-clicked"></div>
+                            <img className={toggled ? "toggler-icon scaled" : "toggler-icon not-scaled"} onClick={toggling} src={require('../images/icons/output-onlinepngtools.webp')} alt="logo" />
 
-                                        <table className="param-choice-toggle">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <a className="nav-link" href="/dashboard"><img className="icon-navbar" src={require('../images/icons/home.webp')} alt='home' /></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a className="nav-link" href="/session"><img className="icon-navbar" src={require('../images/icons/write.webp')} alt='session' /></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a className="nav-link" href="/stats"><img className="icon-navbar" src={require('../images/icons/chart.webp')} alt='stats' /></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a className="nav-link" href="/programme"><img className="icon-navbar" src={require('../images/icons/plus.webp')} alt='programme' /></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a className="nav-link" href="/social"><img className="icon-navbar" src={require('../images/icons/social.webp')} alt='social' /></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a className="nav-link" href="/accomplissements"><img className="icon-navbar" src={require('../images/icons/accomplissements.webp')} alt='accomplissements' /></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <a className="nav-link" href="/notifications"><img className="icon-navbar" src={require('../images/icons/notifications.webp')} alt='notifications' /></a>
-                                                    </td>
-                                                </tr>
-                                                <div className="div-navigbar-text">
-                                                    <tr>
-                                                        <td>
-                                                            <a className="param-choice" href="/compte"> Compte </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a className="param-choice" href="/aide"> Aide </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a className="param-choice" href="/a_propos"> A propos </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <a className="param-choice" href="/CGU"> CGU </a>
-                                                        </td>
-                                                    </tr>
-                                                </div>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                )
-                                : null}
+                            <div>
+                                <div className={toggled ? "toggle-is-clicked extended" : "toggle-is-clicked not-extended"} ></div>
+
+                                <table className={toggled ? "param-choice-toggle visible" : "param-choice-toggle not-visible"} >
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a className="nav-link" href="/dashboard"><img className="icon-navbar" src={require('../images/icons/home.webp')} alt='home' /></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="nav-link" href="/session"><img className="icon-navbar" src={require('../images/icons/write.webp')} alt='session' /></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="nav-link" href="/stats"><img className="icon-navbar" src={require('../images/icons/chart.webp')} alt='stats' /></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="nav-link" href="/programme"><img className="icon-navbar" src={require('../images/icons/plus.webp')} alt='programme' /></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="nav-link" href="/social"><img className="icon-navbar" src={require('../images/icons/social.webp')} alt='social' /></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="nav-link" href="/accomplissements"><img className="icon-navbar" src={require('../images/icons/accomplissements.webp')} alt='accomplissements' /></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="nav-link" href="/notifications"><img className="icon-navbar" src={require('../images/icons/notifications.webp')} alt='notifications' /></a>
+                                            </td>
+                                        </tr>
+                                        <div className="div-navigbar-text">
+                                            <tr>
+                                                <td>
+                                                    <a className="param-choice" href="/compte"> Compte </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a className="param-choice" href="/aide"> Aide </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a className="param-choice" href="/a_propos"> A propos </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a className="param-choice" href="/CGU"> CGU </a>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
                     </nav>
                     :
@@ -157,64 +155,68 @@ function NavigBar(props) {
                                         <a className="nav-link" href="/notifications"><img style={{ width: "19px" }} className="icon-navbar" src={require('../images/icons/notifications.webp')} alt='notifications' /></a>
                                     </li>
                                     <li className="nav-item active">
-                                        <a onClick={handleClick} className="nav-link"><img className="icon-navbar" src={require('../images/icons/gear.webp')} alt='parametres' /></a>
+                                        <a onClick={handleClick} className="nav-link">
+                                            <img className={gearIsClicked ? "icon-navbar rotated" : "icon-navbar not-rotated"} src={require('../images/icons/gear.webp')} alt='parametres' />
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </nav>
 
-                        {gearIsClicked ? (
-                            <div>
-                                <div className="gear-is-clicked"></div>
 
-                                <table className="param-choice-div">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <a className="param-choice" href="/compte"> Compte </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a className="param-choice" href="/aide"> Aide </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a className="param-choice" href="/a_propos"> A propos </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a className="param-choice" href="/CGU"> CGU </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        ) : null}
+                        <div>
+                            <div className={gearIsClicked ? "gear-is-clicked extended" : "gear-is-clicked not-extended"}></div>
+
+                            <table className={gearIsClicked ? "param-choice-div visible" : "param-choice-div not-visible"} >
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a className="param-choice" href="/compte"> Compte </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a className="param-choice" href="/aide"> Aide </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a className="param-choice" href="/a_propos"> A propos </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a className="param-choice" href="/CGU"> CGU </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
             }
-            {props.show === true ?
-                clickedWarning ?
-                    null
-                    :
-                    <div className="warning-border">
-                        <div className="text">
-                            <p className="La-croix" onClick={handleClickWarning}> <strong>  X </strong> </p>
-                            <p className="attention" > <strong> Attention ! </strong>  </p>
-                            <p> Ce site est encore en version pré-alpha, cela signifie : </p>
-                            <p> - que ProgrArmor se garde tout droit concernant votre accès à ce site, </p>
-                            <p> - que ProgrArmor se garde tout droit concernant vos données,
-                                et que celles-ci pourraient être supprimées pour des raisons de développement ou pour tout autre raison, </p>
-                            <p> - que le site peut comporter de nombreux bugs et manquer de fonctionnalités, </p>
-                            <br />
-                            <p> Vous êtes donc conviez à indiquer toute suggestion et tout bug avec un maximum {"d'information "}
-                                en message direct sur {"l'un de nos réseaux ou par tout autre moyen"}</p>
+            {
+                props.show === true ?
+                    clickedWarning ?
+                        null
+                        :
+                        <div className="warning-border">
+                            <div className="text">
+                                <p className="La-croix" onClick={handleClickWarning}> <strong>  X </strong> </p>
+                                <p className="attention" > <strong> Attention ! </strong>  </p>
+                                <p> Ce site est encore en version pré-alpha, cela signifie : </p>
+                                <p> - que ProgrArmor se garde tout droit concernant votre accès à ce site, </p>
+                                <p> - que ProgrArmor se garde tout droit concernant vos données,
+                                    et que celles-ci pourraient être supprimées pour des raisons de développement ou pour tout autre raison, </p>
+                                <p> - que le site peut comporter de nombreux bugs et manquer de fonctionnalités, </p>
+                                <br />
+                                <p> Vous êtes donc conviez à indiquer toute suggestion et tout bug avec un maximum {"d'information "}
+                                    en message direct sur {"l'un de nos réseaux ou par tout autre moyen"}</p>
+                            </div>
                         </div>
-                    </div>
-                : null}
-        </div>
+                    : null
+            }
+        </div >
     )
 }
 
