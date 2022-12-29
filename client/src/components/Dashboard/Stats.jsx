@@ -398,46 +398,43 @@ function Stats() {
                                         <h1
                                             onClick={handleClickPoids}>
                                             Evolution de ton poids
-                                            {poidsHidden ?
-                                                <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                                :
-                                                <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                            }
+                                            <img className={poidsHidden ? "expert-toggle not-rotated" : "expert-toggle rotated"}
+                                                src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                         </h1>
 
-                                        {poidsHidden ? null :
-                                            <div className="large-margin-bottom">
-                                                <div className="form-group row stats-form mini-margin-bottom">
-                                                    <div className="form-group col-12">
-                                                        <label className="col-form-label">
-                                                            Periode
-                                                        </label>
-                                                        <select onChange={handleChange1} className={user.modeSombre === true ? "form-control selectDark" : "form-control"}
-                                                            id="periode">
-                                                            <option value="max"> Max (défaut) </option>
-                                                            <option value="7d"> 7 derniers jours </option>
-                                                            <option value="30d"> 30 derniers jours </option>
-                                                            <option value="90d"> 90 derniers jours (3 mois) </option>
-                                                            <option value="180d"> 180 derniers jours (6 mois) </option>
-                                                            <option value="1y"> Depuis 1 an </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
 
-                                                <div className="form-group row stats-form mini-margin-bottom">
-                                                    <div className="form-group col-12">
-                                                        <label className="col-form-label">
-                                                            Format Date
-                                                        </label>
-                                                        <select onChange={handleChange1} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="date">
-                                                            <option value="md"> Mois-Jour (défaut) </option>
-                                                            <option value="d"> Jour </option>
-                                                            <option value=""> Année-Mois-Jour </option>
-                                                        </select>
-                                                    </div>
+                                        <div className={poidsHidden ? "large-margin-bottom not-extended" : "large-margin-bottom extended"}>
+                                            <div className="form-group row stats-form mini-margin-bottom">
+                                                <div className="form-group col-12">
+                                                    <label className="col-form-label">
+                                                        Periode
+                                                    </label>
+                                                    <select onChange={handleChange1} className={user.modeSombre === true ? "form-control selectDark" : "form-control"}
+                                                        id="periode">
+                                                        <option value="max"> Max (défaut) </option>
+                                                        <option value="7d"> 7 derniers jours </option>
+                                                        <option value="30d"> 30 derniers jours </option>
+                                                        <option value="90d"> 90 derniers jours (3 mois) </option>
+                                                        <option value="180d"> 180 derniers jours (6 mois) </option>
+                                                        <option value="1y"> Depuis 1 an </option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                        }
+
+                                            <div className="form-group row stats-form mini-margin-bottom">
+                                                <div className="form-group col-12">
+                                                    <label className="col-form-label">
+                                                        Format Date
+                                                    </label>
+                                                    <select onChange={handleChange1} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="date">
+                                                        <option value="md"> Mois-Jour (défaut) </option>
+                                                        <option value="d"> Jour </option>
+                                                        <option value=""> Année-Mois-Jour </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                         <p> Evolution de ton poids sur la période {params1.periode} </p>
 
@@ -472,99 +469,96 @@ function Stats() {
                                             <h1
                                                 onClick={handleClickPerf}>
                                                 Evolution de tes performances
-                                                {perfHidden ?
-                                                    <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                                    :
-                                                    <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                                }
+                                                <img className={perfHidden ? "expert-toggle not-rotated" : "expert-toggle rotated"}
+                                                    src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                             </h1>
 
-                                            {perfHidden ? null :
-                                                <div className="large-margin-bottom">
-                                                    <div className="form-group row stats-form mini-margin-bottom">
-                                                        <div className="form-group col-4">
-                                                            <label className="col-form-label">
-                                                                Exercice
-                                                            </label>
-                                                            <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} taille="petit" typeSerie={0} id="exercice" exercice={exercice.exercice} changeExercice={changeExercice} />
-                                                        </div>
 
-                                                        <div className="form-group col-4">
-                                                            <label onClick={handleClick} className="col-form-label categorie-label">
-                                                                Catégorie <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.webp')} />
-                                                            </label>
-                                                            <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" click={clicked} id={"catégorie" + 0} categorie={categorie} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie} />
-                                                        </div>
-
-                                                        <div className="form-group col-4">
-                                                            <label className="col-form-label">
-                                                                Performance
-                                                            </label>
-                                                            <select onChange={changeTypePerfGraph} className={user.modeSombre === true ? "form-control selectDark" : "form-control"}>
-                                                                <option value={"percent"}> Pourcentage du poids de corps (défaut) </option>
-                                                                <option value={"charge"}> Charge </option>
-                                                            </select>
-                                                        </div>
+                                            <div className={perfHidden ? "large-margin-bottom not-extended" : "large-margin-bottom extended"}>
+                                                <div className="form-group row stats-form mini-margin-bottom">
+                                                    <div className="form-group col-4">
+                                                        <label className="col-form-label">
+                                                            Exercice
+                                                        </label>
+                                                        <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} taille="petit" typeSerie={0} id="exercice" exercice={exercice.exercice} changeExercice={changeExercice} />
                                                     </div>
 
-                                                    <div className="form-group row stats-form mini-margin-bottom">
-                                                        <div className="form-group col-4">
-                                                            <label className="col-form-label">
-                                                                Format Date
-                                                            </label>
-                                                            <select onChange={handleChange2} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="date">
-                                                                <option value="md"> Mois-Jour (défaut) </option>
-                                                                <option value="d"> Jour </option>
-                                                                <option value=""> Année-Mois-Jour </option>
-                                                            </select>
-                                                        </div>
-
-                                                        <div className="form-group col-4">
-                                                            <label className="col-form-label">
-                                                                Periode
-                                                            </label>
-                                                            <select onChange={handleChange2} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="periode">
-                                                                <option value="max"> Max (défaut) </option>
-                                                                <option value="7d"> 7 derniers jours </option>
-                                                                <option value="30d"> 30 derniers jours </option>
-                                                                <option value="90d"> 90 derniers jours (3 mois) </option>
-                                                                <option value="180d"> 180 derniers jours (6 mois) </option>
-                                                                <option value="1y"> Depuis 1 an </option>
-                                                            </select>
-                                                        </div>
-
-                                                        <div className="form-group col-4">
-                                                            <label onClick={handleClickDetail} className="col-form-label detail-label">
-                                                                Détail <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.webp')} />
-                                                            </label>
-                                                            <DetailInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" click={clickedDetail} detail={detail} id={"detail" + 0} index={0} num={0} dashboard={true} changeDetail={changeDetail} />
-                                                        </div>
+                                                    <div className="form-group col-4">
+                                                        <label onClick={handleClick} className="col-form-label categorie-label">
+                                                            Catégorie <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.webp')} />
+                                                        </label>
+                                                        <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" click={clicked} id={"catégorie" + 0} categorie={categorie} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie} />
                                                     </div>
 
-                                                    <div className="form-group row stats-form basic-margin-top mini-margin-bottom">
-                                                        <label className="col-form-label col-3">
-                                                            Reps / Temps
+                                                    <div className="form-group col-4">
+                                                        <label className="col-form-label">
+                                                            Performance
                                                         </label>
-                                                        <input type="text"
-                                                            className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
-                                                            value={params2.repsFrom}
-                                                            onChange={handleChange2}
-                                                            placeholder="Aucun filtre"
-                                                            id="repsFrom"
-                                                        />
-                                                        <label className="col-form-label col-1">
-                                                            à
-                                                        </label>
-                                                        <input type="text"
-                                                            className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
-                                                            value={params2.repsTo}
-                                                            onChange={handleChange2}
-                                                            placeholder="Aucun filtre"
-                                                            id="repsTo"
-                                                        />
+                                                        <select onChange={changeTypePerfGraph} className={user.modeSombre === true ? "form-control selectDark" : "form-control"}>
+                                                            <option value={"percent"}> Pourcentage du poids de corps (défaut) </option>
+                                                            <option value={"charge"}> Charge </option>
+                                                        </select>
                                                     </div>
                                                 </div>
-                                            }
+
+                                                <div className="form-group row stats-form mini-margin-bottom">
+                                                    <div className="form-group col-4">
+                                                        <label className="col-form-label">
+                                                            Format Date
+                                                        </label>
+                                                        <select onChange={handleChange2} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="date">
+                                                            <option value="md"> Mois-Jour (défaut) </option>
+                                                            <option value="d"> Jour </option>
+                                                            <option value=""> Année-Mois-Jour </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div className="form-group col-4">
+                                                        <label className="col-form-label">
+                                                            Periode
+                                                        </label>
+                                                        <select onChange={handleChange2} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="periode">
+                                                            <option value="max"> Max (défaut) </option>
+                                                            <option value="7d"> 7 derniers jours </option>
+                                                            <option value="30d"> 30 derniers jours </option>
+                                                            <option value="90d"> 90 derniers jours (3 mois) </option>
+                                                            <option value="180d"> 180 derniers jours (6 mois) </option>
+                                                            <option value="1y"> Depuis 1 an </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div className="form-group col-4">
+                                                        <label onClick={handleClickDetail} className="col-form-label detail-label">
+                                                            Détail <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.webp')} />
+                                                        </label>
+                                                        <DetailInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" click={clickedDetail} detail={detail} id={"detail" + 0} index={0} num={0} dashboard={true} changeDetail={changeDetail} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="form-group row stats-form basic-margin-top mini-margin-bottom">
+                                                    <label className="col-form-label col-3">
+                                                        Reps / Temps
+                                                    </label>
+                                                    <input type="text"
+                                                        className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
+                                                        value={params2.repsFrom}
+                                                        onChange={handleChange2}
+                                                        placeholder="Aucun filtre"
+                                                        id="repsFrom"
+                                                    />
+                                                    <label className="col-form-label col-1">
+                                                        à
+                                                    </label>
+                                                    <input type="text"
+                                                        className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
+                                                        value={params2.repsTo}
+                                                        onChange={handleChange2}
+                                                        placeholder="Aucun filtre"
+                                                        id="repsTo"
+                                                    />
+                                                </div>
+                                            </div>
+
 
                                             <p className="chart-little-title">
                                                 Evolution de tes performances en
@@ -680,99 +674,96 @@ function Stats() {
                                             <h1
                                                 onClick={handleClickPerf}>
                                                 Evolution de tes performances
-                                                {perfHidden ?
-                                                    <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                                    :
-                                                    <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                                }
+                                                <img className={perfHidden ? "expert-toggle not-rotated" : "expert-toggle rotated"}
+                                                    src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                             </h1>
 
-                                            {perfHidden ? null :
-                                                <div className="large-margin-bottom">
-                                                    <div className="form-group row stats-form mini-margin-bottom">
-                                                        <div className="form-group col-4">
-                                                            <label className="col-form-label">
-                                                                Exercice
-                                                            </label>
-                                                            <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} taille="petit" exercice={exercice.exercice} typeSerie={0} id="exercice" changeExercice={changeExercice} />
-                                                        </div>
 
-                                                        <div className="form-group col-4">
-                                                            <label onClick={handleClick} className="col-form-label categorie-label">
-                                                                Catégorie <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.webp')} />
-                                                            </label>
-                                                            <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" categorie={categorie} click={clicked} id={"catégorie" + 0} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie} />
-                                                        </div>
-
-                                                        <div className="form-group col-4">
-                                                            <label className="col-form-label">
-                                                                Performance
-                                                            </label>
-                                                            <select onChange={changeTypePerfGraph} className={user.modeSombre === true ? "form-control selectDark" : "form-control"}>
-                                                                <option value={"percent"}> Pourcentage du poids de corps (défaut) </option>
-                                                                <option value={"charge"}> Charge </option>
-                                                            </select>
-                                                        </div>
+                                            <div className={perfHidden ? "large-margin-bottom not-extended" : "large-margin-bottom extended"}>
+                                                <div className="form-group row stats-form mini-margin-bottom">
+                                                    <div className="form-group col-4">
+                                                        <label className="col-form-label">
+                                                            Exercice
+                                                        </label>
+                                                        <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} taille="petit" exercice={exercice.exercice} typeSerie={0} id="exercice" changeExercice={changeExercice} />
                                                     </div>
 
-                                                    <div className="form-group row stats-form mini-margin-bottom">
-                                                        <div className="form-group col-4">
-                                                            <label className="col-form-label">
-                                                                Format Date
-                                                            </label>
-                                                            <select onChange={handleChange2} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="date">
-                                                                <option value="md"> Mois-Jour (défaut) </option>
-                                                                <option value="d"> Jour </option>
-                                                                <option value=""> Année-Mois-Jour </option>
-                                                            </select>
-                                                        </div>
-
-                                                        <div className="form-group col-4">
-                                                            <label className="col-form-label">
-                                                                Periode
-                                                            </label>
-                                                            <select onChange={handleChange2} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="periode">
-                                                                <option value="max"> Max (défaut) </option>
-                                                                <option value="7d"> 7 derniers jours </option>
-                                                                <option value="30d"> 30 derniers jours </option>
-                                                                <option value="90d"> 90 derniers jours (3 mois) </option>
-                                                                <option value="180d"> 180 derniers jours (6 mois) </option>
-                                                                <option value="1y"> Depuis 1 an </option>
-                                                            </select>
-                                                        </div>
-
-                                                        <div className="form-group col-4">
-                                                            <label onClick={handleClickDetail} className="col-form-label detail-label">
-                                                                Détail <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.webp')} />
-                                                            </label>
-                                                            <DetailInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" detail={detail} click={clickedDetail} id={"detail" + 0} index={0} num={0} dashboard={true} changeDetail={changeDetail} />
-                                                        </div>
+                                                    <div className="form-group col-4">
+                                                        <label onClick={handleClick} className="col-form-label categorie-label">
+                                                            Catégorie <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.webp')} />
+                                                        </label>
+                                                        <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" categorie={categorie} click={clicked} id={"catégorie" + 0} index={0} dashboard={true} num={0} exercice={exercice.exercice} changeCategorie={changeCategorie} />
                                                     </div>
 
-                                                    <div className="form-group row stats-form basic-margin-top mini-margin-bottom">
-                                                        <label className="col-form-label col-3">
-                                                            Reps / Temps
+                                                    <div className="form-group col-4">
+                                                        <label className="col-form-label">
+                                                            Performance
                                                         </label>
-                                                        <input type="text"
-                                                            className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
-                                                            value={params2.repsFrom}
-                                                            onChange={handleChange2}
-                                                            placeholder="Aucun filtre"
-                                                            id="repsFrom"
-                                                        />
-                                                        <label className="col-form-label col-1">
-                                                            à
-                                                        </label>
-                                                        <input type="text"
-                                                            className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
-                                                            value={params2.repsTo}
-                                                            onChange={handleChange2}
-                                                            placeholder="Aucun filtre"
-                                                            id="repsTo"
-                                                        />
+                                                        <select onChange={changeTypePerfGraph} className={user.modeSombre === true ? "form-control selectDark" : "form-control"}>
+                                                            <option value={"percent"}> Pourcentage du poids de corps (défaut) </option>
+                                                            <option value={"charge"}> Charge </option>
+                                                        </select>
                                                     </div>
                                                 </div>
-                                            }
+
+                                                <div className="form-group row stats-form mini-margin-bottom">
+                                                    <div className="form-group col-4">
+                                                        <label className="col-form-label">
+                                                            Format Date
+                                                        </label>
+                                                        <select onChange={handleChange2} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="date">
+                                                            <option value="md"> Mois-Jour (défaut) </option>
+                                                            <option value="d"> Jour </option>
+                                                            <option value=""> Année-Mois-Jour </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div className="form-group col-4">
+                                                        <label className="col-form-label">
+                                                            Periode
+                                                        </label>
+                                                        <select onChange={handleChange2} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="periode">
+                                                            <option value="max"> Max (défaut) </option>
+                                                            <option value="7d"> 7 derniers jours </option>
+                                                            <option value="30d"> 30 derniers jours </option>
+                                                            <option value="90d"> 90 derniers jours (3 mois) </option>
+                                                            <option value="180d"> 180 derniers jours (6 mois) </option>
+                                                            <option value="1y"> Depuis 1 an </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div className="form-group col-4">
+                                                        <label onClick={handleClickDetail} className="col-form-label detail-label">
+                                                            Détail <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.webp')} />
+                                                        </label>
+                                                        <DetailInput dimensions={dimensions} modeSombre={user.modeSombre === true ? true : false} info="false" detail={detail} click={clickedDetail} id={"detail" + 0} index={0} num={0} dashboard={true} changeDetail={changeDetail} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="form-group row stats-form basic-margin-top mini-margin-bottom">
+                                                    <label className="col-form-label col-3">
+                                                        Reps / Temps
+                                                    </label>
+                                                    <input type="text"
+                                                        className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
+                                                        value={params2.repsFrom}
+                                                        onChange={handleChange2}
+                                                        placeholder="Aucun filtre"
+                                                        id="repsFrom"
+                                                    />
+                                                    <label className="col-form-label col-1">
+                                                        à
+                                                    </label>
+                                                    <input type="text"
+                                                        className={user.modeSombre === true ? "form-control col-4 inputDark" : "form-control col-4"}
+                                                        value={params2.repsTo}
+                                                        onChange={handleChange2}
+                                                        placeholder="Aucun filtre"
+                                                        id="repsTo"
+                                                    />
+                                                </div>
+                                            </div>
+
 
                                             <p className="chart-little-title">
                                                 Evolution de tes performances en
@@ -886,55 +877,52 @@ function Stats() {
                             className="chart-title"
                             onClick={handleClickPref}>
                             Tes exercices préférés
-                            {prefHidden ?
-                                <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                :
-                                <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                            }
+                            <img className={prefHidden ? "expert-toggle not-rotated" : "expert-toggle rotated"}
+                                src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                         </h1>
 
-                        {prefHidden ? null :
-                            <div className="large-margin-bottom">
-                                <div className="form-group row stats-form mini-margin-bottom">
-                                    <div className="form-group col-4">
-                                        <label className="col-form-label">
-                                            Periode
-                                        </label>
-                                        <select onChange={handleChange3} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="periode">
-                                            <option value="max"> Max (défaut) </option>
-                                            <option value="7d"> 7 derniers jours </option>
-                                            <option value="30d"> 30 derniers jours </option>
-                                            <option value="90d"> 90 derniers jours (3 mois) </option>
-                                            <option value="180d"> 180 derniers jours (6 mois) </option>
-                                            <option value="1y"> Depuis 1 an </option>
-                                        </select>
-                                    </div>
 
-                                    <div className="form-group col-4">
-                                        <label className="col-form-label">
-                                            Classification
-                                        </label>
-                                        <select onChange={handleChange3} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="class">
-                                            <option value="reps"> Somme des répétitions (défaut) </option>
-                                            <option value="sets"> Somme des séries </option>
-                                            <option value="time"> Somme des secondes </option>
-                                        </select>
-                                    </div>
+                        <div className={prefHidden ? "large-margin-bottom not-extended" : "large-margin-bottom extended"}>
+                            <div className="form-group row stats-form mini-margin-bottom">
+                                <div className="form-group col-4">
+                                    <label className="col-form-label">
+                                        Periode
+                                    </label>
+                                    <select onChange={handleChange3} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="periode">
+                                        <option value="max"> Max (défaut) </option>
+                                        <option value="7d"> 7 derniers jours </option>
+                                        <option value="30d"> 30 derniers jours </option>
+                                        <option value="90d"> 90 derniers jours (3 mois) </option>
+                                        <option value="180d"> 180 derniers jours (6 mois) </option>
+                                        <option value="1y"> Depuis 1 an </option>
+                                    </select>
+                                </div>
 
-                                    <div className="form-group col-4">
-                                        <label className="col-form-label">
-                                            Affichage
-                                        </label>
-                                        <select onChange={handleChange3} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="top">
-                                            <option value={5}> Top 5 (défaut) </option>
-                                            <option value={10}> Top 10 </option>
-                                            <option value={20}> Top 20 </option>
-                                            <option value="max"> Tous </option>
-                                        </select>
-                                    </div>
+                                <div className="form-group col-4">
+                                    <label className="col-form-label">
+                                        Classification
+                                    </label>
+                                    <select onChange={handleChange3} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="class">
+                                        <option value="reps"> Somme des répétitions (défaut) </option>
+                                        <option value="sets"> Somme des séries </option>
+                                        <option value="time"> Somme des secondes </option>
+                                    </select>
+                                </div>
+
+                                <div className="form-group col-4">
+                                    <label className="col-form-label">
+                                        Affichage
+                                    </label>
+                                    <select onChange={handleChange3} className={user.modeSombre === true ? "form-control selectDark" : "form-control"} id="top">
+                                        <option value={5}> Top 5 (défaut) </option>
+                                        <option value={10}> Top 10 </option>
+                                        <option value={20}> Top 20 </option>
+                                        <option value="max"> Tous </option>
+                                    </select>
                                 </div>
                             </div>
-                        }
+                        </div>
+
 
                         <p style={{ marginBottom: "0" }}>
                             Top {params3.top} de tes exercices préférés classés par

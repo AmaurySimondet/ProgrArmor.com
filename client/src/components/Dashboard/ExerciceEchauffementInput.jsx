@@ -71,10 +71,11 @@ function ExerciceEchauffementInput(props) {
             <label className="exercice-label">
               Echauffement {props.index + 1}
             </label>
-            {props.debutant ? null : props.clickExercice ?
-              <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
+            {props.debutant ?
+              null
               :
-              <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
+              <img className={props.clickExercice ? "expert-toggle rotated" : "expert-toggle not-rotated"}
+                src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
             }
           </div>
           <div className="poubelle-div" style={{ paddingLeft: "0" }}>

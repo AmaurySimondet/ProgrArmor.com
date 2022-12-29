@@ -577,277 +577,271 @@ function Dashboard() {
                             <h2
                                 onClick={handleClickFiltrage}>
                                 Filtrage
-                                {clickFiltrage ?
-                                    <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                    :
-                                    <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                }
+                                <img className={clickFiltrage ? "expert-toggle rotated" : "expert-toggle not-rotated"}
+                                    src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                             </h2>
 
-                            {clickFiltrage ?
-                                <div>
-                                    <div className="form-group row">
-                                        <div className="form-group col-6">
-                                            <label className=" col-form-label">
-                                                Tri
-                                            </label>
-                                            <Select onChange={handleChange} placeholder="Tri..." id="tri"
-                                                options={[
-                                                    { id: "tri", label: "Ordre chronologique décroissant (défaut)", value: "Ordre chronologique décroissant" },
-                                                    { id: "tri", label: "Ordre chronologique croissant", value: "Ordre chronologique croissant" },
-                                                    { id: "tri", label: "Charge (ordre décroissant)", value: "Charge (ordre décroissant)" },
-                                                    { id: "tri", label: "%PDC (ordre décroissant)", value: "PDC (ordre décroissant)" }
-                                                ]}
-                                                styles={
-                                                    dimensions.width <= 500 ?
-                                                        user.modeSombre === true ?
-                                                            customStylesDarkMini
-                                                            :
-                                                            customStylesMini
-                                                        :
-                                                        user.modeSombre === true ?
-                                                            customStylesDark
-                                                            :
-                                                            customStyles
-                                                }
-                                                value={{ label: params.tri, value: params.tri }}
-                                            />
-                                        </div>
 
-                                        <div className="form-group col-6">
-                                            <label className=" col-form-label">
-                                                Periode
-                                            </label>
-                                            <Select onChange={handleChange} placeholder="Periode..." id="periode"
-                                                options={[
-                                                    { id: "periode", label: "Max (défaut)", value: "max" },
-                                                    { id: "periode", label: "7 derniers jours", value: "7d" },
-                                                    { id: "periode", label: "30 derniers jours", value: "30d" },
-                                                    { id: "periode", label: "90 derniers jours (3 mois)", value: "90d" },
-                                                    { id: "periode", label: "180 derniers jours (6 mois)", value: "180d" },
-                                                    { id: "periode", label: "Depuis 1 an", value: "1y" }
-                                                ]}
-                                                styles={
-                                                    dimensions.width <= 500 ?
-                                                        user.modeSombre === true ?
-                                                            customStylesDarkMini
-                                                            :
-                                                            customStylesMini
+                            <div className={clickFiltrage ? "extended" : "not-extended"}>
+                                <div className="form-group row">
+                                    <div className="form-group col-6">
+                                        <label className=" col-form-label">
+                                            Tri
+                                        </label>
+                                        <Select onChange={handleChange} placeholder="Tri..." id="tri"
+                                            options={[
+                                                { id: "tri", label: "Ordre chronologique décroissant (défaut)", value: "Ordre chronologique décroissant" },
+                                                { id: "tri", label: "Ordre chronologique croissant", value: "Ordre chronologique croissant" },
+                                                { id: "tri", label: "Charge (ordre décroissant)", value: "Charge (ordre décroissant)" },
+                                                { id: "tri", label: "%PDC (ordre décroissant)", value: "PDC (ordre décroissant)" }
+                                            ]}
+                                            styles={
+                                                dimensions.width <= 500 ?
+                                                    user.modeSombre === true ?
+                                                        customStylesDarkMini
                                                         :
-                                                        user.modeSombre === true ?
-                                                            customStylesDark
-                                                            :
-                                                            customStyles
-                                                }
-                                                value={{ label: params.periode, value: params.periode }}
-                                            />
-                                        </div>
+                                                        customStylesMini
+                                                    :
+                                                    user.modeSombre === true ?
+                                                        customStylesDark
+                                                        :
+                                                        customStyles
+                                            }
+                                            value={{ label: params.tri, value: params.tri }}
+                                        />
                                     </div>
 
-                                    <div className="form-group row">
-                                        <div className="form-group col-6">
-                                            <label className="col-form-label">
-                                                Exercice
-                                            </label>
-                                            <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} exercice={exercice.exercice} taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
-                                        </div>
-
-                                        <div className="form-group col-6">
-                                            <label className="col-form-label">
-                                                Reps / Temps
-                                            </label>
-                                            <input type="text"
-                                                className={user.modeSombre ? "inputDark form-control" : "form-control"}
-                                                value={params.repsFrom}
-                                                onChange={handleChange}
-                                                placeholder="Aucun filtre"
-                                                id="repsFrom"
-                                            />
-                                            <label className="col-form-label">
-                                                à
-                                            </label>
-                                            <input type="text"
-                                                className={user.modeSombre ? "inputDark form-control" : "form-control"}
-                                                value={params.repsTo}
-                                                onChange={handleChange}
-                                                placeholder="Aucun filtre"
-                                                id="repsTo"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    {categoriesAddRien.map((rien, index) => {
-                                        return (
-                                            <div className="form-group row">
-                                                <div className="form-group col-12">
-                                                    <label onClick={handleClick} id={index} className="col-form-label categorie-label">
-                                                        Catégorie {index + 1} <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.webp')} />
-                                                    </label>
-                                                    <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
-
-                                    {detailsAddRien.map((rien, index) => {
-                                        return (
-                                            <div className="form-group row">
-                                                <div className="form-group col-12">
-                                                    <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
-                                                        Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.webp')} />
-                                                    </label>
-                                                    <DetailInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
-
-                                    <div className="form-group row">
-                                        <div className="form-group col-6" style={{ margin: "0" }}>
-                                            <label className=" col-form-label">
-                                                Nom
-                                            </label>
-                                            <Select onChange={handleChange} placeholder="Nom..." id="nom"
-                                                options={listeNoms}
-                                                styles={
-                                                    dimensions.width <= 500 ?
-                                                        user.modeSombre === true ?
-                                                            customStylesDarkMini
-                                                            :
-                                                            customStylesMini
+                                    <div className="form-group col-6">
+                                        <label className=" col-form-label">
+                                            Periode
+                                        </label>
+                                        <Select onChange={handleChange} placeholder="Periode..." id="periode"
+                                            options={[
+                                                { id: "periode", label: "Max (défaut)", value: "max" },
+                                                { id: "periode", label: "7 derniers jours", value: "7d" },
+                                                { id: "periode", label: "30 derniers jours", value: "30d" },
+                                                { id: "periode", label: "90 derniers jours (3 mois)", value: "90d" },
+                                                { id: "periode", label: "180 derniers jours (6 mois)", value: "180d" },
+                                                { id: "periode", label: "Depuis 1 an", value: "1y" }
+                                            ]}
+                                            styles={
+                                                dimensions.width <= 500 ?
+                                                    user.modeSombre === true ?
+                                                        customStylesDarkMini
                                                         :
-                                                        user.modeSombre === true ?
-                                                            customStylesDark
-                                                            :
-                                                            customStyles
-                                                }
-                                                value={{ label: params.nom, value: params.nom }}
-                                            />
-                                        </div>
-
-                                        <div className="form-group col-3 button-dashboard">
-                                            <button className="btn btn-dark form-button" onClick={resetParameters} type="submit">Reset des paramètres</button>
-                                        </div>
+                                                        customStylesMini
+                                                    :
+                                                    user.modeSombre === true ?
+                                                        customStylesDark
+                                                        :
+                                                        customStyles
+                                            }
+                                            value={{ label: params.periode, value: params.periode }}
+                                        />
                                     </div>
                                 </div>
-                                : null}
+
+                                <div className="form-group row">
+                                    <div className="form-group col-6">
+                                        <label className="col-form-label">
+                                            Exercice
+                                        </label>
+                                        <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} exercice={exercice.exercice} taille="petit" typeSerie={0} id="exercice" changeExercice={changeExercice} />
+                                    </div>
+
+                                    <div className="form-group col-6">
+                                        <label className="col-form-label">
+                                            Reps / Temps
+                                        </label>
+                                        <input type="text"
+                                            className={user.modeSombre ? "inputDark form-control" : "form-control"}
+                                            value={params.repsFrom}
+                                            onChange={handleChange}
+                                            placeholder="Aucun filtre"
+                                            id="repsFrom"
+                                        />
+                                        <label className="col-form-label">
+                                            à
+                                        </label>
+                                        <input type="text"
+                                            className={user.modeSombre ? "inputDark form-control" : "form-control"}
+                                            value={params.repsTo}
+                                            onChange={handleChange}
+                                            placeholder="Aucun filtre"
+                                            id="repsTo"
+                                        />
+                                    </div>
+                                </div>
+
+                                {categoriesAddRien.map((rien, index) => {
+                                    return (
+                                        <div className="form-group row">
+                                            <div className="form-group col-12">
+                                                <label onClick={handleClick} id={index} className="col-form-label categorie-label">
+                                                    Catégorie {index + 1} <img className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} onClick={handleClick} src={require('../../images/icons/reset.webp')} />
+                                                </label>
+                                                <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+
+                                {detailsAddRien.map((rien, index) => {
+                                    return (
+                                        <div className="form-group row">
+                                            <div className="form-group col-12">
+                                                <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
+                                                    Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.webp')} />
+                                                </label>
+                                                <DetailInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+
+                                <div className="form-group row">
+                                    <div className="form-group col-6" style={{ margin: "0" }}>
+                                        <label className=" col-form-label">
+                                            Nom
+                                        </label>
+                                        <Select onChange={handleChange} placeholder="Nom..." id="nom"
+                                            options={listeNoms}
+                                            styles={
+                                                dimensions.width <= 500 ?
+                                                    user.modeSombre === true ?
+                                                        customStylesDarkMini
+                                                        :
+                                                        customStylesMini
+                                                    :
+                                                    user.modeSombre === true ?
+                                                        customStylesDark
+                                                        :
+                                                        customStyles
+                                            }
+                                            value={{ label: params.nom, value: params.nom }}
+                                        />
+                                    </div>
+
+                                    <div className="form-group col-3 button-dashboard">
+                                        <button className="btn btn-dark form-button" onClick={resetParameters} type="submit">Reset des paramètres</button>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <h2
                                 onClick={handleClickAffichage}>
                                 Affichage
-                                {clickAffichage ?
-                                    <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                    :
-                                    <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                }
+                                <img className={clickAffichage ? "expert-toggle rotated" : "expert-toggle not-rotated"}
+                                    src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                             </h2>
 
-                            {clickAffichage ?
-                                <div>
-                                    <div className="form-group row slider-style">
-                                        <label className="col-1 col-form-label">
-                                            Nombre de catégories
-                                        </label>
-                                        <div className="col-5">
-                                            <StyleSlider
-                                                style={
-                                                    {
-                                                        width: "70%",
-                                                    }
+
+                            <div className={clickAffichage ? "extended" : "not-extended"}>
+                                <div className="form-group row slider-style">
+                                    <label className="col-1 col-form-label">
+                                        Nombre de catégories
+                                    </label>
+                                    <div className="col-5">
+                                        <StyleSlider
+                                            style={
+                                                {
+                                                    width: "70%",
                                                 }
-                                                defaultValue={0}
-                                                onChange={handleChangeSliderCategorie}
-                                                getAriaValueText={valuetext}
-                                                aria-labelledby="discrete-slider-custom"
-                                                step={1}
-                                                max={5}
-                                                min={0}
-                                                valueLabelDisplay="auto"
-                                                marks={marks}
-                                            />
-                                        </div>
+                                            }
+                                            defaultValue={0}
+                                            onChange={handleChangeSliderCategorie}
+                                            getAriaValueText={valuetext}
+                                            aria-labelledby="discrete-slider-custom"
+                                            step={1}
+                                            max={5}
+                                            min={0}
+                                            valueLabelDisplay="auto"
+                                            marks={marks}
+                                        />
+                                    </div>
 
-                                        <label className="col-1 col-form-label">
-                                            Nombre de détails
-                                        </label>
-                                        <div className="col-5">
-                                            <StyleSlider
-                                                style={
-                                                    {
-                                                        width: "70%",
-                                                    }
+                                    <label className="col-1 col-form-label">
+                                        Nombre de détails
+                                    </label>
+                                    <div className="col-5">
+                                        <StyleSlider
+                                            style={
+                                                {
+                                                    width: "70%",
                                                 }
-                                                defaultValue={0}
-                                                onChange={handleChangeSliderDetail}
-                                                getAriaValueText={valuetext}
-                                                aria-labelledby="discrete-slider-custom"
-                                                step={1}
-                                                max={5}
-                                                min={0}
-                                                valueLabelDisplay="auto"
-                                                marks={marks}
-                                            />
-                                        </div>
-
-                                    </div>
-
-                                    <div className="form-group row">
-                                        <div className="form-group group-margin 2">
-                                            <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageNom" id="affichageNom" />
-                                            <label className="col-form-label" htmlFor="#affichageNom"> Nom </label>
-
-                                            <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageDate" id="affichageDate" />
-                                            <label className="col-form-label" htmlFor="#affichageDate"> Date </label>
-
-                                            <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePoids" id="affichagePoids" />
-                                            <label className="col-form-label" htmlFor="#affichagePoids"> Poids </label>
-
-                                            <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExercice" id="affichageExercice" />
-                                            <label className="col-form-label" htmlFor="#affichageExercice"> Exercice </label>
-
-                                            <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType" />
-                                            <label className="col-form-label" htmlFor="#affichageType"> Type </label>
-
-                                            <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageReps" id="affichageReps" />
-                                            <label className="col-form-label" htmlFor="#affichageReps"> Reps </label>
-
-                                            <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageCharge" id="affichageCharge" />
-                                            <label className="col-form-label" htmlFor="#affichageCharge"> Charge </label>
-
-                                            <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePercent" id="affichagePercent" />
-                                            <label className="col-form-labell" htmlFor="#affichagePercent"> % PDC </label>
-                                        </div>
-                                    </div>
-
-                                    <div className="form-group row">
-                                        <div className="form-group group-margin col-12">
-                                            <p className=""> Tableau blanc
-                                                <GreenSwitch
-                                                    onChange={handleChangeSwitch}
-                                                    defaultChecked={user.modeSombre ? user.modeSombre === true ? true : false : false}
-                                                /> Tableau noir </p>
-                                        </div>
-                                    </div>
-
-                                    <div className="form-group row">
-                                        <div className="form-group col-4">
-                                            <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageModif" id="affichageModif" />
-                                            <label className="col-form-label" htmlFor="#affichageModif"> Modifier des séances </label>
-                                        </div>
-
-                                        <div className="form-group group-margin-last col-4">
-                                            <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSuppr" id="affichageSuppr" />
-                                            <label className="col-form-label" htmlFor="#affichageSuppr"> Supprimer des séances </label>
-                                        </div>
-
-                                        <div className="form-group group-margin-last col-4">
-                                            <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExport" id="affichageExport" />
-                                            <label className="col-form-label" htmlFor="#affichageExport"> Exporter le tableau en CSV </label>
-                                        </div>
+                                            }
+                                            defaultValue={0}
+                                            onChange={handleChangeSliderDetail}
+                                            getAriaValueText={valuetext}
+                                            aria-labelledby="discrete-slider-custom"
+                                            step={1}
+                                            max={5}
+                                            min={0}
+                                            valueLabelDisplay="auto"
+                                            marks={marks}
+                                        />
                                     </div>
 
                                 </div>
-                                : null}
+
+                                <div className="form-group row">
+                                    <div className="form-group group-margin 2">
+                                        <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageNom" id="affichageNom" />
+                                        <label className="col-form-label" htmlFor="#affichageNom"> Nom </label>
+
+                                        <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageDate" id="affichageDate" />
+                                        <label className="col-form-label" htmlFor="#affichageDate"> Date </label>
+
+                                        <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePoids" id="affichagePoids" />
+                                        <label className="col-form-label" htmlFor="#affichagePoids"> Poids </label>
+
+                                        <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExercice" id="affichageExercice" />
+                                        <label className="col-form-label" htmlFor="#affichageExercice"> Exercice </label>
+
+                                        <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType" />
+                                        <label className="col-form-label" htmlFor="#affichageType"> Type </label>
+
+                                        <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageReps" id="affichageReps" />
+                                        <label className="col-form-label" htmlFor="#affichageReps"> Reps </label>
+
+                                        <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageCharge" id="affichageCharge" />
+                                        <label className="col-form-label" htmlFor="#affichageCharge"> Charge </label>
+
+                                        <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePercent" id="affichagePercent" />
+                                        <label className="col-form-labell" htmlFor="#affichagePercent"> % PDC </label>
+                                    </div>
+                                </div>
+
+                                <div className="form-group row">
+                                    <div className="form-group group-margin col-12">
+                                        <p className=""> Tableau blanc
+                                            <GreenSwitch
+                                                onChange={handleChangeSwitch}
+                                                defaultChecked={user.modeSombre ? user.modeSombre === true ? true : false : false}
+                                            /> Tableau noir </p>
+                                    </div>
+                                </div>
+
+                                <div className="form-group row">
+                                    <div className="form-group col-4">
+                                        <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageModif" id="affichageModif" />
+                                        <label className="col-form-label" htmlFor="#affichageModif"> Modifier des séances </label>
+                                    </div>
+
+                                    <div className="form-group group-margin-last col-4">
+                                        <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSuppr" id="affichageSuppr" />
+                                        <label className="col-form-label" htmlFor="#affichageSuppr"> Supprimer des séances </label>
+                                    </div>
+
+                                    <div className="form-group group-margin-last col-4">
+                                        <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExport" id="affichageExport" />
+                                        <label className="col-form-label" htmlFor="#affichageExport"> Exporter le tableau en CSV </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </form>
                     </div>
 
@@ -863,164 +857,161 @@ function Dashboard() {
                                     <h2
                                         onClick={handleClickFiltrage}>
                                         Filtrage
-                                        {clickFiltrage ?
-                                            <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                            :
-                                            <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                        }
+                                        <img className={clickFiltrage ? "expert-toggle rotated" : "expert-toggle not-rotated"}
+                                            src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                     </h2>
 
-                                    {clickFiltrage ?
-                                        <div>
-                                            <div className="form-group row">
-                                                <div className="form-group col-6">
-                                                    <label className=" col-form-label">
-                                                        Tri
-                                                    </label>
-                                                    <Select onChange={handleChange} placeholder="Tri..." id="tri"
-                                                        options={[
-                                                            { id: "tri", label: "Ordre chronologique décroissant (défaut)", value: "Ordre chronologique décroissant" },
-                                                            { id: "tri", label: "Ordre chronologique croissant", value: "Ordre chronologique croissant" },
-                                                            { id: "tri", label: "Charge (ordre décroissant)", value: "Charge (ordre décroissant)" },
-                                                            { id: "tri", label: "%PDC (ordre décroissant)", value: "PDC (ordre décroissant)" }
-                                                        ]}
-                                                        styles={
-                                                            dimensions.width <= 500 ?
-                                                                user.modeSombre === true ?
-                                                                    customStylesDarkMini
-                                                                    :
-                                                                    customStylesMini
-                                                                :
-                                                                user.modeSombre === true ?
-                                                                    customStylesDark
-                                                                    :
-                                                                    customStyles
-                                                        }
-                                                        value={{ label: params.tri, value: params.tri }}
-                                                    />
-                                                </div>
 
-                                                <div className="form-group col-6">
-                                                    <label className=" col-form-label">
-                                                        Periode
-                                                    </label>
-                                                    <Select onChange={handleChange} placeholder="Periode..." id="periode"
-                                                        options={[
-                                                            { id: "periode", label: "Max (défaut)", value: "max" },
-                                                            { id: "periode", label: "7 derniers jours", value: "7d" },
-                                                            { id: "periode", label: "30 derniers jours", value: "30d" },
-                                                            { id: "periode", label: "90 derniers jours (3 mois)", value: "90d" },
-                                                            { id: "periode", label: "180 derniers jours (6 mois)", value: "180d" },
-                                                            { id: "periode", label: "Depuis 1 an", value: "1y" }
-                                                        ]}
-                                                        styles={
-                                                            dimensions.width <= 500 ?
-                                                                user.modeSombre === true ?
-                                                                    customStylesDarkMini
-                                                                    :
-                                                                    customStylesMini
+                                    <div className={clickFiltrage ? "extended" : "not-extended"}>
+                                        <div className="form-group row">
+                                            <div className="form-group col-6">
+                                                <label className=" col-form-label">
+                                                    Tri
+                                                </label>
+                                                <Select onChange={handleChange} placeholder="Tri..." id="tri"
+                                                    options={[
+                                                        { id: "tri", label: "Ordre chronologique décroissant (défaut)", value: "Ordre chronologique décroissant" },
+                                                        { id: "tri", label: "Ordre chronologique croissant", value: "Ordre chronologique croissant" },
+                                                        { id: "tri", label: "Charge (ordre décroissant)", value: "Charge (ordre décroissant)" },
+                                                        { id: "tri", label: "%PDC (ordre décroissant)", value: "PDC (ordre décroissant)" }
+                                                    ]}
+                                                    styles={
+                                                        dimensions.width <= 500 ?
+                                                            user.modeSombre === true ?
+                                                                customStylesDarkMini
                                                                 :
-                                                                user.modeSombre === true ?
-                                                                    customStylesDark
-                                                                    :
-                                                                    customStyles
-                                                        }
-                                                        value={{ label: params.periode, value: params.periode }}
-                                                    />
-                                                </div>
+                                                                customStylesMini
+                                                            :
+                                                            user.modeSombre === true ?
+                                                                customStylesDark
+                                                                :
+                                                                customStyles
+                                                    }
+                                                    value={{ label: params.tri, value: params.tri }}
+                                                />
                                             </div>
 
-                                            <div className="form-group row">
-                                                <div className="form-group col-6">
-                                                    <label className="col-form-label">
-                                                        Exercice
-                                                    </label>
-                                                    <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false}
-                                                        exercice={exercice.exercice}
-                                                        taille="petit"
-                                                        typeSerie={0} id="exercice" changeExercice={changeExercice}
-                                                    />
-                                                </div>
-
-                                                <div className="form-group col-6">
-                                                    <label className="col-form-label">
-                                                        Reps / Temps
-                                                    </label>
-                                                    <input type="text"
-                                                        className={user.modeSombre ? "inputDark form-control" : "form-control"}
-                                                        value={params.repsFrom}
-                                                        onChange={handleChange}
-                                                        placeholder="Aucun filtre"
-                                                        id="repsFrom"
-                                                    />
-                                                    <label className="col-form-label">
-                                                        à
-                                                    </label>
-                                                    <input type="text"
-                                                        className={user.modeSombre ? "inputDark form-control" : "form-control"}
-                                                        value={params.repsTo}
-                                                        onChange={handleChange}
-                                                        placeholder="Aucun filtre"
-                                                        id="repsTo"
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            {categoriesAddRien.map((rien, index) => {
-                                                return (
-                                                    <div className="form-group row">
-                                                        <div className="form-group col-12">
-                                                            <label onClick={handleClick} id={index} className="col-form-label categorie-label">
-                                                                Catégorie {index + 1} <img onClick={handleClick} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.webp')} />
-                                                            </label>
-                                                            <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
-                                                        </div>
-                                                    </div>
-                                                )
-                                            })}
-
-                                            {detailsAddRien.map((rien, index) => {
-                                                return (
-                                                    <div className="form-group row">
-                                                        <div className="form-group col-12">
-                                                            <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
-                                                                Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.webp')} />
-                                                            </label>
-                                                            <DetailInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
-                                                        </div>
-                                                    </div>
-                                                )
-                                            })}
-
-                                            <div className="form-group row">
-                                                <div className="form-group col-6">
-                                                    <label className=" col-form-label">
-                                                        Nom
-                                                    </label>
-                                                    <Select onChange={handleChange} placeholder="Nom..." id="nom"
-                                                        options={listeNoms}
-                                                        styles={
-                                                            dimensions.width <= 500 ?
-                                                                user.modeSombre === true ?
-                                                                    customStylesDarkMini
-                                                                    :
-                                                                    customStylesMini
+                                            <div className="form-group col-6">
+                                                <label className=" col-form-label">
+                                                    Periode
+                                                </label>
+                                                <Select onChange={handleChange} placeholder="Periode..." id="periode"
+                                                    options={[
+                                                        { id: "periode", label: "Max (défaut)", value: "max" },
+                                                        { id: "periode", label: "7 derniers jours", value: "7d" },
+                                                        { id: "periode", label: "30 derniers jours", value: "30d" },
+                                                        { id: "periode", label: "90 derniers jours (3 mois)", value: "90d" },
+                                                        { id: "periode", label: "180 derniers jours (6 mois)", value: "180d" },
+                                                        { id: "periode", label: "Depuis 1 an", value: "1y" }
+                                                    ]}
+                                                    styles={
+                                                        dimensions.width <= 500 ?
+                                                            user.modeSombre === true ?
+                                                                customStylesDarkMini
                                                                 :
-                                                                user.modeSombre === true ?
-                                                                    customStylesDark
-                                                                    :
-                                                                    customStyles
-                                                        }
-                                                        value={{ label: params.nom, value: params.nom }}
-                                                    />
-                                                </div>
-
-                                                <div className="form-group col-3 button-dashboard">
-                                                    <button className="btn btn-dark form-button" onClick={resetParameters} type="submit">Reset des paramètres</button>
-                                                </div>
+                                                                customStylesMini
+                                                            :
+                                                            user.modeSombre === true ?
+                                                                customStylesDark
+                                                                :
+                                                                customStyles
+                                                    }
+                                                    value={{ label: params.periode, value: params.periode }}
+                                                />
                                             </div>
                                         </div>
-                                        : null}
+
+                                        <div className="form-group row">
+                                            <div className="form-group col-6">
+                                                <label className="col-form-label">
+                                                    Exercice
+                                                </label>
+                                                <ExerciceInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false}
+                                                    exercice={exercice.exercice}
+                                                    taille="petit"
+                                                    typeSerie={0} id="exercice" changeExercice={changeExercice}
+                                                />
+                                            </div>
+
+                                            <div className="form-group col-6">
+                                                <label className="col-form-label">
+                                                    Reps / Temps
+                                                </label>
+                                                <input type="text"
+                                                    className={user.modeSombre ? "inputDark form-control" : "form-control"}
+                                                    value={params.repsFrom}
+                                                    onChange={handleChange}
+                                                    placeholder="Aucun filtre"
+                                                    id="repsFrom"
+                                                />
+                                                <label className="col-form-label">
+                                                    à
+                                                </label>
+                                                <input type="text"
+                                                    className={user.modeSombre ? "inputDark form-control" : "form-control"}
+                                                    value={params.repsTo}
+                                                    onChange={handleChange}
+                                                    placeholder="Aucun filtre"
+                                                    id="repsTo"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {categoriesAddRien.map((rien, index) => {
+                                            return (
+                                                <div className="form-group row">
+                                                    <div className="form-group col-12">
+                                                        <label onClick={handleClick} id={index} className="col-form-label categorie-label">
+                                                            Catégorie {index + 1} <img onClick={handleClick} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.webp')} />
+                                                        </label>
+                                                        <CategorieInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} categorie={categories[index]} info="dash" click={clicked[index]} id={"catégorie" + index} index={index} dashboard={true} exercice={exercice.exercice} changeCategorie={changeCategorie} />
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+
+                                        {detailsAddRien.map((rien, index) => {
+                                            return (
+                                                <div className="form-group row">
+                                                    <div className="form-group col-12">
+                                                        <label onClick={handleClickDetail} id={index} className="col-form-label detail-label">
+                                                            Détail {index + 1} <img onClick={handleClickDetail} className={user.modeSombre === true ? "reset-img  questionDark" : "reset-img"} src={require('../../images/icons/reset.webp')} />
+                                                        </label>
+                                                        <DetailInput dimensions={dimensions} modeSombre={user.modeSombre ? true : false} detail={details[index]} info={true} click={clickedDetail[index]} id={"detail" + index} index={index} dashboard={true} changeDetail={changeDetail} />
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+
+                                        <div className="form-group row">
+                                            <div className="form-group col-6">
+                                                <label className=" col-form-label">
+                                                    Nom
+                                                </label>
+                                                <Select onChange={handleChange} placeholder="Nom..." id="nom"
+                                                    options={listeNoms}
+                                                    styles={
+                                                        dimensions.width <= 500 ?
+                                                            user.modeSombre === true ?
+                                                                customStylesDarkMini
+                                                                :
+                                                                customStylesMini
+                                                            :
+                                                            user.modeSombre === true ?
+                                                                customStylesDark
+                                                                :
+                                                                customStyles
+                                                    }
+                                                    value={{ label: params.nom, value: params.nom }}
+                                                />
+                                            </div>
+
+                                            <div className="form-group col-3 button-dashboard">
+                                                <button className="btn btn-dark form-button" onClick={resetParameters} type="submit">Reset des paramètres</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </td>
 
 
@@ -1029,118 +1020,115 @@ function Dashboard() {
                                     <h2
                                         onClick={handleClickAffichage}>
                                         Affichage
-                                        {clickAffichage ?
-                                            <img className="expert-toggle" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                            :
-                                            <img className="expert-toggle-inverted" src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
-                                        }
+                                        <img className={clickAffichage ? "expert-toggle rotated" : "expert-toggle not-rotated"}
+                                            src={require('../../images/icons/icons8-expand-arrow-90.webp')} />
                                     </h2>
 
-                                    {clickAffichage ?
-                                        <div>
-                                            <div className="form-group row slider-style">
-                                                <label className="col-1 col-form-label">
-                                                    Nombre de catégories
-                                                </label>
-                                                <div className="col-5">
-                                                    <StyleSlider
-                                                        style={
-                                                            {
-                                                                width: "70%",
-                                                            }
+
+                                    <div className={clickAffichage ? "extended" : "not-extended"}>
+                                        <div className="form-group row slider-style">
+                                            <label className="col-1 col-form-label">
+                                                Nombre de catégories
+                                            </label>
+                                            <div className="col-5">
+                                                <StyleSlider
+                                                    style={
+                                                        {
+                                                            width: "70%",
                                                         }
-                                                        defaultValue={categories.length}
-                                                        onChange={handleChangeSliderCategorie}
-                                                        getAriaValueText={valuetext}
-                                                        aria-labelledby="discrete-slider-custom"
-                                                        step={1}
-                                                        max={5}
-                                                        min={0}
-                                                        valueLabelDisplay="auto"
-                                                        marks={marks}
-                                                    />
-                                                </div>
+                                                    }
+                                                    defaultValue={categories.length}
+                                                    onChange={handleChangeSliderCategorie}
+                                                    getAriaValueText={valuetext}
+                                                    aria-labelledby="discrete-slider-custom"
+                                                    step={1}
+                                                    max={5}
+                                                    min={0}
+                                                    valueLabelDisplay="auto"
+                                                    marks={marks}
+                                                />
+                                            </div>
 
-                                                <label className="col-1 col-form-label">
-                                                    Nombre de détails
-                                                </label>
-                                                <div className="col-5">
-                                                    <StyleSlider
-                                                        style={
-                                                            {
-                                                                width: "70%",
-                                                            }
+                                            <label className="col-1 col-form-label">
+                                                Nombre de détails
+                                            </label>
+                                            <div className="col-5">
+                                                <StyleSlider
+                                                    style={
+                                                        {
+                                                            width: "70%",
                                                         }
-                                                        defaultValue={details.length}
-                                                        onChange={handleChangeSliderDetail}
-                                                        getAriaValueText={valuetext}
-                                                        aria-labelledby="discrete-slider-custom"
-                                                        step={1}
-                                                        max={5}
-                                                        min={0}
-                                                        valueLabelDisplay="auto"
-                                                        marks={marks}
-                                                    />
-                                                </div>
-
+                                                    }
+                                                    defaultValue={details.length}
+                                                    onChange={handleChangeSliderDetail}
+                                                    getAriaValueText={valuetext}
+                                                    aria-labelledby="discrete-slider-custom"
+                                                    step={1}
+                                                    max={5}
+                                                    min={0}
+                                                    valueLabelDisplay="auto"
+                                                    marks={marks}
+                                                />
                                             </div>
 
-                                            <div className="form-group row">
-                                                <div className="form-group group-margin 2">
-                                                    <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageNom" id="affichageNom" />
-                                                    <label className="col-form-label" htmlFor="#affichageNom"> Nom </label>
+                                        </div>
 
-                                                    <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageDate" id="affichageDate" />
-                                                    <label className="col-form-label" htmlFor="#affichageDate"> Date </label>
+                                        <div className="form-group row">
+                                            <div className="form-group group-margin 2">
+                                                <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageNom" id="affichageNom" />
+                                                <label className="col-form-label" htmlFor="#affichageNom"> Nom </label>
 
-                                                    <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePoids" id="affichagePoids" />
-                                                    <label className="col-form-label" htmlFor="#affichagePoids"> Poids </label>
+                                                <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageDate" id="affichageDate" />
+                                                <label className="col-form-label" htmlFor="#affichageDate"> Date </label>
 
-                                                    <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExercice" id="affichageExercice" />
-                                                    <label className="col-form-label" htmlFor="#affichageExercice"> Exercice </label>
+                                                <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePoids" id="affichagePoids" />
+                                                <label className="col-form-label" htmlFor="#affichagePoids"> Poids </label>
 
-                                                    <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType" />
-                                                    <label className="col-form-label" htmlFor="#affichageType"> Type </label>
+                                                <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExercice" id="affichageExercice" />
+                                                <label className="col-form-label" htmlFor="#affichageExercice"> Exercice </label>
 
-                                                    <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageReps" id="affichageReps" />
-                                                    <label className="col-form-label" htmlFor="#affichageReps"> Reps </label>
+                                                <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageType" id="affichageType" />
+                                                <label className="col-form-label" htmlFor="#affichageType"> Type </label>
 
-                                                    <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageCharge" id="affichageCharge" />
-                                                    <label className="col-form-label" htmlFor="#affichageCharge"> Charge </label>
+                                                <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageReps" id="affichageReps" />
+                                                <label className="col-form-label" htmlFor="#affichageReps"> Reps </label>
 
-                                                    <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePercent" id="affichagePercent" />
-                                                    <label className="col-form-labell" htmlFor="#affichagePercent"> % PDC </label>
-                                                </div>
-                                            </div>
+                                                <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageCharge" id="affichageCharge" />
+                                                <label className="col-form-label" htmlFor="#affichageCharge"> Charge </label>
 
-                                            <div className="form-group row">
-                                                <div className="form-group group-margin col-12">
-                                                    <p className=""> Tableau blanc
-                                                        <GreenSwitch
-                                                            onChange={handleChangeSwitch}
-                                                            defaultChecked={user.modeSombre ? user.modeSombre === true ? true : false : false}
-                                                        /> Tableau noir </p>
-                                                </div>
-                                            </div>
-
-                                            <div className="form-group row">
-                                                <div className="form-group col-4">
-                                                    <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageModif" id="affichageModif" />
-                                                    <label className="col-form-label" htmlFor="#affichageModif"> Modifier des séances </label>
-                                                </div>
-
-                                                <div className="form-group group-margin-last col-4">
-                                                    <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSuppr" id="affichageSuppr" />
-                                                    <label className="col-form-label" htmlFor="#affichageSuppr"> Supprimer des séances </label>
-                                                </div>
-
-                                                <div className="form-group group-margin-last col-4">
-                                                    <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExport" id="affichageExport" />
-                                                    <label className="col-form-label" htmlFor="#affichageExport"> Exporter en CSV </label>
-                                                </div>
+                                                <input defaultChecked={true} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichagePercent" id="affichagePercent" />
+                                                <label className="col-form-labell" htmlFor="#affichagePercent"> % PDC </label>
                                             </div>
                                         </div>
-                                        : null}
+
+                                        <div className="form-group row">
+                                            <div className="form-group group-margin col-12">
+                                                <p className=""> Tableau blanc
+                                                    <GreenSwitch
+                                                        onChange={handleChangeSwitch}
+                                                        defaultChecked={user.modeSombre ? user.modeSombre === true ? true : false : false}
+                                                    /> Tableau noir </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="form-group row">
+                                            <div className="form-group col-4">
+                                                <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageModif" id="affichageModif" />
+                                                <label className="col-form-label" htmlFor="#affichageModif"> Modifier des séances </label>
+                                            </div>
+
+                                            <div className="form-group group-margin-last col-4">
+                                                <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageSuppr" id="affichageSuppr" />
+                                                <label className="col-form-label" htmlFor="#affichageSuppr"> Supprimer des séances </label>
+                                            </div>
+
+                                            <div className="form-group group-margin-last col-4">
+                                                <input defaultChecked={false} type="checkbox" className="col-form-control" onChange={handleChangeCheckbox} value="affichageExport" id="affichageExport" />
+                                                <label className="col-form-label" htmlFor="#affichageExport"> Exporter en CSV </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </td>
                             </tr>
                         </table>

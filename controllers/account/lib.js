@@ -1176,17 +1176,6 @@ async function getNiveau(req, res) {
                 "Traction / Pull up", "", [], "reps", 1, 30)
         }
 
-        checkItems["streetliftIntermItem3"] = {
-            level: "Intermédiaire",
-            categorie: "Musculation / StreetLifting",
-            date: new Date(),
-            titre: "",
-            id: "streetliftIntermItem3",
-            description: "",
-            valeur: checkPerformance(seances,
-                "Muscle Up", "", [], "reps", 3, 0)
-        }
-
         checkItems["streetliftIntermItem4"] = {
             level: "Intermédiaire",
             categorie: "Musculation / StreetLifting",
@@ -1268,7 +1257,7 @@ async function getNiveau(req, res) {
         //CONFIRME
 
         checkItems["statiqueConfirmeItem1"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Statique",
             titre: "Front Fever",
             id: "statiqueConfirmeItem1",
@@ -1279,7 +1268,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["statiqueConfirmeItem2"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Statique",
             date: new Date(),
             titre: "Planche à pain",
@@ -1290,7 +1279,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["statiqueConfirmeItem3"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Statique",
             date: new Date(),
             titre: "Patriote",
@@ -1301,7 +1290,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcConfirmeItem1"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "Diper",
@@ -1312,7 +1301,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcConfirmeItem2"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Poids du corps",
             titre: "Tracteur Ford",
             id: "pdcConfirmeItem2",
@@ -1324,7 +1313,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcConfirmeItem3"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "",
@@ -1335,7 +1324,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcConfirmeItem4"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "",
@@ -1346,7 +1335,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcConfirmeItem5"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Poids du corps",
             titre: "",
             id: "pdcConfirmeItem5",
@@ -1357,7 +1346,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcConfirmeItem6"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "",
@@ -1368,7 +1357,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcConfirmeItem7"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "",
@@ -1379,7 +1368,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["streetliftConfirmeItem1"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
             titre: "Compète de Dips",
@@ -1390,7 +1379,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["streetliftConfirmeItem2"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
             titre: "Contraction",
@@ -1400,19 +1389,8 @@ async function getNiveau(req, res) {
                 "Traction / Pull up", "", [], "reps", 1, 75)
         }
 
-        checkItems["streetliftConfirmeItem3"] = {
-            level: "Intermédiaire",
-            categorie: "Musculation / StreetLifting",
-            date: new Date(),
-            titre: "",
-            id: "streetliftConfirmeItem3",
-            description: "",
-            valeur: checkPerformance(seances,
-                "Muscle Up", "", [], "reps", 8, 0)
-        }
-
         checkItems["streetliftConfirmeItem4"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
             titre: "",
@@ -1423,7 +1401,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["streetliftConfirmeItem5"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
             titre: "",
@@ -1434,7 +1412,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["streetliftConfirmeItem6"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
             titre: "",
@@ -1445,7 +1423,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["streetliftConfirmeItem7"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
             titre: "",
@@ -1456,7 +1434,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["equilibreConfirmeItem1"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Equilibre",
             date: new Date(),
             titre: "",
@@ -1467,7 +1445,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["equilibreConfirmeItem2"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Equilibre",
             date: new Date(),
             titre: "",
@@ -1478,7 +1456,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["equilibreConfirmeItem3"] = {
-            level: "Intermédiaire",
+            level: "Confirmé",
             categorie: "Equilibre",
             date: new Date(),
             titre: "",
@@ -1491,7 +1469,7 @@ async function getNiveau(req, res) {
 
         //EXPERT
         checkItems["statiqueExpertItem1"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Statique",
             titre: "Front Forever",
             id: "statiqueExpertItem1",
@@ -1503,7 +1481,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["statiqueExpertItem2"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Statique",
             date: new Date(),
             titre: "Planche à découper",
@@ -1515,7 +1493,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["statiqueExpertItem3"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Statique",
             date: new Date(),
             titre: "Christ rédempteur",
@@ -1526,7 +1504,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["statiqueExpertItem4"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Statique",
             date: new Date(),
             titre: "Hissez haut !",
@@ -1537,7 +1515,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcExpertItem1"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "Dipest",
@@ -1548,7 +1526,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcExpertItem2"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "Tracteur Ferrari",
@@ -1559,7 +1537,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcExpertItem3"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "",
@@ -1570,7 +1548,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcExpertItem4"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "",
@@ -1581,7 +1559,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcExpertItem5"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "",
@@ -1592,7 +1570,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcExpertItem6"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "",
@@ -1603,7 +1581,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["pdcExpertItem7"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Poids du corps",
             date: new Date(),
             titre: "",
@@ -1614,7 +1592,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["streetliftExpertItem1"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
             titre: "Dip-lômé",
@@ -1625,7 +1603,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["streetliftExpertItem2"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
             titre: "Decontraction",
@@ -1635,19 +1613,8 @@ async function getNiveau(req, res) {
                 "Traction / Pull up", "", [], "reps", 1, 100)
         }
 
-        checkItems["streetliftExpertItem3"] = {
-            level: "Intermédiaire",
-            categorie: "Musculation / StreetLifting",
-            date: new Date(),
-            titre: "",
-            id: "streetliftExpertItem3",
-            description: "",
-            valeur: checkPerformance(seances,
-                "Muscle Up", "", [], "reps", 3, 25)
-        }
-
         checkItems["streetliftExpertItem4"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
             titre: "",
@@ -1658,7 +1625,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["streetliftExpertItem5"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Musculation / StreetLifting",
             date: new Date(),
             titre: "",
@@ -1669,7 +1636,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["streetliftExpertItem6"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Musculation / StreetLifting",
             titre: "",
             id: "streetliftExpertItem6",
@@ -1680,7 +1647,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["streetliftExpertItem7"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Musculation / StreetLifting",
             titre: "",
             id: "streetliftExpertItem7",
@@ -1691,7 +1658,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["equilibreExpertItem1"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Equilibre",
             date: new Date(),
             titre: "",
@@ -1702,7 +1669,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["equilibreExpertItem2"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Equilibre",
             date: new Date(),
             titre: "",
@@ -1713,7 +1680,7 @@ async function getNiveau(req, res) {
         }
 
         checkItems["equilibreExpertItem3"] = {
-            level: "Intermédiaire",
+            level: "Expert",
             categorie: "Equilibre",
             date: new Date(),
             titre: "",

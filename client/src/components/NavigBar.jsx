@@ -165,32 +165,33 @@ function NavigBar(props) {
 
 
                         <div>
-                            <div className={gearIsClicked ? "gear-is-clicked extended" : "gear-is-clicked not-extended"}></div>
+                            <div className={gearIsClicked ? "gear-is-clicked extended" : "gear-is-clicked not-extended"}>
 
-                            <table className={gearIsClicked ? "param-choice-div visible" : "param-choice-div not-visible"} >
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <a className="param-choice" href="/compte"> Compte </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a className="param-choice" href="/aide"> Aide </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a className="param-choice" href="/a_propos"> A propos </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a className="param-choice" href="/CGU"> CGU </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                <table className="param-choice-div" >
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a className="param-choice" href="/compte"> Compte </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="param-choice" href="/aide"> Aide </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="param-choice" href="/a_propos"> A propos </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a className="param-choice" href="/CGU"> CGU </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
                     </div>

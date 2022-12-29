@@ -3,6 +3,10 @@ import Footer from '../Footer';
 import NavigBar from '../NavigBar';
 import API from '../../utils/API';
 import Accomplissement from './Accomplissements/Accomplissement';
+import Select from 'react-select';
+import Niveaux from './Programme/Niveaux';
+import TypeDeProgrammes from './Programme/TypeDeProgrammes';
+import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "./customStyles.js";
 
 function Accomplissements() {
     const [dimensions, setDimensions] = useState({
@@ -13,6 +17,8 @@ function Accomplissements() {
     const [checkedItems, setCheckedItems] = useState({});
     const [accomplissements, setAccomplissements] = useState([]);
     const [nonaAccomplissements, setNonaAccomplissements] = useState([]);
+    const [selectedNiveau, setSelectedNiveau] = useState(null);
+    const [selectedType, setSelectedType] = useState(null);
 
     async function getUser() {
         const { data } = await API.getUser({ id: localStorage.getItem("id") });
@@ -70,22 +76,47 @@ function Accomplissements() {
             console.log("checkItems", data.checkItems)
             setCheckedItems(data.checkItems);
 
-            let acc = [];
-            let nonaAcc = [];
-            Object.values(data.checkItems).forEach((item, index) => {
-                if (item.valeur === true) {
-                    acc.push(item);
-                } else {
-                    nonaAcc.push(item);
-                }
-            });
-
-            setAccomplissements(acc);
-            setNonaAccomplissements(nonaAcc);
+            setAccomplissements(Object.values(data.checkItems).filter(item => item.valeur === true));
+            setNonaAccomplissements(Object.values(data.checkItems).filter(item => item.valeur === false));
             // setText("Vos critères ont bien été chargés automatiquement, désolé pour toi si tu n'as remplis aucun objectif !")
         }
 
     }
+
+    function handleChange(event) {
+        console.log(event);
+        if (event.name === "Niveaux") {
+            setSelectedNiveau(event);
+        }
+        else if (event.name === "Type de programme") {
+            setSelectedType(event);
+        }
+    }
+
+    function handleReset(event) {
+        setSelectedNiveau(null);
+        setSelectedType(null);
+    }
+
+    useEffect(() => {
+        if (selectedNiveau !== null) {
+            let filteredCheckItems = Object.values(checkedItems).filter(item => item.level === selectedNiveau.value);
+
+            setAccomplissements(Object.values(filteredCheckItems).filter(item => item.valeur === true));
+            setNonaAccomplissements(Object.values(filteredCheckItems).filter(item => item.valeur === false));
+        }
+        else if (selectedType !== null) {
+            let filteredCheckItems = Object.values(checkedItems).filter(item => item.categorie === selectedType.value);
+
+            setAccomplissements(Object.values(filteredCheckItems).filter(item => item.valeur === true));
+            setNonaAccomplissements(Object.values(filteredCheckItems).filter(item => item.valeur === false));
+        }
+        if (selectedNiveau === null && selectedType === null) {
+            setAccomplissements(Object.values(checkedItems).filter(item => item.valeur === true));
+            setNonaAccomplissements(Object.values(checkedItems).filter(item => item.valeur === false));
+        }
+    }, [selectedNiveau, selectedType]);
+
 
     useEffect(() => {
         handleLoad()
@@ -102,7 +133,9 @@ function Accomplissements() {
                     <p className='basic-margin-bottom'>
                         Voici la liste de tous les accomplissements que tu as débloqués.
                         <br />
-                        Tous les accomplissements sont aussi atteignables via leurs conversions selon les tables de Berger (%1RM) ou en faisant mieux que l'objectif.
+                        Tous les accomplissements sont aussi atteignables via leurs
+                        <a href="/aide#Berger"> conversions selon les tables de Berger (%1RM) </a>
+                        ou en faisant mieux que l'objectif.
                     </p>
 
                     <div id="topSummaryBoxContent" style={
@@ -166,6 +199,50 @@ function Accomplissements() {
                             </div>
                         </div>
                         <div style={{ clear: "both" }}></div>
+                    </div>
+
+                    <div className='grid-accomplissements'>
+                        <Select
+                            className=""
+                            value={selectedNiveau}
+                            onChange={handleChange}
+                            options={Niveaux}
+                            styles={
+                                dimensions.width <= 500 ?
+                                    user.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    user.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            placeholder="Niveau"
+                        />
+
+                        <Select
+                            className=""
+                            value={selectedType}
+                            onChange={handleChange}
+                            options={TypeDeProgrammes}
+                            styles={
+                                dimensions.width <= 500 ?
+                                    user.modeSombre === true ?
+                                        customStylesDarkMini
+                                        :
+                                        customStylesMini
+                                    :
+                                    user.modeSombre === true ?
+                                        customStylesDark
+                                        :
+                                        customStyles
+                            }
+                            placeholder="Type"
+                        />
+
+                        <button className=" btn btn-dark" onClick={handleReset}>Reset</button>
                     </div>
 
                     <div id="personalAchieve" class="achievements_list ">

@@ -24,6 +24,10 @@ h1 {
     margin: 5% 0;
 }
 
+a {
+    color: #9b0000;
+}
+
 .row {
     margin-left: 0;
     margin-right: 0;
@@ -280,6 +284,13 @@ table.profile-table {
 }
 
 /* ACCOMPLISSEMENTS */
+
+.grid-accomplissements {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-rows: repeat(2, 1fr); */
+    grid-gap: 10px;
+}
 
 .achieveTxtHolder {
     min-height: 80px;
@@ -1022,13 +1033,19 @@ table.Stats-table {
 }
 
 .extended {
-    max-height: 1500px;
-    transition: max-height 0.7s linear;
+    max-height: 500px;
+    transition: max-height 1.1s linear;
+}
+
+.extended-huge {
+    max-height: 3000px;
+    transition: max-height 2s linear;
 }
 
 .not-extended {
     max-height: 0px;
-    transition: max-height 0.7s linear;
+    overflow: hidden;
+    transition: max-height 1.1s linear;
 }
 
 .rotated {
@@ -1376,6 +1393,10 @@ table.connexion-table td.connexion-img-td {
 
 .basic-margin-top {
     margin-top: 20px;
+}
+
+.basic-margin-right {
+    margin-right: 20px;
 }
 
 .basic-margin-bottom {

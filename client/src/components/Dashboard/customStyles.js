@@ -75,6 +75,7 @@ const customStylesDark = {
   input: (defaultStyles) => ({
     ...defaultStyles,
     color: 'white',
+    margin: "0px"
   }),
 
   valueContainer: (provided, state) => ({
@@ -83,10 +84,6 @@ const customStylesDark = {
     padding: '0 6px'
   }),
 
-  input: (provided, state) => ({
-    ...provided,
-    margin: '0px',
-  }),
   indicatorSeparator: state => ({
     display: 'none',
   }),
