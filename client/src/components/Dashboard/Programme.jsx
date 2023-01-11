@@ -8,7 +8,7 @@ import ProgrammeCard from './ProgrammeCard';
 import ProgrammeCardExplication from './ProgrammeCardExplication';
 import InsertProgramme from './InsertProgramme';
 
-import TypeBarres from "./Categories/TypesBarres";
+import ProgrammeMateriel from './Programme/ProgrammeMateriel';
 
 function Programme(props) {
     const [programme, setProgramme] = useState([]);
@@ -191,7 +191,7 @@ function Programme(props) {
                                 <label className="col-form-label">Materiel</label>
                                 <Select
                                     isMulti
-                                    options={TypeBarres}
+                                    options={ProgrammeMateriel}
                                     styles={styleOnDim(dimensions)}
                                     placeholder="Tout (défaut)"
                                 />

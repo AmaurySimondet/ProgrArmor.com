@@ -207,7 +207,6 @@ function CategorieInput(props) {
     }, [categorie.tension])
 
     useEffect(() => {
-        console.log("categorie changed", categorie)
         props.changeCategorie(categorie, props.id)
         if (categorie.name === "title") {
             props.onDeleteCategorie

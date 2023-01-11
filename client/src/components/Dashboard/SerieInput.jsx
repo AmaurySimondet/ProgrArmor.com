@@ -118,7 +118,8 @@ function SerieInput(props) {
         : null}
 
       <div className="form-group row">
-        <div className="col-5 col-form-label" style={{ marginRight: "10px" }}>
+        <div className={props.programme === true ? "" : "col-5 col-form-label"} style={
+          props.programme === true ? { margin: "10px", width: "100%", textAlign: "left" } : { marginRight: "10px" }}>
 
           <label className="nom-exercice-serie">
             Série {props.index + 1} {props.dimensions > 500 ? "(" + props.exercice.name + ")" : null}
@@ -144,27 +145,32 @@ function SerieInput(props) {
           </div>
         </div>
 
-        <div className="col-6 col-form-label">
-          <label>Charge totale (kg)</label>
-          <br />
+        {props.programme === true ? null :
+          <div className="col-6 col-form-label">
+            <label>Charge totale (kg)</label>
+            <br />
 
-          <div className="col-6" style={{ display: "inline-block" }}>
-            <input type="number"
-              className={props.modeSombre === true ? "inputDark form-control" : "form-control"}
-              id="charge"
-              value={serie.charge}
-              onChange={handleChange}
-            />
+            <div className="col-6" style={{ display: "inline-block" }}>
+              <input type="number"
+                className={props.modeSombre === true ? "inputDark form-control" : "form-control"}
+                id="charge"
+                value={serie.charge}
+                onChange={handleChange}
+              />
+            </div>
+
+
+            <div className="col-6" style={{ display: "inline-block" }}>
+              <input type="text"
+                className={props.modeSombre === true ? "inputReadOnlyDark form-control" : "form-control"}
+                id="percent"
+                value={serie.percent}
+                readOnly
+              />
+            </div>
+
           </div>
-          <div className="col-6" style={{ display: "inline-block" }}>
-            <input type="text"
-              className={props.modeSombre === true ? "inputReadOnlyDark form-control" : "form-control"}
-              id="percent"
-              value={serie.percent}
-              readOnly
-            />
-          </div>
-        </div>
+        }
 
       </div>
       <p> {text} </p>

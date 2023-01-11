@@ -30,6 +30,7 @@ function FullExerciceInput(props) {
         const Categories = { ...categories };
         const Exercice = { ...fullExercice, Series, Categories };
         props.changeExercices(Exercice, props.id);
+        props.writeExerciceInSeance(Exercice, props.id);
     }, [fullExercice, series, categories])
 
     function changeSerie(changedS, id) {
@@ -171,6 +172,7 @@ function FullExerciceInput(props) {
                                         changeSerie={changeSerie}
                                         onDeleteSerie={onDeleteSerie}
                                         modeSombre={props.modeSombre}
+                                        programme={props.programme}
                                     />
                                 </div>
                             );

@@ -7,8 +7,8 @@ const { v4: uuidv4 } = require('uuid');
 const stringSimilarity = require('string-similarity');
 require('dotenv').config();
 
-const url = "http://192.168.1.88:8800" // http://192.168.1.88:8800 https://prograrmorprealpha1.herokuapp.com
-const url2 = "http://192.168.1.88:3000" // http://192.168.1.88:3000 https://prograrmorprealpha1.herokuapp.com
+const url = "http://localhost:8800" // http://localhost:8800 https://prograrmorprealpha1.herokuapp.com
+const url2 = "http://localhost:3000" // http://localhost:3000 https://prograrmorprealpha1.herokuapp.com
 
 const app = express();
 
@@ -1099,9 +1099,9 @@ async function getNiveau(req, res) {
             level: "Intermédiaire",
             categorie: "Poids du corps",
             date: new Date(),
-            titre: "",
+            titre: "Hussle Up",
             id: "pdcIntermItem3",
-            description: "",
+            description: "Pouvoir exécuter 3 Muscle Up",
             valeur: checkPerformance(seances,
                 "Muscle Up", "", [], "reps", 3, 0)
         }
@@ -1316,9 +1316,9 @@ async function getNiveau(req, res) {
             level: "Confirmé",
             categorie: "Poids du corps",
             date: new Date(),
-            titre: "",
+            titre: "Ma Salope",
             id: "pdcConfirmeItem3",
-            description: "",
+            description: "Pouvoir exécuter 8 Muscle Up",
             valeur: checkPerformance(seances,
                 "Muscle Up", "", [], "reps", 8, 0)
         }
@@ -1540,9 +1540,9 @@ async function getNiveau(req, res) {
             level: "Expert",
             categorie: "Poids du corps",
             date: new Date(),
-            titre: "",
+            titre: "Muslce Up",
             id: "pdcExpertItem3",
-            description: "",
+            description: "Pouvoir exécuter 12 Muscle Up",
             valeur: checkPerformance(seances,
                 "Muscle Up", "", [], "reps", 12, 0)
         }

@@ -5,6 +5,7 @@ import SeanceOfProgramme from './SeanceOfProgramme';
 import { v4 as uuidv4 } from 'uuid';
 import TypesDeProgrammes from './Programme/TypeDeProgrammes'
 import Niveaux from './Programme/Niveaux'
+import ProgrammeMateriel from './Programme/ProgrammeMateriel';
 
 function InsertProgramme(props) {
     const [titre, setTitre] = useState("");
@@ -12,7 +13,9 @@ function InsertProgramme(props) {
     const [type, setType] = useState({ id: "", label: "", value: "" });
     const [niveau, setNiveau] = useState({ id: "", label: "", value: "" });
     const [duree, setDuree] = useState({ id: "", label: "", value: "" });
+    const [materiel, setMateriel] = useState([]);
     const [seances, setSeances] = useState([]);
+    const [seancesClosed, setSeancesClosed] = useState(false);
 
     const [dimensions, setDimensions] = useState({
         height: window.innerHeight,
@@ -51,18 +54,29 @@ function InsertProgramme(props) {
     }
 
     function handleChange(event) {
+        console.log(event)
         if (event.target) {
             if (event.target.id === "titre") {
                 setTitre(event.target.value);
             } else if (event.target.id === "description") {
                 setDescription(event.target.value);
+            } else if (event.target.id === "duree") {
+                setDuree(event.target.value);
             }
         }
         else {
             if (event.id === "type") {
                 setType(event);
             }
+            if (event.id === "niveaux") {
+                setNiveau(event);
+            }
         }
+    }
+
+    function closingSeances() {
+        setSeancesClosed(!seancesClosed);
+        console.log(seancesClosed)
     }
 
     function addSeance() {
@@ -84,7 +98,7 @@ function InsertProgramme(props) {
                         onChange={handleChange}
                         id="titre"
                         placeholder="FullStack... heu je veux dire FullBody"
-                        className='form-control inputDark' value={titre} />
+                        className={props.modeSombre ? 'form-control inputDark' : 'form-control'} value={titre} />
                 </div>
 
                 <div className='col-12 basic-margin-updown'>
@@ -93,13 +107,14 @@ function InsertProgramme(props) {
                         onChange={handleChange}
                         id="description"
                         placeholder="Vous savez, le truc qui explique ce que c'est"
-                        className='form-control inputDark'
+                        className={props.modeSombre ? 'form-control inputDark' : 'form-control'}
                         value={description} />
                 </div>
 
                 <div className='col-4 basic-margin-updown'>
                     <label> Type de programme </label>
                     <Select options={TypesDeProgrammes}
+                        placeholder="Type de programme..."
                         onChange={handleChange}
                         value={{ id: type.id, label: type.label, value: type.value }}
                         styles={styleOnDim(dimensions)} />
@@ -108,6 +123,7 @@ function InsertProgramme(props) {
                 <div className='col-4 basic-margin-updown'>
                     <label> Niveau </label>
                     <Select options={Niveaux}
+                        placeholder="Niveau..."
                         onChange={handleChange}
                         value={{ id: niveau.id, label: niveau.label, value: niveau.value }}
                         styles={styleOnDim(dimensions)} />
@@ -120,21 +136,36 @@ function InsertProgramme(props) {
                         onChange={handleChange}
                         id="duree"
                         placeholder="En minutes"
-                        className='form-control inputDark'
+                        style={{ textAlign: 'center', height: "50px" }}
+                        className={props.modeSombre ? 'form-control inputDark' : 'form-control'}
                         value={duree} />
+                </div>
+
+                <div className="col-12">
+                    <label className="col-form-label">Materiel</label>
+                    <Select
+                        isMulti
+                        options={ProgrammeMateriel}
+                        styles={styleOnDim(dimensions)}
+                        placeholder="Tout (défaut)"
+                    />
                 </div>
             </div>
 
             {seances?.map((seance, index) => {
                 return (
-                    <SeanceOfProgramme
-                        key={seance.id}
-                        id={seance.id}
-                        seance={seance}
-                        index={index}
-                        modeSombre={props.modeSombre}
-                        handleDeleteSeance={handleDeleteSeance}
-                    />
+                    <div>
+                        <SeanceOfProgramme
+                            key={seance.id}
+                            id={seance.id}
+                            seance={seance}
+                            index={index}
+                            modeSombre={props.modeSombre}
+                            closed={seancesClosed}
+                            handleDeleteSeance={handleDeleteSeance}
+                        />
+                        <hr className='hr-exercice' />
+                    </div>
                 )
             })}
 
@@ -142,6 +173,11 @@ function InsertProgramme(props) {
                 style={{ marginLeft: "0" }}
                 onClick={addSeance}>
                 Ajouter une séance
+            </button>
+
+            <button className='btn btn-dark block large-margin-updown'
+                onClick={closingSeances}>
+                {seancesClosed ? "Ouvrir toutes les séances" : "Résumer toutes les séances"}
             </button>
 
             <button className='btn btn-black block large-margin-updown'

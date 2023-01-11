@@ -29,8 +29,6 @@ function ExerciceInput(props) {
     useEffect(() => {
         props.changeExercice(exercice);
 
-        console.log("exercie", exercice)
-
         if (exercice.name !== "Elevation" && exercice.name !== "Press" && exercice.name !== "Extension" && exercice.name !== "Abduction" && exercice.name !== "Adduction" && exercice.name !== "Curl") {
             delete exercice.muscle;
         }
