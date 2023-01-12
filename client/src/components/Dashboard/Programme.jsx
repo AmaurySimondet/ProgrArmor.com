@@ -105,7 +105,10 @@ function Programme(props) {
                 :
                 <div className="basic-div">
 
-                    <h1>Programmes</h1>
+                    <h1 className='large-margin-left'>
+                        Programmes
+                        <button className="btn btn-dark large-margin-left" onClick={handleClickCreate}>Créer le mien !</button>
+                    </h1>
 
                     <div className="tri">
                         <div className="form-group row">
@@ -213,8 +216,6 @@ function Programme(props) {
                             />
                         ))}
                     </div>
-
-                    <button className="btn btn-dark large-margin-updown" onClick={handleClickCreate}>Créer un programme</button>
 
                 </div>
             }

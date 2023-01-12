@@ -443,7 +443,7 @@ function CategorieInput(props) {
                         </div>}
                     </div>
                 : null}
-            {categorie.name === "Type de barre / poids / machine" ?
+            {categorie.name === "Type de barre / poids" ?
                 props.info === "false" ?
                     <Select
                         placeholder="Categorie..."

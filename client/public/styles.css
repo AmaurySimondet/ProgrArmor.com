@@ -1411,6 +1411,10 @@ table.connexion-table td.connexion-img-td {
     margin-top: 40px;
 }
 
+.large-margin-left {
+    margin-left: 40px;
+}
+
 .large-margin-bottom {
     margin-bottom: 40px;
 }

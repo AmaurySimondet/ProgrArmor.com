@@ -20,14 +20,14 @@ const variantes = [
   {
     id: "input",
     className: "select-item",
-    label: "Olympique droite",
-    value: "Olympique droite",
+    label: "Barre olympique droite",
+    value: "Barre olympique droite",
   },
   {
     id: "input",
     className: "select-item",
-    label: "Olympique droite fine",
-    value: "Olympique droite fine",
+    label: "Barre olympique droite fine",
+    value: "Barre olympique droite fine",
   },
   {
     id: "input",
