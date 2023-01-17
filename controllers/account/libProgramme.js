@@ -126,10 +126,15 @@ exports.getProgramme = (req, res) => {
             res.json({ success: false, message: err })
         }
         else {
-            res.json({
-                success: true, programme: data[0],
-                message: "Programme trouvé !", numLikes: data[0].likes.length
-            })
+            if (data[0]) {
+                res.json({
+                    success: true, programme: data[0],
+                    message: "Programme trouvé !", numLikes: data[0].likes.length
+                })
+            }
+            else {
+                res.json({ success: false, message: "Programme non trouvé" })
+            }
         }
     })
 };
