@@ -92,6 +92,7 @@ function Periodisation(props) {
                 return (
                     <SeanceOfProgramme
                         key={seance.id}
+                        id={seance.id}
                         index={index}
                         modeSombre={props.modeSombre}
                         seance={seance}

@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node server.js",
     "config": "set scripts-prepend-node-path true set legacy-peer-deps true",
-    "build-prev": "cd client && npm run build",
+    "build-prev": "npm config set legacy-peer-deps true && cd client && npm run build",
     "build": "npm config set legacy-peer-deps true && npm run install-client && npm run build-prev",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm config set legacy-peer-deps true && npm run install-client && npm run build"

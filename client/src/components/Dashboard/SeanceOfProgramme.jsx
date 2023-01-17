@@ -202,17 +202,21 @@ function SeanceOfProgramme(props) {
             }
 
             {props.closedPeriodisation ? null :
-                <div className="col-12">
-                    <label className="col-form-label">Jour de repos avant séance suivante (maximum)</label>
-                    <input
-                        type="number"
-                        onChange={handleChange}
-                        id="jourDeRepos"
-                        placeholder="42"
-                        style={{ textAlign: 'center', height: "50px" }}
-                        className={props.modeSombre ? 'form-control inputDark' : 'form-control'}
-                        value={seance.jourDeRepos} />
-                </div>
+                clickSeance ? null :
+                    <div className="col-12">
+                        <label className="col-form-label"
+                        style={{fontWeight:"800"}}>
+                            Jour de repos avant séance suivante (maximum)
+                            </label>
+                        <input
+                            type="number"
+                            onChange={handleChange}
+                            id="jourDeRepos"
+                            placeholder="42"
+                            style={{ textAlign: 'center', height: "50px" }}
+                            className={props.modeSombre ? 'form-control inputDark' : 'form-control'}
+                            value={seance.jourDeRepos} />
+                    </div>
             }
 
         </div>

@@ -118,7 +118,7 @@ async function likeProgramme(req, res) {
 
 //get programme by its id
 exports.getProgramme = (req, res) => {
-    let conditions = { id: req.body.programmeId }
+    let conditions = { id: req.body.programmeId, createdBy: req.body.userId }
 
     //trouver le programme
     Programme.find(conditions, function (err, data) {
