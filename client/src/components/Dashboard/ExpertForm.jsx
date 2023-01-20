@@ -8,6 +8,7 @@ import EchauffementInput from "./EchauffementInput";
 import FullExerciceExpertInput from "./FullExerciceExpertInput"
 import { v4 as uuidv4 } from 'uuid';
 import { useSearchParams } from "react-router-dom";
+import { seanceContainErr } from "../../utils/verifications";
 
 function containsObj(arr, obj) {
     let contains = arr.some(elem => {
@@ -45,145 +46,11 @@ function ExpertForm(props) {
 
         console.log("expert recording seance", seance);
 
-        let err = false;
-
         //CONDITIONS
-        if (!seance.nom.ancienNom || seance.nom.ancienNom === "title") {
-            err = true;
-            alert("Donne un nom à ta séance pour t'en resservir plus tard !")
-
+        let { err, alertMessage } = seanceContainErr(seance);
+        if (err === true) {
+            alert(alertMessage);
         }
-
-        if (seance.date === '') {
-            err = true;
-            alert("Et c'était quand ça ? tu m'as pas dis la date !")
-
-        }
-
-        if (seance.poids === '') {
-            err = true;
-            alert("Tu pèses combien ? Pas de tricherie avec moi tu m'as pas donné ton poids !")
-
-        }
-
-        if (seance.exercices.length === 0) {
-            err = true;
-            alert("Ah bah super ta séance, y a aucun exo !")
-
-        }
-
-        seance.exercices.forEach((exercice, index) => {
-            if (Object.keys(exercice.Series).length === 0) {
-                err = true;
-                alert("Faut avouer qu'un exercice sans série c'est pas commode (exercice " + (index + 1) + " " + exercice.exercice.name + ") !")
-            }
-
-            //serie manquant
-            Object.values(exercice.Series).forEach(serie => {
-                if (serie.repsTime === '' || serie.charge === '' || !serie.repsTime || !serie.charge && err === false) {
-                    err = true;
-                    alert("Une serie n'est pas remplie (exercice " + (index + 1) + " " + exercice.exercice.name + ") !")
-                }
-            })
-
-            //muscle manquant
-            if (exercice.exercice.name === "Elevation" || exercice.exercice.name === "Curl" || exercice.exercice.name === "Extension" || exercice.exercice.name === "Abduction" || exercice.exercice.name === "Adduction" || exercice.exercice.name === "Press") {
-                if (!exercice.exercice.muscle || exercice.exercice.muscle === "" || exercice.exercice.muscle === "title") {
-                    err = true;
-                    alert("Tu ne m'as pas dis quelle muscle pour ton exercice " + (index + 1) + " " + exercice.exercice.name + " !")
-                }
-            }
-
-            //name exercice titre
-            if (exercice.exercice.name === "title") {
-                err = true;
-                alert("Un titre n'est pas un exercice voyons (exercice " + (index + 1) + " " + exercice.exercice.name + ") !")
-            }
-
-            //name exo manquant
-            if (!exercice.exercice.name || exercice.exercice.name === "") {
-                err = true;
-                alert("Tu m'as pas donné le nom de ton exo petit cachottier (exercice " + (index + 1) + " " + exercice.exercice.name + ") !")
-            }
-
-            //catégorie manquant
-            Object.values(exercice.Categories).forEach(categorie => {
-                if (!categorie.name || categorie.name === '' || categorie.input === '' || !categorie.input || categorie.input === "title") {
-                    err = true;
-                    alert("Une catégorie n'est pas remplie (exercice " + (index + 1) + " " + exercice.exercice.name + ") !")
-                }
-                if (categorie.name === 'Elastique') {
-                    if (categorie.utilisation === '' || !categorie.utilisation || categorie.utilisation === "title") {
-                        err = true;
-                        alert("Et l'elastique il sert à quoi ? (exercice " + (index + 1) + " " + exercice.exercice.name + ") !")
-                    }
-                    if (categorie.estimation === '' || !categorie.estimation || Number.isNaN(parseFloat(categorie.estimation))) {
-                        err = true;
-                        alert("Erreur de mesure élastique (exercice " + (index + 1) + " " + exercice.exercice.name + ") !")
-                    }
-                }
-            })
-        });
-
-        seance.echauffements.forEach((echauffement, index) => {
-            if (Object.keys(echauffement.Series).length === 0) {
-                err = true;
-                alert("Faut avouer qu'un echauffement sans série c'est pas commode (echauffement " + (index + 1) + " " + echauffement.echauffement.name + ") !")
-            }
-
-            //serie manquant
-            Object.values(echauffement.Series).forEach(serie => {
-                if (serie.repsTime === '' || serie.charge === '' || !serie.repsTime || !serie.charge && err === false) {
-                    err = true;
-                    alert("Une serie n'est pas remplie (echauffement " + (index + 1) + " " + echauffement.echauffement.name + ") !")
-                }
-            })
-
-            //muscle echauffement
-            if (echauffement.echauffement.name === "Elevation" || echauffement.echauffement.name === "Curl" || echauffement.echauffement.name === "Extension" || echauffement.echauffement.name === "Abduction" || echauffement.echauffement.name === "Adduction" || echauffement.echauffement.name === "Press") {
-                if (!echauffement.echauffement.muscle || echauffement.echauffement.muscle === "" || echauffement.echauffement.muscle === "title") {
-                    err = true;
-                    alert("Tu ne m'as pas dis quelle muscle pour ton echauffement " + (index + 1) + " " + echauffement.echauffement.name + " !")
-                }
-            }
-
-            //name echauffement titre
-            if (echauffement.echauffement.name === "title") {
-                err = true;
-                alert("Un titre n'est pas un echauffement voyons (echauffement " + (index + 1) + " " + echauffement.echauffement.name + ") !")
-            }
-
-            //name echauffement manquant
-            if (!echauffement.echauffement.name || echauffement.echauffement.name === "") {
-                err = true;
-                alert("Tu t'echauffes en faisant rien ? (echauffement " + (index + 1) + " " + echauffement.echauffement.name + ") !")
-            }
-
-            //catégorie manquant
-            Object.values(echauffement.Categories).forEach(categorie => {
-                if (!categorie.name || categorie.name === '' || categorie.input === '' || !categorie.input || categorie.input === "title") {
-                    err = true;
-                    alert("Une catégorie n'est pas remplie (echauffement " + (index + 1) + " " + echauffement.echauffement.name + ") !")
-                }
-                if (categorie.name === 'Elastique') {
-                    if (categorie.utilisation === '' || !categorie.utilisation || categorie.utilisation === "title") {
-                        err = true;
-                        alert("Et l'elastique il sert à quoi ? (echauffement " + (index + 1) + " " + echauffement.echauffement.name + ") !")
-                    }
-                    if (categorie.estimation === '' || !categorie.estimation || Number.isNaN(parseFloat(categorie.estimation))) {
-                        err = true;
-                        alert("Erreur de mesure élastique (echauffement " + (index + 1) + " " + echauffement.echauffement.name + ") !")
-                    }
-                }
-            })
-        });
-
-        seance.details.forEach((detail, index) => {
-            if (!detail.name || detail.name === '' || detail.input === '' || !detail.input || detail.input === "title") {
-                err = true;
-                alert("Ce n'est peut être qu'un détail, mais il est vide !");
-            }
-        });
 
         //API
         if (err === false) {

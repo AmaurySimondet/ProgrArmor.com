@@ -3,7 +3,6 @@ import { React, useState, useEffect } from 'react';
 import FullExerciceExpertInput from './FullExerciceExpertInput';
 import { v4 as uuidv4 } from 'uuid';
 import { writeExercice } from "../../utils/WriteExercice";
-import Select from 'react-select';
 
 function SeanceOfProgramme(props) {
 
@@ -58,7 +57,7 @@ function SeanceOfProgramme(props) {
                 setSeance(oldSeance => {
                     return ({
                         ...oldSeance,
-                        jourRepos: event.target.value
+                        jourDeRepos: event.target.value
                     })
                 })
             }
@@ -205,9 +204,9 @@ function SeanceOfProgramme(props) {
                 clickSeance ? null :
                     <div className="col-12">
                         <label className="col-form-label"
-                        style={{fontWeight:"800"}}>
+                            style={{ fontWeight: "800" }}>
                             Jour de repos avant séance suivante (maximum)
-                            </label>
+                        </label>
                         <input
                             type="number"
                             onChange={handleChange}

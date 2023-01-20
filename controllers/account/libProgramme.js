@@ -10,17 +10,16 @@ const app = express();
 
 // Create a new Programme
 async function create(req, res) {
-    // 
-
     // Validate request
     if (!req.body || !req.body.programme || !req.body.materiel) {
-        res.json({ success: false, message: "Un ou plusieurs éléments non donnés" })
+        console.log(req.body)
+        return res.json({ success: false, message: "Un ou plusieurs éléments non donnés" })
     }
     else {
 
         // Create a Programme
         const programme = new Programme({
-            id: uuidv4(),
+            id: req.body.programmeId,
             createdBy: req.body.createdBy,
             materiel: req.body.materiel,
             programme: req.body.programme,
@@ -37,18 +36,18 @@ async function create(req, res) {
 
         await programme.save((err) => {
             if (err) {
-                res.json({ success: false, message: err })
-            }
-        })
-
-        // 
-
-        User.findOneAndUpdate({ _id: req.body.createdBy }, { $addToSet: { programmes: programme._id } }, (err) => {
-            if (err) {
-                res.json({ success: false, message: err })
+                console.log(err)
+                return res.json({ success: false, message: err })
             }
             else {
-                res.json({ success: true, message: "Programme créé" })
+                User.findOneAndUpdate({ _id: req.body.createdBy }, { $addToSet: { programmes: programme._id } }, (err) => {
+                    if (err) {
+                        return res.json({ success: false, message: err })
+                    }
+                    else {
+                        return res.json({ success: true, message: "Programme créé" })
+                    }
+                })
             }
         })
     }

@@ -84,8 +84,6 @@ function writeSeriesProgramme(series) {
 function writeCategories(categories) {
     let text = "";
 
-    console.log(categories)
-
     categories.map((categorie, index) => {
         if (categorie.name !== "Elastique") {
             if (categorie.name === "Temps de repos entre les séries") {
@@ -141,7 +139,10 @@ function includesExercice(array, exercice) {
 function writeExercice(exercice) {
     let json = {}
     let series = Object.values(exercice.Series);
-    let categories = Object.values(exercice.Categories);
+    let categories = "";
+    if (exercice.Categories) {
+        categories = Object.values(exercice.Categories);
+    }
 
     if (series.length > 0) {
         json.series = writeSeriesProgramme(series);

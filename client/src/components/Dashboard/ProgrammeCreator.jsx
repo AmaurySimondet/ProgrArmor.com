@@ -10,24 +10,28 @@ import Footer from '../Footer';
 import NavigBar from '../NavigBar';
 import API from '../../utils/API';
 import { useSearchParams } from 'react-router-dom';
+import { programmeContainErr } from '../../utils/verifications';
 
 function ProgrammeCreator(props) {
     const [periodisationsClosed, setPeriodisationsClosed] = useState(false);
     const [programme, setProgramme] = useState({
+        id: uuidv4(),
         titre: "",
         description: "",
         type: { id: "", label: "", value: "" },
         niveau: { id: "", label: "", value: "" },
-        duree: { id: "", label: "", value: "" },
+        duree: "0",
         materiel: [],
         programme: [{
-            id: uuidv4(), seances: [
+            id: uuidv4(),
+            seances: [
                 {
                     id: uuidv4(), exercices: [
                         { id: uuidv4(), exercice: "", Series: "", Categories: "" }
                     ]
                 }
-            ], cycle: ""
+            ],
+            cycle: ""
         }]
     });
     const [user, setUser] = useState({ modeSombre: false });
@@ -129,8 +133,13 @@ function ProgrammeCreator(props) {
             if (event.id === "niveaux") {
                 setProgramme({ ...programme, niveau: event });
             }
-            if (event.id === "materiel") {
-                setProgramme({ ...programme, materiel: event });
+            if ((event.length > 0 && event[0])) {
+                if (event[0].id === "materiel") {
+                    setProgramme({ ...programme, materiel: event });
+                }
+            }
+            if (event.length === 0) {
+                setProgramme({ ...programme, materiel: [] });
             }
         }
     }
@@ -153,8 +162,41 @@ function ProgrammeCreator(props) {
         setPeriodisationsClosed(!periodisationsClosed);
     }
 
-    function sendProgramme() {
+    function printProgramme() {
         console.log(programme);
+    }
+
+    async function sendProgramme() {
+        console.log(programme);
+
+        if (programmeContainErr(programme).err === true) {
+            alert(programmeContainErr(programme).alertMessage);
+        } else {
+            let objSent = {
+                programmeId: programme.id,
+                titre: programme.titre,
+                description: programme.description,
+                type: programme.type.value,
+                niveau: programme.niveau.value,
+                duree: programme.duree,
+                materiel: programme.materiel,
+                programme: programme.programme,
+                createdBy: localStorage.getItem("id"),
+                seancesSemaine: 0,
+                seancesTotal: 0,
+            }
+
+            const { data } = await API.createProgramme(objSent);
+
+            if (data.success === false) {
+                if (data.message === "Creation programme ratée !") {
+                    console.log(data.message);
+                }
+                else {
+                    window.location = "/programme";
+                }
+            }
+        }
     }
 
     function writePeriodisation(id, seances) {
@@ -287,6 +329,7 @@ function ProgrammeCreator(props) {
         Object.keys(obj).forEach(key => {
             newObj[key] = obj[key];
         });
+        newObj.id = uuidv4();
         setProgramme(newObj)
 
     }
@@ -296,12 +339,16 @@ function ProgrammeCreator(props) {
             <NavigBar />
 
             <div className="basic-div">
-                <div style={{ textAlign: "left" }} className="large-margin-top">
-                    <button className="btn btn-dark" onClick={() => { window.location = "/programme" }}> Retour en arrière </button>
-                    <p> <i> Toute progression sera perdue </i> </p>
+                <div style={{ display: "flex", alignItems: "center" }} className="large-margin-top">
+                    <div style={{ paddingRight: "40px" }}>
+                        <button className="btn btn-dark" onClick={() => { window.location = "/programme" }}> Retour en arrière </button>
+                        <p> <i> Toute progression sera perdue </i> </p>
+                    </div>
+
+                    <h1>Enregistre ton programme !</h1>
                 </div>
 
-                <h1>Enregistre ton programme !</h1>
+
 
                 <div>
                     <button className='btn btn-black block large-margin-updown'

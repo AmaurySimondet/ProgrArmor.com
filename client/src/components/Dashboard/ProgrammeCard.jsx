@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import API from '../../utils/API';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { writeExercice } from "../../utils/WriteExercice";
 
 function ProgrammeCard(props) {
     const [programme, setProgramme] = useState(props.programme);
@@ -205,7 +206,8 @@ function ProgrammeCard(props) {
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
                 <div className="YOUR_FRONT_CCOMPONENT" style={props.modeSombre ? null : { color: "white" }}>
 
-                    <div className="programme-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
+                    <div className="programme-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+                        style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
                         <Scrollbars autoHide>
                             <div className="programme-card-header">
 
@@ -229,14 +231,19 @@ function ProgrammeCard(props) {
                                 <div onClick={handleFlipProgramme} style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
                                     <p>{programme.type}</p>
                                     <p>{programme.niveau}</p>
-                                    <p>{programme.seancesSemaine}</p>
-                                    <p>{programme.duree}</p>
+                                    <p>{programme.seancesSemaine} s / w</p>
+                                    <p>{programme.duree}min max</p>
                                     {programme.materiel.map((materiel, index) => {
-                                        if (index <= 3) {
-                                            return <p style={{ overflow: "hidden", margin: "0" }}>{materiel.slice(0, 40)}</p>
+                                        if (materiel.value) {
+                                            return <p>{materiel.value}</p>
                                         }
-                                        if (index === 4) {
-                                            return <p style={{ overflow: "hidden", margin: "0" }}>...</p>
+                                        else {
+                                            if (index <= 3) {
+                                                return <p style={{ overflow: "hidden", margin: "0" }}>{materiel.slice(0, 40)}</p>
+                                            }
+                                            if (index === 4) {
+                                                return <p style={{ overflow: "hidden", margin: "0" }}>...</p>
+                                            }
                                         }
                                     }
                                     )}
@@ -248,7 +255,8 @@ function ProgrammeCard(props) {
 
                             </div>
 
-                            <div className={mouseEnter ? "programme-card-profile-hover" : "programme-card-profile"}>
+                            <div className={mouseEnter ? "programme-card-profile-hover" : "programme-card-profile"}
+                                style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
                                 <table className="basic-table">
                                     <col style={{ width: "35%" }} />
                                     <col style={{ width: "65%" }} />
@@ -319,7 +327,8 @@ function ProgrammeCard(props) {
 
                 <div className="YOUR_BACK_COMPONENT">
                     {flipWhoLiked ?
-                        <div className="programme-card" onClick={handleFlipWhoLiked}>
+                        <div className="programme-card" onClick={handleFlipWhoLiked}
+                            style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
                             {whoLikedArray.length > 0 ?
                                 whoLikedArray.map((user, index) => {
                                     return (
@@ -352,7 +361,7 @@ function ProgrammeCard(props) {
                     }
 
                     {flipComment ?
-                        <div className="programme-card">
+                        <div className="programme-card" style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
                             <Scrollbars autoHide>
 
                                 <div style={{ height: "1000px" }}>
@@ -430,36 +439,95 @@ function ProgrammeCard(props) {
                     }
 
                     {flipProgramme ?
-                        <div className="programme-card" onClick={handleFlipProgramme}>
-                        </div>
-                        : null}
-
-                    {flipThreeDots ?
-                        <div className="programme-card">
+                        <div className="programme-card" onClick={handleFlipProgramme}
+                            style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
                             <Scrollbars autoHide>
-                                <button className='btn btn-black large-margin-top mini-margin-bottom' onClick={handleFlipThreeDots}>
-                                    Revenir au programme
-                                </button>
-
-                                <button className='btn btn-dark basic-margin-updown' onClick={handleEditProgramme}>
-                                    Modifier le programme
-                                </button>
-
-                                <button className='btn btn-dark basic-margin-updown' onClick={handleDeleteProgramme}>
-                                    Supprimer le programme
-                                </button>
-
-                                <button className='btn btn-dark basic-margin-updown' onClick={handleSignalerProgramme}>
-                                    Signaler le programme
-                                </button>
+                                <div style={{ overflow: "auto" }}>
+                                    {programme.programme[0].seances ?
+                                        <div className='large-margin-top'>
+                                            {programme.programme.map((periodisation, indexPeriodisation) => {
+                                                return (
+                                                    <div>
+                                                        <h1>Periodisation {indexPeriodisation + 1}</h1>
+                                                        {periodisation.seances.map((seance, indexSeance) => {
+                                                            return (
+                                                                <div>
+                                                                    <h2>Seance {indexSeance + 1}</h2>
+                                                                    <div>
+                                                                        {seance.exercices.map((exercice, index) => {
+                                                                            console.log("break", writeExercice(exercice))
+                                                                            return (
+                                                                                <div>
+                                                                                    <p>
+                                                                                        Exercice {index + 1}: {writeExercice(exercice).exercice + ", "}
+                                                                                        {writeExercice(exercice).categories[0] ?
+                                                                                            writeExercice(exercice).categories
+                                                                                            : null}
+                                                                                    </p>
+                                                                                    <p>
+                                                                                        Series: {writeExercice(exercice).series}
+                                                                                    </p>
+                                                                                    <hr className='hr-serie'></hr>
+                                                                                </div>
+                                                                            )
+                                                                        })}
+                                                                    </div>
+                                                                    <p>Repos: {seance.jourDeRepos}j</p>
+                                                                    {periodisation.seances.length > 1 ?
+                                                                        indexSeance != periodisation.seances.length ?
+                                                                            <hr className="hr-exercice" />
+                                                                            : null
+                                                                        : null}
+                                                                </div>
+                                                            )
+                                                        })}
+                                                        {periodisation.cycle ?
+                                                            <p>Cycle: {periodisation.cycle}</p>
+                                                            : null}
+                                                        {programme.programme.length > 1 ?
+                                                            indexPeriodisation != programme.programme.length ?
+                                                                <hr className="hr-detail" />
+                                                                : null
+                                                            : null}
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                        : null}
+                                </div>
                             </Scrollbars>
                         </div>
-                        : null}
+                        : null
+                    }
 
-                </div>
-            </ReactCardFlip>
+                    {
+                        flipThreeDots ?
+                            <div className="programme-card" style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
+                                <Scrollbars autoHide>
+                                    <button className='btn btn-black large-margin-top mini-margin-bottom' onClick={handleFlipThreeDots}>
+                                        Revenir au programme
+                                    </button>
 
-        </div>
+                                    <button className='btn btn-dark basic-margin-updown' onClick={handleEditProgramme}>
+                                        Modifier le programme
+                                    </button>
+
+                                    <button className='btn btn-dark basic-margin-updown' onClick={handleDeleteProgramme}>
+                                        Supprimer le programme
+                                    </button>
+
+                                    <button className='btn btn-dark basic-margin-updown' onClick={handleSignalerProgramme}>
+                                        Signaler le programme
+                                    </button>
+                                </Scrollbars>
+                            </div>
+                            : null
+                    }
+
+                </div >
+            </ReactCardFlip >
+
+        </div >
     )
 };
 

@@ -131,6 +131,10 @@ export default {
   },
 
   //PROGRAMMES
+  createProgramme: function (send) {
+    return axios.post(`${burl}/user/createProgramme`, send, { headers: headers });
+  },
+
   getProgrammes: function (send) {
     return axios.post(`${burl}/user/getProgrammes`, send, { headers: headers });
 
