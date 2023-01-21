@@ -16,7 +16,6 @@ async function create(req, res) {
         return res.json({ success: false, message: "Un ou plusieurs éléments non donnés" })
     }
     else {
-
         // Create a Programme
         const programme = new Programme({
             id: req.body.programmeId,
@@ -34,7 +33,7 @@ async function create(req, res) {
             comments: []
         });
 
-        await programme.save((err) => {
+        await programme.save({ runValidators: true }, (err) => {
             if (err) {
                 console.log(err)
                 return res.json({ success: false, message: err })
@@ -117,7 +116,7 @@ async function likeProgramme(req, res) {
 
 //get programme by its id
 exports.getProgramme = (req, res) => {
-    let conditions = { id: req.body.programmeId, createdBy: req.body.userId }
+    let conditions = { _id: req.body.programmeId, createdBy: req.body.createdBy }
 
     //trouver le programme
     Programme.find(conditions, function (err, data) {
@@ -132,8 +131,22 @@ exports.getProgramme = (req, res) => {
                 })
             }
             else {
-                res.json({ success: false, message: "Programme non trouvé" })
+                res.json({ success: false, message: "Programme non trouvé (il t'appartient surement pas !)" })
             }
+        }
+    })
+};
+
+//delete programme by its id
+exports.deleteProgramme = (req, res) => {
+    let conditions = { _id: req.body.programmeId, createdBy: req.body.createdBy }
+    //trouver le programme
+    Programme.deleteOne(conditions, function (err, data) {
+        if (err) {
+            res.json({ success: false, message: err })
+        }
+        else {
+            res.json({ success: true, message: "Programme supprimé !" })
         }
     })
 };

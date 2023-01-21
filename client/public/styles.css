@@ -1420,6 +1420,10 @@ table.connexion-table td.connexion-img-td {
     margin-bottom: 40px;
 }
 
+.basic-margin-bottom-and-auto {
+    margin: 0 auto 20px auto;
+}
+
 .large-margin-updown {
     margin: 40px auto;
 }
@@ -1495,7 +1499,7 @@ table.connexion-table td.connexion-img-td {
 }
 
 .programme-card h1,
-h2 {
+.programme-card h2 {
     font-size: large;
 }
 

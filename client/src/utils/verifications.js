@@ -186,7 +186,7 @@ function programmeContainErr(programme) {
         alertMessage = ("Veuillez ajouter du matériel à votre programme !");
     } else if (programme.programme.length > 0) {
         programme.programme.forEach(periodisation => {
-            if (periodisation.cycle === "" && periodisation.length > 1) {
+            if (periodisation.cycle === "") {
                 err = true;
                 alertMessage = ("Veuillez choisir un cycle pour chaque périodisation !");
             }

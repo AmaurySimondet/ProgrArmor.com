@@ -170,12 +170,19 @@ function ProgrammeCard(props) {
         }
     }
 
-    function handleDeleteProgramme() {
-        return null
+    async function handleDeleteProgramme() {
+        let { data } = await API.deleteProgramme({ programmeId: programme._id, createdBy: localStorage.getItem('id') });
+
+        if (data.success) {
+            window.location.reload();
+        }
+        else {
+            alert(data.message);
+        }
     }
 
-    function handleEditProgramme() {
-        return null
+    function handleEditProgramme(id) {
+        window.location.href = `/programmeCreator?programmeId=${id}`;
     }
 
     function handleSignalerProgramme() {
@@ -508,7 +515,7 @@ function ProgrammeCard(props) {
                                         Revenir au programme
                                     </button>
 
-                                    <button className='btn btn-dark basic-margin-updown' onClick={handleEditProgramme}>
+                                    <button className='btn btn-dark basic-margin-updown' onClick={() => handleEditProgramme(programme._id)}>
                                         Modifier le programme
                                     </button>
 

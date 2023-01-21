@@ -140,6 +140,10 @@ export default {
 
   },
 
+  deleteProgramme: function (send) {
+    return axios.post(`${burl}/user/deleteProgramme`, send, { headers: headers });
+  },
+
   getProgrammesByUser: function (send) {
     return axios.post(`${burl}/user/getProgrammesByUser`, send, { headers: headers });
 

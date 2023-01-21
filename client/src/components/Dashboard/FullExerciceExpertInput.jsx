@@ -6,7 +6,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { writeSeries, writeCategories } from "../../utils/WriteExercice";
 
 function FullExerciceInput(props) {
-    const [categories, setCategories] = useState([...Object.values(props.exercice.Categories)]);
+    console.log("FullExerciceInput", props.exercice)
+    let cat = [];
+    if (props.exercice.Categories) {
+        cat = [...Object.values(props.exercice.Categories)];
+    }
+    const [categories, setCategories] = useState(cat);
     const [series, setSeries] = useState([...Object.values(props.exercice.Series)]);
     const [fullExercice, setFullExercice] = useState(props.exercice);
     const [clickExercice, setClickExercice] = useState(props.click);

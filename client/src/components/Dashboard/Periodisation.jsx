@@ -110,6 +110,19 @@ function Periodisation(props) {
                 Ajouter une séance
             </button>
             }
+
+            {clickPeriodisation ? null :
+                props.length > 1 ?
+                    <div>
+                        <label>
+
+
+                        </label>
+                        <input
+                        />
+                    </div>
+                    : null
+            }
         </div>
     )
 }

@@ -35,7 +35,7 @@ module.exports = function (app) {
 
     // //EDIT DB
     // app.get('/editDB', account.editDB)
-    app.get('/editDB2', account.editDB2)
+    // app.get('/editDB2', account.editDB2)
 
     //NIVEAU
     app.post('/getNiveau', account.getNiveau)
@@ -44,6 +44,7 @@ module.exports = function (app) {
     app.post('/createProgramme', programme.create);
     app.post('/getProgrammes', programme.getProgrammes);
     app.post('/getProgramme', programme.getProgramme);
+    app.post('/deleteProgramme', programme.deleteProgramme);
     app.post('/getProgrammesByUser', programme.getProgrammesByUser);
     app.post('/likeProgramme', programme.likeProgramme);
     app.post('/isProgrammeLiked', programme.isProgrammeLiked);
@@ -53,5 +54,4 @@ module.exports = function (app) {
     app.post('/getProgrammeCreator', programme.getProgrammeCreator);
     app.post('/sendComment', programme.sendComment);
     app.post('/getComments', programme.getComments);
-    // app.post('/editDB2', programme.editDB2);
 }

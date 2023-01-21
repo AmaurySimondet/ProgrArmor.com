@@ -27,18 +27,17 @@ function ProgrammeCreator(props) {
             seances: [
                 {
                     id: uuidv4(), exercices: [
-                        { id: uuidv4(), exercice: "", Series: "", Categories: "" }
+                        { id: uuidv4(), exercice: "", Series: {}, Categories: {} }
                     ]
                 }
             ],
-            cycle: ""
+            cycle: "0"
         }]
     });
     const [user, setUser] = useState({ modeSombre: false });
     const [searchParams, setSearchParams] = useSearchParams();
 
     async function loadProgrammeIfParams() {
-
         if (searchParams.get("programmeId")) {
             const { data } = await API.getProgramme({
                 programmeId: searchParams.get("programmeId"),
@@ -55,6 +54,7 @@ function ProgrammeCreator(props) {
             else {
                 if (data.programme) {
                     setProgramme(data.programme);
+                    console.log("programme", data.programme);
                 }
             }
         }
@@ -167,7 +167,7 @@ function ProgrammeCreator(props) {
     }
 
     async function sendProgramme() {
-        console.log(programme);
+        console.log("sendProgramme", programme);
 
         if (programmeContainErr(programme).err === true) {
             alert(programmeContainErr(programme).alertMessage);
@@ -192,11 +192,14 @@ function ProgrammeCreator(props) {
                 if (data.message === "Creation programme ratée !") {
                     console.log(data.message);
                 }
-                else {
-                    window.location = "/programme";
-                }
+                else { alert(data.message); }
             }
+            else {
+                window.location = "/programme";
+            }
+
         }
+
     }
 
     function writePeriodisation(id, seances) {
@@ -318,10 +321,10 @@ function ProgrammeCreator(props) {
                                 }
                             ],
                             "echauffements": [],
-                            "jourRepos": "2"
+                            "jourDeRepos": "2"
                         }
                     ],
-                    "cycle": ""
+                    "cycle": "0"
                 }
             ]
         };
@@ -351,7 +354,7 @@ function ProgrammeCreator(props) {
 
 
                 <div>
-                    <button className='btn btn-black block large-margin-updown'
+                    <button className='btn btn-black block basic-margin-bottom-and-auto'
                         onClick={adminLoadProgramme}>
                         Admin: Charger programme type
                     </button>
@@ -428,6 +431,7 @@ function ProgrammeCreator(props) {
                                     id={periodisation.id}
                                     periodisation={periodisation}
                                     index={index}
+                                    length={programme.programme.length}
                                     modeSombre={user.modeSombre}
                                     closedPeriodisation={periodisationsClosed}
                                     writePeriodisation={writePeriodisation}
