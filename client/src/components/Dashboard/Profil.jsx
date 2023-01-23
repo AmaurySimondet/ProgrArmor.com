@@ -191,12 +191,6 @@ function Profil() {
                         placeholder="ID utilisateur"
                         onChange={(e) => setSearchParams({ id: e.target.value })} />
 
-                    <button className='btn btn-dark'
-                        style={{ margin: "40px auto" }}
-                        onClick={(e) => setSearchParams({ id: user.id })}>
-                        Voir ton profil
-                    </button>
-
                 </div>
 
                 <br />

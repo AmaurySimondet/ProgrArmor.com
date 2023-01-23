@@ -366,7 +366,12 @@ function Compte() {
                 Mode Sombre </p>
             </div>
 
-            <button className="btn btn-dark btn-lg profile-disconnect-btn" onClick={disconnect} block="true" type="submit">
+            <button className='btn btn-dark btn-lg'
+              style={{ margin: "40px 20px" }}
+              onClick={() => { window.location = "/profil?id=" + user.id }}>
+              Voir profil en ligne
+            </button>
+            <button className="btn btn-black btn-lg profile-disconnect-btn" onClick={disconnect} block="true" type="submit">
               Se déconnecter
             </button>
           </div>

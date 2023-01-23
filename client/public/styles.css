@@ -627,7 +627,6 @@ table.Stats-table {
     table-layout: fixed;
     width: 100%;
     margin: auto;
-    margin-top: 40px;
 }
 
 .chart-little-title {
@@ -711,8 +710,8 @@ table.Stats-table {
 
 
 .Stats-div h1 {
-    margin-bottom: 40px;
-
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 /* DASHBOARD */
@@ -877,12 +876,13 @@ table.Stats-table {
 }
 
 .Dashboard-h1 {
-    margin: 40px 0;
+    margin-top: 40px;
+    margin-bottom: 20px;
 
 }
 
 .Dashboard h2 {
-    margin: 40px 0;
+    margin: 20px 0;
 
 }
 
@@ -1444,6 +1444,15 @@ table.connexion-table td.connexion-img-td {
 
 /* PROGRAMMES */
 
+.programme-a {
+    color: white;
+}
+
+.programme-a:hover {
+    color: #9a9a9a;
+    text-decoration: none;
+}
+
 .dropComment {
     position: absolute;
     background-color: #9b0000;
@@ -1624,6 +1633,7 @@ table.connexion-table td.connexion-img-td {
     border: 2px solid white;
     border-radius: 10px;
     padding: 10px;
+    color: white;
     background-color: #330000;
 }
 

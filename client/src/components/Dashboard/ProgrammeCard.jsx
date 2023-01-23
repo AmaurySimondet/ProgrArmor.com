@@ -273,12 +273,17 @@ function ProgrammeCard(props) {
                                                 className="profile-pic"
                                                 src={programmeCreator.profilePic}
                                                 alt="profile-pic"
+                                                onClick={() => window.location.href = "/profil?id=" + programmeCreator._id}
                                             />
                                         </td>
                                         <td>
-                                            <p style={{ margin: "auto", display: "inline-block" }}>{programmeCreator.fName} {programmeCreator.lName}</p>
+                                            <p style={{ margin: "auto", display: "inline-block" }}>
+                                                <a className="programme-a" href={"/profil?id=" + programmeCreator._id}>{programmeCreator.fName} {programmeCreator.lName}</a>
+                                            </p>
                                             <br />
-                                            <p style={{ margin: "auto", display: "inline-block" }}>{programmeCreator._id}</p>
+                                            <p style={{ margin: "auto", display: "inline-block" }}>
+                                                <a className="programme-a" href={"/profil?id=" + programmeCreator._id}>{programmeCreator._id}</a>
+                                            </p>
                                         </td>
                                     </tr>
                                 </table>
@@ -348,10 +353,13 @@ function ProgrammeCard(props) {
                                                         className="profile-pic"
                                                         src={user.user.profilePic}
                                                         alt="profile-pic"
+                                                        onClick={() => window.location.href = "/profil?id=" + user.user._id}
                                                     />
                                                 </td>
                                                 <td>
-                                                    <p style={{ margin: "auto", display: "inline-block" }}>{user.user.fName} {user.user.lName}</p>
+                                                    <p style={{ margin: "auto", display: "inline-block" }}>
+                                                        <a className="programme-a" href={"/profil?id=" + user.user._id}>{user.user.fName} {user.user.lName}</a>
+                                                    </p>
                                                 </td>
                                             </tr>
                                         </table>)
@@ -384,11 +392,14 @@ function ProgrammeCard(props) {
                                                                 className="profile-pic profile-pic-comment"
                                                                 src={comment.user.profilePic}
                                                                 alt="profile-pic"
+                                                                onClick={() => window.location.href = "/profil?id=" + comment.user._id}
                                                             />
                                                         </td>
                                                         <td>
                                                             <div style={{ padding: "5%" }}>
-                                                                <p onClick={handleFlipCommentFalse} style={{ margin: "auto", display: "inline-block", fontSize: "7px" }}>{comment.user.fName} {comment.user.lName}</p>
+                                                                <p onClick={handleFlipCommentFalse} style={{ margin: "auto", display: "inline-block", fontSize: "7px" }}>
+                                                                    <a className="programme-a" href={"/profil?id=" + comment.user._id}>{comment.user.fName} {comment.user.lName}</a>
+                                                                </p>
 
                                                                 <img
                                                                     className={props.modeSombre ? "small-img questionDark" : "small-img"}
