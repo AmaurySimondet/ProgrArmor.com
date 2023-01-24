@@ -56,7 +56,8 @@ function NavigBar(props) {
                             <img className={toggled ? "toggler-icon scaled" : "toggler-icon not-scaled"} onClick={toggling} src={require('../images/icons/output-onlinepngtools.webp')} alt="logo" />
 
                             <div>
-                                <div className={toggled ? "toggle-is-clicked extended" : "toggle-is-clicked not-extended"} ></div>
+                                <div className={toggled ? "toggle-is-clicked extended" : "toggle-is-clicked not-extended"}
+                                    style={toggled ? null : { border: "0" }} ></div>
 
                                 <table className={toggled ? "param-choice-toggle visible" : "param-choice-toggle not-visible"} >
                                     <tbody>

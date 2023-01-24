@@ -1,9 +1,10 @@
 import { React, useState, useEffect } from 'react';
 import Footer from '../Footer';
 import NavigBar from '../NavigBar';
-import API from '../../utils/API';
 import { useSearchParams } from "react-router-dom";
-import { writeSeries, writeCategories, includesExercice } from "../../utils/WriteExercice";
+import { writeSeries, writeCategories } from "../../utils/WriteExercice";
+import { getReguScore, getPR } from "../../utils/stats";
+import { getUser, getProgrammesByUser, getUserById } from "../../utils/user";
 
 function Profil() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -17,11 +18,7 @@ function Profil() {
     const [lastSeance, setLastSeance] = useState();
     const [programmes, setProgrammes] = useState();
     const [PR, setPR] = useState();
-
-    function sortDateCroissant(a, b) {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
-
-    }
+    const [ReguScore, setReguScore] = useState();
 
 
     useEffect(() => {
@@ -39,122 +36,10 @@ function Profil() {
         });
     })
 
-    async function getUser() {
-        const { data } = await API.getUser({ id: localStorage.getItem("id") });
-        if (data.success === false) {
-            console.log(data.message);
-        } else {
-            console.log(data.profile);
-            if (data.profile.modeSombre && data.profile.modeSombre === true) {
-                // 👇 add class to body element
-                document.body.classList.add('darkMode');
-            }
-            setUser(data.profile);
-        };
-    }
-
-    async function getUserById(id) {
-        const { data } = await API.getUser({ id: id });
-        if (data.success === false) {
-            console.log("getuserbyid", data.message);
-        } else {
-            console.log("getuserbyid", data.profile);
-            setProfile(data.profile);
-            setLastSeance(data.seances.sort(sortDateCroissant).slice(-1)[0]);
-        };
-    }
-
-    async function getProgrammesByUser(id) {
-        const { data } = await API.getProgrammesByUser({ userId: id });
-        if (data.success === false) {
-            console.log("getProgrammeByUser", data.message);
-        } else {
-            console.log("getProgrammeByUser", data.programmes);
-            setProgrammes(data.programmes);
-        };
-    }
-
-    async function getPR(id) {
-        const { data } = await API.workouts({ id: id, date: "", reforme: "true", nom: "", periode: "max", tri: "PDC (ordre décroissant)", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" });
-        if (data.success === false) {
-            console.log("getPR", data.message);
-        } else {
-            console.log("getPR", data.seances);
-            setPR(arrangePR(data.seances));
-        };
-    }
-
-    function arrangePR(seances) {
-        let PR = [];
-        let PR13 = [];
-        let PR36 = [];
-        let PR612 = [];
-        let PR12 = [];
-
-        seances.forEach(seance => {
-            let exercice = seance.exercices[0].exercice.name;
-            console.log(seance.exercices[0])
-            if (seance.exercices[0].exercice.muscle) {
-                exercice += " - " + seance.exercices[0].exercice.muscle;
-            }
-            if (seance.exercices[0].Categories && Object.values(seance.exercices[0].Categories).length > 0) {
-                PR.push({
-                    exercice: exercice,
-                    categories: writeCategories(Object.values(seance.exercices[0].Categories)),
-                    reps: parseFloat(seance.exercices[0].Series[0].repsTime),
-                    charge: parseFloat(seance.exercices[0].Series[0].charge),
-                    percent: seance.exercices[0].Series[0].percent,
-                });
-            }
-            else {
-                PR.push({
-                    exercice: exercice,
-                    reps: parseFloat(seance.exercices[0].Series[0].repsTime),
-                    charge: parseFloat(seance.exercices[0].Series[0].charge),
-                    percent: seance.exercices[0].Series[0].percent,
-                });
-            }
-        });
-
-        console.log(PR);
-
-        PR.forEach(pr => {
-            if (pr.reps <= 3 && pr.reps >= 1 && PR13.includes(pr) === false && includesExercice(PR13, pr.exercice) === false) {
-                PR13.push(pr);
-            }
-            if (pr.reps >= 3 && pr.reps <= 6 && PR36.includes(pr) === false && includesExercice(PR36, pr.exercice) === false) {
-                PR36.push(pr);
-            }
-            if (pr.reps >= 6 && pr.reps <= 12 && PR612.includes(pr) === false && includesExercice(PR612, pr.exercice) === false) {
-                PR612.push(pr);
-            }
-            if (pr.reps >= 12 && PR12.includes(pr) === false && includesExercice(PR12, pr.exercice) === false) {
-                PR12.push(pr);
-            }
-        });
-
-        if (PR13.length > 2) {
-            PR13 = PR13.slice(0, 2)
-        }
-        if (PR36.length > 2) {
-            PR36 = PR36.slice(0, 2)
-        }
-        if (PR612.length > 2) {
-            PR612 = PR612.slice(0, 2)
-        }
-        if (PR12.length > 2) {
-            PR12 = PR12.slice(0, 2)
-        }
-
-        console.log("PR12", PR12);
-
-        PR = { PR13: PR13, PR36: PR36, PR612: PR612, PR12: PR12 };
-
-        return PR;
-    }
-
     useEffect(() => {
-        getUser();
+        getUser(localStorage.getItem("id")).then((user) => {
+            setUser(user);
+        });
     }, []);
 
     useEffect(() => {
@@ -162,12 +47,24 @@ function Profil() {
     }, [searchParams])
 
     useEffect(() => {
+
         if (userID) {
-            getUserById(userID);
-            getProgrammesByUser(userID);
-            getPR(userID);
+            getUserById(userID).then((obj) => {
+                setProfile(obj.profile);
+                setLastSeance(obj.lastSeance);
+            });
+            getProgrammesByUser(userID).then((programmes) => {
+                setProgrammes(programmes);
+            });
+            getPR(userID).then((PR) => {
+                setPR(PR);
+            });
+            getReguScore(userID).then((ReguScore) => {
+                setReguScore(ReguScore);
+            });
             console.log("userID", userID);
         }
+
     }, [userID])
 
     useEffect(() => {
@@ -197,7 +94,8 @@ function Profil() {
 
                 {userID ?
                     profile ?
-                        <div className='Profile'>
+                        <div className='Profile'
+                            style={user.modeSombre ? null : { backgroundColor: "#9b0000", border: "black" }}>
                             <div className='basic-flexed2' style={{ marginTop: "40px" }}>
 
                                 <img
