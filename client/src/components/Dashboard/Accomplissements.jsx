@@ -6,7 +6,7 @@ import Accomplissement from './Accomplissements/Accomplissement';
 import Select from 'react-select';
 import Niveaux from './Programme/Niveaux';
 import TypeDeProgrammes from './Programme/TypeDeProgrammes';
-import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "./customStyles.js";
+import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "../../utils/customStyles";
 
 function Accomplissements() {
     const [dimensions, setDimensions] = useState({
@@ -84,7 +84,7 @@ function Accomplissements() {
     }
 
     function handleChange(event) {
-        console.log(event);
+        // console.log(event);
         if (event.name === "Niveaux") {
             setSelectedNiveau(event);
         }
@@ -128,7 +128,7 @@ function Accomplissements() {
 
             {Object.values(checkedItems).length > 0 ?
                 <div className="basic-div large-margin-bottom" style={{ minHeight: "85vh" }}>
-                    <h1>Accomplissements</h1>
+                    <h1 style={{ marginBottom: "10px" }}>Accomplissements</h1>
 
                     <p className='basic-margin-bottom'>
                         Voici la liste de tous les accomplissements que tu as débloqués.
@@ -170,7 +170,7 @@ function Accomplissements() {
                                 alt="profile-pic"
                             />
 
-                            <div style={{ padding: "5%", margin: "auto", display: "inline-block" }}>
+                            <div style={{ padding: "5% 0 0 5%", margin: "auto", display: "inline-block" }}>
                                 <p style={
                                     dimensions.width < 500 ?
                                         dimensions.width < 300 ?
@@ -182,20 +182,21 @@ function Accomplissements() {
                                     {user.fName} {user.lName}
                                 </p>
                             </div>
-                        </div>
-                        <div id="topSummaryAchievements">
-                            <div style={
-                                user.modeSombre ?
-                                    null :
-                                    { color: "white" }
-                            }>
-                                Succès remportés:
-                                {" " + accomplissements.length + " "}
-                                sur {" " + Object.values(checkedItems).length + "  "}
-                                ({(accomplissements.length / Object.values(checkedItems).length).toFixed(2) * 100}%)
-                            </div>
-                            <div class="achieveBar basic-margin-bottom">
-                                <div class="achieveBarProgress" style={{ width: (accomplissements.length / Object.values(checkedItems).length).toFixed(2) * 100 + "%" }}></div>
+
+                            <div id="topSummaryAchievements" style={{ paddingBottom: "5%" }}>
+                                <div style={
+                                    user.modeSombre ?
+                                        null :
+                                        { color: "white" }
+                                }>
+                                    Succès remportés:
+                                    {" " + accomplissements.length + " "}
+                                    sur {" " + Object.values(checkedItems).length + "  "}
+                                    ({(accomplissements.length / Object.values(checkedItems).length).toFixed(2) * 100}%)
+                                </div>
+                                <div class="achieveBar basic-margin-bottom">
+                                    <div class="achieveBarProgress" style={{ width: (accomplissements.length / Object.values(checkedItems).length).toFixed(2) * 100 + "%" }}></div>
+                                </div>
                             </div>
                         </div>
                         <div style={{ clear: "both" }}></div>

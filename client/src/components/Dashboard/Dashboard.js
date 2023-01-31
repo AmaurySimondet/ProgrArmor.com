@@ -4,7 +4,7 @@ import Bienvenue from "../Bienvenue.jsx"
 import API from "../../utils/API";
 import ExerciceInput from "./ExerciceInput"
 import DetailInput from "./DetailInput"
-import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from "./customStyles";
+import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from "../../utils/customStyles";
 import CategorieInput from "./CategorieInput"
 import Footer from "../Footer.jsx";
 import Slider from '@mui/material/Slider';

@@ -3,7 +3,7 @@ import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Select from "react-select";
-import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "./customStyles.js";
+import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "../../utils/customStyles";
 
 import AllCategories from "./Categories/AllCategories.js";
 

@@ -431,7 +431,8 @@ function ProgrammeCard(props) {
                                         })
                                         :
                                         <div>
-                                            <button onClick={handleFlipCommentFalse} className="btn btn-dark large-margin-updown">
+                                            <button onClick={handleFlipCommentFalse} className="btn btn-dark large-margin-updown"
+                                                style={props.modeSombre ? null : { borderColor: "#330000" }}>
                                                 Retour au programme
                                             </button>
                                             <p> Tu seras le premier à commenter, c'est un privilège </p>
@@ -526,15 +527,19 @@ function ProgrammeCard(props) {
                                         Revenir au programme
                                     </button>
 
-                                    <button className='btn btn-dark basic-margin-updown' onClick={() => handleEditProgramme(programme._id)}>
+                                    <button className='btn btn-dark basic-margin-updown'
+                                        style={props.modeSombre ? null : { borderColor: "#330000" }}
+                                        onClick={() => handleEditProgramme(programme._id)}>
                                         Modifier le programme
                                     </button>
 
-                                    <button className='btn btn-dark basic-margin-updown' onClick={handleDeleteProgramme}>
+                                    <button className='btn btn-dark basic-margin-updown' onClick={handleDeleteProgramme}
+                                        style={props.modeSombre ? null : { borderColor: "#330000" }}>
                                         Supprimer le programme
                                     </button>
 
-                                    <button className='btn btn-dark basic-margin-updown' onClick={handleSignalerProgramme}>
+                                    <button className='btn btn-dark basic-margin-updown' onClick={handleSignalerProgramme}
+                                        style={props.modeSombre ? null : { borderColor: "#330000" }}>
                                         Signaler le programme
                                     </button>
                                 </Scrollbars>

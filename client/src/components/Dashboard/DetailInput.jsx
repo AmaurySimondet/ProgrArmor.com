@@ -10,7 +10,7 @@ import Psycho from "./Details/Psycho";
 import Seul from "./Details/Seul";
 import Environnement from "./Details/Environnement";
 import Courbatures from "./Details/Courbatures";
-import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "./customStyles.js";
+import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "../../utils/customStyles";
 import Select from "react-select";
 
 function DetailInput(props) {

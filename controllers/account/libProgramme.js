@@ -54,6 +54,8 @@ async function create(req, res) {
 
 // Retrieve all Programmes from the database.
 exports.getProgrammes = (req, res) => {
+    console.log("body", req.body)
+
     Programme.find({},
         (err, data) => {
             if (err) {

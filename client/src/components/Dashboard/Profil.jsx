@@ -79,7 +79,7 @@ function Profil() {
 
             <div className='basic-div basic-flex2'>
 
-                <div className="form-group row">
+                <div className="form-group row large-margin-bottom">
                     <label className="col-form-label">
                         Rechercher un utilisateur:
                     </label>

@@ -136,6 +136,7 @@ export default {
   },
 
   getProgrammes: function (send) {
+    console.log(send)
     return axios.post(`${burl}/user/getProgrammes`, send, { headers: headers });
 
   },

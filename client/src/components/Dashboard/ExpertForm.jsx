@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import API from "../../utils/API";
 import PoidsInput from "./PoidsInput";
 import Select from "react-select"
-import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from "./customStyles";
+import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from "../../utils/customStyles";
 import DetailInput from "./DetailInput";
 import EchauffementInput from "./EchauffementInput";
 import FullExerciceExpertInput from "./FullExerciceExpertInput"

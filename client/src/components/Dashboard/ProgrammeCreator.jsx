@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import Select from 'react-select';
-import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from './customStyles';
+import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from '../../utils/customStyles';
 import Periodisation from './Periodisation';
 import { v4 as uuidv4 } from 'uuid';
 import TypesDeProgrammes from './Programme/TypeDeProgrammes'
@@ -385,7 +385,7 @@ function ProgrammeCreator(props) {
                                 placeholder="Type de programme..."
                                 onChange={handleChange}
                                 value={{ id: programme.type.id, label: programme.type.label, value: programme.type.value }}
-                                styles={styleOnDim(dimensions)} />
+                                styles={styleOnDim(dimensions, user)} />
                         </div>
 
                         <div className='col-4 basic-margin-updown'>
@@ -394,7 +394,7 @@ function ProgrammeCreator(props) {
                                 placeholder="Niveau..."
                                 onChange={handleChange}
                                 value={{ id: programme.niveau.id, label: programme.niveau.label, value: programme.niveau.value }}
-                                styles={styleOnDim(dimensions)} />
+                                styles={styleOnDim(dimensions, user)} />
                         </div>
 
                         <div className='col-4 basic-margin-updown'>
@@ -417,7 +417,7 @@ function ProgrammeCreator(props) {
                                 id="materiel"
                                 value={programme.materiel}
                                 options={ProgrammeMateriel}
-                                styles={styleOnDim(dimensions)}
+                                styles={styleOnDim(dimensions, user)}
                                 placeholder="Tout (défaut)"
                             />
                         </div>

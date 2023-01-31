@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import lesExercices from "./Exercices";
 import MusclesCategorie from "./Categories/MusclesCategorie.js";
 import Select from 'react-select';
-import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "./customStyles.js";
+import { customStyles, customStylesDark, customStylesDarkMini, customStylesMini } from "../../utils/customStyles";
 
 function ExerciceEchauffementInput(props) {
   const [exercice, setExercice] = useState(props.echauffement);

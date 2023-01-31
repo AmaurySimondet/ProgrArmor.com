@@ -82,6 +82,10 @@ function App() {
                 <Route exact path='/accomplissements/*' element={<Accomplissements />} />
             </Route>
 
+            <Route path="/notifications/*" element={<PrivateRoute />}>
+                <Route exact path='/notifications/*' element={<Travaux />} />
+            </Route>
+
             {/* AIDE */}
             <Route path="/aide" element={<PrivateRoute />}>
                 <Route exact path='/aide' element={<Aide />} />

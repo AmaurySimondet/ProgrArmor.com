@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import API from "../../utils/API";
 import Select from "react-select";
-import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from "./customStyles";
+import { customStyles, customStylesDark, customStylesMini, customStylesDarkMini } from "../../utils/customStyles";
 import PoidsInput from "./PoidsInput";
 import FullExerciceInput from "./FullExerciceInput"
 import { v4 as uuidv4 } from 'uuid';
