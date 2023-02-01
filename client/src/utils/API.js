@@ -136,9 +136,8 @@ export default {
   },
 
   getProgrammes: function (send) {
-    console.log(send)
+    send.id = localStorage.getItem("id")
     return axios.post(`${burl}/user/getProgrammes`, send, { headers: headers });
-
   },
 
   deleteProgramme: function (send) {

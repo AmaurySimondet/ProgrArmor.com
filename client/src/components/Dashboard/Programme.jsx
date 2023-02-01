@@ -201,7 +201,7 @@ function Programme(props) {
                                     type="number"
                                     className={user.modeSombre === true ? "inputDark form-control" : "form-control"}
                                     placeholder="3"
-                                    value={searchParamsValues.dureeMax}
+                                    value={searchParamsValues.seancesParSemaine}
                                     onChange={(e) => {
                                         const newParams = new URLSearchParams(searchParams);
                                         newParams.set('seancesParSemaine', e.target.value);

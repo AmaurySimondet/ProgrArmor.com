@@ -5,6 +5,7 @@ const User = require("../../schema/schemaUser.js");
 const express = require("express");
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
+const getConditions = require("../utils/programme.js").getConditions
 
 const app = express();
 
@@ -24,11 +25,11 @@ async function create(req, res) {
             programme: req.body.programme,
             type: req.body.type,
             niveau: req.body.niveau,
-            duree: req.body.duree,
+            duree: parseInt(req.body.duree),
             description: req.body.description,
             titre: req.body.titre,
-            seancesSemaine: req.body.seancesSemaine,
-            seancesTotal: req.body.seancesTotal,
+            seancesSemaine: parseInt(req.body.seancesSemaine),
+            seancesTotal: parseInt(req.body.seancesTotal),
             likes: [],
             comments: []
         });
@@ -54,15 +55,40 @@ async function create(req, res) {
 
 // Retrieve all Programmes from the database.
 exports.getProgrammes = (req, res) => {
-    console.log("body", req.body)
+    let conditions = {};
+    if (req.body) {
+        conditions = getConditions(req)
+    }
 
-    Programme.find({},
+    console.log("conditions", conditions)
+
+    Programme.find(conditions,
         (err, data) => {
             if (err) {
 
                 return res.json({ success: false, message: err })
             }
-            else { return res.json({ success: true, message: "Programmes trouvés !", programmes: data }) }
+            else {
+                if (req.body.tri) {
+                    console.log("tri", req.body.tri)
+                    if (req.body.tri.value === "mostLiked") {
+                        data.sort((a, b) => b.likes.length - a.likes.length)
+                    }
+                    else if (req.body.tri.value === "mostRecent") {
+                        data.sort((a, b) => b.createdAt - a.createdAt)
+                    }
+                    else if (req.body.tri.value === "mostCommented") {
+                        data.sort((a, b) => b.comments.length - a.comments.length)
+                    }
+                    else if (req.body.tri.value === "oldest") {
+                        data.sort((a, b) => a.createdAt - b.createdAt)
+                    }
+                }
+                else {
+                    data.sort((a, b) => b.likes.length - a.likes.length)
+                }
+                return res.json({ success: true, message: "Programmes trouvés !", programmes: data })
+            }
         }
     )
 };
