@@ -1215,17 +1215,6 @@ table.hometable td.inscription-img-td {
     display: flex;
 }
 
-table.connexion-table {
-    table-layout: fixed;
-    width: 100%;
-    min-height: 80vh;
-}
-
-table.connexion-table td.connexion-img-td {
-    width: 55%;
-    flex-grow: 1;
-}
-
 /* NavigBar */
 
 .div-navigbar-text {
@@ -1422,6 +1411,10 @@ table.connexion-table td.connexion-img-td {
 
 .large-margin-bottom {
     margin-bottom: 40px;
+}
+
+.huge-margin-bottom {
+    margin-bottom: 100px;
 }
 
 .basic-margin-bottom-and-auto {

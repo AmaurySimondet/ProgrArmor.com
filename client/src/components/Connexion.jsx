@@ -17,6 +17,24 @@ function Connexion() {
     const [codeEmail, setCodeEmail] = useState("");
     const [newMDP, setNewMDP] = useState("");
     const [confirmMDP, setConfirmMDP] = useState("");
+    const [dimensions, setDimensions] = useState({
+        height: window.innerHeight,
+        width: window.innerWidth
+    })
+    useEffect(() => {
+        function handleResize() {
+            setDimensions({
+                height: window.innerHeight,
+                width: window.innerWidth
+            })
+        }
+
+        var timeout = false;
+        window.addEventListener('resize', function () {
+            clearTimeout(timeout);;
+            timeout = setTimeout(handleResize, 200);
+        });
+    })
 
 
     function handleClickMdp() {
@@ -132,102 +150,100 @@ function Connexion() {
         <div>
             <HomeHeader />
 
-            <table className="connexion-table">
-                <tbody>
-                    <tr className="tr-connexion">
-                        <td className="connexion-img-td">
-                            <img className="connexion-img" src={require('../images/connexion.webp')} alt="ad" />
-                        </td>
+            <div className="tr-connexion">
+                {dimensions.width > 900 ?
+                    <div className="connexion-img-div" style={{ flexBasis: "35%" }}>
+                        <img className="connexion-img" src={require('../images/connexion.webp')} alt="ad" />
+                    </div>
+                    : null}
 
-                        <td style={{ flexGrow: "1", margin: "auto" }}>
+                <div style={{ flexGrow: "1" }} className="huge-margin-bottom">
 
-                            {mdpClicked ?
-                                <div className="basic-div">
+                    {mdpClicked ?
+                        <div className="basic-div">
 
-                                    <h1 className="h1-inscription"> J'y penses et puis j'oublie </h1>
-                                    <h2 className="h2-inscription"> Je t'envoies un mail de récupération chef </h2>
+                            <h1 className="h1-inscription"> J'y penses et puis j'oublie </h1>
+                            <h2 className="h2-inscription"> Je t'envoies un mail de récupération chef </h2>
 
-                                    <button onClick={handleClickMdp}
-                                        className="btn btn-dark large-margin-updown">
-                                        Retour </button>
+                            <button onClick={handleClickMdp}
+                                className="btn btn-dark large-margin-updown">
+                                Retour </button>
 
-                                    <input
-                                        className="form-control"
-                                        placeholder="Ton email"
-                                        type="email"
-                                        onChange={e => setEmail(e.target.value)}
-                                    ></input>
+                            <input
+                                className="form-control"
+                                placeholder="Ton email"
+                                type="email"
+                                onChange={e => setEmail(e.target.value)}
+                            ></input>
 
-                                    {sentClicked ?
-                                        <div>
-                                            <p className="basic-margin-top">
-                                                Un mail de récupération a été envoyé à l'adresse
-                                                <br />
-                                                {" " + email + " "}
-                                                <br />
-                                                Vérifies tes spams aussi au cas où !
-                                                <br />
-                                                Tu pourras renvoyer un mail dans 60 secondes.
-                                            </p>
+                            {sentClicked ?
+                                <div>
+                                    <p className="basic-margin-top">
+                                        Un mail de récupération a été envoyé à l'adresse
+                                        <br />
+                                        {" " + email + " "}
+                                        <br />
+                                        Vérifies tes spams aussi au cas où !
+                                        <br />
+                                        Tu pourras renvoyer un mail dans 60 secondes.
+                                    </p>
 
-                                            <button className="btn btn-dark basic-margin-updown" disabled>
-                                                {timer}
-                                            </button>
-
-                                        </div>
-                                        :
-                                        <button
-                                            onClick={handleForgotPassword}
-                                            className="btn btn-dark basic-margin-top large-margin-bottom">
-                                            Envoyer </button>
-                                    }
-
-                                    <input
-                                        className="form-control mini-margin-bottom"
-                                        placeholder="Code email"
-                                        onChange={e => setCodeEmail(e.target.value)}
-                                    ></input>
-
-                                    <input
-                                        className="form-control mini-margin-bottom"
-                                        placeholder="Nouveau mot de passe"
-                                        type="password"
-                                        onChange={e => setNewMDP(e.target.value)}
-                                    ></input>
-
-                                    <input
-                                        className="form-control mini-margin-bottom"
-                                        placeholder="Confirme ton mot de passe"
-                                        type="password"
-                                        onChange={e => setConfirmMDP(e.target.value)}
-                                    ></input>
-
-                                    <button
-                                        onClick={handleApplyNewMDP}
-                                        className="btn btn-dark large-margin-updown">
-                                        Appliquer </button>
+                                    <button className="btn btn-dark basic-margin-updown" disabled>
+                                        {timer}
+                                    </button>
 
                                 </div>
-
                                 :
-                                <div className="basic-div">
-                                    <div>
-                                        <h1 className="h1-inscription">{"On s'connait non ?"}</h1>
-                                        <h2 className="h2-inscription">Connexion</h2>
-                                    </div>
-
-                                    <BoutonsSociaux inscription={false} />
-
-                                    <ConnexionForm handleClickMdp={handleClickMdp} />
-                                </div>
-
+                                <button
+                                    onClick={handleForgotPassword}
+                                    className="btn btn-dark basic-margin-top large-margin-bottom">
+                                    Envoyer </button>
                             }
 
+                            <input
+                                className="form-control mini-margin-bottom"
+                                placeholder="Code email"
+                                onChange={e => setCodeEmail(e.target.value)}
+                            ></input>
 
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            <input
+                                className="form-control mini-margin-bottom"
+                                placeholder="Nouveau mot de passe"
+                                type="password"
+                                onChange={e => setNewMDP(e.target.value)}
+                            ></input>
+
+                            <input
+                                className="form-control mini-margin-bottom"
+                                placeholder="Confirme ton mot de passe"
+                                type="password"
+                                onChange={e => setConfirmMDP(e.target.value)}
+                            ></input>
+
+                            <button
+                                onClick={handleApplyNewMDP}
+                                className="btn btn-dark large-margin-updown">
+                                Appliquer </button>
+
+                        </div>
+
+                        :
+                        <div className="basic-div">
+                            <div>
+                                <h1 className="h1-inscription">{"On s'connait non ?"}</h1>
+                                <h2 className="h2-inscription">Connexion</h2>
+                            </div>
+
+                            <BoutonsSociaux inscription={false} />
+
+                            <ConnexionForm handleClickMdp={handleClickMdp} />
+                        </div>
+
+                    }
+
+
+                </div>
+            </div>
 
             <Footer />
         </div>

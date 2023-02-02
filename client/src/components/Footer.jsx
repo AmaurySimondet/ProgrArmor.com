@@ -1,61 +1,10 @@
 import { React, useState, useEffect, useRef } from "react";
 
 function Footer(props) {
-    // const [dimensions, setDimensions] = useState({
-    //     height: window.innerHeight,
-    //     width: window.innerWidth
-    // })
-
-
-    // useEffect(() => {
-    //     function handleResize() {
-    //         setDimensions({
-    //             height: window.innerHeight,
-    //             width: window.innerWidth
-    //         })
-    //     }
-
-    //     var timeout = false;
-    //     window.addEventListener('resize', function () {
-    //         clearTimeout(timeout);;
-    //         timeout = setTimeout(handleResize, 200);
-    //     });
-    // })
-
-    // const boxRef = useRef();
-
-    // // X
-    // const [x, setX] = useState();
-
-    // // Y
-    // const [y, setY] = useState();
-
-    // // This function calculate X and Y
-    // const getPosition = () => {
-    //     const x = boxRef.current.offsetLeft;
-    //     setX(x);
-
-    //     const y = boxRef.current.offsetTop;
-    //     setY(y);
-    // };
-
-    // // Get the position of the red box in the beginning
-    // useEffect(() => {
-    //     getPosition();
-    // }, []);
-
-    // // Re-calculate X and Y of the red box when the window is resized by the user
-    // useEffect(() => {
-    //     window.addEventListener("resize", getPosition);
-    // }, []);
 
     return (
 
         <div>
-
-            {/* {y < dimensions.height - 50 ? <div style={{ height: "" + dimensions.height - y + 50 + "px" }}></div> : null}
-
-            {props.warnref ? <div style={{ height: "" + props.warnref + "px" }}></div> : null} */}
 
             <footer className="footer footer-black">
 

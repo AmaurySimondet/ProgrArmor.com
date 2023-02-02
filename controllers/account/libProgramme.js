@@ -62,34 +62,35 @@ exports.getProgrammes = (req, res) => {
 
     console.log("conditions", conditions)
 
-    Programme.find(conditions,
-        (err, data) => {
-            if (err) {
+    Programme.find(conditions).populate('likes').populate('comments').exec(function (err, data) {
+        if (err) {
 
-                return res.json({ success: false, message: err })
+            return res.json({ success: false, message: err })
+        }
+        else {
+            data.forEach((programme) => {
+                console.log(programme._doc.likes.length)
+            })
+            if (req.body.tri) {
+                if (req.body.tri.value === "mostLiked") {
+                    data.sort((a, b) => b._doc.likes.length - a._doc.likes.length)
+                }
+                else if (req.body.tri.value === "mostRecent") {
+                    data.sort((a, b) => b._doc.created_at - a._doc.created_at)
+                }
+                else if (req.body.tri.value === "mostCommented") {
+                    data.sort((a, b) => b._doc.comments.length - a._doc.comments.length)
+                }
+                else if (req.body.tri.value === "oldest") {
+                    data.sort((a, b) => a._doc.created_at - b._doc.created_at)
+                }
             }
             else {
-                if (req.body.tri) {
-                    console.log("tri", req.body.tri)
-                    if (req.body.tri.value === "mostLiked") {
-                        data.sort((a, b) => b.likes.length - a.likes.length)
-                    }
-                    else if (req.body.tri.value === "mostRecent") {
-                        data.sort((a, b) => b.createdAt - a.createdAt)
-                    }
-                    else if (req.body.tri.value === "mostCommented") {
-                        data.sort((a, b) => b.comments.length - a.comments.length)
-                    }
-                    else if (req.body.tri.value === "oldest") {
-                        data.sort((a, b) => a.createdAt - b.createdAt)
-                    }
-                }
-                else {
-                    data.sort((a, b) => b.likes.length - a.likes.length)
-                }
-                return res.json({ success: true, message: "Programmes trouvés !", programmes: data })
+                data.sort((a, b) => b.likes.length - a.likes.length)
             }
+            return res.json({ success: true, message: "Programmes trouvés !", programmes: data })
         }
+    }
     )
 };
 
@@ -113,6 +114,7 @@ async function likeProgramme(req, res) {
     if (likeData.length > 0) {
         let deleteEl = { programme: likeData[0].programme, user: likeData[0].user }
 
+        //update likes
         await Like.deleteOne(deleteEl, function (err, data) {
             if (err) {
                 res.json({ success: false, message: err })
@@ -121,6 +123,17 @@ async function likeProgramme(req, res) {
                 res.json({ success: true, message: "Like supprimé" })
             }
         })
+
+        //update programme
+        await Programme.updateOne({ _id: req.body.programmeId }, { $pull: { likes: likeData[0]._id } }, function (err, data) {
+            if (err) {
+                res.json({ success: false, message: err })
+            }
+            else {
+                res.json({ success: true, message: "Like supprimé" })
+            }
+        })
+
     }
 
     //sinon, ajouter le like
@@ -131,12 +144,23 @@ async function likeProgramme(req, res) {
             user: req.body.userId
         })
 
+        //update likes
         await likeElement.save((err) => {
             if (err) {
                 res.json({ success: false, message: err })
             }
             else {
                 res.json({ success: true, message: "Like ajouté" })
+            }
+        })
+
+        //update programme
+        await Programme.updateOne({ _id: req.body.programmeId }, { $addToSet: { likes: likeData[0]._id } }, function (err, data) {
+            if (err) {
+                res.json({ success: false, message: err })
+            }
+            else {
+                res.json({ success: true, message: "Like supprimé" })
             }
         })
     }
@@ -295,6 +319,7 @@ async function sendComment(req, res) {
         comment: req.body.comment
     })
 
+    //save comment
     await comment.save((err) => {
         if (err) {
             console.log(err)
@@ -304,6 +329,23 @@ async function sendComment(req, res) {
             res.json({ success: true, message: "Commentaire ajouté" })
         }
     })
+
+    //update programme comments
+    let conditions = { _id: req.body.programmeId }
+    let update = { $push: { comments: comment.id } }
+    Programme.updateOne(
+        conditions,
+        update,
+        function (err, data) {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                console.log("Programme updated")
+            }
+        }
+    )
+
 }
 
 async function getComments(req, res) {

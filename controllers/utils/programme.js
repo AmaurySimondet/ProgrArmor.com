@@ -35,6 +35,8 @@ function getConditions(req) {
     //      }
 
     console.log("body", req.body)
+    console.log("type", typeof req.body)
+    console.log("keys", Object.keys(req.body))
 
     let conditions = {};
     if (req.body.ownedByMe) {
