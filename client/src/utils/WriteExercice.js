@@ -176,7 +176,51 @@ function writeExercice(exercice) {
     }
 }
 
-exports.writeCategories = writeCategories;
-exports.writeSeries = writeSeries;
-exports.includesExercice = includesExercice;
-exports.writeExercice = writeExercice;
+
+function writeExercicesHtml(exercices, length, index) {
+    let htmlRes = [];
+    Object.values(exercices).map((exercice, index) => {
+        if (index === Object.values(exercices).length - 1) {
+            htmlRes.push(
+                <div>
+                    <p>
+                        <u>Exercice {index + 1}:</u> {exercice.exercice}
+                    </p>
+                    {exercice.categories[0] ?
+                        <p>
+                            <u>Categories:</u> {exercice.categories}
+                        </p>
+                        : null}
+                    <p>
+                        <u>Series:</u> {exercice.series}
+                    </p>
+                </div>
+            )
+        } else {
+            htmlRes.push(
+                <div>
+                    <p>
+                        <u>Exercice {index + 1}:</u> {exercice.exercice}
+                    </p>
+                    {exercice.categories[0] ?
+                        <p>
+                            <u>Categories:</u> {exercice.categories}
+                        </p>
+                        : null}
+                    <p>
+                        <u>Series:</u> {exercice.series}
+                    </p>
+                </div>
+            )
+        }
+    })
+    if (length > 1 && index !== length - 1) {
+        htmlRes.push(
+            <hr className="hr-serie"></hr>
+        )
+    }
+    htmlRes = htmlRes.flat();
+    return htmlRes;
+}
+
+export { writeExercicesHtml, writeExercice, writeSeriesProgramme, writeSeries, writeCategories, includesExercice }

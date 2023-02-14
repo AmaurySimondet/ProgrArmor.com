@@ -88,7 +88,6 @@ function Periodisation(props) {
                 alt="Poubelle" />
 
             {seances?.map((seance, index) => {
-                console.log(seance);
                 return (
                     <SeanceOfProgramme
                         key={seance.id}
@@ -96,6 +95,7 @@ function Periodisation(props) {
                         index={index}
                         modeSombre={props.modeSombre}
                         seance={seance}
+                        length={seances.length}
                         closed={closed}
                         writeSeance={writeSeance}
                         closedPeriodisation={clickPeriodisation}
@@ -111,17 +111,28 @@ function Periodisation(props) {
             </button>
             }
 
-            {clickPeriodisation ? null :
-                props.length > 1 ?
+            {props.length > 1 ?
+                clickPeriodisation ?
+                    <div>
+                        <hr className='hr-serie' />
+                        <p>
+                            <strong>Cycles:</strong> {props.periodisation.cycle}
+                        </p>
+                    </div>
+                    :
                     <div>
                         <label>
-
-
+                            Nombre de cycle(s) avant la periodisation suivante:
                         </label>
                         <input
+                            type="number"
+                            className="form-control"
+                            value={props.periodisation.cycle}
+                            onChange={(e) => props.writeCycle(props.id, e.target.value)}
                         />
                     </div>
-                    : null
+                :
+                null
             }
         </div>
     )

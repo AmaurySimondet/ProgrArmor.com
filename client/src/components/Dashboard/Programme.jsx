@@ -91,7 +91,7 @@ function Programme(props) {
 
             <div className="basic-div">
 
-                <h1 className='large-margin-left'>
+                <h1 className=''>
                     Programmes
                     <button className="btn btn-dark large-margin-left" onClick={handleClickCreate}>
                         Menu de création
@@ -110,7 +110,7 @@ function Programme(props) {
                     <button type="submit" className="btn btn-dark large-margin-left" onClick={resetParameters}>
                         Reset des paramètres
                     </button>
-                    <div className={clickFiltrage ? "tri large-margin-updown extended" : "tri large-margin-updown not-extended"}>
+                    <div className={clickFiltrage ? "tri large-perc-margin-updown extended" : "tri large-perc-margin-updown not-extended"}>
                         <div className="form-group row">
                             <div className="col-4">
                                 <label className="col-form-label">Tri par</label>

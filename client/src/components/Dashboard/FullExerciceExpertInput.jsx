@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { writeSeries, writeCategories } from "../../utils/WriteExercice";
 
 function FullExerciceInput(props) {
-    console.log("FullExerciceInput", props.exercice)
     let cat = [];
     if (props.exercice.Categories) {
         cat = [...Object.values(props.exercice.Categories)];

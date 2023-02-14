@@ -1413,6 +1413,10 @@ table.hometable td.inscription-img-td {
     margin-bottom: 40px;
 }
 
+.large-perc-margin-bottom {
+    margin-bottom: 5%;
+}
+
 .huge-margin-bottom {
     margin-bottom: 100px;
 }
@@ -1423,6 +1427,10 @@ table.hometable td.inscription-img-td {
 
 .large-margin-updown {
     margin: 40px auto;
+}
+
+.large-perc-margin-updown {
+    margin: 2% auto;
 }
 
 .basic-margin-updown {

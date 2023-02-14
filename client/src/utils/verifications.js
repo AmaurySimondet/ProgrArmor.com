@@ -28,6 +28,8 @@ function seanceContainErr(seance, programme = false) {
 
     }
 
+    console.log("exercices.length", seance.exercices.length)
+
     seance.exercices.forEach((exercice, index) => {
         if (Object.keys(exercice.Series).length === 0) {
             returnObj.err = true;
@@ -150,16 +152,22 @@ function seanceContainErr(seance, programme = false) {
         });
     }
 
+    console.log(returnObj)
+
     return returnObj;
 }
 
 function seancesContainErr(seances, programme = false) {
+    let err = false;
+    let alertMessage = '';
     seances.forEach(seance => {
+        console.log("seanceContainErr", seanceContainErr(seance, programme))
         if (seanceContainErr(seance, programme).err === true) {
-            return seanceContainErr;
+            err = true;
+            alertMessage = seanceContainErr(seance, programme).alertMessage;
         }
     })
-    return { err: false, alertMessage: '' }
+    return { err: err, alertMessage: alertMessage }
 }
 
 function programmeContainErr(programme) {
@@ -184,20 +192,25 @@ function programmeContainErr(programme) {
     } else if (programme.materiel.length === 0) {
         err = true;
         alertMessage = ("Veuillez ajouter du matériel à votre programme !");
-    } else if (programme.programme.length > 0) {
+    } else {
         programme.programme.forEach(periodisation => {
+            console.log("seancesContainErr", seancesContainErr(periodisation.seances, true))
+            if (periodisation.seances.length === 0) {
+                err = true;
+                alertMessage = ("Veuillez ajouter des séances à chaque périodisation !");
+                return { err: err, alertMessage: alertMessage };
+            }
             if (periodisation.cycle === "") {
                 err = true;
                 alertMessage = ("Veuillez choisir un cycle pour chaque périodisation !");
+                return { err: err, alertMessage: alertMessage };
             }
             if (seancesContainErr(periodisation.seances, true).err === true) {
                 err = true;
                 alertMessage = (seancesContainErr(periodisation.seances, true).alertMessage);
+                return { err: err, alertMessage: alertMessage };
             }
         });
-    } else if (programme.programme.length > 0) {
-        err = true;
-        alertMessage = ("Veuillez ajouter des séances à votre programme !");
     }
 
     return { err: err, alertMessage: alertMessage };

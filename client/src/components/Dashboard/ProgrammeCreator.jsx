@@ -11,6 +11,9 @@ import NavigBar from '../NavigBar';
 import API from '../../utils/API';
 import { useSearchParams } from 'react-router-dom';
 import { programmeContainErr } from '../../utils/verifications';
+import { getUser } from '../../utils/user';
+import { styleOnDim } from '../../utils/styling';
+import adminProgramme from '../../data/adminProgramme';
 
 function ProgrammeCreator(props) {
     const [periodisationsClosed, setPeriodisationsClosed] = useState(false);
@@ -26,12 +29,10 @@ function ProgrammeCreator(props) {
             id: uuidv4(),
             seances: [
                 {
-                    id: uuidv4(), exercices: [
-                        { id: uuidv4(), exercice: "", Series: {}, Categories: {} }
-                    ]
+                    id: uuidv4(), exercices: []
                 }
             ],
-            cycle: "0"
+            cycle: "",
         }]
     });
     const [user, setUser] = useState({ modeSombre: false });
@@ -60,22 +61,13 @@ function ProgrammeCreator(props) {
         }
     }
 
-    async function getUser() {
-        const { data } = await API.getUser({ id: localStorage.getItem("id") });
-        if (data.success === false) {
-            alert(data.message);
-        } else {
-            console.log(data.profile);
-            if (data.profile.modeSombre && data.profile.modeSombre === true) {
-                // 👇 add class to body element
-                document.body.classList.add('darkMode');
-            }
-            setUser(data.profile);
-        };
-    }
+    useEffect(() => {
+        getUser(localStorage.getItem("id")).then((user) => {
+            setUser(user);
+        });
+    }, []);
 
     useEffect(() => {
-        setTimeout(getUser, 50);
         loadProgrammeIfParams();
     }, []);
 
@@ -99,22 +91,6 @@ function ProgrammeCreator(props) {
             timeout = setTimeout(handleResize, 200);
         });
     });
-
-    function styleOnDim() {
-        if (dimensions.width > 500) {
-            if (user.modeSombre === true) {
-                return customStylesDark;
-            } else {
-                return customStyles;
-            }
-        } else {
-            if (user.modeSombre === true) {
-                return customStylesDarkMini;
-            } else {
-                return customStylesMini;
-            }
-        }
-    }
 
     function handleChange(event) {
         if (event.target) {
@@ -169,9 +145,15 @@ function ProgrammeCreator(props) {
     async function sendProgramme() {
         console.log("sendProgramme", programme);
 
+        console.log("programmeContainErr", programmeContainErr(programme));
         if (programmeContainErr(programme).err === true) {
             alert(programmeContainErr(programme).alertMessage);
         } else {
+            let periodisationsSeances = [];
+            programme.programme.forEach(periodisation => {
+                periodisationsSeances.push(periodisation.seances.length);
+            });
+
             let objSent = {
                 programmeId: programme.id,
                 titre: programme.titre,
@@ -182,8 +164,8 @@ function ProgrammeCreator(props) {
                 materiel: programme.materiel,
                 programme: programme.programme,
                 createdBy: localStorage.getItem("id"),
-                seancesSemaine: 0,
-                seancesTotal: 0,
+                seancesSemaine: Math.max(...periodisationsSeances),
+                seancesTotal: periodisationsSeances.reduce((a, b) => a + b, 0)
             }
 
             const { data } = await API.createProgramme(objSent);
@@ -199,8 +181,9 @@ function ProgrammeCreator(props) {
             }
 
         }
-
     }
+
+
 
     function writePeriodisation(id, seances) {
         setProgramme({
@@ -214,120 +197,20 @@ function ProgrammeCreator(props) {
         });
     }
 
-    function adminLoadProgramme() {
-        let obj = {
-            "titre": "Le classico",
-            "description": "Ultra classico mon pote",
-            "type": {
-                "id": "type",
-                "label": "Musculation / StreetLifting",
-                "value": "Musculation / StreetLifting",
-                "name": "Type de programme"
-            },
-            "niveau": {
-                "id": "niveaux",
-                "label": "Débutant",
-                "value": "Débutant",
-                "name": "Niveaux"
-            },
-            "duree": "120",
-            "materiel": { "id": "materiel", "label": 'Rack, barre et poids', "value": 'Rack, barre et poids', "name": "Materiel" },
-            "programme": [
-                {
-                    "id": "f159c84e-b5b1-4cf4-b345-9c0733e01b4b",
-                    "seances": [
-                        {
-                            "id": "95636e1c-c465-4a2a-b052-80df00ef6f3c",
-                            "exercices": [
-                                {
-                                    "exercice": {
-                                        "name": "Developpé couché"
-                                    },
-                                    "Series": {
-                                        "0": {
-                                            "id": "0f691e27-95dc-4c97-aadf-7a819ea15455",
-                                            "typeSerie": "reps",
-                                            "repsTime": "12",
-                                            "charge": "",
-                                            "percent": "NaN%"
-                                        },
-                                        "1": {
-                                            "id": "ab88fcca-02d2-49f7-8e00-368824aa3944",
-                                            "typeSerie": "reps",
-                                            "repsTime": "12",
-                                            "charge": "",
-                                            "percent": "NaN%"
-                                        },
-                                        "2": {
-                                            "id": "57fcb5ec-7557-426a-b41f-510634dbf606",
-                                            "typeSerie": "reps",
-                                            "repsTime": "12",
-                                            "charge": "",
-                                            "percent": "NaN%"
-                                        },
-                                        "3": {
-                                            "id": "b74862d6-7d9b-4c7b-88ae-602d74054805",
-                                            "typeSerie": "reps",
-                                            "repsTime": "12",
-                                            "charge": "",
-                                            "percent": "NaN%"
-                                        }
-                                    },
-                                    "Categories": {
-                                        "0": {
-                                            "id": "4ed2f9c0-9cbe-4e93-8e3d-d49c956790b2",
-                                            "input": "Barre olympique droite",
-                                            "name": "Type de barre / poids"
-                                        }
-                                    },
-                                    "id": "4fe30b97-b6ae-4972-8021-777099775346"
-                                },
-                                {
-                                    "exercice": {
-                                        "name": "Squat"
-                                    },
-                                    "Series": {
-                                        "0": {
-                                            "id": "6ee29fe0-87bc-4d6b-a21c-84310e7464b7",
-                                            "typeSerie": "reps",
-                                            "repsTime": "12",
-                                            "charge": "",
-                                            "percent": "NaN%"
-                                        },
-                                        "1": {
-                                            "id": "462becbe-5367-470a-a306-c9e89f48ebf5",
-                                            "typeSerie": "reps",
-                                            "repsTime": "12",
-                                            "charge": "",
-                                            "percent": "NaN%"
-                                        },
-                                        "2": {
-                                            "id": "298f2289-5f77-4c6c-a2c6-1e6d4efa5793",
-                                            "typeSerie": "reps",
-                                            "repsTime": "12",
-                                            "charge": "",
-                                            "percent": "NaN%"
-                                        },
-                                        "3": {
-                                            "id": "aa312ba5-9103-41f4-9184-14b8330d15cc",
-                                            "typeSerie": "reps",
-                                            "repsTime": "12",
-                                            "charge": "",
-                                            "percent": "NaN%"
-                                        }
-                                    },
-                                    "Categories": {},
-                                    "id": "48699b90-1a39-4c45-a22b-6c03cc562790"
-                                }
-                            ],
-                            "echauffements": [],
-                            "jourDeRepos": "2"
-                        }
-                    ],
-                    "cycle": "0"
+    function writeCycle(id, value) {
+        setProgramme({
+            ...programme,
+            programme: programme.programme.map(periodisation => {
+                if (periodisation.id === id) {
+                    periodisation.cycle = value;
                 }
-            ]
-        };
+                return periodisation;
+            })
+        });
+    }
+
+    function adminLoadProgramme() {
+        let obj = adminProgramme;
         let newObj = {};
         Object.keys(obj).forEach(key => {
             newObj[key] = obj[key];
@@ -423,6 +306,11 @@ function ProgrammeCreator(props) {
                         </div>
                     </div>
 
+                    <button className='btn btn-dark block large-margin-updown'
+                        onClick={closingPeriodisations} disabled={programme.programme.length > 0 ? false : true}>
+                        {periodisationsClosed ? "Ouvrir toutes les periodisations" : "Résumer toutes les periodisations"}
+                    </button>
+
                     {programme.programme?.map((periodisation, index) => {
                         return (
                             <div>
@@ -436,6 +324,7 @@ function ProgrammeCreator(props) {
                                     closedPeriodisation={periodisationsClosed}
                                     writePeriodisation={writePeriodisation}
                                     handleDeletePeriodisation={handleDeletePeriodisation}
+                                    writeCycle={writeCycle}
                                 />
                                 <hr className='hr-detail large-margin-top' />
                             </div>

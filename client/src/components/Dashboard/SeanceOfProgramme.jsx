@@ -2,7 +2,7 @@ import { React, useState, useEffect } from 'react';
 
 import FullExerciceExpertInput from './FullExerciceExpertInput';
 import { v4 as uuidv4 } from 'uuid';
-import { writeExercice } from "../../utils/WriteExercice";
+import { writeExercice, writeExercicesHtml } from "../../utils/WriteExercice";
 
 function SeanceOfProgramme(props) {
 
@@ -131,43 +131,7 @@ function SeanceOfProgramme(props) {
                 }
 
                 {clickSeance ?
-                    Object.values(exerciceInSeance).map((exercice, index) => {
-                        if (index === Object.values(exerciceInSeance).length - 1) {
-                            return (
-                                <div>
-                                    <p>
-                                        Exercice {index + 1}: {exercice.exercice}
-                                    </p>
-                                    {exercice.categories[0] ?
-                                        <p>
-                                            Categories: {exercice.categories}
-                                        </p>
-                                        : null}
-                                    <p>
-                                        Series: {exercice.series}
-                                    </p>
-                                </div>
-                            )
-                        } else {
-                            return (
-                                <div>
-                                    <p>
-                                        Exercice {index + 1}: {exercice.exercice}
-                                    </p>
-                                    {exercice.categories[0] ?
-                                        <p>
-                                            Categories: {exercice.categories}
-                                        </p>
-                                        : null}
-                                    <p>
-                                        Series: {exercice.series}
-                                    </p>
-                                    <hr className="hr-serie" />
-                                </div>
-                            )
-                        }
-                    })
-
+                    writeExercicesHtml(exerciceInSeance, props.length, props.index)
                     :
                     seance.exercices ? seance.exercices.map((exercice, index) => {
                         return (

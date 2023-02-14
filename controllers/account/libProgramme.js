@@ -100,10 +100,12 @@ async function likeProgramme(req, res) {
     let likeData = [];
     let likeElement = {};
 
+    let resp = {}
+
     //trouver le programme s'il est liké par user
     await Like.find(conditions, function (err, data) {
         if (err) {
-            res.json({ success: false, message: err })
+            resp.json({ success: false, message: err })
         }
         else {
             likeData = data;
@@ -117,20 +119,20 @@ async function likeProgramme(req, res) {
         //update likes
         await Like.deleteOne(deleteEl, function (err, data) {
             if (err) {
-                res.json({ success: false, message: err })
+                resp = ({ success: false, message: err })
             }
             else {
-                res.json({ success: true, message: "Like supprimé" })
+                resp = ({ success: true, message: "Like supprimé" })
             }
         })
 
         //update programme
         await Programme.updateOne({ _id: req.body.programmeId }, { $pull: { likes: likeData[0]._id } }, function (err, data) {
             if (err) {
-                res.json({ success: false, message: err })
+                resp = ({ success: false, message: err })
             }
             else {
-                res.json({ success: true, message: "Like supprimé" })
+                resp = ({ success: true, message: "Like supprimé" })
             }
         })
 
@@ -147,23 +149,25 @@ async function likeProgramme(req, res) {
         //update likes
         await likeElement.save((err) => {
             if (err) {
-                res.json({ success: false, message: err })
+                resp = ({ success: false, message: err })
             }
             else {
-                res.json({ success: true, message: "Like ajouté" })
+                resp = ({ success: true, message: "Like ajouté" })
             }
         })
 
         //update programme
-        await Programme.updateOne({ _id: req.body.programmeId }, { $addToSet: { likes: likeData[0]._id } }, function (err, data) {
+        await Programme.updateOne({ _id: req.body.programmeId }, { $addToSet: { likes: likeElement._id } }, function (err, data) {
             if (err) {
-                res.json({ success: false, message: err })
+                resp = ({ success: false, message: err })
             }
             else {
-                res.json({ success: true, message: "Like supprimé" })
+                resp = ({ success: true, message: "Like supprimé" })
             }
         })
     }
+
+    res.json(resp)
 }
 
 //get programme by its id
