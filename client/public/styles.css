@@ -1490,6 +1490,20 @@ table.hometable td.inscription-img-td {
     color: white;
 }
 
+.programme-card-dark {
+    height: 550px;
+    width: 300px;
+    border-color: black;
+    border-radius: 20px;
+    border: solid;
+    margin: 10px;
+    background-color: #9b0000;
+    padding: 10px;
+    overflow: auto;
+    transition: 0.3s;
+    color: white;
+}
+
 .programme-card-header {
     height: 400px;
 }
@@ -1501,23 +1515,27 @@ table.hometable td.inscription-img-td {
 }
 
 .programme-card-explication {
-    background-color: #333333;
+    background-color: #333333
 }
 
-.programme-card:hover {
-    background-color: rgb(81, 81, 81);
+.programme-card:hover,
+.programme-card-dark:hover {
+    background-color: #bd0000
 }
 
 .programme-card-explication:hover {
-    background-color: #333333;
+    background-color: #333333
 }
 
 .programme-card h1,
-.programme-card h2 {
+.programme-card h2,
+.programme-card-dark h1,
+.programme-card-dark h2 {
     font-size: large;
 }
 
-.programme-card .profile-pic {
+.programme-card .profile-pic,
+.programme-card-dark .profile-pic {
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -1530,7 +1548,7 @@ table.hometable td.inscription-img-td {
     width: 100%;
     padding: 5%;
     border-top: solid 1px white;
-    background-color: #330000;
+    background-color: #bd0000;
 }
 
 .programme-card-profile-hover {
@@ -1540,7 +1558,27 @@ table.hometable td.inscription-img-td {
     width: 100%;
     padding: 5%;
     border-top: solid 1px white;
-    background-color: rgb(81, 81, 81);
+    background-color: #bd0000
+}
+
+.programme-card-profile-dark {
+    position: sticky;
+    bottom: 0px;
+    z-index: 1;
+    width: 100%;
+    padding: 5%;
+    border-top: solid 1px black;
+    background-color: #330000;
+}
+
+.programme-card-profile-hover-dark {
+    position: sticky;
+    bottom: 0px;
+    z-index: 1;
+    width: 100%;
+    padding: 5%;
+    border-top: solid 1px black;
+    background-color: #bd0000
 }
 
 .react-card {

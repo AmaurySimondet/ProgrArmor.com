@@ -142,7 +142,6 @@ function ProgrammeCard(props) {
     async function getProgrammeCreator() {
         const { data } = await API.getProgrammeCreator({ programmeId: programme._id });
         if (data.success) {
-            console.log(data.creator)
             setProgrammeCreator(data.creator);
         }
         else {
@@ -213,9 +212,8 @@ function ProgrammeCard(props) {
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
                 <div className="YOUR_FRONT_CCOMPONENT" style={props.modeSombre ? null : { color: "white" }}>
 
-                    <div className="programme-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-                        style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
-                        <Scrollbars autoHide>
+                    <div className={props.modeSombre ? "programme-card-dark" : "programme-card"} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                        <Scrollbars>
                             <div className="programme-card-header">
 
                                 <div style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
@@ -262,8 +260,18 @@ function ProgrammeCard(props) {
 
                             </div>
 
-                            <div className={mouseEnter ? "programme-card-profile-hover" : "programme-card-profile"}
-                                style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
+                            <div className={
+                                mouseEnter ?
+                                    props.modeSombre ?
+                                        "programme-card-profile-hover-dark"
+                                        :
+                                        "programme-card-profile-hover"
+                                    :
+                                    props.modeSombre ?
+                                        "programme-card-profile-dark"
+                                        :
+                                        "programme-card-profile"
+                            }>
                                 <table className="basic-table">
                                     <col style={{ width: "35%" }} />
                                     <col style={{ width: "65%" }} />
@@ -339,8 +347,7 @@ function ProgrammeCard(props) {
 
                 <div className="YOUR_BACK_COMPONENT">
                     {flipWhoLiked ?
-                        <div className="programme-card" onClick={handleFlipWhoLiked}
-                            style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
+                        <div className={props.modeSombre ? "programme-card-dark" : "programme-card"} onClick={handleFlipWhoLiked}>
                             {whoLikedArray.length > 0 ?
                                 whoLikedArray.map((user, index) => {
                                     return (
@@ -376,7 +383,7 @@ function ProgrammeCard(props) {
                     }
 
                     {flipComment ?
-                        <div className="programme-card" style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
+                        <div className={props.modeSombre ? "programme-card-dark" : "programme-card"}>
                             <Scrollbars autoHide>
 
                                 <div style={{ height: "1000px" }}>
@@ -458,12 +465,11 @@ function ProgrammeCard(props) {
                     }
 
                     {flipProgramme ?
-                        <div className="programme-card" onClick={handleFlipProgramme}
-                            style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
-                            <Scrollbars autoHide>
-                                <div style={{ overflow: "auto" }}>
+                        <div className={props.modeSombre ? "programme-card-dark" : "programme-card"} onClick={handleFlipProgramme}>
+                            <Scrollbars>
+                                <div>
                                     {programme.programme[0].seances ?
-                                        <div className='large-margin-top'>
+                                        <div>
                                             {programme.programme.map((periodisation, indexPeriodisation) => {
                                                 return (
                                                     <div>
@@ -474,7 +480,6 @@ function ProgrammeCard(props) {
                                                                     <h2>Seance {indexSeance + 1}</h2>
                                                                     <div>
                                                                         {seance.exercices.map((exercice, index) => {
-                                                                            console.log("break", writeExercice(exercice))
                                                                             return (
                                                                                 <div>
                                                                                     <p>
@@ -521,7 +526,7 @@ function ProgrammeCard(props) {
 
                     {
                         flipThreeDots ?
-                            <div className="programme-card" style={props.modeSombre ? null : { backgroundColor: "#9b0000" }}>
+                            <div className={props.modeSombre ? "programme-card-dark" : "programme-card"}>
                                 <Scrollbars autoHide>
                                     <button className='btn btn-black large-margin-top mini-margin-bottom' onClick={handleFlipThreeDots}>
                                         Revenir au programme
