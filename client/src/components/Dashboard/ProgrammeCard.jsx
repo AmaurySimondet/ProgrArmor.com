@@ -204,6 +204,7 @@ function ProgrammeCard(props) {
         getLikes();
         getProgrammeCreator();
         getComments();
+        console.log("modeSombre : ", props.modeSombre)
     }, []);
 
     return (

@@ -109,14 +109,13 @@ function Dashboard() {
     })
     const [clickAffichage, setClickAffichage] = useState(false);
     const [clickFiltrage, setClickFiltrage] = useState(false);
-    const [user, setUser] = useState()
+    const [user, setUser] = useState({ modeSombre: false });
 
     async function getUser() {
         const { data } = await API.getUser({ id: localStorage.getItem("id") });
         if (data.success === false) {
             alert(data.message);
         } else {
-            console.log(data.profile);
             if (data.profile.modeSombre && data.profile.modeSombre === true) {
                 // 👇 add class to body element
                 document.body.classList.add('darkMode');
@@ -145,6 +144,37 @@ function Dashboard() {
                     }
                 }));
             }
+            else {
+                data.profile.modeSombre = false;
+            }
+
+            // set listeNoms
+            let arr = [{ id: "nom", label: "/ (défaut)", value: "title" }]
+            if (data.profile.seances) {
+                data.profile.seances.forEach((seance, index) => {
+                    if (seance.nom) {
+                        if (seance.nom.ancienNom !== "nouveau-nom") {
+                            if (!arr.includes(seance.nom.ancienNom)) {
+                                let obj = { id: "nom", label: seance.nom.ancienNom, value: seance.nom.ancienNom }
+                                if (!containsObj(arr, obj)) {
+                                    arr.push(obj)
+                                }
+                            }
+                        }
+                        else {
+                            if (!arr.includes(seance.nom.nouveauNom)) {
+                                let obj = { id: "nom", label: seance.nom.nouveauNom, value: seance.nom.nouveauNom }
+                                if (!containsObj(arr, obj)) {
+                                    arr.push(obj)
+                                }
+                            }
+                        }
+                    }
+                })
+            }
+            arr.push({ id: "nom", value: "nouveau-nom", label: "Entrer un nouveau nom de séance..." })
+
+            setListeNoms(arr);
             setUser(data.profile);
         };
     }
@@ -286,51 +316,13 @@ function Dashboard() {
             }
             else { alert(data.message); }
         } else {
-            console.log(data.seances)
             setSeances(data.seances);
         }
     }
 
     useEffect(() => {
-        console.log("params", params)
         setTimeout(getWorkouts, 50);
     }, [params]);
-
-    async function getNames() {
-        const { data } = await API.workouts({ nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "" });
-        if (data.success === false) {
-            alert(data.message);
-        } else {
-            let arr = [{ id: "nom", label: "/ (défaut)", value: "title" }]
-
-            data.seances.forEach((seance, index) => {
-                if (seance.nom) {
-                    if (seance.nom.ancienNom !== "nouveau-nom") {
-                        if (!arr.includes(seance.nom.ancienNom)) {
-                            let obj = { id: "nom", label: seance.nom.ancienNom, value: seance.nom.ancienNom }
-                            if (!containsObj(arr, obj)) {
-                                arr.push(obj)
-                            }
-                        }
-                    }
-                    else {
-                        if (!arr.includes(seance.nom.nouveauNom)) {
-                            let obj = { id: "nom", label: seance.nom.nouveauNom, value: seance.nom.nouveauNom }
-                            if (!containsObj(arr, obj)) {
-                                arr.push(obj)
-                            }
-                        }
-                    }
-                }
-            })
-            arr.push({ id: "nom", value: "nouveau-nom", label: "Entrer un nouveau nom de séance..." })
-            setListeNoms(arr);
-        }
-    }
-
-    useEffect(() => {
-        getNames();
-    }, []);
 
     function handleChange(event) {
         console.log(event)
@@ -522,7 +514,7 @@ function Dashboard() {
 
         csv.push(["Ce tableau est une exportation de Prograrmor"])
         csv.push(["ProgrArmor outil ultime de la progression sportive: journal et historique programme statistiques de tes amis et autre"])
-        csv.push(["https://prograrmorprealpha2.herokuapp.com/"])
+        csv.push(["https://prograrmor.com/"])
         csv.push([])
         for (let i = 1; i < rows.length; i++) {
             let row = [], cols = rows[i].querySelectorAll("td, th");

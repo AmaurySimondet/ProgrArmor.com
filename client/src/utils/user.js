@@ -6,7 +6,7 @@ async function getUser(id) {
     if (data.success === false) {
         console.log(data.message);
     } else {
-        console.log(data.profile);
+        // console.log(data.profile);
         if (data.profile.modeSombre && data.profile.modeSombre === true) {
             // 👇 add class to body element
             document.body.classList.add('darkMode');

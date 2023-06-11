@@ -116,7 +116,12 @@ function valuetext(value) {
 }
 
 function CategorieInput(props) {
-    const [categorie, setCategorie] = useState(props.categorie);
+    const [categorie, setCategorie] = useState(props.categorie || {
+        name: "",
+        input: "",
+        type: "",
+        muscle: "",
+    });
     const [streetworkoutHiddenClicked, setStreetworkoutHiddenClicked] = useState("hide");
     const [categorieHiddenClick, setcategorieHiddenClick] = useState('hide')
     const [elastiqueHiddenClick, setElastiqueHiddenClick] = useState('hide')

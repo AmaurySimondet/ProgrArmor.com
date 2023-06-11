@@ -366,7 +366,7 @@ function Compte() {
                 Mode Sombre </p>
             </div>
 
-            <button className='btn btn-dark btn-lg'
+            <button className='btn btn-dark btn-lg' disabled={true}
               style={{ margin: "40px 20px" }}
               onClick={() => { window.location = "/profil?id=" + user.id }}>
               Voir profil en ligne

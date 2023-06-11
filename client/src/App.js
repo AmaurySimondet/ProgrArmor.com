@@ -50,13 +50,13 @@ function App() {
                 <Route exact path='/stats/*' element={<Stats />} />
             </Route>
 
-            {/* <Route path="/programme/*" element={<PrivateRoute />}>
-                <Route exact path='/programme/*' element={<Travaux />} />
-            </Route> */}
-
             <Route path="/programme/*" element={<PrivateRoute />}>
-                <Route exact path='/programme/*' element={<Programme />} />
+                <Route exact path='/programme/*' element={<Travaux />} />
             </Route>
+
+            {/* <Route path="/programme/*" element={<PrivateRoute />}>
+                <Route exact path='/programme/*' element={<Programme />} />
+            </Route> */}
 
             <Route path="/programmeCreator/*" element={<PrivateRoute />}>
                 <Route exact path='/programmeCreator/*' element={<ProgrammeCreator />} />
@@ -78,8 +78,11 @@ function App() {
                 <Route exact path='/a_propos/*' element={<Travaux />} />
             </Route>
 
-            <Route path="/accomplissements/*" element={<PrivateRoute />}>
+            {/* <Route path="/accomplissements/*" element={<PrivateRoute />}>
                 <Route exact path='/accomplissements/*' element={<Accomplissements />} />
+            </Route> */}
+            <Route path="/accomplissements/*" element={<PrivateRoute />}>
+                <Route exact path='/accomplissements/*' element={<Travaux />} />
             </Route>
 
             <Route path="/notifications/*" element={<PrivateRoute />}>

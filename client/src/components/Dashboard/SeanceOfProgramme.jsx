@@ -137,16 +137,16 @@ function SeanceOfProgramme(props) {
                         return (
                             <div>
                                 <FullExerciceExpertInput
-                                    key={exercice.id}
-                                    index={index}
-                                    dimensions={dimensions}
-                                    id={exercice.id}
-                                    modeSombre={props.modeSombre}
-                                    exercice={exercice}
-                                    poids={seance.poids}
-                                    click={true}
                                     changeExercices={changeExercices}
+                                    click={true}
+                                    dimensions={dimensions}
+                                    exercice={exercice}
+                                    id={exercice.id}
+                                    index={index}
+                                    key={exercice.id}
+                                    modeSombre={props.modeSombre}
                                     onDeleteExercices={onDeleteExercices}
+                                    poids={seance.poids}
                                     programme={true}
                                     writeExerciceInSeance={writeExerciceInSeance}
                                 />

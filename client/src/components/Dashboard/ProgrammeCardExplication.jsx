@@ -8,9 +8,18 @@ function ProgrammeCard(props) {
         width: window.innerWidth
     });
     const [isFlipped, setIsFlipped] = useState(false);
+    const [mouseEnter, setMouseEnter] = useState(false);
 
     function handleFlip() {
         setIsFlipped(!isFlipped);
+    }
+
+    function handleMouseEnter() {
+        setMouseEnter(true);
+    }
+
+    function handleMouseLeave() {
+        setMouseEnter(false);
     }
 
     useEffect(() => {
@@ -33,7 +42,7 @@ function ProgrammeCard(props) {
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
                 <div className="YOUR_FRONT_CCOMPONENT" onClick={handleFlip} style={props.modeSombre ? null : { color: "white" }}>
 
-                    <div className="programme-card programme-card-explication">
+                    <div className="programme-card programme-card-explication" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                         <Scrollbars autoHide>
                             <div className="programme-card-header">
                                 <div style={dimensions.width > 850 ? { marginBottom: "40px" } : { marginBottom: "10px" }}>
@@ -58,7 +67,12 @@ function ProgrammeCard(props) {
 
                             </div>
 
-                            <div className="programme-card-profile explication">
+                            <div className={
+                                mouseEnter ?
+                                    "programme-card-profile-explication-hover"
+                                    :
+                                    "programme-card-profile-explication"
+                            }>
                                 <table className="basic-table">
                                     <tr>
                                         <td>

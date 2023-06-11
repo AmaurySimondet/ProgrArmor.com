@@ -268,10 +268,11 @@ function ExpertForm(props) {
     }
 
     async function getNames() {
-        const { data } = await API.workouts({ nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "" });
+        const { data } = await API.workouts({ nom: "", periode: "max", tri: "Ordre chronologique décroissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "", id: localStorage.getItem("id") });
         if (data.success === false) {
             alert(data.message);
         } else {
+            console.log("data", data)
             let arr = [{ label: "/ (défaut)", value: "title" }]
 
             let arr2 = [
@@ -380,6 +381,7 @@ function ExpertForm(props) {
     }
 
     useEffect(() => {
+        console.log("useEffect getNames")
         getNames();
     }, []);
 

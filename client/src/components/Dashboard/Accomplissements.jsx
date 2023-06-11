@@ -99,7 +99,13 @@ function Accomplissements() {
     }
 
     useEffect(() => {
-        if (selectedNiveau !== null) {
+        if (selectedNiveau !== null && selectedType !== null) {
+            let filteredCheckItems = Object.values(checkedItems).filter(item => item.level === selectedNiveau.value && item.categorie === selectedType.value);
+
+            setAccomplissements(Object.values(filteredCheckItems).filter(item => item.valeur === true));
+            setNonaAccomplissements(Object.values(filteredCheckItems).filter(item => item.valeur === false));
+        }
+        else if (selectedNiveau !== null) {
             let filteredCheckItems = Object.values(checkedItems).filter(item => item.level === selectedNiveau.value);
 
             setAccomplissements(Object.values(filteredCheckItems).filter(item => item.valeur === true));
@@ -111,7 +117,7 @@ function Accomplissements() {
             setAccomplissements(Object.values(filteredCheckItems).filter(item => item.valeur === true));
             setNonaAccomplissements(Object.values(filteredCheckItems).filter(item => item.valeur === false));
         }
-        if (selectedNiveau === null && selectedType === null) {
+        else if (selectedNiveau === null && selectedType === null) {
             setAccomplissements(Object.values(checkedItems).filter(item => item.valeur === true));
             setNonaAccomplissements(Object.values(checkedItems).filter(item => item.valeur === false));
         }

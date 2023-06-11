@@ -33,8 +33,11 @@ function FullExerciceInput(props) {
         const Series = { ...series };
         const Categories = { ...categories };
         const Exercice = { ...fullExercice, Series, Categories };
+        console.log(props);
         props.changeExercices(Exercice, props.id);
-        props.writeExerciceInSeance(Exercice, props.id);
+        if (props.writeExerciceInSeance) {
+            props.writeExerciceInSeance(Exercice, props.id);
+        }
     }, [fullExercice, series, categories])
 
     function changeSerie(changedS, id) {

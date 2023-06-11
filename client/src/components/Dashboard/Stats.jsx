@@ -107,6 +107,11 @@ let renderLabel = function (entry) {
 
 function Stats() {
     let errIter = 0;
+
+    const initialParams3 = { id: localStorage.getItem("id"), top: 5, class: "reps", date: "md", reforme: "pie", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" }
+    const initialParams2 = { id: localStorage.getItem("id"), date: "md", reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" }
+    const initialParams1 = { id: localStorage.getItem("id"), date: "md", reforme: "poids", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "" }
+
     const [seances1, setSeances1] = useState([]);
     const [seances2, setSeances2] = useState([]);
     const [seances3, setSeances3] = useState([]);
@@ -118,9 +123,9 @@ function Stats() {
     const [infoPerf, setInfoPerf] = useState({})
     const [clickedDetail, setClickedDetail] = useState(false)
     const [exercice, setExercice] = useState({ exercice: { name: "title", ownExercice: "" } });
-    const [params3, setParams3] = useState({ id: localStorage.getItem("id"), top: 5, class: "reps", date: "md", reforme: "pie", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" })
-    const [params2, setParams2] = useState({ id: localStorage.getItem("id"), date: "md", reforme: "true", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceMuscle: "title", exerciceOwnExercice: "" })
-    const [params1, setParams1] = useState({ id: localStorage.getItem("id"), date: "md", reforme: "poids", nom: "", periode: "max", tri: "Ordre chronologique croissant", repsFrom: "", repsTo: "", exerciceName: "title", exerciceOwnExercice: "" })
+    const [params3, setParams3] = useState(initialParams3)
+    const [params2, setParams2] = useState(initialParams2)
+    const [params1, setParams1] = useState(initialParams1)
     const [user, setUser] = useState()
     const [reguScore, setReguScore] = useState();
     const [ReguHiddenClick, setReguHiddenClick] = useState('hide')
@@ -381,7 +386,7 @@ function Stats() {
         <div>
             <NavigBar />
 
-            {seances1.length === 0 ?
+            {seances1.length === 0 && seances2.length === 0 && seances3.length === 0 ?
                 <div className="Travaux-div">
                     <h1>Rien à afficher ici ! </h1>
 
