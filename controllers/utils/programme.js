@@ -2,38 +2,6 @@ const Comment = require("../../schema/schemaComment.js");
 const Like = require("../../schema/schemaLike.js");
 
 function getConditions(req) {
-    //     {
-    //         commentedByMe: true,
-    //         likedByMe: true,
-    //         ownedByMe: true,
-    //         type: {
-    //           id: 'type',
-    //           label: 'Poids du corps',
-    //           value: 'Poids du corps',
-    //           name: 'Type de programme'
-    //         },
-    //         niveau: {
-    //           id: 'niveaux',
-    //           label: 'Intermédiaire',
-    //           value: 'Intermédiaire',
-    //           name: 'Niveaux'
-    //         },
-    //         tri: { label: 'Les plus récents', value: 'mostRecent' },
-    //         dureeMax: '45',
-    //         seancesParSemaine: '256',
-    //         programmeId: '638631bc62cdec70045197f1',
-    //         createdBy: '638631bc62cdec70045197f1',
-    //         materiel: [
-    //           {
-    //             id: 'materiel',
-    //             label: 'Aucun materiel',
-    //             value: 'Aucun materiel',
-    //             name: 'Materiel'
-    //           }
-    //         ]
-    //         id: '6391b8256622de5dcc9c7a36'
-    //      }
-
     console.log("body", req.body)
     console.log("type", typeof req.body)
     console.log("keys", Object.keys(req.body))
