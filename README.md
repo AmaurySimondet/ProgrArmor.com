@@ -33,3 +33,10 @@ This project is my property only and you can't share it for commercial purpose. 
 
 ## TODO
 - Ne plus avoir à changer entre localhost et prograrmor.com
+
+## Deployment
+- update package.json and package-lock.json
+- npm run build
+- download repository from github
+- load repository on server public_html
+- unzip and rename folder to ProgrArmor
