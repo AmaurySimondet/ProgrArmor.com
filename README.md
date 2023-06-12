@@ -32,7 +32,6 @@ This project is my property only and you can't share it for commercial purpose. 
 **Merci / Thank you!** 🚀
 
 ## TODO
-- Ne plus avoir à changer entre localhost et prograrmor.com
 
 ## Deployment
 - update package.json and package-lock.json
