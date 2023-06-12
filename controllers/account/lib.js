@@ -6,9 +6,10 @@ const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 const stringSimilarity = require('string-similarity');
 require('dotenv').config();
+const DEV = false;
 
-const url = "http://localhost:8800" // http://localhost:8800 https://prograrmorprealpha1.herokuapp.com
-const url2 = "http://localhost:3000" // http://localhost:3000 https://prograrmorprealpha1.herokuapp.com
+const url = DEV ? "http://localhost:8800" : "https://www.prograrmor.com"
+const url_client = DEV ? "http://localhost:3000" : "https://www.prograrmor.com"
 
 const app = express();
 
@@ -73,7 +74,7 @@ async function facebookAuthenticate(req, res) {
         passport.authenticate("facebook")(req, res, function (err) {
             if (req.user) {
                 const token = jwt.sign({ id: req.user._id }, process.env.secret, { expiresIn: "24h" });
-                res.redirect(url2 + '/token?token=' + token);
+                res.redirect(url_client + '/token?token=' + token);
             }
             else {
                 console.log(err)
@@ -143,7 +144,7 @@ async function googleAuthenticate(req, res) {
         passport.authenticate("google")(req, res, function (err) {
             if (req.user) {
                 const token = jwt.sign({ id: req.user._id }, process.env.secret, { expiresIn: "24h" });
-                res.redirect(url2 + '/token?token=' + token);
+                res.redirect(url_client + '/token?token=' + token);
             }
             else {
                 console.log(err)

@@ -1,7 +1,8 @@
 import React from "react";
+import { DEV } from "../App";
 
 function BoutonsSociaux(props) {
-  const url = "http://localhost:8800" // http://localhost:8800 http://localhost:8800
+  const url = DEV ? "http://localhost:8800" : "https://www.prograrmor.com";
 
   return (
     <div>

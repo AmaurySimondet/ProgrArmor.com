@@ -30,3 +30,6 @@ I love receiving feedback ! I'm always looking to improve my projects. So if you
 This project is my property only and you can't share it for commercial purpose. However, you can share it with anyone who will find it useful for practice or as my portfolio.
 
 **Merci / Thank you!** 🚀
+
+## TODO
+- Ne plus avoir à changer entre localhost et prograrmor.com
