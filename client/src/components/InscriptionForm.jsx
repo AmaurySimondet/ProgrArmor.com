@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import API from '../utils/API';
 
 function containsSC(str) {
+  // eslint-disable-next-line
   const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
   return specialChars.test(str);
 }
@@ -140,7 +141,7 @@ function InscriptionForm() {
         </div>
       </div>
       <p className="p-cgu">
-        En cliquant sur le bouton "Inscription" ci dessous, vous certifiez avoir
+        En cliquant sur le bouton &quot;Inscription&quot; ci dessous, vous certifiez avoir
         pris connaissance et approuvé nos CGU
       </p>
       <button

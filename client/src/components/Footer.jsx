@@ -1,6 +1,6 @@
-import { React, useState, useEffect, useRef } from 'react';
+import { React } from 'react';
 
-function Footer(props) {
+function Footer() {
   return (
     <div>
       <footer className="footer footer-black">

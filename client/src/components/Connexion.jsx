@@ -148,7 +148,7 @@ function Connexion() {
     <div>
       <HomeHeader />
 
-      <div className="tr-connexion">
+      <div className="tr-connexion min-height">
         {dimensions.width > 900 ? (
           <div className="connexion-img-div" style={{ flexBasis: '35%' }}>
             <img

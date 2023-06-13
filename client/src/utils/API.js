@@ -3,7 +3,7 @@ const headers = {
   'Content-Type': 'application/json',
 };
 const DEV = true;
-const burl = DEV ? 'http://localhost:8800' : 'https://www.prograrmor.com';
+const burl = DEV ? 'http://10.0.51.241:8800' : 'https://www.prograrmor.com';
 
 function paramsToString(params) {
   let string = '';

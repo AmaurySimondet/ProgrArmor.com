@@ -35,8 +35,7 @@ This project is my property only and you can't share it for commercial purpose. 
 ## TODO
 
 ## Before comitting
-- npx prettier --write .
-- npx eslint --ext .js,.jsx .  
+- npx prettier --write . 
 
 ## Deployment
 

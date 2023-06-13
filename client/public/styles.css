@@ -158,7 +158,7 @@ img {
   margin: auto;
 }
 
-.css-b62m3t-container > * {
+.css-b62m3t-container>* {
   height: 50px;
 }
 
@@ -913,7 +913,7 @@ table.Stats-table {
   width: 80px;
 }
 
-.navbar-light .navbar-nav .active > .nav-link {
+.navbar-light .navbar-nav .active>.nav-link {
   color: white;
 }
 
@@ -1584,6 +1584,10 @@ table.hometable td.inscription-img-td {
 }
 
 /* PROFIL */
+
+.min-height {
+  min-height: 80vh;
+}
 
 .basic-flex2 {
   display: flex;

@@ -8,8 +8,8 @@ const stringSimilarity = require('string-similarity');
 require('dotenv').config();
 const DEV = true;
 
-const url = DEV ? 'http://localhost:8800' : 'https://www.prograrmor.com';
-const url_client = DEV ? 'http://localhost:3000' : 'https://www.prograrmor.com';
+const url = DEV ? 'http://10.0.51.241:8800' : 'https://www.prograrmor.com';
+const url_client = DEV ? 'http://10.0.51.241:3000' : 'https://www.prograrmor.com';
 
 const app = express();
 

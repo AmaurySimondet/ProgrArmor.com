@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom';
 import API from '../utils/API.js';
 
 function Token() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   async function createTokenAndId() {
     const result = await API.verifyToken({ token: searchParams.get('token') });

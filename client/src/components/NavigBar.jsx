@@ -1,4 +1,16 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import logoNavbar from '../images/icons/logo-navbar.webp';
+import threeLines from '../images/icons/output-onlinepngtools.webp'
+import home from '../images/icons/home.webp'
+import write from '../images/icons/write.webp'
+import chart from '../images/icons/chart.webp'
+import plus from '../images/icons/plus.webp'
+import social from '../images/icons/social.webp'
+import accomplissements from '../images/icons/accomplissements.webp'
+import notifications from '../images/icons/notifications.webp'
+import gear from '../images/icons/gear.webp'
 
 function NavigBar(props) {
   const [gearIsClicked, setGearIsClicked] = useState(false);
@@ -59,7 +71,7 @@ function NavigBar(props) {
           <a className="navbar-brand" href="/dashboard">
             <img
               className="logo-navbar"
-              src={require('../images/icons/logo-navbar.webp')}
+              src={logoNavbar}
               alt="logo"
             />
           </a>
@@ -72,8 +84,8 @@ function NavigBar(props) {
                 toggled ? 'toggler-icon scaled' : 'toggler-icon not-scaled'
               }
               onClick={toggling}
-              src={require('../images/icons/output-onlinepngtools.webp')}
-              alt="logo"
+              src={threeLines}
+              alt="threeLines"
             />
 
             <div>
@@ -99,7 +111,7 @@ function NavigBar(props) {
                       <a className="nav-link" href="/dashboard">
                         <img
                           className="icon-navbar"
-                          src={require('../images/icons/home.webp')}
+                          src={home}
                           alt="home"
                         />
                       </a>
@@ -110,7 +122,7 @@ function NavigBar(props) {
                       <a className="nav-link" href="/session">
                         <img
                           className="icon-navbar"
-                          src={require('../images/icons/write.webp')}
+                          src={write}
                           alt="session"
                         />
                       </a>
@@ -121,7 +133,7 @@ function NavigBar(props) {
                       <a className="nav-link" href="/stats">
                         <img
                           className="icon-navbar"
-                          src={require('../images/icons/chart.webp')}
+                          src={chart}
                           alt="stats"
                         />
                       </a>
@@ -132,7 +144,7 @@ function NavigBar(props) {
                       <a className="nav-link" href="/programme">
                         <img
                           className="icon-navbar"
-                          src={require('../images/icons/plus.webp')}
+                          src={plus}
                           alt="programme"
                         />
                       </a>
@@ -143,7 +155,7 @@ function NavigBar(props) {
                       <a className="nav-link" href="/social">
                         <img
                           className="icon-navbar"
-                          src={require('../images/icons/social.webp')}
+                          src={social}
                           alt="social"
                         />
                       </a>
@@ -154,7 +166,7 @@ function NavigBar(props) {
                       <a className="nav-link" href="/accomplissements">
                         <img
                           className="icon-navbar"
-                          src={require('../images/icons/accomplissements.webp')}
+                          src={accomplissements}
                           alt="accomplissements"
                         />
                       </a>
@@ -165,7 +177,7 @@ function NavigBar(props) {
                       <a className="nav-link" href="/notifications">
                         <img
                           className="icon-navbar"
-                          src={require('../images/icons/notifications.webp')}
+                          src={notifications}
                           alt="notifications"
                         />
                       </a>
@@ -227,7 +239,7 @@ function NavigBar(props) {
             <a className="navbar-brand" href="/dashboard">
               <img
                 className="logo-navbar"
-                src={require('../images/icons/logo-navbar.webp')}
+                src={logoNavbar}
                 alt="logo"
               />
             </a>
@@ -240,7 +252,7 @@ function NavigBar(props) {
                   <a className="nav-link" href="/dashboard">
                     <img
                       className="icon-navbar"
-                      src={require('../images/icons/home.webp')}
+                      src={home}
                       alt="home"
                     />
                   </a>
@@ -249,7 +261,7 @@ function NavigBar(props) {
                   <a className="nav-link" href="/session">
                     <img
                       className="icon-navbar"
-                      src={require('../images/icons/write.webp')}
+                      src={write}
                       alt="session"
                     />
                   </a>
@@ -258,7 +270,7 @@ function NavigBar(props) {
                   <a className="nav-link" href="/stats">
                     <img
                       className="icon-navbar"
-                      src={require('../images/icons/chart.webp')}
+                      src={chart}
                       alt="stats"
                     />
                   </a>
@@ -267,7 +279,7 @@ function NavigBar(props) {
                   <a className="nav-link" href="/programme">
                     <img
                       className="icon-navbar"
-                      src={require('../images/icons/plus.webp')}
+                      src={plus}
                       alt="programme"
                     />
                   </a>
@@ -276,7 +288,7 @@ function NavigBar(props) {
                   <a className="nav-link" href="/social">
                     <img
                       className="icon-navbar"
-                      src={require('../images/icons/social.webp')}
+                      src={social}
                       alt="social"
                     />
                   </a>
@@ -286,7 +298,7 @@ function NavigBar(props) {
                     <img
                       style={{ width: '19px' }}
                       className="icon-navbar"
-                      src={require('../images/icons/accomplissements.webp')}
+                      src={accomplissements}
                       alt="accomplissements"
                     />
                   </a>
@@ -296,7 +308,7 @@ function NavigBar(props) {
                     <img
                       style={{ width: '19px' }}
                       className="icon-navbar"
-                      src={require('../images/icons/notifications.webp')}
+                      src={notifications}
                       alt="notifications"
                     />
                   </a>
@@ -309,7 +321,7 @@ function NavigBar(props) {
                           ? 'icon-navbar rotated'
                           : 'icon-navbar not-rotated'
                       }
-                      src={require('../images/icons/gear.webp')}
+                      src={gear}
                       alt="parametres"
                     />
                   </a>
@@ -410,5 +422,9 @@ function NavigBar(props) {
     </div>
   );
 }
+
+NavigBar.propTypes = {
+  show: PropTypes.bool.isRequired,
+};
 
 export default NavigBar;

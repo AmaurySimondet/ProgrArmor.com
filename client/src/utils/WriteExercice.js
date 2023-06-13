@@ -1,9 +1,8 @@
+import React from 'react';
+
 function writeSeries(series) {
   let sameReps = [];
   let sameCharge = [];
-
-  let reps = series[0].repsTime;
-  let charge = series[0].charge;
 
   for (let i = 0; i < series.length - 1; i++) {
     if (series[i].repsTime === series[i + 1].repsTime) {

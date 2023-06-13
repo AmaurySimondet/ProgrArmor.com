@@ -293,7 +293,7 @@ function seanceContainErr(seance, programme = false) {
       });
     });
 
-    seance.details.forEach((detail, index) => {
+    seance.details.forEach((detail) => {
       if (
         !detail.name ||
         detail.name === '' ||

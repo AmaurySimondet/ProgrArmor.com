@@ -2,7 +2,7 @@ import React from 'react';
 import { DEV } from '../App';
 
 function BoutonsSociaux(props) {
-  const url = DEV ? 'http://localhost:8800' : 'https://www.prograrmor.com';
+  const url = DEV ? 'http://10.0.51.241:8800' : 'https://www.prograrmor.com';
 
   return (
     <div>

@@ -25,7 +25,7 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
 
 function Session() {
   const [switched, setSwitched] = useState();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [seance, setSeance] = useState();
   const [user, setUser] = useState();
   const [dimensions, setDimensions] = useState({
@@ -162,14 +162,14 @@ function Session() {
                     ? seance
                     : DebutantToExpert(seance)
                   : {
-                      id: uuidv4(),
-                      date: '',
-                      poids: '',
-                      exercices: [],
-                      nom: {},
-                      echauffements: [],
-                      details: [],
-                    }
+                    id: uuidv4(),
+                    date: '',
+                    poids: '',
+                    exercices: [],
+                    nom: {},
+                    echauffements: [],
+                    details: [],
+                  }
               }
               modeSombre={user && user.modeSombre ? true : false}
               dimensions={dimensions}

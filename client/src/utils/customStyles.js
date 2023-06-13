@@ -27,20 +27,20 @@ const customStylesMini = {
     boxShadow: state.isFocused ? null : null,
   }),
 
-  valueContainer: (provided, state) => ({
+  valueContainer: (provided) => ({
     ...provided,
     height: '20px',
     padding: '0 6px',
   }),
 
-  input: (provided, state) => ({
+  input: (provided) => ({
     ...provided,
     margin: '0px',
   }),
-  indicatorSeparator: (state) => ({
+  indicatorSeparator: () => ({
     display: 'none',
   }),
-  indicatorsContainer: (provided, state) => ({
+  indicatorsContainer: (provided) => ({
     ...provided,
     height: '20px',
     marginTop: '-1px',
@@ -78,16 +78,16 @@ const customStylesDark = {
     margin: '0px',
   }),
 
-  valueContainer: (provided, state) => ({
+  valueContainer: (provided) => ({
     ...provided,
     height: '38px',
     padding: '0 6px',
   }),
 
-  indicatorSeparator: (state) => ({
+  indicatorSeparator: () => ({
     display: 'none',
   }),
-  indicatorsContainer: (provided, state) => ({
+  indicatorsContainer: (provided) => ({
     ...provided,
     height: '38px',
   }),
@@ -112,7 +112,7 @@ const customStylesDarkMini = {
     boxShadow: state.isFocused ? null : null,
   }),
 
-  valueContainer: (provided, state) => ({
+  valueContainer: (provided) => ({
     ...provided,
     height: '20px',
     padding: '0 6px',
@@ -127,17 +127,17 @@ const customStylesDarkMini = {
     color: 'white',
   }),
 
-  input: (provided, state) => ({
+  input: (provided) => ({
     ...provided,
     margin: '0px',
     color: 'white',
   }),
 
-  indicatorSeparator: (state) => ({
+  indicatorSeparator: () => ({
     display: 'none',
   }),
 
-  indicatorsContainer: (provided, state) => ({
+  indicatorsContainer: (provided) => ({
     ...provided,
     height: '20px',
     marginTop: '-1px',

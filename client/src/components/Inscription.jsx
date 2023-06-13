@@ -5,6 +5,8 @@ import InscriptionForm from './InscriptionForm.jsx';
 import Footer from './Footer.jsx';
 import API from '../utils/API.js';
 
+import inscription from '../images/inscription.webp'
+
 function Inscription() {
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
@@ -158,8 +160,8 @@ function Inscription() {
             dimensions.width > 900
               ? 'basic-flexed'
               : dimensions.width < 500
-              ? 'basic-noflexed500'
-              : 'basic-noflexed'
+                ? 'basic-noflexed500'
+                : 'basic-noflexed'
           }
           style={{ textAlign: 'center', height: '650px' }}
         >
@@ -184,7 +186,7 @@ function Inscription() {
           style={dimensions.width < 900 ? { height: '400px' } : null}
           ref={dimensions.width < 900 ? div1 : null}
         >
-          <img src={require('../images/inscription.webp')} alt="ad" />
+          <img src={inscription} alt="ad" />
         </div>
       </div>
 
@@ -224,14 +226,14 @@ function Inscription() {
         >
           <div style={{ width: '90%', margin: 'auto' }}>
             <h1 className="h1-inscription">
-              Tu peux jeter ton cahier d'entraînement !
+              Tu peux jeter ton cahier d&rsquoentraînement !
             </h1>
             <h2 className="h2-inscription">
-              Ton historique d'entraînement te suivras partout. Tu pourras le
+              Ton historique d&rsquoentraînement te suivras partout. Tu pourras le
               consulter à tout moment. <br />
               <br />
               Avec les nombreuses options de filtrage, tu pourras retrouver tes
-              séances en un clin d'oeil. <br />
+              séances en un clin d&rsquooeil. <br />
               <br />
               Tu pourras aussi consulter tes statistiques et les comparer à
               celles de tes amis. <br />
@@ -270,8 +272,8 @@ function Inscription() {
               Ne perds pas ton temps à écrire tes séances, nous le faisons pour
               toi ! <br />
               <br />
-              ProgrArmor te propose de charger une séance précédente, tu n'auras
-              plus qu'a modifier les changements ! <br />
+              ProgrArmor te propose de charger une séance précédente, tu n&rsquoauras
+              plus qu&rsquoa modifier les changements ! <br />
               <br />
               Tu peux aussi créer tes propres séances avec le mode prise de note
               rapide ! <br />
@@ -331,7 +333,7 @@ function Inscription() {
               Trouves le programme parfait parmis ceux de la communauté, ou
               créer le tiens et obtiens des commentaires pertinents ! <br />
               <br />
-              Suis tes amis et charies les s'ils ne progressent pas ! <br />
+              Suis tes amis et charies les s&rsquoils ne progressent pas ! <br />
               <br />
             </h2>
           </div>
@@ -369,7 +371,7 @@ function Inscription() {
             </h1>
             <h2 className="h2-inscription">
               Utilises ProgrArmor dès maintenant et améliore ta pratique
-              sportive, c'est gratuit. <br />
+              sportive, c&rsquoest gratuit. <br />
               <br />
               <button className="btn btn-lg btn-dark" onClick={scrollToTop}>
                 Je suis prêt !
