@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const findOrCreate = require('mongoose-findorcreate');
-const passportLocalMongoose = require("passport-local-mongoose");
+const passportLocalMongoose = require('passport-local-mongoose');
 const { Schema } = mongoose;
 
 const userSchema = mongoose.Schema(
@@ -12,34 +12,34 @@ const userSchema = mongoose.Schema(
       lowercase: true,
       trim: true,
       unique: true,
-      required: true
+      required: true,
     },
     fName: {
       type: String,
       trim: true,
       required: true,
-      unique: false
+      unique: false,
     },
     lName: {
       type: String,
       trim: true,
       required: true,
-      unique: false
+      unique: false,
     },
     profilePic: {
-      type: String
+      type: String,
     },
     modeSombre: {
-      type: Boolean
+      type: Boolean,
     },
     seances: Array,
     checkItems: Object,
     programmes: [{ type: Schema.Types.ObjectId, ref: 'Programme' }],
   },
-  { timestamps: { createdAt: "created_at" } }
+  { timestamps: { createdAt: 'created_at' } }
 );
 
-userSchema.plugin(passportLocalMongoose, { usernameField: "email" });
+userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 userSchema.plugin(findOrCreate);
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

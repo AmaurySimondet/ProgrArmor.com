@@ -1,10 +1,10 @@
-import { React, useState } from "react";
-import API from "../utils/API";
+import { React, useState } from 'react';
+import API from '../utils/API';
 
 function ConnexionForm(props) {
   const stateNull = {
-    email: "",
-    password: ""
+    email: '',
+    password: '',
   };
 
   const [state, setState] = useState(stateNull);
@@ -15,37 +15,40 @@ function ConnexionForm(props) {
     const { email, password } = state;
 
     if (!email || email.length === 0) {
-      return alert("Donne moi ton email !");
+      return alert('Donne moi ton email !');
     }
     if (!password || password.length === 0) {
-      return alert("Donne moi un mot de passe (pas pourrie de préférence) !");
+      return alert('Donne moi un mot de passe (pas pourrie de préférence) !');
     }
     try {
       const { data } = await API.login(email, password);
       if (data.success === true) {
-        console.log(data)
-        window.location = "/token?token=" + data.token;
-      } else { alert(data.message); }
+        console.log(data);
+        window.location = '/token?token=' + data.token;
+      } else {
+        alert(data.message);
+      }
     } catch (error) {
       alert(error);
     }
-  };
+  }
 
   function handleChange(event) {
-    setState(oldState => {
-      return ({
+    setState((oldState) => {
+      return {
         ...oldState,
-        [event.target.id]: event.target.value
-      });
+        [event.target.id]: event.target.value,
+      };
     });
-  };
+  }
 
   return (
     <div>
       <div className="form-group row large-margin-top">
         <label className="col-sm-2 col-form-label">Email</label>
         <div className="col-sm-10">
-          <input type="email"
+          <input
+            type="email"
             className="form-control"
             placeholder="pasdeproces@lasauce.com"
             id="email"
@@ -71,13 +74,22 @@ function ConnexionForm(props) {
         </div>
       </div>
 
-      <p onClick={props.handleClickMdp}
-        className="basic-margin-bottom mdpOublié">
-        Mot de passe oublié ?</p>
+      <p
+        onClick={props.handleClickMdp}
+        className="basic-margin-bottom mdpOublié"
+      >
+        Mot de passe oublié ?
+      </p>
 
-      <button className="btn btn-lg btn-dark" onClick={handleClick} type="submit">Connexion</button>
+      <button
+        className="btn btn-lg btn-dark"
+        onClick={handleClick}
+        type="submit"
+      >
+        Connexion
+      </button>
     </div>
-  )
+  );
 }
 
 export default ConnexionForm;

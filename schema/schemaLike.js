@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const likeSchema = mongoose.Schema(
@@ -11,7 +11,7 @@ const likeSchema = mongoose.Schema(
     programme: { type: Schema.Types.ObjectId, ref: 'Programme' },
     user: { type: Schema.Types.ObjectId, ref: 'User' },
   },
-  { timestamps: { createdAt: "created_at" } }
+  { timestamps: { createdAt: 'created_at' } }
 );
 
-module.exports = mongoose.model("Like", likeSchema);
+module.exports = mongoose.model('Like', likeSchema);

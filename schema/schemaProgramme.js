@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const programmeSchema = mongoose.Schema(
@@ -11,23 +11,23 @@ const programmeSchema = mongoose.Schema(
     createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
     materiel: {
       type: Array,
-      required: true
+      required: true,
     },
     programme: {
       type: Array,
-      required: true
+      required: true,
     },
     type: {
       type: String,
-      required: true
+      required: true,
     },
     niveau: {
       type: String,
-      required: true
+      required: true,
     },
     duree: {
       type: String,
-      required: true
+      required: true,
     },
     description: {
       type: String,
@@ -37,17 +37,16 @@ const programmeSchema = mongoose.Schema(
     },
     seancesSemaine: {
       type: Number,
-      required: true
+      required: true,
     },
     seancesTotal: {
       type: Number,
-      required: true
+      required: true,
     },
     likes: [{ type: Schema.Types.ObjectId, ref: 'Like' }],
-    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
-
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   },
-  { timestamps: { createdAt: "created_at" } }
+  { timestamps: { createdAt: 'created_at' } }
 );
 
-module.exports = mongoose.model("Programme", programmeSchema);
+module.exports = mongoose.model('Programme', programmeSchema);

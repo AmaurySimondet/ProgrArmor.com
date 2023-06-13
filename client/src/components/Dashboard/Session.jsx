@@ -1,15 +1,15 @@
-import { React, useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
-import NavigBar from "../NavigBar.jsx"
-import DebutantForm from "./DebutantForm.jsx"
-import ExpertForm from "./ExpertForm.jsx"
-import API from "../../utils/API.js";
+import { React, useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import NavigBar from '../NavigBar.jsx';
+import DebutantForm from './DebutantForm.jsx';
+import ExpertForm from './ExpertForm.jsx';
+import API from '../../utils/API.js';
 import { alpha, styled } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
-import Footer from "../Footer.jsx";
+import Footer from '../Footer.jsx';
 import { v4 as uuidv4 } from 'uuid';
-import PriseDeNote from "./PriseDeNote.jsx"
+import PriseDeNote from './PriseDeNote.jsx';
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
@@ -30,8 +30,8 @@ function Session() {
   const [user, setUser] = useState();
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
-    width: window.innerWidth
-  })
+    width: window.innerWidth,
+  });
   const [priseDeNote, setPriseDeNote] = useState(false);
 
   function handlePriseDeNote() {
@@ -42,19 +42,19 @@ function Session() {
     function handleResize() {
       setDimensions({
         height: window.innerHeight,
-        width: window.innerWidth
-      })
+        width: window.innerWidth,
+      });
     }
 
     var timeout = false;
     window.addEventListener('resize', function () {
-      clearTimeout(timeout);;
+      clearTimeout(timeout);
       timeout = setTimeout(handleResize, 200);
     });
-  })
+  });
 
   async function getUser() {
-    const { data } = await API.getUser({ id: localStorage.getItem("id") });
+    const { data } = await API.getUser({ id: localStorage.getItem('id') });
     if (data.success === false) {
       alert(data.message);
     } else {
@@ -64,49 +64,47 @@ function Session() {
         document.body.classList.add('darkMode');
       }
       setUser(data.profile);
-    };
+    }
   }
 
   async function loadSeanceIfParams() {
-
-    if (searchParams.get("seanceId")) {
-      const { data } = await API.loadSeance({ seanceId: searchParams.get("seanceId") });
+    if (searchParams.get('seanceId')) {
+      const { data } = await API.loadSeance({
+        seanceId: searchParams.get('seanceId'),
+      });
 
       if (data.success === false) {
-        if (data.message === "Aucune séance !") {
+        if (data.message === 'Aucune séance !') {
           console.log(data.message);
+        } else {
+          alert(data.message);
         }
-        else { alert(data.message); }
-      }
-
-      else {
+      } else {
         if (data.seance) {
           if (data.seance.nom) {
-            setSwitched(true)
-            setSeance(data.seance)
-            console.log("seance from params", data.seance)
-          }
-          else {
-            setSwitched(false)
-            setSeance(data.seance)
-            console.log("seance from params", data.seance)
+            setSwitched(true);
+            setSeance(data.seance);
+            console.log('seance from params', data.seance);
+          } else {
+            setSwitched(false);
+            setSeance(data.seance);
+            console.log('seance from params', data.seance);
           }
         }
       }
-    }
-    else {
-      setSwitched(false)
+    } else {
+      setSwitched(false);
     }
   }
 
   function DebutantToExpert(seance) {
-    let expS = { ...seance, nom: {}, echauffements: [], details: [] }
+    let expS = { ...seance, nom: {}, echauffements: [], details: [] };
 
     expS.exercices.forEach((ex, indEx) => {
-      expS.exercices[indEx] = { ...ex, Categories: {} }
-    })
+      expS.exercices[indEx] = { ...ex, Categories: {} };
+    });
 
-    return expS
+    return expS;
   }
 
   useEffect(() => {
@@ -133,53 +131,67 @@ function Session() {
     <div>
       <NavigBar location="session" />
 
-      <button className={user && user.modeSombre ? "btn btn-black" : "btn btn-white"} style={{ margin: "20px" }} onClick={handlePriseDeNote}>
-        {!priseDeNote ? "Mode prise de note rapide" : "Mode normal"}
+      <button
+        className={user && user.modeSombre ? 'btn btn-black' : 'btn btn-white'}
+        style={{ margin: '20px' }}
+        onClick={handlePriseDeNote}
+      >
+        {!priseDeNote ? 'Mode prise de note rapide' : 'Mode normal'}
       </button>
 
-      {priseDeNote ?
+      {priseDeNote ? (
         <PriseDeNote submitNote={submitNote} modeSombre={user.modeSombre} />
-        :
+      ) : (
         <div className="session-div">
-
           <h1> Enregistre ta séance ! </h1>
 
           <p className="session-div-switch">
-            Débutant <GreenSwitch defaultChecked={seance ? !switched : switched} onChange={handleChange} /> Expert
+            Débutant{' '}
+            <GreenSwitch
+              defaultChecked={seance ? !switched : switched}
+              onChange={handleChange}
+            />{' '}
+            Expert
           </p>
 
-          {switched ?
+          {switched ? (
             <ExpertForm
               seance={
-                seance ?
-                  seance.nom ?
-                    seance
-                    :
-                    DebutantToExpert(seance)
-                  :
-                  { id: uuidv4(), date: "", poids: "", exercices: [], nom: {}, echauffements: [], details: [] }
+                seance
+                  ? seance.nom
+                    ? seance
+                    : DebutantToExpert(seance)
+                  : {
+                      id: uuidv4(),
+                      date: '',
+                      poids: '',
+                      exercices: [],
+                      nom: {},
+                      echauffements: [],
+                      details: [],
+                    }
               }
               modeSombre={user && user.modeSombre ? true : false}
-              dimensions={dimensions} />
-            :
+              dimensions={dimensions}
+            />
+          ) : (
             <DebutantForm
               loadExpert={loadExpert}
               seance={
-                seance ?
-                  seance
-                  :
-                  { id: uuidv4(), date: "", poids: "", exercices: [] }
+                seance
+                  ? seance
+                  : { id: uuidv4(), date: '', poids: '', exercices: [] }
               }
               modeSombre={user && user.modeSombre ? true : false}
-              dimensions={dimensions} />
-          }
-
+              dimensions={dimensions}
+            />
+          )}
         </div>
-      }
+      )}
 
       <Footer />
     </div>
   );
-};
+}
 
 export default Session;
