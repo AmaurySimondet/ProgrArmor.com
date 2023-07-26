@@ -35,10 +35,14 @@ This project is my property only and you can't share it for commercial purpose. 
 ## TODO
 
 ## Before comitting
-- npx prettier --write . 
+
+- npm run format
+- npm run lint
+- npm run flow
 
 ## Deployment
 
+- change DEV to false in controllers/account/lib.js, client/src/utils/API.js, client/src/App.js
 - update package.json and package-lock.json
 - npm run build
 - download repository from github
