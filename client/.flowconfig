@@ -1,0 +1,17 @@
+[ignore]
+; Ignore the node_modules folder
+.*/node_modules/.*
+
+[include]
+
+[libs]
+; Include the flow-typed definitions for React
+flow-typed
+
+[options]
+; Enable support for React specific syntax
+module.name_mapper='^react$' -> 'react/jsx-runtime'
+module.name_mapper='^react/(.*)$' -> 'react/jsx-runtime/(.*)'
+module.name_mapper='^react-dom$' -> 'react-dom/jsx-runtime'
+module.name_mapper='^react-dom/(.*)$' -> 'react-dom/jsx-runtime/(.*)'
+

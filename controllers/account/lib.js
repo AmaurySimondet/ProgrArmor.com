@@ -9,7 +9,9 @@ require('dotenv').config();
 const DEV = true;
 
 const url = DEV ? 'http://10.0.51.241:8800' : 'https://www.prograrmor.com';
-const url_client = DEV ? 'http://10.0.51.241:3000' : 'https://www.prograrmor.com';
+const url_client = DEV
+  ? 'http://10.0.51.241:3000'
+  : 'https://www.prograrmor.com';
 
 const app = express();
 
@@ -1937,8 +1939,8 @@ async function workouts(req, res) {
             if (seances[indexSeance].exercices[indexExercice].exercice.muscle) {
               namesList.push(
                 seances[indexSeance].exercices[indexExercice].exercice.name +
-                ' - ' +
-                seances[indexSeance].exercices[indexExercice].exercice.muscle
+                  ' - ' +
+                  seances[indexSeance].exercices[indexExercice].exercice.muscle
               );
               if (string !== 'sets') {
                 sumsList.push(
@@ -2769,7 +2771,7 @@ async function reguScore(req, res) {
           (this.getTime() -
             newYear.getTime() -
             (this.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) /
-          86400000
+            86400000
         ) + 1;
       var weeknum;
       //if the year starts before the middle of a week

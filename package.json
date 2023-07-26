@@ -12,7 +12,10 @@
     "build-prev": "npm config set legacy-peer-deps true && cd client && npm run build",
     "build": "npm config set legacy-peer-deps true && npm run install-client && npm run build-prev",
     "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm config set legacy-peer-deps true && npm run install-client && npm run build"
+    "heroku-postbuild": "npm config set legacy-peer-deps true && npm run install-client && npm run build",
+    "format": "prettier --write \"**/*.js\"",
+    "flow": "cd client && flow",
+    "lint": "cd client && eslint ."
   },
   "dependencies": {
     "body-parser": "^1.18.2",
