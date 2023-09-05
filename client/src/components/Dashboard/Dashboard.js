@@ -374,7 +374,6 @@ function Dashboard() {
   }, [params]);
 
   function handleChange(event) {
-    console.log(event);
     if (event.target) {
       setParams((oldParams) => {
         return {
@@ -674,8 +673,8 @@ function Dashboard() {
                           ? customStylesDarkMini
                           : customStylesMini
                         : user.modeSombre === true
-                        ? customStylesDark
-                        : customStyles
+                          ? customStylesDark
+                          : customStyles
                     }
                     value={{ label: params.tri, value: params.tri }}
                   />
@@ -713,8 +712,8 @@ function Dashboard() {
                           ? customStylesDarkMini
                           : customStylesMini
                         : user.modeSombre === true
-                        ? customStylesDark
-                        : customStyles
+                          ? customStylesDark
+                          : customStyles
                     }
                     value={{ label: params.periode, value: params.periode }}
                   />
@@ -852,8 +851,8 @@ function Dashboard() {
                           ? customStylesDarkMini
                           : customStylesMini
                         : user.modeSombre === true
-                        ? customStylesDark
-                        : customStyles
+                          ? customStylesDark
+                          : customStyles
                     }
                     value={{ label: params.nom, value: params.nom }}
                   />
@@ -1164,8 +1163,8 @@ function Dashboard() {
                               ? customStylesDarkMini
                               : customStylesMini
                             : user.modeSombre === true
-                            ? customStylesDark
-                            : customStyles
+                              ? customStylesDark
+                              : customStyles
                         }
                         value={{ label: params.tri, value: params.tri }}
                       />
@@ -1211,8 +1210,8 @@ function Dashboard() {
                               ? customStylesDarkMini
                               : customStylesMini
                             : user.modeSombre === true
-                            ? customStylesDark
-                            : customStyles
+                              ? customStylesDark
+                              : customStyles
                         }
                         value={{ label: params.periode, value: params.periode }}
                       />
@@ -1350,8 +1349,8 @@ function Dashboard() {
                               ? customStylesDarkMini
                               : customStylesMini
                             : user.modeSombre === true
-                            ? customStylesDark
-                            : customStyles
+                              ? customStylesDark
+                              : customStyles
                         }
                         value={{ label: params.nom, value: params.nom }}
                       />
@@ -1876,7 +1875,7 @@ function Dashboard() {
                                     if (exercice.Categories) {
                                       if (
                                         Object.values(exercice.Categories)[
-                                          index
+                                        index
                                         ]
                                       ) {
                                         if (

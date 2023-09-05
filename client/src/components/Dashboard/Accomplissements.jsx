@@ -30,7 +30,6 @@ function Accomplissements() {
     if (data.success === false) {
       alert(data.message);
     } else {
-      console.log(data.profile);
       if (data.profile.modeSombre && data.profile.modeSombre === true) {
         // 👇 add class to body element
         document.body.classList.add('darkMode');
@@ -75,9 +74,6 @@ function Accomplissements() {
     if (data.success === false) {
       console.log(data.message);
     } else {
-      // console.log(data);
-      // console.log(Object.values(data.checkItems).length)
-      console.log('checkItems', data.checkItems);
       setCheckedItems(data.checkItems);
 
       setAccomplissements(
@@ -91,7 +87,6 @@ function Accomplissements() {
   }
 
   function handleChange(event) {
-    // console.log(event);
     if (event.name === 'Niveaux') {
       setSelectedNiveau(event);
     } else if (event.name === 'Type de programme') {
@@ -194,8 +189,8 @@ function Accomplissements() {
                     ? { marginTop: '20px', width: '90%' }
                     : { marginTop: '20px', width: '90%', background: '#aaaaaa' }
                   : user.modeSombre
-                  ? { marginTop: '20px', width: '60%' }
-                  : { marginTop: '20px', width: '60%', background: '#aaaaaa' }
+                    ? { marginTop: '20px', width: '60%' }
+                    : { marginTop: '20px', width: '60%', background: '#aaaaaa' }
               }
             >
               <img
@@ -250,7 +245,7 @@ function Accomplissements() {
                           accomplissements.length /
                           Object.values(checkedItems).length
                         ).toFixed(2) *
-                          100 +
+                        100 +
                         '%',
                     }}
                   ></div>
@@ -272,8 +267,8 @@ function Accomplissements() {
                     ? customStylesDarkMini
                     : customStylesMini
                   : user.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               placeholder="Niveau"
             />
@@ -289,8 +284,8 @@ function Accomplissements() {
                     ? customStylesDarkMini
                     : customStylesMini
                   : user.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               placeholder="Type"
             />

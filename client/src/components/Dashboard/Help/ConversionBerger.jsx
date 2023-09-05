@@ -107,8 +107,6 @@ function ConversionBerger(props) {
         setTextPerf('Veuillez entrer un nombre de répétitions entre 1 et 15');
       }
 
-      console.log('perfReps', perfReps);
-
       if (perfReps >= objectiveReps) {
         if (perfPdc >= objectivePdc) {
           checkTemp = 1;
@@ -124,7 +122,7 @@ function ConversionBerger(props) {
   return (
     <div>
       <div className="grid-test large-margin-bottom">
-        <div>{}</div>
+        <div>{ }</div>
         <label className="">Reps</label>
         <label className="">Charge en % PDC</label>
         <label className="">% PDC converti</label>
@@ -153,8 +151,8 @@ function ConversionBerger(props) {
           value={pdc}
           onChange={(e) => setPdc(e.target.value)}
         />
-        <div>{}</div>
-        <div>{}</div>
+        <div>{ }</div>
+        <div>{ }</div>
 
         <label className="">
           {dimensions.width <= 500 ? 'Obje -ctif' : 'Objectif'}

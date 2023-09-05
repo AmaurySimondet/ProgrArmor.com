@@ -157,10 +157,8 @@ function CategorieInput(props) {
   }
 
   function handleChange(event) {
-    // console.log("event", event)
 
     if (event.target) {
-      // console.log(event.target.id, event.target.value)
       setCategorie((oldCategorie) => {
         return {
           ...oldCategorie,
@@ -178,7 +176,6 @@ function CategorieInput(props) {
         });
       }
       if (event.id && event.id !== 'muscle') {
-        // console.log(event.id, event.value, event.name)
         setCategorie((oldCategorie) => {
           return {
             ...oldCategorie,
@@ -286,8 +283,8 @@ function CategorieInput(props) {
                 ? customStylesDarkMini
                 : customStylesMini
               : props.modeSombre === true
-              ? customStylesDark
-              : customStyles
+                ? customStylesDark
+                : customStyles
           }
           value={{ value: categorie.name, label: categorie.name }}
         />
@@ -354,8 +351,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             className={props.info === 'dash' ? 'col-10' : ' col-12'}
             value={{ value: categorie.name, label: categorie.name }}
@@ -375,8 +372,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.name, label: categorie.name }}
           />
@@ -411,8 +408,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.name, label: categorie.name }}
@@ -446,8 +443,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -479,8 +476,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -513,8 +510,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -533,8 +530,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -567,8 +564,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -587,8 +584,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -621,8 +618,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -641,8 +638,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -675,8 +672,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -695,8 +692,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -729,8 +726,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -749,8 +746,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -783,8 +780,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -803,8 +800,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -837,8 +834,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -857,8 +854,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -891,8 +888,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -911,8 +908,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -945,8 +942,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -965,8 +962,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -999,8 +996,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1019,8 +1016,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1053,8 +1050,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1073,8 +1070,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1107,8 +1104,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1127,8 +1124,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1161,8 +1158,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1181,8 +1178,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1264,8 +1261,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1284,8 +1281,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1318,8 +1315,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1338,8 +1335,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1372,8 +1369,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1392,8 +1389,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1426,8 +1423,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1446,8 +1443,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1480,8 +1477,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1500,8 +1497,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1534,8 +1531,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1554,8 +1551,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1588,8 +1585,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1608,8 +1605,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1642,8 +1639,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1662,8 +1659,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1696,8 +1693,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1716,8 +1713,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1750,8 +1747,8 @@ function CategorieInput(props) {
                   ? customStylesDarkMini
                   : customStylesMini
                 : props.modeSombre === true
-                ? customStylesDark
-                : customStyles
+                  ? customStylesDark
+                  : customStyles
             }
             value={{ value: categorie.input, label: categorie.input }}
           />
@@ -1770,8 +1767,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               value={{ value: categorie.input, label: categorie.input }}
@@ -1804,8 +1801,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               options={[
@@ -1849,8 +1846,8 @@ function CategorieInput(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
               className={props.info === 'dash' ? 'col-10' : ' col-11'}
               options={[
@@ -1920,8 +1917,8 @@ function CategorieInput(props) {
                       ? customStylesDarkMini
                       : customStylesMini
                     : props.modeSombre === true
-                    ? customStylesDark
-                    : customStyles
+                      ? customStylesDark
+                      : customStyles
                 }
                 className={props.info === 'dash' ? 'col-10' : ' col-11'}
                 options={[
@@ -1964,8 +1961,8 @@ function CategorieInput(props) {
                       ? customStylesDarkMini
                       : customStylesMini
                     : props.modeSombre === true
-                    ? customStylesDark
-                    : customStyles
+                      ? customStylesDark
+                      : customStyles
                 }
                 className={props.info === 'dash' ? 'col-10' : ' col-11'}
                 value={{ value: categorie.input, label: categorie.input }}

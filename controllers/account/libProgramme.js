@@ -13,7 +13,6 @@ const app = express();
 async function create(req, res) {
   // Validate request
   if (!req.body || !req.body.programme || !req.body.materiel) {
-    console.log(req.body);
     return res.json({
       success: false,
       message: 'Un ou plusieurs éléments non donnés',
@@ -64,8 +63,6 @@ exports.getProgrammes = (req, res) => {
     conditions = getConditions(req);
   }
 
-  console.log('conditions', conditions);
-
   Programme.find(conditions)
     .populate('likes')
     .populate('comments')
@@ -73,9 +70,6 @@ exports.getProgrammes = (req, res) => {
       if (err) {
         return res.json({ success: false, message: err });
       } else {
-        data.forEach((programme) => {
-          console.log(programme._doc.likes.length);
-        });
         if (req.body.tri) {
           if (req.body.tri.value === 'mostLiked') {
             data.sort((a, b) => b._doc.likes.length - a._doc.likes.length);
@@ -220,7 +214,6 @@ exports.deleteProgramme = (req, res) => {
 //get programme by user id
 exports.getProgrammesByUser = (req, res) => {
   let conditions = { createdBy: req.body.userId };
-  // console.log(conditions)
 
   //trouver le programme
   Programme.find(conditions, function (err, data) {

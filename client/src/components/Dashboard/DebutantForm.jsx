@@ -13,8 +13,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSearchParams } from 'react-router-dom';
 
 function DebutantForm(props) {
-  // console.log("debutant seance from props", props.seance)
-
   const [seance, setSeance] = useState(props.seance);
   const [params, setParams] = useState({ load: '' });
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,8 +21,6 @@ function DebutantForm(props) {
     event.preventDefault();
     let emptySerie = false;
     let err = false;
-
-    console.log('debutant recording seance', seance);
 
     //CONDITIONS
     if (seance.date === '' && err === false) {
@@ -76,7 +72,6 @@ function DebutantForm(props) {
     //API
     if (err === false) {
       let data;
-      console.log(searchParams.get('seanceId'));
 
       if (searchParams.get('seanceId')) {
         data = await API.debutantform({
@@ -84,8 +79,6 @@ function DebutantForm(props) {
           seanceId: searchParams.get('seanceId'),
           id: localStorage.getItem('id'),
         });
-
-        console.log(data.data);
 
         if (data.data.success === true) {
           window.location = '/dashboard';
@@ -201,12 +194,10 @@ function DebutantForm(props) {
     const { data } = await API.loadSeance(params);
     if (data.success === false) {
       if (data.message === 'Aucune séance !') {
-        console.log(data.message);
       } else {
         alert(data.message);
       }
     } else {
-      console.log('loaded seance', data.seance);
       if (data.seance) {
         if (data.seance.nom) {
           props.loadExpert(data.seance);
@@ -254,8 +245,8 @@ function DebutantForm(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                  ? customStylesDark
-                  : customStyles
+                    ? customStylesDark
+                    : customStyles
               }
             />
           </div>

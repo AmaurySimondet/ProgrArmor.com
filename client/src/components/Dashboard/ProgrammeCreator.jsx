@@ -62,7 +62,6 @@ function ProgrammeCreator(props) {
       } else {
         if (data.programme) {
           setProgramme(data.programme);
-          console.log('programme', data.programme);
         }
       }
     }
@@ -148,14 +147,7 @@ function ProgrammeCreator(props) {
     setPeriodisationsClosed(!periodisationsClosed);
   }
 
-  function printProgramme() {
-    console.log(programme);
-  }
-
   async function sendProgramme() {
-    console.log('sendProgramme', programme);
-
-    console.log('programmeContainErr', programmeContainErr(programme));
     if (programmeContainErr(programme).err === true) {
       alert(programmeContainErr(programme).alertMessage);
     } else {

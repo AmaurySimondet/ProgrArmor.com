@@ -7,7 +7,6 @@ async function getReguScore(id) {
     console.log(data.message);
     return null;
   } else {
-    console.log(data);
     return data;
   }
 }
@@ -27,10 +26,8 @@ async function getPR(id) {
     exerciceOwnExercice: '',
   });
   if (data.success === false) {
-    console.log('getPR', data.message);
     return null;
   } else {
-    // console.log("getPR", data.seances);
     return arrangePR(data.seances);
   }
 }
@@ -69,8 +66,6 @@ function arrangePR(seances) {
       });
     }
   });
-
-  // console.log(PR);
 
   PR.forEach((pr) => {
     if (

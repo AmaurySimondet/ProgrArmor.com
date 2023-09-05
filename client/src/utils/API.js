@@ -65,7 +65,6 @@ export default {
         { token: localStorage.getItem('token') },
         { headers: headers }
       );
-      //        console.log(result)
       if (result.data.success === true) {
         return true;
       }

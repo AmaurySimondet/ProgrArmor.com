@@ -24,8 +24,6 @@ function PriseDeNote(props) {
   }
 
   async function handleSubmitNotes() {
-    console.log(note);
-
     const { data } = await API.priseDeNote({
       note: note,
       muscles: musclesCategorie,

@@ -15,7 +15,6 @@ function Aide() {
     if (data.success === false) {
       alert(data.message);
     } else {
-      console.log(data.profile);
       if (data.profile.modeSombre && data.profile.modeSombre === true) {
         // 👇 add class to body element
         document.body.classList.add('darkMode');

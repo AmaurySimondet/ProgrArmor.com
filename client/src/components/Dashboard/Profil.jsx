@@ -60,15 +60,8 @@ function Profil() {
       getReguScore(userID).then((ReguScore) => {
         setReguScore(ReguScore);
       });
-      console.log('userID', userID);
     }
   }, [userID]);
-
-  useEffect(() => {
-    if (lastSeance) {
-      console.log('lastSeance', lastSeance);
-    }
-  }, [lastSeance]);
 
   return (
     <div>

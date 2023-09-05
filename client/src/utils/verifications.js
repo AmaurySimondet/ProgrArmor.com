@@ -26,8 +26,6 @@ function seanceContainErr(seance, programme = false) {
     returnObj.alertMessage = 'Ah bah super ta séance, y a aucun exo !';
   }
 
-  console.log('exercices.length', seance.exercices.length);
-
   seance.exercices.forEach((exercice, index) => {
     if (Object.keys(exercice.Series).length === 0) {
       returnObj.err = true;
@@ -308,8 +306,6 @@ function seanceContainErr(seance, programme = false) {
     });
   }
 
-  console.log(returnObj);
-
   return returnObj;
 }
 
@@ -317,7 +313,6 @@ function seancesContainErr(seances, programme = false) {
   let err = false;
   let alertMessage = '';
   seances.forEach((seance) => {
-    console.log('seanceContainErr', seanceContainErr(seance, programme));
     if (seanceContainErr(seance, programme).err === true) {
       err = true;
       alertMessage = seanceContainErr(seance, programme).alertMessage;
@@ -354,10 +349,6 @@ function programmeContainErr(programme) {
     alertMessage = 'Veuillez ajouter du matériel à votre programme !';
   } else {
     programme.programme.forEach((periodisation) => {
-      console.log(
-        'seancesContainErr',
-        seancesContainErr(periodisation.seances, true)
-      );
       if (periodisation.seances.length === 0) {
         err = true;
         alertMessage = 'Veuillez ajouter des séances à chaque périodisation !';

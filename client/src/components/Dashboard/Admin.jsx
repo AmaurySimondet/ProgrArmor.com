@@ -90,7 +90,6 @@ function Admin(props) {
     if (data.success === false) {
       alert(data.message);
     } else {
-      console.log(data.profile);
       if (data.profile.modeSombre && data.profile.modeSombre === true) {
         // 👇 add class to body element
         document.body.classList.add('darkMode');
@@ -119,7 +118,6 @@ function Admin(props) {
   });
 
   useEffect(() => {
-    console.log(seances3);
     setTimeout(getSeance3, 50);
   }, [params3]);
 
@@ -253,10 +251,10 @@ function Admin(props) {
                 dimensions.width < 330
                   ? 100
                   : dimensions.width < 450
-                  ? 200
-                  : dimensions.width < 700
-                  ? 300
-                  : 400
+                    ? 200
+                    : dimensions.width < 700
+                      ? 300
+                      : 400
               }
             >
               <PieChart width={800} height={800}>
@@ -266,19 +264,19 @@ function Admin(props) {
                     dimensions.width < 330
                       ? 10
                       : dimensions.width < 450
-                      ? 20
-                      : dimensions.width < 700
-                      ? 40
-                      : 100
+                        ? 20
+                        : dimensions.width < 700
+                          ? 40
+                          : 100
                   }
                   outerRadius={
                     dimensions.width < 330
                       ? 20
                       : dimensions.width < 450
-                      ? 40
-                      : dimensions.width < 700
-                      ? 70
-                      : 150
+                        ? 40
+                        : dimensions.width < 700
+                          ? 70
+                          : 150
                   }
                   fill="#9b0000"
                   dataKey="repsTime"

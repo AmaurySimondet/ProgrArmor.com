@@ -58,7 +58,6 @@ function Session() {
     if (data.success === false) {
       alert(data.message);
     } else {
-      console.log(data.profile);
       if (data.profile.modeSombre && data.profile.modeSombre === true) {
         // 👇 add class to body element
         document.body.classList.add('darkMode');
@@ -84,11 +83,9 @@ function Session() {
           if (data.seance.nom) {
             setSwitched(true);
             setSeance(data.seance);
-            console.log('seance from params', data.seance);
           } else {
             setSwitched(false);
             setSeance(data.seance);
-            console.log('seance from params', data.seance);
           }
         }
       }
@@ -162,14 +159,14 @@ function Session() {
                     ? seance
                     : DebutantToExpert(seance)
                   : {
-                      id: uuidv4(),
-                      date: '',
-                      poids: '',
-                      exercices: [],
-                      nom: {},
-                      echauffements: [],
-                      details: [],
-                    }
+                    id: uuidv4(),
+                    date: '',
+                    poids: '',
+                    exercices: [],
+                    nom: {},
+                    echauffements: [],
+                    details: [],
+                  }
               }
               modeSombre={user && user.modeSombre ? true : false}
               dimensions={dimensions}

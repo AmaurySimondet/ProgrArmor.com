@@ -35,7 +35,6 @@ function Compte() {
         id: localStorage.getItem('id'),
         modeSombre: '' + switched,
       });
-      console.log(res);
 
       window.location = '/compte';
     }
@@ -63,7 +62,6 @@ function Compte() {
     if (data.success === false) {
       alert(data.message);
     } else {
-      console.log(data.profile);
       if (data.profile.modeSombre && data.profile.modeSombre === true) {
         // 👇 add class to body element
         document.body.classList.add('darkMode');
@@ -103,7 +101,6 @@ function Compte() {
       return specialChars.test(str);
     }
 
-    // console.log(formInfo)
     let { fName, lName, email, password, cpassword } = formInfo;
 
     if (email && fName && lName) {
@@ -116,7 +113,6 @@ function Compte() {
           lName: lName,
           email: email,
         });
-        console.log(res);
 
         window.location = '/compte';
       }
@@ -140,7 +136,6 @@ function Compte() {
           id: localStorage.getItem('id'),
           password: password,
         });
-        console.log(res);
 
         window.location = '/compte';
       }
@@ -182,7 +177,6 @@ function Compte() {
       id: localStorage.getItem('id'),
       profilePic: fileUrl,
     });
-    console.log(res);
 
     window.location = '/compte';
   }

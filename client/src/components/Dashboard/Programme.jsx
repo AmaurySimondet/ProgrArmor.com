@@ -46,7 +46,6 @@ function Programme(props) {
 
   useEffect(() => {
     getUser(localStorage.getItem('id')).then((user) => {
-      console.log('user: ', user);
       setUser(user);
     });
   }, []);

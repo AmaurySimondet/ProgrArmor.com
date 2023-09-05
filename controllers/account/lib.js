@@ -277,9 +277,6 @@ async function debutantform(req, res) {
   let update = {};
 
   if (req.body.seanceId) {
-    console.log('seanceId:', req.body.seanceId);
-    console.log('seanceSent:', req.body.seance);
-
     let seances = [];
 
     await User.find(conditions, function (err, data) {
@@ -329,8 +326,6 @@ async function debutantform(req, res) {
 
 //LOAD SEANCE
 async function loadSeance(req, res) {
-  // console.log(req.query);
-
   function sortDateDecroissant(a, b) {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   }
@@ -376,7 +371,6 @@ async function loadSeance(req, res) {
           // LastDate seance
           if (req.query.load[8] === '-') {
             nomSeance = req.query.load.slice(9, req.query.load.length);
-            // console.log(nomSeance)
 
             seances = seances.sort(sortDateCroissant);
 
@@ -395,8 +389,6 @@ async function loadSeance(req, res) {
 
         if (req.query.seanceId) {
           seance = seances.filter((s) => s.id === req.query.seanceId)[0];
-
-          // console.log(req.query.seanceId, seance)
         }
 
         res.json({
@@ -879,17 +871,6 @@ async function priseDeNote(req, res) {
       details: details,
     };
 
-    // Object.values(seance).forEach((element, index) => {
-    //     if (Array.isArray(element)) {
-    //         element.forEach((el, i) => {
-    //             console.log(el)
-    //         })
-    //     }
-    //     else {
-    //         console.log(element)
-    //     }
-    // })
-
     return res.json({ success: true, seance: seance });
   } catch (error) {
     return res.json({
@@ -898,17 +879,6 @@ async function priseDeNote(req, res) {
     });
   }
 }
-
-// exports.editDB2 = (req, res) => {
-//     User.updateMany({}, { $set: { checkItems: {} } }, (err) => {
-//         if (err) {
-//             res.json({ success: false, message: err })
-//         }
-//         else {
-//             res.json({ success: true, message: "Users updated" })
-//         }
-//     })
-// }
 
 //NIVEAU
 async function getNiveau(req, res) {
@@ -919,7 +889,6 @@ async function getNiveau(req, res) {
 
   await getUserSeancesItems(req.body.id)
     .then((data) => {
-      console.log(data);
       seances = data.seances;
       checkItems = data.checkItems;
     })
@@ -929,7 +898,6 @@ async function getNiveau(req, res) {
     });
 
   if (err === true) {
-    console.log(message);
     return res.json({ success: false, message: message });
   }
 
@@ -1735,7 +1703,6 @@ async function getNiveau(req, res) {
     ),
   };
 
-  // console.log(checkItems)
   let same = true;
   if (Object.values(userCheckItems).length > 0) {
     Object.values(checkItems).forEach((item, index) => {
@@ -1753,12 +1720,6 @@ async function getNiveau(req, res) {
   }
 
   if (same === false && Object.values(userCheckItems).length > 0) {
-    console.log('same', same);
-    console.log('\n');
-    console.log('checkItems', checkItems);
-    console.log('\n');
-    console.log('userCheckItems', userCheckItems);
-    console.log('\n');
 
     await User.updateOne(
       { _id: req.body.id },
@@ -1789,7 +1750,6 @@ async function getNiveau(req, res) {
 //DASHBOARD
 //ALL WORKOUTS / ADMIN
 async function workouts(req, res) {
-  // console.log(req.query)
 
   function sortDateCroissant(a, b) {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
@@ -1839,9 +1799,6 @@ async function workouts(req, res) {
     seances.map((seance, indexSeance) => {
       return seance.exercices.map((exercice, indexExercice) => {
         return Object.keys(exercice.Series).map((index) => {
-          //                        console.log(seance)
-          //                        console.log(exercice.Series)
-          //                        console.log(Object.keys(exercice.Series))
           if (multiple) {
             seances[indexSeance].exercices[indexExercice].Series[
               index
@@ -1939,8 +1896,8 @@ async function workouts(req, res) {
             if (seances[indexSeance].exercices[indexExercice].exercice.muscle) {
               namesList.push(
                 seances[indexSeance].exercices[indexExercice].exercice.name +
-                  ' - ' +
-                  seances[indexSeance].exercices[indexExercice].exercice.muscle
+                ' - ' +
+                seances[indexSeance].exercices[indexExercice].exercice.muscle
               );
               if (string !== 'sets') {
                 sumsList.push(
@@ -2093,7 +2050,6 @@ async function workouts(req, res) {
       if (isAdmin(req.query) === { _id: req.query.id }) {
         seances = data[0].seances;
       } else {
-        console.log('data', data);
         numUsers = data.length;
         let seancesDay = [];
         data.forEach((user, index) => {
@@ -2130,13 +2086,11 @@ async function workouts(req, res) {
         });
         numSeances = seances.length;
         numSeanceDay = seancesDay.length;
-        console.log('seances', seances);
       }
 
       //TRI NOM
       if (req.query.nom !== '' && req.query.nom !== 'title') {
         seances.map((seance, indexSeance) => {
-          console.log(seance.nom, req.query.nom);
           if (seance.nom) {
             if (
               seance.nom.ancienNom !== req.query.nom &&
@@ -2576,12 +2530,6 @@ async function modifyUser(req, res) {
     );
   }
 
-  // else {
-  //     console.log("\n no update \n")
-  //     console.log(req.body)
-  //     res.json({ success: false, message: "Aucune mis à jour!" })
-  // }
-
   if (updated === false) {
     try {
       User.findOneAndUpdate(conditions, update, function (error, result) {
@@ -2607,7 +2555,6 @@ async function resetPassword(req, res) {
     User.findOne(conditions).then(
       function (foundUser) {
         if (foundUser) {
-          // console.log(foundUser)
           foundUser.setPassword(req.body.password, function () {
             foundUser.save();
             res.json({ success: true, message: 'Utilisateur mis à jour!' });
@@ -2661,8 +2608,6 @@ async function getUser(req, res) {
             obj.modeSombre = data[0].modeSombre;
           }
 
-          // console.log(obj)
-
           res.json({
             success: true,
             message: 'Utilisateur trouvé !',
@@ -2702,21 +2647,11 @@ async function supprSeance(req, res) {
   });
 
   if (seances.length !== 0) {
-    console.log('DEL_ID: ', req.body.seanceId);
-    seances.forEach((seance) => console.log(seance.id));
-
-    //newSeance = seance filtered with req.body.seanceId
     newSeances = seances.filter((seance) => seance.id !== req.body.seanceId);
 
     update = {
       seances: newSeances,
     };
-
-    console.log('newSeances :', newSeances);
-
-    // if (newSeances.length === 0) {
-    //     res.json({ success: false, message: "Toutes les séances seront supprimées !" })
-    // }
 
     //update seances user
     User.findOneAndUpdate(conditions, update, function (error, result) {
@@ -2771,7 +2706,7 @@ async function reguScore(req, res) {
           (this.getTime() -
             newYear.getTime() -
             (this.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) /
-            86400000
+          86400000
         ) + 1;
       var weeknum;
       //if the year starts before the middle of a week
@@ -2866,11 +2801,6 @@ async function reguScore(req, res) {
 
     const average = (array) => array.reduce((a, b) => a + b) / array.length;
 
-    // console.log("seanceOnWeeks:", seancesOnWeeks)
-    // console.log("consecutivePeriods:", consecutivePeriods)
-    // console.log("avg(consPeriods)/weeksOvPeriod", average(consecutivePeriods) / weeksOverPeriod)
-    // console.log("consecutivePeriodsLength/LengthMax", consecutivePeriods.length / (weeksOverPeriod / 2))
-
     //meilleur cas: seanceOnWeeks >= 1, consecutivePeriods = [ >= weeksOverPeriod ]
     //pire cas: seanceOnWeeks ~= 0, consecutivePeriods = [ 1 / weeksOverPeriod, ~0, ...][weeksOverPeriod / 2]
 
@@ -2880,7 +2810,6 @@ async function reguScore(req, res) {
         consecutivePeriods.length / (weeksOverPeriod / 2)) /
         3) *
       100;
-    // console.log("score:", score)
 
     if (score >= 100) {
       reguScore[0].score = 100;

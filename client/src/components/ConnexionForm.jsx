@@ -23,7 +23,6 @@ function ConnexionForm(props) {
     try {
       const { data } = await API.login(email, password);
       if (data.success === true) {
-        console.log(data);
         window.location = '/token?token=' + data.token;
       } else {
         alert(data.message);

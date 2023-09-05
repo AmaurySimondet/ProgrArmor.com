@@ -105,7 +105,6 @@ function Inscription() {
   }, []);
 
   useEffect(() => {
-    console.log(window.pageYOffset);
   }, [window.pageYOffset]);
 
   // This function will scroll the window to the top
@@ -137,8 +136,6 @@ function Inscription() {
     });
     if (result.data.success === true) {
       window.location = '/dashboard';
-    } else {
-      console.log(result.data.message);
     }
   }
 
@@ -160,8 +157,8 @@ function Inscription() {
             dimensions.width > 900
               ? 'basic-flexed'
               : dimensions.width < 500
-              ? 'basic-noflexed500'
-              : 'basic-noflexed'
+                ? 'basic-noflexed500'
+                : 'basic-noflexed'
           }
           style={{ textAlign: 'center', height: '650px' }}
         >
