@@ -35,7 +35,6 @@ This project is my property only and you can't share it for commercial purpose. 
 ## TODO
 
 ## Before comitting
-
 - npm run code-quality
 
 ## Deployment
