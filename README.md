@@ -36,9 +36,7 @@ This project is my property only and you can't share it for commercial purpose. 
 
 ## Before comitting
 
-- npm run format
-- npm run lint
-- npm run flow
+- npm run code-quality
 
 ## Deployment
 

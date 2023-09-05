@@ -1,0 +1,13 @@
+{
+    "env": {
+        "node": true, // Enable Node.js environment
+        "es6": true // Enable ES6 syntax
+    },
+    "extends": "eslint:recommended", // Use ESLint's recommended rules
+    "parserOptions": {
+        "ecmaVersion": 2023 // Set the ECMAScript version you're using (adjust as needed)
+    },
+    "rules": {
+        // Add your project-specific rules here (if any)
+    }
+}

@@ -162,14 +162,14 @@ function Session() {
                     ? seance
                     : DebutantToExpert(seance)
                   : {
-                    id: uuidv4(),
-                    date: '',
-                    poids: '',
-                    exercices: [],
-                    nom: {},
-                    echauffements: [],
-                    details: [],
-                  }
+                      id: uuidv4(),
+                      date: '',
+                      poids: '',
+                      exercices: [],
+                      nom: {},
+                      echauffements: [],
+                      details: [],
+                    }
               }
               modeSombre={user && user.modeSombre ? true : false}
               dimensions={dimensions}

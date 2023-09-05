@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import logoNavbar from '../images/icons/logo-navbar.webp';
-import threeLines from '../images/icons/output-onlinepngtools.webp'
-import home from '../images/icons/home.webp'
-import write from '../images/icons/write.webp'
-import chart from '../images/icons/chart.webp'
-import plus from '../images/icons/plus.webp'
-import social from '../images/icons/social.webp'
-import accomplissements from '../images/icons/accomplissements.webp'
-import notifications from '../images/icons/notifications.webp'
-import gear from '../images/icons/gear.webp'
+import threeLines from '../images/icons/output-onlinepngtools.webp';
+import home from '../images/icons/home.webp';
+import write from '../images/icons/write.webp';
+import chart from '../images/icons/chart.webp';
+import plus from '../images/icons/plus.webp';
+import social from '../images/icons/social.webp';
+import accomplissements from '../images/icons/accomplissements.webp';
+import notifications from '../images/icons/notifications.webp';
+import gear from '../images/icons/gear.webp';
 
 function NavigBar(props) {
   const [gearIsClicked, setGearIsClicked] = useState(false);
@@ -69,11 +69,7 @@ function NavigBar(props) {
             <span className="navbar-toggler-icon"></span>
           </button>
           <a className="navbar-brand" href="/dashboard">
-            <img
-              className="logo-navbar"
-              src={logoNavbar}
-              alt="logo"
-            />
+            <img className="logo-navbar" src={logoNavbar} alt="logo" />
           </a>
           <a className="navbar-brand" href="/dashboard">
             <h1 className="ProgrArmor">ProgrArmor</h1>
@@ -109,11 +105,7 @@ function NavigBar(props) {
                   <tr>
                     <td>
                       <a className="nav-link" href="/dashboard">
-                        <img
-                          className="icon-navbar"
-                          src={home}
-                          alt="home"
-                        />
+                        <img className="icon-navbar" src={home} alt="home" />
                       </a>
                     </td>
                   </tr>
@@ -131,11 +123,7 @@ function NavigBar(props) {
                   <tr>
                     <td>
                       <a className="nav-link" href="/stats">
-                        <img
-                          className="icon-navbar"
-                          src={chart}
-                          alt="stats"
-                        />
+                        <img className="icon-navbar" src={chart} alt="stats" />
                       </a>
                     </td>
                   </tr>
@@ -237,11 +225,7 @@ function NavigBar(props) {
               <span className="navbar-toggler-icon"></span>
             </button>
             <a className="navbar-brand" href="/dashboard">
-              <img
-                className="logo-navbar"
-                src={logoNavbar}
-                alt="logo"
-              />
+              <img className="logo-navbar" src={logoNavbar} alt="logo" />
             </a>
             <a className="navbar-brand" href="/dashboard">
               <h1 className="ProgrArmor">ProgrArmor</h1>
@@ -250,47 +234,27 @@ function NavigBar(props) {
               <ul className="navbar-nav mr-auto mt-2 mt-lg-0 navbar-elements">
                 <li className="nav-item active">
                   <a className="nav-link" href="/dashboard">
-                    <img
-                      className="icon-navbar"
-                      src={home}
-                      alt="home"
-                    />
+                    <img className="icon-navbar" src={home} alt="home" />
                   </a>
                 </li>
                 <li className="nav-item active">
                   <a className="nav-link" href="/session">
-                    <img
-                      className="icon-navbar"
-                      src={write}
-                      alt="session"
-                    />
+                    <img className="icon-navbar" src={write} alt="session" />
                   </a>
                 </li>
                 <li className="nav-item active">
                   <a className="nav-link" href="/stats">
-                    <img
-                      className="icon-navbar"
-                      src={chart}
-                      alt="stats"
-                    />
+                    <img className="icon-navbar" src={chart} alt="stats" />
                   </a>
                 </li>
                 <li className="nav-item active">
                   <a className="nav-link" href="/programme">
-                    <img
-                      className="icon-navbar"
-                      src={plus}
-                      alt="programme"
-                    />
+                    <img className="icon-navbar" src={plus} alt="programme" />
                   </a>
                 </li>
                 <li className="nav-item active">
                   <a className="nav-link" href="/social">
-                    <img
-                      className="icon-navbar"
-                      src={social}
-                      alt="social"
-                    />
+                    <img className="icon-navbar" src={social} alt="social" />
                   </a>
                 </li>
                 <li className="nav-item active">

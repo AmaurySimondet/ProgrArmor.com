@@ -141,8 +141,8 @@ function InscriptionForm() {
         </div>
       </div>
       <p className="p-cgu">
-        En cliquant sur le bouton &quot;Inscription&quot; ci dessous, vous certifiez avoir
-        pris connaissance et approuvé nos CGU
+        En cliquant sur le bouton &quot;Inscription&quot; ci dessous, vous
+        certifiez avoir pris connaissance et approuvé nos CGU
       </p>
       <button
         className="btn btn-lg btn-dark"

@@ -13,9 +13,11 @@
     "build": "npm config set legacy-peer-deps true && npm run install-client && npm run build-prev",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm config set legacy-peer-deps true && npm run install-client && npm run build",
-    "format": "prettier --write \"**/*.js\"",
-    "flow": "cd client && flow",
-    "lint": "cd client && eslint ."
+    "format": "prettier --write \"**/*.js\" \"**/*.jsx\"",
+    "react-check": "cd client && flow",
+    "lint-client": "cd client && eslint . --ignore-pattern 'build/'",
+    "lint-server": "eslint . --ignore-pattern 'client/'",
+    "code-quality": "npm run format && npm run lint-client && npm run lint-server && npm run react-check"
   },
   "dependencies": {
     "body-parser": "^1.18.2",

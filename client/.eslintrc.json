@@ -7,7 +7,7 @@
         "react"
     ],
     "parserOptions": {
-        "ecmaVersion": 2021,
+        "ecmaVersion": 2023,
         "sourceType": "module",
         "ecmaFeatures": {
             "jsx": true
@@ -17,7 +17,12 @@
         "browser": true,
         "es2021": true
     },
+    "settings": {
+        "react": {
+            "version": "detect" // You can specify the React version here
+        }
+    },
     "rules": {
-        // Ajoutez ici les règles spécifiques que vous souhaitez appliquer
+        // Add your specific rules here
     }
 }

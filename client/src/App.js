@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Dashboard from './components/Dashboard/Dashboard.js';
 import Inscription from './components/Inscription';
@@ -14,9 +14,9 @@ import Compte from './components/Dashboard/Compte';
 import Admin from './components/Dashboard/Admin.jsx';
 import InstallApp from './components/Dashboard/Help/InstallApp.jsx';
 import Aide from './components/Dashboard/Aide.jsx';
-import Programme from './components/Dashboard/Programme.jsx';
+// import Programme from './components/Dashboard/Programme.jsx';
 import Profil from './components/Dashboard/Profil.jsx';
-import Accomplissements from './components/Dashboard/Accomplissements.jsx';
+// import Accomplissements from './components/Dashboard/Accomplissements.jsx';
 import ProgrammeCreator from './components/Dashboard/ProgrammeCreator.jsx';
 
 // import eruda from "eruda";
