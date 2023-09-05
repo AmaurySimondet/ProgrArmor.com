@@ -1,5 +1,3 @@
-import { React } from 'react';
-
 function PriseDeNoteHiddenText() {
   function copyToClipboard() {
     const text =

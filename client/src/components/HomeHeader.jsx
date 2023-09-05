@@ -1,5 +1,3 @@
-import React from 'react';
-
 function HomeHeader() {
   return (
     <nav className="navbar navbar-expand navbar-light bg-light inscription-navbar">

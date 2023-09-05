@@ -38,23 +38,23 @@ const CustomTooltip = ({ active, payload, label }) => {
                     : payload.payload.exercices[0].exercice.name}
                   {payload.payload.exercices[0].Categories
                     ? Object.values(
-                      payload.payload.exercices[0].Categories
-                    ).map((categorie, index) => {
-                      if (
-                        index ===
-                        Object.values(payload.payload.exercices[0].Categories)
-                          .length -
-                        1
-                      ) {
-                        return categorie.name === 'Elastique'
-                          ? categorie.name
-                          : categorie.input;
-                      } else {
-                        return categorie.name === 'Elastique'
-                          ? categorie.name + ', '
-                          : categorie.input + ', ';
-                      }
-                    })
+                        payload.payload.exercices[0].Categories
+                      ).map((categorie, index) => {
+                        if (
+                          index ===
+                          Object.values(payload.payload.exercices[0].Categories)
+                            .length -
+                            1
+                        ) {
+                          return categorie.name === 'Elastique'
+                            ? categorie.name
+                            : categorie.input;
+                        } else {
+                          return categorie.name === 'Elastique'
+                            ? categorie.name + ', '
+                            : categorie.input + ', ';
+                        }
+                      })
                     : null}
                 </p>
                 <p className="chart-desc">
@@ -78,10 +78,10 @@ const CustomTooltip = ({ active, payload, label }) => {
                 {payload.payload.class === 'reps'
                   ? 'Total répétitions : ' + payload.value
                   : payload.payload.class === 'time'
-                    ? 'Temps total (secondes) : ' + payload.value
-                    : payload.payload.class === 'sets'
-                      ? 'Total séries : ' + payload.value
-                      : null}
+                  ? 'Temps total (secondes) : ' + payload.value
+                  : payload.payload.class === 'sets'
+                  ? 'Total séries : ' + payload.value
+                  : null}
               </p>
             );
           }
@@ -465,8 +465,8 @@ function Stats() {
       <NavigBar />
 
       {seances1.length === 0 &&
-        seances2.length === 0 &&
-        seances3.length === 0 ? (
+      seances2.length === 0 &&
+      seances3.length === 0 ? (
         <div className="Travaux-div">
           <h1>Rien à afficher ici ! </h1>
 
@@ -623,15 +623,15 @@ function Stats() {
                         style={
                           user.modeSombre === true
                             ? {
-                              borderColor: '#ff6666',
-                              borderWidth: '4px',
-                              width: '60px',
-                            }
+                                borderColor: '#ff6666',
+                                borderWidth: '4px',
+                                width: '60px',
+                              }
                             : {
-                              borderColor: '#ff0000',
-                              borderWidth: '4px',
-                              width: '60px',
-                            }
+                                borderColor: '#ff0000',
+                                borderWidth: '4px',
+                                width: '60px',
+                              }
                         }
                       />
                       <p style={{ margin: 'auto' }}> Ton poids en kg </p>
@@ -854,38 +854,38 @@ function Stats() {
                         {params2.exerciceName === 'title'
                           ? 'Tous les exercices, '
                           : params2.exerciceMuscle !== ''
-                            ? params2.exerciceName +
+                          ? params2.exerciceName +
                             ' - ' +
                             params2.exerciceMuscle +
                             ', '
-                            : params2.exerciceName + ', '}
+                          : params2.exerciceName + ', '}
                         {params2.categorie0name
                           ? params2.categorie0name === 'Aucune'
                             ? 'aucune catégorie, '
                             : params2.categorie0name +
-                            ' : ' +
-                            params2.categorie0input +
-                            ', '
+                              ' : ' +
+                              params2.categorie0input +
+                              ', '
                           : 'toutes catégories, '}
                         {params2.detail0name
                           ? params2.detail0name === 'Aucun'
                             ? 'aucun détail, '
                             : params2.detail0name +
-                            ' : ' +
-                            params2.detail0input +
-                            ', '
+                              ' : ' +
+                              params2.detail0input +
+                              ', '
                           : 'tout détail, '}
                         {params2.repsFrom !== ''
                           ? params2.repsTo !== ''
                             ? 'de ' +
-                            params2.repsFrom +
-                            ' à ' +
-                            params2.repsTo +
-                            ' réps/sec, '
+                              params2.repsFrom +
+                              ' à ' +
+                              params2.repsTo +
+                              ' réps/sec, '
                             : params2.repsFrom + ' reps/sec minimum, '
                           : params2.repsTo !== ''
-                            ? params2.repsTo + ' reps/sec maximum, '
-                            : 'toutes les réps/sec, '}
+                          ? params2.repsTo + ' reps/sec maximum, '
+                          : 'toutes les réps/sec, '}
                         sur la période {params2.periode}
                       </p>
 
@@ -1046,15 +1046,15 @@ function Stats() {
                           style={
                             user.modeSombre === true
                               ? {
-                                borderColor: '#ff6666',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#ff6666',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                               : {
-                                borderColor: '#ff0000',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#ff0000',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                           }
                         />
                         <p style={{ margin: 'auto' }}>
@@ -1067,15 +1067,15 @@ function Stats() {
                           style={
                             user.modeSombre === true
                               ? {
-                                borderColor: '#4DBAFF',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#4DBAFF',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                               : {
-                                borderColor: '#10669C',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#10669C',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                           }
                         />
                         <p style={{ margin: 'auto' }}>
@@ -1086,15 +1086,15 @@ function Stats() {
                           style={
                             user.modeSombre === true
                               ? {
-                                borderColor: '#66E891',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#66E891',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                               : {
-                                borderColor: '#24B34C',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#24B34C',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                           }
                         />
                         <p style={{ margin: 'auto' }}>
@@ -1105,15 +1105,15 @@ function Stats() {
                           style={
                             user.modeSombre === true
                               ? {
-                                borderColor: '#626262',
-                                borderWidth: '12px',
-                                width: '60px',
-                              }
+                                  borderColor: '#626262',
+                                  borderWidth: '12px',
+                                  width: '60px',
+                                }
                               : {
-                                borderColor: '#afafa6',
-                                borderWidth: '12px',
-                                width: '60px',
-                              }
+                                  borderColor: '#afafa6',
+                                  borderWidth: '12px',
+                                  width: '60px',
+                                }
                           }
                         />
                         <p style={{ margin: 'auto' }}>
@@ -1349,38 +1349,38 @@ function Stats() {
                         {params2.exerciceName === 'title'
                           ? 'Tous les exercices, '
                           : params2.exerciceMuscle !== ''
-                            ? params2.exerciceName +
+                          ? params2.exerciceName +
                             ' - ' +
                             params2.exerciceMuscle +
                             ', '
-                            : params2.exerciceName + ', '}
+                          : params2.exerciceName + ', '}
                         {params2.categorie0name
                           ? params2.categorie0name === 'Aucune'
                             ? 'aucune catégorie, '
                             : params2.categorie0name +
-                            ' : ' +
-                            params2.categorie0input +
-                            ', '
+                              ' : ' +
+                              params2.categorie0input +
+                              ', '
                           : 'toutes catégories, '}
                         {params2.detail0name
                           ? params2.detail0name === 'Aucun'
                             ? 'aucun détail, '
                             : params2.detail0name +
-                            ' : ' +
-                            params2.detail0input +
-                            ', '
+                              ' : ' +
+                              params2.detail0input +
+                              ', '
                           : 'tout détail, '}
                         {params2.repsFrom !== ''
                           ? params2.repsTo !== ''
                             ? 'de ' +
-                            params2.repsFrom +
-                            ' à ' +
-                            params2.repsTo +
-                            ' réps/sec, '
+                              params2.repsFrom +
+                              ' à ' +
+                              params2.repsTo +
+                              ' réps/sec, '
                             : params2.repsFrom + ' reps/sec minimum, '
                           : params2.repsTo !== ''
-                            ? params2.repsTo + ' reps/sec maximum, '
-                            : 'toutes les réps/sec, '}
+                          ? params2.repsTo + ' reps/sec maximum, '
+                          : 'toutes les réps/sec, '}
                         sur la période {params2.periode}
                       </p>
 
@@ -1541,15 +1541,15 @@ function Stats() {
                           style={
                             user.modeSombre === true
                               ? {
-                                borderColor: '#ff6666',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#ff6666',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                               : {
-                                borderColor: '#ff0000',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#ff0000',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                           }
                         />
                         <p style={{ margin: 'auto' }}>
@@ -1562,15 +1562,15 @@ function Stats() {
                           style={
                             user.modeSombre === true
                               ? {
-                                borderColor: '#4DBAFF',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#4DBAFF',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                               : {
-                                borderColor: '#10669C',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#10669C',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                           }
                         />
                         <p style={{ margin: 'auto' }}>
@@ -1581,15 +1581,15 @@ function Stats() {
                           style={
                             user.modeSombre === true
                               ? {
-                                borderColor: '#66E891',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#66E891',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                               : {
-                                borderColor: '#24B34C',
-                                borderWidth: '4px',
-                                width: '60px',
-                              }
+                                  borderColor: '#24B34C',
+                                  borderWidth: '4px',
+                                  width: '60px',
+                                }
                           }
                         />
                         <p style={{ margin: 'auto' }}>
@@ -1600,15 +1600,15 @@ function Stats() {
                           style={
                             user.modeSombre === true
                               ? {
-                                borderColor: '#626262',
-                                borderWidth: '12px',
-                                width: '60px',
-                              }
+                                  borderColor: '#626262',
+                                  borderWidth: '12px',
+                                  width: '60px',
+                                }
                               : {
-                                borderColor: '#afafa6',
-                                borderWidth: '12px',
-                                width: '60px',
-                              }
+                                  borderColor: '#afafa6',
+                                  borderWidth: '12px',
+                                  width: '60px',
+                                }
                           }
                         />
                         <p style={{ margin: 'auto' }}>
@@ -1716,10 +1716,10 @@ function Stats() {
               {params3.class === 'reps'
                 ? ' répétitions '
                 : params3.class === 'sets'
-                  ? ' séries '
-                  : params3.class === 'time'
-                    ? ' temps (secondes) '
-                    : null}
+                ? ' séries '
+                : params3.class === 'time'
+                ? ' temps (secondes) '
+                : null}
               sur la période {params3.periode}
             </p>
 
@@ -1735,10 +1735,10 @@ function Stats() {
                   dimensions.width < 330
                     ? 100
                     : dimensions.width < 450
-                      ? 200
-                      : dimensions.width < 700
-                        ? 300
-                        : 400
+                    ? 200
+                    : dimensions.width < 700
+                    ? 300
+                    : 400
                 }
               >
                 <PieChart width={800} height={800}>
@@ -1748,19 +1748,19 @@ function Stats() {
                       dimensions.width < 330
                         ? 10
                         : dimensions.width < 450
-                          ? 20
-                          : dimensions.width < 700
-                            ? 40
-                            : 100
+                        ? 20
+                        : dimensions.width < 700
+                        ? 40
+                        : 100
                     }
                     outerRadius={
                       dimensions.width < 330
                         ? 20
                         : dimensions.width < 450
-                          ? 40
-                          : dimensions.width < 700
-                            ? 70
-                            : 150
+                        ? 40
+                        : dimensions.width < 700
+                        ? 70
+                        : 150
                     }
                     fill="#9b0000"
                     dataKey="repsTime"
@@ -1774,8 +1774,8 @@ function Stats() {
                               ? '#ffbcbc'
                               : '#ff6666'
                             : index % 2 === 0
-                              ? '#9b0000'
-                              : '#E84646'
+                            ? '#9b0000'
+                            : '#E84646'
                         }
                       />
                     ))}
@@ -1794,8 +1794,8 @@ function Stats() {
                     dimensions.width < 350
                       ? '-50px'
                       : dimensions.width < 950
-                        ? '-100px'
-                        : '-300px',
+                      ? '-100px'
+                      : '-300px',
                 }}
               >
                 <h1 style={{ marginBottom: '20px' }}>Ta régularité</h1>
@@ -1838,19 +1838,19 @@ function Stats() {
                   dimensions.width < 350
                     ? 80
                     : dimensions.width < 450
-                      ? 100
-                      : dimensions.width < 925
-                        ? 200
-                        : 200
+                    ? 100
+                    : dimensions.width < 925
+                    ? 200
+                    : 200
                 }
                 height={
                   dimensions.width < 350
                     ? 150
                     : dimensions.width < 450
-                      ? 300
-                      : dimensions.width < 925
-                        ? 400
-                        : 800
+                    ? 300
+                    : dimensions.width < 925
+                    ? 400
+                    : 800
                 }
                 className={
                   user.modeSombre === true
@@ -1899,10 +1899,10 @@ function Stats() {
                           entry.score < 25
                             ? '#F7A4A4'
                             : entry.score < 50
-                              ? '#FEBE8C'
-                              : entry.score < 75
-                                ? '#FFFBC1'
-                                : '#B6E2A1'
+                            ? '#FEBE8C'
+                            : entry.score < 75
+                            ? '#FFFBC1'
+                            : '#B6E2A1'
                         }
                       />
                     ))}

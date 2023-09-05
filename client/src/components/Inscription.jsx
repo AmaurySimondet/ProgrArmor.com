@@ -104,8 +104,7 @@ function Inscription() {
     });
   }, []);
 
-  useEffect(() => {
-  }, [window.pageYOffset]);
+  useEffect(() => {}, [window.pageYOffset]);
 
   // This function will scroll the window to the top
   const scrollToTop = () => {
@@ -157,8 +156,8 @@ function Inscription() {
             dimensions.width > 900
               ? 'basic-flexed'
               : dimensions.width < 500
-                ? 'basic-noflexed500'
-                : 'basic-noflexed'
+              ? 'basic-noflexed500'
+              : 'basic-noflexed'
           }
           style={{ textAlign: 'center', height: '650px' }}
         >

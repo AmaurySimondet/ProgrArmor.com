@@ -1,5 +1,3 @@
-import React from 'react';
-
 function writeSeries(series) {
   let sameReps = [];
   let sameCharge = [];

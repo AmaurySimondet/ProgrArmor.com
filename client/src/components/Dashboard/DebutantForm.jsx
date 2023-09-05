@@ -245,8 +245,8 @@ function DebutantForm(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                    ? customStylesDark
-                    : customStyles
+                  ? customStylesDark
+                  : customStyles
               }
             />
           </div>

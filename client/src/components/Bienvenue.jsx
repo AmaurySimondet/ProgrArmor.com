@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Bienvenue(props) {
   return (
     <div className="Dashboard">

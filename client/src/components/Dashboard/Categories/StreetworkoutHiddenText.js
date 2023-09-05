@@ -1,5 +1,3 @@
-import React from 'react';
-
 function VarianteHiddenText() {
   return (
     <div className="hidden-text">

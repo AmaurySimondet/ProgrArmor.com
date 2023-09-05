@@ -1720,7 +1720,6 @@ async function getNiveau(req, res) {
   }
 
   if (same === false && Object.values(userCheckItems).length > 0) {
-
     await User.updateOne(
       { _id: req.body.id },
       { $set: { checkItems: checkItems } },
@@ -1750,7 +1749,6 @@ async function getNiveau(req, res) {
 //DASHBOARD
 //ALL WORKOUTS / ADMIN
 async function workouts(req, res) {
-
   function sortDateCroissant(a, b) {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   }
@@ -1896,8 +1894,8 @@ async function workouts(req, res) {
             if (seances[indexSeance].exercices[indexExercice].exercice.muscle) {
               namesList.push(
                 seances[indexSeance].exercices[indexExercice].exercice.name +
-                ' - ' +
-                seances[indexSeance].exercices[indexExercice].exercice.muscle
+                  ' - ' +
+                  seances[indexSeance].exercices[indexExercice].exercice.muscle
               );
               if (string !== 'sets') {
                 sumsList.push(
@@ -2706,7 +2704,7 @@ async function reguScore(req, res) {
           (this.getTime() -
             newYear.getTime() -
             (this.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) /
-          86400000
+            86400000
         ) + 1;
       var weeknum;
       //if the year starts before the middle of a week

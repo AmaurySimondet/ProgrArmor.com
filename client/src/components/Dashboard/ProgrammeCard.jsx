@@ -315,8 +315,8 @@ function ProgrammeCard(props) {
                       ? 'programme-card-profile-hover-dark'
                       : 'programme-card-profile-hover'
                     : props.modeSombre
-                      ? 'programme-card-profile-dark'
-                      : 'programme-card-profile'
+                    ? 'programme-card-profile-dark'
+                    : 'programme-card-profile'
                 }
               >
                 <table className="basic-table">
@@ -329,8 +329,8 @@ function ProgrammeCard(props) {
                         src={programmeCreator.profilePic}
                         alt="profile-pic"
                         onClick={() =>
-                        (window.location.href =
-                          '/profil?id=' + programmeCreator._id)
+                          (window.location.href =
+                            '/profil?id=' + programmeCreator._id)
                         }
                       />
                     </td>
@@ -443,8 +443,8 @@ function ProgrammeCard(props) {
                             src={user.user.profilePic}
                             alt="profile-pic"
                             onClick={() =>
-                            (window.location.href =
-                              '/profil?id=' + user.user._id)
+                              (window.location.href =
+                                '/profil?id=' + user.user._id)
                             }
                           />
                         </td>
@@ -504,8 +504,8 @@ function ProgrammeCard(props) {
                                 src={comment.user.profilePic}
                                 alt="profile-pic"
                                 onClick={() =>
-                                (window.location.href =
-                                  '/profil?id=' + comment.user._id)
+                                  (window.location.href =
+                                    '/profil?id=' + comment.user._id)
                                 }
                               />
                             </td>
@@ -655,7 +655,7 @@ function ProgrammeCard(props) {
                                                   {writeExercice(exercice)
                                                     .categories[0]
                                                     ? writeExercice(exercice)
-                                                      .categories
+                                                        .categories
                                                     : null}
                                                 </p>
                                                 <p>
@@ -674,7 +674,7 @@ function ProgrammeCard(props) {
                                       <p>Repos: {seance.jourDeRepos}j</p>
                                       {periodisation.seances.length > 1 ? (
                                         indexSeance !=
-                                          periodisation.seances.length ? (
+                                        periodisation.seances.length ? (
                                           <hr className="hr-exercice" />
                                         ) : null
                                       ) : null}
@@ -687,7 +687,7 @@ function ProgrammeCard(props) {
                               ) : null}
                               {programme.programme.length > 1 ? (
                                 indexPeriodisation !=
-                                  programme.programme.length ? (
+                                programme.programme.length ? (
                                   <hr className="hr-detail" />
                                 ) : null
                               ) : null}

@@ -157,30 +157,30 @@ function FullExerciceInput(props) {
         <div>
           {categories
             ? categories.map((categorie, index) => {
-              return (
-                <div>
-                  <hr
-                    className={
-                      props.modeSombre === true
-                        ? 'hr-serie-dark '
-                        : 'hr-serie'
-                    }
-                  />
+                return (
+                  <div>
+                    <hr
+                      className={
+                        props.modeSombre === true
+                          ? 'hr-serie-dark '
+                          : 'hr-serie'
+                      }
+                    />
 
-                  <CategorieInput
-                    key={categorie.id}
-                    id={categorie.id}
-                    index={index}
-                    dimensions={props.dimensions}
-                    categorie={categorie}
-                    exercice={fullExercice.exercice}
-                    changeCategorie={changeCategorie}
-                    onDeleteCategorie={onDeleteCategorie}
-                    modeSombre={props.modeSombre}
-                  />
-                </div>
-              );
-            })
+                    <CategorieInput
+                      key={categorie.id}
+                      id={categorie.id}
+                      index={index}
+                      dimensions={props.dimensions}
+                      categorie={categorie}
+                      exercice={fullExercice.exercice}
+                      changeCategorie={changeCategorie}
+                      onDeleteCategorie={onDeleteCategorie}
+                      modeSombre={props.modeSombre}
+                    />
+                  </div>
+                );
+              })
             : null}
 
           <button
@@ -194,33 +194,33 @@ function FullExerciceInput(props) {
 
           {series
             ? series.map((serie, index) => {
-              return (
-                <div>
-                  <hr
-                    className={
-                      props.modeSombre === true
-                        ? 'hr-serie-dark '
-                        : 'hr-serie'
-                    }
-                  />
+                return (
+                  <div>
+                    <hr
+                      className={
+                        props.modeSombre === true
+                          ? 'hr-serie-dark '
+                          : 'hr-serie'
+                      }
+                    />
 
-                  <SerieInput
-                    key={serie.id}
-                    id={serie.id}
-                    index={index}
-                    serie={serie}
-                    length={series.length}
-                    exercice={fullExercice.exercice}
-                    poids={props.poids}
-                    onAddSerie={onAddSerie}
-                    changeSerie={changeSerie}
-                    onDeleteSerie={onDeleteSerie}
-                    modeSombre={props.modeSombre}
-                    programme={props.programme}
-                  />
-                </div>
-              );
-            })
+                    <SerieInput
+                      key={serie.id}
+                      id={serie.id}
+                      index={index}
+                      serie={serie}
+                      length={series.length}
+                      exercice={fullExercice.exercice}
+                      poids={props.poids}
+                      onAddSerie={onAddSerie}
+                      changeSerie={changeSerie}
+                      onDeleteSerie={onDeleteSerie}
+                      modeSombre={props.modeSombre}
+                      programme={props.programme}
+                    />
+                  </div>
+                );
+              })
             : null}
 
           <button

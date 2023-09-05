@@ -471,8 +471,8 @@ function ExpertForm(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                    ? customStylesDark
-                    : customStyles
+                  ? customStylesDark
+                  : customStyles
               }
             />
           </div>
@@ -502,8 +502,8 @@ function ExpertForm(props) {
                     ? customStylesDarkMini
                     : customStylesMini
                   : props.modeSombre === true
-                    ? customStylesDark
-                    : customStyles
+                  ? customStylesDark
+                  : customStyles
               }
               value={{
                 value: seance.nom.ancienNom,
@@ -567,34 +567,34 @@ function ExpertForm(props) {
           </p>
           {seance.echauffements
             ? seance.echauffements.map((echauffement, index) => {
-              return (
-                <div>
-                  <EchauffementInput
-                    key={echauffement.id}
-                    index={index}
-                    dimensions={props.dimensions}
-                    id={echauffement.id}
-                    modeSombre={props.modeSombre}
-                    poids={seance.poids}
-                    echauffement={echauffement}
-                    click={true}
-                    onAddEchauffements={onAddEchauffements}
-                    changeEchauffements={changeEchauffements}
-                    onDeleteEchauffements={onDeleteEchauffements}
-                  />
+                return (
+                  <div>
+                    <EchauffementInput
+                      key={echauffement.id}
+                      index={index}
+                      dimensions={props.dimensions}
+                      id={echauffement.id}
+                      modeSombre={props.modeSombre}
+                      poids={seance.poids}
+                      echauffement={echauffement}
+                      click={true}
+                      onAddEchauffements={onAddEchauffements}
+                      changeEchauffements={changeEchauffements}
+                      onDeleteEchauffements={onDeleteEchauffements}
+                    />
 
-                  <button
-                    className="btn btn-dark form-button"
-                    id={index}
-                    onClick={onInsertEchauffement}
-                    type="submit"
-                  >
-                    Insérer un echauffement ici !
-                  </button>
-                  <br />
-                </div>
-              );
-            })
+                    <button
+                      className="btn btn-dark form-button"
+                      id={index}
+                      onClick={onInsertEchauffement}
+                      type="submit"
+                    >
+                      Insérer un echauffement ici !
+                    </button>
+                    <br />
+                  </div>
+                );
+              })
             : null}
 
           <hr className={props.modeSombre ? 'hr-serie-dark' : 'hr-serie'} />
@@ -633,34 +633,34 @@ function ExpertForm(props) {
           </p>
           {seance.exercices
             ? seance.exercices.map((exercice, index) => {
-              return (
-                <div>
-                  <FullExerciceExpertInput
-                    key={exercice.id}
-                    index={index}
-                    dimensions={props.dimensions}
-                    id={exercice.id}
-                    modeSombre={props.modeSombre}
-                    exercice={exercice}
-                    poids={seance.poids}
-                    click={true}
-                    onAddExercices={onAddExercices}
-                    changeExercices={changeExercices}
-                    onDeleteExercices={onDeleteExercices}
-                  />
+                return (
+                  <div>
+                    <FullExerciceExpertInput
+                      key={exercice.id}
+                      index={index}
+                      dimensions={props.dimensions}
+                      id={exercice.id}
+                      modeSombre={props.modeSombre}
+                      exercice={exercice}
+                      poids={seance.poids}
+                      click={true}
+                      onAddExercices={onAddExercices}
+                      changeExercices={changeExercices}
+                      onDeleteExercices={onDeleteExercices}
+                    />
 
-                  <button
-                    className="btn btn-dark form-button"
-                    id={index}
-                    onClick={onInsertExercice}
-                    type="submit"
-                  >
-                    Insérer un exercice ici !
-                  </button>
-                  <br />
-                </div>
-              );
-            })
+                    <button
+                      className="btn btn-dark form-button"
+                      id={index}
+                      onClick={onInsertExercice}
+                      type="submit"
+                    >
+                      Insérer un exercice ici !
+                    </button>
+                    <br />
+                  </div>
+                );
+              })
             : null}
 
           <hr className={props.modeSombre ? 'hr-serie-dark' : 'hr-serie'} />
@@ -699,24 +699,24 @@ function ExpertForm(props) {
           </p>
           {seance.details
             ? seance.details.map((detail, index) => {
-              return (
-                <div>
-                  <hr className="hr-detail" />
+                return (
+                  <div>
+                    <hr className="hr-detail" />
 
-                  <DetailInput
-                    key={detail.id}
-                    index={index}
-                    id={detail.id}
-                    modeSombre={props.modeSombre}
-                    detail={detail}
-                    dimensions={props.dimensions}
-                    onAddDetail={onAddDetail}
-                    changeDetail={changeDetail}
-                    onDeleteDetail={onDeleteDetail}
-                  />
-                </div>
-              );
-            })
+                    <DetailInput
+                      key={detail.id}
+                      index={index}
+                      id={detail.id}
+                      modeSombre={props.modeSombre}
+                      detail={detail}
+                      dimensions={props.dimensions}
+                      onAddDetail={onAddDetail}
+                      changeDetail={changeDetail}
+                      onDeleteDetail={onDeleteDetail}
+                    />
+                  </div>
+                );
+              })
             : null}
 
           <div className="detail-div">

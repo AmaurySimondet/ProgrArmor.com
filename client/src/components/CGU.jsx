@@ -1,4 +1,3 @@
-import React from 'react';
 import NavigBar from './NavigBar.jsx';
 import HomeHeader from './HomeHeader.jsx';
 

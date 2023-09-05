@@ -189,8 +189,8 @@ function Accomplissements() {
                     ? { marginTop: '20px', width: '90%' }
                     : { marginTop: '20px', width: '90%', background: '#aaaaaa' }
                   : user.modeSombre
-                    ? { marginTop: '20px', width: '60%' }
-                    : { marginTop: '20px', width: '60%', background: '#aaaaaa' }
+                  ? { marginTop: '20px', width: '60%' }
+                  : { marginTop: '20px', width: '60%', background: '#aaaaaa' }
               }
             >
               <img
@@ -245,7 +245,7 @@ function Accomplissements() {
                           accomplissements.length /
                           Object.values(checkedItems).length
                         ).toFixed(2) *
-                        100 +
+                          100 +
                         '%',
                     }}
                   ></div>
@@ -267,8 +267,8 @@ function Accomplissements() {
                     ? customStylesDarkMini
                     : customStylesMini
                   : user.modeSombre === true
-                    ? customStylesDark
-                    : customStyles
+                  ? customStylesDark
+                  : customStyles
               }
               placeholder="Niveau"
             />
@@ -284,8 +284,8 @@ function Accomplissements() {
                     ? customStylesDarkMini
                     : customStylesMini
                   : user.modeSombre === true
-                    ? customStylesDark
-                    : customStyles
+                  ? customStylesDark
+                  : customStyles
               }
               placeholder="Type"
             />
