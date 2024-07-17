@@ -3,7 +3,7 @@
   "version": "1.1.2",
   "main": "server.js",
   "engines": {
-    "node": "16.17.0",
+    "node": "20.15.1",
     "npm": "8.15.0"
   },
   "scripts": {
@@ -11,7 +11,7 @@
     "config": "set scripts-prepend-node-path true set legacy-peer-deps true",
     "build-prev": "npm config set legacy-peer-deps true && cd client && npm run build",
     "build": "npm config set legacy-peer-deps true && npm run install-client && npm run build-prev",
-    "install-client": "cd client && npm install",
+    "install-client": "cd client && npm install --legacy-peer-deps",
     "heroku-postbuild": "npm config set legacy-peer-deps true && npm run install-client && npm run build"
   },
   "dependencies": {
